@@ -1,22 +1,75 @@
 [versions]
-agp = "8.2.0"
-kotlin = "1.9.10"
-core-ktx = "1.10.1"
+android-gradle-plugin = "8.1.2"
+core-ktx = "1.12.0"
 junit = "4.13.2"
 androidx-test-ext-junit = "1.1.5"
 espresso-core = "3.5.1"
 appcompat = "1.6.1"
-material = "1.9.0"
+material = "1.11.0"
 constraintlayout = "2.1.4"
+firebase-bom = "32.7.0"
 
+ksp = "1.9.10-1.0.13"
+androidx-app-compat = "1.6.1"
+androidx-core = "1.12.0"
+androidx-lifecycle = "2.6.2"
+androidx-navigation = "2.7.6"
+androidx-constraint-layout = "2.1.4"
+androidx-activity-ktx = "1.8.2"
+androidx-fragment-ktx = "1.6.2"
+androidx-recycler-view = "1.3.2"
+androidx-splash-screen = "1.0.1"
+androidx-datastore = "1.0.0"
+
+kotlin = "1.9.10"
+kotlinx-coroutines = "1.7.3"
+kotlinx-serialization-json = "1.5.1"
+kotlinx-datetime = "0.4.0"
 ktlint = "11.5.1"
 
+retrofit = "2.9.0"
+retrofit-kotlinx-serialization-json = "1.0.0"
+okhttp = "4.11.0"
+
+hilt = "2.48"
+room = "2.5.2"
+
+timber = "5.0.1"
+encrypted-datastore = "1.7.21-1.0.8-1.1.0-alpha01"
+simple-rating-bar = "1.5.1"
+ted-image-picker = "1.4.2"
+ted-permission = "3.3.0"
+coil = "2.4.0"
+lottie = "6.0.0"
+mp-android-chart = "v3.1.0"
+power-menu = "2.2.2"
+
+oss-plugin = "0.10.6"
+oss = "17.0.1"
+
+protobuf-plugin = "0.9.4"
+protobuf = "3.24.4"
 [plugins]
-androidApplication = { id = "com.android.application", version.ref = "agp" }
-kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
+android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
+android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+protobuf = { id = "com.google.protobuf", version.ref = "protobuf-plugin" }
+
+linkmind-android-application = { id = "linkmind.android.application", version = "unspecified" }
+linkmind-android-library = { id = "linkmind.android.library", version = "unspecified" }
+linkmind-android-hilt = { id = "linkmind.android.hilt", version = "unspecified" }
+linkmind-java-library = { id = "linkmind.java.library", version = "unspecified" }
 
 [libraries]
+# Dependencies of the included build-logic
+android-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "android-gradle-plugin" }
+kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+ksp-gradle-plugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
@@ -25,3 +78,57 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hilt" }
+hilt-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
+hilt-testing-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
+
+retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofit-kotlinx-serialization-json" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+
+navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "androidx-navigation" }
+navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "androidx-navigation" }
+
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidx-app-compat" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidx-core" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraint-layout" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
+androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "androidx-activity-ktx" }
+androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "androidx-fragment-ktx" }
+androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "androidx-recycler-view" }
+androidx-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidx-splash-screen" }
+
+google-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
+androidx-datastore-core = { group = "androidx.datastore", name = "datastore", version.ref = "androidx-datastore" }
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidx-datastore" }
+encrypted-datastore-preference-ksp = { group = "tech.thdev", name = "useful-encrypted-data-store-preferences-ksp", version.ref = "encrypted-datastore" }
+encrypted-datastore-preference-ksp-annotations = { group = "tech.thdev", name = "useful-encrypted-data-store-preferences-ksp-annotations", version.ref = "encrypted-datastore" }
+encrypted-datastore-preference-security = { group = "tech.thdev", name = "useful-encrypted-data-store-preferences-security", version.ref = "encrypted-datastore" }
+
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database-ktx" }
+
+ted-permission = { group = "io.github.ParkSangGwon", name = "tedpermission-normal", version.ref = "ted-permission" }
+coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
+lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
+
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+
+
+oss-licenses = { group = "com.google.android.gms", name = "play-services-oss-licenses", version.ref = "oss" }
+
+protobuf-kotlin-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
+protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
