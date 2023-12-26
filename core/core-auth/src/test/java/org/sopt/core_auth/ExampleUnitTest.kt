@@ -1,4 +1,4 @@
-package org.sopt.core_common
+package org.sopt.core_auth
 
 import org.junit.Test
 
