@@ -115,3 +115,8 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 
+[bundles]
+firebase = ["firebase-analytics", "firebase-database"]
+androidx-lifecycle = ["androidx-lifecycle-runtime-ktx", "androidx-lifecycle-viewmodel-ktx"]
+androidx-navigation = ["navigation-fragment-ktx", "navigation-ui-ktx"]
+coroutine = ["kotlinx-coroutines-android", "kotlinx-coroutines-core"]
