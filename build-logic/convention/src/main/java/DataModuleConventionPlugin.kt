@@ -15,7 +15,7 @@ internal class DataModuleConventionPlugin : Plugin<Project> {
       }
 
       dependencies {
-        "implementation"(project(":core:core-model"))
+        "implementation"(project(":core:model"))
         "implementation"(libs.findBundle("coroutine").get())
         "implementation"(libs.findLibrary("timber").get())
       }
