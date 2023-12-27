@@ -39,6 +39,8 @@ encrypted-datastore = "1.7.21-1.0.8-1.1.0-alpha01"
 coil = "2.4.0"
 lottie = "6.0.0"
 
+detekt = "1.23.1"
+
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -48,6 +50,7 @@ ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
 android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 linkmind-android-application = { id = "linkmind.android.application", version = "unspecified" }
 linkmind-android-library = { id = "linkmind.android.library", version = "unspecified" }
@@ -69,6 +72,7 @@ espresso-core = { group = "androidx.test.espresso", name = "espresso-core", vers
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+gitlab-detekt-plugin-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-plugin-formatting", version.ref = "detekt" }
 
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
@@ -117,6 +121,9 @@ lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie"
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+
+# formatting
+detekt-plugin-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 
 [bundles]
 firebase = ["firebase-analytics", "firebase-database"]

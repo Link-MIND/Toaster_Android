@@ -1,0 +1,30 @@
+
+build:
+  maxIssues: 0
+
+config:
+  validation: true
+  warningsAsErrors: false
+
+complexity:
+  LongMethod:
+    threshold: 100
+  LongParameterList:
+    active: false
+  TooManyFunctions:
+    active: false
+    thresholdInClasses: 30
+    ignorePrivate: true
+  ComplexCondition:
+    threshold: 7
+
+performance:
+  SpreadOperator:
+    active: false
+
+formatting:
+  active: true
+
+style:
+  active: false
+
