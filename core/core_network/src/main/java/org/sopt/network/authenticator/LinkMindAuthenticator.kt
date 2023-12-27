@@ -1,4 +1,4 @@
-package org.sopt.core_network.authenticator
+package org.sopt.network.authenticator
 
 
 import okhttp3.Authenticator
