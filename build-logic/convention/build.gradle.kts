@@ -37,5 +37,9 @@ gradlePlugin {
       id = "linkmind.plugin.feature"
       implementationClass = "FeatureConventionPlugin"
     }
+    register("DataModulePlugin") {
+      id = "linkmind.plugin.data"
+      implementationClass = "DataModuleConventionPlugin"
+    }
   }
 }
