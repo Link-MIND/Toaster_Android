@@ -1,10 +1,10 @@
 
-build:
-  maxIssues: 0
+#build:
+#  maxIssues: 0
 
-config:
-  validation: true
-  warningsAsErrors: false
+#config:
+#  validation: true
+#  warningsAsErrors: false
 
 complexity:
   LongMethod:
@@ -13,7 +13,6 @@ complexity:
     active: false
   TooManyFunctions:
     active: false
-    thresholdInClasses: 30
     ignorePrivate: true
   ComplexCondition:
     threshold: 7
@@ -21,10 +20,81 @@ complexity:
 performance:
   SpreadOperator:
     active: false
-
 formatting:
-  active: true
+  TrailingCommaOnCallSite:
+    active: true
+  TrailingCommaOnDeclarationSite:
+    active: true
+  ImportOrdering:
+    active: false
+  MaximumLineLength:
+    active: false
+  MultiLineIfElse:
+    active: false
+  Indentation:
+    indentSize: 2
+  ParameterListWrapping:
+    active: false
+  ArgumentListWrapping:
+    indentSize: 2
+    maxLineLength: 150
+  KdocWrapping:
+    active: true
+    indentSize: 2
+  Wrapping:
+    indentSize: 2
+    active: false
+  CommentWrapping:
+    active: false
+  Filename:
+    active: false
+  PackageName:
+    active: false
+  AnnotationOnSeparateLine:
+    active: false
 
 style:
-  active: false
+  MagicNumber:
+    active: false
+    ignoreAnnotated: [ 'AllowMagicNumber' ]
+  ForbiddenComment:
+    active: false
+  ThrowsCount:
+    active: false
+  ReturnCount:
+    active: false
+  LoopWithTooManyJumpStatements:
+    active: false
+  DestructuringDeclarationWithTooManyEntries:
+    active: false
+  MaxLineLength:
+    active: false
+  UseCheckOrError:
+    active: false # (Default: true)
+  SerialVersionUIDInSerializableClass:
+    active: false
+  UseRequire:
+    active: false
+
+exceptions:
+  TooGenericExceptionThrown:
+    active: false
+
+naming:
+  TopLevelPropertyNaming:
+    constantPattern: '[A-Z][A-Za-z0-9_]*'
+  MatchingDeclarationName:
+    active: false
+  VariableNaming:
+    active: false
+  PackageNaming:
+    packagePattern: '[a-z]+(\._?[_?A-Za-z0-9]*)*'
+  InvalidPackageDeclaration:
+    active: false
+
+#formatting:
+#  active: true
+#
+#style:
+#  active: false
 
