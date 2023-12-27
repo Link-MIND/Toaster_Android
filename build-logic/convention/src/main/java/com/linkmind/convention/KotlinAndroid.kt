@@ -27,6 +27,8 @@ internal fun Project.configureKotlinAndroid(
       jvmTarget = Const.JAVA_VERSION.toString()
     }
 
+    dependencies.add("detektPlugins", libs.findLibrary("detekt-plugin-formatting").get())
+
     buildTypes {
       getByName("debug") {
         proguardFiles(
