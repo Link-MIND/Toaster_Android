@@ -1,3 +1,4 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 pluginManagement {
   includeBuild("build-logic")
   repositories {
@@ -22,3 +23,4 @@ include(":core:core-model")
 include(":core:core-ui")
 include(":core:core-auth")
 include(":core:core-auth-impl")
+include(":domain:linkmind-domain")
