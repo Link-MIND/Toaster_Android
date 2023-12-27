@@ -1,4 +1,4 @@
-package org.sopt.core_network.service
+package org.sopt.network.service
 
 interface AuthService {
   //Todo Refresh Api

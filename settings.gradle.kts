@@ -17,7 +17,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Link-Mind"
 include(":app")
-include(":core:core-network")
+include(":core:core_network")
 include(":core:core-common")
 include(":core:core-model")
 include(":core:core-ui")

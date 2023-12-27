@@ -1,4 +1,4 @@
-package org.sopt.core_network.di
+package org.sopt.network.di
 
 import javax.inject.Qualifier
 

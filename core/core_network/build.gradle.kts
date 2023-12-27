@@ -6,10 +6,11 @@ plugins {
 }
 
 android {
-  namespace = "org.sopt.core.core-network"
+  namespace = "org.sopt.core.core_network"
 }
 
 dependencies {
+  implementation(projects.core.coreModel)
   implementation(libs.bundles.coroutine)
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.retrofit.core)

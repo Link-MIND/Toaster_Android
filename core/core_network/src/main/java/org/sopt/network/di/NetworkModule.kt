@@ -1,4 +1,4 @@
-package org.sopt.core_network.di
+package org.sopt.network.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
