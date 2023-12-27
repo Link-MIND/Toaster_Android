@@ -33,5 +33,9 @@ gradlePlugin {
       id = "linkmind.java.library"
       implementationClass = "JavaLibraryConventionPlugin"
     }
+    register("FeaturePlugin") {
+      id = "linkmind.plugin.feature"
+      implementationClass = "FeatureConventionPlugin"
+    }
   }
 }

@@ -53,6 +53,7 @@ linkmind-android-application = { id = "linkmind.android.application", version = 
 linkmind-android-library = { id = "linkmind.android.library", version = "unspecified" }
 linkmind-android-hilt = { id = "linkmind.android.hilt", version = "unspecified" }
 linkmind-java-library = { id = "linkmind.java.library", version = "unspecified" }
+linkmind-plugin-feature = { id = "linkmind.plugin.feature", version = "unspecified" }
 
 [libraries]
 # Dependencies of the included build-logic
