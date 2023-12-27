@@ -10,7 +10,6 @@ android {
 }
 
 dependencies {
-
   implementation(libs.bundles.coroutine)
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.retrofit.core)
