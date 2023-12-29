@@ -1,4 +1,4 @@
-package org.sopt.linkmind
+package org.sopt.mainfeature
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
