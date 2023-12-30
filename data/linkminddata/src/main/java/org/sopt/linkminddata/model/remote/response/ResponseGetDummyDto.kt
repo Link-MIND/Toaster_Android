@@ -7,7 +7,7 @@ import org.sopt.linkminddomain.entity.DummyEntity
 @Serializable
 data class ResponseGetDummyDto(
   @SerialName("dummy")
-  val response : String
-){
-  fun toDomainModel() : DummyEntity = DummyEntity(this.response)
+  val response: String,
+) {
+  fun toDomainModel(): DummyEntity = DummyEntity(this.response)
 }

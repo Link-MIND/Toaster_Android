@@ -14,10 +14,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ExampleViewModel @Inject constructor(
-  private val dummyUseCase : DummyUseCase
+  private val dummyUseCase: DummyUseCase,
 ) : ViewModel() {
   private val _dummyState = MutableStateFlow<UiState<DummyEntity>>(UiState.Empty)
-  val dummyState : StateFlow<UiState<DummyEntity>> = _dummyState.asStateFlow()
+  val dummyState: StateFlow<UiState<DummyEntity>> = _dummyState.asStateFlow()
 
   fun getDummy() = viewModelScope.launch {
     dummyUseCase().onSuccess {

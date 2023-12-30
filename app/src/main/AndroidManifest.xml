@@ -15,4 +15,5 @@
     android:theme="@style/Theme.LinkMind"
     android:usesCleartextTraffic="true"
     tools:targetApi="31" />
+
 </manifest>

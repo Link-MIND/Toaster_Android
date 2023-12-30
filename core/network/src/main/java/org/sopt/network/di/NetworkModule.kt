@@ -21,7 +21,6 @@ import javax.inject.Singleton
 object NetworkModule {
   @Provides
   @Singleton
-  @NoneOkHttpClient
   fun provideOkHttpClient(
     loggingInterceptor: HttpLoggingInterceptor,
   ): OkHttpClient =

@@ -5,8 +5,7 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import org.sopt.linkminddata.source.ExampleDataSource
-import org.sopt.linkminddata.source.remote.DummyRemoteDataSource
-import org.sopt.linkminddata_remote.source.ExampleDataSourceImpl
+import org.sopt.linkminddata.sourceimpl.ExampleDataSourceImpl
 import javax.inject.Singleton
 
 @Module
