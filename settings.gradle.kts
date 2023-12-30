@@ -12,6 +12,7 @@ dependencyResolutionManagement {
   repositories {
     google()
     mavenCentral()
+    maven(url = "https://devrepo.kakao.com/nexus/content/groups/public/")
   }
 }
 
@@ -29,3 +30,6 @@ include(":feature:mainfeature")
 include(":core:datastore")
 include(":data:linkminddata-remote")
 include(":data:linkminddata-local")
+include(":core:oauth")
+include(":data:oauthdata")
+include(":domain:oauthdomain")
