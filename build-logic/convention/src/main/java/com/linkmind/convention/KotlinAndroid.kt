@@ -2,6 +2,7 @@ package com.linkmind.convention
 
 import org.gradle.api.Project
 import com.android.build.api.dsl.CommonExtension
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import org.gradle.api.plugins.ExtensionAware
 import org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
 
@@ -16,6 +17,12 @@ internal fun Project.configureKotlinAndroid(
 
       testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
       vectorDrawables.useSupportLibrary = true
+
+      buildConfigField(
+        "String",
+        "BASE_URL",
+        gradleLocalProperties(rootDir).getProperty("base.url")
+      )
     }
 
     compileOptions {
@@ -44,6 +51,10 @@ internal fun Project.configureKotlinAndroid(
           "proguard-rules.pro",
         )
       }
+    }
+
+    buildFeatures {
+      buildConfig = true
     }
   }
 }
