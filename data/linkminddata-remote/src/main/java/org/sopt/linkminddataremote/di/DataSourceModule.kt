@@ -1,11 +1,11 @@
-package org.sopt.linkminddata_remote.di
+package org.sopt.linkminddataremote.di
 
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import org.sopt.linkminddata.source.remote.DummyRemoteDataSource
-import org.sopt.linkminddata_remote.source.ExampleDataSourceImpl
+import org.sopt.linkminddataremote.source.DummyRemoteDataSourceImpl
 import javax.inject.Singleton
 
 @Module
@@ -14,6 +14,5 @@ internal abstract class DataSourceModule {
 
   @Singleton
   @Binds
-  abstract fun bindsDummyRemoteDataSource(dummyRemoteDataSource: ExampleDataSourceImpl): DummyRemoteDataSource
-
+  abstract fun bindsDummyRemoteDataSource(dummyRemoteDataSource: DummyRemoteDataSourceImpl): DummyRemoteDataSource
 }

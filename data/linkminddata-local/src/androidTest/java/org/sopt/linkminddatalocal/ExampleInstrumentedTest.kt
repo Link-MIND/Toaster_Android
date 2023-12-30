@@ -1,4 +1,4 @@
-package org.sopt.datastore
+package org.sopt.linkminddatalocal
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
   fun useAppContext() {
     // Context of the app under test.
     val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-    assertEquals("org.sopt.datastore.test", appContext.packageName)
+    assertEquals("org.sopt.linkminddata_local.test", appContext.packageName)
   }
 }

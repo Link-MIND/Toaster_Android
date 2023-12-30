@@ -26,7 +26,7 @@ object DataStoreModule {
   @Provides
   fun provideSecurityDataStore(dataStore: DataStore<Preferences>): SecurityDataStore {
     return dataStore.generateSecurityDataStore(
-      generateUsefulSecurity()
+      generateUsefulSecurity(),
     )
   }
 }

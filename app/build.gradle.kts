@@ -17,6 +17,17 @@ android {
 dependencies {
 
   implementation(projects.feature.mainfeature)
+  implementation(projects.data.linkminddata)
+  implementation(projects.data.linkminddataLocal)
+  implementation(projects.data.linkminddataRemote)
+  implementation(projects.core.network)
+  implementation(projects.core.ui)
+  implementation(projects.core.common)
+  implementation(projects.core.datastore)
+  implementation(projects.core.model)
+  implementation(projects.core.auth)
+  implementation(projects.core.authimpl)
+  implementation(projects.domain.linkminddomain)
   implementation(libs.core.ktx)
   implementation(libs.appcompat)
   implementation(libs.material)

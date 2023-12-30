@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-  namespace = "org.sopt.linkminddata"
+  namespace = "org.sopt.linkminddataremote"
 }
 
 dependencies {
