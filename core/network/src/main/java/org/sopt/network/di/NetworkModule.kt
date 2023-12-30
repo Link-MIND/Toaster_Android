@@ -11,6 +11,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONArray
 import org.json.JSONObject
+import org.sopt.core.network.BuildConfig.BASE_URL
 import retrofit2.Retrofit
 import timber.log.Timber
 import javax.inject.Singleton
@@ -53,7 +54,7 @@ object NetworkModule {
   @LinkMindRetrofit
   fun provideLinkMindRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
     .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
-    .baseUrl("BASE_URL")
+    .baseUrl(BASE_URL)
     .client(okHttpClient)
     .build()
 }
