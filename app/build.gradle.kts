@@ -18,8 +18,6 @@ dependencies {
 
   implementation(projects.feature.mainfeature)
   implementation(projects.data.linkminddata)
-  implementation(projects.data.linkminddataLocal)
-  implementation(projects.data.linkminddataRemote)
   implementation(projects.core.network)
   implementation(projects.core.ui)
   implementation(projects.core.common)
