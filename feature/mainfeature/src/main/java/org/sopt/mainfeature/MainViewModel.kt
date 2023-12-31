@@ -6,5 +6,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor() : ViewModel() {
-  fun login() {}
+  fun login() {
+    TODO("로그인")
+  }
 }
