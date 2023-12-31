@@ -6,12 +6,14 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
+import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONArray
 import org.json.JSONObject
 import org.sopt.core.network.BuildConfig.BASE_URL
+import org.sopt.network.interceptor.AuthenticationIntercept
 import retrofit2.Retrofit
 import timber.log.Timber
 import javax.inject.Singleton
@@ -21,8 +23,9 @@ import javax.inject.Singleton
 object NetworkModule {
   @Provides
   @Singleton
+  @NoneAuthOkHttpClient
   fun provideOkHttpClient(
-    loggingInterceptor: HttpLoggingInterceptor,
+    @Logging loggingInterceptor: HttpLoggingInterceptor,
   ): OkHttpClient =
     OkHttpClient.Builder()
       .addInterceptor(loggingInterceptor)
@@ -30,6 +33,19 @@ object NetworkModule {
 
   @Provides
   @Singleton
+  @AuthOkHttpClient
+  fun provideAuthOkHttpClient(
+    @Logging loggingInterceptor: HttpLoggingInterceptor,
+    @Auth authInterceptor: Interceptor
+  ): OkHttpClient =
+    OkHttpClient.Builder()
+      .addInterceptor(loggingInterceptor)
+      .addInterceptor(authInterceptor)
+      .build()
+
+  @Provides
+  @Singleton
+  @Logging
   fun provideLoggingInterceptor(): HttpLoggingInterceptor {
     val loggingInterceptor = HttpLoggingInterceptor { message ->
       when {
@@ -48,10 +64,24 @@ object NetworkModule {
     return loggingInterceptor
   }
 
+  @Provides
+  @Singleton
+  @Auth
+  fun provideAuthInterceptor(interceptor : AuthenticationIntercept):Interceptor = interceptor
+
   @Singleton
   @Provides
   @LinkMindRetrofit
-  fun provideLinkMindRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+  fun provideLinkMindRetrofit(@NoneAuthOkHttpClient okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+    .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+    .baseUrl(BASE_URL)
+    .client(okHttpClient)
+    .build()
+
+  @Singleton
+  @Provides
+  @AuthLinkMindRetrofit
+  fun provideAuthLinkMindRetrofit(@AuthOkHttpClient okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
     .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
     .baseUrl(BASE_URL)
     .client(okHttpClient)
