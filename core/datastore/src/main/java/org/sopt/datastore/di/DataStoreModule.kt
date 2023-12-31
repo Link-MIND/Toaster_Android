@@ -16,7 +16,7 @@ import tech.thdev.useful.encrypted.data.store.preferences.security.generateUsefu
 @Module
 @InstallIn(SingletonComponent::class)
 object DataStoreModule {
-  private val Context.dataStore by preferencesDataStore(name = "winey_data_store")
+  private val Context.dataStore by preferencesDataStore(name = "toaster_data_store")
 
   @Provides
   fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
