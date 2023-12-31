@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import org.sopt.mainfeature.databinding.ActivityMainBinding
-import org.sopt.oauthdomain.repository.OAuthRepository
+import org.sopt.oauthdomain.interactor.OAuthInteractor
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
   lateinit var binding : ActivityMainBinding
 
   @Inject
-  lateinit var kakaoAuthRepository : OAuthRepository
+  lateinit var kakaoAuthInteractor : OAuthInteractor
 
   private val viewModel : MainViewModel by viewModels()
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     binding.tvMain.setOnClickListener {
       lifecycleScope.launch {
-        kakaoAuthRepository.loginByKakao().onSuccess {
+        kakaoAuthInteractor.loginByKakao().onSuccess {
           viewModel.login()
         }.onFailure {
 
