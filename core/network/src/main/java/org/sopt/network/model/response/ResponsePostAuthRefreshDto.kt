@@ -8,5 +8,5 @@ data class ResponsePostAuthRefreshDto(
   @SerialName("accessToken")
   val accessToken: String,
   @SerialName("refreshToken")
-  val refreshToken: String
+  val refreshToken: String,
 )

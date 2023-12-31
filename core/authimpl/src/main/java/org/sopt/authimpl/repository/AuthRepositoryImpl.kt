@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
   private val authLocalDataSource: AuthLocalDataSource,
-  private val authRemoteDataSource: AuthRemoteDataSource
+  private val authRemoteDataSource: AuthRemoteDataSource,
 ) : AuthRepository {
   override suspend fun authenticate(auth: Auth): Result<Pair<Token, UserData>?> =
     runCatching { authRemoteDataSource.authenticate(auth.socialToken, auth.toDataModel()).data?.toDomainModel() }
@@ -26,5 +26,4 @@ class AuthRepositoryImpl @Inject constructor(
 
   override suspend fun clearToken() =
     authLocalDataSource.clear()
-
 }

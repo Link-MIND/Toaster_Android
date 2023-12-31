@@ -8,5 +8,5 @@ data class ResponsePostSignOutDto(
   @SerialName("code")
   val code: Int,
   @SerialName("message")
-  val message: String
+  val message: String,
 )

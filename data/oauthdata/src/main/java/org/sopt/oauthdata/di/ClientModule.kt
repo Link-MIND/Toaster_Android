@@ -12,5 +12,5 @@ import javax.inject.Singleton
 object ClientModule {
   @Provides
   @Singleton
-  fun provideKakaoClient() : UserApiClient = UserApiClient.instance
+  fun provideKakaoClient(): UserApiClient = UserApiClient.instance
 }

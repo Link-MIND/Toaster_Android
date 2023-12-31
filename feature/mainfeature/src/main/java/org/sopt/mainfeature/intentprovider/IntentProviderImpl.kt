@@ -8,8 +8,8 @@ import org.sopt.mainfeature.onboarding.LoginActivity
 import javax.inject.Inject
 
 class IntentProviderImpl @Inject constructor(
-  @ApplicationContext private val context : Context
-) : IntentProvider{
+  @ApplicationContext private val context: Context,
+) : IntentProvider {
   override fun getAuthIntent(): Intent =
     LoginActivity.newInstance(context)
 }

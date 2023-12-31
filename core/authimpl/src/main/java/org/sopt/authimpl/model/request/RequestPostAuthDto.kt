@@ -9,13 +9,13 @@ data class RequestPostAuthDto(
   @SerialName("socialType")
   val socialType: String,
   @SerialName("fcmToken")
-  val fcmToken: String
-){
-  companion object{
+  val fcmToken: String,
+) {
+  companion object {
     fun Auth.toDataModel() =
       RequestPostAuthDto(
         this.socialType,
-        this.deviceToken
+        this.deviceToken,
       )
   }
 }

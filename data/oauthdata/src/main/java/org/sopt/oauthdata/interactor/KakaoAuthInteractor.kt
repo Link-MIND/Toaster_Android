@@ -13,11 +13,11 @@ import kotlin.coroutines.resumeWithException
 
 class KakaoAuthInteractor @Inject constructor(
   private val client: UserApiClient,
-  @ActivityContext private val context: Context
+  @ActivityContext private val context: Context,
 ) : OAuthInteractor {
   override suspend fun loginByKakao(): Result<KakaoToken> =
     suspendCancellableCoroutine {
-      when(client.isKakaoTalkLoginAvailable(context)){
+      when (client.isKakaoTalkLoginAvailable(context)) {
         true -> {
           client.loginWithKakaoTalk(context) { token, error ->
             if (error != null) {
@@ -54,5 +54,4 @@ class KakaoAuthInteractor @Inject constructor(
   override fun withdraw() {
     client.unlink(Timber::e)
   }
-
 }

@@ -12,12 +12,12 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-  lateinit var binding : ActivityMainBinding
+  lateinit var binding: ActivityMainBinding
 
   @Inject
-  lateinit var kakaoAuthInteractor : OAuthInteractor
+  lateinit var kakaoAuthInteractor: OAuthInteractor
 
-  private val viewModel : MainViewModel by viewModels()
+  private val viewModel: MainViewModel by viewModels()
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = ActivityMainBinding.inflate(layoutInflater)
@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         kakaoAuthInteractor.loginByKakao().onSuccess {
           viewModel.login()
         }.onFailure {
-
         }
       }
     }

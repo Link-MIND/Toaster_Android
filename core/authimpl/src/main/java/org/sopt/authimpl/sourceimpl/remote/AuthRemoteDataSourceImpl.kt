@@ -8,11 +8,11 @@ import org.sopt.network.model.response.base.BaseResponse
 import javax.inject.Inject
 
 class AuthRemoteDataSourceImpl @Inject constructor(
-  private val authService: AuthService
-): AuthRemoteDataSource {
+  private val authService: AuthService,
+) : AuthRemoteDataSource {
   override suspend fun authenticate(
     socialToken: String,
-    postAuthDto: RequestPostAuthDto
+    postAuthDto: RequestPostAuthDto,
   ) = authService.postLogin(socialToken, postAuthDto)
 
   override suspend fun signout(): ResponsePostSignOutDto =

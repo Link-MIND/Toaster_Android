@@ -36,7 +36,7 @@ object NetworkModule {
   @AuthOkHttpClient
   fun provideAuthOkHttpClient(
     @Logging loggingInterceptor: HttpLoggingInterceptor,
-    @Auth authInterceptor: Interceptor
+    @Auth authInterceptor: Interceptor,
   ): OkHttpClient =
     OkHttpClient.Builder()
       .addInterceptor(loggingInterceptor)
@@ -67,7 +67,7 @@ object NetworkModule {
   @Provides
   @Singleton
   @Auth
-  fun provideAuthInterceptor(interceptor : AuthenticationIntercept):Interceptor = interceptor
+  fun provideAuthInterceptor(interceptor: AuthenticationIntercept): Interceptor = interceptor
 
   @Singleton
   @Provides

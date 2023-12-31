@@ -17,7 +17,7 @@ class LinkMindAuthenticator @Inject constructor(
   private val dataStore: SecurityDataStore,
   private val tokenRefreshService: TokenRefreshService,
   @ApplicationContext private val context: Context,
-  private val intentProvider: IntentProvider
+  private val intentProvider: IntentProvider,
 ) : Authenticator {
   override fun authenticate(route: Route?, response: Response): Request? {
     if (response.code == 401) {

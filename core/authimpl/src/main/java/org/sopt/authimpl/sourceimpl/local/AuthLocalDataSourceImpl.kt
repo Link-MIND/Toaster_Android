@@ -6,7 +6,7 @@ import org.sopt.datastore.datastore.SecurityDataStore
 import javax.inject.Inject
 
 class AuthLocalDataSourceImpl @Inject constructor(
-  private val dataStore: SecurityDataStore
+  private val dataStore: SecurityDataStore,
 ) : AuthLocalDataSource {
   override suspend fun save(token: Token) {
     dataStore.apply {

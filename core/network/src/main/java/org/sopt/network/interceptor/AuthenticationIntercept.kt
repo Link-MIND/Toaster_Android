@@ -5,7 +5,6 @@ import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import org.sopt.core.network.BuildConfig.BASE_URL
 import org.sopt.datastore.datastore.SecurityDataStore
 import javax.inject.Inject
 
@@ -22,7 +21,7 @@ class AuthenticationIntercept @Inject constructor(
     when {
       originalRequest.url.encodedPath.contains("auth") -> {
         when {
-          originalRequest.url.encodedPath.contains("withdraw") || originalRequest.url.encodedPath.contains("out")  -> {
+          originalRequest.url.encodedPath.contains("withdraw") || originalRequest.url.encodedPath.contains("out") -> {
             originalRequest.accessTokenBuilder()
           }
           originalRequest.url.encodedPath.contains("token") -> {
