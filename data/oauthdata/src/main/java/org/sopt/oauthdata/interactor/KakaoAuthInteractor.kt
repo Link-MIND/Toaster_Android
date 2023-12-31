@@ -1,20 +1,20 @@
-package org.sopt.oauthdata.repository
+package org.sopt.oauthdata.interactor
 
 import android.content.Context
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.qualifiers.ActivityContext
 import kotlinx.coroutines.suspendCancellableCoroutine
 import org.sopt.oauthdomain.entity.KakaoToken
-import org.sopt.oauthdomain.repository.OAuthRepository
+import org.sopt.oauthdomain.interactor.OAuthInteractor
 import timber.log.Timber
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-class KakaoAuthRepository @Inject constructor(
+class KakaoAuthInteractor @Inject constructor(
   private val client: UserApiClient,
   @ActivityContext private val context: Context
-) : OAuthRepository {
+) : OAuthInteractor {
   override suspend fun loginByKakao(): Result<KakaoToken> =
     suspendCancellableCoroutine {
       when(client.isKakaoTalkLoginAvailable(context)){

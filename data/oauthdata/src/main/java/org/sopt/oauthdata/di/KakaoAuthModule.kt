@@ -5,8 +5,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.scopes.ActivityScoped
-import org.sopt.oauthdata.repository.KakaoAuthRepository
-import org.sopt.oauthdomain.repository.OAuthRepository
+import org.sopt.oauthdata.interactor.KakaoAuthInteractor
+import org.sopt.oauthdomain.interactor.OAuthInteractor
 
 @Module
 @InstallIn(ActivityComponent::class)
@@ -14,6 +14,6 @@ object KakaoAuthModule {
   @Provides
   @ActivityScoped
   fun provideKakaoAuthRepository(
-    kakaoAuthRepository: KakaoAuthRepository,
-  ): OAuthRepository = kakaoAuthRepository
+    kakaoAuthInteractor: KakaoAuthInteractor,
+  ): OAuthInteractor = kakaoAuthInteractor
 }
