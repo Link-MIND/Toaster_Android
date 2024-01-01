@@ -23,7 +23,7 @@ object NetworkModule {
   @Singleton
   @NoneAuthOkHttpClient
   fun provideOkHttpClient(
-    @Logging loggingInterceptor: HttpLoggingInterceptor,
+    loggingInterceptor: HttpLoggingInterceptor,
   ): OkHttpClient =
     OkHttpClient.Builder()
       .addInterceptor(loggingInterceptor)
@@ -33,7 +33,7 @@ object NetworkModule {
   @Singleton
   @AuthOkHttpClient
   fun provideAuthOkHttpClient(
-    @Logging loggingInterceptor: HttpLoggingInterceptor,
+    loggingInterceptor: HttpLoggingInterceptor,
     @Auth authInterceptor: Interceptor,
     authenticator: LinkMindAuthenticator,
   ): OkHttpClient =
@@ -45,7 +45,6 @@ object NetworkModule {
 
   @Provides
   @Singleton
-  @Logging
   fun provideLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
     level = HttpLoggingInterceptor.Level.BODY
   }

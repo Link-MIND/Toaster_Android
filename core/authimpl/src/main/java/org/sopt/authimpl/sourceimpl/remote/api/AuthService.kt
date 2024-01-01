@@ -10,15 +10,22 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface AuthService {
-  @POST("auth")
+  @POST(AUTH)
   suspend fun postLogin(
-    @Header("Authorization") socialAccessToken: String,
+    @Header(AUTHORIZATION) socialAccessToken: String,
     @Body requestLoginDto: RequestPostAuthDto,
   ): BaseResponse<ResponsePostAuthDto>
 
-  @POST("auth/sign-out")
+  @POST("$AUTH/$SIGNOUT")
   suspend fun postSignOut(): ResponsePostSignOutDto
 
-  @DELETE("auth/withdraw")
+  @DELETE("$AUTH/$WITHDRAW")
   suspend fun deleteUser(): BaseResponse<Unit>
+
+  companion object{
+    const val AUTH = "auth"
+    const val SIGNOUT = "sign-out"
+    const val WITHDRAW = "withdraw"
+    const val AUTHORIZATION = "Autorization"
+  }
 }
