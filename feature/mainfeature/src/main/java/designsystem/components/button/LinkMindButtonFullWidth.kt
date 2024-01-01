@@ -69,7 +69,6 @@ class LinkMindButtonFullWidth @JvmOverloads constructor(
       R.styleable.LinkMindButtonFullWidth_fullWidthBtnTextColor,
       ContextCompat.getColor(context, R.color.black),
     )
-
     binding.apply {
       clBtnFullWidthLinkmind.setBackgroundResource(background)
       tvBtn.text = text
