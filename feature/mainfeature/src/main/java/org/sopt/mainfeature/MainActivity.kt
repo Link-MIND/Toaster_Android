@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
       navController?.let { NavController ->
         bnvMain.setupWithNavController(NavController)
       }
-
     }
 
     setBottomVisible(navController)
@@ -43,9 +42,11 @@ class MainActivity : AppCompatActivity() {
           R.id.navigation_timer,
           R.id.navigation_my,
         )
-      ) View.VISIBLE else View.GONE
-
+      ) {
+        View.VISIBLE
+      } else {
+        View.GONE
+      }
     }
   }
-
 }
