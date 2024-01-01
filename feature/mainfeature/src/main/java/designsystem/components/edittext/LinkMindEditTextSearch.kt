@@ -57,6 +57,6 @@ class LinkMindEditTextSearch @JvmOverloads constructor(
         }
       }
       isPreventLosingFocus = false
-    }, losingFocusDelay,)
+    }, losingFocusDelay)
   }
 }
