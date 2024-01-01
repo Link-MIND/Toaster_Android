@@ -5,8 +5,8 @@
   </declare-styleable>
 
   <declare-styleable name="LinkMindButtonFullWidth">
-    <attr name="fullWidthBtnBackGroundTint" format="reference|integer" />
+    <attr name="fullWidthBtnBackGroundTint" format="reference|color" />
     <attr name="fullWidthBtnText" format="reference|string" />
-    <attr name="fullWidthBtnTextColor" format="reference|integer" />
+    <attr name="fullWidthBtnTextColor" format="reference|color" />
   </declare-styleable>
 </resources>
