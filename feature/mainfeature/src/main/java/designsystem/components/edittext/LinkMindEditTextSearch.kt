@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.widget.doAfterTextChanged
 import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.EditTextSearchBoxLinkmindBinding
 import org.sopt.ui.view.onThrottleClick
@@ -31,6 +33,11 @@ class LinkMindEditTextSearch @JvmOverloads constructor(
       }
     }
 
+    binding.editText.doAfterTextChanged { text ->
+      binding.ivCancel.visibility =
+        if (text.isNullOrEmpty()) View.GONE else View.VISIBLE
+    }
+
     binding.ivCancel.onThrottleClick {
       binding.editText.text.clear()
     }
@@ -51,13 +58,16 @@ class LinkMindEditTextSearch @JvmOverloads constructor(
     isPreventLosingFocus = true
     val losingFocusDelay = 250L
 
-    binding.editText.postDelayed({
-      binding.editText.run {
-        if (isFocused.not()) {
-          requestFocus()
+    binding.editText.postDelayed(
+      {
+        binding.editText.run {
+          if (isFocused.not()) {
+            requestFocus()
+          }
         }
-      }
-      isPreventLosingFocus = false
-    }, losingFocusDelay,)
+        isPreventLosingFocus = false
+      },
+      losingFocusDelay,
+    )
   }
 }
