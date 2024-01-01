@@ -1,4 +1,4 @@
-package org.sopt.mainfeature.intentprovider
+package org.sopt.mainfeature.onboarding.intentprovider
 
 import android.content.Context
 import android.content.Intent
