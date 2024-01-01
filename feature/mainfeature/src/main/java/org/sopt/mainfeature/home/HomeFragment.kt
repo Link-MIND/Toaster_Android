@@ -1,4 +1,4 @@
-package home
+package org.sopt.mainfeature.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
