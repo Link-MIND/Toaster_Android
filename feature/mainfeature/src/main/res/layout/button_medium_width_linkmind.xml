@@ -6,7 +6,7 @@
   android:layout_height="wrap_content">
 
   <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/cl_btn_half_width_linkmind"
+    android:id="@+id/cl_btn_medium_width_linkmind"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingHorizontal="109dp"
