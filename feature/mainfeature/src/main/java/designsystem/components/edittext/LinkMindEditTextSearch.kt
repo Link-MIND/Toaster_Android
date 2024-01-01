@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.EditTextBoxLinkmindBinding
+import org.sopt.mainfeature.databinding.EditTextSearchBoxLinkmindBinding
 
 @SuppressLint("CustomViewStyleable")
 class LinkMindEditTextSearch @JvmOverloads constructor(
@@ -14,14 +15,14 @@ class LinkMindEditTextSearch @JvmOverloads constructor(
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0,
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
-  private val binding: EditTextBoxLinkmindBinding
+  private val binding: EditTextSearchBoxLinkmindBinding
 
   val editText
     get() = binding.editText
 
   init {
     val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-    binding = EditTextBoxLinkmindBinding.inflate(inflater, this, true)
+    binding = EditTextSearchBoxLinkmindBinding.inflate(inflater, this, true)
 
     binding.editText.setOnFocusChangeListener { _, hasFocus ->
       if (isPreventLosingFocus) return@setOnFocusChangeListener
