@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.EditTextSearchBoxLinkmindBinding
+import org.sopt.ui.view.onThrottleClick
 
 @SuppressLint("CustomViewStyleable")
 class LinkMindEditTextSearch @JvmOverloads constructor(
@@ -30,7 +31,7 @@ class LinkMindEditTextSearch @JvmOverloads constructor(
       }
     }
 
-    binding.ivCancel.setOnClickListener {
+    binding.ivCancel.onThrottleClick {
       binding.editText.text.clear()
     }
 
