@@ -19,8 +19,6 @@ dependencies {
 
   implementation(projects.feature.mainfeature)
   implementation(projects.data.linkminddata)
-  implementation(projects.data.linkminddataLocal)
-  implementation(projects.data.linkminddataRemote)
   implementation(projects.data.oauthdata)
   implementation(projects.core.network)
   implementation(projects.core.ui)
