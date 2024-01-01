@@ -1,5 +1,6 @@
 package org.sopt.authimpl.sourceimpl.local
 
+import kotlinx.coroutines.flow.first
 import org.sopt.auth.model.Token
 import org.sopt.authimpl.source.local.AuthLocalDataSource
 import org.sopt.datastore.datastore.SecurityDataStore
@@ -16,6 +17,12 @@ class AuthLocalDataSourceImpl @Inject constructor(
     }
   }
 
+  override suspend fun getToken(): Token =
+    Token(
+      dataStore.flowAccessToken().first(),
+      dataStore.flowRefreshToken().first(),
+      dataStore.flowDeviceToken().first()
+    )
   override suspend fun clear() {
     dataStore.clearAll()
   }

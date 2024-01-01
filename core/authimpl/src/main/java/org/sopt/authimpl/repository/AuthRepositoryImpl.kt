@@ -24,6 +24,9 @@ class AuthRepositoryImpl @Inject constructor(
   override suspend fun saveToken(token: Token) =
     authLocalDataSource.save(token)
 
+  override suspend fun getToken(): Token =
+    authLocalDataSource.getToken()
+
   override suspend fun clearToken() =
     authLocalDataSource.clear()
 }
