@@ -6,14 +6,14 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
+import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.json.JSONArray
-import org.json.JSONObject
 import org.sopt.core.network.BuildConfig.BASE_URL
+import org.sopt.network.authenticator.LinkMindAuthenticator
+import org.sopt.network.interceptor.AuthenticationIntercept
 import retrofit2.Retrofit
-import timber.log.Timber
 import javax.inject.Singleton
 
 @Module
@@ -21,6 +21,7 @@ import javax.inject.Singleton
 object NetworkModule {
   @Provides
   @Singleton
+  @NoneAuthOkHttpClient
   fun provideOkHttpClient(
     loggingInterceptor: HttpLoggingInterceptor,
   ): OkHttpClient =
@@ -30,33 +31,44 @@ object NetworkModule {
 
   @Provides
   @Singleton
-  fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-    val loggingInterceptor = HttpLoggingInterceptor { message ->
-      when {
-        message.isJsonObject() ->
-          Timber.d("Retrofit2", JSONObject(message).toString(4))
+  @AuthOkHttpClient
+  fun provideAuthOkHttpClient(
+    loggingInterceptor: HttpLoggingInterceptor,
+    @Auth authInterceptor: Interceptor,
+    authenticator: LinkMindAuthenticator,
+  ): OkHttpClient =
+    OkHttpClient.Builder()
+      .addInterceptor(loggingInterceptor)
+      .addInterceptor(authInterceptor)
+      .authenticator(authenticator)
+      .build()
 
-        message.isJsonArray() ->
-          Timber.d("Retrofit2", JSONArray(message).toString(4))
-
-        else -> {
-          Timber.d("Retrofit2", "CONNECTION INFO -> $message")
-        }
-      }
-    }
-    loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-    return loggingInterceptor
+  @Provides
+  @Singleton
+  fun provideLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+    level = HttpLoggingInterceptor.Level.BODY
   }
+
+  @Provides
+  @Singleton
+  @Auth
+  fun provideAuthInterceptor(interceptor: AuthenticationIntercept): Interceptor = interceptor
 
   @Singleton
   @Provides
   @LinkMindRetrofit
-  fun provideLinkMindRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+  fun provideLinkMindRetrofit(@NoneAuthOkHttpClient okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+    .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+    .baseUrl(BASE_URL)
+    .client(okHttpClient)
+    .build()
+
+  @Singleton
+  @Provides
+  @AuthLinkMindRetrofit
+  fun provideAuthLinkMindRetrofit(@AuthOkHttpClient okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
     .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
     .baseUrl(BASE_URL)
     .client(okHttpClient)
     .build()
 }
-
-private fun String?.isJsonObject(): Boolean = this?.startsWith("{") == true && this.endsWith("}")
-private fun String?.isJsonArray(): Boolean = this?.startsWith("[") == true && this.endsWith("]")

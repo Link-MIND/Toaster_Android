@@ -10,11 +10,14 @@ android {
 }
 
 dependencies {
+  implementation(projects.core.common)
   implementation(projects.core.model)
+  implementation(projects.core.datastore)
   implementation(libs.bundles.coroutine)
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.retrofit.core)
   implementation(libs.retrofit.kotlin.serialization)
   implementation(libs.okhttp.logging)
   implementation(libs.timber)
+  implementation(libs.process.phoenix)
 }

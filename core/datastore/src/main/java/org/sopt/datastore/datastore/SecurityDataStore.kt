@@ -2,6 +2,7 @@ package org.sopt.datastore.datastore
 
 import kotlinx.coroutines.flow.Flow
 import tech.thdev.useful.encrypted.data.store.preferences.ksp.annotations.UsefulPreferences
+import tech.thdev.useful.encrypted.data.store.preferences.ksp.annotations.value.ClearValues
 import tech.thdev.useful.encrypted.data.store.preferences.ksp.annotations.value.GetValue
 import tech.thdev.useful.encrypted.data.store.preferences.ksp.annotations.value.SetValue
 
@@ -19,8 +20,24 @@ interface SecurityDataStore {
   @SetValue(KEY_REFRESHTOKEN)
   suspend fun setRefreshToken(string: String)
 
+  @GetValue(KEY_DEVICETOKEN)
+  fun flowDeviceToken(): Flow<String>
+
+  @SetValue(KEY_DEVICETOKEN)
+  suspend fun setDeviceToken(string: String)
+
+  @GetValue(KEY_AUTOLOGIN)
+  fun flowAutoLogin(): Flow<Boolean>
+
+  @SetValue(KEY_AUTOLOGIN)
+  suspend fun setAutoLogin(boolean: Boolean)
+
+  @ClearValues
+  suspend fun clearAll()
   companion object {
     const val KEY_ACCESSTOKEN = "key-accesstoken"
     const val KEY_REFRESHTOKEN = "key-refreshtoken"
+    const val KEY_DEVICETOKEN = "key-devicetoken"
+    const val KEY_AUTOLOGIN = "key-autologin"
   }
 }

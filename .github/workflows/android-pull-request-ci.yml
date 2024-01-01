@@ -25,8 +25,16 @@ jobs:
       - name: Add Local Properties
         env:
           BASE_URL: ${{ secrets.BASE_URL }}
+          KAKAO_NATIVE_KEY: ${{ secrets.KAKAO_NATIVE_KEY }}
         run: |
           echo base.url=\"$BASE_URL\" >> ./local.properties
+          echo kakao.native.key=\"$KAKAO_NATIVE_KEY\" >> ./local.properties
+          echo kakaoNativeKey=$KAKAO_NATIVE_KEY >> ./local.properties
+
+      - name: Create Google Services JSON File
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: echo $GOOGLE_SERVICES_JSON > ./app/google-services.json
 
       - name: Run ktlint
         run: ./gradlew ktlintCheck

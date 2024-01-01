@@ -20,5 +20,8 @@ dependencies {
   androidTestImplementation(libs.espresso.core)
   implementation(projects.core.common)
   implementation(projects.core.ui)
+  implementation(projects.core.datastore)
+  implementation(projects.core.auth)
   implementation(projects.domain.linkminddomain)
+  implementation(projects.domain.oauthdomain)
 }

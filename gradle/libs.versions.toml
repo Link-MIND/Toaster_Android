@@ -8,6 +8,7 @@ appcompat = "1.6.1"
 material = "1.11.0"
 constraintlayout = "2.1.4"
 firebase-bom = "32.7.0"
+crashlytics = "2.9.9"
 
 ksp = "1.9.10-1.0.13"
 androidx-app-compat = "1.6.1"
@@ -40,6 +41,10 @@ coil = "2.4.0"
 lottie = "6.0.0"
 
 detekt = "1.23.1"
+kakao-login = "2.19.0"
+
+google-service = "4.4.0"
+process-pheonix = "2.1.2"
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
@@ -51,6 +56,7 @@ android-application = { id = "com.android.application", version.ref = "android-g
 android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+google-service = { id = "com.google.gms.google-services", version.ref = "google-service" }
 
 linkmind-android-application = { id = "linkmind.android.application", version = "unspecified" }
 linkmind-android-library = { id = "linkmind.android.library", version = "unspecified" }
@@ -111,8 +117,12 @@ encrypted-datastore-preference-ksp = { group = "tech.thdev", name = "useful-encr
 encrypted-datastore-preference-ksp-annotations = { group = "tech.thdev", name = "useful-encrypted-data-store-preferences-ksp-annotations", version.ref = "encrypted-datastore" }
 encrypted-datastore-preference-security = { group = "tech.thdev", name = "useful-encrypted-data-store-preferences-security", version.ref = "encrypted-datastore" }
 
+crashlytics-plugin = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "crashlytics" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
+firebase-remoteConfig = { group = "com.google.firebase", name = "firebase-config-ktx" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database-ktx" }
 
 coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
@@ -125,8 +135,12 @@ room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "
 # formatting
 detekt-plugin-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 
+kakao-login = { group = "com.kakao.sdk", name = "v2-user", version.ref = "kakao-login" }
+
+process-phoenix = { module = "com.jakewharton:process-phoenix", version.ref = "process-pheonix" }
+
 [bundles]
-firebase = ["firebase-analytics", "firebase-database"]
+firebase = ["firebase-analytics", "firebase-database", "firebase-messaging", "firebase-remoteConfig"]
 androidx-lifecycle = ["androidx-lifecycle-runtime-ktx", "androidx-lifecycle-viewmodel-ktx"]
 androidx-navigation = ["navigation-fragment-ktx", "navigation-ui-ktx"]
 coroutine = ["kotlinx-coroutines-android", "kotlinx-coroutines-core"]

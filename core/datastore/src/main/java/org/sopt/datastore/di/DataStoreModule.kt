@@ -17,7 +17,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DataStoreModule {
-  private val Context.dataStore by preferencesDataStore(name = "linkmind_data_store")
+  private val Context.dataStore by preferencesDataStore(name = "toaster_data_store")
 
   @Singleton
   @Provides
