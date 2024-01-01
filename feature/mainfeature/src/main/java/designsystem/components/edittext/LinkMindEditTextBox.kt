@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.EditTextBoxLinkmindBinding
+import org.sopt.ui.view.onThrottleClick
 
 @SuppressLint("CustomViewStyleable")
 class LinkMindEditTextBox @JvmOverloads constructor(
@@ -30,7 +31,7 @@ class LinkMindEditTextBox @JvmOverloads constructor(
       }
     }
 
-    binding.ivCancel.setOnClickListener {
+    binding.ivCancel.onThrottleClick {
       binding.editText.text.clear()
     }
 
@@ -50,13 +51,16 @@ class LinkMindEditTextBox @JvmOverloads constructor(
     isPreventLosingFocus = true
     val losingFocusDelay = 250L
 
-    binding.editText.postDelayed({
-      binding.editText.run {
-        if (isFocused.not()) {
-          requestFocus()
+    binding.editText.postDelayed(
+      {
+        binding.editText.run {
+          if (isFocused.not()) {
+            requestFocus()
+          }
         }
-      }
-      isPreventLosingFocus = false
-    }, losingFocusDelay,)
+        isPreventLosingFocus = false
+      },
+      losingFocusDelay,
+    )
   }
 }
