@@ -1,7 +1,6 @@
 package org.sopt.network.authenticator
 
 import android.content.Context
-import android.util.Log
 import com.jakewharton.processphoenix.ProcessPhoenix
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.runBlocking
@@ -46,7 +45,7 @@ class LinkMindAuthenticator @Inject constructor(
     }
     return null
   }
-  companion object{
+  companion object {
     const val CODE_TOKEN_EXPIRED = 401
   }
 }

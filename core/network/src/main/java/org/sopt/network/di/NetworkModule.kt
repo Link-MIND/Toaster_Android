@@ -6,18 +6,14 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
-import okhttp3.Authenticator
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.json.JSONArray
-import org.json.JSONObject
 import org.sopt.core.network.BuildConfig.BASE_URL
 import org.sopt.network.authenticator.LinkMindAuthenticator
 import org.sopt.network.interceptor.AuthenticationIntercept
 import retrofit2.Retrofit
-import timber.log.Timber
 import javax.inject.Singleton
 
 @Module
@@ -39,7 +35,7 @@ object NetworkModule {
   fun provideAuthOkHttpClient(
     @Logging loggingInterceptor: HttpLoggingInterceptor,
     @Auth authInterceptor: Interceptor,
-    authenticator: LinkMindAuthenticator
+    authenticator: LinkMindAuthenticator,
   ): OkHttpClient =
     OkHttpClient.Builder()
       .addInterceptor(loggingInterceptor)

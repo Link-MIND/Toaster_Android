@@ -3,8 +3,6 @@ package org.sopt.mainfeature.onboarding
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.flowWithLifecycle
@@ -25,7 +23,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
   private lateinit var binding: ActivityLoginBinding
-  private val viewModel : LoginViewModel by viewModels()
+  private val viewModel: LoginViewModel by viewModels()
 
   @Inject
   lateinit var kakaoAuthInteractor: OAuthInteractor
@@ -37,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
     binding = ActivityLoginBinding.inflate(layoutInflater)
     setContentView(binding.root)
     lifecycleScope.launch {
-      if(dataStore.flowAutoLogin().first()){
+      if (dataStore.flowAutoLogin().first()) {
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
@@ -73,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
         is UiState.Loading -> {}
         else -> {}
       }
-      }.launchIn(lifecycleScope)
+    }.launchIn(lifecycleScope)
   }
 
   private fun initKakaoLoginBtnClickListener() {

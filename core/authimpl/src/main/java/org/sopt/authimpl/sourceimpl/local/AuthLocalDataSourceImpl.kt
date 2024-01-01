@@ -21,7 +21,7 @@ class AuthLocalDataSourceImpl @Inject constructor(
     Token(
       dataStore.flowAccessToken().first(),
       dataStore.flowRefreshToken().first(),
-      dataStore.flowDeviceToken().first()
+      dataStore.flowDeviceToken().first(),
     )
   override suspend fun clear() {
     dataStore.clearAll()

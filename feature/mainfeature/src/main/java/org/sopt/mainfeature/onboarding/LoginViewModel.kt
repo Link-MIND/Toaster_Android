@@ -30,7 +30,7 @@ class LoginViewModel @Inject constructor(
       )
       authRepository.authenticate(auth)
         .onSuccess {
-          if(it == null) return@launch
+          if (it == null) return@launch
           authRepository.saveToken(it.first)
           _authState.emit(UiState.Success(it.second))
         }.onFailure {

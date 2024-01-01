@@ -1,7 +1,6 @@
 package org.sopt.network.interceptor
 
 import android.content.Context
-import android.util.Log
 import com.jakewharton.processphoenix.ProcessPhoenix
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.first
