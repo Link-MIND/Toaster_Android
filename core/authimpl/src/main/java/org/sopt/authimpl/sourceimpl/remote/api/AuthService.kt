@@ -22,7 +22,7 @@ interface AuthService {
   @DELETE("$AUTH/$WITHDRAW")
   suspend fun deleteUser(): BaseResponse<Unit>
 
-  companion object{
+  companion object {
     const val AUTH = "auth"
     const val SIGNOUT = "sign-out"
     const val WITHDRAW = "withdraw"
