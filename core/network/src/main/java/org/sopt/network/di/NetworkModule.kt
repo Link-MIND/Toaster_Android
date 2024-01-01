@@ -6,6 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
+import okhttp3.Authenticator
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -13,6 +14,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONArray
 import org.json.JSONObject
 import org.sopt.core.network.BuildConfig.BASE_URL
+import org.sopt.network.authenticator.LinkMindAuthenticator
 import org.sopt.network.interceptor.AuthenticationIntercept
 import retrofit2.Retrofit
 import timber.log.Timber
@@ -37,31 +39,19 @@ object NetworkModule {
   fun provideAuthOkHttpClient(
     @Logging loggingInterceptor: HttpLoggingInterceptor,
     @Auth authInterceptor: Interceptor,
+    authenticator: LinkMindAuthenticator
   ): OkHttpClient =
     OkHttpClient.Builder()
       .addInterceptor(loggingInterceptor)
       .addInterceptor(authInterceptor)
+      .authenticator(authenticator)
       .build()
 
   @Provides
   @Singleton
   @Logging
-  fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-    val loggingInterceptor = HttpLoggingInterceptor { message ->
-      when {
-        message.isJsonObject() ->
-          Timber.d("Retrofit2", JSONObject(message).toString(4))
-
-        message.isJsonArray() ->
-          Timber.d("Retrofit2", JSONArray(message).toString(4))
-
-        else -> {
-          Timber.d("Retrofit2", "CONNECTION INFO -> $message")
-        }
-      }
-    }
-    loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-    return loggingInterceptor
+  fun provideLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+    level = HttpLoggingInterceptor.Level.BODY
   }
 
   @Provides
