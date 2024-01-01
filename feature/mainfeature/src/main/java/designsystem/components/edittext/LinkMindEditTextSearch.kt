@@ -6,7 +6,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import org.sopt.mainfeature.R
-import org.sopt.mainfeature.databinding.EditTextBoxLinkmindBinding
 import org.sopt.mainfeature.databinding.EditTextSearchBoxLinkmindBinding
 
 @SuppressLint("CustomViewStyleable")
@@ -58,6 +57,6 @@ class LinkMindEditTextSearch @JvmOverloads constructor(
         }
       }
       isPreventLosingFocus = false
-    }, losingFocusDelay)
+    }, losingFocusDelay,)
   }
 }

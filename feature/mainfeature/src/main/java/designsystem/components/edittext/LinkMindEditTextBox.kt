@@ -57,6 +57,6 @@ class LinkMindEditTextBox @JvmOverloads constructor(
         }
       }
       isPreventLosingFocus = false
-    }, losingFocusDelay)
+    }, losingFocusDelay,)
   }
 }
