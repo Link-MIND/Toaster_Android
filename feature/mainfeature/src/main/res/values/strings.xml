@@ -5,4 +5,6 @@
   <string name="text_timer">TIMER</string>
   <string name="text_my">MY</string>
   <string name="text_placeholder">placeholder</string>
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
