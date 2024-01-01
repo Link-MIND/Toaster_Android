@@ -23,5 +23,4 @@ class LinkMindHorizontalProgressBar @JvmOverloads constructor(
     val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     binding = ProgressBarLinkmindBinding.inflate(inflater, this, true)
   }
-
 }

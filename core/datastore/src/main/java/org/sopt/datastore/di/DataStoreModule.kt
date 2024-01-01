@@ -18,11 +18,13 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DataStoreModule {
   private val Context.dataStore by preferencesDataStore(name = "linkmind_data_store")
+
   @Singleton
   @Provides
   fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
     return context.dataStore
   }
+
   @Singleton
   @Provides
   fun provideSecurityDataStore(dataStore: DataStore<Preferences>): SecurityDataStore {
