@@ -73,6 +73,3 @@ object NetworkModule {
     .client(okHttpClient)
     .build()
 }
-
-private fun String?.isJsonObject(): Boolean = this?.startsWith("{") == true && this.endsWith("}")
-private fun String?.isJsonArray(): Boolean = this?.startsWith("[") == true && this.endsWith("]")
