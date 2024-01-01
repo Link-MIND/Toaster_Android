@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.widget.doAfterTextChanged
 import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.EditTextBoxLinkmindBinding
 import org.sopt.ui.view.onThrottleClick
@@ -33,6 +35,11 @@ class LinkMindEditTextBox @JvmOverloads constructor(
 
     binding.ivCancel.onThrottleClick {
       binding.editText.text.clear()
+    }
+
+    binding.editText.doAfterTextChanged { text ->
+      binding.ivCancel.visibility =
+        if (text.isNullOrEmpty()) View.GONE else View.VISIBLE
     }
 
     val typedArray =
