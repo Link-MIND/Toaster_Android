@@ -34,6 +34,12 @@ class LoginActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     binding = ActivityLoginBinding.inflate(layoutInflater)
     setContentView(binding.root)
+    initCheckAutoLogin()
+    initKakaoLoginBtnClickListener()
+    initAuthStateObserver()
+  }
+
+  private fun initCheckAutoLogin() {
     lifecycleScope.launch {
       if (dataStore.flowAutoLogin().first()) {
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
@@ -41,8 +47,6 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
       }
     }
-    initKakaoLoginBtnClickListener()
-    initAuthStateObserver()
   }
 
   private fun initAuthStateObserver() {
