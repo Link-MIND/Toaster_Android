@@ -3,4 +3,10 @@
   <declare-styleable name="EditTextSearch">
     <attr name="editTextSearchHint" format="reference|string" />
   </declare-styleable>
+
+  <declare-styleable name="LinkMindButtonFullWidth">
+    <attr name="fullWidthBtnBackGroundTint" format="reference|integer" />
+    <attr name="fullWidthBtnText" format="reference|string" />
+    <attr name="fullWidthBtnTextColor" format="reference|integer" />
+  </declare-styleable>
 </resources>
