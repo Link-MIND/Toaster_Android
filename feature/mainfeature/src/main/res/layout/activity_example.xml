@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ExampleActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  tools:context=".ExampleActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+  <designsystem.components.horizontalprogressbar.LinkMindHorizontalProgressBar
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+  <designsystem.components.edittext.LinkMindEditTextBox
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
+
+</LinearLayout>
