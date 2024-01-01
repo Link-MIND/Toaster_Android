@@ -5,7 +5,7 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import org.sopt.common.intentprovider.IntentProvider
-import org.sopt.mainfeature.intentprovider.IntentProviderImpl
+import org.sopt.mainfeature.onboarding.intentprovider.IntentProviderImpl
 import javax.inject.Singleton
 
 @Module
