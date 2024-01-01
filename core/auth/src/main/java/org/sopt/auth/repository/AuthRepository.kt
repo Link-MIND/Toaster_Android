@@ -9,5 +9,7 @@ interface AuthRepository {
   suspend fun signout(): Result<Unit>
   suspend fun withdraw(): Result<Unit>
   suspend fun saveToken(token: Token)
+
+  suspend fun getToken(): Token
   suspend fun clearToken()
 }
