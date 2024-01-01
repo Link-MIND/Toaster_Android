@@ -1,6 +1,7 @@
 package org.sopt.network.authenticator
 
 import android.content.Context
+import android.util.Log
 import com.jakewharton.processphoenix.ProcessPhoenix
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.runBlocking
@@ -20,7 +21,7 @@ class LinkMindAuthenticator @Inject constructor(
   private val intentProvider: IntentProvider,
 ) : Authenticator {
   override fun authenticate(route: Route?, response: Response): Request? {
-    if (response.code == 401) {
+    if (response.code == CODE_TOKEN_EXPIRED) {
       val newTokens = runCatching {
         runBlocking {
           tokenRefreshService.postAuthRefresh()
@@ -44,5 +45,8 @@ class LinkMindAuthenticator @Inject constructor(
         .build()
     }
     return null
+  }
+  companion object{
+    const val CODE_TOKEN_EXPIRED = 401
   }
 }
