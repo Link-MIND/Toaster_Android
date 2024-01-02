@@ -18,6 +18,9 @@
       android:layout_height="wrap_content"
       android:gravity="center"
       app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
       tools:text="BTN" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
