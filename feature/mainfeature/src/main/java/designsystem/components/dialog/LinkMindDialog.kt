@@ -1,12 +1,14 @@
 package designsystem.components.dialog
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.view.WindowManager
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import org.sopt.mainfeature.databinding.DialogLinkmindBinding
@@ -30,13 +32,6 @@ class LinkMindDialog constructor(private val context: Context) {
     return this
   }
 
-  fun setTitle(message: CharSequence): LinkMindDialog {
-    binding.tvDialogTitle.apply {
-      text = message
-    }
-    return this
-  }
-
   fun setDescription(@StringRes messageId: Int?): LinkMindDialog {
     binding.tvDialogSubtitle.apply {
       if (messageId == null) {
@@ -49,29 +44,17 @@ class LinkMindDialog constructor(private val context: Context) {
     return this
   }
 
-  fun setDescription(message: CharSequence): LinkMindDialog {
-    binding.tvDialogSubtitle.apply {
-      if (message.isEmpty()) {
-        visibility = View.GONE
-      } else {
-        visibility = View.VISIBLE
-        text = message
-      }
-    }
-    return this
-  }
-
-  fun setGoneDescription(): LinkMindDialog {
+  fun visibleSubtitle(): LinkMindDialog {
     binding.tvDialogSubtitle.visibility = View.GONE
     return this
   }
 
   fun setPositiveButton(
-    text: CharSequence,
+    @StringRes text: Int,
     onClickListener: (view: View) -> (Unit),
   ): LinkMindDialog {
     binding.btnPositive.apply {
-      setText(text.toString())
+      setText(context.getText(text).toString())
       setOnClickListener(onClickListener)
       dismiss()
     }
@@ -79,12 +62,12 @@ class LinkMindDialog constructor(private val context: Context) {
   }
 
   fun setNegativeButton(
-    text: CharSequence,
+    @StringRes text: Int,
     onClickListener: (view: View) -> (Unit) = {},
   ): LinkMindDialog {
-    binding.btnPositive.apply {
+    binding.btnNegative.apply {
       visibility = View.VISIBLE
-      setText(text.toString())
+      setText(context.getText(text).toString())
       setOnClickListener(onClickListener)
     }
     return this
@@ -95,12 +78,17 @@ class LinkMindDialog constructor(private val context: Context) {
   }
 
   fun show() {
+    val dpToPixel = Resources.getSystem().displayMetrics.density
+    val dialogHorizontalMarginInPixels =
+      (dpToPixel * 37.0f + 0.5f).toInt()
+    val deviceWidth = Resources.getSystem().displayMetrics.widthPixels
     dialog = builder.create()
-    dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
     dialog?.show()
-  }
+    dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    dialog?.window?.setLayout(deviceWidth - 2 * dialogHorizontalMarginInPixels, WindowManager.LayoutParams.WRAP_CONTENT )
 
+  }
   fun dismiss() {
     val parentViewGroup = binding.root.parent as? ViewGroup
     parentViewGroup?.removeView(binding.root)
