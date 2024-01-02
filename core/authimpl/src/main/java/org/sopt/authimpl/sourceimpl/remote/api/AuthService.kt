@@ -26,6 +26,6 @@ interface AuthService {
     const val AUTH = "auth"
     const val SIGNOUT = "sign-out"
     const val WITHDRAW = "withdraw"
-    const val AUTHORIZATION = "Autorization"
+    const val AUTHORIZATION = "Authorization"
   }
 }
