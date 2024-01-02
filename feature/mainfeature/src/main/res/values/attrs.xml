@@ -9,4 +9,10 @@
     <attr name="fullWidthBtnText" format="reference|string" />
     <attr name="fullWidthBtnTextColor" format="reference|color" />
   </declare-styleable>
+
+  <declare-styleable name="LinkMindButtonHalfWidth">
+    <attr name="HalfWidthBtnBackGroundTint" format="reference|color" />
+    <attr name="HalfWidthBtnText" format="reference|string" />
+    <attr name="WidthBtnTextColor" format="reference|color" />
+  </declare-styleable>
 </resources>

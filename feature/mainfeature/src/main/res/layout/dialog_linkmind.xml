@@ -3,7 +3,8 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="wrap_content"
+  android:layout_height="match_parent"
+  android:background="@color/black"
   android:padding="24dp">
 
   <TextView
@@ -35,16 +36,20 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="18dp"
     app:HalfWidthBtnText="test"
+    app:layout_constraintEnd_toStartOf="@+id/btn_negative"
+    app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/tv_dialog_subtitle" />
 
   <designsystem.components.button.LinkMindButtonHalfWidth
-    android:layout_marginStart="10dp"
     android:id="@+id/btn_negative"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
     android:layout_marginTop="18dp"
     app:HalfWidthBtnText="test"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toEndOf="@+id/btn_positive"
     app:layout_constraintTop_toBottomOf="@id/tv_dialog_subtitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

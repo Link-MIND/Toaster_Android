@@ -8,12 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import designsystem.components.dialog.LinkMindDialog
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.sopt.datastore.datastore.SecurityDataStore
 import org.sopt.mainfeature.MainActivity
+import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.ActivityLoginBinding
 import org.sopt.oauthdomain.interactor.OAuthInteractor
 import org.sopt.ui.context.toast
@@ -30,6 +32,10 @@ class LoginActivity : AppCompatActivity() {
 
   @Inject
   lateinit var dataStore: SecurityDataStore
+
+  private val linkMindDialog by lazy {
+    LinkMindDialog(this)
+  }
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -37,8 +43,20 @@ class LoginActivity : AppCompatActivity() {
     initCheckAutoLogin()
     initKakaoLoginBtnClickListener()
     initAuthStateObserver()
-  }
+    showRevokeCommonDialog()
 
+  }
+  private fun showRevokeCommonDialog() {
+    linkMindDialog.setTitle(R.string.text_home)
+      .setDescription(R.string.text_clip)
+      .setNegativeButton(R.string.text_home) {
+        linkMindDialog.dismiss()
+      }
+      .setPositiveButton(R.string.text_home) {
+        linkMindDialog.dismiss()
+      }
+      .show()
+  }
   private fun initCheckAutoLogin() {
     lifecycleScope.launch {
       if (dataStore.flowAutoLogin().first()) {
