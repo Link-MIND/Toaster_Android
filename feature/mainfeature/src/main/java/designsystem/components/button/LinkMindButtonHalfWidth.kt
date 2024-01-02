@@ -56,21 +56,24 @@ class LinkMindButtonHalfWidth @JvmOverloads constructor(
       onClick()
     }
   }
+  fun setText(text:String) {
+    binding.tvBtn.text=text
+  }
 
   init {
     val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     binding = ButtonHalfWidthLinkmindBinding.inflate(inflater, this, true)
 
     val typedArray =
-      context.obtainStyledAttributes(attrs, R.styleable.LinkMindButtonFullWidth, defStyleAttr, 0)
+      context.obtainStyledAttributes(attrs, R.styleable.LinkMindButtonHalfWidth, defStyleAttr, 0)
 
     val background = typedArray.getResourceId(
-      R.styleable.LinkMindButtonFullWidth_fullWidthBtnBackGroundTint,
+      R.styleable.LinkMindButtonHalfWidth_HalfWidthBtnBackGroundTint,
       R.drawable.ripple_btn,
     )
-    val text = typedArray.getText(R.styleable.LinkMindButtonFullWidth_fullWidthBtnText)
+    val text = typedArray.getText(R.styleable.LinkMindButtonHalfWidth_HalfWidthBtnText)
     val textColor = typedArray.getColor(
-      R.styleable.LinkMindButtonFullWidth_fullWidthBtnTextColor,
+      R.styleable.LinkMindButtonHalfWidth_WidthBtnTextColor,
       ContextCompat.getColor(context, R.color.black),
     )
 
