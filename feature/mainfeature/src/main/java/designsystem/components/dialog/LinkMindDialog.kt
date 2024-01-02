@@ -24,6 +24,23 @@ class LinkMindDialog constructor(private val context: Context) {
   }
 
   private var dialog: AlertDialog? = null
+  fun show() {
+    val dpToPixel = Resources.getSystem().displayMetrics.density
+    val dialogHorizontalMarginInPixels =
+      (dpToPixel * 37.0f + 0.5f).toInt()
+    val deviceWidth = Resources.getSystem().displayMetrics.widthPixels
+    dialog = builder.create()
+    dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+    dialog?.show()
+    dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    dialog?.window?.setLayout(deviceWidth - 2 * dialogHorizontalMarginInPixels, WindowManager.LayoutParams.WRAP_CONTENT)
+  }
+
+  fun dismiss() {
+    val parentViewGroup = binding.root.parent as? ViewGroup
+    parentViewGroup?.removeView(binding.root)
+    dialog?.dismiss()
+  }
 
   fun setTitle(@StringRes messageId: Int): LinkMindDialog {
     binding.tvDialogTitle.apply {
@@ -32,7 +49,7 @@ class LinkMindDialog constructor(private val context: Context) {
     return this
   }
 
-  fun setDescription(@StringRes messageId: Int?): LinkMindDialog {
+  fun setSubtitle(@StringRes messageId: Int?): LinkMindDialog {
     binding.tvDialogSubtitle.apply {
       if (messageId == null) {
         visibility = View.GONE
@@ -75,23 +92,5 @@ class LinkMindDialog constructor(private val context: Context) {
 
   fun create() {
     dialog = builder.create()
-  }
-
-  fun show() {
-    val dpToPixel = Resources.getSystem().displayMetrics.density
-    val dialogHorizontalMarginInPixels =
-      (dpToPixel * 37.0f + 0.5f).toInt()
-    val deviceWidth = Resources.getSystem().displayMetrics.widthPixels
-    dialog = builder.create()
-    dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
-    dialog?.show()
-    dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-    dialog?.window?.setLayout(deviceWidth - 2 * dialogHorizontalMarginInPixels, WindowManager.LayoutParams.WRAP_CONTENT )
-
-  }
-  fun dismiss() {
-    val parentViewGroup = binding.root.parent as? ViewGroup
-    parentViewGroup?.removeView(binding.root)
-    dialog?.dismiss()
   }
 }

@@ -44,11 +44,10 @@ class LoginActivity : AppCompatActivity() {
     initKakaoLoginBtnClickListener()
     initAuthStateObserver()
     showRevokeCommonDialog()
-
   }
   private fun showRevokeCommonDialog() {
     linkMindDialog.setTitle(R.string.text_home)
-      .setDescription(R.string.text_clip)
+      .setSubtitle(R.string.text_clip)
       .setNegativeButton(R.string.text_home) {
         linkMindDialog.dismiss()
       }
