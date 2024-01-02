@@ -56,8 +56,8 @@ class LinkMindButtonHalfWidth @JvmOverloads constructor(
       onClick()
     }
   }
-  fun setText(text:String) {
-    binding.tvBtn.text=text
+  fun setText(text: String) {
+    binding.tvBtn.text = text
   }
 
   init {
