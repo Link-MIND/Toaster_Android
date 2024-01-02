@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+  <color name="black">#FF000000</color>
+  <color name="white">#FFFFFFFF</color>
+  <!-- gray scale -->
+  <color name="neutrals050">#F2F2F2</color>
+  <color name="neutrals100">#E5E5E5</color>
+  <color name="neutrals150">#D9D9D9</color>
+  <color name="neutrals200">#CCCCCC</color>
+  <color name="neutrals300">#B2B2B2</color>
+  <color name="neutrals400">#999999</color>
+  <color name="neutrals500">#7F7F7F</color>
+  <color name="neutrals600">#666666</color>
+  <color name="neutrals700">#4C4C4C</color>
+  <color name="neutrals800">#333333</color>
+  <color name="neutrals850">#262626</color>
+  <color name="neutrals900">#191919</color>
+
+  <!-- Accessible Colors -->
+  <color name="accessible050">#FEEFEB</color>
+  <color name="accessible100">#FCDED7</color>
+  <color name="accessible200">#FBCEC4</color>
+  <color name="accessible300">#F9BDB0</color>
+  <color name="accessible400">#F8AD9C</color>
+  <color name="accessible500">#F69C88</color>
+  <color name="accessible600">#F58B74</color>
+  <color name="accessible700">#F37B61</color>
+  <color name="accessible800">#F26B4D</color>
+  <color name="accessible900">#F05A39</color>
+
+  <!-- Primary Color -->
+  <color name="primary">#F05A39</color>
+
+  <!-- Semantic Colors -->
+  <color name="success">#0E8345</color>
+  <color name="warning">#F6BC2F</color>
+  <color name="error">#FF3B30</color>
+
+
+  <!-- Background Color -->
+  <color name="background">#F8F8F8</color>
 </resources>
