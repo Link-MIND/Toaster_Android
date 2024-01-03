@@ -1,5 +1,6 @@
 package designsystem.components.button
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -7,16 +8,17 @@ import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import designsystem.components.button.state.LinkMindButtonFullWidthState
 import org.sopt.mainfeature.R
-import org.sopt.mainfeature.databinding.ButtonMediumWidthLinkmindBinding
+import org.sopt.mainfeature.databinding.ButtonPopUpLinkmindBinding
 import org.sopt.ui.view.onThrottleClick
 
-class LinkMindButtonMediumWidth @JvmOverloads constructor(
+@SuppressLint("CustomViewStyleable")
+class LinkMindPopUpButton @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0,
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-  private val binding: ButtonMediumWidthLinkmindBinding
+  private val binding: ButtonPopUpLinkmindBinding
 
   var state: LinkMindButtonFullWidthState = LinkMindButtonFullWidthState.ENABLE
     set(value) {
@@ -34,46 +36,50 @@ class LinkMindButtonMediumWidth @JvmOverloads constructor(
 
   private fun setBtnEnable() {
     binding.apply {
-      clBtnMediumWidthLinkmind.isClickable = true
-      clBtnMediumWidthLinkmind.isFocusable = true
+      clBtnHalfWidthLinkmind.isClickable = true
+      clBtnHalfWidthLinkmind.isFocusable = true
       tvBtn.setTextColor(ContextCompat.getColor(context, R.color.black))
     }
   }
 
   private fun setBtnDisable() {
     binding.apply {
-      clBtnMediumWidthLinkmind.isClickable = false
-      clBtnMediumWidthLinkmind.isFocusable = false
+      clBtnHalfWidthLinkmind.isClickable = false
+      clBtnHalfWidthLinkmind.isFocusable = false
       tvBtn.setTextColor(ContextCompat.getColor(context, R.color.black))
-      clBtnMediumWidthLinkmind.setBackgroundColor(ContextCompat.getColor(context, R.color.black))
+      clBtnHalfWidthLinkmind.setBackgroundColor(ContextCompat.getColor(context, R.color.black))
     }
   }
 
   fun btnClick(onClick: () -> Unit) {
-    binding.clBtnMediumWidthLinkmind.onThrottleClick {
+    binding.clBtnHalfWidthLinkmind.onThrottleClick {
       onClick()
     }
   }
 
+  fun setText(text: String) {
+    binding.tvBtn.text = text
+  }
+
   init {
     val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-    binding = ButtonMediumWidthLinkmindBinding.inflate(inflater, this, true)
+    binding = ButtonPopUpLinkmindBinding.inflate(inflater, this, true)
 
     val typedArray =
-      context.obtainStyledAttributes(attrs, R.styleable.LinkMindButtonFullWidth, defStyleAttr, 0)
+      context.obtainStyledAttributes(attrs, R.styleable.LinkMindPopUpButton, defStyleAttr, 0)
 
     val background = typedArray.getResourceId(
-      R.styleable.LinkMindButtonFullWidth_fullWidthBtnBackGroundTint,
+      R.styleable.LinkMindPopUpButton_PopUpBtnBackGroundTint,
       R.drawable.ripple_btn,
     )
-    val text = typedArray.getText(R.styleable.LinkMindButtonFullWidth_fullWidthBtnText)
+    val text = typedArray.getText(R.styleable.LinkMindPopUpButton_PopUpBtnText)
     val textColor = typedArray.getColor(
-      R.styleable.LinkMindButtonFullWidth_fullWidthBtnTextColor,
+      R.styleable.LinkMindPopUpButton_PopUpBtnTextColor,
       ContextCompat.getColor(context, R.color.black),
     )
 
     binding.apply {
-      clBtnMediumWidthLinkmind.setBackgroundResource(background)
+      clBtnHalfWidthLinkmind.setBackgroundResource(background)
       tvBtn.text = text
       tvBtn.setTextColor(textColor)
     }

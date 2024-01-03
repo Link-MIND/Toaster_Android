@@ -10,9 +10,9 @@
     <attr name="fullWidthBtnTextColor" format="reference|color" />
   </declare-styleable>
 
-  <declare-styleable name="LinkMindButtonHalfWidth">
-    <attr name="HalfWidthBtnBackGroundTint" format="reference|color" />
-    <attr name="HalfWidthBtnText" format="reference|string" />
-    <attr name="WidthBtnTextColor" format="reference|color" />
+  <declare-styleable name="LinkMindPopUpButton">
+    <attr name="PopUpBtnBackGroundTint" format="reference|color" />
+    <attr name="PopUpBtnText" format="reference|string" />
+    <attr name="PopUpBtnTextColor" format="reference|color" />
   </declare-styleable>
 </resources>

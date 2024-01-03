@@ -7,16 +7,16 @@ import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import designsystem.components.button.state.LinkMindButtonFullWidthState
 import org.sopt.mainfeature.R
-import org.sopt.mainfeature.databinding.ButtonFullWidthLinkmindBinding
+import org.sopt.mainfeature.databinding.ButtonBlockLinkmindBinding
 import org.sopt.ui.view.onThrottleClick
 
-class LinkMindButtonFullWidth @JvmOverloads constructor(
+class LinkMindBlockButton @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0,
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-  private val binding: ButtonFullWidthLinkmindBinding
+  private val binding: ButtonBlockLinkmindBinding
 
   var state: LinkMindButtonFullWidthState = LinkMindButtonFullWidthState.ENABLE
     set(value) {
@@ -34,28 +34,30 @@ class LinkMindButtonFullWidth @JvmOverloads constructor(
 
   private fun setBtnEnable() {
     binding.apply {
-      clBtnFullWidthLinkmind.isClickable = true
-      clBtnFullWidthLinkmind.isFocusable = true
+      clBtnMediumWidthLinkmind.isClickable = true
+      clBtnMediumWidthLinkmind.isFocusable = true
+      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.black))
     }
   }
 
   private fun setBtnDisable() {
     binding.apply {
-      clBtnFullWidthLinkmind.isClickable = false
-      clBtnFullWidthLinkmind.isFocusable = false
-      clBtnFullWidthLinkmind.setBackgroundColor(ContextCompat.getColor(context, R.color.black))
+      clBtnMediumWidthLinkmind.isClickable = false
+      clBtnMediumWidthLinkmind.isFocusable = false
+      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.black))
+      clBtnMediumWidthLinkmind.setBackgroundColor(ContextCompat.getColor(context, R.color.black))
     }
   }
 
   fun btnClick(onClick: () -> Unit) {
-    binding.clBtnFullWidthLinkmind.onThrottleClick {
+    binding.clBtnMediumWidthLinkmind.onThrottleClick {
       onClick()
     }
   }
 
   init {
     val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-    binding = ButtonFullWidthLinkmindBinding.inflate(inflater, this, true)
+    binding = ButtonBlockLinkmindBinding.inflate(inflater, this, true)
 
     val typedArray =
       context.obtainStyledAttributes(attrs, R.styleable.LinkMindButtonFullWidth, defStyleAttr, 0)
@@ -69,8 +71,9 @@ class LinkMindButtonFullWidth @JvmOverloads constructor(
       R.styleable.LinkMindButtonFullWidth_fullWidthBtnTextColor,
       ContextCompat.getColor(context, R.color.black),
     )
+
     binding.apply {
-      clBtnFullWidthLinkmind.setBackgroundResource(background)
+      clBtnMediumWidthLinkmind.setBackgroundResource(background)
       tvBtn.text = text
       tvBtn.setTextColor(textColor)
     }
