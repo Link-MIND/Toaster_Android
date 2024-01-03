@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doAfterTextChanged
+import org.sopt.common.util.throttleValue.ThrottleValue
 import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.EditTextBoxLinkmindBinding
 import org.sopt.ui.view.onThrottleClick
@@ -18,7 +19,7 @@ class LinkMindEditTextBox @JvmOverloads constructor(
   defStyleAttr: Int = 0,
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
   private val binding: EditTextBoxLinkmindBinding
-
+  private val editThrottleValue = ThrottleValue<String>()
   val editText
     get() = binding.editText
 
@@ -52,6 +53,23 @@ class LinkMindEditTextBox @JvmOverloads constructor(
     typedArray.recycle()
   }
 
+  /**
+   * 실제 사용하면서 사이드 효과 측정할게염
+   * **/
+  fun throttleAfterTextChanged(onClickListener: () -> Unit) {
+    binding.editText.doAfterTextChanged { text ->
+      val isTextEmpty = text.isNullOrEmpty()
+
+      binding.ivCancel.visibility = if (isTextEmpty) View.GONE else View.VISIBLE
+
+      if (!isTextEmpty)
+        editThrottleValue.setDelay(text.toString(), 300L) {
+          onClickListener()
+        }
+
+    }
+  }
+
   private var isPreventLosingFocus = false
 
   private fun preventFocusClearedByAdjustResize() {
@@ -71,3 +89,4 @@ class LinkMindEditTextBox @JvmOverloads constructor(
     )
   }
 }
+
