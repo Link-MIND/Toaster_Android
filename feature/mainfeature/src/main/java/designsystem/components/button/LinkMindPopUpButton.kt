@@ -38,7 +38,8 @@ class LinkMindPopUpButton @JvmOverloads constructor(
     binding.apply {
       clBtnHalfWidthLinkmind.isClickable = true
       clBtnHalfWidthLinkmind.isFocusable = true
-      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.black))
+      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.white))
+      clBtnHalfWidthLinkmind.setBackgroundResource(R.drawable.shape_primary_fill_8_rect)
     }
   }
 
@@ -46,8 +47,8 @@ class LinkMindPopUpButton @JvmOverloads constructor(
     binding.apply {
       clBtnHalfWidthLinkmind.isClickable = false
       clBtnHalfWidthLinkmind.isFocusable = false
-      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.black))
-      clBtnHalfWidthLinkmind.setBackgroundColor(ContextCompat.getColor(context, R.color.black))
+      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.neutrals400))
+      clBtnHalfWidthLinkmind.setBackgroundResource(R.drawable.shape_neutrals_fill_8_rect)
     }
   }
 
