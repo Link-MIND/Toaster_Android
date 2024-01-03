@@ -12,4 +12,7 @@
   <string name="timer_turn_on_permission">에서 알림을 켜주세요.</string>
   <string name="timer_set_timer">타이머를 설정하고\n원하는 때에 링크를 받아보세요</string>
   <string name="timer_set_btn">타이머 설정하기</string>
+  <string name="timer_read">읽으러가기</string>
+  <string name="timer_link">링크들을</string>
+  <string name="timer_good">읽기 딱 좋은 시간이에요!</string>
 </resources>
