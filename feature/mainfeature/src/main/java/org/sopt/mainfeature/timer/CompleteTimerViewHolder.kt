@@ -10,7 +10,7 @@ class CompleteTimerViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(data: Timer?) {
     if (data == null) return
-    with(binding){
+    with(binding) {
       val ampm = if (data.am)AM else PM
       val minute = data.minute.toString().takeIf { data.minute >= 10 } ?: MINUTE_FORMAT.format(data.minute)
       tvItemTimerCompleteCategory.text = data.category
