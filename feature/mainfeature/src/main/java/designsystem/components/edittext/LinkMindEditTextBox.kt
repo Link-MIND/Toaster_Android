@@ -40,7 +40,7 @@ class LinkMindEditTextBox @JvmOverloads constructor(
 
     binding.editText.doAfterTextChanged { text ->
       binding.ivCancel.visibility =
-        if (text.isNullOrEmpty()) View.GONE else View.VISIBLE
+        if (text.isNullOrEmpty()) View.INVISIBLE else View.VISIBLE
     }
 
     val typedArray =
