@@ -25,11 +25,11 @@ class LinkMindBlockButton @JvmOverloads constructor(
       field = value
       when (field) {
         LinkMindButtonState.ENABLE -> {
-          setBtnEnable(R.drawable.shape_neutrals200_fill_12_rect)
+          setBtnEnable(R.drawable.shape_neutrals850_fill_12_rect)
         }
 
         LinkMindButtonState.DISABLE -> {
-          setBtnDisable(R.drawable.shape_neutrals850_fill_12_rect)
+          setBtnDisable(R.drawable.shape_neutrals200_fill_12_rect)
         }
       }
     }
