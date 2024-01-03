@@ -1,5 +1,5 @@
 package designsystem.components.button.state
 
-enum class LinkMindButtonFullWidthState {
+enum class LinkMindButtonState {
   ENABLE, DISABLE
 }
