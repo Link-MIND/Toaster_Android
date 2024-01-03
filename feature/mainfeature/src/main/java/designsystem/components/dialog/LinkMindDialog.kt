@@ -12,6 +12,7 @@ import android.view.WindowManager
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import org.sopt.mainfeature.databinding.DialogLinkmindBinding
+import org.sopt.ui.view.caculateMarignDialog
 
 class LinkMindDialog constructor(private val context: Context) {
 
@@ -25,15 +26,12 @@ class LinkMindDialog constructor(private val context: Context) {
 
   private var dialog: AlertDialog? = null
   fun show() {
-    val dpToPixel = Resources.getSystem().displayMetrics.density
-    val dialogHorizontalMarginInPixels =
-      (dpToPixel * 37.0f + 0.5f).toInt()
-    val deviceWidth = Resources.getSystem().displayMetrics.widthPixels
+    val dialogMaginWidth = caculateMarignDialog(37.0f)
     dialog = builder.create()
     dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
     dialog?.show()
     dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-    dialog?.window?.setLayout(deviceWidth - 2 * dialogHorizontalMarginInPixels, WindowManager.LayoutParams.WRAP_CONTENT)
+    dialog?.window?.setLayout(dialogMaginWidth, WindowManager.LayoutParams.WRAP_CONTENT)
   }
 
   fun dismiss() {
