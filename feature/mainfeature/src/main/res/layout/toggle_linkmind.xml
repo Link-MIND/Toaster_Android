@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:id="@+id/ml_toggle"
+  android:background="@android:color/transparent"
+  app:layoutDescription="@xml/toggle_motion_scene"
+  app:layout_constraintEnd_toEndOf="parent"
+  app:layout_constraintTop_toTopOf="parent"
+  app:layout_constraintBottom_toBottomOf="parent" >
+
+  <androidx.constraintlayout.utils.widget.ImageFilterView
+    android:id="@+id/ifv_toggle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_toggle_off_background"
+    app:altSrc="@drawable/ic_toggle_on_background"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent" />
+
+  <ImageView
+    android:id="@+id/iv_toggle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ic_toggle_ellipse_18"
+    android:layout_marginStart="3dp"
+    android:layout_margin="3dp"
+    app:layout_constraintStart_toStartOf="@id/ml_toggle"
+    app:layout_constraintTop_toTopOf="@id/ml_toggle"
+    app:layout_constraintBottom_toBottomOf="@id/ml_toggle" />
+</androidx.constraintlayout.motion.widget.MotionLayout>
