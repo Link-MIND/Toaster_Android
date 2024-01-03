@@ -5,7 +5,8 @@
   <string name="text_timer">TIMER</string>
   <string name="text_my">MY</string>
   <string name="text_placeholder">placeholder</string>
-    <string name="timer_title">TIMER</string>
+  <!-- timer -->
+  <string name="timer_title">TIMER</string>
   <string name="timer_permission_off">알림 설정이 꺼져 있어요</string>
   <string name="timer_to_use_timer">타이머 기능을 이용하시려면</string>
   <string name="timer_setting_notification">기기 설정 > 알림</string>
