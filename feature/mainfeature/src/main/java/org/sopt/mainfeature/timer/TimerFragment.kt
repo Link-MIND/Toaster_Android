@@ -12,6 +12,7 @@ import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.FragmentTimerBinding
 import org.sopt.mainfeature.timer.dummymodel.Timer
 import org.sopt.ui.fragment.colorOf
+import org.sopt.ui.fragment.snackBar
 
 class TimerFragment : Fragment() {
   private var _binding: FragmentTimerBinding? = null
@@ -45,14 +46,14 @@ class TimerFragment : Fragment() {
       }
     }
 
-    completeTimerAdapter = CompleteTimerAdapter({})
+    completeTimerAdapter = CompleteTimerAdapter({ snackBar(binding.root, {"안녕"})})
     waitTimerAdapter = WaitTimerAdapter({}, {})
 
     val list = listOf(
       Timer(1, "네이버", "일요일", true, 8, 37),
         Timer(1, "네이버", "일요일", true, 8, 37)
     )
-
+    //val list = emptyList<Timer>()
     completeTimerAdapter.submitList(list)
     waitTimerAdapter.submitList(list)
     binding.tvTimerCompleteCount.text = list.count().toString()
@@ -62,6 +63,9 @@ class TimerFragment : Fragment() {
       val colorStateList = ColorStateList.valueOf(color)
       binding.flTimerCompleteCount.backgroundTintList = colorStateList
       binding.tvTimerCompleteCount.setTextColor(textColor)
+      binding.tvTimerNotComplete.isGone = true
+    } else {
+      binding.tvTimerNotComplete.isVisible = true
     }
     binding.rvTimerComplete.adapter = completeTimerAdapter
     binding.rvTimerWait.adapter = waitTimerAdapter
