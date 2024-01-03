@@ -29,6 +29,7 @@
         android:src="@drawable/ic_alarm_24" />
 
       <TextView
+        android:id="@+id/tv_item_timer_complete_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/Typography.suit.bold_18"
@@ -61,6 +62,7 @@
       app:layout_constraintTop_toBottomOf="@id/ll_item_timer_complete_date">
 
       <TextView
+        android:id="@+id/tv_item_timer_complete_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="@style/Typography.suit.semibold_16"
