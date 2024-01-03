@@ -5,7 +5,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:context=".MainActivity">
-  
+
   <androidx.fragment.app.FragmentContainerView
     android:id="@+id/fcv_main"
     android:name="androidx.navigation.fragment.NavHostFragment"
@@ -22,11 +22,14 @@
     android:id="@+id/bnv_main"
     android:layout_width="match_parent"
     android:layout_height="60dp"
+    android:theme="@style/Typography.suit.bold_12"
     app:labelVisibilityMode="labeled"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/fcv_main"
-    app:menu="@menu/main_nav_menu" />
+    app:menu="@menu/main_nav_menu"
+    app:itemTextColor="@drawable/sel_bnv_text_color"
+    app:itemActiveIndicatorStyle="@android:color/transparent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

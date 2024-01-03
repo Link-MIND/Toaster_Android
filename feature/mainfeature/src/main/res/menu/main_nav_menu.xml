@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
   <item
     android:id="@+id/navigation_home"
-    android:icon="@drawable/ic_home_24"
-    android:title="@string/text_home" />
+    android:icon="@drawable/sel_bnv_home"
+    android:title="@string/text_home"
+    app:iconPadding="7dp" />
 
   <item
     android:id="@+id/navigation_clip"
-    android:icon="@drawable/ic_clip_24"
-    android:title="@string/text_clip" />
+    android:icon="@drawable/sel_bnv_clip"
+    android:title="@string/text_clip"
+    app:iconPadding="7dp"/>
 
   <item
     android:id="@+id/temp_menu"
@@ -16,12 +19,14 @@
 
   <item
     android:id="@+id/navigation_timer"
-    android:icon="@drawable/ic_timer_24"
-    android:title="@string/text_timer" />
+    android:icon="@drawable/sel_bnv_timer"
+    android:title="@string/text_timer"
+    app:iconPadding="7dp"/>
 
   <item
     android:id="@+id/navigation_my"
-    android:icon="@drawable/ic_my_24"
-    android:title="@string/text_my" />
+    android:icon="@drawable/sel_bnv_my"
+    android:title="@string/text_my"
+    app:iconPadding="7dp"/>
 
 </menu>
