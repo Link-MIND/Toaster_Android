@@ -43,7 +43,7 @@ class LinkMindBlockButton @JvmOverloads constructor(
     }
   }
 
-  private fun setBtnDisable(drawableResId:Int) {
+  private fun setBtnDisable(drawableResId: Int) {
     binding.apply {
       clBtnMediumWidthLinkmind.isClickable = false
       clBtnMediumWidthLinkmind.isFocusable = false

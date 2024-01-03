@@ -6,9 +6,8 @@
   android:layout_height="wrap_content"
   android:background="@drawable/shape_neutrals_fill_12_rect"
   android:paddingHorizontal="24dp"
-  android:paddingBottom="24dp"
   android:paddingTop="20dp"
-  >
+  android:paddingBottom="24dp">
 
   <TextView
     android:id="@+id/tv_dialog_title"

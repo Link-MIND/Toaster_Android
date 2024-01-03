@@ -9,8 +9,8 @@
     android:id="@+id/cl_btn_half_width_linkmind"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingVertical="14dp"
-    android:paddingHorizontal="44dp">
+    android:paddingHorizontal="44dp"
+    android:paddingVertical="14dp">
 
     <TextView
       android:id="@+id/tv_btn"
@@ -18,10 +18,10 @@
       android:layout_height="wrap_content"
       android:gravity="center"
       android:textAppearance="@style/Typography.suit.bold_16"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
       tools:text="BTN" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -3,8 +3,8 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:background="@drawable/shape_neutrals_fill_12_rect"
-  android:layout_height="wrap_content">
+  android:layout_height="wrap_content"
+  android:background="@drawable/shape_neutrals_fill_12_rect">
 
   <ImageView
     android:id="@+id/iv_search"
