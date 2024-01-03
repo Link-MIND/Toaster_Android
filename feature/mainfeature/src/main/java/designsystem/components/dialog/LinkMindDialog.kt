@@ -10,6 +10,7 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
+import designsystem.components.button.state.LinkMindButtonFullWidthState
 import org.sopt.mainfeature.databinding.DialogLinkmindBinding
 import org.sopt.ui.view.caculateMarignDialog
 
@@ -68,6 +69,7 @@ class LinkMindDialog constructor(private val context: Context) {
     onClickListener: (view: View) -> (Unit),
   ): LinkMindDialog {
     binding.btnPositive.apply {
+      state = LinkMindButtonFullWidthState.ENABLE
       setText(context.getText(text).toString())
       setOnClickListener(onClickListener)
       dismiss()
@@ -80,6 +82,7 @@ class LinkMindDialog constructor(private val context: Context) {
     onClickListener: (view: View) -> (Unit) = {},
   ): LinkMindDialog {
     binding.btnNegative.apply {
+      state = LinkMindButtonFullWidthState.DISABLE
       visibility = View.VISIBLE
       setText(context.getText(text).toString())
       setOnClickListener(onClickListener)
