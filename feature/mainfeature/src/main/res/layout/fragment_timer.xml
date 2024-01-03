@@ -39,6 +39,7 @@
   </androidx.constraintlayout.widget.ConstraintLayout>
 
   <LinearLayout
+    android:id="@+id/ll_timer_not_exist"
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:orientation="vertical"
@@ -195,8 +196,10 @@
   </LinearLayout>
 
   <androidx.core.widget.NestedScrollView
+    android:id="@+id/sv_timer_exist"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:visibility="visible"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/cl_timer_title">
@@ -224,6 +227,7 @@
           android:textColor="@color/neutrals900" />
 
         <FrameLayout
+          android:id="@+id/fl_timer_complete_count"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
@@ -232,6 +236,7 @@
           android:backgroundTint="@color/neutrals100">
 
           <TextView
+            android:id="@+id/tv_timer_complete_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
