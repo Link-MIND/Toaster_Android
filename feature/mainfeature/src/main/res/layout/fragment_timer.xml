@@ -42,6 +42,7 @@
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:orientation="vertical"
+    android:visibility="gone"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintTop_toBottomOf="@id/cl_timer_title">
 
@@ -188,76 +189,76 @@
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 
-      <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_timer_exist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-          android:id="@+id/ll_timer_complete"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="20dp"
-          android:layout_marginTop="20dp"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent">
-
-          <TextView
-            android:id="@+id/tv_timer_complete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="완료된 타이머"
-            android:textAppearance="@style/Typography.suit.bold_18"
-            android:textColor="@color/neutrals900" />
-
-          <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="4dp"
-            android:background="@drawable/ic_ellipse_18"
-            android:backgroundTint="@color/neutrals100">
-
-            <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_gravity="center"
-              android:textAppearance="@style/Typography.suit.bold_12"
-              android:textColor="@color/neutrals300"
-              tools:text="0" />
-          </FrameLayout>
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-          android:id="@+id/rv_timer_complete"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginHorizontal="20dp"
-          android:layout_marginTop="18dp"
-          android:nestedScrollingEnabled="false"
-          android:orientation="vertical"
-          android:overScrollMode="never"
-          app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/ll_timer_complete"
-          tools:itemCount="1"
-          tools:listitem="@layout/item_timer_complete" />
-
-        <View
-          android:layout_width="match_parent"
-          android:layout_height="4dp"
-          android:layout_marginTop="6dp"
-          android:background="@color/neutrals050"
-          app:layout_constraintTop_toBottomOf="@id/rv_timer_complete" />
-      </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
   </LinearLayout>
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_timer_exist"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/cl_timer_title">
 
+    <LinearLayout
+      android:id="@+id/ll_timer_complete"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="20dp"
+      android:layout_marginTop="20dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+      <TextView
+        android:id="@+id/tv_timer_complete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="완료된 타이머"
+        android:textAppearance="@style/Typography.suit.bold_18"
+        android:textColor="@color/neutrals900" />
+
+      <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="4dp"
+        android:background="@drawable/ic_ellipse_18"
+        android:backgroundTint="@color/neutrals100">
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:textAppearance="@style/Typography.suit.bold_12"
+          android:textColor="@color/neutrals300"
+          tools:text="0" />
+      </FrameLayout>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rv_timer_complete"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginHorizontal="20dp"
+      android:layout_marginTop="18dp"
+      android:nestedScrollingEnabled="false"
+      android:orientation="vertical"
+      android:overScrollMode="never"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/ll_timer_complete"
+      tools:itemCount="1"
+      tools:listitem="@layout/item_timer_complete" />
+
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="4dp"
+      android:layout_marginTop="6dp"
+      android:background="@color/neutrals050"
+      app:layout_constraintTop_toBottomOf="@id/rv_timer_complete" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
