@@ -25,12 +25,12 @@ class LinkMindDialog constructor(private val context: Context) {
 
   private var dialog: AlertDialog? = null
   fun show() {
-    val dialogMaginWidth = caculateMarignDialog(37.0f)
+    val dialogMarginWidth = caculateMarignDialog(37.0f)
     dialog = builder.create()
     dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
     dialog?.show()
     dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-    dialog?.window?.setLayout(dialogMaginWidth, WindowManager.LayoutParams.WRAP_CONTENT)
+    dialog?.window?.setLayout(dialogMarginWidth, WindowManager.LayoutParams.WRAP_CONTENT)
   }
 
   fun dismiss() {
