@@ -30,7 +30,7 @@
     tools:text="subtitle"
     tools:visibility="visible" />
 
-  <designsystem.components.button.LinkMindButtonHalfWidth
+  <designsystem.components.button.LinkMindPopUpButton
     android:id="@+id/btn_positive"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/tv_dialog_subtitle" />
 
-  <designsystem.components.button.LinkMindButtonHalfWidth
+  <designsystem.components.button.LinkMindPopUpButton
     android:id="@+id/btn_negative"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
