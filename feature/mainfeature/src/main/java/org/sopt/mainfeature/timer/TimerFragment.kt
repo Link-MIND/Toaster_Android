@@ -35,7 +35,7 @@ class TimerFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
 
     binding.tvTimerTitle.setOnClickListener {
-      if(timerExist){
+      if (timerExist) {
         binding.svTimerExist.isVisible = true
         binding.llTimerNotExist.isGone = true
         timerExist = false
@@ -46,18 +46,18 @@ class TimerFragment : Fragment() {
       }
     }
 
-    completeTimerAdapter = CompleteTimerAdapter({ snackBar(binding.root, {"안녕"})})
+    completeTimerAdapter = CompleteTimerAdapter({ snackBar(binding.root, { "안녕" }) })
     waitTimerAdapter = WaitTimerAdapter({}, {})
 
     val list = listOf(
       Timer(1, "네이버", "일요일", true, 8, 37),
-        Timer(1, "네이버", "일요일", true, 8, 37)
+      Timer(1, "네이버", "일요일", true, 8, 37),
     )
-    //val list = emptyList<Timer>()
+    // val list = emptyList<Timer>()
     completeTimerAdapter.submitList(list)
     waitTimerAdapter.submitList(list)
     binding.tvTimerCompleteCount.text = list.count().toString()
-    if(list.count() != 0){
+    if (list.count() != 0) {
       val color = colorOf(R.color.primary)
       val textColor = colorOf(R.color.white)
       val colorStateList = ColorStateList.valueOf(color)
