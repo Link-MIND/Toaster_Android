@@ -1,5 +1,6 @@
 package designsystem.components.button
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.ButtonBlockLinkmindBinding
 import org.sopt.ui.view.onThrottleClick
 
+@SuppressLint("CustomViewStyleable")
 class LinkMindBlockButton @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
@@ -23,29 +25,28 @@ class LinkMindBlockButton @JvmOverloads constructor(
       field = value
       when (field) {
         LinkMindButtonFullWidthState.ENABLE -> {
-          setBtnEnable()
+          setBtnEnable(R.color.black)
         }
 
         LinkMindButtonFullWidthState.DISABLE -> {
-          setBtnDisable()
+          setBtnDisable(R.color.black)
         }
       }
     }
 
-  private fun setBtnEnable() {
+  private fun setBtnEnable(textColorResId: Int) {
     binding.apply {
       clBtnMediumWidthLinkmind.isClickable = true
       clBtnMediumWidthLinkmind.isFocusable = true
-      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.black))
+      tvBtn.setTextColor(ContextCompat.getColor(context, textColorResId))
     }
   }
 
-  private fun setBtnDisable() {
+  private fun setBtnDisable(textColorResId: Int) {
     binding.apply {
       clBtnMediumWidthLinkmind.isClickable = false
       clBtnMediumWidthLinkmind.isFocusable = false
-      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.black))
-      clBtnMediumWidthLinkmind.setBackgroundColor(ContextCompat.getColor(context, R.color.black))
+      clBtnMediumWidthLinkmind.setBackgroundColor(ContextCompat.getColor(context,textColorResId ))
     }
   }
 
