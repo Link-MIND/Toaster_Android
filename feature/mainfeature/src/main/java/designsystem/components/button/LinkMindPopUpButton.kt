@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
-import designsystem.components.button.state.LinkMindButtonFullWidthState
+import designsystem.components.button.state.LinkMindButtonState
 import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.ButtonPopUpLinkmindBinding
 import org.sopt.ui.view.onThrottleClick
@@ -20,15 +20,15 @@ class LinkMindPopUpButton @JvmOverloads constructor(
 
   private val binding: ButtonPopUpLinkmindBinding
 
-  var state: LinkMindButtonFullWidthState = LinkMindButtonFullWidthState.ENABLE
+  var state: LinkMindButtonState = LinkMindButtonState.ENABLE
     set(value) {
       field = value
       when (field) {
-        LinkMindButtonFullWidthState.ENABLE -> {
+        LinkMindButtonState.ENABLE -> {
           setBtnEnable()
         }
 
-        LinkMindButtonFullWidthState.DISABLE -> {
+        LinkMindButtonState.DISABLE -> {
           setBtnDisable()
         }
       }
