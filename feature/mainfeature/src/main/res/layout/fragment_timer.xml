@@ -219,7 +219,7 @@
           android:id="@+id/tv_timer_complete"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="완료된 타이머"
+          android:text="@string/timer_complete"
           android:textAppearance="@style/Typography.suit.bold_18"
           android:textColor="@color/neutrals900" />
 
@@ -268,7 +268,7 @@
           android:id="@+id/tv_timer_not_complete"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="타이머가 완료되면 리마인드 드릴게요"
+          android:text="@string/timer_not_complete"
           android:layout_marginTop="18dp"
           android:layout_marginHorizontal="20dp"
           android:layout_marginBottom="18dp"
@@ -297,7 +297,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
-        android:text="타이머 대기 중.."
+        android:text="@string/timer_wait"
         android:textAppearance="@style/Typography.suit.bold_18"
         android:textColor="@color/neutrals900"
         app:layout_constraintStart_toStartOf="parent"
