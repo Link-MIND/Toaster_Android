@@ -10,12 +10,21 @@ class CompleteTimerViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(data: Timer?) {
     if (data == null) return
-    val ampm = if(data.am)" 오전 " else " 오후 "
-    val minute = if(data.minute < 10)"0${data.minute}" else data.minute.toString()
-    binding.tvItemTimerCompleteCategory.text = data.category
-    binding.tvItemTimerCompleteTime.text = data.day + ampm + data.hour.toString() + ":" + minute
-    binding.tvItemTimerCompleteRead.setOnClickListener {
-      onClicked(data)
+    with(binding){
+      val ampm = if (data.am)AM else PM
+      val minute = data.minute.toString().takeIf { data.minute >= 10 } ?: MINUTE_FORMAT.format(data.minute)
+      tvItemTimerCompleteCategory.text = data.category
+      tvItemTimerCompleteTime.text = TIME_FORMAT.format(data.day, ampm, data.hour, minute)
+      tvItemTimerCompleteRead.setOnClickListener {
+        onClicked(data)
+      }
     }
+  }
+
+  companion object {
+    private const val TIME_FORMAT = "%s %s %d:%s"
+    private const val MINUTE_FORMAT = "0%d"
+    private const val AM = "오전"
+    private const val PM = "오후"
   }
 }
