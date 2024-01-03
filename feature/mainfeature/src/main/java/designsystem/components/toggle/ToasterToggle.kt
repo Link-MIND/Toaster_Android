@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.ToggleLinkmindBinding
+import org.sopt.ui.view.onThrottleClick
 
 class ToasterToggle @JvmOverloads constructor(
   context: Context,
@@ -31,15 +32,18 @@ class ToasterToggle @JvmOverloads constructor(
     }
   }
 
-  fun btnClick() {
-    when (binding.mlToggle.currentState) {
-      R.id.start -> {
-        binding.mlToggle.transitionToState(R.id.end, 200)
-      }
+  fun btnClick(onClick: () -> Unit) {
+    binding.mlToggle.onThrottleClick {
+      when (binding.mlToggle.currentState) {
+        R.id.start -> {
+          binding.mlToggle.transitionToState(R.id.end, 200)
+        }
 
-      R.id.end -> {
-        binding.mlToggle.transitionToState(R.id.start, 200)
+        R.id.end -> {
+          binding.mlToggle.transitionToState(R.id.start, 200)
+        }
       }
+      onClick()
     }
   }
 
