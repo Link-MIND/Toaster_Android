@@ -9,8 +9,9 @@
     android:id="@+id/cl_btn_medium_width_linkmind"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="109dp"
-    android:paddingVertical="14dp">
+    android:paddingHorizontal="146dp"
+    android:background="@drawable/shape_neutrals200_fill_12_rect"
+    android:paddingVertical="21dp">
 
     <TextView
       android:id="@+id/tv_btn"

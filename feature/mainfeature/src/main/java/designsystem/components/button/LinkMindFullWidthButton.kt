@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
+import designsystem.components.button.state.LinkMIndFullWidthButtonState
 import designsystem.components.button.state.LinkMindButtonState
 import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.ButtonFullWidthLinkmindBinding
@@ -20,16 +21,20 @@ class LinkMindFullWidthButton @JvmOverloads constructor(
 
   private val binding: ButtonFullWidthLinkmindBinding
 
-  var state: LinkMindButtonState = LinkMindButtonState.ENABLE
+  var state: LinkMIndFullWidthButtonState = LinkMIndFullWidthButtonState.ENABLE_PRIMARY
     set(value) {
       field = value
       when (field) {
-        LinkMindButtonState.ENABLE -> {
-          setBtnEnable(R.color.black)
+        LinkMIndFullWidthButtonState.ENABLE_PRIMARY -> {
+          setBtnEnable(R.color.primary)
         }
 
-        LinkMindButtonState.DISABLE -> {
-          setBtnDisable(R.color.black)
+        LinkMIndFullWidthButtonState.ENABLE_BLACK -> {
+          setBtnEnable(R.color.neutrals_black)
+        }
+
+        LinkMIndFullWidthButtonState.DISABLE -> {
+          setBtnDisable(R.color.neutrals100)
         }
       }
     }
