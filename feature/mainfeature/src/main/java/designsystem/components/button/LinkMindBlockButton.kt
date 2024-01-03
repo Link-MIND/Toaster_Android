@@ -38,6 +38,7 @@ class LinkMindBlockButton @JvmOverloads constructor(
     binding.apply {
       clBtnMediumWidthLinkmind.isClickable = true
       clBtnMediumWidthLinkmind.isFocusable = true
+      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.white))
       clBtnMediumWidthLinkmind.setBackgroundResource(drawableResId)
     }
   }
@@ -46,6 +47,7 @@ class LinkMindBlockButton @JvmOverloads constructor(
     binding.apply {
       clBtnMediumWidthLinkmind.isClickable = false
       clBtnMediumWidthLinkmind.isFocusable = false
+      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.white))
       clBtnMediumWidthLinkmind.setBackgroundResource(drawableResId)
     }
   }
