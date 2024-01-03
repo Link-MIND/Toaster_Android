@@ -31,9 +31,81 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginEnd="20dp"
-      app:layout_constraintTop_toTopOf="parent"
+      android:src="@drawable/ic_plus_24"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      android:src="@drawable/ic_plus_24"
+      app:layout_constraintTop_toTopOf="parent" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_timer_permission"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="20dp"
+    android:background="@drawable/shape_gray_fill_12_rect"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/cl_timer_title">
+
+    <LinearLayout
+      android:id="@+id/ll_timer_permission"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="12dp"
+      android:layout_marginTop="12dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+      <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start||center"
+        android:src="@drawable/ic_alarm_disabled_20" />
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="알림 설정이 꺼져 있어요"
+        android:textAppearance="@style/Typography.suit.bold_18"
+        android:textColor="@color/neutrals700" />
+    </LinearLayout>
+
+    <TextView
+      android:id="@+id/tv_timer_permission_first"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:text="타이머 기능을 이용하시려면"
+      android:textAppearance="@style/Typography.suit.regular_16"
+      android:textColor="@color/neutrals500"
+      app:layout_constraintStart_toStartOf="@id/ll_timer_permission"
+      app:layout_constraintTop_toBottomOf="@id/ll_timer_permission" />
+
+    <LinearLayout
+      android:id="@+id/ll_timer_permission_second"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="12dp"
+      app:layout_constraintStart_toStartOf="@id/tv_timer_permission_first"
+      app:layout_constraintTop_toBottomOf="@id/tv_timer_permission_first"
+      app:layout_constraintBottom_toBottomOf="parent">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="기기 설정 > 알림"
+        android:textAppearance="@style/Typography.suit.bold_16"
+        android:textColor="@color/neutrals700" />
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="에서 알림을 켜주세요."
+        android:textAppearance="@style/Typography.suit.regular_16"
+        android:textColor="@color/neutrals500" />
+    </LinearLayout>
+
   </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
