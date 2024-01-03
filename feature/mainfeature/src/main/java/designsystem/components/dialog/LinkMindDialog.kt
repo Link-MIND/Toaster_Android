@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import designsystem.components.button.state.LinkMindButtonFullWidthState
 import org.sopt.mainfeature.databinding.DialogLinkmindBinding
 import org.sopt.ui.view.caculateMarignDialog
+import org.sopt.ui.view.onThrottleClick
 
 class LinkMindDialog constructor(private val context: Context) {
 
@@ -63,6 +64,11 @@ class LinkMindDialog constructor(private val context: Context) {
     binding.tvDialogSubtitle.visibility = View.GONE
     return this
   }
+
+  fun setCloseBtn() =
+    binding.ivDialogCancel.onThrottleClick {
+      dismiss()
+    }
 
   fun setPositiveButton(
     @StringRes text: Int,

@@ -3,19 +3,31 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:background="@color/black"
-  android:padding="24dp">
+  android:layout_height="wrap_content"
+  android:background="@drawable/shape_neutrals_fill_12_rect"
+  android:paddingHorizontal="24dp"
+  android:paddingBottom="24dp"
+  android:paddingTop="20dp"
+  >
 
   <TextView
     android:id="@+id/tv_dialog_title"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
     android:gravity="center"
+    android:textAppearance="@style/Typography.suit.bold_20"
+    android:textColor="@color/neutrals800"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     tools:text="Title" />
+
+  <ImageView
+    android:id="@+id/iv_dialog_cancel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_close_20"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="@id/tv_dialog_title" />
 
   <TextView
     android:id="@+id/tv_dialog_subtitle"
@@ -23,6 +35,8 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="12dp"
     android:gravity="start"
+    android:textAppearance="@style/Typography.suit.regular_16_128"
+    android:textColor="@color/neutrals800"
     android:visibility="gone"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
