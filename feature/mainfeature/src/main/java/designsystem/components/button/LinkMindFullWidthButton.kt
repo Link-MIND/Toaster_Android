@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
-import designsystem.components.button.state.LinkMindButtonState
 import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.ButtonFullWidthLinkmindBinding
 import org.sopt.ui.view.onThrottleClick
@@ -44,7 +43,6 @@ class LinkMindFullWidthButton @JvmOverloads constructor(
       clBtnFullWidthLinkmind.isFocusable = false
       tvBtn.setTextColor(ContextCompat.getColor(context, R.color.neutrals_white))
       clBtnFullWidthLinkmind.setBackgroundColor(ContextCompat.getColor(context, textColorResId))
-
     }
   }
 
