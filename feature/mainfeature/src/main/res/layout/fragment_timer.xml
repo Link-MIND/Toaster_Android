@@ -3,6 +3,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:background="@color/background"
   tools:context=".timer.TimerFragment">
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,75 +38,222 @@
       app:layout_constraintTop_toTopOf="parent" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
-  <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/cl_timer_permission"
+  <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginHorizontal="20dp"
-    android:background="@drawable/shape_gray_fill_12_rect"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintTop_toBottomOf="@id/cl_timer_title">
 
-    <LinearLayout
-      android:id="@+id/ll_timer_permission"
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/cl_timer_permission"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_margin="12dp"
-      android:layout_marginTop="12dp"
+      android:layout_marginHorizontal="20dp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent">
+      app:layout_constraintTop_toBottomOf="@id/cl_timer_title">
 
-      <ImageView
-        android:layout_width="wrap_content"
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_timer_permission_off"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="start||center"
-        android:src="@drawable/ic_alarm_disabled_20" />
+        android:background="@drawable/shape_gray_fill_12_rect"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-      <TextView
-        android:layout_width="wrap_content"
+        <LinearLayout
+          android:id="@+id/ll_timer_permission"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="12dp"
+          android:layout_marginTop="12dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent">
+
+          <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_alarm_disabled_20" />
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/timer_permission_off"
+            android:textAppearance="@style/Typography.suit.bold_18"
+            android:textColor="@color/neutrals700" />
+        </LinearLayout>
+
+        <TextView
+          android:id="@+id/tv_timer_permission_first"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="4dp"
+          android:text="@string/timer_to_use_timer"
+          android:textAppearance="@style/Typography.suit.regular_16"
+          android:textColor="@color/neutrals500"
+          app:layout_constraintStart_toStartOf="@id/ll_timer_permission"
+          app:layout_constraintTop_toBottomOf="@id/ll_timer_permission" />
+
+        <LinearLayout
+          android:id="@+id/ll_timer_permission_second"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="12dp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="@id/tv_timer_permission_first"
+          app:layout_constraintTop_toBottomOf="@id/tv_timer_permission_first">
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/timer_setting_notification"
+            android:textAppearance="@style/Typography.suit.bold_16"
+            android:textColor="@color/neutrals700" />
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/timer_turn_on_permission"
+            android:textAppearance="@style/Typography.suit.regular_16"
+            android:textColor="@color/neutrals500" />
+        </LinearLayout>
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/cl_timer"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_timer_none"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="알림 설정이 꺼져 있어요"
-        android:textAppearance="@style/Typography.suit.bold_18"
-        android:textColor="@color/neutrals700" />
-    </LinearLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <TextView
-      android:id="@+id/tv_timer_permission_first"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="4dp"
-      android:text="타이머 기능을 이용하시려면"
-      android:textAppearance="@style/Typography.suit.regular_16"
-      android:textColor="@color/neutrals500"
-      app:layout_constraintStart_toStartOf="@id/ll_timer_permission"
-      app:layout_constraintTop_toBottomOf="@id/ll_timer_permission" />
+        <ImageView
+          android:id="@+id/iv_timer_none"
+          android:layout_width="280dp"
+          android:layout_height="254dp"
+          android:layout_marginTop="18dp"
+          android:background="@color/neutrals050"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-      android:id="@+id/ll_timer_permission_second"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginBottom="12dp"
-      app:layout_constraintStart_toStartOf="@id/tv_timer_permission_first"
-      app:layout_constraintTop_toBottomOf="@id/tv_timer_permission_first"
-      app:layout_constraintBottom_toBottomOf="parent">
+        <TextView
+          android:id="@+id/tv_timer_none"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="24dp"
+          android:gravity="center"
+          android:text="@string/timer_set_timer"
+          android:textAppearance="@style/Typography.suit.regular_16_128"
+          android:textColor="@color/neutrals500"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/iv_timer_none" />
 
-      <TextView
-        android:layout_width="wrap_content"
+        <androidx.appcompat.widget.AppCompatButton
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="12dp"
+          android:paddingHorizontal="20dp"
+          android:paddingVertical="12dp"
+          android:background="@drawable/shape_gray_fill_12_rect"
+          android:backgroundTint="@color/neutrals800"
+          android:text="@string/timer_set_btn"
+          android:textAppearance="@style/Typography.suit.bold_16"
+          android:textColor="@color/white"
+          app:layout_constraintTop_toBottomOf="@id/tv_timer_none"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <ScrollView
+        android:id="@+id/sv_timer_exist"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="기기 설정 > 알림"
-        android:textAppearance="@style/Typography.suit.bold_16"
-        android:textColor="@color/neutrals700" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/cl_timer_exist"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
 
-      <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="에서 알림을 켜주세요."
-        android:textAppearance="@style/Typography.suit.regular_16"
-        android:textColor="@color/neutrals500" />
-    </LinearLayout>
+          <LinearLayout
+            android:id="@+id/ll_timer_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+              android:id="@+id/tv_timer_complete"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="완료된 타이머"
+              android:textAppearance="@style/Typography.suit.bold_18"
+              android:textColor="@color/neutrals900" />
+
+            <FrameLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:layout_marginStart="4dp"
+              android:background="@drawable/ic_ellipse_18"
+              android:backgroundTint="@color/neutrals100">
+
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="0"
+                android:layout_gravity="center"
+                android:textAppearance="@style/Typography.suit.bold_12"
+                android:textColor="@color/neutrals300" />
+            </FrameLayout>
+          </LinearLayout>
+
+          <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_timer_complete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginHorizontal="20dp"
+            android:nestedScrollingEnabled="false"
+            android:orientation="vertical"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/ll_timer_complete"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+      </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
