@@ -15,4 +15,7 @@
   <string name="timer_read">읽으러가기</string>
   <string name="timer_link">링크들을</string>
   <string name="timer_good">읽기 딱 좋은 시간이에요!</string>
+  <string name="timer_wait">타이머 대기 중..</string>
+  <string name="timer_not_complete">타이머가 완료되면 리마인드 드릴게요</string>
+  <string name="timer_complete">완료된 타이머</string>
 </resources>
