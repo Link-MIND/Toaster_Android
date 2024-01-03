@@ -17,6 +17,8 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:gravity="center"
+      android:textAppearance="@style/Typography.suit.bold_16"
+      android:textColor="@color/neutrals_white"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="BTN" />
   </androidx.constraintlayout.widget.ConstraintLayout>
