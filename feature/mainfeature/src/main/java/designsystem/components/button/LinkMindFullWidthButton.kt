@@ -45,7 +45,7 @@ class LinkMindFullWidthButton @JvmOverloads constructor(
     binding.apply {
       clBtnFullWidthLinkmind.isClickable = true
       clBtnFullWidthLinkmind.isFocusable = true
-      clBtnFullWidthLinkmind.setBackgroundColor(ContextCompat.getColor(context,textColorResId ))
+      clBtnFullWidthLinkmind.setBackgroundColor(ContextCompat.getColor(context, textColorResId))
     }
   }
 
