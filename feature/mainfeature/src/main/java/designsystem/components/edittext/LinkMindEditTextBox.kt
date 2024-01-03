@@ -62,11 +62,11 @@ class LinkMindEditTextBox @JvmOverloads constructor(
 
       binding.ivCancel.visibility = if (isTextEmpty) View.GONE else View.VISIBLE
 
-      if (!isTextEmpty)
+      if (!isTextEmpty) {
         editThrottleValue.setDelay(text.toString(), 300L) {
           onClickListener()
         }
-
+      }
     }
   }
 
@@ -89,4 +89,3 @@ class LinkMindEditTextBox @JvmOverloads constructor(
     )
   }
 }
-
