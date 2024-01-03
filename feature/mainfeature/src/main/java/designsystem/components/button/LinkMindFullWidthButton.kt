@@ -42,7 +42,9 @@ class LinkMindFullWidthButton @JvmOverloads constructor(
     binding.apply {
       clBtnFullWidthLinkmind.isClickable = false
       clBtnFullWidthLinkmind.isFocusable = false
-      tvBtn.setTextColor(ContextCompat.getColor(context, textColorResId))
+      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.neutrals_white))
+      clBtnFullWidthLinkmind.setBackgroundColor(ContextCompat.getColor(context, textColorResId))
+
     }
   }
 
@@ -50,6 +52,7 @@ class LinkMindFullWidthButton @JvmOverloads constructor(
     binding.apply {
       clBtnFullWidthLinkmind.isClickable = true
       clBtnFullWidthLinkmind.isFocusable = true
+      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.neutrals_white))
       clBtnFullWidthLinkmind.setBackgroundColor(ContextCompat.getColor(context, textColorResId))
     }
   }
