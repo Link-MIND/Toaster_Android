@@ -59,10 +59,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_gray_fill_12_rect"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
           android:id="@+id/ll_timer_permission"
@@ -128,10 +128,10 @@
       <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="62dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -144,9 +144,9 @@
         android:id="@+id/cl_timer_none"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
           android:id="@+id/iv_timer_none"
@@ -175,88 +175,85 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="12dp"
-          android:paddingHorizontal="20dp"
-          android:paddingVertical="12dp"
           android:background="@drawable/shape_gray_fill_12_rect"
           android:backgroundTint="@color/neutrals800"
+          android:paddingHorizontal="20dp"
+          android:paddingVertical="12dp"
           android:text="@string/timer_set_btn"
           android:textAppearance="@style/Typography.suit.bold_16"
           android:textColor="@color/white"
-          app:layout_constraintTop_toBottomOf="@id/tv_timer_none"
+          app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintEnd_toEndOf="parent" />
+          app:layout_constraintTop_toBottomOf="@id/tv_timer_none" />
 
       </androidx.constraintlayout.widget.ConstraintLayout>
 
-      <ScrollView
-        android:id="@+id/sv_timer_exist"
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_timer_exist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-        <androidx.constraintlayout.widget.ConstraintLayout
-          android:id="@+id/cl_timer_exist"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
+        app:layout_constraintTop_toTopOf="parent">
 
-          <LinearLayout
-            android:id="@+id/ll_timer_complete"
+        <LinearLayout
+          android:id="@+id/ll_timer_complete"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="20dp"
+          android:layout_marginTop="20dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent">
+
+          <TextView
+            android:id="@+id/tv_timer_complete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="20dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:text="완료된 타이머"
+            android:textAppearance="@style/Typography.suit.bold_18"
+            android:textColor="@color/neutrals900" />
+
+          <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="4dp"
+            android:background="@drawable/ic_ellipse_18"
+            android:backgroundTint="@color/neutrals100">
 
             <TextView
-              android:id="@+id/tv_timer_complete"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="완료된 타이머"
-              android:textAppearance="@style/Typography.suit.bold_18"
-              android:textColor="@color/neutrals900" />
-
-            <FrameLayout
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_gravity="center"
-              android:layout_marginStart="4dp"
-              android:background="@drawable/ic_ellipse_18"
-              android:backgroundTint="@color/neutrals100">
+              android:textAppearance="@style/Typography.suit.bold_12"
+              android:textColor="@color/neutrals300"
+              tools:text="0" />
+          </FrameLayout>
+        </LinearLayout>
 
-              <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="0"
-                android:layout_gravity="center"
-                android:textAppearance="@style/Typography.suit.bold_12"
-                android:textColor="@color/neutrals300" />
-            </FrameLayout>
-          </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/rv_timer_complete"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginHorizontal="20dp"
+          android:layout_marginTop="18dp"
+          android:nestedScrollingEnabled="false"
+          android:orientation="vertical"
+          android:overScrollMode="never"
+          app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/ll_timer_complete"
+          tools:itemCount="1"
+          tools:listitem="@layout/item_timer_complete" />
 
-          <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_timer_complete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:layout_marginHorizontal="20dp"
-            android:nestedScrollingEnabled="false"
-            android:orientation="vertical"
-            android:overScrollMode="never"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/ll_timer_complete"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-          <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:layout_marginTop="24dp"
-            android:background="@color/neutrals050"
-            app:layout_constraintTop_toBottomOf="@id/rv_timer_complete" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-      </ScrollView>
+        <View
+          android:layout_width="match_parent"
+          android:layout_height="4dp"
+          android:layout_marginTop="6dp"
+          android:background="@color/neutrals050"
+          app:layout_constraintTop_toBottomOf="@id/rv_timer_complete" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

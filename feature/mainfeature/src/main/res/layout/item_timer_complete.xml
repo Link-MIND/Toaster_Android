@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_marginBottom="18dp"
+  android:elevation="0dp"
+  app:strokeWidth="0dp"
+  app:cardCornerRadius="10dp">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <LinearLayout
+      android:id="@+id/ll_item_timer_complete_date"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="14dp"
+      android:layout_marginTop="14dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+      <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_alarm_24" />
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Typography.suit.bold_18"
+        android:textColor="@color/neutrals900"
+        tools:text="일요일 오전 10:00" />
+    </LinearLayout>
+
+    <TextView
+      android:id="@+id/tv_item_timer_complete_read"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_marginTop="14dp"
+      android:layout_marginEnd="14dp"
+      android:background="@drawable/shape_primary_fill_4_rect"
+      android:paddingHorizontal="12dp"
+      android:paddingVertical="4dp"
+      android:text="읽으러가기"
+      android:textAppearance="@style/Typography.suit.semibold_14"
+      android:textColor="@color/primary"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+      android:id="@+id/ll_item_timer_complete_category"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      app:layout_constraintStart_toStartOf="@id/ll_item_timer_complete_date"
+      app:layout_constraintTop_toBottomOf="@id/ll_item_timer_complete_date">
+
+      <TextView
+        android:id="@+id/tv_item_timer_complete_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/Typography.suit.semibold_16"
+        android:textColor="@color/neutrals800"
+        tools:text="카테고리 네임" />
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="링크들을"
+        android:textAppearance="@style/Typography.suit.regular_16"
+        android:textColor="@color/neutrals600" />
+    </LinearLayout>
+
+    <TextView
+      android:id="@+id/tv_item_timer_complete_good"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="14dp"
+      android:text="읽기 딱 좋은 시간이에요!"
+      android:textAppearance="@style/Typography.suit.regular_16"
+      android:textColor="@color/neutrals600"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="@id/ll_item_timer_complete_category"
+      app:layout_constraintTop_toBottomOf="@id/ll_item_timer_complete_category" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
