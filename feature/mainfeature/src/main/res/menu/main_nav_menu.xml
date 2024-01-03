@@ -5,28 +5,29 @@
     android:id="@+id/navigation_home"
     android:icon="@drawable/sel_bnv_home"
     android:title="@string/text_home"
-    app:iconPadding="7dp" />
+    app:iconPadding="4dp" />
 
   <item
     android:id="@+id/navigation_clip"
     android:icon="@drawable/sel_bnv_clip"
     android:title="@string/text_clip"
-    app:iconPadding="7dp"/>
+    app:iconPadding="4dp" />
 
   <item
     android:id="@+id/temp_menu"
+    android:enabled="false"
     android:title="" />
 
   <item
     android:id="@+id/navigation_timer"
     android:icon="@drawable/sel_bnv_timer"
     android:title="@string/text_timer"
-    app:iconPadding="7dp"/>
+    app:iconPadding="4dp" />
 
   <item
     android:id="@+id/navigation_my"
     android:icon="@drawable/sel_bnv_my"
     android:title="@string/text_my"
-    app:iconPadding="7dp"/>
+    app:iconPadding="4dp" />
 
 </menu>

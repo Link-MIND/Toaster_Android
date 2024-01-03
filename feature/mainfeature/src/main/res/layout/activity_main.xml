@@ -21,15 +21,16 @@
   <com.google.android.material.bottomnavigation.BottomNavigationView
     android:id="@+id/bnv_main"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:theme="@style/Typography.suit.bold_12"
+    android:layout_height="72dp"
+    app:itemTextAppearanceActive="@style/Typography.suit.bold_12"
+    app:itemTextAppearanceInactive="@style/Typography.suit.bold_12"
+    app:itemActiveIndicatorStyle="@android:color/transparent"
+    app:itemTextColor="@drawable/sel_bnv_text_color"
     app:labelVisibilityMode="labeled"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/fcv_main"
-    app:menu="@menu/main_nav_menu"
-    app:itemTextColor="@drawable/sel_bnv_text_color"
-    app:itemActiveIndicatorStyle="@android:color/transparent" />
+    app:menu="@menu/main_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
