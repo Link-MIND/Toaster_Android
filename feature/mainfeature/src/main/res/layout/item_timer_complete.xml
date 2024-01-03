@@ -46,7 +46,7 @@
       android:background="@drawable/shape_primary_fill_4_rect"
       android:paddingHorizontal="12dp"
       android:paddingVertical="4dp"
-      android:text="읽으러가기"
+      android:text="@string/timer_read"
       android:textAppearance="@style/Typography.suit.semibold_14"
       android:textColor="@color/primary"
       app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +70,7 @@
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="링크들을"
+        android:text="@string/timer_link"
         android:textAppearance="@style/Typography.suit.regular_16"
         android:textColor="@color/neutrals600" />
     </LinearLayout>
@@ -80,7 +80,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginBottom="14dp"
-      android:text="읽기 딱 좋은 시간이에요!"
+      android:text="@string/timer_good"
       android:textAppearance="@style/Typography.suit.regular_16"
       android:textColor="@color/neutrals600"
       app:layout_constraintBottom_toBottomOf="parent"
