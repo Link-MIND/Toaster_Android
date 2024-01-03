@@ -5,4 +5,5 @@
   <string name="text_timer">TIMER</string>
   <string name="text_my">MY</string>
   <string name="text_placeholder">placeholder</string>
+    <string name="timer_title">TIMER</string>
 </resources>
