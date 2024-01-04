@@ -33,16 +33,10 @@ class LinkMindEditTextBox @JvmOverloads constructor(
         preventFocusClearedByAdjustResize()
       }
     }
-
-    binding.ivCancel.onThrottleClick {
-      binding.editText.text.clear()
-    }
-
     binding.editText.doAfterTextChanged { text ->
       binding.ivCancel.visibility =
         if (text.isNullOrEmpty()) View.INVISIBLE else View.VISIBLE
     }
-
     val typedArray =
       context.obtainStyledAttributes(attrs, R.styleable.EditTextSearch, defStyleAttr, 0)
 
@@ -52,7 +46,12 @@ class LinkMindEditTextBox @JvmOverloads constructor(
 
     typedArray.recycle()
   }
-
+  fun onClickTextClear(onClick: () -> Unit){
+    binding.ivCancel.onThrottleClick {
+      binding.editText.text.clear()
+      onClick()
+    }
+  }
   /**
    * 실제 사용하면서 사이드 효과 측정할게염
    * **/
