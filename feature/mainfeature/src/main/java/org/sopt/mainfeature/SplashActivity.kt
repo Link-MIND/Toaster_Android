@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import org.sopt.mainfeature.onboarding.LoginActivity
 
-
 class SplashActivity : Activity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
