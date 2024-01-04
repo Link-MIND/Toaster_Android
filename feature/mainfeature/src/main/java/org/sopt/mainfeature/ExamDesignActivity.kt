@@ -55,17 +55,15 @@ class ExamDesignActivity : AppCompatActivity() {
     setContentView(binding.root)
     showRevokeCommonDialog()
 
-
     val linkMindBottomSheet = LinkMindBottomSheet(this)
     linkMindBottomSheet.show()
     linkMindBottomSheet.apply {
       setTitle(R.string.text_clip)
       setErroMsg(R.string.text_clip)
       bottomSheetConfirmBtnClick {
-        Log.d("test","test")
+        Log.d("test", "test")
       }
     }
-
   }
 
   private fun showRevokeCommonDialog() {
