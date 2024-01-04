@@ -2,6 +2,7 @@
 <img src="https://img.shields.io/badge/Kotlin-0095D5?&style=flat-square&logo=kotlin&logoColor=white"/> <img src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white"/>    
 
 더 이상 링크를 태우지 마세요. 토스트 먹듯이 간단하게!
+유저가 링크를 산재된 플랫폼에 저장함으로 인해 발생하는 모든 불편함을 토스터에서 해소해줄 수 있어요.
 
 - 33기 DO SOPT APP-JAM (2023.12.17 ~ )
 - Development Environment : `Hedgehog | 2023.1.1`
