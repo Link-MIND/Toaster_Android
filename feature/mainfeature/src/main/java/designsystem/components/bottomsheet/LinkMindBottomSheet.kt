@@ -35,7 +35,6 @@ class LinkMindBottomSheet(context: Context) {
       onClickTextClear {
         binding.btnBottomSheet.state = LinkMIndFullWidthButtonState.DISABLE
       }
-
     }
   }
 

@@ -46,12 +46,13 @@ class LinkMindEditTextBox @JvmOverloads constructor(
 
     typedArray.recycle()
   }
-  fun onClickTextClear(onClick: () -> Unit){
+  fun onClickTextClear(onClick: () -> Unit) {
     binding.ivCancel.onThrottleClick {
       binding.editText.text.clear()
       onClick()
     }
   }
+
   /**
    * 실제 사용하면서 사이드 효과 측정할게염
    * **/
