@@ -60,7 +60,7 @@ class LinkMindEditTextBox @JvmOverloads constructor(
     binding.editText.doAfterTextChanged { text ->
       val isTextEmpty = text.isNullOrEmpty()
 
-      binding.ivCancel.visibility = if (isTextEmpty) View.GONE else View.VISIBLE
+      binding.ivCancel.visibility = if (isTextEmpty) View.INVISIBLE else View.VISIBLE
 
       if (!isTextEmpty) {
         editThrottleValue.setDelay(text.toString(), 300L) {
