@@ -33,18 +33,12 @@
 [GIT Kanban Board](https://github.com/orgs/Link-MIND/projects/1/views/1)
 </br>
 
-### 📂 Foldering Convention
+### 📂 Module
 ```bash
 ├── LinkMind-Android
 ├── 📁 app
-│   ├── build
-│   ├── src
 ├── 📁 build-logic
-│   │   ├── .gradle
-│   │   ├── build
 ├── 📁 Convention
-│   ├── build
-│   ├── src
 ├── 📁 core
 │   ├── 🗂️ auth
 │   ├── 🗂️ authimpl
