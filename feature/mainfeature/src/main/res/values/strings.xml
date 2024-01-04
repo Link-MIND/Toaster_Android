@@ -6,9 +6,9 @@
   <string name="text_my">MY</string>
   <string name="text_placeholder">placeholder</string>
   <!-- mypage -->
-  <string name="my_link_number_now">지금 까지 읽은 링크수</string>
-  <string name="my_number">개</string>
-  <string name="my_this_week_read_link">이번주 열람한 링크</string>
-  <string name="my_this_week_save_link">이번주 저장한 링크</string>
-  <string name="my_please_wait">아직 마이페이지는 추가 공사 중!\n 업데이트를 기다려주세요 :)</string>
+  <string name="mypage_link_number_now">지금 까지 읽은 링크수</string>
+  <string name="mypage_number">개</string>
+  <string name="mypage_this_week_read_link">이번주 열람한 링크</string>
+  <string name="mypage_this_week_save_link">이번주 저장한 링크</string>
+  <string name="mypage_please_wait">아직 마이페이지는 추가 공사 중!\n 업데이트를 기다려주세요 :)</string>
 </resources>
