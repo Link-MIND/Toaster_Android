@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import androidx.annotation.StringRes
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.BottomSheetDialogLinkmindBinding
 import org.sopt.ui.view.onThrottleClick
 
@@ -21,9 +20,15 @@ class LinkMindBottomSheet(context: Context) {
 
   }
 
-  fun setTitle(@StringRes textId:Int){
+  fun setTitle(@StringRes textId: Int) {
     binding.tvBottomSheetTitle.setText(textId)
   }
+
+
+  fun setErroMsg(@StringRes textId: Int) {
+    binding.tvBottomSheetErrorText.setText(textId)
+  }
+
   fun show() {
     bottomSheetDialog.show()
   }
