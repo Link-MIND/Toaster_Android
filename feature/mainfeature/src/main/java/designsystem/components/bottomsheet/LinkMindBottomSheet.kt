@@ -3,6 +3,7 @@ package designsystem.components.bottomsheet
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import androidx.annotation.StringRes
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
@@ -18,6 +19,12 @@ class LinkMindBottomSheet(context: Context) {
   init {
     binding.ivBottomSheetClose.onThrottleClick { dismiss() }
 
+    binding.btnBottomSheet.state = LinkMIndFullWidthButtonState.DISABLE
+    bottomSheetDialog.window?.let { window ->
+      window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+      window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+      binding.etvBottomSheet.editText.requestFocus()
+    }
     binding.etvBottomSheet.apply {
       throttleAfterTextChanged {
         handleTextChange()
