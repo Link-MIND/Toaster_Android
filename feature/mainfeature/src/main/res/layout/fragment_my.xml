@@ -1,13 +1,183 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".my.MyFragment">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_mypage_title"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".my.MyFragment">
+    android:layout_height="56dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="my" />
+  <TextView
+    android:id="@+id/tv_my_logo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="18dp"
+    android:text="@string/text_my"
+    android:textAppearance="@style/Typography.suit.bold_18"
+    app:layout_constraintBottom_toBottomOf="@+id/cl_mypage_title"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+
+  <ImageView
+    android:id="@+id/iv_setting"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="20dp"
+    android:src="@drawable/ic_setting_24"
+    app:layout_constraintBottom_toBottomOf="@+id/cl_mypage_title"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <LinearLayout
+    android:id="@+id/ll_mypage_now_link"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/cl_mypage_title">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/cl_mypage_now_link"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginHorizontal="20dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/cl_mypage_title">
+
+      <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_profile"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="1dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/circleImageView"
+        android:background="@drawable/img_toast" />
+
+      <TextView
+        android:id="@+id/tv_now_link"
+        style="@style/Typography.suit.regular_18"
+        android:layout_width="155dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="26dp"
+        android:text="@string/my_link_number_now"
+        app:layout_constraintStart_toEndOf="@id/iv_profile"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <TextView
+        style="@style/Typography.suit.regular_18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/my_number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/cl_mypage_this_week"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <View
+        android:id="@+id/bg_link_record"
+        android:layout_width="0dp"
+        android:layout_height="83dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/bg_mypage_link"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <TextView
+        style="@style/Typography.suit.regular_14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/my_this_week_read_link"
+        app:layout_constraintStart_toStartOf="@+id/bg_link_record"
+        app:layout_constraintTop_toTopOf="@+id/bg_link_record" />
+
+      <TextView
+        style="@style/Typography.suit.regular_14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/my_this_week_save_link"
+        app:layout_constraintStart_toEndOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/bg_link_record" />
+
+      <View
+        android:id="@+id/view"
+        android:layout_width="1dp"
+        android:layout_height="83dp"
+        android:background="@drawable/bg_mypage_line"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_link_record"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bg_link_record" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+      android:id="@+id/v_mypage_1"
+      android:layout_width="match_parent"
+      android:layout_height="4dp"
+      android:background="#F2F2F2"
+      app:layout_constraintTop_toBottomOf="@id/cl_mypage_this_week" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/cl_mypage_please_wait"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <ImageView
+        android:id="@+id/my_wait_image"
+        android:layout_width="280dp"
+        android:layout_height="254dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/img_toast" />
+
+
+      <TextView
+        style="@style/Typography.suit.regular_16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:hint="@string/my_please_wait"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_wait_image" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
