@@ -27,8 +27,25 @@
     android:padding="18dp"
     android:src="@drawable/ic_close_20"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"/>
+    app:layout_constraintTop_toTopOf="parent" />
 
+  <designsystem.components.edittext.LinkMindEditTextBox
+    android:id="@+id/etv_bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginTop="21dp"
+    app:editTextSearchHint="클립의 이름을 입력해주세요"
+    app:layout_constraintTop_toBottomOf="@id/tv_bottom_sheet_title" />
 
-
+  <designsystem.components.button.LinkMindFullWidthButton
+    android:id="@+id/btn_bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="10dp"
+    android:layout_marginTop="24dp"
+    app:fullWidthBtnText="test"
+    app:layout_constraintTop_toBottomOf="@id/etv_bottom_sheet"
+    tools:fullWidthBtnBackGroundTint="@color/primary"
+    tools:fullWidthBtnTextColor="@color/black" />
 </androidx.constraintlayout.widget.ConstraintLayout>
