@@ -3,6 +3,7 @@ package org.sopt.network.authenticator
 import android.content.Context
 import com.jakewharton.processphoenix.ProcessPhoenix
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
 import okhttp3.Request
@@ -23,7 +24,7 @@ class LinkMindAuthenticator @Inject constructor(
     if (response.code == CODE_TOKEN_EXPIRED) {
       val newTokens = runCatching {
         runBlocking {
-          tokenRefreshService.postAuthRefresh()
+          tokenRefreshService.postAuthRefresh(dataStore.flowRefreshToken().first())
         }
       }.onSuccess {
         runBlocking {
