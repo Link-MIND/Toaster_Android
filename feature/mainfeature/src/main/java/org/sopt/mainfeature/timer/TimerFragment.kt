@@ -17,7 +17,7 @@ import org.sopt.ui.fragment.snackBar
 
 class TimerFragment : Fragment() {
   private var _binding: FragmentTimerBinding? = null
-  protected val binding
+  private val binding
     get() = requireNotNull(_binding) {
     }
   private lateinit var completeTimerAdapter: CompleteTimerAdapter
