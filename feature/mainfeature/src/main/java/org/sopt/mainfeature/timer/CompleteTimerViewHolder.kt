@@ -12,7 +12,7 @@ class CompleteTimerViewHolder(
     if (data == null) return
     with(binding) {
       val ampm = if (data.am) AM else PM
-      val minute = if(data.minute >= 10) data.minute.toString() else MINUTE_FORMAT.format(data.minute)
+      val minute = if (data.minute >= 10) data.minute.toString() else MINUTE_FORMAT.format(data.minute)
       tvItemTimerCompleteCategory.text = data.category
       tvItemTimerCompleteTime.text = TIME_FORMAT.format(data.day, ampm, data.hour, minute)
       tvItemTimerCompleteRead.setOnClickListener {
