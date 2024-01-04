@@ -15,8 +15,8 @@ class WaitTimerViewHolder(
     with(binding) {
       tvItemTimerWaitCategory.text = data.category
       val ampm = if (data.am) AM else PM
-      val minuteText = MINUTE_FORMAT.format(data.minute).takeIf { data.minute != 0 } ?: ""
-      tvItemTimerWaitWhen.text = TIME_FORMAT.format(data.day, ampm, data.hour, minuteText)
+      val minute = if(data.minute != 0) MINUTE_FORMAT.format(data.minute) else ""
+      tvItemTimerWaitWhen.text = TIME_FORMAT.format(data.day, ampm, data.hour, minute)
 
       tgItemTimerWait.setOnClickListener {
         onToggleClicked(data)
