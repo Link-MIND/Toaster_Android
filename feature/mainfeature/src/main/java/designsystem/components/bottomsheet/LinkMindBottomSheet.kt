@@ -26,10 +26,16 @@ class LinkMindBottomSheet(context: Context) {
       window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
       binding.etvBottomSheet.editText.requestFocus()
     }
+
     binding.etvBottomSheet.apply {
       throttleAfterTextChanged {
         handleTextChange()
       }
+
+      onClickTextClear {
+        binding.btnBottomSheet.state = LinkMIndFullWidthButtonState.DISABLE
+      }
+
     }
   }
 
