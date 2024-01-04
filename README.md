@@ -18,7 +18,7 @@
 <br>
 
 ## 💻 Code Convention
-[NOTION Code Convetion Link](https://www.notion.so/dosopt/Code-Convention-da64b0be4cc043c4a923612be792ece0)
+[NOTION Code Convetion Link](https://hill-agenda-2b0.notion.site/Code-Convention-f492a5bdf5b444a6aae561e53d9d4e10)
 </br>
 
 ## 🔖 Branch Strategy
