@@ -20,6 +20,7 @@ class LinkMindBottomSheet(context: Context) {
     binding.ivBottomSheetClose.onThrottleClick { dismiss() }
 
     binding.btnBottomSheet.state = LinkMIndFullWidthButtonState.DISABLE
+
     bottomSheetDialog.window?.let { window ->
       window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
       window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
@@ -29,6 +30,12 @@ class LinkMindBottomSheet(context: Context) {
       throttleAfterTextChanged {
         handleTextChange()
       }
+    }
+  }
+
+  fun bottomSheetConfirmBtnClick(onClick: () -> Unit) {
+    binding.btnBottomSheet.btnClick {
+      onClick()
     }
   }
 
