@@ -36,7 +36,6 @@ class TimerFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
 
     binding.tvTimerTitle.setOnClickListener {
-
       if (timerExist) {
         binding.svTimerExist.isVisible = true
         binding.llTimerNotExist.isGone = true
@@ -49,7 +48,7 @@ class TimerFragment : Fragment() {
     }
 
     completeTimerAdapter = CompleteTimerAdapter({ snackBar(binding.root, { "안녕" }) })
-    waitTimerAdapter = WaitTimerAdapter({}, { ModifyTimerBottomSheetFragment.newInstance(it.id).show( parentFragmentManager,this.tag )})
+    waitTimerAdapter = WaitTimerAdapter({}, { ModifyTimerBottomSheetFragment.newInstance(it.id).show(parentFragmentManager, this.tag) })
 
     val list = listOf(
       Timer(1, "네이버", "일요일", true, 8, 37),

@@ -7,7 +7,7 @@ import org.sopt.ui.base.BindingBottomSheetDialogFragment
 
 class ModifyTimerBottomSheetFragment :
   BindingBottomSheetDialogFragment<FragmentModifyTimerBottomSheetBinding>({ FragmentModifyTimerBottomSheetBinding.inflate(it) }) {
-    var id: Int? = null
+  var id: Int? = null
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
@@ -23,7 +23,7 @@ class ModifyTimerBottomSheetFragment :
   companion object {
     fun newInstance(id: Int): ModifyTimerBottomSheetFragment {
       val args = Bundle().apply {
-        putInt("id",id)
+        putInt("id", id)
       }
       return ModifyTimerBottomSheetFragment().apply {
         arguments = args
