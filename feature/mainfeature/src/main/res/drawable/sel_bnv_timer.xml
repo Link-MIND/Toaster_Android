@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent">
+  <item android:drawable="@drawable/ic_timer_24" android:state_checked="true" />
+  <item android:color="@color/neutrals150" android:drawable="@drawable/ic_timer_unclicked" android:state_checked="false" />
+</selector>
