@@ -8,6 +8,6 @@ import retrofit2.http.POST
 interface TokenRefreshService {
   @POST("auth/token")
   suspend fun postAuthRefresh(
-    @Header("refreshToken") refreshToken: String
+    @Header("refreshToken") refreshToken: String,
   ): BaseResponse<ResponsePostAuthRefreshDto>
 }
