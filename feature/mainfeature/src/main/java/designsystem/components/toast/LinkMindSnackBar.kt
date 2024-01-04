@@ -10,14 +10,14 @@ import com.google.android.material.snackbar.Snackbar
 import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.LayoutToasterSnackbarBinding
 
-fun Context.toasterSnackBar(view: View, message: String, warning: Boolean = false) {
+fun Context.linkMindSnackBar(view: View, message: String, warning: Boolean = false) {
   Snackbar.make(view, "", Snackbar.LENGTH_LONG).apply {
-    val snackbarBinding = LayoutToasterSnackbarBinding.inflate(LayoutInflater.from(this@toasterSnackBar))
+    val snackbarBinding = LayoutToasterSnackbarBinding.inflate(LayoutInflater.from(this@linkMindSnackBar))
 
     (this.view as Snackbar.SnackbarLayout).apply {
       removeAllViews()
       setPadding(0, 0, 0, 0)
-      setBackgroundColor(ContextCompat.getColor(this@toasterSnackBar, android.R.color.transparent))
+      setBackgroundColor(ContextCompat.getColor(this@linkMindSnackBar, android.R.color.transparent))
 
       if (warning) snackbarBinding.ivToast.setImageResource(R.drawable.ic_alert_18_white)
       snackbarBinding.tvToast.text = message
