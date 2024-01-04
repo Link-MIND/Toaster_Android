@@ -8,7 +8,9 @@ import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.viewbinding.ViewBinding
 
-abstract class BindingDialogFragment<T : ViewBinding> : DialogFragment() {
+abstract class BindingDialogFragment<T : ViewBinding>(
+  private val inflater: (LayoutInflater) -> T,
+  ) : DialogFragment() {
   private var _binding: T? = null
   protected val binding get() = requireNotNull(_binding) { { "binding object is not initialized" } }
 
@@ -27,15 +29,13 @@ abstract class BindingDialogFragment<T : ViewBinding> : DialogFragment() {
     container: ViewGroup?,
     savedInstanceState: Bundle?,
   ): View {
-    _binding = getFragmentBinding(inflater, container)
+    _binding = inflater(layoutInflater)
     return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
   }
-
-  abstract fun getFragmentBinding(inflater: LayoutInflater, container: ViewGroup?): T
 
   override fun onDestroyView() {
     _binding = null

@@ -9,13 +9,13 @@ import androidx.viewbinding.ViewBinding
 import org.sopt.ui.context.hideKeyboard
 
 abstract class BindingActivity<T : ViewBinding>(
-  val bindingFactory: (LayoutInflater) -> T,
+  private val inflater: (LayoutInflater) -> T,
 ) : AppCompatActivity() {
   protected lateinit var binding: T
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    binding = bindingFactory(layoutInflater)
+    binding = inflater(layoutInflater)
     setContentView(binding.root)
   }
 
