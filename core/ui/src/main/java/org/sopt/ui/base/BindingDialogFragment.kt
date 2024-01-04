@@ -10,7 +10,7 @@ import androidx.viewbinding.ViewBinding
 
 abstract class BindingDialogFragment<T : ViewBinding>(
   private val inflater: (LayoutInflater) -> T,
-  ) : DialogFragment() {
+) : DialogFragment() {
   private var _binding: T? = null
   protected val binding get() = requireNotNull(_binding) { { "binding object is not initialized" } }
 
