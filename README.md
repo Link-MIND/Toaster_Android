@@ -28,3 +28,21 @@
 ## 🎁 Git Convention
 [NOTION Git Convention](https://hill-agenda-2b0.notion.site/Git-Convention-064dee5df78e4b0c9dd59d18c775a460?pvs=4)    
 </br>
+
+## 💻 Kanban Board
+[GIT Kanban Board](https://github.com/orgs/Link-MIND/projects/1/views/1)
+</br>
+
+### 📂 Foldering Convention
+```bash
+├── LinkMind-Android
+│   ├── app
+│   ├── build-logic
+│   ├── core
+│   ├── data
+│   │── data-local
+│   ├── domain
+│   ├── feature
+``` 
+
+
