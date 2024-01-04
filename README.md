@@ -36,13 +36,35 @@
 ### 📂 Foldering Convention
 ```bash
 ├── LinkMind-Android
-│   ├── app
-│   ├── build-logic
-│   ├── core
-│   ├── data
-│   │── data-local
-│   ├── domain
-│   ├── feature
+├── 📁 app
+│   ├── build
+│   ├── src
+├── 📁 build-logic
+│   │   ├── .gradle
+│   │   ├── build
+├── 📁 Convention
+│   ├── build
+│   ├── src
+├── 📁 core
+│   ├── 🗂️ auth
+│   ├── 🗂️ authimpl
+│   ├── 🗂️ common
+│   ├── 🗂️ datastore
+│   ├── 🗂️ model
+│   ├── 🗂️ network
+│   ├── 🗂️ ui
+├── 📁 data
+│   ├── 🗂️ linkminddata
+│   ├── 🗂️ oauthdata
+├── 📁 data-local
+│   ├── 🗂️ linkminddata-local
+├── 📁 data- remote
+│   ├── 🗂️ linkminddata-remote
+├── 📁 domain
+│   ├── 🗂️ linkminddomain
+│   ├── 🗂️ oauthdomain
+├── 📁 feature
+│   ├── 🗂️ mainfeature
 ``` 
 
 
