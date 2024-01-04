@@ -44,6 +44,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="20dp"
     android:layout_marginTop="6dp"
+    android:visibility="gone"
     android:textAppearance="@style/Typography.suit.medium_12"
     android:textColor="@color/error"
     app:layout_constraintTop_toBottomOf="@id/etv_bottom_sheet"

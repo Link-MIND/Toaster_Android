@@ -2,6 +2,7 @@ package designsystem.components.bottomsheet
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import androidx.annotation.StringRes
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import org.sopt.mainfeature.databinding.BottomSheetDialogLinkmindBinding
@@ -17,7 +18,12 @@ class LinkMindBottomSheet(context: Context) {
     binding.ivBottomSheetClose.onThrottleClick {
       dismiss()
     }
-
+    binding.etvBottomSheet.apply {
+      throttleAfterTextChanged {
+        if (showErrorMsg()) binding.tvBottomSheetErrorText.visibility = View.VISIBLE
+        else View.GONE
+      }
+    }
   }
 
   fun setTitle(@StringRes textId: Int) {
@@ -25,6 +31,7 @@ class LinkMindBottomSheet(context: Context) {
   }
 
 
+  fun showErrorMsg(): Boolean = binding.etvBottomSheet.editText.text.length > 10
   fun setErroMsg(@StringRes textId: Int) {
     binding.tvBottomSheetErrorText.setText(textId)
   }
