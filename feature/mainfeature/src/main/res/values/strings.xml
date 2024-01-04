@@ -19,4 +19,8 @@
   <string name="timer_wait">타이머 대기 중..</string>
   <string name="timer_not_complete">타이머가 완료되면 리마인드 드릴게요</string>
   <string name="timer_complete">완료된 타이머</string>
+  <!-- modify timer -->
+  <string name="modify_timer_mod">타이머 수정하기</string>
+  <string name="modify_timer_delete">삭제</string>
+  <string name="modify_timer_title">수정하기</string>
 </resources>
