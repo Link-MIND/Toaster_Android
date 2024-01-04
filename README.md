@@ -17,14 +17,14 @@
 
 <br>
 
-# 💻 Code Convention
+## 💻 Code Convention
 [NOTION Code Convetion Link](https://www.notion.so/dosopt/Code-Convention-da64b0be4cc043c4a923612be792ece0)
 </br>
 
-# 🔖 Branch Strategy
+## 🔖 Branch Strategy
 [NOTION Branch Strategy](https://hill-agenda-2b0.notion.site/Branch-Strategy-e3a9c5e70f6241ae9ccad544666b095c?pvs=4)
 </br>
 
-# 🎁 Git Convention
+## 🎁 Git Convention
 [NOTION Git Convention](https://hill-agenda-2b0.notion.site/Git-Convention-064dee5df78e4b0c9dd59d18c775a460?pvs=4)    
 </br>
