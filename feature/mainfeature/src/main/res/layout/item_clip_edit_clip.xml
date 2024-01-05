@@ -8,12 +8,13 @@
   <!--android:background="@color/transparent"-->
 
   <ImageView
-    android:id="@+id/iv_clip_edit_minus"
+    android:id="@+id/iv_clip_edit_delete"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="13dp"
     android:layout_marginEnd="8dp"
     android:layout_marginBottom="9dp"
+    android:contentDescription="@string/edit_clip_minus_description"
     android:src="@drawable/ic_minus_28"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
@@ -22,9 +23,11 @@
     android:id="@+id/ll_clip_edit_clip"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:background="@color/white"
     android:orientation="horizontal"
-    app:layout_constraintStart_toEndOf="@id/iv_clip_edit_minus"
     app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/iv_clip_edit_delete"
     app:layout_constraintTop_toTopOf="parent">
 
 
@@ -33,7 +36,6 @@
       android:layout_height="wrap_content"
       android:layout_marginVertical="15dp"
       android:layout_marginStart="14dp"
-      android:background="@color/white"
       android:maxLines="1"
       android:text="clip"
       android:textAppearance="@style/Typography.suit.semibold_16"

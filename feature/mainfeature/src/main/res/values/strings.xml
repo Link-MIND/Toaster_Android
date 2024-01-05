@@ -21,4 +21,5 @@
   <string name="timer_complete">완료된 타이머</string>
   <!-- edit clip -->
   <string name="edit_clip_guide_msg">클립을 누른 뒤 위아래로 드래그하여 순서를 수정하세요!</string>
+  <string name="edit_clip_minus_description">클립을 삭제하려면 누르세요</string>
 </resources>
