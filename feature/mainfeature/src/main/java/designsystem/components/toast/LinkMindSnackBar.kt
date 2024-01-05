@@ -1,5 +1,6 @@
 package designsystem.components.toast
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.LayoutToasterSnackbarBinding
 
+@SuppressLint("RestrictedApi")
 fun Context.linkMindSnackBar(view: View, message: String, warning: Boolean = false) {
   Snackbar.make(view, "", Snackbar.LENGTH_LONG).apply {
     val snackbarBinding = LayoutToasterSnackbarBinding.inflate(LayoutInflater.from(this@linkMindSnackBar))
