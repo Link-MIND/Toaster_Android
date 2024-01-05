@@ -19,4 +19,7 @@
   <string name="timer_wait">타이머 대기 중..</string>
   <string name="timer_not_complete">타이머가 완료되면 리마인드 드릴게요</string>
   <string name="timer_complete">완료된 타이머</string>
+  <!-- clip -->
+  <string name="clip_toolbar_edit">편집</string>
+  <string name="clip_toolbar_all_clip">전체 클립</string>
 </resources>

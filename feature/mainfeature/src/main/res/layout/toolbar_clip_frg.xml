@@ -21,7 +21,7 @@ app:contentInsetStartWithNavigation="0dp">
       android:layout_constraintStart_toStartOf="@id/cl_clip_toolbar"
       android:layout_constraintTop_toTopOf="@id/cl_clip_toolbar"
       android:paddingVertical="4dp"
-      android:text="CLIP"
+      android:text="@string/text_clip"
       android:textAppearance="@style/Typography.suit.bold_18"
       android:textColor="@color/neutrals900" />
 
@@ -38,7 +38,7 @@ app:contentInsetStartWithNavigation="0dp">
       android:paddingTop="6dp"
       android:paddingEnd="8dp"
       android:paddingBottom="7dp"
-      android:text="편집"
+      android:text="@string/clip_toolbar_edit"
       android:textAppearance="@style/Typography.suit.bold_14"
       android:textColor="@color/neutrals600"
       app:layout_constraintEnd_toEndOf="parent" />
