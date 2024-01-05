@@ -33,7 +33,7 @@ class ExampleTimePickerFragment : BindingFragment<FragmentExampleTimePickerBindi
     val list = mutableListOf<PickerItem>()
     list.add(PickerItem(end.toString(), false))
     list.add(PickerItem(start.toString(), true))
-    for (i in start + 1..end) {
+    for (i in start + 1..end - 1) {
       list.add(PickerItem(i.toString(), false))
     }
     return list
