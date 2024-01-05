@@ -33,7 +33,7 @@
       android:background="@color/neutrals050"
       android:gravity="center"
       android:paddingVertical="12dp"
-      android:text="클립을 누른 뒤 위아래로 드래그하여 순서를 수정하세요!"
+      android:text="@string/edit_clip_guide_msg"
       android:textAppearance="@style/Typography.suit.medium_12"
       android:textColor="@color/neutrals400"
       app:layout_constraintEnd_toEndOf="@id/cl_clip_edit_main"
