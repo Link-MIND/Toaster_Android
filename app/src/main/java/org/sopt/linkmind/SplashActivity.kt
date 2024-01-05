@@ -1,4 +1,4 @@
-package org.sopt.mainfeature
+package org.sopt.linkmind
 
 import android.app.Activity
 import android.content.Intent
