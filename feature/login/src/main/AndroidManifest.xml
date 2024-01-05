@@ -2,16 +2,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools">
 
-  <application
-    android:allowBackup="true"
-    android:fullBackupContent="@xml/backup_rules"
-    android:usesCleartextTraffic="true"
-    tools:targetApi="31">
-    <activity
-      android:name=".onboarding.LoginActivity"
-      android:exported="true"
-      android:screenOrientation="portrait"/>
-
-  </application>
 
 </manifest>
