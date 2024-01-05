@@ -5,7 +5,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   app:contentInsetStart="0dp"
-  app:contentInsetTop="0dp">
+app:contentInsetStartWithNavigation="0dp">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/cl_clip_toolbar"
