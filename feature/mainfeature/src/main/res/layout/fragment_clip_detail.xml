@@ -110,7 +110,7 @@
       app:layout_constraintStart_toStartOf="@id/cl_clip_category_main"
       app:layout_constraintTop_toBottomOf="@id/tv_clip_category_all"
       tools:itemCount="2"
-      tools:listitem="@layout/item_clip_category_link_detail" />
+      tools:listitem="@layout/item_clip_detail_link" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/cl_clip_category_empty"
