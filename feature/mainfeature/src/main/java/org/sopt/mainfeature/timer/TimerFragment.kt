@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.FragmentTimerBinding
 import org.sopt.mainfeature.timer.dummymodel.Timer
@@ -69,6 +70,13 @@ class TimerFragment : Fragment() {
     }
     binding.rvTimerComplete.adapter = completeTimerAdapter
     binding.rvTimerWait.adapter = waitTimerAdapter
+
+    binding.ivTimerPlus.setOnClickListener {
+      parentFragmentManager.commit {
+        val exampleTimePickerFragment = ExampleTimePickerFragment()
+        replace(R.id.fcv_main, exampleTimePickerFragment)
+      }
+    }
   }
 
   override fun onDestroyView() {
