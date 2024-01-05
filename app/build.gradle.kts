@@ -13,7 +13,7 @@ android {
     versionCode = 1
     versionName = "1.0"
   }
-  viewBinding.enable =true
+  viewBinding.enable = true
 }
 
 dependencies {

@@ -45,9 +45,9 @@ class MainActivity : AppCompatActivity() {
           R.id.navigation_my,
         )
       ) {
-          View.VISIBLE
+        View.VISIBLE
       } else {
-          View.GONE
+        View.GONE
       }
     }
   }
