@@ -61,7 +61,10 @@ class ExampleTimePickerFragment : BindingFragment<FragmentExampleTimePickerBindi
           val newList: MutableList<PickerItem> = numberAdapter.currentList.mapIndexed { index, item ->
             item.copy(isSelected = index == pos!! % numberAdapter.currentList.size)
           }.toMutableList()
-          numberAdapter.submitList(newList)
+          numberAdapter.run {
+            submitList(newList)
+            notifyDataSetChanged()
+          }
         }
       },
     )
@@ -72,7 +75,10 @@ class ExampleTimePickerFragment : BindingFragment<FragmentExampleTimePickerBindi
         val newList: MutableList<PickerItem> = numberAdapter.currentList.mapIndexed { index, item ->
           item.copy(isSelected = index == pos!! % numberAdapter.currentList.size)
         }.toMutableList()
-        numberAdapter.submitList(newList)
+        numberAdapter.run {
+          submitList(newList)
+          notifyDataSetChanged()
+        }
         return false
       }
     }

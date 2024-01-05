@@ -19,13 +19,13 @@ class NumberAdapter : ListAdapter<PickerItem, NumberViewHolder>(DiffUtil) {
     )
   }
   override fun getItemCount(): Int = Int.MAX_VALUE
+
+  fun getMiddlePosition() =
+    round(Int.MAX_VALUE / 2.0).toInt() - round(Int.MAX_VALUE / 2.0).toInt() % currentList.size
   companion object {
     private val DiffUtil = ItemDiffCallback<PickerItem>(
       onItemsTheSame = { old, new -> old == new },
       onContentsTheSame = { old, new -> old == new },
     )
   }
-
-  fun getMiddlePosition() =
-    round(Int.MAX_VALUE / 2.0).toInt() - round(Int.MAX_VALUE / 2.0).toInt() % currentList.size
 }
