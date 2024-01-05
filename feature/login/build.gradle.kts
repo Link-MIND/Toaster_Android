@@ -12,13 +12,14 @@ android {
 }
 
 dependencies {
+  implementation(projects.feature.mainfeature)
   implementation(projects.feature.maincontainer)
+  implementation(projects.core.common)
+  implementation(projects.core.ui)
   implementation(projects.core.datastore)
   implementation(projects.core.auth)
   implementation(projects.domain.linkminddomain)
   implementation(projects.domain.oauthdomain)
-  implementation(projects.core.common)
-  implementation(projects.core.ui)
   implementation(libs.core.ktx)
   implementation(libs.appcompat)
   implementation(libs.material)

@@ -16,7 +16,7 @@
     android:usesCleartextTraffic="true"
     tools:targetApi="31">
     <activity
-      android:name=".onboarding.LoginActivity"
+      android:name="org.sopt.login.onboarding.LoginActivity"
       android:exported="true"></activity>
     <activity
       android:name=".ExampleActivity"

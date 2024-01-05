@@ -20,6 +20,7 @@ dependencies {
 
   implementation(projects.feature.mainfeature)
   implementation(projects.feature.maincontainer)
+  implementation(projects.feature.login)
   implementation(projects.data.linkminddata)
   implementation(projects.data.oauthdata)
   implementation(projects.core.network)
