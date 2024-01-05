@@ -10,13 +10,8 @@
     <activity
       android:name=".onboarding.LoginActivity"
       android:exported="true"
-      android:screenOrientation="portrait">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
+      android:screenOrientation="portrait"/>
 
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-    </activity>
   </application>
 
 </manifest>

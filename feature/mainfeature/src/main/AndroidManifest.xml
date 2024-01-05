@@ -16,16 +16,8 @@
     android:usesCleartextTraffic="true"
     tools:targetApi="31">
     <activity
-      android:name="org.sopt.login.onboarding.LoginActivity"
-      android:exported="true"></activity>
-    <activity
       android:name=".ExampleActivity"
       android:exported="false" />
-    <activity
-      android:name=".SplashActivity"
-      android:exported="true"
-      android:theme="@style/SplashTheme">
-    </activity>
   </application>
 
 </manifest>

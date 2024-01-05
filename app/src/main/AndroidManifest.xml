@@ -19,6 +19,16 @@
     android:theme="@style/Theme.LinkMind"
     android:usesCleartextTraffic="true"
     tools:targetApi="31">
+    <activity
+      android:name=".SplashActivity"
+      android:theme="@style/SplashTheme"
+      android:exported="true">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
     <service
       android:name=".configuration.ToasterMessagingService"
       android:enabled="true"
@@ -27,6 +37,7 @@
         <action android:name="com.google.firebase.MESSAGING_EVENT" />
       </intent-filter>
     </service>
+
     <activity
       android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
       android:exported="true">
@@ -41,6 +52,7 @@
           android:scheme="kakao${KAKAO_NATIVE_KEY}" />
       </intent-filter>
     </activity>
+
 
   </application>
 

@@ -8,7 +8,7 @@ import org.sopt.login.onboarding.LoginActivity
 class SplashActivity : Activity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    val intent = Intent(this, org.sopt.login.onboarding.LoginActivity::class.java)
+    val intent = Intent(this, LoginActivity::class.java)
     startActivity(intent)
     finish()
   }
