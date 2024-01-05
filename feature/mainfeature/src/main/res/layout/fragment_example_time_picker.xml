@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/neutrals050"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="114dp"
+    android:layout_marginHorizontal="26dp"
+    app:layout_constraintTop_toTopOf="parent">
+    <View
+      android:layout_width="match_parent"
+      android:layout_height="38dp"
+      android:background="@drawable/shape_neutrals200_fill_12_rect"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"/>
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rv_1"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_marginStart="25dp"
+      android:nestedScrollingEnabled="false"
+      android:orientation="vertical"
+      android:overScrollMode="never"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      tools:listitem="@layout/item_number_picker"
+      tools:itemCount="4"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rv_2"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:nestedScrollingEnabled="false"
+      android:orientation="vertical"
+      android:overScrollMode="never"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/rv_3"
+      tools:listitem="@layout/item_number_picker"
+      tools:itemCount="4"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rv_3"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_marginEnd="25dp"
+      android:nestedScrollingEnabled="false"
+      android:orientation="vertical"
+      android:overScrollMode="never"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      tools:listitem="@layout/item_number_picker"
+      tools:itemCount="4"/>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
