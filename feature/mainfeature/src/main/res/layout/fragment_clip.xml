@@ -12,7 +12,10 @@
     android:layout_height="wrap_content"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toTopOf="parent" >
+  <include layout="@layout/toolbar_clip"/>
+
+  </androidx.appcompat.widget.Toolbar>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/cl_category_main"
