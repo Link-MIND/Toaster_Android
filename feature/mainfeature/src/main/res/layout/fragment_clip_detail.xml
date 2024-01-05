@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/background">
+
+  <androidx.appcompat.widget.Toolbar
+    android:id="@+id/tb_clip_category"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_clip_category_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="20dp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tb_clip_category">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/cl_clip_picker"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/neutrals050"
+      android:orientation="horizontal"
+      android:padding="2dp"
+      app:layout_constraintEnd_toEndOf="@id/cl_clip_category_main"
+
+      app:layout_constraintStart_toStartOf="@id/cl_clip_category_main"
+      app:layout_constraintTop_toTopOf="@id/cl_clip_category_main">
+
+      <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_clip_all"
+        android:layout_width="105dp"
+        android:layout_height="38dp"
+        android:background="@color/neutrals_white"
+        android:paddingVertical="8dp"
+        android:text="전체"
+        android:textAppearance="@style/Typography.suit.bold_14"
+        android:textColor="@color/neutrals850"
+        app:layout_constraintStart_toStartOf="@id/cl_clip_picker"
+        app:layout_constraintTop_toTopOf="@id/cl_clip_picker" />
+
+      <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/dv_clip_picker1"
+        android:layout_width="1dp"
+        android:layout_height="19dp"
+        app:layout_constraintBottom_toBottomOf="@id/cl_clip_picker"
+        app:layout_constraintStart_toEndOf="@id/btn_clip_all"
+        app:layout_constraintTop_toTopOf="@id/cl_clip_picker" />
+
+      <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_clip_read"
+        android:layout_width="105dp"
+        android:layout_height="38dp"
+        android:background="@color/neutrals050"
+        android:paddingVertical="8dp"
+        android:text="열람"
+        android:textAppearance="@style/Typography.suit.semibold_14"
+        android:textColor="@color/neutrals400"
+        app:layout_constraintStart_toEndOf="@id/dv_clip_picker1"
+        app:layout_constraintTop_toTopOf="@id/cl_clip_picker" />
+
+      <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/dv_clip_picker2"
+        android:layout_width="1dp"
+        android:layout_height="19dp"
+        app:layout_constraintBottom_toBottomOf="@id/cl_clip_picker"
+        app:layout_constraintStart_toEndOf="@id/btn_clip_read"
+        app:layout_constraintTop_toTopOf="@id/cl_clip_picker" />
+
+      <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_clip_unread"
+        android:layout_width="105dp"
+        android:layout_height="38dp"
+        android:background="@color/neutrals050"
+        android:paddingVertical="8dp"
+        android:text="미열람"
+        android:textAppearance="@style/Typography.suit.semibold_14"
+        android:textColor="@color/neutrals400"
+        app:layout_constraintStart_toEndOf="@id/dv_clip_picker2"
+        app:layout_constraintTop_toTopOf="@id/cl_clip_picker" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+      android:id="@+id/tv_clip_category_all"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="2dp"
+      android:layout_marginTop="19dp"
+      android:text="전체 (n)"
+      android:textAppearance="@style/Typography.suit.medium_12"
+      android:textColor="@color/neutrals400"
+      app:layout_constraintStart_toStartOf="@id/cl_clip_category_main"
+      app:layout_constraintTop_toBottomOf="@id/cl_clip_picker"
+      app:layout_marginTop="22dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rv_category_link"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="14dp"
+      app:layout_constraintEnd_toEndOf="@id/cl_clip_category_main"
+      app:layout_constraintStart_toStartOf="@id/cl_clip_category_main"
+      app:layout_constraintTop_toBottomOf="@id/tv_clip_category_all"
+      tools:itemCount="2"
+      tools:listitem="@layout/item_clip_category_link_detail" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/cl_clip_category_empty"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginHorizontal="31dp"
+      android:layout_marginTop="102dp"
+      app:layout_constraintEnd_toEndOf="@id/cl_clip_category_main"
+      app:layout_constraintStart_toStartOf="@id/tv_clip_category_all"
+      app:layout_constraintTop_toBottomOf="@id/rv_category_link">
+
+      <ImageView
+        android:id="@+id/iv_clip_category_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_link_empty"
+        app:layout_constraintEnd_toEndOf="@id/cl_clip_category_empty"
+        app:layout_constraintStart_toStartOf="@id/cl_clip_category_empty"
+        app:layout_constraintTop_toTopOf="@id/cl_clip_category_empty" />
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="아직 클립에 저장된 링크가 없어요\n아래 + 버튼을 통해 링크를 저장해보세요!"
+        android:textAppearance="@style/Typography.suit.regular_16_128"
+        android:textColor="@color/neutrals500"
+        app:layout_constraintEnd_toEndOf="@id/cl_clip_category_empty"
+        app:layout_constraintStart_toStartOf="@id/cl_clip_category_empty"
+        app:layout_constraintTop_toBottomOf="@id/iv_clip_category_empty" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
