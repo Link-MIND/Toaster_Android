@@ -1,4 +1,4 @@
-package org.sopt.mainfeature
+package org.sopt.maincontainer
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
-import org.sopt.mainfeature.databinding.ActivityMainBinding
+import org.sopt.maincontainer.databinding.ActivityMainBinding
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -45,9 +45,9 @@ class MainActivity : AppCompatActivity() {
           R.id.navigation_my,
         )
       ) {
-        View.VISIBLE
+          View.VISIBLE
       } else {
-        View.GONE
+          View.GONE
       }
     }
   }

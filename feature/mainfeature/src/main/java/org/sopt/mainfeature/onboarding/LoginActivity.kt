@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.sopt.datastore.datastore.SecurityDataStore
-import org.sopt.mainfeature.MainActivity
+//import org.sopt.linkmind.MainActivity
 import org.sopt.mainfeature.databinding.ActivityLoginBinding
 import org.sopt.oauthdomain.interactor.OAuthInteractor
 import org.sopt.ui.context.toast
@@ -43,9 +43,9 @@ class LoginActivity : AppCompatActivity() {
   private fun initCheckAutoLogin() {
     lifecycleScope.launch {
       if (dataStore.flowAutoLogin().first()) {
-        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
+//        val intent = Intent(this@LoginActivity, org.sopt.linkmind.MainActivity::class.java)
+//        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//        startActivity(intent)
       }
     }
   }
@@ -57,15 +57,15 @@ class LoginActivity : AppCompatActivity() {
           when (state.data.isRegistered) {
             true -> {
               dataStore.setAutoLogin(true)
-              val intent = Intent(this@LoginActivity, MainActivity::class.java)
-              intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-              startActivity(intent)
+//              val intent = Intent(this@LoginActivity, org.sopt.linkmind.MainActivity::class.java)
+//              intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//              startActivity(intent)
             }
 
             false -> {
-              val intent = Intent(this@LoginActivity, MainActivity::class.java)
-              intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-              startActivity(intent)
+//              val intent = Intent(this@LoginActivity, org.sopt.linkmind.MainActivity::class.java)
+//              intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//              startActivity(intent)
             }
           }
         }

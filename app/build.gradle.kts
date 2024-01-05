@@ -13,11 +13,13 @@ android {
     versionCode = 1
     versionName = "1.0"
   }
+  viewBinding.enable =true
 }
 
 dependencies {
 
   implementation(projects.feature.mainfeature)
+  implementation(projects.feature.maincontainer)
   implementation(projects.data.linkminddata)
   implementation(projects.data.oauthdata)
   implementation(projects.core.network)
