@@ -3,7 +3,6 @@ package org.sopt.mainfeature
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
 import designsystem.components.button.state.LinkMindButtonState
@@ -11,7 +10,6 @@ import designsystem.components.dialog.LinkMindDialog
 import org.sopt.mainfeature.databinding.ActivityDesignComponentsBinding
 import timber.log.Timber
 
-@AndroidEntryPoint
 class ExamDesignActivity : AppCompatActivity() {
   private lateinit var binding: ActivityDesignComponentsBinding
 

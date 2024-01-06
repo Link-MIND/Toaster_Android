@@ -1,6 +1,6 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-  alias(libs.plugins.linkmind.plugin.feature)
+  alias(libs.plugins.linkmind.android.library)
   alias(libs.plugins.kotlin.android)
 }
 
@@ -12,8 +12,13 @@ android {
 }
 
 dependencies {
-  implementation(projects.core.datastore)
-  implementation(projects.core.auth)
-  implementation(projects.domain.linkminddomain)
-  implementation(projects.domain.oauthdomain)
+  implementation(projects.core.ui)
+  implementation(projects.core.common)
+  implementation(libs.androidx.appcompat)
+  implementation(libs.androidx.core.ktx)
+  implementation(libs.androidx.constraintlayout)
+  implementation(libs.androidx.recyclerview)
+  implementation(libs.google.material)
+  implementation(libs.coil)
+  implementation(libs.timber)
 }
