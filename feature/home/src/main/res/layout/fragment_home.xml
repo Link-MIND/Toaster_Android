@@ -157,4 +157,17 @@
     app:layout_constraintStart_toEndOf="@+id/tv_home_user_clip_name"
     app:layout_constraintTop_toTopOf="@id/tv_home_user_clip_name" />
 
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rv_home_clip"
+    android:paddingHorizontal="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:overScrollMode="never"
+    android:paddingTop="15dp"
+    tools:listitem="@layout/item_home_clip"
+    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_home_user_clip_name"
+    app:spanCount="2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
