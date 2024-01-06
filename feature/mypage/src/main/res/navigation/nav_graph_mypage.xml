@@ -8,5 +8,7 @@
     android:id="@+id/navigation_my"
     android:name="org.sopt.mypage.my.MyFragment"
     android:label="fragment_my"
-    tools:layout="@layout/fragment_my" />
+    tools:layout="@layout/fragment_my" >
+    <deepLink app:uri="featureMyPage://fragmentMy" />
+  </fragment>
 </navigation>
