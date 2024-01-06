@@ -16,7 +16,9 @@ class NumberViewHolder(
       } else {
         tvText.setTextAppearance(R.style.Typography_suit_regular_16)
       }
-      tvText.text = data.text
+      tvText.text = data.text.toIntOrNull()?.let {
+        if (it < 10) "0$it" else data.text
+      } ?: data.text
     }
   }
 }
