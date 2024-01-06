@@ -8,15 +8,17 @@ import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.FragmentTimerBinding
 import org.sopt.mainfeature.timer.dummymodel.Timer
+import org.sopt.mainfeature.timer.modifytimer.ModifyTimerBottomSheetFragment
 import org.sopt.ui.fragment.colorOf
 import org.sopt.ui.fragment.snackBar
 
 class TimerFragment : Fragment() {
   private var _binding: FragmentTimerBinding? = null
-  protected val binding
+  private val binding
     get() = requireNotNull(_binding) {
     }
   private lateinit var completeTimerAdapter: CompleteTimerAdapter
@@ -47,7 +49,7 @@ class TimerFragment : Fragment() {
     }
 
     completeTimerAdapter = CompleteTimerAdapter({ snackBar(binding.root, { "안녕" }) })
-    waitTimerAdapter = WaitTimerAdapter({}, {})
+    waitTimerAdapter = WaitTimerAdapter({}, { ModifyTimerBottomSheetFragment.newInstance(it.id).show(parentFragmentManager, this.tag) })
 
     val list = listOf(
       Timer(1, "네이버", "일요일", true, 8, 37),
@@ -69,6 +71,13 @@ class TimerFragment : Fragment() {
     }
     binding.rvTimerComplete.adapter = completeTimerAdapter
     binding.rvTimerWait.adapter = waitTimerAdapter
+
+    binding.ivTimerPlus.setOnClickListener {
+      parentFragmentManager.commit {
+        val exampleTimePickerFragment = ExampleTimePickerFragment()
+        replace(R.id.fcv_main, exampleTimePickerFragment)
+      }
+    }
   }
 
   override fun onDestroyView() {

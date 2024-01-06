@@ -1,8 +1,10 @@
 package org.sopt.mainfeature
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
+import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
 import designsystem.components.button.state.LinkMindButtonState
 import designsystem.components.dialog.LinkMindDialog
@@ -30,6 +32,9 @@ class ExamDesignActivity : AppCompatActivity() {
       }
     }
     binding.etv.apply {
+      onClickTextClear {
+        Timber.d("SaK")
+      }
       throttleAfterTextChanged {
         Timber.d("SaK")
       }
@@ -49,6 +54,16 @@ class ExamDesignActivity : AppCompatActivity() {
     }
     setContentView(binding.root)
     showRevokeCommonDialog()
+
+    val linkMindBottomSheet = LinkMindBottomSheet(this)
+    linkMindBottomSheet.show()
+    linkMindBottomSheet.apply {
+      setTitle(R.string.text_clip)
+      setErroMsg(R.string.text_clip)
+      bottomSheetConfirmBtnClick {
+        Log.d("test", "test")
+      }
+    }
   }
 
   private fun showRevokeCommonDialog() {
