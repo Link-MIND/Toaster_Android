@@ -74,7 +74,7 @@ class TimerFragment : Fragment() {
 
     binding.ivTimerPlus.setOnClickListener {
       parentFragmentManager.commit {
-        val exampleTimePickerFragment = ExampleTimePickerFragment()
+//        val exampleTimePickerFragment = ExampleTimePickerFragment()
       }
     }
   }

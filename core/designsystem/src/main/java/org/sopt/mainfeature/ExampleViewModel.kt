@@ -1,9 +1,9 @@
 package org.sopt.mainfeature
 
-//@HiltViewModel
-//class ExampleViewModel @Inject constructor(
+// @HiltViewModel
+// class ExampleViewModel @Inject constructor(
 //  private val dummyUseCase: DummyUseCase,
-//) : ViewModel() {
+// ) : ViewModel() {
 //  private val _dummyState = MutableStateFlow<UiState<DummyEntity>>(UiState.Empty)
 //  val dummyState: StateFlow<UiState<DummyEntity>> = _dummyState.asStateFlow()
 //
@@ -14,4 +14,4 @@ package org.sopt.mainfeature
 //      _dummyState.emit(UiState.Failure(it.message.toString()))
 //    }
 //  }
-//}
+// }
