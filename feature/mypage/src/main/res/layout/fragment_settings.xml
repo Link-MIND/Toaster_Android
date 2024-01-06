@@ -4,7 +4,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".settings.SettingsFragment">
+  tools:context="org.sopt.mypage.settings.SettingsFragment">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/cl_settings_title"

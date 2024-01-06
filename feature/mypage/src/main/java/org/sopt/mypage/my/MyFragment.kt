@@ -1,11 +1,11 @@
-package org.sopt.mainfeature.my
+package org.sopt.mypage.my
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import org.sopt.mainfeature.R
+import org.sopt.mypage.R
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

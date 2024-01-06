@@ -3,7 +3,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".my.MyFragment">
+  tools:context="org.sopt.mypage.my.MyFragment">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/cl_mypage_title"

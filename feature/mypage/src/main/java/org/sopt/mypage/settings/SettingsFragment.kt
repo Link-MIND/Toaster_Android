@@ -1,4 +1,4 @@
-package org.sopt.mainfeature.settings
+package org.sopt.mypage.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import org.sopt.mainfeature.R
-import org.sopt.mainfeature.databinding.FragmentSettingsBinding
+import org.sopt.mypage.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
 
