@@ -33,6 +33,7 @@ dependencies {
   implementation(projects.domain.linkminddomain)
   implementation(projects.domain.oauthdomain)
   implementation(projects.feature.clip)
+  implementation(projects.feature.mypage)
   implementation(libs.core.ktx)
   implementation(libs.appcompat)
   implementation(libs.material)
