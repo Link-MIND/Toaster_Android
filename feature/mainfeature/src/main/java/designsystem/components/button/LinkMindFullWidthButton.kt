@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
-import designsystem.components.button.state.LinkMindButtonFullWidthState
+import designsystem.components.button.state.LinkMIndFullWidthButtonState
 import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.ButtonFullWidthLinkmindBinding
 import org.sopt.ui.view.onThrottleClick
@@ -20,31 +20,37 @@ class LinkMindFullWidthButton @JvmOverloads constructor(
 
   private val binding: ButtonFullWidthLinkmindBinding
 
-  var state: LinkMindButtonFullWidthState = LinkMindButtonFullWidthState.ENABLE
+  var state: LinkMIndFullWidthButtonState = LinkMIndFullWidthButtonState.ENABLE_PRIMARY
     set(value) {
       field = value
       when (field) {
-        LinkMindButtonFullWidthState.ENABLE -> {
-          setBtnEnable(R.color.black)
+        LinkMIndFullWidthButtonState.ENABLE_PRIMARY -> {
+          setBtnEnable(R.color.primary)
         }
 
-        LinkMindButtonFullWidthState.DISABLE -> {
-          setBtnDisable(R.color.black)
+        LinkMIndFullWidthButtonState.ENABLE_BLACK -> {
+          setBtnEnable(R.color.neutrals_black)
+        }
+
+        LinkMIndFullWidthButtonState.DISABLE -> {
+          setBtnDisable(R.color.neutrals100)
         }
       }
     }
   private fun setBtnEnable(textColorResId: Int) {
     binding.apply {
-      clBtnFullWidthLinkmind.isClickable = false
-      clBtnFullWidthLinkmind.isFocusable = false
-      tvBtn.setTextColor(ContextCompat.getColor(context, textColorResId))
+      clBtnFullWidthLinkmind.isClickable = true
+      clBtnFullWidthLinkmind.isFocusable = true
+      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.neutrals_white))
+      clBtnFullWidthLinkmind.setBackgroundColor(ContextCompat.getColor(context, textColorResId))
     }
   }
 
   private fun setBtnDisable(textColorResId: Int) {
     binding.apply {
-      clBtnFullWidthLinkmind.isClickable = true
-      clBtnFullWidthLinkmind.isFocusable = true
+      clBtnFullWidthLinkmind.isClickable = false
+      clBtnFullWidthLinkmind.isFocusable = false
+      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.neutrals_white))
       clBtnFullWidthLinkmind.setBackgroundColor(ContextCompat.getColor(context, textColorResId))
     }
   }

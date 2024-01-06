@@ -5,7 +5,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:context=".MainActivity">
-  
+
   <androidx.fragment.app.FragmentContainerView
     android:id="@+id/fcv_main"
     android:name="androidx.navigation.fragment.NavHostFragment"
@@ -21,7 +21,12 @@
   <com.google.android.material.bottomnavigation.BottomNavigationView
     android:id="@+id/bnv_main"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="72dp"
+    android:background="@color/white"
+    app:itemTextAppearanceActive="@style/Typography.suit.bold_12"
+    app:itemTextAppearanceInactive="@style/Typography.suit.bold_12"
+    app:itemActiveIndicatorStyle="@android:color/transparent"
+    app:itemTextColor="@drawable/sel_bnv_text_color"
     app:labelVisibilityMode="labeled"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"

@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
-import designsystem.components.button.state.LinkMindButtonFullWidthState
+import designsystem.components.button.state.LinkMindButtonState
 import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.ButtonBlockLinkmindBinding
 import org.sopt.ui.view.onThrottleClick
@@ -20,33 +20,35 @@ class LinkMindBlockButton @JvmOverloads constructor(
 
   private val binding: ButtonBlockLinkmindBinding
 
-  var state: LinkMindButtonFullWidthState = LinkMindButtonFullWidthState.ENABLE
+  var state: LinkMindButtonState = LinkMindButtonState.ENABLE
     set(value) {
       field = value
       when (field) {
-        LinkMindButtonFullWidthState.ENABLE -> {
-          setBtnEnable(R.color.black)
+        LinkMindButtonState.ENABLE -> {
+          setBtnEnable(R.drawable.shape_neutrals850_fill_12_rect)
         }
 
-        LinkMindButtonFullWidthState.DISABLE -> {
-          setBtnDisable(R.color.black)
+        LinkMindButtonState.DISABLE -> {
+          setBtnDisable(R.drawable.shape_neutrals200_fill_12_rect)
         }
       }
     }
 
-  private fun setBtnEnable(textColorResId: Int) {
+  private fun setBtnEnable(drawableResId: Int) {
     binding.apply {
       clBtnMediumWidthLinkmind.isClickable = true
       clBtnMediumWidthLinkmind.isFocusable = true
-      tvBtn.setTextColor(ContextCompat.getColor(context, textColorResId))
+      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.white))
+      clBtnMediumWidthLinkmind.setBackgroundResource(drawableResId)
     }
   }
 
-  private fun setBtnDisable(textColorResId: Int) {
+  private fun setBtnDisable(drawableResId: Int) {
     binding.apply {
       clBtnMediumWidthLinkmind.isClickable = false
       clBtnMediumWidthLinkmind.isFocusable = false
-      clBtnMediumWidthLinkmind.setBackgroundColor(ContextCompat.getColor(context, textColorResId))
+      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.white))
+      clBtnMediumWidthLinkmind.setBackgroundResource(drawableResId)
     }
   }
 

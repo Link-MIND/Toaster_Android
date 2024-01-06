@@ -5,13 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
+import androidx.viewbinding.ViewBinding
 
-abstract class BindingDialogFragment<T : ViewDataBinding>(
-  @LayoutRes val layoutRes: Int,
+abstract class BindingDialogFragment<T : ViewBinding>(
+  private val inflater: (LayoutInflater) -> T,
 ) : DialogFragment() {
   private var _binding: T? = null
   protected val binding get() = requireNotNull(_binding) { { "binding object is not initialized" } }
@@ -31,13 +29,12 @@ abstract class BindingDialogFragment<T : ViewDataBinding>(
     container: ViewGroup?,
     savedInstanceState: Bundle?,
   ): View {
-    _binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
+    _binding = inflater(layoutInflater)
     return binding.root
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    binding.lifecycleOwner = viewLifecycleOwner
   }
 
   override fun onDestroyView() {
