@@ -111,6 +111,17 @@
       app:layout_constraintStart_toStartOf="@id/cl_clip_category_main"
       app:layout_constraintTop_toBottomOf="@id/cl_clip_picker" />
 
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="2dp"
+      android:layout_marginTop="19dp"
+      android:text="(n)"
+      android:textAppearance="@style/Typography.suit.medium_12"
+      android:textColor="@color/neutrals400"
+      app:layout_constraintStart_toEndOf="@id/tv_clip_category_all"
+      app:layout_constraintTop_toBottomOf="@id/cl_clip_picker" />
+
     <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/rv_category_link"
       android:layout_width="match_parent"
