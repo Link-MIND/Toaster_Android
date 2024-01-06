@@ -6,9 +6,6 @@
   android:layout_height="match_parent"
   android:background="@color/background">
 
-  <include
-    android:id="@+id/tb_clip"
-    layout="@layout/toolbar_clip"/>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/cl_clip_main"
@@ -17,7 +14,7 @@
     android:layout_marginHorizontal="20dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tb_clip">
+    app:layout_constraintTop_toTopOf="parent">
 
 
     <androidx.appcompat.widget.AppCompatButton
