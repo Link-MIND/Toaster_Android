@@ -1,6 +1,7 @@
 package org.sopt.timer
 
 import android.content.res.ColorStateList
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,7 @@ import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
+import androidx.navigation.fragment.findNavController
 import org.sopt.mainfeature.R
 import org.sopt.timer.databinding.FragmentTimerBinding
 import org.sopt.timer.dummymodel.Timer
@@ -73,9 +74,8 @@ class TimerFragment : Fragment() {
     binding.rvTimerWait.adapter = waitTimerAdapter
 
     binding.ivTimerPlus.setOnClickListener {
-      parentFragmentManager.commit {
-//        val exampleTimePickerFragment = ExampleTimePickerFragment()
-      }
+      val uri = Uri.parse("featureTimer://fragmentExample")
+      findNavController().navigate(uri)
     }
   }
 
