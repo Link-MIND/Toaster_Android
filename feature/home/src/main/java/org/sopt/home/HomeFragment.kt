@@ -1,22 +1,18 @@
 package org.sopt.home
 
+import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import org.sopt.home.databinding.FragmentHomeBinding
+import org.sopt.ui.base.BindingFragment
 
-class HomeFragment : Fragment() {
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-  }
-
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?,
-  ): View? {
-    return inflater.inflate(R.layout.fragment_home, container, false)
+class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.inflate(it) }) {
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    binding.root.setOnClickListener {
+      val uri = Uri.parse("featureTimer://fragmentExample")
+      findNavController().navigate(uri)
+    }
   }
 }

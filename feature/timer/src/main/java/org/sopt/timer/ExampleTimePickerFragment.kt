@@ -12,6 +12,7 @@ class ExampleTimePickerFragment : BindingFragment<FragmentExampleTimePickerBindi
   private lateinit var numberAdapter1: NumberAdapter
   private lateinit var numberAdapter2: NumberAdapter
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
     setupRecyclerViews()
   }
 

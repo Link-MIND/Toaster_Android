@@ -1,7 +1,6 @@
 package org.sopt.maincontainer
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -33,10 +32,36 @@ class MainActivity : AppCompatActivity() {
       }
     }
 
-    setBottomVisible(navController)
+    changeBottomNavigationFragment(navController)
   }
-
-  private fun setBottomVisible(navController: NavController) {
+  private fun changeBottomNavigationFragment(navController: NavController) {
+    binding.bnvMain.setOnItemSelectedListener {
+      if (binding.bnvMain.menu.findItem(it.itemId).isChecked) {
+        false
+      } else {
+        when (it.itemId) {
+          R.id.navigation_home -> {
+            navController.navigate(org.sopt.home.R.id.nav_graph_home)
+            true
+          }
+          R.id.navigation_clip -> {
+            navController.navigate(org.sopt.clip.R.id.nav_graph_clip)
+            true
+          }
+          R.id.navigation_my -> {
+            navController.navigate(org.sopt.mypage.R.id.nav_graph_mypage)
+            true
+          }
+          R.id.navigation_timer -> {
+            navController.navigate(org.sopt.timer.R.id.nav_graph_timer)
+            true
+          }
+          else -> { false }
+        }
+      }
+    }
+  }
+  /*private fun setBottomVisible(navController: NavController) {
     navController.addOnDestinationChangedListener { _, destination, _ ->
       binding.bnvMain.visibility = if (destination.id in listOf(
           R.id.navigation_home,
@@ -50,5 +75,5 @@ class MainActivity : AppCompatActivity() {
         View.GONE
       }
     }
-  }
+  }*/
 }
