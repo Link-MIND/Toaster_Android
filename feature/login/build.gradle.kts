@@ -16,6 +16,6 @@ dependencies {
   implementation(projects.core.auth)
   implementation(projects.domain.linkminddomain)
   implementation(projects.domain.oauthdomain)
-  implementation(projects.feature.designsystem)
+  implementation(projects.core.designsystem)
   implementation(projects.feature.maincontainer)
 }
