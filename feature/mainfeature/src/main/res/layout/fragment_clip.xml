@@ -6,16 +6,9 @@
   android:layout_height="match_parent"
   android:background="@color/background">
 
-  <androidx.appcompat.widget.Toolbar
-    android:id="@+id/tb_category_toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" >
-  <include layout="@layout/toolbar_clip"/>
-
-  </androidx.appcompat.widget.Toolbar>
+  <include
+    android:id="@+id/tb_clip"
+    layout="@layout/toolbar_clip"/>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/cl_category_main"
