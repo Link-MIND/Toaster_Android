@@ -29,15 +29,20 @@
   <string name="timer_wait">타이머 대기 중..</string>
   <string name="timer_not_complete">타이머가 완료되면 리마인드 드릴게요</string>
   <string name="timer_complete">완료된 타이머</string>
+  
   <!-- modify timer -->
   <string name="modify_timer_mod">타이머 수정하기</string>
   <string name="modify_timer_delete">삭제</string>
   <string name="modify_timer_title">수정하기</string>
+  
   <!-- clip -->
   <string name="clip_search">검색어를 입력하세요</string>
   <string name="clip_add_clip">+ 클립추가</string>
   <string name="clip_all">전체 클립</string>
-  <string name="clip_empty">클립을 추가해\n링크를 정리해보세요!</string>
+  <string name="clip_empty">클립을 추가해\n링크를 정리해보세요!</string> 
+  <string name="clip_toolbar_edit">편집</string>
+  <string name="clip_toolbar_all_clip">전체 클립</string>
+  
   <!-- clip detail-->
   <string name="clip_detail_read">열람</string>
   <string name="clip_detail_unread">미열람</string>
