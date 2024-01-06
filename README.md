@@ -38,6 +38,7 @@
 [Project Plan](https://hill-agenda-2b0.notion.site/7a635a2c014c470899899073be2ff49f?v=4de94ec87af045d8ba9a69afa39511af)
 
 ### 📂 Module
+### 모듈은 추가적으로 변화가능
 ```bash
 ├── LinkMind-Android
 ├── 📁 app
