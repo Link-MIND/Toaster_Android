@@ -25,8 +25,7 @@ class AuthenticationIntercept @Inject constructor(
       runBlocking { dataStore.setAutoLogin(false) }
       ProcessPhoenix.triggerRebirth(context, intentProvider.getAuthIntent())
     }
-    response.close()
-    return chain.proceed(authRequest)
+    return response
   }
 
   private fun handleRequest(originalRequest: Request) =

@@ -5,4 +5,22 @@
   <string name="text_timer">TIMER</string>
   <string name="text_my">MY</string>
   <string name="text_placeholder">placeholder</string>
+  <!-- timer -->
+  <string name="timer_title">TIMER</string>
+  <string name="timer_permission_off">알림 설정이 꺼져 있어요</string>
+  <string name="timer_to_use_timer">타이머 기능을 이용하시려면</string>
+  <string name="timer_setting_notification">기기 설정 > 알림</string>
+  <string name="timer_turn_on_permission">에서 알림을 켜주세요.</string>
+  <string name="timer_set_timer">타이머를 설정하고\n원하는 때에 링크를 받아보세요</string>
+  <string name="timer_set_btn">타이머 설정하기</string>
+  <string name="timer_read">읽으러가기</string>
+  <string name="timer_link">링크들을</string>
+  <string name="timer_good">읽기 딱 좋은 시간이에요!</string>
+  <string name="timer_wait">타이머 대기 중..</string>
+  <string name="timer_not_complete">타이머가 완료되면 리마인드 드릴게요</string>
+  <string name="timer_complete">완료된 타이머</string>
+  <!-- modify timer -->
+  <string name="modify_timer_mod">타이머 수정하기</string>
+  <string name="modify_timer_delete">삭제</string>
+  <string name="modify_timer_title">수정하기</string>
 </resources>

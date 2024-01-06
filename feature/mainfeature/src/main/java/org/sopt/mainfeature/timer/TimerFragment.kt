@@ -1,61 +1,87 @@
 package org.sopt.mainfeature.timer
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import org.sopt.mainfeature.R
+import org.sopt.mainfeature.databinding.FragmentTimerBinding
+import org.sopt.mainfeature.timer.dummymodel.Timer
+import org.sopt.mainfeature.timer.modifytimer.ModifyTimerBottomSheetFragment
+import org.sopt.ui.fragment.colorOf
+import org.sopt.ui.fragment.snackBar
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [TimerFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TimerFragment : Fragment() {
-  // TODO: Rename and change types of parameters
-  private var param1: String? = null
-  private var param2: String? = null
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    arguments?.let {
-      param1 = it.getString(ARG_PARAM1)
-      param2 = it.getString(ARG_PARAM2)
+  private var _binding: FragmentTimerBinding? = null
+  private val binding
+    get() = requireNotNull(_binding) {
     }
-  }
-
+  private lateinit var completeTimerAdapter: CompleteTimerAdapter
+  private lateinit var waitTimerAdapter: WaitTimerAdapter
+  var timerExist = true
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?,
   ): View? {
-    // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_timer, container, false)
+    _binding = FragmentTimerBinding.inflate(layoutInflater)
+    return binding.root
   }
 
-  companion object {
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TimerFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    @JvmStatic
-    fun newInstance(param1: String, param2: String) =
-      TimerFragment().apply {
-        arguments = Bundle().apply {
-          putString(ARG_PARAM1, param1)
-          putString(ARG_PARAM2, param2)
-        }
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+
+    binding.tvTimerTitle.setOnClickListener {
+      if (timerExist) {
+        binding.svTimerExist.isVisible = true
+        binding.llTimerNotExist.isGone = true
+        timerExist = false
+      } else {
+        binding.svTimerExist.isGone = true
+        binding.llTimerNotExist.isVisible = true
+        timerExist = true
       }
+    }
+
+    completeTimerAdapter = CompleteTimerAdapter({ snackBar(binding.root, { "안녕" }) })
+    waitTimerAdapter = WaitTimerAdapter({}, { ModifyTimerBottomSheetFragment.newInstance(it.id).show(parentFragmentManager, this.tag) })
+
+    val list = listOf(
+      Timer(1, "네이버", "일요일", true, 8, 37),
+      Timer(1, "네이버", "일요일", true, 8, 37),
+    )
+    // val list = emptyList<Timer>()
+    completeTimerAdapter.submitList(list)
+    waitTimerAdapter.submitList(list)
+    binding.tvTimerCompleteCount.text = list.count().toString()
+    if (list.count() != 0) {
+      val color = colorOf(R.color.primary)
+      val textColor = colorOf(R.color.white)
+      val colorStateList = ColorStateList.valueOf(color)
+      binding.flTimerCompleteCount.backgroundTintList = colorStateList
+      binding.tvTimerCompleteCount.setTextColor(textColor)
+      binding.tvTimerNotComplete.isGone = true
+    } else {
+      binding.tvTimerNotComplete.isVisible = true
+    }
+    binding.rvTimerComplete.adapter = completeTimerAdapter
+    binding.rvTimerWait.adapter = waitTimerAdapter
+
+    binding.ivTimerPlus.setOnClickListener {
+      parentFragmentManager.commit {
+        val exampleTimePickerFragment = ExampleTimePickerFragment()
+        replace(R.id.fcv_main, exampleTimePickerFragment)
+      }
+    }
+  }
+
+  override fun onDestroyView() {
+    _binding = null
+    super.onDestroyView()
   }
 }
