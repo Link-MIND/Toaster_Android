@@ -27,6 +27,7 @@
   <!-- clip -->
   <string name="clip_search">검색어를 입력하세요</string>
   <string name="clip_add_clip">+ 클립추가</string>
+  <string name="clip_all">전체 클립</string>
   <string name="clip_empty">클립을 추가해\n링크를 정리해보세요!</string>
   <!-- clip detail-->
   <string name="clip_detail_read">열람</string>
