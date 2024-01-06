@@ -11,6 +11,7 @@ android {
 
 dependencies {
   implementation(projects.feature.mainfeature)
+  implementation(projects.feature.clip)
   implementation(libs.core.ktx)
   implementation(libs.appcompat)
   implementation(libs.material)
