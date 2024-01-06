@@ -19,4 +19,14 @@
   <string name="timer_wait">타이머 대기 중..</string>
   <string name="timer_not_complete">타이머가 완료되면 리마인드 드릴게요</string>
   <string name="timer_complete">완료된 타이머</string>
+  <!-- settings -->
+  <string name="settings_title">Title</string>
+  <string name="user_nim">님</string>
+  <string name="settings_ex_email">pcu2083@naver.com</string>
+  <string name="settings_alert_off">알림 설정을 끄면 타이머 기능을 이용할 수 없어요</string>
+  <string name="settings_withdraw">탈퇴하기</string>
+  <string name="settings_logout">로그아웃</string>
+  <string name="settings_term">이용약관</string>
+  <string name="settings_question">1:1문의</string>
+  <string name="settings_alert">알림설정</string>
 </resources>
