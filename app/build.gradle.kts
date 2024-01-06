@@ -13,13 +13,10 @@ android {
     versionCode = 1
     versionName = "1.0"
   }
+  viewBinding.enable = true
 }
 
 dependencies {
-
-  implementation(projects.feature.mainfeature)
-  implementation(projects.data.linkminddata)
-  implementation(projects.data.oauthdata)
   implementation(projects.core.network)
   implementation(projects.core.ui)
   implementation(projects.core.common)
@@ -27,12 +24,16 @@ dependencies {
   implementation(projects.core.model)
   implementation(projects.core.auth)
   implementation(projects.core.authimpl)
+  implementation(projects.core.designsystem)
   implementation(projects.domain.linkminddomain)
   implementation(projects.domain.oauthdomain)
-  implementation(libs.core.ktx)
-  implementation(libs.appcompat)
-  implementation(libs.material)
-  implementation(libs.constraintlayout)
+  implementation(projects.data.linkminddata)
+  implementation(projects.data.oauthdata)
+  implementation(projects.feature.maincontainer)
+  implementation(projects.feature.clip)
+  implementation(projects.feature.mypage)
+  implementation(projects.feature.timer)
+  implementation(projects.feature.login)
   implementation(libs.timber)
   implementation(libs.kakao.login)
   implementation(libs.bundles.firebase)
