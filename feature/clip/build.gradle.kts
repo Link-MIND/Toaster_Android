@@ -12,8 +12,5 @@ android {
 }
 
 dependencies {
-
-  implementation(libs.core.ktx)
-  implementation(libs.appcompat)
-  implementation(libs.material)
+  implementation(projects.feature.mainfeature)
 }

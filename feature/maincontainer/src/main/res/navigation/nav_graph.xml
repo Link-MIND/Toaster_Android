@@ -12,7 +12,7 @@
     tools:layout="@layout/fragment_home" />
   <fragment
     android:id="@+id/navigation_clip"
-    android:name="org.sopt.mainfeature.clip.ClipFragment"
+    android:name="org.sopt.clip.ClipFragment"
     android:label="fragment_clip"
     tools:layout="@layout/fragment_clip" />
   <fragment
