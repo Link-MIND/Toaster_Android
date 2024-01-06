@@ -12,4 +12,5 @@ android {
 }
 
 dependencies {
+  implementation(projects.feature.mainfeature)
 }
