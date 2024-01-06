@@ -4,7 +4,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:background="@color/neutrals_white"
-  android:paddingBottom="8dp">
+  android:marginBottom="8dp">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/cl_category_link_detail"
