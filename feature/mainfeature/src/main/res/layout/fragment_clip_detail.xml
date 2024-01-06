@@ -37,11 +37,13 @@
 
       <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_clip_all"
-        android:layout_width="105dp"
-        android:layout_height="38dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@color/neutrals_white"
         android:paddingVertical="8dp"
+        android:paddingHorizontal="42dp"
         android:text="전체"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:textAppearance="@style/Typography.suit.bold_14"
         android:textColor="@color/neutrals850"
         app:layout_constraintStart_toStartOf="@id/cl_clip_picker"
@@ -50,18 +52,22 @@
       <com.google.android.material.divider.MaterialDivider
         android:id="@+id/dv_clip_picker1"
         android:layout_width="1dp"
-        android:layout_height="19dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="9dp"
         app:layout_constraintBottom_toBottomOf="@id/cl_clip_picker"
         app:layout_constraintStart_toEndOf="@id/btn_clip_all"
         app:layout_constraintTop_toTopOf="@id/cl_clip_picker" />
 
       <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_clip_read"
-        android:layout_width="105dp"
-        android:layout_height="38dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="@color/neutrals050"
         android:paddingVertical="8dp"
+        android:paddingHorizontal="42dp"
         android:text="열람"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:textAppearance="@style/Typography.suit.semibold_14"
         android:textColor="@color/neutrals400"
         app:layout_constraintStart_toEndOf="@id/dv_clip_picker1"
@@ -70,21 +76,25 @@
       <com.google.android.material.divider.MaterialDivider
         android:id="@+id/dv_clip_picker2"
         android:layout_width="1dp"
-        android:layout_height="19dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="9dp"
         app:layout_constraintBottom_toBottomOf="@id/cl_clip_picker"
         app:layout_constraintStart_toEndOf="@id/btn_clip_read"
         app:layout_constraintTop_toTopOf="@id/cl_clip_picker" />
 
       <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_clip_unread"
-        android:layout_width="105dp"
-        android:layout_height="38dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:background="@color/neutrals050"
         android:paddingVertical="8dp"
         android:text="미열람"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:textAppearance="@style/Typography.suit.semibold_14"
         android:textColor="@color/neutrals400"
         app:layout_constraintStart_toEndOf="@id/dv_clip_picker2"
+        app:layout_constraintEnd_toEndOf="@id/cl_clip_picker"
         app:layout_constraintTop_toTopOf="@id/cl_clip_picker" />
 
 
