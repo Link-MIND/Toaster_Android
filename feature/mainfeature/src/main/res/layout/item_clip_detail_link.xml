@@ -3,8 +3,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="@color/neutrals_white"
-  android:marginBottom="8dp">
+  android:background="@color/neutrals_white">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/cl_category_link_detail"
