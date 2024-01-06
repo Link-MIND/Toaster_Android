@@ -1,10 +1,10 @@
-package org.sopt.mainfeature.timer
+package org.sopt.timer
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import org.sopt.mainfeature.databinding.ItemTimerWaitBinding
-import org.sopt.mainfeature.timer.dummymodel.Timer
+import org.sopt.timer.databinding.ItemTimerWaitBinding
+import org.sopt.timer.dummymodel.Timer
 import org.sopt.ui.view.ItemDiffCallback
 
 class WaitTimerAdapter(

@@ -1,4 +1,4 @@
-package org.sopt.mainfeature.timer
+package org.sopt.timer
 
 import android.view.View
 import androidx.recyclerview.widget.LinearSnapHelper

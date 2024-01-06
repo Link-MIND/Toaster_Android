@@ -1,8 +1,8 @@
-package org.sopt.mainfeature.timer
+package org.sopt.timer
 
 import androidx.recyclerview.widget.RecyclerView
-import org.sopt.mainfeature.databinding.ItemTimerWaitBinding
-import org.sopt.mainfeature.timer.dummymodel.Timer
+import org.sopt.timer.databinding.ItemTimerWaitBinding
+import org.sopt.timer.dummymodel.Timer
 
 class WaitTimerViewHolder(
   private val binding: ItemTimerWaitBinding,

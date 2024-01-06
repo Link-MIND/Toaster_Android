@@ -1,10 +1,10 @@
-package org.sopt.mainfeature.timer
+package org.sopt.timer
 
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import org.sopt.mainfeature.databinding.FragmentExampleTimePickerBinding
-import org.sopt.mainfeature.timer.dummymodel.PickerItem
+import org.sopt.timer.databinding.FragmentExampleTimePickerBinding
+import org.sopt.timer.dummymodel.PickerItem
 import org.sopt.ui.base.BindingFragment
 
 class ExampleTimePickerFragment : BindingFragment<FragmentExampleTimePickerBinding>({ FragmentExampleTimePickerBinding.inflate(it) }) {

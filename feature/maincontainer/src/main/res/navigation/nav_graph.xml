@@ -22,7 +22,7 @@
     tools:layout="@layout/fragment_my" />
   <fragment
     android:id="@+id/navigation_timer"
-    android:name="org.sopt.mainfeature.timer.TimerFragment"
+    android:name="org.sopt.timer.TimerFragment"
     android:label="fragment_timer"
     tools:layout="@layout/fragment_timer" />
 </navigation>

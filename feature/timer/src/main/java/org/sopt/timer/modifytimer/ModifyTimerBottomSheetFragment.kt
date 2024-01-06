@@ -1,8 +1,8 @@
-package org.sopt.mainfeature.timer.modifytimer
+package org.sopt.timer.modifytimer
 
 import android.os.Bundle
 import android.view.View
-import org.sopt.mainfeature.databinding.FragmentModifyTimerBottomSheetBinding
+import org.sopt.timer.databinding.FragmentModifyTimerBottomSheetBinding
 import org.sopt.ui.base.BindingBottomSheetDialogFragment
 
 class ModifyTimerBottomSheetFragment :

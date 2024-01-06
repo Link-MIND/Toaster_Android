@@ -1,4 +1,4 @@
-package org.sopt.mainfeature.timer
+package org.sopt.timer
 
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -10,9 +10,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import org.sopt.mainfeature.R
-import org.sopt.mainfeature.databinding.FragmentTimerBinding
-import org.sopt.mainfeature.timer.dummymodel.Timer
-import org.sopt.mainfeature.timer.modifytimer.ModifyTimerBottomSheetFragment
+import org.sopt.timer.databinding.FragmentTimerBinding
+import org.sopt.timer.dummymodel.Timer
+import org.sopt.timer.modifytimer.ModifyTimerBottomSheetFragment
 import org.sopt.ui.fragment.colorOf
 import org.sopt.ui.fragment.snackBar
 

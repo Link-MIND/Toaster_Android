@@ -1,4 +1,4 @@
-package org.sopt.mainfeature.timer.dummymodel
+package org.sopt.timer.dummymodel
 
 data class PickerItem(
   val text: String,

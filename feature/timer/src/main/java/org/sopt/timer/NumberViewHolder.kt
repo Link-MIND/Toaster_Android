@@ -1,11 +1,11 @@
-package org.sopt.mainfeature.timer
+package org.sopt.timer
 
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.mainfeature.R
-import org.sopt.mainfeature.databinding.ItemNumberPickerBinding
-import org.sopt.mainfeature.timer.dummymodel.PickerItem
+import org.sopt.timer.databinding.ItemNumberPickerBinding
+import org.sopt.timer.dummymodel.PickerItem
 
-class TextViewHolder(
+class NumberViewHolder(
   val binding: ItemNumberPickerBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(data: PickerItem?) {
