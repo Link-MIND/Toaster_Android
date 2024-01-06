@@ -6,7 +6,9 @@ plugins {
 
 android {
   namespace = "org.sopt.maincontainer"
-  viewBinding.enable = true
+  buildFeatures {
+    viewBinding = true
+  }
 }
 
 dependencies {
