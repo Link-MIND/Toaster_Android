@@ -24,6 +24,12 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun initView() {
+    setFcv()
+    changeBottomNavigationFragment()
+    setBottomVisible()
+  }
+
+  private fun setFcv() {
     val navHostFragment =
       supportFragmentManager.findFragmentById(R.id.fcv_main) as NavHostFragment
     navController = navHostFragment.navController
@@ -32,42 +38,39 @@ class MainActivity : AppCompatActivity() {
     binding.bnvMain.setupWithNavController(navController)
     binding.bnvMain.setOnItemReselectedListener { }
     changeBottomNavigationFragment()
-    setBottomVisible()
   }
 
-  private fun changeBottomNavigationFragment() {
-    binding.bnvMain.setOnItemSelectedListener {
-      if (binding.bnvMain.menu.findItem(it.itemId).isChecked) {
-        false
-      } else {
-        when (it.itemId) {
-          R.id.navigation_home -> {
-            navController.navigate(org.sopt.home.R.id.nav_graph_home)
-            true
-          }
 
-          R.id.navigation_clip -> {
-            navController.navigate(org.sopt.clip.R.id.nav_graph_clip)
-            true
-          }
-
-          R.id.navigation_my -> {
-            navController.navigate(org.sopt.mypage.R.id.nav_graph_mypage)
-            true
-          }
-
-          R.id.navigation_timer -> {
-            navController.navigate(org.sopt.timer.R.id.nav_graph_timer)
-            true
-          }
-
-          else -> {
-            false
-          }
-        }
+private fun changeBottomNavigationFragment() {
+  binding.bnvMain.setOnItemSelectedListener {
+    if (binding.bnvMain.menu.findItem(it.itemId).isChecked) {
+      false
+    } else {
+      navController.apply {
+        popBackStack(org.sopt.clip.R.id.nav_graph_clip, false)
+        popBackStack(org.sopt.timer.R.id.nav_graph_timer, false)
+        popBackStack(org.sopt.mypage.R.id.nav_graph_mypage, false)
+        if (it.itemId == R.id.navigation_home) {
+        popBackStack(org.sopt.home.R.id.nav_graph_home, true)
       }
+      }
+      navigateToDestination(it.itemId, navController)
     }
   }
+}
+private val navigationMap = mapOf(
+  R.id.navigation_home to org.sopt.home.R.id.nav_graph_home,
+  R.id.navigation_clip to org.sopt.clip.R.id.nav_graph_clip,
+  R.id.navigation_my to org.sopt.mypage.R.id.nav_graph_mypage,
+  R.id.navigation_timer to org.sopt.timer.R.id.nav_graph_timer
+)
+
+private fun navigateToDestination(itemId: Int, navController: NavController): Boolean {
+  return navigationMap[itemId]?.let { destination ->
+    navController.navigate(destination)
+    true
+  } ?: false
+}
 
   private fun setBottomVisible() {
     navController.addOnDestinationChangedListener { _, destination, _ ->
