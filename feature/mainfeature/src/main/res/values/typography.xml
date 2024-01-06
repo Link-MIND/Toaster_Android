@@ -54,6 +54,11 @@
     <item name="android:textSize">24sp</item>
   </style>
 
+  <style name="Typography.suit.regular_18">
+    <item name="fontFamily">@font/font_suit_regular</item>
+    <item name="android:textSize">18sp</item>
+  </style>
+
   <style name="Typography.suit.regular_16_128">
     <item name="fontFamily">@font/font_suit_regular</item>
     <item name="android:textSize">16sp</item>
@@ -114,6 +119,11 @@
   <style name="Typography.suit.medium_10">
     <item name="fontFamily">@font/font_suit_medium</item>
     <item name="android:textSize">10sp</item>
+  </style>
+
+  <style name="circleImageView">
+    <item name="cornerFamily">rounded</item>
+    <item name="cornerSize">50%</item>
   </style>
 
 </resources>
