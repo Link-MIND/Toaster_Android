@@ -5,12 +5,16 @@
   <string name="text_timer">TIMER</string>
   <string name="text_my">MY</string>
   <string name="text_placeholder">placeholder</string>
+
+  <string name="text_all">전체</string>
+
   <!-- mypage -->
   <string name="mypage_link_number_now">지금 까지 읽은 링크수</string>
   <string name="mypage_number">개</string>
   <string name="mypage_this_week_read_link">이번주 열람한 링크</string>
   <string name="mypage_this_week_save_link">이번주 저장한 링크</string>
   <string name="mypage_please_wait">아직 마이페이지는 추가 공사 중!\n 업데이트를 기다려주세요 :)</string>
+
   <!-- timer -->
   <string name="timer_title">TIMER</string>
   <string name="timer_permission_off">알림 설정이 꺼져 있어요</string>
@@ -29,4 +33,13 @@
   <string name="modify_timer_mod">타이머 수정하기</string>
   <string name="modify_timer_delete">삭제</string>
   <string name="modify_timer_title">수정하기</string>
+  <!-- clip -->
+  <string name="clip_search">검색어를 입력하세요</string>
+  <string name="clip_add_clip">+ 클립추가</string>
+  <string name="clip_all">전체 클립</string>
+  <string name="clip_empty">클립을 추가해\n링크를 정리해보세요!</string>
+  <!-- clip detail-->
+  <string name="clip_detail_read">열람</string>
+  <string name="clip_detail_unread">미열람</string>
+  <string name="clip_detail_empty">아직 클립에 저장된 링크가 없어요\n아래 + 버튼을 통해 링크를 저장해보세요!</string>
 </resources>
