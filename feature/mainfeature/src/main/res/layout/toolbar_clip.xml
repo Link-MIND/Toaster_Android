@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/tb_clip_category"
+  android:background="@color/transparent"
+  app:title="CLIP"
+  app:titleTextColor="@color/neutrals900"
+  app:titleTextAppearance="@style/Typography.suit.bold_18"
+  android:layout_gravity=""
+  >
+
+  <androidx.appcompat.widget.AppCompatButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minWidth="0dp"
+    android:minHeight="0dp"
+    android:background="@color/transparent"
+    android:paddingStart="7dp"
+    android:paddingTop="6dp"
+    android:paddingEnd="8dp"
+    android:paddingBottom="7dp"
+    android:text="편집"
+    android:textAppearance="@style/Typography.suit.bold_14"
+    android:textColor="@color/neutrals600"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+</androidx.appcompat.widget.Toolbar>
