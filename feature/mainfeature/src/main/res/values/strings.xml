@@ -29,7 +29,13 @@
   <string name="timer_wait">타이머 대기 중..</string>
   <string name="timer_not_complete">타이머가 완료되면 리마인드 드릴게요</string>
   <string name="timer_complete">완료된 타이머</string>
-  
+
+  <!-- edit clip -->
+  <string name="edit_clip_guide_msg">클립을 누른 뒤 위아래로 드래그하여 순서를 수정하세요!</string>
+  <string name="edit_clip_minus_description">클립을 삭제하려면 누르세요</string>
+  <string name="edit_clip_edit_description">클립을 수정하려면 누르세요</string>
+
+
   <!-- modify timer -->
   <string name="modify_timer_mod">타이머 수정하기</string>
   <string name="modify_timer_delete">삭제</string>
@@ -47,4 +53,5 @@
   <string name="clip_detail_read">열람</string>
   <string name="clip_detail_unread">미열람</string>
   <string name="clip_detail_empty">아직 클립에 저장된 링크가 없어요\n아래 + 버튼을 통해 링크를 저장해보세요!</string>
+
 </resources>
