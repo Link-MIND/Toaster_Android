@@ -13,7 +13,4 @@ dependencies {
   implementation(projects.feature.mainfeature)
   implementation(projects.feature.clip)
   implementation(projects.feature.mypage)
-  testImplementation(libs.junit)
-  androidTestImplementation(libs.androidx.test.ext.junit)
-  androidTestImplementation(libs.espresso.core)
 }
