@@ -17,12 +17,6 @@ android {
 }
 
 dependencies {
-
-  implementation(projects.feature.mainfeature)
-  implementation(projects.feature.maincontainer)
-  implementation(projects.feature.login)
-  implementation(projects.data.linkminddata)
-  implementation(projects.data.oauthdata)
   implementation(projects.core.network)
   implementation(projects.core.ui)
   implementation(projects.core.common)
@@ -32,8 +26,13 @@ dependencies {
   implementation(projects.core.authimpl)
   implementation(projects.domain.linkminddomain)
   implementation(projects.domain.oauthdomain)
+  implementation(projects.data.linkminddata)
+  implementation(projects.data.oauthdata)
   implementation(projects.feature.clip)
   implementation(projects.feature.mypage)
+  implementation(projects.feature.mainfeature)
+  implementation(projects.feature.maincontainer)
+  implementation(projects.feature.login)
   implementation(libs.core.ktx)
   implementation(libs.appcompat)
   implementation(libs.material)

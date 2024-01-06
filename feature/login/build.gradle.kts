@@ -12,10 +12,10 @@ android {
 }
 
 dependencies {
-  implementation(projects.feature.mainfeature)
-  implementation(projects.feature.maincontainer)
   implementation(projects.core.datastore)
   implementation(projects.core.auth)
   implementation(projects.domain.linkminddomain)
   implementation(projects.domain.oauthdomain)
+  implementation(projects.feature.mainfeature)
+  implementation(projects.feature.maincontainer)
 }
