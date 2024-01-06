@@ -11,9 +11,9 @@ object DeepLinkUtil {
     uri: String,
   ): Pair<NavDeepLinkRequest, NavOptions> {
     return setNavRequestPopUpAndOption(
-        popUpToId,
-        inclusive,
-        uri,
+      popUpToId,
+      inclusive,
+      uri,
     )
   }
 
@@ -21,10 +21,9 @@ object DeepLinkUtil {
     uri: String,
   ): Pair<NavDeepLinkRequest, NavOptions> {
     return setNavRequestNotPopUpAndOption(
-        uri,
+      uri,
     )
   }
-
 
   private fun setNavRequestNotPopUpAndOption(
     uri: String,

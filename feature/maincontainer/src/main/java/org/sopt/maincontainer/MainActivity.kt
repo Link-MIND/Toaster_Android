@@ -40,37 +40,36 @@ class MainActivity : AppCompatActivity() {
     changeBottomNavigationFragment()
   }
 
-
-private fun changeBottomNavigationFragment() {
-  binding.bnvMain.setOnItemSelectedListener {
-    if (binding.bnvMain.menu.findItem(it.itemId).isChecked) {
-      false
-    } else {
-      navController.apply {
-        popBackStack(org.sopt.clip.R.id.nav_graph_clip, false)
-        popBackStack(org.sopt.timer.R.id.nav_graph_timer, false)
-        popBackStack(org.sopt.mypage.R.id.nav_graph_mypage, false)
-        if (it.itemId == R.id.navigation_home) {
-        popBackStack(org.sopt.home.R.id.nav_graph_home, true)
+  private fun changeBottomNavigationFragment() {
+    binding.bnvMain.setOnItemSelectedListener {
+      if (binding.bnvMain.menu.findItem(it.itemId).isChecked) {
+        false
+      } else {
+        navController.apply {
+          popBackStack(org.sopt.clip.R.id.nav_graph_clip, false)
+          popBackStack(org.sopt.timer.R.id.nav_graph_timer, false)
+          popBackStack(org.sopt.mypage.R.id.nav_graph_mypage, false)
+          if (it.itemId == R.id.navigation_home) {
+            popBackStack(org.sopt.home.R.id.nav_graph_home, true)
+          }
+        }
+        navigateToDestination(it.itemId, navController)
       }
-      }
-      navigateToDestination(it.itemId, navController)
     }
   }
-}
-private val navigationMap = mapOf(
-  R.id.navigation_home to org.sopt.home.R.id.nav_graph_home,
-  R.id.navigation_clip to org.sopt.clip.R.id.nav_graph_clip,
-  R.id.navigation_my to org.sopt.mypage.R.id.nav_graph_mypage,
-  R.id.navigation_timer to org.sopt.timer.R.id.nav_graph_timer
-)
+  private val navigationMap = mapOf(
+    R.id.navigation_home to org.sopt.home.R.id.nav_graph_home,
+    R.id.navigation_clip to org.sopt.clip.R.id.nav_graph_clip,
+    R.id.navigation_my to org.sopt.mypage.R.id.nav_graph_mypage,
+    R.id.navigation_timer to org.sopt.timer.R.id.nav_graph_timer,
+  )
 
-private fun navigateToDestination(itemId: Int, navController: NavController): Boolean {
-  return navigationMap[itemId]?.let { destination ->
-    navController.navigate(destination)
-    true
-  } ?: false
-}
+  private fun navigateToDestination(itemId: Int, navController: NavController): Boolean {
+    return navigationMap[itemId]?.let { destination ->
+      navController.navigate(destination)
+      true
+    } ?: false
+  }
 
   private fun setBottomVisible() {
     navController.addOnDestinationChangedListener { _, destination, _ ->
