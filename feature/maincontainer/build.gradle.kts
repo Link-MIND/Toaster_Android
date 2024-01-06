@@ -13,6 +13,8 @@ android {
 
 dependencies {
   implementation(projects.feature.mainfeature)
+  implementation(projects.feature.home)
   implementation(projects.feature.clip)
   implementation(projects.feature.mypage)
+  implementation(projects.feature.timer)
 }
