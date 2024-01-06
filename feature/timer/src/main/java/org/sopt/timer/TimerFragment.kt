@@ -74,8 +74,7 @@ class TimerFragment : Fragment() {
     binding.rvTimerWait.adapter = waitTimerAdapter
 
     binding.ivTimerPlus.setOnClickListener {
-      val uri = Uri.parse("featureTimer://fragmentExample")
-      findNavController().navigate(uri)
+      findNavController().navigate(org.sopt.timer.R.id.action_navigation_timer_to_navigation_timer_clip_select)
     }
   }
 
