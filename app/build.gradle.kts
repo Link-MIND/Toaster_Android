@@ -28,7 +28,7 @@ dependencies {
   implementation(projects.domain.oauthdomain)
   implementation(projects.data.linkminddata)
   implementation(projects.data.oauthdata)
-  implementation(projects.feature.mainfeature)
+  implementation(projects.feature.designsystem)
   implementation(projects.feature.maincontainer)
   implementation(projects.feature.clip)
   implementation(projects.feature.mypage)

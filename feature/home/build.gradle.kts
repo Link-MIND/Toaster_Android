@@ -12,5 +12,5 @@ android {
 }
 
 dependencies {
-  implementation(projects.feature.mainfeature)
+  implementation(projects.feature.designsystem)
 }
