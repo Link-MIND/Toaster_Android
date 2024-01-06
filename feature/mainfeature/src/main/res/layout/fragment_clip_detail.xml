@@ -31,19 +31,18 @@
       android:orientation="horizontal"
       android:padding="2dp"
       app:layout_constraintEnd_toEndOf="@id/cl_clip_category_main"
-
       app:layout_constraintStart_toStartOf="@id/cl_clip_category_main"
       app:layout_constraintTop_toTopOf="@id/cl_clip_category_main">
 
       <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_clip_all"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/neutrals_white"
-        android:paddingVertical="8dp"
         android:paddingHorizontal="42dp"
-        android:text="전체"
-        style="@style/Widget.AppCompat.Button.Borderless"
+        android:paddingVertical="8dp"
+        android:text="@string/text_all"
         android:textAppearance="@style/Typography.suit.bold_14"
         android:textColor="@color/neutrals850"
         app:layout_constraintStart_toStartOf="@id/cl_clip_picker"
@@ -61,13 +60,13 @@
 
       <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_clip_read"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/neutrals050"
-        android:paddingVertical="8dp"
         android:paddingHorizontal="42dp"
-        android:text="열람"
-        style="@style/Widget.AppCompat.Button.Borderless"
+        android:paddingVertical="8dp"
+        android:text="@string/clip_detail_read"
         android:textAppearance="@style/Typography.suit.semibold_14"
         android:textColor="@color/neutrals400"
         app:layout_constraintStart_toEndOf="@id/dv_clip_picker1"
@@ -85,16 +84,16 @@
 
       <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_clip_unread"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/neutrals050"
         android:paddingVertical="8dp"
-        android:text="미열람"
-        style="@style/Widget.AppCompat.Button.Borderless"
+        android:text="@string/clip_detail_unread"
         android:textAppearance="@style/Typography.suit.semibold_14"
         android:textColor="@color/neutrals400"
-        app:layout_constraintStart_toEndOf="@id/dv_clip_picker2"
         app:layout_constraintEnd_toEndOf="@id/cl_clip_picker"
+        app:layout_constraintStart_toEndOf="@id/dv_clip_picker2"
         app:layout_constraintTop_toTopOf="@id/cl_clip_picker" />
 
 
@@ -106,7 +105,7 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="2dp"
       android:layout_marginTop="19dp"
-      android:text="전체 (n)"
+      android:text="@string/text_all"
       android:textAppearance="@style/Typography.suit.medium_12"
       android:textColor="@color/neutrals400"
       app:layout_constraintStart_toStartOf="@id/cl_clip_category_main"
@@ -148,7 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:gravity="center"
-        android:text="아직 클립에 저장된 링크가 없어요\n아래 + 버튼을 통해 링크를 저장해보세요!"
+        android:text="@string/clip_detail_empty"
         android:textAppearance="@style/Typography.suit.regular_16_128"
         android:textColor="@color/neutrals500"
         app:layout_constraintEnd_toEndOf="@id/cl_clip_category_empty"
