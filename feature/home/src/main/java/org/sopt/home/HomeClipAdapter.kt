@@ -8,6 +8,7 @@ import org.sopt.ui.view.ItemDiffCallback
 
 class HomeClipAdapter(
   private val onClickItemClip: (ClipDummy) -> Unit,
+  private val onClickItemClip2: () -> Unit,
 ) : ListAdapter<ClipDummy, HomeCliprViewHolder>(DiffUtil) {
   override fun onBindViewHolder(holder: HomeCliprViewHolder, position: Int) {
     holder.onBind(getItem(position))
@@ -16,7 +17,7 @@ class HomeClipAdapter(
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeCliprViewHolder {
     return HomeCliprViewHolder(
       ItemHomeClipBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-      onClickItemClip,
+      onClickItemClip, onClickItemClip2,
     )
   }
 

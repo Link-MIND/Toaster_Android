@@ -23,10 +23,12 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
 //      )
       findNavController().navigate(request, navOptions)
     }
-    homeClipAdapter = HomeClipAdapter(onClickItemClip = {})
-    val list = listOf<ClipDummy>(ClipDummy("test", 3), ClipDummy("test", 3), ClipDummy("test", 3))
+    initClipAdapter()
+    val list = listOf(ClipDummy("1", 1), ClipDummy("2", 2), ClipDummy("3", 3), null)
     homeClipAdapter.submitList(list)
+  }
+  private fun initClipAdapter() {
+    homeClipAdapter = HomeClipAdapter(onClickItemClip = {}, onClickItemClip2 = {})
     binding.rvHomeClip.adapter = homeClipAdapter
-
   }
 }
