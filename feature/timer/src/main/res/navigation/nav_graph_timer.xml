@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/nav_graph_timer"
+  app:startDestination="@id/navigation_timer">
+  <fragment
+    android:id="@+id/navigation_timer"
+    android:name="org.sopt.timer.TimerFragment"
+    android:label="fragment_timer"
+    tools:layout="@layout/fragment_timer" />
+  <fragment
+    android:id="@+id/navigation_timer_example"
+    android:name="org.sopt.timer.ExampleTimePickerFragment"
+    android:label="fragment_timer_example"
+    tools:layout="@layout/fragment_timer" >
+    <deepLink app:uri="featureTimer://fragmentExample" />
+  </fragment>
+</navigation>

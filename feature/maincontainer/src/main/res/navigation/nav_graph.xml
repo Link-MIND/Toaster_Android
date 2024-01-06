@@ -3,26 +3,10 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/nav_graph"
-  app:startDestination="@id/navigation_home">
+  app:startDestination="@id/nav_graph_home">
 
-  <fragment
-    android:id="@+id/navigation_home"
-    android:name="org.sopt.home.HomeFragment"
-    android:label="fragment_home"
-    tools:layout="@layout/fragment_home" />
-  <fragment
-    android:id="@+id/navigation_clip"
-    android:name="org.sopt.clip.ClipFragment"
-    android:label="fragment_clip"
-    tools:layout="@layout/fragment_clip" />
-  <fragment
-    android:id="@+id/navigation_my"
-    android:name="org.sopt.mypage.my.MyFragment"
-    android:label="fragment_my"
-    tools:layout="@layout/fragment_my" />
-  <fragment
-    android:id="@+id/navigation_timer"
-    android:name="org.sopt.timer.TimerFragment"
-    android:label="fragment_timer"
-    tools:layout="@layout/fragment_timer" />
+  <include app:graph="@navigation/nav_graph_home" />
+  <include app:graph="@navigation/nav_graph_clip" />
+  <include app:graph="@navigation/nav_graph_mypage" />
+  <include app:graph="@navigation/nav_graph_timer" />
 </navigation>
