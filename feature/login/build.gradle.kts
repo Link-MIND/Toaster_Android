@@ -18,10 +18,4 @@ dependencies {
   implementation(projects.core.auth)
   implementation(projects.domain.linkminddomain)
   implementation(projects.domain.oauthdomain)
-  implementation(libs.core.ktx)
-  implementation(libs.appcompat)
-  implementation(libs.material)
-  testImplementation(libs.junit)
-  androidTestImplementation(libs.androidx.test.ext.junit)
-  androidTestImplementation(libs.espresso.core)
 }
