@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/tb_category_toolbar"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  app:contentInsetStart="0dp"
+app:contentInsetStartWithNavigation="0dp">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_clip_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="13dp">
+
+    <TextView
+      android:id="@+id/textView2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_constraintStart_toStartOf="@id/cl_clip_toolbar"
+      android:layout_constraintTop_toTopOf="@id/cl_clip_toolbar"
+      android:paddingVertical="4dp"
+      android:text="@string/text_clip"
+      android:textAppearance="@style/Typography.suit.bold_18"
+      android:textColor="@color/neutrals900" />
+
+    <androidx.appcompat.widget.AppCompatButton
+      style="@style/Widget.AppCompat.Button.Borderless"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_constraintEnd_toEndOf="@id/cl_clip_toolbar"
+      android:layout_constraintTop_toTopOf="@id/cl_clip_toolbar"
+      android:background="@color/background"
+      android:minWidth="0dp"
+      android:minHeight="0dp"
+      android:paddingStart="7dp"
+      android:paddingTop="6dp"
+      android:paddingEnd="8dp"
+      android:paddingBottom="7dp"
+      android:text="@string/clip_toolbar_edit"
+      android:textAppearance="@style/Typography.suit.bold_14"
+      android:textColor="@color/neutrals600"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.appcompat.widget.Toolbar>
+

@@ -41,4 +41,5 @@
 
   <!-- Background Color -->
   <color name="background">#F8F8F8</color>
+  <color name="transparent">#00FFFFFF</color>
 </resources>
