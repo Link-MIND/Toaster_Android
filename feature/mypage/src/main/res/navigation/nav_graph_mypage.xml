@@ -10,5 +10,13 @@
     android:label="fragment_my"
     tools:layout="@layout/fragment_my" >
     <deepLink app:uri="featureMyPage://fragmentMy" />
+    <action
+      android:id="@+id/action_navigation_my_to_navigation_setting"
+      app:destination="@id/navigation_setting" />
   </fragment>
+  <fragment
+    android:id="@+id/navigation_setting"
+    android:name="org.sopt.mypage.settings.SettingsFragment"
+    android:label="fragment_setting"
+    tools:layout="@layout/fragment_settings" />
 </navigation>
