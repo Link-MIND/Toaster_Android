@@ -180,6 +180,36 @@
         app:spanCount="2"
         tools:listitem="@layout/item_home_clip" />
 
+      <View
+        android:id="@+id/view_divider_second"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/neutrals050"
+        app:layout_constraintTop_toBottomOf="@id/rv_home_clip" />
+
+      <TextView
+        android:id="@+id/tv_home_week_link_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingTop="24dp"
+        android:text="홍길동"
+        android:textAppearance="@style/Typography.suit.medium_18"
+        android:textColor="@color/neutrals900"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_divider_second" />
+
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_week_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_home_week_link_title"
+        tools:listitem="@layout/item_week_link" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.core.widget.NestedScrollView>
