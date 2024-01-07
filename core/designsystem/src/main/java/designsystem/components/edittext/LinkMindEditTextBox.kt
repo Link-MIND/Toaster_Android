@@ -50,6 +50,7 @@ class LinkMindEditTextBox @JvmOverloads constructor(
 
   fun checkTextLength(value:Int)=
     binding.editText.text.length >= value
+
   fun onClickTextClear(onClick: () -> Unit) {
     binding.ivCancel.onThrottleClick {
       binding.editText.text.clear()
