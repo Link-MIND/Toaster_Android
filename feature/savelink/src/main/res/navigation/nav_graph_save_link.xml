@@ -7,7 +7,7 @@
 
   <fragment
     android:id="@+id/saveLinkFragment"
-    android:name="org.sopt.savelink.SaveLinkFragment"
+    android:name="org.sopt.savelink.ui.SaveLinkFragment"
     android:label="fragment_save_link"
     tools:layout="@layout/fragment_save_link" >
     <deepLink app:uri="featureSaveLink://saveLinkFragment" />

@@ -1,4 +1,4 @@
-package org.sopt.savelink
+package org.sopt.savelink.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -6,9 +6,12 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
 import org.sopt.savelink.databinding.FragmentSaveLinkBinding
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.view.onThrottleClick
 
 class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSaveLinkBinding.inflate(it) }) {
 
@@ -17,6 +20,9 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     binding.btnSaveLinkNext.state = LinkMIndFullWidthButtonState.DISABLE
     handleEditTextLink()
     handleEditTextTitle()
+    binding.ivSaveLinkClose.onThrottleClick {
+      findNavController().navigateUp()
+    }
   }
   private fun handleEditTextLink() {
     with(binding) {
