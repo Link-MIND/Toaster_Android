@@ -38,14 +38,16 @@
   </androidx.constraintlayout.widget.ConstraintLayout>
 
   <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rv_item_timer_clip_select"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="0dp"
     android:layout_marginHorizontal="20dp"
     android:nestedScrollingEnabled="false"
     android:orientation="vertical"
     android:overScrollMode="never"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     app:layout_constraintTop_toBottomOf="@id/cl_timer_clip_select_appbar"
+    app:layout_constraintBottom_toTopOf="@id/btn_timer_clip_select_next"
     tools:listitem="@layout/item_timer_clip_select" />
 
   <designsystem.components.button.LinkMindBlockButton
