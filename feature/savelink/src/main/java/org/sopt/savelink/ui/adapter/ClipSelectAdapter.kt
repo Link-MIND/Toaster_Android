@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import org.sopt.savelink.R
 import org.sopt.savelink.databinding.ItemTimerClipSelectBinding
 import org.sopt.savelink.ui.Clip
 import org.sopt.savelink.ui.viewholder.ClipSelectViewHolder
@@ -15,7 +16,9 @@ class ClipSelectAdapter(
 ) : ListAdapter<Clip, ClipSelectViewHolder>(DiffUtil) {
   private var selectedPosition = -1
   override fun onBindViewHolder(holder: ClipSelectViewHolder, position: Int) {
-    holder.onBind(getItem(position)) { clip, position ->
+//    if (position==0) holder.binding.ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_home_clip_20)
+    holder.onBind(getItem(position),position)
+    { clip, position ->
       if (selectedPosition != position) {
         if (selectedPosition != -1) {
           getItem(selectedPosition).isSelected = false
