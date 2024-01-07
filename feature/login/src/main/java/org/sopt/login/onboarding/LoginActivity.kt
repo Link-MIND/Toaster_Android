@@ -12,9 +12,10 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import org.sopt.common.intentprovider.IntentProvider
+import org.sopt.common.intentprovider.MAIN
 import org.sopt.datastore.datastore.SecurityDataStore
 import org.sopt.login.databinding.ActivityLoginBinding
-import org.sopt.maincontainer.MainActivity
 import org.sopt.oauthdomain.interactor.OAuthInteractor
 import org.sopt.ui.context.toast
 import org.sopt.ui.view.UiState
@@ -31,6 +32,10 @@ class LoginActivity : AppCompatActivity() {
   @Inject
   lateinit var dataStore: SecurityDataStore
 
+  @MAIN
+  @Inject
+  lateinit var intentProvider: IntentProvider
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -43,8 +48,7 @@ class LoginActivity : AppCompatActivity() {
   private fun initCheckAutoLogin() {
     lifecycleScope.launch {
       if (dataStore.flowAutoLogin().first()) {
-        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        val intent = intentProvider.getIntent()
         startActivity(intent)
       }
     }
@@ -57,14 +61,12 @@ class LoginActivity : AppCompatActivity() {
           when (state.data.isRegistered) {
             true -> {
               dataStore.setAutoLogin(true)
-              val intent = Intent(this@LoginActivity, MainActivity::class.java)
-              intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+              val intent = intentProvider.getIntent()
               startActivity(intent)
             }
 
             false -> {
-              val intent = Intent(this@LoginActivity, MainActivity::class.java)
-              intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+              val intent = intentProvider.getIntent()
               startActivity(intent)
             }
           }
