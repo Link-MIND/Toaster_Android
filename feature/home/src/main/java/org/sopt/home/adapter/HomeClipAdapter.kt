@@ -1,8 +1,10 @@
-package org.sopt.home
+package org.sopt.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import org.sopt.home.ClipDummy
+import org.sopt.home.viewholder.HomeCliprViewHolder
 import org.sopt.home.databinding.ItemHomeClipBinding
 import org.sopt.ui.view.ItemDiffCallback
 

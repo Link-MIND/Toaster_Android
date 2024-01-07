@@ -1,9 +1,9 @@
-package org.sopt.home
+package org.sopt.home.viewholder
 
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import org.sopt.home.ClipDummy
 import org.sopt.home.databinding.ItemHomeClipBinding
 
 class HomeCliprViewHolder(

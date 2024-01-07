@@ -1,7 +1,8 @@
-package org.sopt.home
+package org.sopt.home.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import org.sopt.home.WeekLinkDummy
 import org.sopt.home.databinding.ItemWeekLinkBinding
 
 class HomeWeekLinkViewHolder(
