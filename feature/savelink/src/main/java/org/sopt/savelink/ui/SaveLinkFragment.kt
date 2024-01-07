@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
+import org.sopt.savelink.R
 import org.sopt.savelink.databinding.FragmentSaveLinkBinding
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
@@ -57,6 +58,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
         binding.btnSaveLinkNext.btnClick {
           with(binding) {
             Log.d("test", "success")
+            findNavController().navigate(R.id.action_saveLinkFragment_to_saveLinkSetClipFragment)
           }
         }
       }
