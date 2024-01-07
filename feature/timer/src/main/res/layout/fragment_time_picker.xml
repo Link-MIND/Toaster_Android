@@ -1,67 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
   android:background="@color/neutrals050">
 
   <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_time_picker_appbar"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <ImageView
+      android:id="@+id/iv_time_picker_back"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingVertical="16dp"
+      android:paddingStart="20dp"
+      android:src="@drawable/ic_arrow_left_24"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="4dp"
+      android:text="타이머 설정"
+      android:textAppearance="@style/Typography.suit.bold_18"
+      android:textColor="@color/neutrals900"
+      app:layout_constraintBottom_toBottomOf="@id/iv_time_picker_back"
+      app:layout_constraintStart_toEndOf="@id/iv_time_picker_back"
+      app:layout_constraintTop_toTopOf="@id/iv_time_picker_back" />
+
+    <ImageView
+      android:id="@+id/iv_time_picker_close"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingVertical="16dp"
+      android:paddingEnd="20dp"
+      android:src="@drawable/ic_close_24"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <TextView
+    android:id="@+id/tv_time_picker_category"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:textAppearance="@style/Typography.suit.semibold_18"
+    android:textColor="@color/neutrals_black"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/cl_time_picker_appbar"
+    tools:text="카테고리네임을" />
+
+  <TextView
+    android:id="@+id/tv_time_picker_time"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/shape_primary_fill_4_rect"
+    android:paddingHorizontal="8dp"
+    android:paddingVertical="4dp"
+    android:textAppearance="@style/Typography.suit.bold_18"
+    android:textColor="@color/primary"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_time_picker_category"
+    tools:text="오전 00시 00분" />
+
+  <TextView
+    android:id="@+id/tv_time_picker_remind"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="에 리마인드 해드릴게요"
+    android:layout_marginStart="2dp"
+    android:textAppearance="@style/Typography.suit.medium_18"
+    android:textColor="@color/neutrals_black"
+    app:layout_constraintBottom_toBottomOf="@id/tv_time_picker_time"
+    app:layout_constraintStart_toEndOf="@id/tv_time_picker_time"
+    app:layout_constraintTop_toTopOf="@id/tv_time_picker_time" />
+
+  <View
+    android:id="@+id/v_time_picker_1"
+    android:layout_width="match_parent"
+    android:layout_height="4dp"
+    android:layout_marginTop="8dp"
+    android:background="@color/neutrals050"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_time_picker_time" />
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_time_picker"
     android:layout_width="match_parent"
     android:layout_height="114dp"
     android:layout_marginHorizontal="26dp"
-    app:layout_constraintTop_toTopOf="parent">
+    android:layout_marginTop="12dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/v_time_picker_1">
+
     <View
       android:layout_width="match_parent"
       android:layout_height="38dp"
-      android:background="@drawable/shape_neutrals200_fill_12_rect"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintBottom_toBottomOf="parent"/>
-    <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/rv_1"
-      android:layout_width="wrap_content"
-      android:layout_height="match_parent"
-      android:layout_marginStart="25dp"
-      android:nestedScrollingEnabled="false"
-      android:orientation="vertical"
-      android:overScrollMode="never"
-      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-      app:layout_constraintTop_toTopOf="parent"
+      android:background="@drawable/shape_neutrals100_fill_12_rect"
       app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      tools:listitem="@layout/item_number_picker"
-      tools:itemCount="4"/>
+      app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/rv_2"
+      android:id="@+id/rv_time_picker_ampm"
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
+      android:layout_marginStart="40dp"
       android:nestedScrollingEnabled="false"
       android:orientation="vertical"
       android:overScrollMode="never"
       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-      app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toStartOf="@id/rv_3"
-      tools:listitem="@layout/item_number_picker"
-      tools:itemCount="4"/>
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:itemCount="4"
+      tools:listitem="@layout/item_number_picker" />
 
     <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/rv_3"
+      android:id="@+id/rv_time_picker_hour"
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
-      android:layout_marginEnd="25dp"
       android:nestedScrollingEnabled="false"
       android:orientation="vertical"
       android:overScrollMode="never"
       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/rv_time_picker_minute"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:itemCount="4"
+      tools:listitem="@layout/item_number_picker" />
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rv_time_picker_minute"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_marginEnd="40dp"
+      android:nestedScrollingEnabled="false"
+      android:orientation="vertical"
+      android:overScrollMode="never"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintBottom_toBottomOf="parent"
-      tools:listitem="@layout/item_number_picker"
-      tools:itemCount="4"/>
+      tools:itemCount="4"
+      tools:listitem="@layout/item_number_picker" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
+  <View
+    android:id="@+id/v_time_picker_2"
+    android:layout_width="match_parent"
+    android:layout_height="4dp"
+    android:layout_marginTop="12dp"
+    android:background="@color/neutrals050"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/cl_time_picker" />
+
+  <TextView
+    android:id="@+id/tv_time_picker_repeat"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="25dp"
+    android:layout_marginTop="12dp"
+    android:text="반복 주기를 정해주세요"
+    android:textAppearance="@style/Typography.suit.medium_18"
+    android:textColor="@color/neutrals_black"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/v_time_picker_2"/>
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_time_picker_repeat"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:layout_marginHorizontal="20dp"
+    android:background="@drawable/shape_white_fill_12_rect"
+    app:layout_constraintTop_toBottomOf="@id/tv_time_picker_repeat"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="반복"
+      android:textAppearance="@style/Typography.suit.semibold_16"
+      android:textColor="@color/neutrals850"
+      android:layout_marginVertical="16dp"
+      android:layout_marginStart="14dp"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+      android:id="@+id/iv_time_picker_repeat"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:src="@drawable/ic_arrow_18_svg"
+      android:layout_marginEnd="14dp"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <designsystem.components.button.LinkMindBlockButton
+    android:id="@+id/btn_time_picker_next"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:fullWidthBtnText="다음"
+    app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

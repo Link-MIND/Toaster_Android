@@ -1,4 +1,4 @@
-package org.sopt.timer
+package org.sopt.timer.settimer.timepicker
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,13 +7,13 @@ import org.sopt.timer.databinding.ItemNumberPickerBinding
 import org.sopt.timer.dummymodel.PickerItem
 import org.sopt.ui.view.ItemDiffCallback
 
-class TextAdapter : ListAdapter<PickerItem, NumberViewHolder>(DiffUtil) {
-  override fun onBindViewHolder(holder: NumberViewHolder, position: Int) {
+class TimePeriodAdapter : ListAdapter<PickerItem, PickerViewHolder>(DiffUtil) {
+  override fun onBindViewHolder(holder: PickerViewHolder, position: Int) {
     holder.onBind(getItem(position))
   }
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NumberViewHolder {
-    return NumberViewHolder(
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PickerViewHolder {
+    return PickerViewHolder(
       ItemNumberPickerBinding.inflate(LayoutInflater.from(parent.context), parent, false),
     )
   }
