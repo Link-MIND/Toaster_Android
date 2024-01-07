@@ -1,5 +1,7 @@
 package org.sopt.maincontainer
 
+import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -95,6 +97,12 @@ class MainActivity : AppCompatActivity() {
       } else {
         View.GONE
       }
+    }
+  }
+  companion object {
+    @JvmStatic
+    fun newInstance(context: Context) = Intent(context, MainActivity::class.java).apply {
+      flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     }
   }
 }
