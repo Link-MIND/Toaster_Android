@@ -38,6 +38,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     homeClipAdapter.submitList(list)
     homeWeekLinkAdapter.submitList(list2)
     homeWeekRecommendLinkAdapter.submitList(list2)
+    binding.pbLinkmindHome.setProgressBarMain(54)
   }
   private fun initAdapter() {
     setClipAdapter()

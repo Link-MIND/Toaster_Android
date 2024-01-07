@@ -1,6 +1,6 @@
 package org.sopt.home.viewholder
 
-import android.view.View
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.home.ClipDummy
@@ -16,8 +16,8 @@ class HomeCliprViewHolder(
     if (data == null) {
 
       with(binding) {
-        clItemClip.visibility = View.GONE
-        ivEmpty.isVisible = true
+        clItemClip.isGone = true
+        clItemClipEmpty.isVisible = true
         root.setOnClickListener {
           onClickItemClip2()
         }
