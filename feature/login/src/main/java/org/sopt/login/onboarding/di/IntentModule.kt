@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import org.sopt.common.intentprovider.IntentProvider
+import org.sopt.common.intentprovider.LOGIN
 import org.sopt.login.onboarding.intentprovider.IntentProviderImpl
 import javax.inject.Singleton
 
@@ -13,5 +14,6 @@ import javax.inject.Singleton
 abstract class IntentModule {
   @Binds
   @Singleton
+  @LOGIN
   abstract fun bindsIntentProvider(intentProvider: IntentProviderImpl): IntentProvider
 }

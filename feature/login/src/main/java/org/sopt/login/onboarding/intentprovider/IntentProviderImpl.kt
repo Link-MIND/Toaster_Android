@@ -10,6 +10,6 @@ import javax.inject.Inject
 class IntentProviderImpl @Inject constructor(
   @ApplicationContext private val context: Context,
 ) : IntentProvider {
-  override fun getAuthIntent(): Intent =
+  override fun getIntent(): Intent =
     LoginActivity.newInstance(context)
 }
