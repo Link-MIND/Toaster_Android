@@ -11,7 +11,7 @@ import org.sopt.timer.dummymodel.Clip
 import org.sopt.ui.base.BindingFragment
 
 class TimerClipSelectFragment : BindingFragment<FragmentTimerClipSelectBinding>({ FragmentTimerClipSelectBinding.inflate(it) }) {
-  lateinit var adapter: ClipSelectAdapter
+  private lateinit var adapter: ClipSelectAdapter
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
