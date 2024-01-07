@@ -35,7 +35,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="20dp"
     android:layout_marginTop="21dp"
-    app:editTextSearchHint="클립의 이름을 입력해주세요"
+    tools:editTextSearchHint="클립의 이름을 입력해주세요"
     app:layout_constraintTop_toBottomOf="@id/tv_bottom_sheet_title" />
 
   <TextView

@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             popBackStack(org.sopt.home.R.id.nav_graph_home, true)
           }
         }
-        navigateToDestination(it.itemId, navController)
+        navigateToDestination(it.itemId)
       }
     }
   }
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
     R.id.navigation_timer to org.sopt.timer.R.id.nav_graph_timer,
   )
 
-  private fun navigateToDestination(itemId: Int, navController: NavController): Boolean {
+  private fun navigateToDestination(itemId: Int): Boolean {
     return navigationMap[itemId]?.let { destination ->
       navController.navigate(destination)
       true
