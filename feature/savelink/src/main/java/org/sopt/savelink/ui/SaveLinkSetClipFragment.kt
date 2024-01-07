@@ -77,4 +77,3 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
     }
   }
 }
-

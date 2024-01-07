@@ -11,11 +11,13 @@ class ClipSelectViewHolder(
   val binding: ItemTimerClipSelectBinding,
   val context: Context,
 ) : RecyclerView.ViewHolder(binding.root) {
-  fun onBind(data: Clip?,positon:Int,onClick: (Clip, Int) -> Unit) {
-
+  fun onBind(data: Clip?, positon: Int, onClick: (Clip, Int) -> Unit) {
     if (data == null) return
-    if (positon == 0 ) binding.ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_home_clip_20)
-    else binding.ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_clip_24)
+    if (positon == 0) {
+      binding.ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_home_clip_20)
+    } else {
+      binding.ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_clip_24)
+    }
     with(binding) {
       tvItemTimerClipName.text = data.name
       tvItemTimerClipCount.text = "${data.count}개"
