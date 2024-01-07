@@ -6,14 +6,79 @@
   android:layout_height="match_parent"
   tools:context="org.sopt.login.onboarding.LoginActivity">
 
-  <Button
-    android:id="@+id/btn_kakao_login"
+  <ImageView
+    android:id="@+id/iv_login_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="27dp"
+    android:layout_marginTop="56dp"
+    android:layout_marginEnd="118dp"
+    android:adjustViewBounds="true"
+    android:src="@drawable/img_toaster_title"
+    app:layout_constraintDimensionRatio="2"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+    android:id="@+id/tv_login_discription"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="50dp"
-    android:text="카카오로그인"
+    android:layout_marginTop="20dp"
+    android:text="더 이상 링크를 태우지 마세요\n토스트 먹듯이 간편하게,"
+    android:textAppearance="@style/Typography.suit.bold_18"
+    android:textColor="@color/neutrals900"
+    app:layout_constraintTop_toBottomOf="@id/iv_login_title"
+    app:layout_constraintStart_toStartOf="@id/iv_login_title"/>
+
+  <ImageView
+    android:id="@+id/iv_login"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:adjustViewBounds="true"
+    android:src="@drawable/img_login"
+    android:layout_marginHorizontal="33dp"
+    app:layout_constraintTop_toBottomOf="@id/tv_login_discription"
+    app:layout_constraintBottom_toTopOf="@id/btn_kakao_login"/>
+
+  <LinearLayout
+    android:id="@+id/btn_kakao_login"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_kakao_fill_12_rect"
+    android:gravity="center"
+    android:paddingVertical="19dp"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginBottom="31dp"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent" />
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
+    <ImageView
+      android:id="@+id/iv_login_kakao"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:src="@drawable/ic_kakaologin_24"
+      app:layout_constraintHorizontal_bias="1.0"
+      android:layout_gravity="center"
+      app:layout_constraintEnd_toStartOf="@id/tv_login_kakao"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+      android:id="@+id/tv_login_kakao"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="카카오 계정으로 시작하기"
+      android:layout_marginStart="4dp"
+      android:textAppearance="@style/Typography.suit.bold_18"
+      android:textColor="@color/neutrals900"
+      android:layout_gravity="center"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toEndOf="@id/iv_login_kakao"
+      app:layout_constraintEnd_toEndOf="parent"/>
+  </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
