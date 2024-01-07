@@ -1,11 +1,11 @@
-package org.sopt.timer
+package org.sopt.timer.settimer
 
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.mainfeature.R
 import org.sopt.timer.databinding.ItemNumberPickerBinding
 import org.sopt.timer.dummymodel.PickerItem
 
-class TextViewHolder(
+class PickerViewHolder(
   val binding: ItemNumberPickerBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(data: PickerItem?) {
@@ -16,7 +16,9 @@ class TextViewHolder(
       } else {
         tvText.setTextAppearance(R.style.Typography_suit_regular_16)
       }
-      tvText.text = data.text
+      tvText.text = data.text.toIntOrNull()?.let {
+        if (it < 10) "0$it" else data.text
+      } ?: data.text
     }
   }
 }
