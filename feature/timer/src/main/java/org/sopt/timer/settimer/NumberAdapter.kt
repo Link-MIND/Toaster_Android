@@ -27,7 +27,7 @@ class NumberAdapter : ListAdapter<PickerItem, PickerViewHolder>(DiffUtil) {
 
   companion object {
     private val DiffUtil = ItemDiffCallback<PickerItem>(
-      onItemsTheSame = { old, new -> old == new },
+      onItemsTheSame = { old, new -> old.text == new.text },
       onContentsTheSame = { old, new -> old == new },
     )
   }
