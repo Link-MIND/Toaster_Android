@@ -10,10 +10,20 @@ android {
 
   defaultConfig {
     applicationId = "org.sopt.linkmind"
-    versionCode = 1
+    versionCode = 6
     versionName = "1.0"
   }
+
   viewBinding.enable = true
+  buildTypes {
+    getByName("release") {
+      signingConfig = signingConfigs.getByName("debug")
+      isMinifyEnabled = false
+      proguardFiles(
+        "proguard-rules.pro",
+      )
+    }
+  }
 }
 
 dependencies {
