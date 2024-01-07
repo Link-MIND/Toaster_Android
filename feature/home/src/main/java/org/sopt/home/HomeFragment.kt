@@ -1,8 +1,10 @@
 package org.sopt.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
+import designsystem.components.bottomsheet.LinkMindBottomSheet
 import org.sopt.home.adapter.HomeClipAdapter
 import org.sopt.home.adapter.HomeWeekLinkAdapter
 import org.sopt.home.adapter.HomeWeekRecommendLinkAdapter
@@ -40,6 +42,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     homeWeekRecommendLinkAdapter.submitList(list2)
     binding.pbLinkmindHome.setProgressBarMain(54)
   }
+
   private fun initAdapter() {
     setClipAdapter()
     setWeekLinkAdapter()
@@ -47,7 +50,21 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   }
 
   private fun setClipAdapter() {
-    homeClipAdapter = HomeClipAdapter(onClickItemClip = {}, onClickItemClip2 = {})
+    homeClipAdapter = HomeClipAdapter(
+      onClickItemClip = {},
+      onClickItemClip2 = {
+        val linkMindBottomSheet = LinkMindBottomSheet(requireContext())
+        linkMindBottomSheet.show()
+        linkMindBottomSheet.apply {
+          setBottomSheetHint(org.sopt.mainfeature.R.string.home_new_clip_info)
+          setTitle(org.sopt.mainfeature.R.string.home_correction_clip)
+          setErroMsg(org.sopt.mainfeature.R.string.home_error_clip_info)
+          bottomSheetConfirmBtnClick {
+            Log.d("test", "test")
+          }
+        }
+      },
+    )
     binding.rvHomeClip.adapter = homeClipAdapter
     val spacingClipInPixels = resources.getDimensionPixelSize(R.dimen.spacing_11)
     binding.rvHomeClip.addItemDecoration(ItemDecoration(2, spacingClipInPixels))
