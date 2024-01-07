@@ -10,7 +10,7 @@ class ClipSelectViewHolder(
   val binding: ItemTimerClipSelectBinding,
   val context: Context,
 ) : RecyclerView.ViewHolder(binding.root) {
-  fun onBind(data: Clip?) {
+  fun onBind(data: Clip?, selectedPosition: Int, onClick: (Clip, Int) -> Unit) {
     if (data == null) return
     with(binding) {
       tvItemTimerClipName.text = data.name
@@ -23,6 +23,9 @@ class ClipSelectViewHolder(
       } else {
         tvItemTimerClipCount.setTextColor(defaultColor)
         tvItemTimerClipName.setTextColor(defaultColor)
+      }
+      root.setOnClickListener {
+        onClick(data, bindingAdapterPosition)
       }
     }
   }
