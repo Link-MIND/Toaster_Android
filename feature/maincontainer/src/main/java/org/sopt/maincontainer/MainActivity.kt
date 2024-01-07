@@ -1,6 +1,7 @@
 package org.sopt.maincontainer
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -8,6 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.maincontainer.databinding.ActivityMainBinding
+import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -38,6 +40,9 @@ class MainActivity : AppCompatActivity() {
     binding.bnvMain.setupWithNavController(navController)
     binding.bnvMain.setOnItemReselectedListener { }
     changeBottomNavigationFragment()
+    binding.fabMain.onThrottleClick {
+      Log.d("test","test")
+    }
   }
 
   private fun changeBottomNavigationFragment() {
