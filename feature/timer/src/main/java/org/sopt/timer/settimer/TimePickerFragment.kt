@@ -2,6 +2,7 @@ package org.sopt.timer.settimer
 
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import designsystem.components.button.state.LinkMindButtonState
 import org.sopt.timer.databinding.FragmentTimePickerBinding
@@ -12,34 +13,34 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   private lateinit var textAdapter: TextAdapter
   private lateinit var numberAdapter1: NumberAdapter
   private lateinit var numberAdapter2: NumberAdapter
-
-  lateinit var ampm: String
-  lateinit var hour: String
-  lateinit var minute: String
+  private var ampm = "오전"
+  private var hour = "01"
+  private var minute = "00"
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     setupRecyclerViews()
-    ampm = "오전"
-    hour = "01"
-    minute = "00"
-    binding.btnTimePickerNext.state = LinkMindButtonState.ENABLE
+    binding.btnTimePickerNext.state = LinkMindButtonState.DISABLE
     binding.tvTimePickerCategory.text = "카테고리이름을"
     binding.tvTimePickerTime.text = "$ampm ${hour}시 ${minute}분"
   }
 
   private fun setupRecyclerViews() {
-    val list1 = generateList1()
-    val list2 = generateNumberList(1, 12)
-    val list3 = generateNumberList(0, 59)
+    val ampmList = generateAmpmList()
+    val hourList = generateNumberList(1, 12)
+    val minuteList = generateNumberList(0, 59)
     textAdapter = TextAdapter()
     numberAdapter1 = NumberAdapter()
     numberAdapter2 = NumberAdapter()
-    setupRecyclerView3(binding.rv1, list1, textAdapter)
-    setupRecyclerView1(binding.rv2, list2, numberAdapter1)
-    setupRecyclerView2(binding.rv3, list3, numberAdapter2)
+    setupRecyclerView(binding.rvTimePickerAmpm, ampmList, textAdapter, ::updateAmPm)
+    setupRecyclerView(binding.rvTimePickerHour, hourList, numberAdapter1, ::updateHour)
+    setupRecyclerView(binding.rvTimePickerMinute, minuteList, numberAdapter2, ::updateMinute)
   }
 
-  private fun generateList1() = listOf(PickerItem("", false), PickerItem("오전", true), PickerItem("오후", false), PickerItem("", false))
+  private fun generateAmpmList() = listOf(
+    PickerItem("", false),
+    PickerItem("오전", true),
+    PickerItem("오후", false),
+    PickerItem("", false))
 
   private fun generateNumberList(start: Int, end: Int): MutableList<PickerItem> {
     val list = mutableListOf<PickerItem>()
@@ -51,157 +52,77 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
     return list
   }
 
-  private fun setupRecyclerView1(recyclerView: RecyclerView, list: List<PickerItem>, numberAdapter: NumberAdapter) {
+  private fun <T : ListAdapter<PickerItem, PickerViewHolder>> setupRecyclerView(
+    recyclerView: RecyclerView,
+    list: List<PickerItem>,
+    adapter: T,
+    updateText: (PickerItem) -> Unit,
+  ) {
     val snapHolder = CenterSnapHelper().apply {
       attachToRecyclerView(recyclerView)
     }
-
-    with(numberAdapter) {
+    val isNumber = adapter is NumberAdapter
+    with(adapter) {
       submitList(list)
       recyclerView.adapter = this
-      numberAdapter
     }
-
     recyclerView.itemAnimator = null
-    recyclerView.scrollToPosition(numberAdapter.getMiddlePosition())
-    recyclerView.addOnScrollListener(
-      object : RecyclerView.OnScrollListener() {
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-          super.onScrollStateChanged(recyclerView, newState)
-          val centerView = snapHolder.findSnapView(recyclerView.layoutManager)
-          val pos = recyclerView.layoutManager?.getPosition(centerView!!)
-          val newList: MutableList<PickerItem> = numberAdapter.currentList.mapIndexed { index, item ->
-            item.copy(isSelected = index == pos!! % numberAdapter.currentList.size)
-          }.toMutableList()
-          numberAdapter.run {
-            submitList(newList)
+    if (adapter is NumberAdapter) recyclerView.scrollToPosition(adapter.getMiddlePosition())
+    recyclerView.apply {
+      addOnScrollListener(
+        object : RecyclerView.OnScrollListener() {
+          override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            val newList = getNewList(snapHolder, recyclerView, isNumber, adapter)
+            adapter.submitList(newList)
             if (newState == 0) {
-              newList.onEach { item ->
+              newList?.onEach { item ->
                 if (item.isSelected) {
-                  hour = item.convertToText()
+                  updateText(item)
                   binding.tvTimePickerTime.text = "$ampm ${hour}시 ${minute}분"
                 }
               }
             }
-            notifyDataSetChanged()
+            adapter.notifyDataSetChanged()
           }
+        },
+      )
+      onFlingListener = object : RecyclerView.OnFlingListener() {
+        override fun onFling(velocityX: Int, velocityY: Int): Boolean {
+          val newList = getNewList(snapHolder, recyclerView, isNumber, adapter)
+          adapter.submitList(newList)
+          return false
         }
-      },
-    )
-    recyclerView.onFlingListener = object : RecyclerView.OnFlingListener() {
-      override fun onFling(velocityX: Int, velocityY: Int): Boolean {
-        val centerView = snapHolder.findSnapView(recyclerView.layoutManager)
-        val pos = recyclerView.layoutManager?.getPosition(centerView!!)
-        val newList: MutableList<PickerItem> = numberAdapter.currentList.mapIndexed { index, item ->
-          item.copy(isSelected = index == pos!! % numberAdapter.currentList.size)
-        }.toMutableList()
-        numberAdapter.run {
-          submitList(newList)
-          notifyDataSetChanged()
-        }
-        return false
       }
     }
   }
 
-  private fun setupRecyclerView2(recyclerView: RecyclerView, list: List<PickerItem>, numberAdapter: NumberAdapter) {
-    val snapHolder = CenterSnapHelper().apply {
-      attachToRecyclerView(recyclerView)
-    }
-
-    with(numberAdapter) {
-      submitList(list)
-      recyclerView.adapter = this
-      numberAdapter
-    }
-
-    recyclerView.itemAnimator = null
-    recyclerView.scrollToPosition(numberAdapter.getMiddlePosition())
-    recyclerView.addOnScrollListener(
-      object : RecyclerView.OnScrollListener() {
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-          super.onScrollStateChanged(recyclerView, newState)
-          val centerView = snapHolder.findSnapView(recyclerView.layoutManager)
-          val pos = recyclerView.layoutManager?.getPosition(centerView!!)
-          val newList: MutableList<PickerItem> = numberAdapter.currentList.mapIndexed { index, item ->
-            item.copy(isSelected = index == pos!! % numberAdapter.currentList.size)
-          }.toMutableList()
-          numberAdapter.run {
-            submitList(newList)
-            if (newState == 0) {
-              newList.onEach { item ->
-                if (item.isSelected) {
-                  minute = item.convertToText()
-                  binding.tvTimePickerTime.text = "$ampm ${hour}시 ${minute}분"
-                }
-              }
-            }
-            notifyDataSetChanged()
-          }
+  private fun <T : ListAdapter<PickerItem, PickerViewHolder>> getNewList(
+    snapHolder: CenterSnapHelper,
+    recyclerView: RecyclerView,
+    isNumber: Boolean,
+    adapter: T,
+  ): List<PickerItem>? {
+    val newList = snapHolder.findSnapView(recyclerView.layoutManager)?.let { centerView ->
+      recyclerView.layoutManager?.getPosition(centerView)?.let { pos ->
+        val newPos = if (isNumber) pos % adapter.currentList.size else pos
+        adapter.currentList.mapIndexed { index, item ->
+          item.copy(isSelected = index == newPos)
         }
-      },
-    )
-    recyclerView.onFlingListener = object : RecyclerView.OnFlingListener() {
-      override fun onFling(velocityX: Int, velocityY: Int): Boolean {
-        val centerView = snapHolder.findSnapView(recyclerView.layoutManager)
-        val pos = recyclerView.layoutManager?.getPosition(centerView!!)
-        val newList: MutableList<PickerItem> = numberAdapter.currentList.mapIndexed { index, item ->
-          item.copy(isSelected = index == pos!! % numberAdapter.currentList.size)
-        }.toMutableList()
-        numberAdapter.run {
-          submitList(newList)
-          notifyDataSetChanged()
-        }
-        binding.tvTimePickerTime.text = "$ampm ${hour}시 ${minute}분"
-        return false
       }
     }
+    return newList
   }
 
-  private fun setupRecyclerView3(recyclerView: RecyclerView, list: List<PickerItem>, textAdapter: TextAdapter) {
-    val snapHolder = CenterSnapHelper().apply {
-      attachToRecyclerView(recyclerView)
-    }
-    with(textAdapter) {
-      submitList(list)
-      recyclerView.adapter = this
-      textAdapter
-    }
+  private fun updateHour(item: PickerItem) {
+    hour = item.convertToText()
+  }
 
-    recyclerView.itemAnimator = null
-    recyclerView.addOnScrollListener(
-      object : RecyclerView.OnScrollListener() {
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-          super.onScrollStateChanged(recyclerView, newState)
-          val centerView = snapHolder.findSnapView(recyclerView.layoutManager)
-          val pos = recyclerView.layoutManager?.getPosition(centerView!!)
-          val newList: MutableList<PickerItem> = textAdapter.currentList.mapIndexed { index, item ->
-            item.copy(isSelected = index == pos)
-          }.toMutableList()
-          textAdapter.run {
-            submitList(newList)
-            if (newState == 0) {
-              newList.onEach { item ->
-                if (item.isSelected) {
-                  ampm = item.convertToText()
-                  binding.tvTimePickerTime.text = "$ampm ${hour}시 ${minute}분"
-                }
-              }
-            }
-          }
-        }
-      },
-    )
-    recyclerView.onFlingListener = object : RecyclerView.OnFlingListener() {
-      override fun onFling(velocityX: Int, velocityY: Int): Boolean {
-        val centerView = snapHolder.findSnapView(recyclerView.layoutManager)
-        val pos = recyclerView.layoutManager?.getPosition(centerView!!)
-        val newList: MutableList<PickerItem> = textAdapter.currentList.mapIndexed { index, item ->
-          item.copy(isSelected = index == pos)
-        }.toMutableList()
-        textAdapter.submitList(newList)
-        return false
-      }
-    }
+  private fun updateMinute(item: PickerItem) {
+    minute = item.convertToText()
+  }
+
+  private fun updateAmPm(item: PickerItem) {
+    ampm = item.convertToText()
   }
 }

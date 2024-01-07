@@ -115,7 +115,7 @@
       app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/rv_1"
+      android:id="@+id/rv_time_picker_ampm"
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
       android:layout_marginStart="40dp"
@@ -130,7 +130,7 @@
       tools:listitem="@layout/item_number_picker" />
 
     <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/rv_2"
+      android:id="@+id/rv_time_picker_hour"
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
       android:nestedScrollingEnabled="false"
@@ -138,13 +138,13 @@
       android:overScrollMode="never"
       app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toStartOf="@id/rv_3"
+      app:layout_constraintEnd_toStartOf="@id/rv_time_picker_minute"
       app:layout_constraintTop_toTopOf="parent"
       tools:itemCount="4"
       tools:listitem="@layout/item_number_picker" />
 
     <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/rv_3"
+      android:id="@+id/rv_time_picker_minute"
       android:layout_width="wrap_content"
       android:layout_height="match_parent"
       android:layout_marginEnd="40dp"
