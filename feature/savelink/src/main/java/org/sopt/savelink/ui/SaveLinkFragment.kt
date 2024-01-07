@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
 import org.sopt.savelink.R
@@ -103,5 +102,4 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     binding.tvSaveLinkSubTitle.isVisible = true
     binding.etvSaveCopyLinkTitle.isVisible = true
   }
-
 }
