@@ -1,6 +1,5 @@
 package org.sopt.timer.settimer.timepicker
 
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.mainfeature.R
 import org.sopt.timer.databinding.ItemNumberPickerBinding
