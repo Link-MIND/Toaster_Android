@@ -17,6 +17,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintBottom_toBottomOf="parent" />
   <TextView
+    android:id="@+id/tv_item_timer_clip_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="전체 클립"
