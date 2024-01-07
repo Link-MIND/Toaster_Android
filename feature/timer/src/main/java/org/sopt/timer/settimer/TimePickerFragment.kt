@@ -40,7 +40,8 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
     PickerItem("", false),
     PickerItem("오전", true),
     PickerItem("오후", false),
-    PickerItem("", false))
+    PickerItem("", false),
+  )
 
   private fun generateNumberList(start: Int, end: Int): MutableList<PickerItem> {
     val list = mutableListOf<PickerItem>()
