@@ -2,6 +2,7 @@
 plugins {
   alias(libs.plugins.linkmind.android.library)
   alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.linkmind.android.hilt)
 }
 
 android {
