@@ -15,14 +15,14 @@
   </fragment>
   <fragment
     android:id="@+id/navigation_timer_example"
-    android:name="org.sopt.timer.settimer.TimePickerFragment"
+    android:name="org.sopt.timer.settimer.timepicker.TimePickerFragment"
     android:label="fragment_timer_example"
     tools:layout="@layout/fragment_timer" >
     <deepLink app:uri="featureTimer://fragmentExample" />
   </fragment>
   <fragment
     android:id="@+id/navigation_timer_clip_select"
-    android:name="org.sopt.timer.settimer.TimerClipSelectFragment"
+    android:name="org.sopt.timer.settimer.clipselect.TimerClipSelectFragment"
     android:label="fragment_timer_clip_select"
     tools:layout="@layout/fragment_timer_clip_select">
     <action
@@ -31,7 +31,7 @@
   </fragment>
   <fragment
     android:id="@+id/navigation_time_picker"
-    android:name="org.sopt.timer.settimer.TimePickerFragment"
+    android:name="org.sopt.timer.settimer.timepicker.TimePickerFragment"
     android:label="fragment_time_picker"
     tools:layout="@layout/fragment_time_picker"/>
 </navigation>
