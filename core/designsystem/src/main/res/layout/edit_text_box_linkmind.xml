@@ -10,6 +10,8 @@
     android:layout_width="0dp"
     android:layout_height="0dp"
     android:background="@null"
+    android:textAppearance="@style/Typography.suit.regular_16"
+    android:textColor="@color/neutrals900"
     android:hint="@string/text_placeholder"
     android:imeOptions="actionSearch"
     android:inputType="text"

@@ -34,6 +34,7 @@ class LinkMindEditTextBox @JvmOverloads constructor(
       }
     }
     binding.editText.doAfterTextChanged { text ->
+      binding.editText.setTextAppearance(R.style.Typography_suit_medium_16)
       binding.ivCancel.visibility =
         if (text.isNullOrEmpty()) View.INVISIBLE else View.VISIBLE
     }
@@ -46,6 +47,7 @@ class LinkMindEditTextBox @JvmOverloads constructor(
 
     typedArray.recycle()
   }
+
   fun onClickTextClear(onClick: () -> Unit) {
     binding.ivCancel.onThrottleClick {
       binding.editText.text.clear()
