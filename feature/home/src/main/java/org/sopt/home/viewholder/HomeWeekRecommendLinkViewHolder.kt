@@ -3,9 +3,7 @@ package org.sopt.home.viewholder
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
-import org.sopt.home.R
 import org.sopt.home.WeekLinkDummy
-import org.sopt.home.databinding.ItemWeekLinkBinding
 import org.sopt.home.databinding.ItemWeekRecommendLinkBinding
 
 class HomeWeekRecommendLinkViewHolder(

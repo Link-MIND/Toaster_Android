@@ -14,7 +14,6 @@ class HomeCliprViewHolder(
 
   fun onBind(data: ClipDummy?) {
     if (data == null) {
-
       with(binding) {
         clItemClip.isGone = true
         clItemClipEmpty.isVisible = true

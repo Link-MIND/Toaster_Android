@@ -50,7 +50,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     homeClipAdapter = HomeClipAdapter(onClickItemClip = {}, onClickItemClip2 = {})
     binding.rvHomeClip.adapter = homeClipAdapter
     val spacingClipInPixels = resources.getDimensionPixelSize(R.dimen.spacing_11)
-    binding.rvHomeClip.addItemDecoration(GridSpacingItemDecoration(2, spacingClipInPixels))
+    binding.rvHomeClip.addItemDecoration(ItemDecoration(2, spacingClipInPixels))
   }
 
   private fun setWeekLinkAdapter() {
@@ -62,6 +62,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     homeWeekRecommendLinkAdapter = HomeWeekRecommendLinkAdapter(onClickItem = {})
     binding.rvHomeWeekRecommend.adapter = homeWeekRecommendLinkAdapter
     val spacingWeekRecommendInPixels = resources.getDimensionPixelSize(R.dimen.spacing_12)
-    binding.rvHomeWeekRecommend.addItemDecoration(GridSpacingItemDecoration(3, spacingWeekRecommendInPixels))
+    binding.rvHomeWeekRecommend.addItemDecoration(ItemDecoration(3, spacingWeekRecommendInPixels))
   }
 }

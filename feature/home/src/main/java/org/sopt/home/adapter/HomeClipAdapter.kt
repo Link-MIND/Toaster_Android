@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import org.sopt.home.ClipDummy
-import org.sopt.home.viewholder.HomeCliprViewHolder
 import org.sopt.home.databinding.ItemHomeClipBinding
+import org.sopt.home.viewholder.HomeCliprViewHolder
 import org.sopt.ui.view.ItemDiffCallback
 
 class HomeClipAdapter(
@@ -19,7 +19,8 @@ class HomeClipAdapter(
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeCliprViewHolder {
     return HomeCliprViewHolder(
       ItemHomeClipBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-      onClickItemClip, onClickItemClip2,
+      onClickItemClip,
+      onClickItemClip2,
     )
   }
 

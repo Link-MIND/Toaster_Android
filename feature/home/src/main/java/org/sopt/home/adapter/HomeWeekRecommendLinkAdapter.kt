@@ -3,9 +3,7 @@ package org.sopt.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import org.sopt.home.viewholder.HomeWeekLinkViewHolder
 import org.sopt.home.WeekLinkDummy
-import org.sopt.home.databinding.ItemWeekLinkBinding
 import org.sopt.home.databinding.ItemWeekRecommendLinkBinding
 import org.sopt.home.viewholder.HomeWeekRecommendLinkViewHolder
 import org.sopt.ui.view.ItemDiffCallback
