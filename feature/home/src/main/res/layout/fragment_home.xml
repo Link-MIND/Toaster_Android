@@ -194,7 +194,8 @@
         android:layout_height="wrap_content"
         android:paddingStart="20dp"
         android:paddingTop="24dp"
-        android:text="홍길동"
+        android:paddingBottom="18dp"
+        android:text="이주의 링크"
         android:textAppearance="@style/Typography.suit.medium_18"
         android:textColor="@color/neutrals900"
         app:layout_constraintStart_toStartOf="parent"
@@ -206,11 +207,44 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_home_week_link_title"
         tools:listitem="@layout/item_week_link" />
+      <View
+        android:id="@+id/view_divider_third"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/neutrals050"
+        app:layout_constraintTop_toBottomOf="@id/rv_week_link" />
 
+      <TextView
+        android:id="@+id/tv_home_week_recommend_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingTop="24dp"
+        android:nestedScrollingEnabled="false"
+        android:paddingBottom="18dp"
+        android:text="이주의 추천 사이트"
+        android:textAppearance="@style/Typography.suit.medium_18"
+        android:textColor="@color/neutrals900"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_divider_third" />
+
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_home_week_recommend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:nestedScrollingEnabled="false"
+        android:paddingHorizontal="20dp"
+        app:spanCount="2"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_home_week_recommend_title"
+        tools:listitem="@layout/item_week_link" />
     </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
