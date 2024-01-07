@@ -9,4 +9,6 @@ data class ResponsePostSignOutDto(
   val code: Int,
   @SerialName("message")
   val message: String,
+  @SerialName("data")
+  val data: Unit?
 )
