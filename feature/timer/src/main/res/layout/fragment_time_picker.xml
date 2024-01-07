@@ -79,6 +79,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="에 리마인드 해드릴게요"
+    android:layout_marginStart="2dp"
     android:textAppearance="@style/Typography.suit.medium_18"
     android:textColor="@color/neutrals_black"
     app:layout_constraintBottom_toBottomOf="@id/tv_time_picker_time"
