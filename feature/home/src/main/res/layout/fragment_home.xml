@@ -1,172 +1,186 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="org.sopt.home.HomeFragment">
+  android:orientation="vertical">
 
-  <ImageView
-    android:id="@+id/iv_tb_toaster"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingVertical="18dp"
-    android:paddingStart="20dp"
-    android:src="@drawable/img_toaster"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
-
-  <ImageView
-    android:id="@+id/iv_home_setting"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="2dp"
-    android:paddingHorizontal="20dp"
-    android:paddingVertical="16dp"
-    android:src="@drawable/ic_setting_24"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
-
-  <designsystem.components.edittext.LinkMindEditTextSearch
-    android:id="@+id/etv_home_search"
+  <androidx.core.widget.NestedScrollView
+    android:id="@+id/ns_main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingHorizontal="20dp"
-    app:editTextSearchHint="검색어를 입력해주세요"
-    app:layout_constraintTop_toBottomOf="@+id/iv_tb_toaster" />
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      tools:context="org.sopt.home.HomeFragment">
+
+      <ImageView
+        android:id="@+id/iv_tb_toaster"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingVertical="18dp"
+        android:paddingStart="20dp"
+        android:src="@drawable/img_toaster"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <ImageView
+        android:id="@+id/iv_home_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="16dp"
+        android:src="@drawable/ic_setting_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <designsystem.components.edittext.LinkMindEditTextSearch
+        android:id="@+id/etv_home_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        app:editTextSearchHint="검색어를 입력해주세요"
+        app:layout_constraintTop_toBottomOf="@+id/iv_tb_toaster" />
 
 
-  <TextView
-    android:id="@+id/tv_home_user_name"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingStart="20dp"
-    android:paddingTop="24dp"
-    android:text="홍길동"
-    android:textAppearance="@style/Typography.suit.bold_20"
-    android:textColor="@color/neutrals900"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/etv_home_search" />
+      <TextView
+        android:id="@+id/tv_home_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingTop="24dp"
+        android:text="홍길동"
+        android:textAppearance="@style/Typography.suit.bold_20"
+        android:textColor="@color/neutrals900"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etv_home_search" />
 
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingTop="24dp"
-    android:text="님"
-    android:textAppearance="@style/Typography.suit.regular_20"
-    android:textColor="@color/neutrals900"
-    app:layout_constraintStart_toEndOf="@+id/tv_home_user_name"
-    app:layout_constraintTop_toTopOf="@id/tv_home_user_name" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="24dp"
+        android:text="님"
+        android:textAppearance="@style/Typography.suit.regular_20"
+        android:textColor="@color/neutrals900"
+        app:layout_constraintStart_toEndOf="@+id/tv_home_user_name"
+        app:layout_constraintTop_toTopOf="@id/tv_home_user_name" />
 
-  <TextView
-    android:id="@+id/tv_toast_second"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingStart="20dp"
-    android:text="토스터로 "
-    android:textAppearance="@style/Typography.suit.regular_20"
-    android:textColor="@color/neutrals900"
-    app:layout_constraintStart_toStartOf="@+id/tv_home_user_name"
-    app:layout_constraintTop_toBottomOf="@id/tv_home_user_name" />
+      <TextView
+        android:id="@+id/tv_toast_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:text="토스터로 "
+        android:textAppearance="@style/Typography.suit.regular_20"
+        android:textColor="@color/neutrals900"
+        app:layout_constraintStart_toStartOf="@+id/tv_home_user_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_home_user_name" />
 
-  <TextView
-    android:id="@+id/tv_home_toast_link_count"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="0개의 링크"
-    android:textAppearance="@style/Typography.suit.extrabold_20"
-    android:textColor="@color/primary"
-    app:layout_constraintStart_toEndOf="@+id/tv_toast_second"
-    app:layout_constraintTop_toBottomOf="@id/tv_home_user_name" />
+      <TextView
+        android:id="@+id/tv_home_toast_link_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0개의 링크"
+        android:textAppearance="@style/Typography.suit.extrabold_20"
+        android:textColor="@color/primary"
+        app:layout_constraintStart_toEndOf="@+id/tv_toast_second"
+        app:layout_constraintTop_toBottomOf="@id/tv_home_user_name" />
 
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="를"
-    android:textAppearance="@style/Typography.suit.regular_20"
-    android:textColor="@color/neutrals900"
-    app:layout_constraintStart_toEndOf="@+id/tv_home_toast_link_count"
-    app:layout_constraintTop_toBottomOf="@id/tv_home_user_name" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="를"
+        android:textAppearance="@style/Typography.suit.regular_20"
+        android:textColor="@color/neutrals900"
+        app:layout_constraintStart_toEndOf="@+id/tv_home_toast_link_count"
+        app:layout_constraintTop_toBottomOf="@id/tv_home_user_name" />
 
-  <TextView
-    android:id="@+id/tv_home_last_comment"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingStart="20dp"
-    android:text="잊지 않고 읽었어요!"
-    android:textAppearance="@style/Typography.suit.regular_20"
-    android:textColor="@color/neutrals900"
-    app:layout_constraintStart_toStartOf="@+id/tv_home_user_name"
-    app:layout_constraintTop_toBottomOf="@id/tv_home_toast_link_count" />
+      <TextView
+        android:id="@+id/tv_home_last_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:text="잊지 않고 읽었어요!"
+        android:textAppearance="@style/Typography.suit.regular_20"
+        android:textColor="@color/neutrals900"
+        app:layout_constraintStart_toStartOf="@+id/tv_home_user_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_home_toast_link_count" />
 
-  <TextView
-    android:id="@+id/tv_home_toast_progress_link"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingStart="20dp"
-    android:paddingTop="8dp"
-    android:text="nn"
-    android:textAppearance="@style/Typography.suit.extrabold_20"
-    android:textColor="@color/primary"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tv_home_last_comment" />
+      <TextView
+        android:id="@+id/tv_home_toast_progress_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingTop="8dp"
+        android:text="nn"
+        android:textAppearance="@style/Typography.suit.extrabold_20"
+        android:textColor="@color/primary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_home_last_comment" />
 
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="/nn"
-    android:textAppearance="@style/Typography.suit.regular_16"
-    android:textColor="@color/neutrals300"
-    app:layout_constraintBottom_toBottomOf="@id/tv_home_toast_progress_link"
-    app:layout_constraintStart_toEndOf="@+id/tv_home_toast_progress_link" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/nn"
+        android:textAppearance="@style/Typography.suit.regular_16"
+        android:textColor="@color/neutrals300"
+        app:layout_constraintBottom_toBottomOf="@id/tv_home_toast_progress_link"
+        app:layout_constraintStart_toEndOf="@+id/tv_home_toast_progress_link" />
 
-  <designsystem.components.horizontalprogressbar.LinkMindHorizontalProgressBar
-    android:id="@+id/pb_linkmind_home"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingHorizontal="20dp"
-    android:paddingTop="6dp"
-    app:layout_constraintTop_toBottomOf="@id/tv_home_toast_progress_link" />
+      <designsystem.components.horizontalprogressbar.LinkMindHorizontalProgressBar
+        android:id="@+id/pb_linkmind_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="6dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_home_toast_progress_link" />
 
-  <View
-    android:id="@+id/view_divider_first"
-    android:layout_width="match_parent"
-    android:layout_height="4dp"
-    android:layout_marginTop="24dp"
-    android:background="@color/neutrals050"
-    app:layout_constraintTop_toBottomOf="@id/pb_linkmind_home" />
+      <View
+        android:id="@+id/view_divider_first"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/neutrals050"
+        app:layout_constraintTop_toBottomOf="@id/pb_linkmind_home" />
 
-  <TextView
-    android:id="@+id/tv_home_user_clip_name"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingStart="20dp"
-    android:paddingTop="24dp"
-    android:text="홍길동"
-    android:textAppearance="@style/Typography.suit.bold_20"
-    android:textColor="@color/neutrals900"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/view_divider_first" />
+      <TextView
+        android:id="@+id/tv_home_user_clip_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingTop="24dp"
+        android:text="홍길동"
+        android:textAppearance="@style/Typography.suit.bold_20"
+        android:textColor="@color/neutrals900"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_divider_first" />
 
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingTop="24dp"
-    android:text="님의 클립"
-    android:textAppearance="@style/Typography.suit.regular_20"
-    android:textColor="@color/neutrals900"
-    app:layout_constraintStart_toEndOf="@+id/tv_home_user_clip_name"
-    app:layout_constraintTop_toTopOf="@id/tv_home_user_clip_name" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="24dp"
+        android:text="님의 클립"
+        android:textAppearance="@style/Typography.suit.regular_20"
+        android:textColor="@color/neutrals900"
+        app:layout_constraintStart_toEndOf="@+id/tv_home_user_clip_name"
+        app:layout_constraintTop_toTopOf="@id/tv_home_user_clip_name" />
 
-  <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/rv_home_clip"
-    android:paddingHorizontal="15dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingTop="15dp"
-    tools:listitem="@layout/item_home_clip"
-    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tv_home_user_clip_name"
-    app:spanCount="2" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_home_clip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="15dp"
+        android:paddingTop="15dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_home_user_clip_name"
+        app:spanCount="2"
+        tools:listitem="@layout/item_home_clip" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
