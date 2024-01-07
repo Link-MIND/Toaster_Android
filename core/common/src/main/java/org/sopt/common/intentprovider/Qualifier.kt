@@ -9,4 +9,3 @@ annotation class LOGIN
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class MAIN
-
