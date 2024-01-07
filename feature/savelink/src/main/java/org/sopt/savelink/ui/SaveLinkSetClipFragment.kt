@@ -3,11 +3,11 @@ package org.sopt.savelink.ui
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.button.state.LinkMindButtonState
 import org.sopt.mainfeature.R
 import org.sopt.savelink.databinding.FragmentSaveLinkSetClipBinding
+import org.sopt.savelink.ui.adapter.ClipSelectAdapter
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
 

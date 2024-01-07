@@ -1,9 +1,10 @@
-package org.sopt.savelink.ui
+package org.sopt.savelink.ui.viewholder
 
 import android.content.Context
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.savelink.databinding.ItemTimerClipSelectBinding
+import org.sopt.savelink.ui.Clip
 
 class ClipSelectViewHolder(
   val binding: ItemTimerClipSelectBinding,

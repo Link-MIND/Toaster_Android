@@ -1,10 +1,12 @@
-package org.sopt.savelink.ui
+package org.sopt.savelink.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import org.sopt.savelink.databinding.ItemTimerClipSelectBinding
+import org.sopt.savelink.ui.Clip
+import org.sopt.savelink.ui.viewholder.ClipSelectViewHolder
 import org.sopt.ui.view.ItemDiffCallback
 
 class ClipSelectAdapter(
