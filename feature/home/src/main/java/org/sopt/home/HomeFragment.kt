@@ -29,11 +29,11 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       findNavController().navigate(request, navOptions)
     }
     initAdapter()
-    val list = listOf(ClipDummy("1", 1), ClipDummy("2", 2), ClipDummy("3", 3), null)
+    val list = listOf(ClipDummy("전체클립", 1), ClipDummy("Title", 2), ClipDummy("LeeSak", 3), null)
     val list2 = listOf(
-      WeekLinkDummy("1", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
-      WeekLinkDummy("1", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
-      WeekLinkDummy("1", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
+      WeekLinkDummy("Title", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
+      WeekLinkDummy("Category", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
+      WeekLinkDummy("LeeSak", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
     )
     homeClipAdapter.submitList(list)
     homeWeekLinkAdapter.submitList(list2)

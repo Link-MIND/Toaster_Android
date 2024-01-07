@@ -241,10 +241,12 @@
         android:nestedScrollingEnabled="false"
         android:paddingHorizontal="20dp"
         app:spanCount="3"
+        android:paddingBottom="80dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_home_week_recommend_title"
         tools:listitem="@layout/item_week_link" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
