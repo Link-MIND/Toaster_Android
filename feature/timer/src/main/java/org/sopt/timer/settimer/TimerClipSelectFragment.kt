@@ -34,7 +34,7 @@ class TimerClipSelectFragment : BindingFragment<FragmentTimerClipSelectBinding>(
         Log.e("리스트", "$list")
         binding.btnTimerClipSelectNext.state = LinkMindButtonState.DISABLE
       }
-    }, requireContext(),)
+    }, requireContext())
     adapter.submitList(list)
     binding.rvItemTimerClipSelect.adapter = adapter
     binding.btnTimerClipSelectNext.btnClick {
