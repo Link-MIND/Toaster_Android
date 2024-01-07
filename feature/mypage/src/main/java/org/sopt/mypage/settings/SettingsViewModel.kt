@@ -14,8 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-  private val authRepository: AuthRepository
-): ViewModel() {
+  private val authRepository: AuthRepository,
+) : ViewModel() {
   private val _logoutState = MutableStateFlow<UiState<Unit>>(UiState.Empty)
   val logoutState: StateFlow<UiState<Unit>> = _logoutState.asStateFlow()
 
@@ -27,7 +27,6 @@ class SettingsViewModel @Inject constructor(
       Log.e("로그아웃성공", "로그아웃성공")
       _logoutState.emit(UiState.Success(it))
     }.onFailure {
-
       Log.e("로그아웃실패", "${it.message}")
       _logoutState.emit(UiState.Failure(it.message.toString()))
     }

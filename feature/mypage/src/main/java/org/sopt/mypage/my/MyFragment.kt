@@ -6,7 +6,7 @@ import androidx.navigation.fragment.findNavController
 import org.sopt.mypage.databinding.FragmentMyBinding
 import org.sopt.ui.base.BindingFragment
 
-class MyFragment : BindingFragment<FragmentMyBinding>({ FragmentMyBinding.inflate(it)}){
+class MyFragment : BindingFragment<FragmentMyBinding>({ FragmentMyBinding.inflate(it) }) {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     binding.ivSetting.setOnClickListener {
