@@ -10,6 +10,7 @@ import org.sopt.ui.base.BindingFragment
 class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.inflate(it) }) {
 
   private lateinit var homeClipAdapter: HomeClipAdapter
+  private lateinit var homeWeekLinkAdapter: HomeWeekLinkAdapter
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     binding.root.setOnClickListener {
@@ -26,9 +27,18 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     initClipAdapter()
     val list = listOf(ClipDummy("1", 1), ClipDummy("2", 2), ClipDummy("3", 3), null)
     homeClipAdapter.submitList(list)
+    val list2 = listOf(
+      WeekLinkDummy("1", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
+      WeekLinkDummy("1", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
+      WeekLinkDummy("1", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
+    )
+    homeWeekLinkAdapter.submitList(list2)
   }
+
   private fun initClipAdapter() {
     homeClipAdapter = HomeClipAdapter(onClickItemClip = {}, onClickItemClip2 = {})
     binding.rvHomeClip.adapter = homeClipAdapter
+    homeWeekLinkAdapter = HomeWeekLinkAdapter(onClickItem = {})
+    binding.rvWeekLink.adapter = homeWeekLinkAdapter
   }
 }
