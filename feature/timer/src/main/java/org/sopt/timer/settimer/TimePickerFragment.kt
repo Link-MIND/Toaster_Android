@@ -78,9 +78,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
             if (newState == 0) {
               newList.onEach { item ->
                 if (item.isSelected) {
-                  hour = item.text.toIntOrNull()?.let {
-                    if (it < 10) "0${item.text}" else item.text
-                  } ?: item.text
+                  hour = item.convertToText()
                   binding.tvTimePickerTime.text = "$ampm ${hour}시 ${minute}분"
                 }
               }
@@ -133,9 +131,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
             if (newState == 0) {
               newList.onEach { item ->
                 if (item.isSelected) {
-                  minute = item.text.toIntOrNull()?.let {
-                    if (it < 10) "0${item.text}" else item.text
-                  } ?: item.text
+                  minute = item.convertToText()
                   binding.tvTimePickerTime.text = "$ampm ${hour}시 ${minute}분"
                 }
               }
@@ -187,9 +183,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
             if (newState == 0) {
               newList.onEach { item ->
                 if (item.isSelected) {
-                  ampm = item.text.toIntOrNull()?.let {
-                    if (it < 10) "0${item.text}" else item.text
-                  } ?: item.text
+                  ampm = item.convertToText()
                   binding.tvTimePickerTime.text = "$ampm ${hour}시 ${minute}분"
                 }
               }
