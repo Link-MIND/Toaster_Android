@@ -1,11 +1,14 @@
 package org.sopt.maincontainer
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.maincontainer.databinding.ActivityMainBinding
@@ -42,6 +45,8 @@ class MainActivity : AppCompatActivity() {
     changeBottomNavigationFragment()
     binding.fabMain.onThrottleClick {
       Log.d("test","test")
+      val uri = Uri.parse("featureSaveLink://saveLinkFragment")
+      navController.navigate(uri)
     }
   }
 
