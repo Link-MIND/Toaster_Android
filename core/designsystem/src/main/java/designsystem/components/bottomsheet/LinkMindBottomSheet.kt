@@ -38,8 +38,7 @@ class LinkMindBottomSheet(context: Context) {
     }
   }
 
-
-  fun setBottomSheetHint(@StringRes textId: Int){
+  fun setBottomSheetHint(@StringRes textId: Int) {
     binding.etvBottomSheet.editText.setHint(textId)
   }
   fun bottomSheetConfirmBtnClick(onClick: () -> Unit) {

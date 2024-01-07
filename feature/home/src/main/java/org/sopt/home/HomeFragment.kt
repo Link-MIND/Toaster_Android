@@ -53,16 +53,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     homeClipAdapter = HomeClipAdapter(
       onClickItemClip = {},
       onClickItemClip2 = {
-        val linkMindBottomSheet = LinkMindBottomSheet(requireContext())
-        linkMindBottomSheet.show()
-        linkMindBottomSheet.apply {
-          setBottomSheetHint(org.sopt.mainfeature.R.string.home_new_clip_info)
-          setTitle(org.sopt.mainfeature.R.string.home_correction_clip)
-          setErroMsg(org.sopt.mainfeature.R.string.home_error_clip_info)
-          bottomSheetConfirmBtnClick {
-            Log.d("test", "test")
-          }
-        }
+        showHomeBottomSheet()
       },
     )
     binding.rvHomeClip.adapter = homeClipAdapter
@@ -80,5 +71,18 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     binding.rvHomeWeekRecommend.adapter = homeWeekRecommendLinkAdapter
     val spacingWeekRecommendInPixels = resources.getDimensionPixelSize(R.dimen.spacing_12)
     binding.rvHomeWeekRecommend.addItemDecoration(ItemDecoration(3, spacingWeekRecommendInPixels))
+  }
+
+  private fun showHomeBottomSheet() {
+    val linkMindBottomSheet = LinkMindBottomSheet(requireContext())
+    linkMindBottomSheet.show()
+    linkMindBottomSheet.apply {
+      setBottomSheetHint(org.sopt.mainfeature.R.string.home_new_clip_info)
+      setTitle(org.sopt.mainfeature.R.string.home_correction_clip)
+      setErroMsg(org.sopt.mainfeature.R.string.home_error_clip_info)
+      bottomSheetConfirmBtnClick {
+        Log.d("test", "test")
+      }
+    }
   }
 }
