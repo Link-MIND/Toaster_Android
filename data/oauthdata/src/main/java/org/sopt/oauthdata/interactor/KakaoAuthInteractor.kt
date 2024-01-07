@@ -36,8 +36,7 @@ class KakaoAuthInteractor @Inject constructor(
                   return@loginWithKakaoAccount
                 }
               }
-            }
-            else if (token != null) {
+            } else if (token != null) {
               it.resume(Result.success(KakaoToken(token.accessToken, token.refreshToken)))
               return@loginWithKakaoTalk
             }
@@ -58,7 +57,6 @@ class KakaoAuthInteractor @Inject constructor(
         }
       }
     }
-
 
   override fun logout() {
     client.logout(Timber::e)
