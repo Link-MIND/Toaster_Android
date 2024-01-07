@@ -17,9 +17,9 @@
 
       <ImageView
         android:id="@+id/iv_tb_toaster"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingVertical="18dp"
+        android:layout_width="108dp"
+        android:layout_height="20dp"
+        android:layout_marginVertical="18dp"
         android:paddingStart="20dp"
         android:src="@drawable/img_toaster"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
         app:editTextSearchHint="검색어를 입력해주세요"
-        app:layout_constraintTop_toBottomOf="@+id/iv_tb_toaster" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_home_setting" />
 
 
       <TextView
