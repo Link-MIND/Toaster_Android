@@ -1,6 +1,8 @@
 package org.sopt.oauthdata.interactor
 
 import android.content.Context
+import com.kakao.sdk.common.model.ClientError
+import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.qualifiers.ActivityContext
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -21,14 +23,24 @@ class KakaoAuthInteractor @Inject constructor(
         true -> {
           client.loginWithKakaoTalk(context) { token, error ->
             if (error != null) {
-              it.resume(Result.failure(error))
-              return@loginWithKakaoTalk
+              if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
+                return@loginWithKakaoTalk
+              }
+              client.loginWithKakaoAccount(context) { accountToken, accountError ->
+                if (accountError != null) {
+                  it.resume(Result.failure(accountError))
+                  return@loginWithKakaoAccount
+                }
+                if (accountToken != null) {
+                  it.resume(Result.success(KakaoToken(accountToken.accessToken, accountToken.refreshToken)))
+                  return@loginWithKakaoAccount
+                }
+              }
             }
-            if (token != null) {
+            else if (token != null) {
               it.resume(Result.success(KakaoToken(token.accessToken, token.refreshToken)))
               return@loginWithKakaoTalk
             }
-            it.resumeWithException(Throwable("Unreachable code"))
           }
         }
         false -> {
@@ -46,6 +58,7 @@ class KakaoAuthInteractor @Inject constructor(
         }
       }
     }
+
 
   override fun logout() {
     client.logout(Timber::e)
