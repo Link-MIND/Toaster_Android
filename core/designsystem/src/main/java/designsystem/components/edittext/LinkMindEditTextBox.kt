@@ -48,7 +48,7 @@ class LinkMindEditTextBox @JvmOverloads constructor(
     typedArray.recycle()
   }
 
-  fun checkTextLength(value:Int)=
+  fun checkTextLength(value: Int) =
     binding.editText.text.length >= value
 
   fun onClickTextClear(onClick: () -> Unit) {
