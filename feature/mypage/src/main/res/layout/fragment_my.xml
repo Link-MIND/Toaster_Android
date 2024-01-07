@@ -52,7 +52,7 @@
       android:layout_width="48dp"
       android:layout_height="48dp"
       android:layout_marginTop="1dp"
-      android:background="@drawable/img_settings_profile"
+      android:background="@drawable/img_mypage_profile"
       android:scaleType="centerCrop"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
@@ -137,9 +137,9 @@
 
   <ImageView
     android:id="@+id/iv_please_wait"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/img_settings_alarm"
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:src="@drawable/img_mypage_alarm"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/v_mypage_1" />
