@@ -11,6 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.sopt.common.intentprovider.IntentProvider
+import org.sopt.common.intentprovider.LOGIN
 import org.sopt.datastore.datastore.SecurityDataStore
 import org.sopt.mainfeature.R
 import org.sopt.mypage.databinding.FragmentSettingsBinding
@@ -25,6 +26,7 @@ class SettingsFragment : Fragment() {
   private val viewModel: SettingsViewModel by viewModels()
 
   @Inject
+  @LOGIN
   lateinit var intentProvider: IntentProvider
 
   @Inject
@@ -60,7 +62,7 @@ class SettingsFragment : Fragment() {
       when (state) {
         is UiState.Success -> {
           dataStore.setAutoLogin(false)
-          val intent = intentProvider.getAuthIntent()
+          val intent = intentProvider.getIntent()
           startActivity(intent)
           requireActivity().finish()
         }
@@ -77,7 +79,7 @@ class SettingsFragment : Fragment() {
       when (state) {
         is UiState.Success -> {
           dataStore.setAutoLogin(false)
-          val intent = intentProvider.getAuthIntent()
+          val intent = intentProvider.getIntent()
           startActivity(intent)
           requireActivity().finish()
         }
