@@ -47,6 +47,17 @@
     android:paddingTop="12dp"
     app:editTextSearchHint="복사한 링크를 붙여 넣어 주세요"
     app:layout_constraintTop_toBottomOf="@id/tv_save_link_sub" />
+  <TextView
+    android:id="@+id/tv_save_link_error"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="20dp"
+    android:paddingTop="12dp"
+    android:text="유효하지 않은 형식의 링크입니다.."
+    android:textAppearance="@style/Typography.suit.medium_12"
+    android:textColor="@color/error"
+    android:visibility="gone"
+    app:layout_constraintTop_toBottomOf="@id/etv_save_copy_link" />
 
   <TextView
     android:id="@+id/tv_save_link_sub_title"
@@ -58,7 +69,7 @@
     android:textAppearance="@style/Typography.suit.medium_18"
     android:textColor="@color/neutrals900"
     android:visibility="gone"
-    app:layout_constraintTop_toBottomOf="@id/etv_save_copy_link" />
+    app:layout_constraintTop_toBottomOf="@id/tv_save_link_error" />
 
   <designsystem.components.edittext.LinkMindEditTextBox
     android:id="@+id/etv_save_copy_link_title"
