@@ -1,4 +1,4 @@
-package org.sopt.timer
+package org.sopt.timer.settimer
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,14 +8,14 @@ import org.sopt.timer.dummymodel.PickerItem
 import org.sopt.ui.view.ItemDiffCallback
 import kotlin.math.round
 
-class NumberAdapter : ListAdapter<PickerItem, NumberViewHolder>(DiffUtil) {
-  override fun onBindViewHolder(holder: NumberViewHolder, position: Int) {
+class NumberAdapter : ListAdapter<PickerItem, PickerViewHolder>(DiffUtil) {
+  override fun onBindViewHolder(holder: PickerViewHolder, position: Int) {
     val realPosition = position % currentList.size
     holder.onBind(getItem(realPosition))
   }
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NumberViewHolder {
-    return NumberViewHolder(
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PickerViewHolder {
+    return PickerViewHolder(
       ItemNumberPickerBinding.inflate(LayoutInflater.from(parent.context), parent, false),
     )
   }
