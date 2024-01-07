@@ -1,5 +1,6 @@
 package org.sopt.maincontainer
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.maincontainer.databinding.ActivityMainBinding
+import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -38,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     binding.bnvMain.setupWithNavController(navController)
     binding.bnvMain.setOnItemReselectedListener { }
     changeBottomNavigationFragment()
+    onClickFab()
   }
 
   private fun changeBottomNavigationFragment() {
@@ -57,6 +60,14 @@ class MainActivity : AppCompatActivity() {
       }
     }
   }
+
+  private fun onClickFab() {
+    binding.fabMain.onThrottleClick {
+      val uri = Uri.parse("featureSaveLink://saveLinkFragment")
+      navController.navigate(uri)
+    }
+  }
+
   private val navigationMap = mapOf(
     R.id.navigation_home to org.sopt.home.R.id.nav_graph_home,
     R.id.navigation_clip to org.sopt.clip.R.id.nav_graph_clip,
