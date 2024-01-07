@@ -1,4 +1,4 @@
-package org.sopt.timer.settimer
+package org.sopt.timer.settimer.clipselect
 
 import android.os.Bundle
 import android.util.Log

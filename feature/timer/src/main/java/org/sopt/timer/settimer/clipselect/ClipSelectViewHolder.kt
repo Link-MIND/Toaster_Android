@@ -1,4 +1,4 @@
-package org.sopt.timer.settimer
+package org.sopt.timer.settimer.clipselect
 
 import android.content.Context
 import androidx.core.content.ContextCompat

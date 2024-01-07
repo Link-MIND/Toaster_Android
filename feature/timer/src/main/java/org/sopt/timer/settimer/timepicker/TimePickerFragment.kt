@@ -1,4 +1,4 @@
-package org.sopt.timer.settimer
+package org.sopt.timer.settimer.timepicker
 
 import android.os.Bundle
 import android.view.View
@@ -10,30 +10,32 @@ import org.sopt.timer.dummymodel.PickerItem
 import org.sopt.ui.base.BindingFragment
 
 class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ FragmentTimePickerBinding.inflate(it) }) {
-  private lateinit var textAdapter: TextAdapter
-  private lateinit var numberAdapter1: NumberAdapter
-  private lateinit var numberAdapter2: NumberAdapter
-  private var ampm = "오전"
+  private lateinit var timePeriodAdapter: TimePeriodAdapter
+  private lateinit var hourAdapter: NumberAdapter
+  private lateinit var minuteAdapter: NumberAdapter
+  private lateinit var listUpdater: ListUpdater<ListAdapter<PickerItem, PickerViewHolder>>
+  private var timePeriod = "오전"
   private var hour = "01"
   private var minute = "00"
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     setupRecyclerViews()
+    listUpdater = ListUpdater()
     binding.btnTimePickerNext.state = LinkMindButtonState.DISABLE
     binding.tvTimePickerCategory.text = "카테고리이름을"
-    binding.tvTimePickerTime.text = "$ampm ${hour}시 ${minute}분"
+    binding.tvTimePickerTime.text = "$timePeriod ${hour}시 ${minute}분"
   }
 
   private fun setupRecyclerViews() {
     val ampmList = generateAmpmList()
     val hourList = generateNumberList(1, 12)
     val minuteList = generateNumberList(0, 59)
-    textAdapter = TextAdapter()
-    numberAdapter1 = NumberAdapter()
-    numberAdapter2 = NumberAdapter()
-    setupRecyclerView(binding.rvTimePickerAmpm, ampmList, textAdapter, ::updateAmPm)
-    setupRecyclerView(binding.rvTimePickerHour, hourList, numberAdapter1, ::updateHour)
-    setupRecyclerView(binding.rvTimePickerMinute, minuteList, numberAdapter2, ::updateMinute)
+    timePeriodAdapter = TimePeriodAdapter()
+    hourAdapter = NumberAdapter()
+    minuteAdapter = NumberAdapter()
+    setupRecyclerView(binding.rvTimePickerAmpm, ampmList, timePeriodAdapter, ::updateAmPm)
+    setupRecyclerView(binding.rvTimePickerHour, hourList, hourAdapter, ::updateHour)
+    setupRecyclerView(binding.rvTimePickerMinute, minuteList, minuteAdapter, ::updateMinute)
   }
 
   private fun generateAmpmList() = listOf(
@@ -74,13 +76,13 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
         object : RecyclerView.OnScrollListener() {
           override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
-            val newList = getNewList(snapHolder, recyclerView, isNumber, adapter)
+            val newList = listUpdater.getNewList(snapHolder, recyclerView, isNumber, adapter)
             adapter.submitList(newList)
             if (newState == 0) {
               newList?.onEach { item ->
                 if (item.isSelected) {
                   updateText(item)
-                  binding.tvTimePickerTime.text = "$ampm ${hour}시 ${minute}분"
+                  binding.tvTimePickerTime.text = "$timePeriod ${hour}시 ${minute}분"
                 }
               }
             }
@@ -90,29 +92,12 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
       )
       onFlingListener = object : RecyclerView.OnFlingListener() {
         override fun onFling(velocityX: Int, velocityY: Int): Boolean {
-          val newList = getNewList(snapHolder, recyclerView, isNumber, adapter)
+          val newList = listUpdater.getNewList(snapHolder, recyclerView, isNumber, adapter)
           adapter.submitList(newList)
           return false
         }
       }
     }
-  }
-
-  private fun <T : ListAdapter<PickerItem, PickerViewHolder>> getNewList(
-    snapHolder: CenterSnapHelper,
-    recyclerView: RecyclerView,
-    isNumber: Boolean,
-    adapter: T,
-  ): List<PickerItem>? {
-    val newList = snapHolder.findSnapView(recyclerView.layoutManager)?.let { centerView ->
-      recyclerView.layoutManager?.getPosition(centerView)?.let { pos ->
-        val newPos = if (isNumber) pos % adapter.currentList.size else pos
-        adapter.currentList.mapIndexed { index, item ->
-          item.copy(isSelected = index == newPos)
-        }
-      }
-    }
-    return newList
   }
 
   private fun updateHour(item: PickerItem) {
@@ -124,6 +109,6 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   }
 
   private fun updateAmPm(item: PickerItem) {
-    ampm = item.convertToText()
+    timePeriod = item.convertToText()
   }
 }

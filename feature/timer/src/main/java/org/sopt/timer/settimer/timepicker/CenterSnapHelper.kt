@@ -1,4 +1,4 @@
-package org.sopt.timer.settimer
+package org.sopt.timer.settimer.timepicker
 
 import android.view.View
 import androidx.recyclerview.widget.LinearSnapHelper
