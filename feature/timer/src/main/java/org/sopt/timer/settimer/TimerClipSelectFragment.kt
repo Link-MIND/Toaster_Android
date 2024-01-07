@@ -23,18 +23,21 @@ class TimerClipSelectFragment : BindingFragment<FragmentTimerClipSelectBinding>(
       Clip("전체 클립", 3, false),
       Clip("전체 클립", 3, false),
     )
-    adapter = ClipSelectAdapter({ a, b ->
-      if (a.isSelected) {
-        list.onEach { it.isSelected = false }
-        list[b].isSelected = true
-        Log.e("리스트", "$list")
-        binding.btnTimerClipSelectNext.state = LinkMindButtonState.ENABLE
-      } else {
-        list.onEach { it.isSelected = false }
-        Log.e("리스트", "$list")
-        binding.btnTimerClipSelectNext.state = LinkMindButtonState.DISABLE
-      }
-    }, requireContext())
+    adapter = ClipSelectAdapter(
+      onClick = { a, b ->
+        if (a.isSelected) {
+          list.onEach { it.isSelected = false }
+          list[b].isSelected = true
+          Log.e("리스트", "$list")
+          binding.btnTimerClipSelectNext.state = LinkMindButtonState.ENABLE
+        } else {
+          list.onEach { it.isSelected = false }
+          Log.e("리스트", "$list")
+          binding.btnTimerClipSelectNext.state = LinkMindButtonState.DISABLE
+        }
+      },
+      context = requireContext(),
+    )
     adapter.submitList(list)
     binding.rvItemTimerClipSelect.adapter = adapter
     binding.btnTimerClipSelectNext.btnClick {
