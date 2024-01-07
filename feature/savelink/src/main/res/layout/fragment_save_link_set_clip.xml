@@ -60,22 +60,38 @@
   <TextView
     android:id="@+id/tv_save_link_add_clip"
     android:layout_width="wrap_content"
-    app:layout_constraintEnd_toEndOf="parent"
     android:layout_height="wrap_content"
-    android:paddingEnd="16dp"
     android:paddingTop="12dp"
+    android:paddingEnd="16dp"
     android:text="클립 추가"
     android:textAppearance="@style/Typography.suit.bold_12"
     android:textColor="@color/primary"
+    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toBottomOf="@id/tv_save_link_clip_title" />
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rv_item_timer_clip_select"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginTop="16dp"
+    android:nestedScrollingEnabled="false"
+    android:orientation="vertical"
+    android:overScrollMode="never"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    app:layout_constraintTop_toBottomOf="@id/tv_save_link_add_clip"
+    app:layout_constraintBottom_toTopOf="@id/btn_save_link_complete"
+    tools:listitem="@layout/item_timer_clip_select" />
 
   <designsystem.components.button.LinkMindBlockButton
     android:id="@+id/btn_save_link_complete"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:fullWidthBtnText="완료"
     android:paddingBottom="12dp"
+    app:fullWidthBtnText="완료"
     app:layout_constraintBottom_toBottomOf="parent"
     tools:fullWidthBtnBackGroundTint="@color/primary"
     tools:fullWidthBtnTextColor="@color/black" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
