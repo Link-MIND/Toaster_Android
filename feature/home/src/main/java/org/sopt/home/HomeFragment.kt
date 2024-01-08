@@ -11,6 +11,7 @@ import org.sopt.home.adapter.HomeWeekRecommendLinkAdapter
 import org.sopt.home.databinding.FragmentHomeBinding
 import org.sopt.ui.DeepLinkUtil
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.view.onThrottleClick
 
 class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.inflate(it) }) {
 
@@ -29,6 +30,10 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
 //        "featureTimer://fragmentExample",
 //      )
       findNavController().navigate(request, navOptions)
+
+      binding.clHomeSearch.onThrottleClick {
+        //Todo
+      }
     }
     initAdapter()
     val list = listOf(ClipDummy("전체클립", 1), ClipDummy("Title", 2), ClipDummy("LeeSak", 3), null)
