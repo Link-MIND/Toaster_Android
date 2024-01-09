@@ -1,28 +1,17 @@
 package org.sopt.mypage.settings
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import org.sopt.mypage.common.BaseFragment
 import org.sopt.mypage.databinding.FragmentSettingsBinding
+import org.sopt.ui.base.BindingFragment
 
-class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
-
-  override fun inflateBinding(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    attachToRoot: Boolean
-  ): FragmentSettingsBinding {
-    return FragmentSettingsBinding.inflate(inflater, container, attachToRoot)
-  }
+class SettingsFragment : BindingFragment<FragmentSettingsBinding>({ FragmentSettingsBinding.inflate(it) }) {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
     val toasterToggle = binding.settingsAlertToggle
     val tvSettingsAlertOff = binding.tvSettingsAlertOff
-
 
     val startStateId = org.sopt.mainfeature.R.id.start
 
