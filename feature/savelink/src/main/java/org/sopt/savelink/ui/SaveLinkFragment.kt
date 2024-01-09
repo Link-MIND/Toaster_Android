@@ -29,8 +29,8 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
   private fun initView() {
     binding.btnSaveLinkNext.apply {
       state = LinkMIndFullWidthButtonState.DISABLE
-      test(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
-      }
+      setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
+    }
   }
 
   private fun handleEditTextLink() {
@@ -133,10 +133,11 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     layoutParams.setMargins(0, 0, 0, 0)
     binding.btnSaveLinkNext.layoutParams = layoutParams
     binding.btnSaveLinkNext.apply {
-      state = if (state == LinkMIndFullWidthButtonState.DISABLE)
+      state = if (state == LinkMIndFullWidthButtonState.DISABLE) {
         LinkMIndFullWidthButtonState.DISABLE
-      else
+      } else {
         LinkMIndFullWidthButtonState.ENABLE_BLACK
+      }
     }
   }
 
@@ -146,10 +147,11 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     layoutParams.rightMargin = marginInPixels
     binding.btnSaveLinkNext.layoutParams = layoutParams
     binding.btnSaveLinkNext.apply {
-      if (state == LinkMIndFullWidthButtonState.DISABLE)
-        test(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
-      else
-        test(org.sopt.mainfeature.R.drawable.shape_neutrals850_fill_12_rect)
+      if (state == LinkMIndFullWidthButtonState.DISABLE) {
+        setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
+      } else {
+        setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals850_fill_12_rect)
+      }
     }
   }
 

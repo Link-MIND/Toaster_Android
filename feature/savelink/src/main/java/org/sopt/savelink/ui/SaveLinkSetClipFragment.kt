@@ -9,8 +9,8 @@ import designsystem.components.dialog.LinkMindDialog
 import org.sopt.mainfeature.R
 import org.sopt.savelink.databinding.FragmentSaveLinkSetClipBinding
 import org.sopt.savelink.ui.adapter.ClipSelectAdapter
-import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.onThrottleClick
 
 class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>({ FragmentSaveLinkSetClipBinding.inflate(it) }) {

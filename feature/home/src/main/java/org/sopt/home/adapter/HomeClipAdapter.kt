@@ -13,7 +13,7 @@ class HomeClipAdapter(
   private val onClickItemClip2: () -> Unit,
 ) : ListAdapter<ClipDummy, HomeCliprViewHolder>(DiffUtil) {
   override fun onBindViewHolder(holder: HomeCliprViewHolder, position: Int) {
-    holder.onBind(getItem(position),position)
+    holder.onBind(getItem(position), position)
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeCliprViewHolder {

@@ -13,7 +13,7 @@ object KeyboardUtils {
   private var keyboardVisibilityListener: ViewTreeObserver.OnGlobalLayoutListener? = null
   fun setKeyboardVisibilityListener(
     parentView: View,
-    onKeyboardVisibilityListener: OnKeyboardVisibilityListener
+    onKeyboardVisibilityListener: OnKeyboardVisibilityListener,
   ) {
     keyboardVisibilityListener = object : ViewTreeObserver.OnGlobalLayoutListener {
       private var alreadyOpen = false
@@ -25,7 +25,7 @@ object KeyboardUtils {
         val estimatedKeyboardHeight = TypedValue.applyDimension(
           TypedValue.COMPLEX_UNIT_DIP,
           estimatedKeyboardDP.toFloat(),
-          parentView.resources.displayMetrics
+          parentView.resources.displayMetrics,
         ).toInt()
         parentView.getWindowVisibleDisplayFrame(rect)
         val heightDiff = parentView.rootView.height - (rect.bottom - rect.top)

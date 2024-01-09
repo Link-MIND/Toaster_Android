@@ -4,10 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
 import org.sopt.mainfeature.R
@@ -58,7 +55,7 @@ class LinkMindFullWidthButton @JvmOverloads constructor(
     }
   }
 
-   fun test(backgroundResource:Int) {
+  fun setBackGround(backgroundResource: Int) {
     binding.apply {
       clBtnFullWidthLinkmind.isClickable = true
       clBtnFullWidthLinkmind.isFocusable = true
@@ -67,14 +64,6 @@ class LinkMindFullWidthButton @JvmOverloads constructor(
     }
   }
 
-   fun test2(textColorResId: Int) {
-    binding.apply {
-      clBtnFullWidthLinkmind.isClickable = true
-      clBtnFullWidthLinkmind.isFocusable = true
-      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.neutrals_white))
-      clBtnFullWidthLinkmind.setBackgroundResource(0)
-    }
-  }
   fun btnClick(onClick: () -> Unit) {
     binding.clBtnFullWidthLinkmind.onThrottleClick {
       onClick()
