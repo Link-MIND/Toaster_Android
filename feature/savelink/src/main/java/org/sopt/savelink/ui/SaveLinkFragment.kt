@@ -1,5 +1,6 @@
 package org.sopt.savelink.ui
 
+import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -19,30 +21,35 @@ import org.sopt.ui.view.onThrottleClick
 
 class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSaveLinkBinding.inflate(it) }) {
   private lateinit var keyboardVisibilityListener: ViewTreeObserver.OnGlobalLayoutListener
+  private lateinit var layoutParams: ViewGroup.MarginLayoutParams
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    setKeyboardVisibilityListener(object : OnKeyboardVisibilityListener {
-      override fun onVisibilityChanged(visible: Boolean) {
-        if (visible) {
-          val layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
+    setKeyboardVisibilityListener(
+      object : OnKeyboardVisibilityListener {
+        override fun onVisibilityChanged(visible: Boolean) {
+          if (visible) {
+            if(binding!=null){
+            layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
 
-          layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
-          layoutParams.setMargins(0, 0, 0, 0)
+            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+            layoutParams.setMargins(0, 0, 0, 0)
 
-          binding.btnSaveLinkNext.layoutParams = layoutParams
-        } else {
-          val layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
+            binding.btnSaveLinkNext.layoutParams = layoutParams
+            }
+          } else {
+            layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
 
-          val marginInPixels = (20 * resources.displayMetrics.density).toInt()
-          layoutParams.leftMargin = marginInPixels
-          layoutParams.rightMargin = marginInPixels
+            val marginInPixels = (20 * resources.displayMetrics.density).toInt()
+            layoutParams.leftMargin = marginInPixels
+            layoutParams.rightMargin = marginInPixels
 
-          binding.btnSaveLinkNext.layoutParams = layoutParams
+            binding.btnSaveLinkNext.layoutParams = layoutParams
+          }
         }
-      }
-    })
+      },
+    )
 
 
     binding.btnSaveLinkNext.state = LinkMIndFullWidthButtonState.DISABLE
@@ -52,6 +59,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
       findNavController().navigateUp()
     }
   }
+
   private fun handleEditTextLink() {
     with(binding) {
       etvSaveCopyLink.apply {
@@ -84,7 +92,11 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
         hideErrorState(binding.tvSaveLinkErrorTitle)
         binding.btnSaveLinkNext.btnClick {
           with(binding) {
+
+            binding.root.viewTreeObserver.removeOnGlobalLayoutListener(keyboardVisibilityListener)
             Log.d("test", "success")
+            val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(binding.btnSaveLinkNext.windowToken, 0)
             findNavController().navigate(R.id.action_saveLinkFragment_to_saveLinkSetClipFragment)
           }
         }
@@ -132,8 +144,9 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
   }
 
   interface OnKeyboardVisibilityListener {
-    fun onVisibilityChanged(visible : Boolean)
+    fun onVisibilityChanged(visible: Boolean)
   }
+
   private fun setKeyboardVisibilityListener(onKeyboardVisibilityListener: OnKeyboardVisibilityListener) {
     val parentView = binding.root
     keyboardVisibilityListener = object : ViewTreeObserver.OnGlobalLayoutListener {
@@ -146,7 +159,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
         val estimatedKeyboardHeight = TypedValue.applyDimension(
           TypedValue.COMPLEX_UNIT_DIP,
           EstimatedKeyboardDP.toFloat(),
-          parentView.resources.displayMetrics
+          parentView.resources.displayMetrics,
         ).toInt()
         parentView.getWindowVisibleDisplayFrame(rect)
         val heightDiff = parentView.rootView.height - (rect.bottom - rect.top)
@@ -161,5 +174,6 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     }
     parentView.viewTreeObserver.addOnGlobalLayoutListener(keyboardVisibilityListener)
   }
+
 
 }
