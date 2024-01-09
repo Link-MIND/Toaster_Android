@@ -12,7 +12,7 @@ import org.sopt.ui.view.ItemDiffCallback
 class ClipSelectAdapter(
   private val onClick: (Clip, Int) -> Unit,
   private val context: Context,
-  ) : ListAdapter<Clip, ClipSelectViewHolder>(DiffUtil) {
+) : ListAdapter<Clip, ClipSelectViewHolder>(DiffUtil) {
   private var selectedPosition = -1
   override fun onBindViewHolder(holder: ClipSelectViewHolder, position: Int) {
     holder.onBind(getItem(position), position) { clip, position ->

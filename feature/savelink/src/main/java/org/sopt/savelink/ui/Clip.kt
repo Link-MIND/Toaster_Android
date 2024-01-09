@@ -4,7 +4,7 @@ data class Clip(
   val name: String,
   val count: Int,
   var isSelected: Boolean,
-){
+) {
   fun selectNewClip() {
     isSelected = true
   }
