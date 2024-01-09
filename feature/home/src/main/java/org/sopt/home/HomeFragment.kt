@@ -1,5 +1,6 @@
 package org.sopt.home
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,7 +10,6 @@ import org.sopt.home.adapter.HomeClipAdapter
 import org.sopt.home.adapter.HomeWeekLinkAdapter
 import org.sopt.home.adapter.HomeWeekRecommendLinkAdapter
 import org.sopt.home.databinding.FragmentHomeBinding
-import org.sopt.ui.DeepLinkUtil
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
 
@@ -45,6 +45,18 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     homeWeekLinkAdapter.submitList(list2)
     homeWeekRecommendLinkAdapter.submitList(list2)
     binding.pbLinkmindHome.setProgressBarMain(54)
+    navigateToSetting()
+  }
+
+  private fun navigateToSetting() {
+    binding.ivHomeSetting.onThrottleClick {
+      navigateToDestination("featureMyPage://fragmentSetting")
+    }
+  }
+
+  private fun navigateToDestination(destination: String) {
+    val uri = Uri.parse(destination)
+    findNavController().navigate(uri)
   }
 
   private fun initAdapter() {
