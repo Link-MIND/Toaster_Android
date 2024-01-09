@@ -18,8 +18,7 @@ class LinkResultAdapter :
   }
 
   override fun onBindViewHolder(holder: LinkResultViewHolder, position: Int) {
-    val linkResult = getItem(position)
-    holder.bind(linkResult)
+    holder.onBind(getItem(position))
   }
 
   private object DiffUtilCallback : DiffUtil.ItemCallback<LinkResultDummy>() {

@@ -18,8 +18,7 @@ class ClipResultAdapter :
   }
 
   override fun onBindViewHolder(holder: ClipResultViewHolder, position: Int) {
-    val clipResult = getItem(position)
-    holder.bind(clipResult)
+    holder.onBind(getItem(position))
   }
 
   private object DiffUtilCallback : DiffUtil.ItemCallback<ClipResultDummy>() {
