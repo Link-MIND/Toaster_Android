@@ -15,7 +15,6 @@ class ClipSelectAdapter(
 ) : ListAdapter<Clip, ClipSelectViewHolder>(DiffUtil) {
   private var selectedPosition = -1
   override fun onBindViewHolder(holder: ClipSelectViewHolder, position: Int) {
-//    if (position==0) holder.binding.ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_home_clip_20)
     holder.onBind(getItem(position), position) { clip, position ->
       if (selectedPosition != position) {
         if (selectedPosition != -1) {
