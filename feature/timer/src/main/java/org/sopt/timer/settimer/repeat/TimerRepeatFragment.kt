@@ -1,53 +1,87 @@
 package org.sopt.timer.settimer.repeat
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import designsystem.components.button.state.LinkMindButtonState
 import org.sopt.timer.databinding.FragmentTimerRepeatBinding
 import org.sopt.timer.dummymodel.Repeat
+import org.sopt.timer.settimer.SetTimerViewModel
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.view.onThrottleClick
 
 class TimerRepeatFragment : BindingFragment<FragmentTimerRepeatBinding>({ FragmentTimerRepeatBinding.inflate(it) }) {
   lateinit var adapter: TimerRepeatAdapter
+  private val viewModel: SetTimerViewModel by activityViewModels()
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     binding.btnTimerRepeatComplete.state = LinkMindButtonState.DISABLE
 
-    val list = listOf(
-      Repeat("매일 (월~일)", false),
-      Repeat("주중마다 (월~금)", false),
-      Repeat("주말마다 (토~일)", false),
-      Repeat("월요일마다", false),
-      Repeat("화요일마다", false),
-      Repeat("수요일마다", false),
-      Repeat("목요일마다", false),
-      Repeat("금요일마다", false),
-      Repeat("토요일마다", false),
-      Repeat("일요일마다", false),
-    )
+    val list = viewModel.repeatList.value.map { Repeat(it.period, it.isSelected) }.toMutableList()
 
+    initTimerRepeatAdapter(list)
+    initCompleteButtonState(list)
+    initBackButtonClickListener()
+    initCloseButtonClickListener()
+    initCompleteButtonClickListener(list)
+  }
+
+  private fun initCompleteButtonState(list: MutableList<Repeat>) {
+    if (list.any { it.isSelected }) {
+      binding.btnTimerRepeatComplete.state = LinkMindButtonState.ENABLE
+    } else {
+      binding.btnTimerRepeatComplete.state = LinkMindButtonState.DISABLE
+    }
+  }
+
+  private fun initTimerRepeatAdapter(list: MutableList<Repeat>) {
     adapter = TimerRepeatAdapter(
-      onClick = { a, b ->
-        if (a.isSelected) {
-          list[b].isSelected = true
-          Log.e("리스트", "$list")
-        } else {
-          list[b].isSelected = false
-          Log.e("리스트", "$list")
-        }
-        val newList = list.map {
-          it.isSelected
-        }
-        if (newList.contains(true)) {
-          binding.btnTimerRepeatComplete.state = LinkMindButtonState.ENABLE
-        } else {
-          binding.btnTimerRepeatComplete.state = LinkMindButtonState.DISABLE
-        }
+      onClick = { repeat, index ->
+        handleTimerRepeatItemClick(repeat, list, index)
       },
       context = requireContext(),
     )
     adapter.submitList(list)
     binding.rvTimerRepeat.adapter = adapter
+  }
+
+  private fun handleTimerRepeatItemClick(
+    repeat: Repeat,
+    list: MutableList<Repeat>,
+    index: Int,
+  ) {
+    if (repeat.isSelected) {
+      list[index].isSelected = true
+    } else {
+      list[index].isSelected = false
+    }
+    val newList = list.map {
+      it.isSelected
+    }
+    if (newList.contains(true)) {
+      binding.btnTimerRepeatComplete.state = LinkMindButtonState.ENABLE
+    } else {
+      binding.btnTimerRepeatComplete.state = LinkMindButtonState.DISABLE
+    }
+  }
+
+  private fun initCloseButtonClickListener() {
+    binding.ivTimerRepeatClose.onThrottleClick {
+      findNavController().navigateUp()
+    }
+  }
+
+  private fun initBackButtonClickListener() {
+    binding.ivTimerRepeatBack.onThrottleClick {
+      findNavController().navigateUp()
+    }
+  }
+
+  private fun initCompleteButtonClickListener(list: MutableList<Repeat>) {
+    binding.btnTimerRepeatComplete.btnClick {
+      viewModel.setRepeatList(list)
+      findNavController().navigateUp()
+    }
   }
 }
