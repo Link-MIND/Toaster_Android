@@ -19,50 +19,18 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    initView()
+    handleEditTextLink()
+    handleEditTextTitle()
     handleKeyboardHide()
+    navigateUp()
+  }
+
+  private fun initView() {
     binding.btnSaveLinkNext.apply {
       state = LinkMIndFullWidthButtonState.DISABLE
       test(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
-    }
-    handleEditTextLink()
-    handleEditTextTitle()
-    binding.ivSaveLinkClose.onThrottleClick {
-      findNavController().navigateUp()
-    }
-  }
-
-  private fun handleKeyboardHide() {
-
-    val layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
-    KeyboardUtils.setKeyboardVisibilityListener(
-      binding.root,
-      object : OnKeyboardVisibilityListener {
-        override fun onVisibilityChanged(isVisible: Boolean) {
-          if (isVisible) {
-            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
-            layoutParams.setMargins(0, 0, 0, 0)
-            binding.btnSaveLinkNext.layoutParams = layoutParams
-            binding.btnSaveLinkNext.apply {
-              state = if (state == LinkMIndFullWidthButtonState.DISABLE)
-                LinkMIndFullWidthButtonState.DISABLE
-              else
-                LinkMIndFullWidthButtonState.ENABLE_BLACK
-            }
-          } else {
-            val marginInPixels = (20 * resources.displayMetrics.density).toInt()
-            layoutParams.leftMargin = marginInPixels
-            layoutParams.rightMargin = marginInPixels
-            binding.btnSaveLinkNext.layoutParams = layoutParams
-            binding.btnSaveLinkNext.apply {
-              if (state == LinkMIndFullWidthButtonState.DISABLE)
-                test(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
-              else
-                test(org.sopt.mainfeature.R.drawable.shape_neutrals850_fill_12_rect)
-            }
-          }
-        }
-      },
-    )
+      }
   }
 
   private fun handleEditTextLink() {
@@ -142,5 +110,52 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     binding.btnSaveLinkNext.state = LinkMIndFullWidthButtonState.DISABLE
     binding.tvSaveLinkSubTitle.isVisible = true
     binding.etvSaveCopyLinkTitle.isVisible = true
+  }
+
+  private fun handleKeyboardHide() {
+    val layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
+    KeyboardUtils.setKeyboardVisibilityListener(
+      binding.root,
+      object : OnKeyboardVisibilityListener {
+        override fun onVisibilityChanged(isVisible: Boolean) {
+          if (isVisible) {
+            handleKeyboardVisible(layoutParams)
+          } else {
+            handleKeyboardHidden(layoutParams)
+          }
+        }
+      },
+    )
+  }
+
+  private fun handleKeyboardVisible(layoutParams: ViewGroup.MarginLayoutParams) {
+    layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+    layoutParams.setMargins(0, 0, 0, 0)
+    binding.btnSaveLinkNext.layoutParams = layoutParams
+    binding.btnSaveLinkNext.apply {
+      state = if (state == LinkMIndFullWidthButtonState.DISABLE)
+        LinkMIndFullWidthButtonState.DISABLE
+      else
+        LinkMIndFullWidthButtonState.ENABLE_BLACK
+    }
+  }
+
+  private fun handleKeyboardHidden(layoutParams: ViewGroup.MarginLayoutParams) {
+    val marginInPixels = (20 * resources.displayMetrics.density).toInt()
+    layoutParams.leftMargin = marginInPixels
+    layoutParams.rightMargin = marginInPixels
+    binding.btnSaveLinkNext.layoutParams = layoutParams
+    binding.btnSaveLinkNext.apply {
+      if (state == LinkMIndFullWidthButtonState.DISABLE)
+        test(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
+      else
+        test(org.sopt.mainfeature.R.drawable.shape_neutrals850_fill_12_rect)
+    }
+  }
+
+  private fun navigateUp() {
+    binding.ivSaveLinkClose.onThrottleClick {
+      findNavController().navigateUp()
+    }
   }
 }
