@@ -8,16 +8,19 @@ import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import org.sopt.mainfeature.R
 import org.sopt.timer.databinding.FragmentTimerBinding
 import org.sopt.timer.dummymodel.Timer
 import org.sopt.timer.modifytimer.ModifyTimerBottomSheetFragment
+import org.sopt.timer.settimer.SetTimerViewModel
 import org.sopt.ui.fragment.colorOf
 import org.sopt.ui.fragment.snackBar
 
 class TimerFragment : Fragment() {
   private var _binding: FragmentTimerBinding? = null
+  private val viewModel: SetTimerViewModel by activityViewModels()
   private val binding
     get() = requireNotNull(_binding) {
     }
@@ -35,7 +38,7 @@ class TimerFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
+    viewModel.initSetTimer()
     binding.tvTimerTitle.setOnClickListener {
       if (timerExist) {
         binding.svTimerExist.isVisible = true
