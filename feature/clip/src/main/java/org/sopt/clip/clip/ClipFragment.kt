@@ -2,7 +2,6 @@ package org.sopt.clip.clip
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import org.sopt.clip.ClipViewModel
@@ -22,8 +21,10 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     )
     binding.rvClipClip.adapter = clipAdapter
     if (viewModel.mockClipData != null) {
-      binding.clClipEmpty.isVisible = false
+      binding.ivClipEmpty.visibility = View.GONE
+      binding.tvClipEmpty.visibility = View.GONE
       clipAdapter.submitList(viewModel.mockClipData)
+    } else {
     }
     binding.clClipSearch.onThrottleClick {
       findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_detail)
