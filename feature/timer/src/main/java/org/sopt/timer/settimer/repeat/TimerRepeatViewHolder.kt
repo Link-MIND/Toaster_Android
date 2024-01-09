@@ -12,7 +12,7 @@ import org.sopt.ui.view.onThrottleClick
 
 class TimerRepeatViewHolder(
   val binding: ItemTimerRepeatBinding,
-  val context: Context
+  val context: Context,
 ) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(data: Repeat?, onClick: (Repeat, Int) -> Unit) {
     if (data == null) return
@@ -25,7 +25,7 @@ class TimerRepeatViewHolder(
       tvTimerRepeatDay.text = data.period
       val selectedColor = ContextCompat.getColor(context, org.sopt.mainfeature.R.color.primary)
       val defaultColor = ContextCompat.getColor(context, org.sopt.mainfeature.R.color.neutrals900)
-      if(data.isSelected){
+      if (data.isSelected) {
         tvTimerRepeatDay.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_bold_16)
         tvTimerRepeatDay.setTextColor(selectedColor)
         ivTimerRepeatCheck.isVisible = true
