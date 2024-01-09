@@ -18,13 +18,14 @@ import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
 
 class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSaveLinkBinding.inflate(it) }) {
+  private lateinit var keyboardVisibilityListener: ViewTreeObserver.OnGlobalLayoutListener
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+
     setKeyboardVisibilityListener(object : OnKeyboardVisibilityListener {
       override fun onVisibilityChanged(visible: Boolean) {
         if (visible) {
-          Log.d("test","test")
           val layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
 
           layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
@@ -39,10 +40,11 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
           layoutParams.rightMargin = marginInPixels
 
           binding.btnSaveLinkNext.layoutParams = layoutParams
-          Log.d("test","test2")
         }
       }
     })
+
+
     binding.btnSaveLinkNext.state = LinkMIndFullWidthButtonState.DISABLE
     handleEditTextLink()
     handleEditTextTitle()
@@ -132,15 +134,14 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
   interface OnKeyboardVisibilityListener {
     fun onVisibilityChanged(visible : Boolean)
   }
-
   private fun setKeyboardVisibilityListener(onKeyboardVisibilityListener: OnKeyboardVisibilityListener) {
-    val parentView = (binding.root as ViewGroup).getChildAt(0)
-    parentView.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+    val parentView = binding.root
+    keyboardVisibilityListener = object : ViewTreeObserver.OnGlobalLayoutListener {
       private var alreadyOpen = false
       private val defaultKeyboardHeightDP = 100
-      private val EstimatedKeyboardDP =
-        defaultKeyboardHeightDP + 48
+      private val EstimatedKeyboardDP = defaultKeyboardHeightDP + 48
       private val rect = Rect()
+
       override fun onGlobalLayout() {
         val estimatedKeyboardHeight = TypedValue.applyDimension(
           TypedValue.COMPLEX_UNIT_DIP,
@@ -157,6 +158,8 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
         alreadyOpen = isShown
         onKeyboardVisibilityListener.onVisibilityChanged(isShown)
       }
-    })
+    }
+    parentView.viewTreeObserver.addOnGlobalLayoutListener(keyboardVisibilityListener)
   }
+
 }
