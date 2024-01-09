@@ -1,8 +1,9 @@
 package org.sopt.mypage.settings
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
+import org.sopt.mypage.databinding.FragmentSettingsBinding
+import org.sopt.ui.base.BindingFragment
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -45,15 +46,16 @@ class SettingsFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
+
     val toasterToggle = binding.settingsAlertToggle
     val tvSettingsAlertOff = binding.tvSettingsAlertOff
 
-    tvSettingsAlertOff.visibility =
-      if (toasterToggle.getState() == R.id.start) View.VISIBLE else View.INVISIBLE
+    val startStateId = org.sopt.mainfeature.R.id.start
+
+    updateVisibility(tvSettingsAlertOff, toasterToggle.getState(), startStateId)
 
     toasterToggle.btnClick {
-      tvSettingsAlertOff.visibility =
-        if (toasterToggle.getState() == R.id.start) View.VISIBLE else View.INVISIBLE
+      updateVisibility(tvSettingsAlertOff, toasterToggle.getState(), startStateId)
     }
 
     binding.tvSetLogout.setOnClickListener {
@@ -92,5 +94,9 @@ class SettingsFragment : Fragment() {
     binding.ivSettingsLeft.onThrottleClick {
       findNavController().navigateUp()
     }
+  }
+
+  private fun updateVisibility(view: View, state: Int, startStateId: Int) {
+    view.visibility = if (state == startStateId) View.VISIBLE else View.INVISIBLE
   }
 }
