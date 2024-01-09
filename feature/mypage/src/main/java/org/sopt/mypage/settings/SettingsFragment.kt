@@ -1,9 +1,8 @@
 package org.sopt.mypage.settings
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import org.sopt.mypage.databinding.FragmentSettingsBinding
-import org.sopt.ui.base.BindingFragment
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,7 +14,6 @@ import kotlinx.coroutines.flow.onEach
 import org.sopt.common.intentprovider.IntentProvider
 import org.sopt.common.intentprovider.LOGIN
 import org.sopt.datastore.datastore.SecurityDataStore
-import org.sopt.mainfeature.R
 import org.sopt.mypage.databinding.FragmentSettingsBinding
 import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
@@ -87,6 +85,7 @@ class SettingsFragment : Fragment() {
           startActivity(intent)
           requireActivity().finish()
         }
+
         else -> {}
       }
     }.launchIn(viewLifeCycleScope)
