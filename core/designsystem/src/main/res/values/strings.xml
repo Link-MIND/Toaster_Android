@@ -54,7 +54,7 @@
 
   <!-- clip -->
   <string name="clip_search">검색어를 입력하세요</string>
-  <string name="clip_add_clip">+ 클립추가</string>
+  <string name="clip_add_clip">클립추가</string>
   <string name="clip_all">전체 클립</string>
   <string name="clip_empty">클립을 추가해\n링크를 정리해보세요!</string>
   <string name="clip_toolbar_edit">편집</string>
@@ -69,4 +69,14 @@
   <string name="home_correction_clip">클립수정</string>
   <string name="home_new_clip_info">"새로운 클립의 이름을 입력해주세요"</string>
   <string name="home_error_clip_info">공백 또는 10글자 이상은 안됩니다.</string>
+
+  <!-- error -->
+  <string name="error_clip_length">링크 제목은 최대 15까지 입력 가능해요</string>
+  <string name="error_clip_name">이미 같은 이름의 클립이 있어요</string>
+
+  <!-- dialog intro -->
+  <string name="save_clip_dialog_title">링크 저장을 취소하시겠어요?</string>
+  <string name="save_clip_dialog_sub_title">저장 중인 링크가 사라져요</string>
+  <string name="positive_ok_msg">확인</string>
+  <string name="negative_close_msg">닫기</string>
 </resources>

@@ -55,6 +55,15 @@ class LinkMindFullWidthButton @JvmOverloads constructor(
     }
   }
 
+  fun setBackGround(backgroundResource: Int) {
+    binding.apply {
+      clBtnFullWidthLinkmind.isClickable = true
+      clBtnFullWidthLinkmind.isFocusable = true
+      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.neutrals_white))
+      clBtnFullWidthLinkmind.setBackgroundResource(backgroundResource)
+    }
+  }
+
   fun btnClick(onClick: () -> Unit) {
     binding.clBtnFullWidthLinkmind.onThrottleClick {
       onClick()

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -18,6 +19,7 @@ import org.sopt.mypage.databinding.FragmentSettingsBinding
 import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
 import org.sopt.ui.view.UiState
+import org.sopt.ui.view.onThrottleClick
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -86,5 +88,9 @@ class SettingsFragment : Fragment() {
         else -> {}
       }
     }.launchIn(viewLifeCycleScope)
+
+    binding.ivSettingsLeft.onThrottleClick {
+      findNavController().navigateUp()
+    }
   }
 }
