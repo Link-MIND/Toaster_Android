@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.savelink.databinding.ItemTimerClipSelectBinding
 import org.sopt.savelink.ui.Clip
+import org.sopt.ui.view.onThrottleClick
 
 class ClipSelectViewHolder(
   val binding: ItemTimerClipSelectBinding,
@@ -12,12 +13,12 @@ class ClipSelectViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(data: Clip?, position: Int, onClick: (Clip, Int) -> Unit) {
     if (data == null) return
-    setImageResource(position)
+    setImage(position)
     setTexts(data)
     setTextColor(data, position)
     setOnClickListener(data, onClick)
   }
-  private fun setImageResource(position: Int) {
+  private fun setImage(position: Int) {
     val imageResource = if (position == 0) {
       org.sopt.mainfeature.R.drawable.ic_clip_all_24
     } else {
@@ -46,13 +47,13 @@ class ClipSelectViewHolder(
     binding.tvItemTimerClipName.setTextColor(color)
   }
 
-  private fun setClipImageResource(position: Int, imageResource1: Int, imageResource2: Int) {
-    val imageResource = if (position == 0) imageResource1 else imageResource2
+  private fun setClipImageResource(position: Int, selectedImage: Int, unselectedImage: Int) {
+    val imageResource = if (position == 0) selectedImage else unselectedImage
     binding.ivItemTimerClip.setImageResource(imageResource)
   }
 
   private fun setOnClickListener(data: Clip, onClick: (Clip, Int) -> Unit) {
-    binding.root.setOnClickListener {
+    binding.root.onThrottleClick {
       onClick(data, bindingAdapterPosition)
     }
   }
