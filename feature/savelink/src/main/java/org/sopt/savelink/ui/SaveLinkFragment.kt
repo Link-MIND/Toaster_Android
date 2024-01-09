@@ -1,9 +1,6 @@
 package org.sopt.savelink.ui
 
-import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
-import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
@@ -15,6 +12,8 @@ import designsystem.components.button.state.LinkMIndFullWidthButtonState
 import org.sopt.savelink.R
 import org.sopt.savelink.databinding.FragmentSaveLinkBinding
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.keyboard.KeyboardUtils
+import org.sopt.ui.keyboard.OnKeyboardVisibilityListener
 import org.sopt.ui.view.onThrottleClick
 
 class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSaveLinkBinding.inflate(it) }) {
@@ -32,8 +31,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
             layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
             layoutParams.setMargins(0, 0, 0, 0)
             binding.btnSaveLinkNext.layoutParams = layoutParams
-          }
-          else{
+          } else {
             layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
             val marginInPixels = (20 * resources.displayMetrics.density).toInt()
             layoutParams.leftMargin = marginInPixels
@@ -128,46 +126,5 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     binding.btnSaveLinkNext.state = LinkMIndFullWidthButtonState.DISABLE
     binding.tvSaveLinkSubTitle.isVisible = true
     binding.etvSaveCopyLinkTitle.isVisible = true
-  }
-
-  interface OnKeyboardVisibilityListener {
-    fun onVisibilityChanged(visible: Boolean)
-  }
-
-  object KeyboardUtils {
-    private var keyboardVisibilityListener: ViewTreeObserver.OnGlobalLayoutListener? = null
-    fun setKeyboardVisibilityListener(
-      parentView: View,
-      onKeyboardVisibilityListener: OnKeyboardVisibilityListener
-    ) {
-      keyboardVisibilityListener = object : ViewTreeObserver.OnGlobalLayoutListener {
-        private var alreadyOpen = false
-        private val defaultKeyboardHeightDP = 100
-        private val estimatedKeyboardDP = defaultKeyboardHeightDP + 48
-        private val rect = Rect()
-
-        override fun onGlobalLayout() {
-          val estimatedKeyboardHeight = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_DIP,
-            estimatedKeyboardDP.toFloat(),
-            parentView.resources.displayMetrics
-          ).toInt()
-          parentView.getWindowVisibleDisplayFrame(rect)
-          val heightDiff = parentView.rootView.height - (rect.bottom - rect.top)
-          val isShown = heightDiff >= estimatedKeyboardHeight
-          if (isShown == alreadyOpen) {
-            return
-          }
-          alreadyOpen = isShown
-          onKeyboardVisibilityListener.onVisibilityChanged(isShown)
-        }
-      }
-      parentView.viewTreeObserver.addOnGlobalLayoutListener(keyboardVisibilityListener)
-    }
-
-    fun removeKeyboardVisibilityListener(parentView: View) {
-      parentView.viewTreeObserver.removeOnGlobalLayoutListener(keyboardVisibilityListener)
-      keyboardVisibilityListener = null
-    }
   }
 }
