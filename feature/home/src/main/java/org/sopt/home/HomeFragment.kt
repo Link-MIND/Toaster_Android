@@ -35,7 +35,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       }
     }
     initAdapter()
-    val list = listOf(ClipDummy("전체클립", 1), ClipDummy("Title", 2), ClipDummy("LeeSak", 3), null)
+    val list = listOf(ClipDummy("전체클립", 1),ClipDummy("TitleCheck", 1), ClipDummy("Title", 2), ClipDummy("LeeSak", 3), null)
     val list2 = listOf(
       WeekLinkDummy("Title", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
       WeekLinkDummy("Category", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
