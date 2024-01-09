@@ -23,33 +23,26 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
-    setKeyboardVisibilityListener(
+    KeyboardUtils.setKeyboardVisibilityListener(
+      binding.root,
       object : OnKeyboardVisibilityListener {
-        override fun onVisibilityChanged(visible: Boolean) {
-          if (visible) {
-            if (binding != null) {
-              layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
-
-              layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
-              layoutParams.setMargins(0, 0, 0, 0)
-
-              binding.btnSaveLinkNext.layoutParams = layoutParams
-            }
-          } else {
+        override fun onVisibilityChanged(isVisible: Boolean) {
+          if (isVisible) {
             layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
-
+            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+            layoutParams.setMargins(0, 0, 0, 0)
+            binding.btnSaveLinkNext.layoutParams = layoutParams
+          }
+          else{
+            layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
             val marginInPixels = (20 * resources.displayMetrics.density).toInt()
             layoutParams.leftMargin = marginInPixels
             layoutParams.rightMargin = marginInPixels
-
             binding.btnSaveLinkNext.layoutParams = layoutParams
           }
         }
       },
     )
-
-
     binding.btnSaveLinkNext.state = LinkMIndFullWidthButtonState.DISABLE
     handleEditTextLink()
     handleEditTextTitle()
@@ -90,7 +83,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
         hideErrorState(binding.tvSaveLinkErrorTitle)
         binding.btnSaveLinkNext.btnClick {
           with(binding) {
-            binding.root.viewTreeObserver.removeOnGlobalLayoutListener(keyboardVisibilityListener)
+            KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
             findNavController().navigate(R.id.action_saveLinkFragment_to_saveLinkSetClipFragment)
           }
         }
@@ -141,32 +134,40 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     fun onVisibilityChanged(visible: Boolean)
   }
 
-  private fun setKeyboardVisibilityListener(onKeyboardVisibilityListener: OnKeyboardVisibilityListener) {
-    val parentView = binding.root
-    keyboardVisibilityListener = object : ViewTreeObserver.OnGlobalLayoutListener {
-      private var alreadyOpen = false
-      private val defaultKeyboardHeightDP = 100
-      private val EstimatedKeyboardDP = defaultKeyboardHeightDP + 48
-      private val rect = Rect()
+  object KeyboardUtils {
+    private var keyboardVisibilityListener: ViewTreeObserver.OnGlobalLayoutListener? = null
+    fun setKeyboardVisibilityListener(
+      parentView: View,
+      onKeyboardVisibilityListener: OnKeyboardVisibilityListener
+    ) {
+      keyboardVisibilityListener = object : ViewTreeObserver.OnGlobalLayoutListener {
+        private var alreadyOpen = false
+        private val defaultKeyboardHeightDP = 100
+        private val estimatedKeyboardDP = defaultKeyboardHeightDP + 48
+        private val rect = Rect()
 
-      override fun onGlobalLayout() {
-        val estimatedKeyboardHeight = TypedValue.applyDimension(
-          TypedValue.COMPLEX_UNIT_DIP,
-          EstimatedKeyboardDP.toFloat(),
-          parentView.resources.displayMetrics,
-        ).toInt()
-        parentView.getWindowVisibleDisplayFrame(rect)
-        val heightDiff = parentView.rootView.height - (rect.bottom - rect.top)
-        val isShown = heightDiff >= estimatedKeyboardHeight
-        if (isShown == alreadyOpen) {
-          return
+        override fun onGlobalLayout() {
+          val estimatedKeyboardHeight = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            estimatedKeyboardDP.toFloat(),
+            parentView.resources.displayMetrics
+          ).toInt()
+          parentView.getWindowVisibleDisplayFrame(rect)
+          val heightDiff = parentView.rootView.height - (rect.bottom - rect.top)
+          val isShown = heightDiff >= estimatedKeyboardHeight
+          if (isShown == alreadyOpen) {
+            return
+          }
+          alreadyOpen = isShown
+          onKeyboardVisibilityListener.onVisibilityChanged(isShown)
         }
-        alreadyOpen = isShown
-        onKeyboardVisibilityListener.onVisibilityChanged(isShown)
       }
+      parentView.viewTreeObserver.addOnGlobalLayoutListener(keyboardVisibilityListener)
     }
-    parentView.viewTreeObserver.addOnGlobalLayoutListener(keyboardVisibilityListener)
+
+    fun removeKeyboardVisibilityListener(parentView: View) {
+      parentView.viewTreeObserver.removeOnGlobalLayoutListener(keyboardVisibilityListener)
+      keyboardVisibilityListener = null
+    }
   }
-
-
 }
