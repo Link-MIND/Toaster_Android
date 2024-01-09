@@ -38,21 +38,6 @@ class LinkMindFullWidthButton @JvmOverloads constructor(
         LinkMIndFullWidthButtonState.DISABLE -> {
           setBtnDisable(R.color.neutrals100)
         }
-        LinkMIndFullWidthButtonState.TEST -> {
-          binding.apply {
-            clBtnFullWidthLinkmind.isClickable = false
-            clBtnFullWidthLinkmind.isFocusable = false
-            tvBtn.setTextColor(ContextCompat.getColor(context, R.color.black))
-            clBtnFullWidthLinkmind.setBackgroundResource(R.drawable.shape_neutrals_fill_8_rect)
-            val layoutParams = clBtnFullWidthLinkmind.layoutParams as ViewGroup.MarginLayoutParams
-
-            val marginInPixels = (20 * resources.displayMetrics.density).toInt()
-            layoutParams.leftMargin = marginInPixels
-            layoutParams.rightMargin = marginInPixels
-
-            clBtnFullWidthLinkmind.layoutParams = layoutParams
-          }
-        }
       }
     }
   private fun setBtnEnable(textColorResId: Int) {
@@ -73,6 +58,23 @@ class LinkMindFullWidthButton @JvmOverloads constructor(
     }
   }
 
+   fun test(backgroundResource:Int) {
+    binding.apply {
+      clBtnFullWidthLinkmind.isClickable = true
+      clBtnFullWidthLinkmind.isFocusable = true
+      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.neutrals_white))
+      clBtnFullWidthLinkmind.setBackgroundResource(backgroundResource)
+    }
+  }
+
+   fun test2(textColorResId: Int) {
+    binding.apply {
+      clBtnFullWidthLinkmind.isClickable = true
+      clBtnFullWidthLinkmind.isFocusable = true
+      tvBtn.setTextColor(ContextCompat.getColor(context, R.color.neutrals_white))
+      clBtnFullWidthLinkmind.setBackgroundResource(0)
+    }
+  }
   fun btnClick(onClick: () -> Unit) {
     binding.clBtnFullWidthLinkmind.onThrottleClick {
       onClick()

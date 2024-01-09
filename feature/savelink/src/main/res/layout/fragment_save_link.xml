@@ -96,6 +96,7 @@
     android:id="@+id/btn_save_link_next"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="20dp"
     app:fullWidthBtnText="다음"
     android:background="@drawable/shape_neutrals_fill_12_rect"
     app:layout_constraintBottom_toBottomOf="parent"

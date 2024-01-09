@@ -3,7 +3,6 @@ package org.sopt.savelink.ui
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import android.widget.TextView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -17,36 +16,53 @@ import org.sopt.ui.keyboard.OnKeyboardVisibilityListener
 import org.sopt.ui.view.onThrottleClick
 
 class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSaveLinkBinding.inflate(it) }) {
-  private lateinit var keyboardVisibilityListener: ViewTreeObserver.OnGlobalLayoutListener
-  private lateinit var layoutParams: ViewGroup.MarginLayoutParams
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    KeyboardUtils.setKeyboardVisibilityListener(
-      binding.root,
-      object : OnKeyboardVisibilityListener {
-        override fun onVisibilityChanged(isVisible: Boolean) {
-          if (isVisible) {
-            layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
-            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
-            layoutParams.setMargins(0, 0, 0, 0)
-            binding.btnSaveLinkNext.layoutParams = layoutParams
-          } else {
-            layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
-            val marginInPixels = (20 * resources.displayMetrics.density).toInt()
-            layoutParams.leftMargin = marginInPixels
-            layoutParams.rightMargin = marginInPixels
-            binding.btnSaveLinkNext.layoutParams = layoutParams
-          }
-        }
-      },
-    )
-    binding.btnSaveLinkNext.state = LinkMIndFullWidthButtonState.DISABLE
+    handleKeyboardHide()
+    binding.btnSaveLinkNext.apply {
+      state = LinkMIndFullWidthButtonState.DISABLE
+      test(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
+    }
     handleEditTextLink()
     handleEditTextTitle()
     binding.ivSaveLinkClose.onThrottleClick {
       findNavController().navigateUp()
     }
+  }
+
+  private fun handleKeyboardHide() {
+
+    val layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
+    KeyboardUtils.setKeyboardVisibilityListener(
+      binding.root,
+      object : OnKeyboardVisibilityListener {
+        override fun onVisibilityChanged(isVisible: Boolean) {
+          if (isVisible) {
+            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+            layoutParams.setMargins(0, 0, 0, 0)
+            binding.btnSaveLinkNext.layoutParams = layoutParams
+            binding.btnSaveLinkNext.apply {
+              state = if (state == LinkMIndFullWidthButtonState.DISABLE)
+                LinkMIndFullWidthButtonState.DISABLE
+              else
+                LinkMIndFullWidthButtonState.ENABLE_BLACK
+            }
+          } else {
+            val marginInPixels = (20 * resources.displayMetrics.density).toInt()
+            layoutParams.leftMargin = marginInPixels
+            layoutParams.rightMargin = marginInPixels
+            binding.btnSaveLinkNext.layoutParams = layoutParams
+            binding.btnSaveLinkNext.apply {
+              if (state == LinkMIndFullWidthButtonState.DISABLE)
+                test(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
+              else
+                test(org.sopt.mainfeature.R.drawable.shape_neutrals850_fill_12_rect)
+            }
+          }
+        }
+      },
+    )
   }
 
   private fun handleEditTextLink() {
