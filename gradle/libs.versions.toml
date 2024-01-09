@@ -39,6 +39,7 @@ timber = "5.0.1"
 encrypted-datastore = "1.7.21-1.0.8-1.1.0-alpha01"
 coil = "2.4.0"
 lottie = "6.0.0"
+jsoup = "1.13.1"
 
 detekt = "1.23.1"
 kakao-login = "2.19.0"
@@ -128,6 +129,7 @@ firebase-database = { group = "com.google.firebase", name = "firebase-database-k
 
 coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 lottie = { group = "com.airbnb.android", name = "lottie", version.ref = "lottie" }
+jsoup = { group = "org.jsoup", name = "jsoup", version.ref = "jsoup" }
 
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
