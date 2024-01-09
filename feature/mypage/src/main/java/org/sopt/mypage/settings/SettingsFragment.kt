@@ -10,6 +10,7 @@ class SettingsFragment : BindingFragment<FragmentSettingsBinding>({ FragmentSett
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
+
     val toasterToggle = binding.settingsAlertToggle
     val tvSettingsAlertOff = binding.tvSettingsAlertOff
 
