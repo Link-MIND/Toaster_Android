@@ -4,15 +4,19 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.home.ClipDummy
+import org.sopt.home.R
 import org.sopt.home.databinding.ItemHomeClipBinding
 
 class HomeCliprViewHolder(
   private val binding: ItemHomeClipBinding,
   private val onClickItemClip: (ClipDummy) -> Unit,
   private val onClickItemClip2: () -> Unit,
-) : RecyclerView.ViewHolder(binding.root) {
 
-  fun onBind(data: ClipDummy?) {
+) : RecyclerView.ViewHolder(binding.root) {
+  fun onBind(data: ClipDummy?,position:Int) {
+    if (position==0){
+      binding.ivHomeClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_home_clip_20)
+    }
     if (data == null) {
       with(binding) {
         clItemClip.isGone = true

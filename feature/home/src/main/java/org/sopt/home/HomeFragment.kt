@@ -21,16 +21,15 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     binding.root.setOnClickListener {
-      val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
-        "featureTimer://fragmentExample",
-      )
+//      val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
+//        "featureTimer://fragmentExample",
+//      )
 //      val (request, navOptions) = DeepLinkUtil.getNavRequestPopUpAndOption(
 //        findNavController().graph.id,
 //        false,
 //        "featureTimer://fragmentExample",
 //      )
-      findNavController().navigate(request, navOptions)
-
+//      findNavController().navigate(request, navOptions)
       binding.clHomeSearch.onThrottleClick {
         //Todo
       }
