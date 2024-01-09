@@ -27,4 +27,5 @@ class ClipAdapter(
       onContentsTheSame = { old, new -> old == new },
     )
   }
+
 }
