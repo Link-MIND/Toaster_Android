@@ -128,6 +128,7 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="14dp"
       android:background="@color/background"
+      app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
       app:layout_constraintEnd_toEndOf="@id/cl_clip_category_main"
       app:layout_constraintStart_toStartOf="@id/cl_clip_category_main"
       app:layout_constraintTop_toBottomOf="@id/tv_clip_category_all"

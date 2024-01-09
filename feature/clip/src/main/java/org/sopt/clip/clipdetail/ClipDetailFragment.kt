@@ -14,8 +14,8 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val clipAdapter = ClipAdapter(requireContext())
-    clipAdapter.setClipList(viewModel.mockClipData)
-    binding.rvCategoryLink.adapter = clipAdapter
+    val clipDetailAdapter = ClipLinkAdapter({})
+    binding.rvCategoryLink.adapter = clipDetailAdapter
+    clipDetailAdapter.submitList(viewModel.mockLinkData)
   }
 }
