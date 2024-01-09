@@ -193,16 +193,21 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent">
     <TextView
-      android:layout_width="wrap_content"
+      android:id="@+id/tv_time_picker_period"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:text="반복"
+      android:ellipsize="end"
       android:textAppearance="@style/Typography.suit.semibold_16"
       android:textColor="@color/neutrals850"
       android:layout_marginVertical="16dp"
       android:layout_marginStart="14dp"
+      android:layout_marginEnd="14dp"
+      android:maxLines="1"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toStartOf="parent" />
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/iv_time_picker_repeat"/>
 
     <ImageView
       android:id="@+id/iv_time_picker_repeat"
