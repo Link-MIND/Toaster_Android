@@ -8,14 +8,13 @@ import org.sopt.clip.R
 import org.sopt.clip.databinding.FragmentClipDetailBinding
 import org.sopt.ui.base.BindingFragment
 
-
 class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ FragmentClipDetailBinding.inflate(it) }) {
   private val viewModel by viewModels<ClipViewModel>()
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val clipDetailAdapter = ClipLinkAdapter({})
+    val clipDetailAdapter = ClipLinkAdapter()
     binding.rvCategoryLink.adapter = clipDetailAdapter
     clipDetailAdapter.submitList(viewModel.mockLinkData)
 
