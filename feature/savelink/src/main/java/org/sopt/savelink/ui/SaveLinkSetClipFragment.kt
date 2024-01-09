@@ -56,17 +56,19 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
         }
       }
     }
+
     binding.ivSaveLinkClose.onThrottleClick {
-      linkMindDialog.setTitle(R.string.text_home)
-        .setSubtitle(R.string.text_clip)
-        .setNegativeButton(R.string.text_home) {
+      linkMindDialog.setTitle(R.string.save_clip_dialog_title)
+        .setSubtitle(R.string.save_clip_dialog_sub_title)
+        .setNegativeButton(R.string.negative_close_msg) {
           linkMindDialog.dismiss()
         }
-        .setPositiveButton(R.string.text_home) {
+        .setPositiveButton(R.string.positive_ok_msg) {
           linkMindDialog.dismiss()
         }
         .show()
     }
+
     binding.btnSaveLinkComplete.btnClick {
       val (request, navOptions) = DeepLinkUtil.getNavRequestPopUpAndOption(
         findNavController().graph.id,

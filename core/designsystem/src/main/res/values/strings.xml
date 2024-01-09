@@ -73,4 +73,10 @@
   <!-- error -->
   <string name="error_clip_length">링크 제목은 최대 15까지 입력 가능해요</string>
   <string name="error_clip_name">이미 같은 이름의 클립이 있어요</string>
+
+  <!-- dialog intro -->
+  <string name="save_clip_dialog_title">링크 저장을 취소하시겠어요?</string>
+  <string name="save_clip_dialog_sub_title">저장 중인 링크가 사라져요</string>
+  <string name="positive_ok_msg">확인</string>
+  <string name="negative_close_msg">닫기</string>
 </resources>
