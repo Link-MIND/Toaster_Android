@@ -12,24 +12,11 @@ import org.sopt.ui.view.ItemDiffCallback
 class ClipSelectAdapter(
   private val onClick: (Clip, Int) -> Unit,
   private val context: Context,
-) : ListAdapter<Clip, ClipSelectViewHolder>(DiffUtil) {
+  ) : ListAdapter<Clip, ClipSelectViewHolder>(DiffUtil) {
   private var selectedPosition = -1
   override fun onBindViewHolder(holder: ClipSelectViewHolder, position: Int) {
     holder.onBind(getItem(position), position) { clip, position ->
-      if (selectedPosition != position) {
-        if (selectedPosition != -1) {
-          getItem(selectedPosition).isSelected = false
-          notifyItemChanged(selectedPosition)
-        }
-        clip.isSelected = true
-        selectedPosition = position
-      } else {
-        clip.isSelected = !clip.isSelected
-        if (!clip.isSelected) {
-          selectedPosition = -1
-        }
-      }
-      notifyItemChanged(position)
+      handleClipSelection(clip, position)
       onClick(clip, position)
     }
   }
@@ -39,6 +26,26 @@ class ClipSelectAdapter(
       ItemTimerClipSelectBinding.inflate(LayoutInflater.from(parent.context), parent, false),
       context,
     )
+  }
+  private fun handleClipSelection(clip: Clip, position: Int) {
+    if (selectedPosition != position) {
+      deselectPreviousClip()
+      clip.selectNewClip()
+      selectedPosition = position
+    } else {
+      clip.toggleSelection()
+      if (!clip.isSelected) {
+        selectedPosition = -1
+      }
+    }
+    notifyItemChanged(position)
+  }
+
+  private fun deselectPreviousClip() {
+    if (selectedPosition != -1) {
+      getItem(selectedPosition).isSelected = false
+      notifyItemChanged(selectedPosition)
+    }
   }
 
   companion object {
