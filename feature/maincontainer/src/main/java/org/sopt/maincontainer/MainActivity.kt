@@ -1,9 +1,12 @@
 package org.sopt.maincontainer
 
+import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -25,6 +28,30 @@ class MainActivity : AppCompatActivity() {
 
     setContentView(binding.root)
     initView()
+
+
+  }
+
+  override fun onWindowFocusChanged(hasFocus: Boolean) {
+    super.onWindowFocusChanged(hasFocus)
+
+    if (hasFocus) {
+      val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+      var pasteData = ""
+      if (!clipboard.hasPrimaryClip()) {
+
+      } else if ((clipboard.primaryClipDescription?.hasMimeType(MIMETYPE_TEXT_PLAIN)) == false) {
+
+      } else {
+        val item = clipboard.primaryClip?.getItemAt(0)!!.coerceToText(applicationContext)
+        if (!item.isNullOrEmpty()) {
+          pasteData = item.toString()
+          if (pasteData.contains("http")) {
+            Log.d("test","$pasteData")
+          }
+        }
+      }
+    }
   }
 
   private fun initView() {
@@ -99,6 +126,7 @@ class MainActivity : AppCompatActivity() {
       }
     }
   }
+
   companion object {
     @JvmStatic
     fun newInstance(context: Context) = Intent(context, MainActivity::class.java).apply {
