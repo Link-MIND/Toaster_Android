@@ -7,9 +7,10 @@ import org.sopt.mypage.search.LinkResultDummy
 class LinkResultViewHolder(val binding: ItemSearchResultClipLinkBinding) :
   RecyclerView.ViewHolder(binding.root) {
 
-  fun bind(linkResult: LinkResultDummy) {
+  fun onBind(linkResult: LinkResultDummy) {
     binding.tvClipDetailTitle.text = linkResult.detailcliptitle
     binding.tvClipTitle.text = linkResult.title
     binding.tvClipUrl.text = linkResult.url
   }
 }
+
