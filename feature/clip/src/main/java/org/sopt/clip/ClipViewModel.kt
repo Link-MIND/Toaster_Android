@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 
 class ClipViewModel : ViewModel() {
   val mockClipData = listOf<ClipsDTO>(
-    ClipsDTO("a", 1),
-    ClipsDTO("b", 2),
-    ClipsDTO("c", 3),
+    ClipsDTO("a", 1, 1),
+    ClipsDTO("b", 2, 2),
+    ClipsDTO("c", 3, 3),
     )
 
   val mockLinkData = listOf<LinkDTO>(
