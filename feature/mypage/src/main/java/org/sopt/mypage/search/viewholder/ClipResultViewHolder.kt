@@ -8,6 +8,7 @@ class ClipResultViewHolder(val binding: ItemSearchResultClipBinding) :
   RecyclerView.ViewHolder(binding.root) {
 
   fun bind(clipResult: ClipResultDummy) {
-    binding.tvClipAmount.text = clipResult.amount
+    binding.tvClipTitle.text = clipResult.title
+    binding.tvClipAmount.text = clipResult.amount.toString()
   }
 }

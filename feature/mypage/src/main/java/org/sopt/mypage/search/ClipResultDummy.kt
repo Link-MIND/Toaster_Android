@@ -1,4 +1,5 @@
 package org.sopt.mypage.search
 
 data class ClipResultDummy(
-  val amount: String)
+  val title : String,
+  val amount: Int)
