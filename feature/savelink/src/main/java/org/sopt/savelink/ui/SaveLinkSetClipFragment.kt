@@ -50,8 +50,8 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
       val linkMindBottomSheet = LinkMindBottomSheet(requireContext())
       linkMindBottomSheet.show()
       linkMindBottomSheet.apply {
-        setTitle(R.string.text_clip)
-        setErroMsg(R.string.text_clip)
+        setTitle(R.string.clip_add_clip)
+        setErroMsg(R.string.error_clip_length)
         bottomSheetConfirmBtnClick {
         }
       }
