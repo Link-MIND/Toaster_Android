@@ -4,7 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
 import org.sopt.mainfeature.R
@@ -34,6 +37,21 @@ class LinkMindFullWidthButton @JvmOverloads constructor(
 
         LinkMIndFullWidthButtonState.DISABLE -> {
           setBtnDisable(R.color.neutrals100)
+        }
+        LinkMIndFullWidthButtonState.TEST -> {
+          binding.apply {
+            clBtnFullWidthLinkmind.isClickable = false
+            clBtnFullWidthLinkmind.isFocusable = false
+            tvBtn.setTextColor(ContextCompat.getColor(context, R.color.black))
+            clBtnFullWidthLinkmind.setBackgroundResource(R.drawable.shape_neutrals_fill_8_rect)
+            val layoutParams = clBtnFullWidthLinkmind.layoutParams as ViewGroup.MarginLayoutParams
+
+            val marginInPixels = (20 * resources.displayMetrics.density).toInt()
+            layoutParams.leftMargin = marginInPixels
+            layoutParams.rightMargin = marginInPixels
+
+            clBtnFullWidthLinkmind.layoutParams = layoutParams
+          }
         }
       }
     }
