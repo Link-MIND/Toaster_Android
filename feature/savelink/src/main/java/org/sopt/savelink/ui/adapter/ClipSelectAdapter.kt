@@ -29,7 +29,7 @@ class ClipSelectAdapter(
   }
   private fun handleClipSelection(clip: Clip, position: Int) {
     if (selectedPosition != position) {
-      deselectPreviousClip()
+      unselectClip()
       clip.selectNewClip()
       selectedPosition = position
     } else {
@@ -41,7 +41,7 @@ class ClipSelectAdapter(
     notifyItemChanged(position)
   }
 
-  private fun deselectPreviousClip() {
+  private fun unselectClip() {
     if (selectedPosition != -1) {
       getItem(selectedPosition).isSelected = false
       notifyItemChanged(selectedPosition)
