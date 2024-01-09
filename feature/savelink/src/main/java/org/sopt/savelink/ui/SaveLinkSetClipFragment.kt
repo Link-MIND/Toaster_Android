@@ -41,7 +41,6 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
           binding.btnSaveLinkComplete.state = LinkMindButtonState.DISABLE
         }
       },
-      context = requireContext(),
     )
     adapter.submitList(list)
     binding.rvItemTimerClipSelect.adapter = adapter

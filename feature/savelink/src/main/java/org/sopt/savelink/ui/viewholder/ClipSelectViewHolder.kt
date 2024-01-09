@@ -1,6 +1,5 @@
 package org.sopt.savelink.ui.viewholder
 
-import android.content.Context
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.savelink.databinding.ItemTimerClipSelectBinding
@@ -9,7 +8,6 @@ import org.sopt.ui.view.onThrottleClick
 
 class ClipSelectViewHolder(
   val binding: ItemTimerClipSelectBinding,
-  val context: Context,
 ) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(data: Clip?, position: Int, onClick: (Clip, Int) -> Unit) {
     if (data == null) return
@@ -42,7 +40,7 @@ class ClipSelectViewHolder(
       setClipImageResource(position, org.sopt.mainfeature.R.drawable.ic_home_clip_20, org.sopt.mainfeature.R.drawable.ic_clip_24)
       org.sopt.mainfeature.R.color.neutrals900
     }
-    val color = ContextCompat.getColor(context, colorResource)
+    val color = ContextCompat.getColor(binding.root.context, colorResource)
     binding.tvItemTimerClipCount.setTextColor(color)
     binding.tvItemTimerClipName.setTextColor(color)
   }

@@ -1,6 +1,5 @@
 package org.sopt.savelink.ui.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -11,7 +10,6 @@ import org.sopt.ui.view.ItemDiffCallback
 
 class ClipSelectAdapter(
   private val onClick: (Clip, Int) -> Unit,
-  private val context: Context,
 ) : ListAdapter<Clip, ClipSelectViewHolder>(DiffUtil) {
   private var selectedPosition = -1
   override fun onBindViewHolder(holder: ClipSelectViewHolder, position: Int) {
@@ -24,7 +22,6 @@ class ClipSelectAdapter(
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClipSelectViewHolder {
     return ClipSelectViewHolder(
       ItemTimerClipSelectBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-      context,
     )
   }
   private fun handleClipSelection(clip: Clip, position: Int) {
