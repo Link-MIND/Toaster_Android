@@ -3,26 +3,29 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:padding="14dp"
+  android:layout_marginBottom="8dp"
   android:background="@color/white"
-  android:layout_marginBottom="8dp">
+  android:padding="14dp">
 
   <ImageView
     android:id="@+id/iv_clip_icon"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:src="@drawable/ic_clip_24"
+    app:layout_constraintBottom_toBottomOf="@id/tv_clip_title"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
+    android:id="@+id/tv_clip_title"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="4dp"
     android:layout_marginTop="2dp"
-    android:text="@string/clip_all"
+    android:text="@string/clip_title"
     android:textAppearance="@style/Typography.suit.semibold_16"
     android:textColor="@color/neutrals850"
+    app:layout_constraintBottom_toBottomOf="@id/tv_clip_amount"
     app:layout_constraintStart_toEndOf="@id/iv_clip_icon"
     app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,9 +33,22 @@
     android:id="@+id/tv_clip_amount"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:text="@string/clip_amount_n"
+    android:textAppearance="@style/Typography.suit.bold_14"
+    android:textColor="@color/neutrals600"
+    app:layout_constraintBottom_toBottomOf="@id/tv_clip_amount_num"
+    app:layout_constraintEnd_toStartOf="@id/tv_clip_amount_num"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+    android:id="@+id/tv_clip_amount_num"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_marginEnd="2dp"
     android:text="@string/search_result_clip_num"
-    android:textColor="@color/neutrals850"
+    android:textAppearance="@style/Typography.suit.semibold_14"
+    android:textColor="@color/neutrals600"
+    app:layout_constraintBottom_toBottomOf="@id/iv_category_clip_arrow"
     app:layout_constraintEnd_toStartOf="@id/iv_category_clip_arrow"
     app:layout_constraintTop_toTopOf="parent" />
 
