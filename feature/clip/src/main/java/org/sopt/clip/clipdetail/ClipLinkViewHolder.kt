@@ -6,12 +6,14 @@ import org.sopt.clip.databinding.ItemClipDetailLinkBinding
 
 class ClipLinkViewHolder(
   private val binding: ItemClipDetailLinkBinding,
-) : RecyclerView.ViewHolder(binding.root) {
+  private val onClickItemClip: (LinkDTO) -> Unit,
+  ) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(linkData: LinkDTO) {
     if (linkData != null) {
       with(binding) {
         tvLinkUrl.text = linkData.linkTitle
         tvLinkUrl.text = linkData.url
+
       }
     }
   }
