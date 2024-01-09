@@ -1,6 +1,7 @@
-package org.sopt.clip
+package org.sopt.clip.clip
 
 import androidx.recyclerview.widget.RecyclerView
+import org.sopt.clip.ClipsDTO
 import org.sopt.clip.databinding.ItemClipClipBinding
 
 class ClipViewHolder(

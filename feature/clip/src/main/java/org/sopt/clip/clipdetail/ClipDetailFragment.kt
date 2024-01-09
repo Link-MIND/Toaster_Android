@@ -1,8 +1,9 @@
-package org.sopt.clip
+package org.sopt.clip.clipdetail
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import org.sopt.clip.ClipViewModel
 import org.sopt.clip.databinding.FragmentClipDetailBinding
 import org.sopt.ui.base.BindingFragment
 

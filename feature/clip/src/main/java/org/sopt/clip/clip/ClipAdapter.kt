@@ -1,8 +1,9 @@
-package org.sopt.clip
+package org.sopt.clip.clip
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import org.sopt.clip.ClipsDTO
 import org.sopt.clip.databinding.ItemClipClipBinding
 import org.sopt.ui.view.ItemDiffCallback
 
