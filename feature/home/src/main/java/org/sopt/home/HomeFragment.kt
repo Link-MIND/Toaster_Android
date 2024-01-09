@@ -6,6 +6,11 @@ import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import designsystem.components.bottomsheet.LinkMindBottomSheet
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.jsoup.Jsoup
 import org.sopt.home.adapter.HomeClipAdapter
 import org.sopt.home.adapter.HomeWeekLinkAdapter
 import org.sopt.home.adapter.HomeWeekRecommendLinkAdapter
@@ -20,19 +25,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   private lateinit var homeWeekRecommendLinkAdapter: HomeWeekRecommendLinkAdapter
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    binding.root.setOnClickListener {
-//      val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
-//        "featureTimer://fragmentExample",
-//      )
-//      val (request, navOptions) = DeepLinkUtil.getNavRequestPopUpAndOption(
-//        findNavController().graph.id,
-//        false,
-//        "featureTimer://fragmentExample",
-//      )
-//      findNavController().navigate(request, navOptions)
-      binding.clHomeSearch.onThrottleClick {
-        // Todo
-      }
+    fetchWebContent()
+    binding.clHomeSearch.onThrottleClick {
+
     }
     initAdapter()
     val list = listOf(
@@ -53,6 +48,20 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     homeWeekRecommendLinkAdapter.submitList(list2)
     binding.pbLinkmindHome.setProgressBarMain(54)
     navigateToSetting()
+  }
+
+  fun fetchWebContent() {
+    CoroutineScope(Dispatchers.Main).launch {
+      val result = withContext(Dispatchers.IO) {
+        val url = "https://www.naver.com"
+        val document = Jsoup.connect(url).get()
+        val content = document.select("title")
+        content.map { it.text() }
+      }
+      result.forEach { text ->
+        Log.d("test", "$text")
+      }
+    }
   }
 
   private fun navigateToSetting() {
