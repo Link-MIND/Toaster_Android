@@ -4,21 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import org.sopt.mainfeature.R
+import org.sopt.mypage.common.BaseFragment
 import org.sopt.mypage.databinding.FragmentSettingsBinding
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
 
-  private lateinit var binding: FragmentSettingsBinding
-
-  override fun onCreateView(
+  override fun inflateBinding(
     inflater: LayoutInflater,
     container: ViewGroup?,
-    savedInstanceState: Bundle?,
-  ): View? {
-    binding = FragmentSettingsBinding.inflate(inflater, container, false)
-    return binding.root
+    attachToRoot: Boolean
+  ): FragmentSettingsBinding {
+    return FragmentSettingsBinding.inflate(inflater, container, attachToRoot)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,12 +23,17 @@ class SettingsFragment : Fragment() {
     val toasterToggle = binding.settingsAlertToggle
     val tvSettingsAlertOff = binding.tvSettingsAlertOff
 
-    tvSettingsAlertOff.visibility =
-      if (toasterToggle.getState() == R.id.start) View.VISIBLE else View.INVISIBLE
+
+    val startStateId = org.sopt.mainfeature.R.id.start
+
+    updateVisibility(tvSettingsAlertOff, toasterToggle.getState(), startStateId)
 
     toasterToggle.btnClick {
-      tvSettingsAlertOff.visibility =
-        if (toasterToggle.getState() == R.id.start) View.VISIBLE else View.INVISIBLE
+      updateVisibility(tvSettingsAlertOff, toasterToggle.getState(), startStateId)
     }
+  }
+
+  private fun updateVisibility(view: View, state: Int, startStateId: Int) {
+    view.visibility = if (state == startStateId) View.VISIBLE else View.INVISIBLE
   }
 }
