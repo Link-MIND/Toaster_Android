@@ -1,6 +1,5 @@
 package org.sopt.savelink.ui
 
-import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +7,6 @@ import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
-import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -30,13 +28,13 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
       object : OnKeyboardVisibilityListener {
         override fun onVisibilityChanged(visible: Boolean) {
           if (visible) {
-            if(binding!=null){
-            layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
+            if (binding != null) {
+              layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
 
-            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
-            layoutParams.setMargins(0, 0, 0, 0)
+              layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+              layoutParams.setMargins(0, 0, 0, 0)
 
-            binding.btnSaveLinkNext.layoutParams = layoutParams
+              binding.btnSaveLinkNext.layoutParams = layoutParams
             }
           } else {
             layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
@@ -92,11 +90,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
         hideErrorState(binding.tvSaveLinkErrorTitle)
         binding.btnSaveLinkNext.btnClick {
           with(binding) {
-
             binding.root.viewTreeObserver.removeOnGlobalLayoutListener(keyboardVisibilityListener)
-            Log.d("test", "success")
-            val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputMethodManager.hideSoftInputFromWindow(binding.btnSaveLinkNext.windowToken, 0)
             findNavController().navigate(R.id.action_saveLinkFragment_to_saveLinkSetClipFragment)
           }
         }
@@ -165,7 +159,6 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
         val heightDiff = parentView.rootView.height - (rect.bottom - rect.top)
         val isShown = heightDiff >= estimatedKeyboardHeight
         if (isShown == alreadyOpen) {
-          Log.i("Keyboard state", "Ignoring global layout change...")
           return
         }
         alreadyOpen = isShown
