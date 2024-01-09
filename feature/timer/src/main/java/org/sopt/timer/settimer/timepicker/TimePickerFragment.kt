@@ -2,12 +2,15 @@ package org.sopt.timer.settimer.timepicker
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import designsystem.components.button.state.LinkMindButtonState
+import org.sopt.timer.R
 import org.sopt.timer.databinding.FragmentTimePickerBinding
 import org.sopt.timer.dummymodel.PickerItem
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.view.onThrottleClick
 
 class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ FragmentTimePickerBinding.inflate(it) }) {
   private lateinit var timePeriodAdapter: TimePeriodAdapter
@@ -24,6 +27,10 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
     binding.btnTimePickerNext.state = LinkMindButtonState.DISABLE
     binding.tvTimePickerCategory.text = "카테고리이름을"
     binding.tvTimePickerTime.text = "$timePeriod ${hour}시 ${minute}분"
+
+    binding.clTimePickerRepeat.onThrottleClick {
+      findNavController().navigate(R.id.action_navigation_time_picker_to_navigation_timer_repeat)
+    }
   }
 
   private fun setupRecyclerViews() {

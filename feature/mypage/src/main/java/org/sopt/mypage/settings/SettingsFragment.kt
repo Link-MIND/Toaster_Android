@@ -4,8 +4,42 @@ import android.os.Bundle
 import android.view.View
 import org.sopt.mypage.databinding.FragmentSettingsBinding
 import org.sopt.ui.base.BindingFragment
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import org.sopt.common.intentprovider.IntentProvider
+import org.sopt.common.intentprovider.LOGIN
+import org.sopt.datastore.datastore.SecurityDataStore
+import org.sopt.mainfeature.R
+import org.sopt.mypage.databinding.FragmentSettingsBinding
+import org.sopt.ui.fragment.viewLifeCycle
+import org.sopt.ui.fragment.viewLifeCycleScope
+import org.sopt.ui.view.UiState
+import javax.inject.Inject
 
-class SettingsFragment : BindingFragment<FragmentSettingsBinding>({ FragmentSettingsBinding.inflate(it) }) {
+@AndroidEntryPoint
+class SettingsFragment : Fragment() {
+  private lateinit var binding: FragmentSettingsBinding
+  private val viewModel: SettingsViewModel by viewModels()
+
+  @Inject
+  @LOGIN
+  lateinit var intentProvider: IntentProvider
+
+  @Inject
+  lateinit var dataStore: SecurityDataStore
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?,
+  ): View? {
+    binding = FragmentSettingsBinding.inflate(inflater, container, false)
+    return binding.root
+  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -21,6 +55,39 @@ class SettingsFragment : BindingFragment<FragmentSettingsBinding>({ FragmentSett
     toasterToggle.btnClick {
       updateVisibility(tvSettingsAlertOff, toasterToggle.getState(), startStateId)
     }
+
+    binding.tvSetLogout.setOnClickListener {
+      viewModel.logout()
+    }
+
+    viewModel.logoutState.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is UiState.Success -> {
+          dataStore.setAutoLogin(false)
+          val intent = intentProvider.getIntent()
+          startActivity(intent)
+          requireActivity().finish()
+        }
+
+        else -> {}
+      }
+    }.launchIn(viewLifeCycleScope)
+
+    binding.tvWithdraw.setOnClickListener {
+      viewModel.withdraw()
+    }
+
+    viewModel.withdrawState.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is UiState.Success -> {
+          dataStore.setAutoLogin(false)
+          val intent = intentProvider.getIntent()
+          startActivity(intent)
+          requireActivity().finish()
+        }
+        else -> {}
+      }
+    }.launchIn(viewLifeCycleScope)
   }
 
   private fun updateVisibility(view: View, state: Int, startStateId: Int) {

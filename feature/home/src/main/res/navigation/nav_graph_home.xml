@@ -8,5 +8,8 @@
     android:id="@+id/navigation_home"
     android:name="org.sopt.home.HomeFragment"
     android:label="fragment_home"
-    tools:layout="@layout/fragment_home" />
+    tools:layout="@layout/fragment_home" >
+
+    <deepLink app:uri="featureHome://homeFragment" />
+  </fragment>
 </navigation>

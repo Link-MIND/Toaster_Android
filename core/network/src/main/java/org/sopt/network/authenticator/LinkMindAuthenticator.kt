@@ -10,6 +10,7 @@ import okhttp3.Request
 import okhttp3.Response
 import okhttp3.Route
 import org.sopt.common.intentprovider.IntentProvider
+import org.sopt.common.intentprovider.LOGIN
 import org.sopt.datastore.datastore.SecurityDataStore
 import org.sopt.network.service.TokenRefreshService
 import javax.inject.Inject
@@ -18,7 +19,7 @@ class LinkMindAuthenticator @Inject constructor(
   private val dataStore: SecurityDataStore,
   private val tokenRefreshService: TokenRefreshService,
   @ApplicationContext private val context: Context,
-  private val intentProvider: IntentProvider,
+  @LOGIN private val intentProvider: IntentProvider,
 ) : Authenticator {
   override fun authenticate(route: Route?, response: Response): Request? {
     if (response.code == CODE_TOKEN_EXPIRED) {
@@ -37,7 +38,7 @@ class LinkMindAuthenticator @Inject constructor(
         runBlocking {
           dataStore.clearAll()
         }
-        ProcessPhoenix.triggerRebirth(context, intentProvider.getAuthIntent())
+        ProcessPhoenix.triggerRebirth(context, intentProvider.getIntent())
       }.getOrThrow()
 
       return response.request.newBuilder()
@@ -46,6 +47,7 @@ class LinkMindAuthenticator @Inject constructor(
     }
     return null
   }
+
   companion object {
     const val CODE_TOKEN_EXPIRED = 401
   }
