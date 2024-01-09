@@ -16,15 +16,14 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val clipAdapter = ClipAdapter(
-      {},
-    )
+    val clipAdapter = ClipAdapter({})
     binding.rvClipClip.adapter = clipAdapter
-    if (viewModel.mockClipData != null) {
+    if (viewModel.mockClipData == null) {
+      clipAdapter.submitList((viewModel.mockClipData))
+    } else {
       binding.ivClipEmpty.visibility = View.GONE
       binding.tvClipEmpty.visibility = View.GONE
       clipAdapter.submitList(viewModel.mockClipData)
-    } else {
     }
     binding.clClipSearch.onThrottleClick {
       findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_detail)
