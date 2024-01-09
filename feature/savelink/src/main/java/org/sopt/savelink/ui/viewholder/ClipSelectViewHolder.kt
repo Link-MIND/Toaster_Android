@@ -10,38 +10,50 @@ class ClipSelectViewHolder(
   val binding: ItemTimerClipSelectBinding,
   val context: Context,
 ) : RecyclerView.ViewHolder(binding.root) {
-  fun onBind(data: Clip?, positon: Int, onClick: (Clip, Int) -> Unit) {
+  fun onBind(data: Clip?, position: Int, onClick: (Clip, Int) -> Unit) {
     if (data == null) return
-    if (positon == 0) {
-      binding.ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_clip_all_24)
+    setImageResource(position)
+    setTexts(data)
+    setTextColor(data, position)
+    setOnClickListener(data, onClick)
+  }
+  private fun setImageResource(position: Int) {
+    val imageResource = if (position == 0) {
+      org.sopt.mainfeature.R.drawable.ic_clip_all_24
     } else {
-      binding.ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_clip_24)
+      org.sopt.mainfeature.R.drawable.ic_clip_24
     }
+    binding.ivItemTimerClip.setImageResource(imageResource)
+  }
+
+  private fun setTexts(data: Clip) {
     with(binding) {
       tvItemTimerClipName.text = data.name
       tvItemTimerClipCount.text = "${data.count}개"
-      val selectedColor = ContextCompat.getColor(context, org.sopt.mainfeature.R.color.primary)
-      val defaultColor = ContextCompat.getColor(context, org.sopt.mainfeature.R.color.neutrals900)
-      if (data.isSelected) {
-        tvItemTimerClipCount.setTextColor(selectedColor)
-        tvItemTimerClipName.setTextColor(selectedColor)
-        if (positon == 0) {
-          ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_clip_all_24_primary)
-        } else {
-          ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_clip_24_primary)
-        }
-      } else {
-        if (positon == 0) {
-          ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_home_clip_20)
-        } else {
-          ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_clip_24)
-        }
-        tvItemTimerClipCount.setTextColor(defaultColor)
-        tvItemTimerClipName.setTextColor(defaultColor)
-      }
-      root.setOnClickListener {
-        onClick(data, bindingAdapterPosition)
-      }
+    }
+  }
+
+  private fun setTextColor(data: Clip, position: Int) {
+    val colorResource = if (data.isSelected) {
+      setClipImageResource(position, org.sopt.mainfeature.R.drawable.ic_clip_all_24_primary, org.sopt.mainfeature.R.drawable.ic_clip_24_primary)
+      org.sopt.mainfeature.R.color.primary
+    } else {
+      setClipImageResource(position, org.sopt.mainfeature.R.drawable.ic_home_clip_20, org.sopt.mainfeature.R.drawable.ic_clip_24)
+      org.sopt.mainfeature.R.color.neutrals900
+    }
+    val color = ContextCompat.getColor(context, colorResource)
+    binding.tvItemTimerClipCount.setTextColor(color)
+    binding.tvItemTimerClipName.setTextColor(color)
+  }
+
+  private fun setClipImageResource(position: Int, imageResource1: Int, imageResource2: Int) {
+    val imageResource = if (position == 0) imageResource1 else imageResource2
+    binding.ivItemTimerClip.setImageResource(imageResource)
+  }
+
+  private fun setOnClickListener(data: Clip, onClick: (Clip, Int) -> Unit) {
+    binding.root.setOnClickListener {
+      onClick(data, bindingAdapterPosition)
     }
   }
 }
