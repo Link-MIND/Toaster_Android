@@ -4,10 +4,9 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.home.ClipDummy
-import org.sopt.home.R
 import org.sopt.home.databinding.ItemHomeClipBinding
 
-class HomeCliprViewHolder(
+class HomeClipViewHolder(
   private val binding: ItemHomeClipBinding,
   private val onClickItemClip: (ClipDummy) -> Unit,
   private val onClickItemClip2: () -> Unit,

@@ -25,11 +25,17 @@ class ClipSelectViewHolder(
       if (data.isSelected) {
         tvItemTimerClipCount.setTextColor(selectedColor)
         tvItemTimerClipName.setTextColor(selectedColor)
-        if (positon == 0) ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_clip_all_24_primary)
-        else ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_clip_24_primary)
+        if (positon == 0) {
+          ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_clip_all_24_primary)
+        } else {
+          ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_clip_24_primary)
+        }
       } else {
-        if (positon == 0) ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_home_clip_20)
-        else ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_clip_24)
+        if (positon == 0) {
+          ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_home_clip_20)
+        } else {
+          ivItemTimerClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_clip_24)
+        }
         tvItemTimerClipCount.setTextColor(defaultColor)
         tvItemTimerClipName.setTextColor(defaultColor)
       }
