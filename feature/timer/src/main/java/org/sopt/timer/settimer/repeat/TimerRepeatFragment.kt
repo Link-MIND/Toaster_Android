@@ -27,24 +27,26 @@ class TimerRepeatFragment : BindingFragment<FragmentTimerRepeatBinding>({ Fragme
       Repeat("일요일마다", false),
     )
 
-    adapter = TimerRepeatAdapter(onClick = { a, b ->
-      if (a.isSelected) {
-        list[b].isSelected = true
-        Log.e("리스트", "$list")
-      } else {
-        list[b].isSelected = false
-        Log.e("리스트", "$list")
-      }
-      val newList = list.map {
-        it.isSelected
-      }
-      if(newList.contains(true)){
-        binding.btnTimerRepeatComplete.state = LinkMindButtonState.ENABLE
-      } else {
-        binding.btnTimerRepeatComplete.state = LinkMindButtonState.DISABLE
-      }
-    },
-      context = requireContext(),)
+    adapter = TimerRepeatAdapter(
+      onClick = { a, b ->
+        if (a.isSelected) {
+          list[b].isSelected = true
+          Log.e("리스트", "$list")
+        } else {
+          list[b].isSelected = false
+          Log.e("리스트", "$list")
+        }
+        val newList = list.map {
+          it.isSelected
+        }
+        if (newList.contains(true)) {
+          binding.btnTimerRepeatComplete.state = LinkMindButtonState.ENABLE
+        } else {
+          binding.btnTimerRepeatComplete.state = LinkMindButtonState.DISABLE
+        }
+      },
+      context = requireContext(),
+    )
     adapter.submitList(list)
     binding.rvTimerRepeat.adapter = adapter
   }

@@ -10,7 +10,7 @@ import org.sopt.ui.view.ItemDiffCallback
 
 class TimerRepeatAdapter(
   private val onClick: (Repeat, Int) -> Unit,
-  private val context: Context
+  private val context: Context,
 ) : ListAdapter<Repeat, TimerRepeatViewHolder>(DiffUtil) {
   override fun onBindViewHolder(holder: TimerRepeatViewHolder, position: Int) {
     holder.onBind(getItem(position), onClick)
@@ -19,7 +19,7 @@ class TimerRepeatAdapter(
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimerRepeatViewHolder {
     return TimerRepeatViewHolder(
       ItemTimerRepeatBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-      context
+      context,
     )
   }
 
