@@ -27,6 +27,7 @@ class LinkMindDialog constructor(private val context: Context) {
 
   private var dialog: AlertDialog? = null
   fun show() {
+    dismiss()
     val dialogMarginWidth = caculateMarignDialog(37.0f)
     dialog = builder.create()
     dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)

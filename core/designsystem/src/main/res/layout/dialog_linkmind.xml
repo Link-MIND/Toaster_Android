@@ -11,11 +11,12 @@
 
   <TextView
     android:id="@+id/tv_dialog_title"
-    android:layout_width="wrap_content"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:gravity="center"
     android:textAppearance="@style/Typography.suit.bold_20"
     android:textColor="@color/neutrals800"
+    app:layout_constraintEnd_toStartOf="@+id/iv_dialog_cancel"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     tools:text="Title" />
