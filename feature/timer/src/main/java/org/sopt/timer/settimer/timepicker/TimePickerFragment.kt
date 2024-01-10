@@ -233,5 +233,4 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
       binding.tvTimePickerTime.text = "${it.timePeriod} ${it.hour}시 ${it.minute}분"
     }.launchIn(viewLifeCycleScope)
   }
-
 }
