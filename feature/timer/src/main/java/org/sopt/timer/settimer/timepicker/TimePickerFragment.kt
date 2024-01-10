@@ -32,9 +32,9 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     listUpdater = ListUpdater()
+    setupRecyclerViews()
     initTimePickerState()
     initRepeatState()
-    setupRecyclerViews()
     initRepeatButtonClickListener()
     initBackButtonClickListener()
     initCloseButtonClickListener()
@@ -42,7 +42,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   }
 
   private fun initTimePickerState() {
-    if (viewModel.currentHourIndex.value != 1) {
+    if (viewModel.currentHourIndex.value != 1 || viewModel.currentMinuteIndex.value != 1) {
       viewModel.currentHourIndex.value.let {
         binding.rvTimePickerHour.scrollToPosition(minuteAdapter.getMiddlePosition() + it - 1)
       }
