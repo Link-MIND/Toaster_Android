@@ -28,7 +28,7 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
     toggleClickListener()
   }
 
-  fun toggleClickListener() : List<LinkDTO> {
+  fun toggleClickListener(): List<LinkDTO> {
     with(binding) {
       btnClipAll.setOnClickListener {
         initButtonTransparent()
@@ -70,8 +70,8 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
 
   fun initEmptyMsgVisible(state: Boolean) {
     with(binding) {
-        ivClipCategoryEmpty.isVisible = state
-        tvClipDetailEmpty.isVisible = state
+      ivClipCategoryEmpty.isVisible = state
+      tvClipDetailEmpty.isVisible = state
     }
   }
 
