@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
   override fun onWindowFocusChanged(hasFocus: Boolean) {
     super.onWindowFocusChanged(hasFocus)
-
+// test
     if (hasFocus) {
       val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
       var pasteData = ""
@@ -129,6 +129,7 @@ class MainActivity : AppCompatActivity() {
       }
     }
   }
+
   private fun showRevokeCommonDialog() {
     linkMindDialog.setTitle(org.sopt.mainfeature.R.string.save_clip_dialog_title)
       .setSubtitle(org.sopt.mainfeature.R.string.save_clip_dialog_sub_title)
@@ -142,6 +143,7 @@ class MainActivity : AppCompatActivity() {
       }
       .show()
   }
+
   companion object {
     @JvmStatic
     fun newInstance(context: Context) = Intent(context, MainActivity::class.java).apply {
