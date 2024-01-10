@@ -13,6 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
+import designsystem.components.dialog.LinkMindDialog
 import org.sopt.maincontainer.databinding.ActivityMainBinding
 import org.sopt.ui.view.onThrottleClick
 
@@ -22,6 +23,11 @@ class MainActivity : AppCompatActivity() {
   private val binding get() = mBinding!!
 
   private lateinit var navController: NavController
+
+  private val linkMindDialog by lazy {
+    LinkMindDialog(this)
+  }
+  private var hasShownDialog = false
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     mBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -40,10 +46,12 @@ class MainActivity : AppCompatActivity() {
       } else if ((clipboard.primaryClipDescription?.hasMimeType(MIMETYPE_TEXT_PLAIN)) == false) {
       } else {
         val item = clipboard.primaryClip?.getItemAt(0)!!.coerceToText(applicationContext)
-        if (!item.isNullOrEmpty()) {
+        if (!item.isNullOrEmpty() && !hasShownDialog) {
           pasteData = item.toString()
           if (pasteData.contains("http")) {
             Log.d("test", "$pasteData")
+            showRevokeCommonDialog()
+            hasShownDialog = true
           }
         }
       }
@@ -122,7 +130,17 @@ class MainActivity : AppCompatActivity() {
       }
     }
   }
-
+  private fun showRevokeCommonDialog() {
+    linkMindDialog.setTitle(org.sopt.mainfeature.R.string.text_home)
+      .setSubtitle(org.sopt.mainfeature.R.string.text_clip)
+      .setNegativeButton(org.sopt.mainfeature.R.string.text_home) {
+        linkMindDialog.dismiss()
+      }
+      .setPositiveButton(org.sopt.mainfeature.R.string.text_home) {
+        linkMindDialog.dismiss()
+      }
+      .show()
+  }
   companion object {
     @JvmStatic
     fun newInstance(context: Context) = Intent(context, MainActivity::class.java).apply {
