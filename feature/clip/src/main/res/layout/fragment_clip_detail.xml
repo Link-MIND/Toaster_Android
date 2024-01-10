@@ -7,7 +7,7 @@
   android:background="@color/background">
 
   <ImageView
-    android:id="@+id/iv_clip_detail_toolbar"
+    android:id="@+id/iv_clip_detail_back"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingStart="20dp"
@@ -16,17 +16,18 @@
     android:paddingBottom="8dp"
     android:src="@drawable/ic_arrow_left_24"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toTopOf="parent"
+    android:contentDescription="@string/clip_detail_back_description" />
 
   <TextView
     android:id="@+id/tv_clip_detail_title"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingVertical="17dp"
-    android:text="전체 클립"
+    android:text="@string/clip_all"
     android:textAppearance="@style/Typography.suit.bold_18"
     android:textColor="@color/neutrals900"
-    app:layout_constraintStart_toEndOf="@id/iv_clip_detail_toolbar"
+    app:layout_constraintStart_toEndOf="@id/iv_clip_detail_back"
     app:layout_constraintTop_toTopOf="parent" />
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,6 +47,7 @@
       style="@style/Widget.AppCompat.Button.Borderless"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:minHeight="0dp"
       android:background="@drawable/shape_white_fill_8_rect"
       android:paddingHorizontal="42dp"
       android:paddingVertical="8dp"
@@ -69,6 +71,7 @@
       android:id="@+id/btn_clip_read"
       style="@style/Widget.AppCompat.Button.Borderless"
       android:layout_width="0dp"
+      android:minHeight="0dp"
       android:layout_height="wrap_content"
       android:background="@color/neutrals050"
       android:paddingHorizontal="42dp"
@@ -91,6 +94,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
       android:id="@+id/btn_clip_unread"
+      android:minHeight="0dp"
       style="@style/Widget.AppCompat.Button.Borderless"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
@@ -152,7 +156,8 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toTopOf="parent"
+    android:contentDescription="@string/clip_detail_empty_description" />
 
   <TextView
     android:layout_width="wrap_content"
