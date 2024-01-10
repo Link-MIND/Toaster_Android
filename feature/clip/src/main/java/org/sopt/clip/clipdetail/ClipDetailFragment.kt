@@ -37,7 +37,7 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
     with(binding) {
       btnClipAll.setOnClickListener {
         initButtonTransparent()
-        initTextGrey()
+        initToggleUnselected()
         dvClipPicker1.isVisible = false
         dvClipPicker2.isVisible = true
         btnClipAll.setBackgroundResource(R.drawable.shape_white_fill_12_rect)
@@ -46,7 +46,7 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
 
       btnClipRead.setOnClickListener {
         initButtonTransparent()
-        initTextGrey()
+        initToggleUnselected()
         dvClipPicker1.isVisible = false
         dvClipPicker2.isVisible = false
         btnClipRead.setBackgroundResource(R.drawable.shape_white_fill_12_rect)
@@ -55,7 +55,7 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
 
       btnClipUnread.setOnClickListener {
         initButtonTransparent()
-        initTextGrey()
+        initToggleUnselected()
         dvClipPicker1.isVisible = true
         dvClipPicker2.isVisible = false
         btnClipUnread.setBackgroundResource(R.drawable.shape_white_fill_12_rect)
@@ -80,7 +80,7 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
     }
   }
 
-  fun initTextGrey() {
+  fun initToggleUnselected() {
     with(binding) {
       btnClipAll.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_semibold_14)
       btnClipRead.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_semibold_14)
