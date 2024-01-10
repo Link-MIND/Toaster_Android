@@ -1,0 +1,29 @@
+package org.sopt.clip.clipedit
+
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.viewModels
+import org.sopt.clip.ClipViewModel
+import org.sopt.clip.databinding.FragmentClipEditBinding
+import org.sopt.ui.base.BindingFragment
+
+class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClipEditBinding.inflate(it) }) {
+  private val viewModel by viewModels<ClipViewModel>()
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+
+    val clipEditAdapter = ClipEditAdapter({})
+    binding.rvClipEdit.adapter = clipEditAdapter
+    var state: Boolean = viewModel.mockClipData == null
+
+    if (!state) {
+      clipEditAdapter.submitList(viewModel.mockClipData)
+    }
+
+    with(binding) {
+      ivClipEditBack.setOnClickListener {
+      }
+    }
+  }
+}
