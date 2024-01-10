@@ -7,7 +7,6 @@ import android.text.style.StyleSpan
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.mypage.databinding.ItemSearchResultClipBinding
 import org.sopt.mypage.search.ClipResultDummy
-import org.sopt.mypage.search.LinkResultDummy
 
 class ClipResultViewHolder(val binding: ItemSearchResultClipBinding) :
   RecyclerView.ViewHolder(binding.root) {
@@ -19,7 +18,6 @@ class ClipResultViewHolder(val binding: ItemSearchResultClipBinding) :
     binding.tvClipTitle.text = title
     binding.tvClipAmount.text = clipResult.amount.toString()
 
-
     // 검색어를 굵게 하이라이팅
     val startIndex = title.indexOf(searchQuery)
     if (startIndex != -1) {
@@ -28,7 +26,7 @@ class ClipResultViewHolder(val binding: ItemSearchResultClipBinding) :
         StyleSpan(Typeface.BOLD),
         startIndex,
         endIndex,
-        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
       )
     }
 

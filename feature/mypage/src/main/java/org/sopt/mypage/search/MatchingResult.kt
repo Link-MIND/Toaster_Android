@@ -1,7 +1,7 @@
 package org.sopt.mypage.search
 
-data class MatchingResults(
+data class MatchingResult(
   val linkResults: List<LinkResultDummy>,
   val clipResults: List<ClipResultDummy>,
-  val matchingTitles: List<String>
+  val matchingTitles: List<String>,
 )

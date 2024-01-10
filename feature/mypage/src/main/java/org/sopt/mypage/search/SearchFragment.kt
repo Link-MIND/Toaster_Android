@@ -13,8 +13,8 @@ import org.sopt.mypage.databinding.FragmentSearchBinding
 import org.sopt.mypage.search.adapter.ClipResultAdapter
 import org.sopt.mypage.search.adapter.LinkResultAdapter
 import org.sopt.ui.base.BindingFragment
-import org.sopt.ui.view.onThrottleClick
 import org.sopt.ui.context.hideKeyboard
+import org.sopt.ui.view.onThrottleClick
 
 class SearchFragment : BindingFragment<FragmentSearchBinding>(
   { FragmentSearchBinding.inflate(it) },

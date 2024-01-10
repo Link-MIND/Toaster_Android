@@ -11,7 +11,6 @@ import org.sopt.mypage.search.LinkResultDummy
 class LinkResultViewHolder(val binding: ItemSearchResultClipLinkBinding) :
   RecyclerView.ViewHolder(binding.root) {
 
-
   fun onBind(linkResult: LinkResultDummy, searchQuery: String) {
     val title = linkResult.title
     val spannable = SpannableString(title)
@@ -19,7 +18,6 @@ class LinkResultViewHolder(val binding: ItemSearchResultClipLinkBinding) :
     binding.tvClipDetailTitle.text = linkResult.detailcliptitle
     binding.tvClipTitle.text = title
     binding.tvClipUrl.text = linkResult.url
-
 
     // 검색어를 굵게 하이라이팅
     val startIndex = title.indexOf(searchQuery)
@@ -29,13 +27,11 @@ class LinkResultViewHolder(val binding: ItemSearchResultClipLinkBinding) :
         StyleSpan(Typeface.BOLD),
         startIndex,
         endIndex,
-        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
       )
     }
 
     // TextView에 텍스트 설정
     binding.tvClipTitle.text = spannable
-
   }
 }
-

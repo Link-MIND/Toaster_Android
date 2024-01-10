@@ -12,7 +12,6 @@ class SearchViewModel : ViewModel() {
   private val _clipResultsLiveData = MutableLiveData<List<ClipResultDummy>>()
   val clipResultsLiveData: LiveData<List<ClipResultDummy>> get() = _clipResultsLiveData
 
-
   fun updateResults(linkResults: List<LinkResultDummy>, clipResults: List<ClipResultDummy>) {
     _linkResultsLiveData.value = linkResults
     _clipResultsLiveData.value = clipResults
@@ -24,6 +23,5 @@ class SearchViewModel : ViewModel() {
 
     updateResults(filteredLinkResults, filteredClipResults)
     return filteredLinkResults.isNotEmpty() || filteredClipResults.isNotEmpty()
-
   }
 }
