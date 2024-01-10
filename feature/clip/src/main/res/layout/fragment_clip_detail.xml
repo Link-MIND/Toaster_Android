@@ -132,7 +132,7 @@
   <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/rv_category_link"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="0dp"
     android:layout_marginHorizontal="20dp"
     android:layout_marginTop="14dp"
     android:background="@color/background"
@@ -140,6 +140,7 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/tv_clip_category_all"
+    app:layout_constraintBottom_toBottomOf="parent"
     tools:itemCount="2"
     tools:listitem="@layout/item_clip_detail_link" />
 
@@ -157,6 +158,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="4dp"
+    android:id="@+id/tv_clip_detail_empty"
     android:gravity="center"
     android:text="@string/clip_detail_empty"
     android:textAppearance="@style/Typography.suit.regular_16_128"
