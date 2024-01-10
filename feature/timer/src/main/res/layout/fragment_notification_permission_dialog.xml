@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_marginHorizontal="30dp"
+  android:background="@drawable/shape_white_fill_12_rect"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+
+  <TextView
+    android:id="@+id/tv_noti_permission_dialog_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="알림이 꺼져있어요!"
+    android:textAppearance="@style/Typography.suit.bold_20"
+    android:textColor="@color/neutrals800"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    android:layout_marginTop="20dp"
+    android:layout_marginStart="24dp" />
+
+  <TextView
+    android:id="@+id/tv_noti_permission_dialog_subtitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="기기 알림이 꺼져있으면\n타이머 기능을 이용할 수 없어요"
+    android:textAppearance="@style/Typography.suit.regular_16_128"
+    android:textColor="@color/neutrals800"
+    android:layout_marginTop="12dp"
+    app:layout_constraintTop_toBottomOf="@id/tv_noti_permission_dialog_title"
+    app:layout_constraintStart_toStartOf="@id/tv_noti_permission_dialog_title"/>
+
+  <ImageView
+    android:id="@+id/iv_noti_permission_dialog_close"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_close_24"
+    android:padding="12dp"
+    android:layout_marginStart="21dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginEnd="10dp"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/tv_noti_permission_dialog_subtitle" />
+
+  <ImageView
+    android:id="@+id/iv_notification_permission_dialog"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:adjustViewBounds="true"
+    android:layout_marginTop="18dp"
+    android:layout_marginHorizontal="24dp"
+    android:src="@drawable/img_notification_permission"
+    app:layout_constraintTop_toBottomOf="@id/tv_noti_permission_dialog_subtitle"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+  <TextView
+    android:id="@+id/btn_notification_permission_dialog"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:text="기기에서 알림 설정하기"
+    android:gravity="center"
+    android:textAppearance="@style/Typography.suit.bold_16"
+    android:background="@drawable/shape_primary_fill_8_rect"
+    android:textColor="@color/neutrals_white"
+    android:layout_marginTop="18dp"
+    android:layout_marginHorizontal="24dp"
+    android:layout_marginBottom="24dp"
+    android:paddingVertical="14dp"
+    app:layout_constraintTop_toBottomOf="@id/iv_notification_permission_dialog"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
