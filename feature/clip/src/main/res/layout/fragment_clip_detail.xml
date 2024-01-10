@@ -7,7 +7,7 @@
   android:background="@color/background">
 
   <ImageView
-    android:id="@+id/iv_clip_detail_toolbar"
+    android:id="@+id/iv_clip_detail_back"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingStart="20dp"
@@ -27,7 +27,7 @@
     android:text="@string/clip_all"
     android:textAppearance="@style/Typography.suit.bold_18"
     android:textColor="@color/neutrals900"
-    app:layout_constraintStart_toEndOf="@id/iv_clip_detail_toolbar"
+    app:layout_constraintStart_toEndOf="@id/iv_clip_detail_back"
     app:layout_constraintTop_toTopOf="parent" />
 
   <androidx.constraintlayout.widget.ConstraintLayout

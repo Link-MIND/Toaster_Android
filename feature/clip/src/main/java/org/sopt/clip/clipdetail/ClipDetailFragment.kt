@@ -25,10 +25,10 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
       clipDetailAdapter.submitList(viewModel.mockLinkData)
     }
 
-    toggleClickListener()
+    initToggleClickListener()
   }
 
-  fun toggleClickListener(): List<LinkDTO> {
+  private fun initToggleClickListener(): List<LinkDTO> {
     with(binding) {
       btnClipAll.setOnClickListener {
         initButtonTransparent()
