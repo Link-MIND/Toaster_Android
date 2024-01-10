@@ -1,22 +1,25 @@
 package org.sopt.mypage.search
 
-import android.graphics.Typeface
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.StyleSpan
 import android.view.View
+import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import org.sopt.mypage.databinding.FragmentSearchBinding
 import org.sopt.mypage.search.adapter.ClipResultAdapter
 import org.sopt.mypage.search.adapter.LinkResultAdapter
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
+import org.sopt.ui.context.hideKeyboard
 
-class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBinding.inflate(it) }) {
+class SearchFragment : BindingFragment<FragmentSearchBinding>(
+  { FragmentSearchBinding.inflate(it) }
+) {
 
   private val viewModel: SearchViewModel by viewModels()
   private lateinit var linkResultAdapter: LinkResultAdapter
@@ -28,78 +31,97 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBi
 
     linkResultAdapter = LinkResultAdapter()
     clipResultAdapter = ClipResultAdapter()
-
-    viewModel.linkResults.observe(
-      viewLifecycleOwner,
-      Observer {
-        linkResultAdapter.submitList(it)
-      },
-    )
-
-    viewModel.clipResults.observe(
-      viewLifecycleOwner,
-      Observer {
-        clipResultAdapter.submitList(it)
-      },
-    )
-
-    viewModel.matchingTitles.observe(
-      viewLifecycleOwner,
-      Observer {
-        handleMatchingTitlesUpdate(it)
-      },
-    )
-
     mResultAdapter = ConcatAdapter(linkResultAdapter, clipResultAdapter)
+
     binding.rcSearchResult.adapter = mResultAdapter
 
-    binding.ivLeft.onThrottleClick {
-      requireActivity().supportFragmentManager.popBackStack()
-    }
+    setupObservers()
+    setupDummyData()
+    setupClickListeners()
+  }
 
-    binding.ivCancel.onThrottleClick {
-      binding.editText.text.clear()
-    }
+  private fun setupObservers() {
+    observeLinkResults()
+    observeClipResults()
+  }
 
+  private fun setupDummyData() {
+    val linkResults = listOf(
+      LinkResultDummy("Category", "토스트기", "URL"),
+      LinkResultDummy("Category2", "토스트", "URL2")
+    )
+    val clipResults = listOf(
+      ClipResultDummy("토스트 맛집", 6),
+      ClipResultDummy("토스트굿", 8)
+    )
+
+    viewModel.updateResults(linkResults, clipResults)
+  }
+
+  private fun setupClickListeners() {
     binding.ivSearch.onThrottleClick {
-      val searchTerm = binding.editText.text.toString()
-      viewModel.searchResults(searchTerm)
-    }
+      val query = binding.editText.text.toString().trim()
 
-    binding.editText.doAfterTextChanged { text ->
-      val isTextEmpty = text.isNullOrEmpty()
-      binding.ivCancel.visibility = if (isTextEmpty) View.INVISIBLE else View.VISIBLE
-    }
+      if (query.isNotEmpty()) {
+        val isMatchedResults = viewModel.onClickSearch(query)
 
-  }
-
-  private fun handleMatchingTitlesUpdate(matchingTitles: List<String>) {
-    if (matchingTitles.isEmpty()) {
-      binding.clNoneResults.visibility = View.VISIBLE
-      binding.rcSearchResult.visibility = View.GONE
-    } else {
-      binding.clNoneResults.visibility = View.GONE
-      binding.rcSearchResult.visibility = View.VISIBLE
-      mResultAdapter.notifyDataSetChanged()
-      applyTextToBold(matchingTitles, viewModel.searchTerm)
-    }
-  }
-
-  private fun applyTextToBold(matchingTitles: List<String>, searchTerm: String) {
-    for (matchingTitle in matchingTitles) {
-      val start = matchingTitle.indexOf(searchTerm, ignoreCase = true)
-      val end = start + searchTerm.length
-
-      if (start != -1) {
-        val spannableString = SpannableString(matchingTitle)
-        spannableString.setSpan(
-          StyleSpan(Typeface.BOLD),
-          start,
-          end,
-          Spannable.SPAN_INCLUSIVE_INCLUSIVE,
-        )
+        if (isMatchedResults) {
+          binding.rcSearchResult.isVisible = true
+          binding.clNoneResults.isVisible = false
+          binding.ivSearch.isVisible = false
+          binding.ivCancel.isVisible = true
+        } else {
+          binding.rcSearchResult.isVisible = false
+          binding.clNoneResults.isVisible = true
+          binding.ivSearch.isVisible = false
+          binding.ivCancel.isVisible = true
+        }
+      } else {
+        binding.rcSearchResult.isVisible = false
+        binding.clNoneResults.isVisible = true
       }
+      updateSearchQuery(query)
+      requireContext().hideKeyboard(requireView())
     }
+
+      binding.ivCancel.onThrottleClick {
+        clearSearch()
+        binding.rcSearchResult.isVisible = false
+        requireContext().hideKeyboard(requireView())
+
+        binding.clSearch.isVisible = true
+        binding.ivCancel.isVisible = false
+      }
+
+
+    binding.ivLeft.onThrottleClick {
+      findNavController().navigateUp()
+    }
+  }
+
+  private fun observeLinkResults() {
+    viewModel.linkResultsLiveData.observe(viewLifecycleOwner, Observer { linkResults ->
+      linkResultAdapter.submitList(linkResults)
+    })
+  }
+
+  private fun observeClipResults() {
+    viewModel.clipResultsLiveData.observe(viewLifecycleOwner, Observer { clipResults ->
+      clipResultAdapter.submitList(clipResults)
+    })
+  }
+
+  private fun updateSearchQuery(query: String) {
+    linkResultAdapter.setSearchQuery(query)
+    clipResultAdapter.setSearchQuery(query)
+  }
+
+  private fun showNoneResults(show: Boolean) {
+    binding.clNoneResults.visibility = if (show) View.VISIBLE else View.GONE
+    binding.rcSearchResult.visibility = if (show) View.GONE else View.VISIBLE
+  }
+
+  private fun clearSearch() {
+    binding.editText.text.clear()
   }
 }
-
