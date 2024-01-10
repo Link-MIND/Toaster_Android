@@ -3,7 +3,6 @@ package designsystem.components.dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,7 +86,7 @@ class LinkMindDialog constructor(private val context: Context) {
 
   fun setNegativeButton(
     @StringRes text: Int,
-    onClickListener: () -> (Unit) ,
+    onClickListener: () -> (Unit),
   ): LinkMindDialog {
     binding.btnNegative.apply {
       state = LinkMindButtonState.DISABLE

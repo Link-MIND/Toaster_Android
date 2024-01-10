@@ -37,7 +37,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     with(binding) {
       etvSaveCopyLink.apply {
         onClickTextClear {
-          hideErrorState(tvSaveLinkError,LinkMIndFullWidthButtonState.DISABLE)
+          hideErrorState(tvSaveLinkError, LinkMIndFullWidthButtonState.DISABLE)
           binding.btnSaveLinkNext.setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
         }
         throttleAfterTextChanged {
@@ -58,21 +58,21 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     }
   }
 
-  private fun hideErrorState(errorText: TextView , state: LinkMIndFullWidthButtonState) {
+  private fun hideErrorState(errorText: TextView, state: LinkMIndFullWidthButtonState) {
     errorText.isGone = true
-    binding.etvSaveCopyLink.state=LinkMindEditTextState.ENABLE
+    binding.etvSaveCopyLink.state = LinkMindEditTextState.ENABLE
     binding.btnSaveLinkNext.state = state
   }
 
   private fun showErrorState(errorText: TextView) {
     errorText.isVisible = true
-    binding.etvSaveCopyLink.state=LinkMindEditTextState.ERROR
+    binding.etvSaveCopyLink.state = LinkMindEditTextState.ERROR
     binding.btnSaveLinkNext.state = LinkMIndFullWidthButtonState.DISABLE
   }
 
   private fun handleSaveLinkNextClick() {
     with(binding) {
-      hideErrorState(tvSaveLinkError,LinkMIndFullWidthButtonState.ENABLE_BLACK)
+      hideErrorState(tvSaveLinkError, LinkMIndFullWidthButtonState.ENABLE_BLACK)
       onClickComplete()
     }
   }

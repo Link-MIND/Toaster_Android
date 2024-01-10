@@ -61,31 +61,29 @@ class LinkMindBottomSheet(context: Context) {
       etvBottomSheet.state = if (isError) LinkMindEditTextState.ERROR else LinkMindEditTextState.ENABLE
       btnBottomSheet.state = if (!isError && isTextLongEnough()) LinkMIndFullWidthButtonState.ENABLE_PRIMARY else LinkMIndFullWidthButtonState.DISABLE
     }
-}
+  }
 
-private fun isTextLongEnough() = binding.etvBottomSheet.editText.text.length > 1
+  private fun isTextLongEnough() = binding.etvBottomSheet.editText.text.length > 1
 
-fun setTitle(@StringRes textId: Int) {
-  binding.tvBottomSheetTitle.setText(textId)
-}
+  fun setTitle(@StringRes textId: Int) {
+    binding.tvBottomSheetTitle.setText(textId)
+  }
 
-fun showErrorMsg(): Boolean = binding.etvBottomSheet.editText.text.length > 10
+  fun showErrorMsg(): Boolean = binding.etvBottomSheet.editText.text.length > 10
 
-fun setErroMsg(@StringRes textId: Int) {
-  binding.tvBottomSheetErrorText.setText(textId)
-}
+  fun setErroMsg(@StringRes textId: Int) {
+    binding.tvBottomSheetErrorText.setText(textId)
+  }
 
-fun showSnackBar(message: String, isLongDuration: Boolean) {
-  context.linkMindSnackBar(binding.root, message, isLongDuration)
-}
+  fun showSnackBar(message: String, isLongDuration: Boolean) {
+    context.linkMindSnackBar(binding.root, message, isLongDuration)
+  }
 
-fun show() {
-  bottomSheetDialog.show()
-}
+  fun show() {
+    bottomSheetDialog.show()
+  }
 
   fun dismiss() {
     bottomSheetDialog.dismiss()
   }
 }
-
-
