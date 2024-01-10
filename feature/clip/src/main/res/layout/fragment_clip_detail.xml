@@ -23,7 +23,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingVertical="17dp"
-    android:text="전체 클립"
+    android:text="@string/clip_all"
     android:textAppearance="@style/Typography.suit.bold_18"
     android:textColor="@color/neutrals900"
     app:layout_constraintStart_toEndOf="@id/iv_clip_detail_toolbar"
