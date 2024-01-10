@@ -24,20 +24,6 @@ class TimerClipSelectFragment : BindingFragment<FragmentTimerClipSelectBinding>(
     initNextButtonClickListener(list)
     initCloseButtonClickListener()
   }
-
-  private fun initCloseButtonClickListener() {
-    binding.ivTimerClipSelectClose.onThrottleClick {
-      findNavController().navigateUp()
-    }
-  }
-
-  private fun initNextButtonClickListener(list: List<Clip>) {
-    binding.btnTimerClipSelectNext.btnClick {
-      viewModel.setClipList(list)
-      findNavController().navigate(R.id.action_navigation_timer_clip_select_to_navigation_time_picker)
-    }
-  }
-
   private fun initClipSelectAdapter(list: List<Clip>) {
     adapter = ClipSelectAdapter(
       onClick = { clip, index ->
@@ -63,6 +49,19 @@ class TimerClipSelectFragment : BindingFragment<FragmentTimerClipSelectBinding>(
     } else {
       list.onEach { it.isSelected = false }
       binding.btnTimerClipSelectNext.state = LinkMindButtonState.DISABLE
+    }
+  }
+
+  private fun initNextButtonClickListener(list: List<Clip>) {
+    binding.btnTimerClipSelectNext.btnClick {
+      viewModel.setClipList(list)
+      findNavController().navigate(R.id.action_navigation_timer_clip_select_to_navigation_time_picker)
+    }
+  }
+
+  private fun initCloseButtonClickListener() {
+    binding.ivTimerClipSelectClose.onThrottleClick {
+      findNavController().navigateUp()
     }
   }
 }
