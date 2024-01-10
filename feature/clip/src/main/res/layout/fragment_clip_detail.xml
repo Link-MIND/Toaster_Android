@@ -61,6 +61,7 @@
       android:id="@+id/dv_clip_picker1"
       android:layout_width="1dp"
       android:layout_height="0dp"
+      android:visibility="invisible"
       android:layout_marginTop="10dp"
       android:layout_marginBottom="9dp"
       app:layout_constraintBottom_toBottomOf="@id/cl_clip_picker"
