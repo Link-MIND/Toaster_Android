@@ -64,6 +64,8 @@
   <string name="clip_detail_read">열람</string>
   <string name="clip_detail_unread">미열람</string>
   <string name="clip_detail_empty">아직 클립에 저장된 링크가 없어요\n아래 + 버튼을 통해 링크를 저장해보세요!</string>
+  <string name="clip_detail_empty_description">저장된 링크가 없습니다</string>
+  <string name="clip_detail_back_description">뒤로 가기</string>
 
   <!-- home -->
   <string name="home_correction_clip">클립수정</string>

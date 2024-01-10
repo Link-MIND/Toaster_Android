@@ -16,9 +16,7 @@ import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.context.hideKeyboard
 import org.sopt.ui.view.onThrottleClick
 
-class SearchFragment : BindingFragment<FragmentSearchBinding>(
-  { FragmentSearchBinding.inflate(it) },
-) {
+class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBinding.inflate(it) }) {
 
   private val viewModel: SearchViewModel by viewModels()
   private lateinit var linkResultAdapter: LinkResultAdapter
@@ -31,7 +29,6 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
     linkResultAdapter = LinkResultAdapter()
     clipResultAdapter = ClipResultAdapter()
     mResultAdapter = ConcatAdapter(linkResultAdapter, clipResultAdapter)
-
     binding.rcSearchResult.adapter = mResultAdapter
 
     setupObservers()
@@ -83,6 +80,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
       findNavController().navigateUp()
     }
   }
+
 
   private fun setSearch() {
     val query = binding.editText.text.toString().trim()
@@ -143,5 +141,6 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
 
   private fun clearSearch() {
     binding.editText.text.clear()
-  }
+
 }
+
