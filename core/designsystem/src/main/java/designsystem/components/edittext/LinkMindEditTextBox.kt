@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doAfterTextChanged
+import designsystem.components.button.state.LinkMIndFullWidthButtonState
+import designsystem.components.edittext.state.LinkMindEditTextState
 import org.sopt.common.util.throttleValue.ThrottleValue
 import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.EditTextBoxLinkmindBinding
@@ -23,6 +25,19 @@ class LinkMindEditTextBox @JvmOverloads constructor(
   val editText
     get() = binding.editText
 
+  var state: LinkMindEditTextState = LinkMindEditTextState.ENABLE
+    set(value) {
+      field = value
+      when (field) {
+        LinkMindEditTextState.ENABLE -> {
+          setBackgroundResource(R.drawable.shape_neutrals_fill_12_rect)
+        }
+
+        LinkMindEditTextState.ERROR -> {
+          setBackgroundResource(R.drawable.shape_neutrals_fill_error_line_12_rect)
+        }
+      }
+    }
   init {
     val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     binding = EditTextBoxLinkmindBinding.inflate(inflater, this, true)

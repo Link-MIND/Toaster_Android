@@ -1,6 +1,7 @@
 package org.sopt.savelink.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -26,6 +27,13 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     navigateUp()
   }
 
+  override fun onResume() {
+    if (binding.etvSaveCopyLink.editText.text.isNotEmpty() && binding.etvSaveCopyLinkTitle.editText.text.isNotEmpty()) {
+      showTitleEditText()
+    }
+    super.onResume()
+  }
+
   private fun initView() {
     binding.btnSaveLinkNext.apply {
       state = LinkMIndFullWidthButtonState.DISABLE
@@ -41,7 +49,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
           hideSubTitleAndLinkTitle()
         }
         throttleAfterTextChanged {
-          hideSubTitleAndLinkTitle()
+         if (binding.etvSaveCopyLinkTitle.editText.text.isEmpty()) hideSubTitleAndLinkTitle()
           if (checkTextLength(15)) {
             showErrorState(tvSaveLinkError)
             return@throttleAfterTextChanged
@@ -64,10 +72,8 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
         }
         hideErrorState(binding.tvSaveLinkErrorTitle)
         binding.btnSaveLinkNext.btnClick {
-          with(binding) {
-            KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
-            findNavController().navigate(R.id.action_saveLinkFragment_to_saveLinkSetClipFragment)
-          }
+          KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
+          findNavController().navigate(R.id.action_saveLinkFragment_to_saveLinkSetClipFragment)
         }
       }
     }
@@ -89,8 +95,10 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
   }
 
   private fun hideSubTitleAndLinkTitle() {
+    Log.d("test","testSak")
     binding.tvSaveLinkSubTitle.isGone = true
     binding.etvSaveCopyLinkTitle.isGone = true
+    binding.etvSaveCopyLinkTitle.editText.text.clear()
   }
 
   private fun handleSaveLinkNextClick() {
@@ -98,7 +106,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
       hideErrorState(tvSaveLinkError)
       btnSaveLinkNext.btnClick {
         if (etvSaveCopyLink.editText.text.isNotEmpty()) {
-          disableSaveLinkNextAndShowSubTitleAndLinkTitle()
+          showTitleEditText()
           return@btnClick
         }
         showErrorState(binding.tvSaveLinkError)
@@ -106,7 +114,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     }
   }
 
-  private fun disableSaveLinkNextAndShowSubTitleAndLinkTitle() {
+  private fun showTitleEditText() {
     binding.btnSaveLinkNext.state = LinkMIndFullWidthButtonState.DISABLE
     binding.tvSaveLinkSubTitle.isVisible = true
     binding.etvSaveCopyLinkTitle.isVisible = true
