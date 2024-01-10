@@ -59,39 +59,6 @@
     android:visibility="gone"
     app:layout_constraintTop_toBottomOf="@id/etv_save_copy_link" />
 
-  <TextView
-    android:id="@+id/tv_save_link_sub_title"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingStart="20dp"
-    android:layout_marginTop="12dp"
-    android:text="제목을 입력해주세요"
-    android:textAppearance="@style/Typography.suit.medium_18"
-    android:textColor="@color/neutrals900"
-    android:visibility="gone"
-    app:layout_constraintTop_toBottomOf="@id/tv_save_link_error" />
-
-  <designsystem.components.edittext.LinkMindEditTextBox
-    android:id="@+id/etv_save_copy_link_title"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingHorizontal="20dp"
-    android:paddingTop="12dp"
-    android:visibility="gone"
-    app:layout_constraintTop_toBottomOf="@id/tv_save_link_sub_title" />
-
-  <TextView
-    android:id="@+id/tv_save_link_error_title"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingStart="20dp"
-    android:paddingTop="12dp"
-    android:text="링크 제목은 최대 15자까지 입력 가능합니다."
-    android:textAppearance="@style/Typography.suit.medium_12"
-    android:textColor="@color/error"
-    android:visibility="gone"
-    app:layout_constraintTop_toBottomOf="@id/etv_save_copy_link_title" />
-
   <designsystem.components.button.LinkMindFullWidthButton
     android:id="@+id/btn_save_link_next"
     android:layout_width="match_parent"

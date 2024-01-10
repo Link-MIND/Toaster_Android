@@ -21,16 +21,8 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     super.onViewCreated(view, savedInstanceState)
     initView()
     handleEditTextLink()
-    handleEditTextTitle()
     handleKeyboardHide()
     navigateUp()
-  }
-
-  override fun onResume() {
-    if (binding.etvSaveCopyLink.editText.text.isNotEmpty() && binding.etvSaveCopyLinkTitle.editText.text.isNotEmpty()) {
-      showTitleEditText()
-    }
-    super.onResume()
   }
 
   private fun initView() {
@@ -44,33 +36,16 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     with(binding) {
       etvSaveCopyLink.apply {
         onClickTextClear {
-          hideErrorStateDisable(tvSaveLinkError)
-          hideSubTitleAndLinkTitle()
+          hideErrorState(tvSaveLinkError,LinkMIndFullWidthButtonState.DISABLE)
+          binding.btnSaveLinkNext.setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
         }
         throttleAfterTextChanged {
-          if (binding.etvSaveCopyLinkTitle.editText.text.isEmpty()) hideSubTitleAndLinkTitle()
           if (checkTextLength(15)) {
             showErrorState(tvSaveLinkError)
             return@throttleAfterTextChanged
           }
           handleSaveLinkNextClick()
         }
-      }
-    }
-  }
-
-  private fun handleEditTextTitle() {
-    binding.etvSaveCopyLinkTitle.apply {
-      onClickTextClear {
-        hideErrorStateDisable(binding.tvSaveLinkErrorTitle)
-      }
-      throttleAfterTextChanged {
-        if (checkTextLength(15)) {
-          showErrorState(binding.tvSaveLinkErrorTitle)
-          return@throttleAfterTextChanged
-        }
-        hideErrorState(binding.tvSaveLinkErrorTitle)
-        onClickComplete()
       }
     }
   }
@@ -82,9 +57,9 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     }
   }
 
-  private fun hideErrorStateDisable(errorText: TextView) {
+  private fun hideErrorState(errorText: TextView , state: LinkMIndFullWidthButtonState) {
     errorText.isGone = true
-    binding.btnSaveLinkNext.state = LinkMIndFullWidthButtonState.DISABLE
+    binding.btnSaveLinkNext.state = state
   }
 
   private fun showErrorState(errorText: TextView) {
@@ -92,38 +67,11 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     binding.btnSaveLinkNext.state = LinkMIndFullWidthButtonState.DISABLE
   }
 
-  private fun hideErrorState(errorText: TextView) {
-    errorText.isGone = true
-    binding.btnSaveLinkNext.state = LinkMIndFullWidthButtonState.ENABLE_BLACK
-  }
-
-  private fun hideSubTitleAndLinkTitle() {
-    binding.tvSaveLinkSubTitle.isGone = true
-    binding.etvSaveCopyLinkTitle.isGone = true
-    binding.etvSaveCopyLinkTitle.editText.text.clear()
-  }
-
   private fun handleSaveLinkNextClick() {
     with(binding) {
-      hideErrorState(tvSaveLinkError)
-      onClickNext()
+      hideErrorState(tvSaveLinkError,LinkMIndFullWidthButtonState.ENABLE_BLACK)
+      onClickComplete()
     }
-  }
-
-  private fun FragmentSaveLinkBinding.onClickNext() {
-    btnSaveLinkNext.btnClick {
-      if (etvSaveCopyLink.editText.text.isNotEmpty()) {
-        showTitleEditText()
-        return@btnClick
-      }
-      showErrorState(binding.tvSaveLinkError)
-    }
-  }
-
-  private fun showTitleEditText() {
-    binding.btnSaveLinkNext.state = LinkMIndFullWidthButtonState.DISABLE
-    binding.tvSaveLinkSubTitle.isVisible = true
-    binding.etvSaveCopyLinkTitle.isVisible = true
   }
 
   private fun handleKeyboardHide() {
