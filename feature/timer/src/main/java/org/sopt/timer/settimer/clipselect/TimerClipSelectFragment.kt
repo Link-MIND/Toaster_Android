@@ -35,6 +35,7 @@ class TimerClipSelectFragment : BindingFragment<FragmentTimerClipSelectBinding>(
     adapter.submitList(list)
     binding.btnTimerClipSelectNext.state = if (adapter.selectedPosition != -1) LinkMindButtonState.ENABLE else LinkMindButtonState.DISABLE
     binding.rvItemTimerClipSelect.adapter = adapter
+    binding.rvItemTimerClipSelect.itemAnimator = null
   }
 
   private fun handleClipClick(
