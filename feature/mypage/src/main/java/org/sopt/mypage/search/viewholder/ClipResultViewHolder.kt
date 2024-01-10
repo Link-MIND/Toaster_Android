@@ -11,5 +11,4 @@ class ClipResultViewHolder(val binding: ItemSearchResultClipBinding) :
     binding.tvClipTitle.text = clipResult.title
     binding.tvClipAmount.text = clipResult.amount.toString()
   }
-
 }

@@ -13,4 +13,3 @@ class LinkResultViewHolder(val binding: ItemSearchResultClipLinkBinding) :
     binding.tvClipUrl.text = linkResult.url
   }
 }
-

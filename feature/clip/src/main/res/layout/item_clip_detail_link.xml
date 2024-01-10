@@ -3,77 +3,69 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="@color/neutrals_white">
+  android:layout_marginBottom="8dp"
+  android:background="@drawable/shape_white_fill_12_rect"
+  android:paddingBottom="12dp">
 
-  <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/cl_link_detail"
-    android:layout_width="match_parent"
+  <ImageView
+    android:id="@+id/iv_link_thumnail"
+    android:layout_width="74dp"
     android:layout_height="wrap_content"
-    android:padding="12dp"
+    android:layout_margin="12dp"
+    android:scaleType="center"
+    android:src="@drawable/img_link_thumb"
+    app:layout_constraintDimensionRatio="1:1"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-      android:id="@+id/iv_link_thumnail"
-      android:layout_width="74dp"
-      android:layout_height="wrap_content"
-      android:src="@drawable/img_link_thumb"
-      app:layout_constraintDimensionRatio="1:1"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+  <TextView
+    android:id="@+id/tv_link_clip_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="6dp"
+    android:layout_marginTop="12dp"
+    android:background="@drawable/shape_red_fill_8_rect"
+    android:paddingHorizontal="8dp"
+    android:paddingVertical="4dp"
+    android:text="세부 클립명"
+    android:textAppearance="@style/Typography.suit.medium_10"
+    android:textColor="@color/accessible800"
+    app:layout_constraintStart_toEndOf="@id/iv_link_thumnail"
+    app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-      android:id="@+id/cl_link_detail_text"
-      android:layout_width="wrap_content"
-      android:layout_height="0dp"
-      android:layout_marginStart="12dp"
-      android:layout_marginBottom="-1dp"
-      app:layout_constraintBottom_toBottomOf="@id/cl_link_detail"
-      app:layout_constraintStart_toEndOf="@id/iv_link_thumnail"
-      app:layout_constraintTop_toTopOf="parent">
+  <ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="-12dp"
+    android:paddingStart="18dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="6dp"
+    android:paddingBottom="14dp"
+    android:src="@drawable/ic_meatballs_24"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
-      <TextView
-        android:id="@+id/tv_link_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/accessible050"
-        android:paddingHorizontal="8dp"
-        android:paddingVertical="4dp"
-        android:text="세부 클립명"
-        android:textAppearance="@style/Typography.suit.medium_10"
-        android:textColor="@color/accessible800"
-        app:layout_constraintStart_toStartOf="@id/cl_link_detail_text"
-        app:layout_constraintTop_toTopOf="@id/cl_link_detail_text" />
+  <TextView
+    android:id="@+id/tv_link_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="6dp"
+    android:layout_marginTop="4dp"
+    android:text="Title"
+    android:textAppearance="@style/Typography.suit.semibold_16"
+    android:textColor="@color/neutrals850"
+    app:layout_constraintStart_toEndOf="@id/iv_link_thumnail"
+    app:layout_constraintTop_toBottomOf="@id/tv_link_clip_title" />
 
-      <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="Title"
-        android:textAppearance="@style/Typography.suit.medium_16"
-        android:textColor="@color/neutrals850"
-        app:layout_constraintStart_toStartOf="@id/cl_link_detail_text"
-        app:layout_constraintTop_toBottomOf="@id/tv_link_title" />
-
-      <TextView
-        android:id="@+id/tv_link_url"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="-1dp"
-        android:text="https://~~"
-        android:textAppearance="@style/Typography.suit.medium_10"
-        android:textColor="@color/neutrals200"
-        app:layout_constraintBottom_toBottomOf="@id/cl_link_detail_text"
-        app:layout_constraintStart_toStartOf="@id/cl_link_detail_text" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:src="@drawable/ic_meatballs_24"
-      app:layout_constraintEnd_toEndOf="@id/cl_link_detail"
-      app:layout_constraintTop_toTopOf="@id/cl_link_detail" />
-  </androidx.constraintlayout.widget.ConstraintLayout>
+  <TextView
+    android:id="@+id/tv_link_url"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="6dp"
+    android:layout_marginTop="18dp"
+    android:text="https://~~"
+    android:textAppearance="@style/Typography.suit.medium_10"
+    android:textColor="@color/neutrals200"
+    app:layout_constraintBottom_toBottomOf="@id/iv_link_thumnail"
+    app:layout_constraintStart_toEndOf="@id/iv_link_thumnail" />
 </androidx.constraintlayout.widget.ConstraintLayout>
