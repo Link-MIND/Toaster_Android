@@ -2,7 +2,6 @@ package designsystem.components.bottomsheet
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.WindowManager
 import androidx.annotation.StringRes
 import androidx.core.view.isGone
@@ -56,15 +55,12 @@ class LinkMindBottomSheet(context: Context) {
   }
 
   private fun handleTextChange() {
-    if (showErrorMsg()) {
-      binding.tvBottomSheetErrorText.isVisible = true
-      binding.etvBottomSheet.state = LinkMindEditTextState.ERROR
-    } else {
-      binding.tvBottomSheetErrorText.isGone = true
-      binding.etvBottomSheet.state = LinkMindEditTextState.ENABLE
+    val isError = showErrorMsg()
+    binding.apply {
+      tvBottomSheetErrorText.isVisible = isError
+      etvBottomSheet.state = if (isError) LinkMindEditTextState.ERROR else LinkMindEditTextState.ENABLE
+      btnBottomSheet.state = if (!isError && isTextLongEnough()) LinkMIndFullWidthButtonState.ENABLE_PRIMARY else LinkMIndFullWidthButtonState.DISABLE
     }
-  binding.btnBottomSheet.state =
-  if (!showErrorMsg() && isTextLongEnough()) LinkMIndFullWidthButtonState.ENABLE_PRIMARY else LinkMIndFullWidthButtonState.DISABLE
 }
 
 private fun isTextLongEnough() = binding.etvBottomSheet.editText.text.length > 1
@@ -87,9 +83,9 @@ fun show() {
   bottomSheetDialog.show()
 }
 
-fun dismiss() {
-  bottomSheetDialog.dismiss()
-}
+  fun dismiss() {
+    bottomSheetDialog.dismiss()
+  }
 }
 
 
