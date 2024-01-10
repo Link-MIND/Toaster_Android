@@ -70,7 +70,6 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBi
       val isTextEmpty = text.isNullOrEmpty()
       binding.ivCancel.visibility = if (isTextEmpty) View.INVISIBLE else View.VISIBLE
     }
-
   }
 
   private fun handleMatchingTitlesUpdate(matchingTitles: List<String>) {
@@ -102,4 +101,3 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBi
     }
   }
 }
-
