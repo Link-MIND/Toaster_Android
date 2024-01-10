@@ -7,17 +7,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.sopt.common.intentprovider.IntentProvider
 import org.sopt.common.intentprovider.LOGIN
 import org.sopt.datastore.datastore.SecurityDataStore
-import org.sopt.mainfeature.R
 import org.sopt.mypage.databinding.FragmentSettingsBinding
 import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
 import org.sopt.ui.view.UiState
+import org.sopt.ui.view.onThrottleClick
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -43,15 +44,16 @@ class SettingsFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
+
     val toasterToggle = binding.settingsAlertToggle
     val tvSettingsAlertOff = binding.tvSettingsAlertOff
 
-    tvSettingsAlertOff.visibility =
-      if (toasterToggle.getState() == R.id.start) View.VISIBLE else View.INVISIBLE
+    val startStateId = org.sopt.mainfeature.R.id.start
+
+    updateVisibility(tvSettingsAlertOff, toasterToggle.getState(), startStateId)
 
     toasterToggle.btnClick {
-      tvSettingsAlertOff.visibility =
-        if (toasterToggle.getState() == R.id.start) View.VISIBLE else View.INVISIBLE
+      updateVisibility(tvSettingsAlertOff, toasterToggle.getState(), startStateId)
     }
 
     binding.tvSetLogout.setOnClickListener {
@@ -83,8 +85,17 @@ class SettingsFragment : Fragment() {
           startActivity(intent)
           requireActivity().finish()
         }
+
         else -> {}
       }
     }.launchIn(viewLifeCycleScope)
+
+    binding.ivSettingsLeft.onThrottleClick {
+      findNavController().navigateUp()
+    }
+  }
+
+  private fun updateVisibility(view: View, state: Int, startStateId: Int) {
+    view.visibility = if (state == startStateId) View.VISIBLE else View.INVISIBLE
   }
 }

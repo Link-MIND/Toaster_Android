@@ -6,13 +6,16 @@ import androidx.recyclerview.widget.RecyclerView
 import org.sopt.home.ClipDummy
 import org.sopt.home.databinding.ItemHomeClipBinding
 
-class HomeCliprViewHolder(
+class HomeClipViewHolder(
   private val binding: ItemHomeClipBinding,
   private val onClickItemClip: (ClipDummy) -> Unit,
   private val onClickItemClip2: () -> Unit,
-) : RecyclerView.ViewHolder(binding.root) {
 
-  fun onBind(data: ClipDummy?) {
+) : RecyclerView.ViewHolder(binding.root) {
+  fun onBind(data: ClipDummy?, position: Int) {
+    if (position == 0) {
+      binding.ivHomeClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_clip_all_24)
+    }
     if (data == null) {
       with(binding) {
         clItemClip.isGone = true
