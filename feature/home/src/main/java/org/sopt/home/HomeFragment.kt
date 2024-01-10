@@ -35,7 +35,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     val list = listOf(
       ClipDummy("전체클립", 1),
       ClipDummy("TitleCheck", 1),
-      ClipDummy("Title", 2),
       ClipDummy("LeeSak", 3),
       null,
     )

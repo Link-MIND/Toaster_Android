@@ -30,7 +30,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
   override fun onResume() {
     if (binding.etvSaveCopyLink.editText.text.isNotEmpty() && binding.etvSaveCopyLinkTitle.editText.text.isNotEmpty()) {
       showTitleEditText()
-    }
+     }
     super.onResume()
   }
 
@@ -71,11 +71,15 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
           return@throttleAfterTextChanged
         }
         hideErrorState(binding.tvSaveLinkErrorTitle)
-        binding.btnSaveLinkNext.btnClick {
-          KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
-          findNavController().navigate(R.id.action_saveLinkFragment_to_saveLinkSetClipFragment)
-        }
+        onClickComplete()
       }
+    }
+  }
+
+  private fun onClickComplete() {
+    binding.btnSaveLinkNext.btnClick {
+      KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
+      findNavController().navigate(R.id.action_saveLinkFragment_to_saveLinkSetClipFragment)
     }
   }
 
@@ -95,7 +99,6 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
   }
 
   private fun hideSubTitleAndLinkTitle() {
-    Log.d("test","testSak")
     binding.tvSaveLinkSubTitle.isGone = true
     binding.etvSaveCopyLinkTitle.isGone = true
     binding.etvSaveCopyLinkTitle.editText.text.clear()
@@ -104,13 +107,17 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
   private fun handleSaveLinkNextClick() {
     with(binding) {
       hideErrorState(tvSaveLinkError)
-      btnSaveLinkNext.btnClick {
-        if (etvSaveCopyLink.editText.text.isNotEmpty()) {
-          showTitleEditText()
-          return@btnClick
-        }
-        showErrorState(binding.tvSaveLinkError)
+      onClickNext()
+    }
+  }
+
+  private fun FragmentSaveLinkBinding.onClickNext() {
+    btnSaveLinkNext.btnClick {
+      if (etvSaveCopyLink.editText.text.isNotEmpty()) {
+        showTitleEditText()
+        return@btnClick
       }
+      showErrorState(binding.tvSaveLinkError)
     }
   }
 
