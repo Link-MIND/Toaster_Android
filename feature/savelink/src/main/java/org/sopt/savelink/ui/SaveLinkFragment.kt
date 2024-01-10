@@ -8,6 +8,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
+import designsystem.components.edittext.state.LinkMindEditTextState
 import org.sopt.savelink.R
 import org.sopt.savelink.databinding.FragmentSaveLinkBinding
 import org.sopt.ui.base.BindingFragment
@@ -59,11 +60,13 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
 
   private fun hideErrorState(errorText: TextView , state: LinkMIndFullWidthButtonState) {
     errorText.isGone = true
+    binding.etvSaveCopyLink.state=LinkMindEditTextState.ENABLE
     binding.btnSaveLinkNext.state = state
   }
 
   private fun showErrorState(errorText: TextView) {
     errorText.isVisible = true
+    binding.etvSaveCopyLink.state=LinkMindEditTextState.ERROR
     binding.btnSaveLinkNext.state = LinkMIndFullWidthButtonState.DISABLE
   }
 
