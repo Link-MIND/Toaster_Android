@@ -7,106 +7,137 @@
   android:background="@color/background">
 
 
+  <TextView
+    android:id="@+id/tv_clip_bar_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="17dp"
+    android:text="@string/text_clip"
+    android:textAppearance="@style/Typography.suit.bold_18"
+    android:textColor="@color/neutrals900"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <androidx.appcompat.widget.AppCompatButton
+    android:layout_width="wrap_content"
+    android:layout_height="0dp"
+    android:background="@color/transparent"
+    android:paddingHorizontal="28dp"
+    android:paddingTop="19dp"
+    android:paddingBottom="20dp"
+    android:text="@string/clip_toolbar_edit"
+    android:textAppearance="@style/Typography.suit.bold_14"
+    android:textColor="@color/neutrals600"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+
   <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/cl_clip_main"
+    android:id="@+id/cl_clip_search"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="20dp"
+    android:background="@drawable/shape_grey050_fill_12_rect"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    app:layout_constraintTop_toBottomOf="@id/tv_clip_bar_title">
 
-
-    <androidx.appcompat.widget.AppCompatButton
-      android:id="@+id/btn_clip_search"
-      android:layout_width="0dp"
+    <ImageView
+      android:id="@+id/iv_clip_search"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:minHeight="0dp"
-      android:minWidth="0dp"
+      android:layout_marginStart="12dp"
+      android:layout_marginTop="11dp"
+      android:layout_marginBottom="11dp"
+      android:src="@drawable/ic_search_20"
+      app:layout_constraintStart_toStartOf="@id/cl_clip_search"
+      app:layout_constraintTop_toTopOf="@id/cl_clip_search" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_marginStart="8dp"
       android:paddingVertical="11dp"
-      android:text="@string/clip_search"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@id/cl_clip_main" />
-
-    <TextView
-      android:id="@+id/tv_clip_all"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="19dp"
-      android:text="@string/text_all"
-      android:textAppearance="@style/Typography.suit.medium_12"
+      android:text="검색어를 입력하세요"
+      android:textAppearance="@style/Typography.suit.regular_16"
       android:textColor="@color/neutrals400"
-      app:layout_constraintStart_toStartOf="@id/cl_clip_main"
-      app:layout_constraintTop_toBottomOf="@id/btn_clip_search" />
-
-    <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="2dp"
-      android:layout_marginTop="19dp"
-      android:text="(n)"
-      android:textAppearance="@style/Typography.suit.medium_12"
-      android:textColor="@color/neutrals400"
-      app:layout_constraintStart_toEndOf="@id/tv_clip_all"
-      app:layout_constraintTop_toBottomOf="@id/btn_clip_search" />
-
-    <androidx.appcompat.widget.AppCompatButton
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="15dp"
-      android:paddingVertical="4dp"
-      android:text="@string/clip_add_clip"
-      android:minHeight="0dp"
-      android:minWidth="0dp"
-      android:textAppearance="@style/Typography.suit.medium_12"
-      android:textColor="@color/primary"
-      android:background="@color/transparent"
-      app:layout_constraintEnd_toEndOf="@id/cl_clip_main"
-      app:layout_constraintTop_toBottomOf="@id/btn_clip_search" />
-
-    <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/rv_clip_clip"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="14dp"
-      app:layout_constraintStart_toStartOf="@id/cl_clip_main"
-      app:layout_constraintTop_toBottomOf="@id/tv_clip_all"
-      tools:itemCount="3"
-      tools:listitem="@layout/item_clip_clip" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-      android:id="@+id/cl_clip_empty"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginHorizontal="60dp"
-      android:layout_marginTop="31dp"
-      app:layout_constraintEnd_toEndOf="@id/cl_clip_main"
-      app:layout_constraintStart_toStartOf="@id/cl_clip_main"
-      app:layout_constraintTop_toBottomOf="@id/rv_clip_clip">
-
-      <ImageView
-        android:id="@+id/iv_clip_empty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/img_clip_empty"
-        app:layout_constraintEnd_toEndOf="@id/cl_clip_empty"
-        app:layout_constraintStart_toStartOf="@id/cl_clip_empty"
-        app:layout_constraintTop_toTopOf="@id/cl_clip_empty" />
-
-      <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/clip_empty"
-        android:textAppearance="@style/Typography.suit.regular_16_128"
-        android:textColor="@color/neutrals500"
-        app:layout_constraintEnd_toEndOf="@id/cl_clip_empty"
-        app:layout_constraintStart_toStartOf="@id/cl_clip_empty"
-        app:layout_constraintTop_toBottomOf="@id/iv_clip_empty" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+      app:layout_constraintStart_toEndOf="@id/iv_clip_search" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+  <TextView
+    android:id="@+id/tv_clip_all"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="19dp"
+    android:text="@string/text_all"
+    android:textAppearance="@style/Typography.suit.medium_12"
+    android:textColor="@color/neutrals400"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/cl_clip_search" />
 
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="2dp"
+    android:layout_marginTop="19dp"
+    android:text="(n)"
+    android:textAppearance="@style/Typography.suit.medium_12"
+    android:textColor="@color/neutrals400"
+    app:layout_constraintStart_toEndOf="@id/tv_clip_all"
+    app:layout_constraintTop_toBottomOf="@id/cl_clip_search" />
+
+  <androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/btn_clip_add"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
+    android:layout_marginEnd="20dp"
+    android:background="@color/transparent"
+    android:minWidth="0dp"
+    android:minHeight="0dp"
+    android:paddingVertical="4dp"
+    android:text="@string/clip_add_clip"
+    android:textAppearance="@style/Typography.suit.medium_12"
+    android:textColor="@color/primary"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/cl_clip_search" />
+
+  <ImageView
+    android:id="@+id/iv_clip_empty"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/img_clip_empty"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+    android:id="@+id/tv_clip_empty"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:text="@string/clip_empty"
+    android:textAppearance="@style/Typography.suit.regular_16_128"
+    android:textColor="@color/neutrals500"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/iv_clip_empty" />
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rv_clip_clip"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginTop="14dp"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tv_clip_all"
+    tools:itemCount="3"
+    tools:listitem="@layout/item_clip_clip" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

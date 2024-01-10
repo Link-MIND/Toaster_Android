@@ -1,4 +1,4 @@
-package org.sopt.ui
+package org.sopt.ui.nav
 
 import androidx.core.net.toUri
 import androidx.navigation.NavDeepLinkRequest

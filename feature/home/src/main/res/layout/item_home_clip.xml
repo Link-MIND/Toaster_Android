@@ -21,7 +21,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:paddingStart="12dp"
-      android:src="@drawable/ic_home_clip_20"
+      android:src="@drawable/ic_home_24"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 

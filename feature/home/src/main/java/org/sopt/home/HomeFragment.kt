@@ -1,5 +1,6 @@
 package org.sopt.home
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,8 +10,8 @@ import org.sopt.home.adapter.HomeClipAdapter
 import org.sopt.home.adapter.HomeWeekLinkAdapter
 import org.sopt.home.adapter.HomeWeekRecommendLinkAdapter
 import org.sopt.home.databinding.FragmentHomeBinding
-import org.sopt.ui.DeepLinkUtil
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.view.onThrottleClick
 
 class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.inflate(it) }) {
 
@@ -20,18 +21,28 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     binding.root.setOnClickListener {
-      val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
-        "featureTimer://fragmentExample",
-      )
+//      val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
+//        "featureTimer://fragmentExample",
+//      )
 //      val (request, navOptions) = DeepLinkUtil.getNavRequestPopUpAndOption(
 //        findNavController().graph.id,
 //        false,
 //        "featureTimer://fragmentExample",
 //      )
-      findNavController().navigate(request, navOptions)
+//      findNavController().navigate(request, navOptions)
+      binding.clHomeSearch.onThrottleClick {
+        // Todo
+      }
     }
     initAdapter()
-    val list = listOf(ClipDummy("전체클립", 1), ClipDummy("Title", 2), ClipDummy("LeeSak", 3), null)
+    val list = listOf(
+      ClipDummy("전체클립", 1),
+      ClipDummy("TitleCheck", 1),
+      ClipDummy("Title", 2),
+      ClipDummy("LeeSak", 3),
+      null,
+    )
+
     val list2 = listOf(
       WeekLinkDummy("Title", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
       WeekLinkDummy("Category", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
@@ -41,6 +52,18 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     homeWeekLinkAdapter.submitList(list2)
     homeWeekRecommendLinkAdapter.submitList(list2)
     binding.pbLinkmindHome.setProgressBarMain(54)
+    navigateToSetting()
+  }
+
+  private fun navigateToSetting() {
+    binding.ivHomeSetting.onThrottleClick {
+      navigateToDestination("featureMyPage://fragmentSetting")
+    }
+  }
+
+  private fun navigateToDestination(destination: String) {
+    val uri = Uri.parse(destination)
+    findNavController().navigate(uri)
   }
 
   private fun initAdapter() {
