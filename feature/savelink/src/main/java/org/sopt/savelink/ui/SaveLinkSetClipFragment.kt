@@ -6,10 +6,12 @@ import androidx.navigation.fragment.findNavController
 import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.button.state.LinkMindButtonState
 import designsystem.components.dialog.LinkMindDialog
+import designsystem.components.toast.linkMindSnackBar
 import org.sopt.mainfeature.R
 import org.sopt.savelink.databinding.FragmentSaveLinkSetClipBinding
 import org.sopt.savelink.ui.adapter.ClipSelectAdapter
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.context.snackBar
 import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.onThrottleClick
 
@@ -74,6 +76,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
         false,
         "featureHome://homeFragment",
       )
+      requireContext().linkMindSnackBar(binding.root,"링크 저장 완료",false)
       findNavController().navigate(request, navOptions)
     }
   }
