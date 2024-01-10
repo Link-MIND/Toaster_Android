@@ -18,7 +18,7 @@ class SearchViewModel : ViewModel() {
     matchingTitles.value = matchingResults.matchingTitles
   }
 
-  private fun findSameResults(searchTerm: String): MatchingResults {
+  private fun findSameResults(searchTerm: String): MatchingResult {
     val matchingTitles = mutableListOf<String>()
     val matchingLinkResults = mutableListOf<LinkResultDummy>()
     val matchingClipResults = mutableListOf<ClipResultDummy>()
@@ -37,6 +37,6 @@ class SearchViewModel : ViewModel() {
       }
     }
 
-    return MatchingResults(matchingLinkResults, matchingClipResults, matchingTitles)
+    return MatchingResult(matchingLinkResults, matchingClipResults, matchingTitles)
   }
 }
