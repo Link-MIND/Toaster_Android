@@ -7,10 +7,12 @@ import android.view.WindowManager
 import androidx.annotation.StringRes
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
+import designsystem.components.toast.linkMindSnackBar
 import org.sopt.mainfeature.databinding.BottomSheetDialogLinkmindBinding
 import org.sopt.ui.view.onThrottleClick
 
 class LinkMindBottomSheet(context: Context) {
+  private val context: Context = context
   private val binding: BottomSheetDialogLinkmindBinding = BottomSheetDialogLinkmindBinding.inflate(LayoutInflater.from(context))
   private val bottomSheetDialog: BottomSheetDialog = BottomSheetDialog(context).apply {
     setContentView(binding.root)
@@ -65,6 +67,9 @@ class LinkMindBottomSheet(context: Context) {
     binding.tvBottomSheetErrorText.setText(textId)
   }
 
+  fun showSnackBar(message: String, isLongDuration: Boolean) {
+    context.linkMindSnackBar(binding.root, message, isLongDuration)
+  }
   fun show() {
     bottomSheetDialog.show()
   }
@@ -73,3 +78,5 @@ class LinkMindBottomSheet(context: Context) {
     bottomSheetDialog.dismiss()
   }
 }
+
+

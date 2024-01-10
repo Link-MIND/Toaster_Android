@@ -7,6 +7,7 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import coil.network.HttpException
 import designsystem.components.bottomsheet.LinkMindBottomSheet
+import designsystem.components.toast.linkMindSnackBar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -127,7 +128,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       setTitle(org.sopt.mainfeature.R.string.home_correction_clip)
       setErroMsg(org.sopt.mainfeature.R.string.home_error_clip_info)
       bottomSheetConfirmBtnClick {
-        Log.d("test", "test")
       }
     }
   }
