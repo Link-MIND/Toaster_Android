@@ -17,7 +17,6 @@ class ClipViewHolder(
           onClickItemClip(clipData)
         }
       }
-      return
     }
   }
 }
