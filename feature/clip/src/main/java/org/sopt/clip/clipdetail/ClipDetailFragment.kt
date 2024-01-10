@@ -5,11 +5,13 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.LinkDTO
 import org.sopt.clip.R
 import org.sopt.clip.databinding.FragmentClipDetailBinding
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.view.onThrottleClick
 
 class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ FragmentClipDetailBinding.inflate(it) }) {
   private val viewModel by viewModels<ClipViewModel>()
@@ -26,6 +28,9 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
     }
 
     initToggleClickListener()
+    binding.ivClipDetailBack.onThrottleClick {
+      findNavController().navigate(R.id.action_navigation_clip_detail_to_navigation_clip)
+    }
   }
 
   private fun initToggleClickListener(): List<LinkDTO> {
