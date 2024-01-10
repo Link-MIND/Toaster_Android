@@ -2,6 +2,7 @@ package org.sopt.mypage.search
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
@@ -104,6 +105,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
 
       binding.clSearch.isVisible = true
       binding.ivCancel.isVisible = false
+      binding.clNoneResults.isGone = true
     }
 
 
