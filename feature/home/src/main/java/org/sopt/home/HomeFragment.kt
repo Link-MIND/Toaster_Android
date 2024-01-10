@@ -29,7 +29,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     super.onViewCreated(view, savedInstanceState)
     fetchWebContent()
     binding.clHomeSearch.onThrottleClick {
-
     }
     initAdapter()
     val list = listOf(
@@ -54,14 +53,14 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   fun fetchWebContent() {
     CoroutineScope(Dispatchers.Main).launch {
       val result = withContext(Dispatchers.IO) {
-        val url = "https://www.figma.com/file/3PL8DmNIAOjJAErrb3I8JT/%ED%86%A0%EC%8A%A4%ED%84%B0-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=400%3A936&mode=devhjvhjvhjhvhvuhvuvyuvuyvukjWEFkjskjlbjkldfskbjakjsfdnkdnsjonwjwkjwdjn"
+        val url = ""
         try {
           val document = Jsoup.connect(url).get()
           val content = document.select("title")
           content.map { it.text() }
         } catch (e: HttpException) {
           // 서버에서 HTTP 오류를 반환할 경우 (예: 404, 500 등)
-          Log.e("test", "HTTP 오류: ${e.response.body.toString()}}")
+          Log.e("test", "HTTP 오류: ${e.response.body}}")
           null
         } catch (e: IOException) {
           // 네트워크 오류, 인증 오류, 리디렉션을 찾을 수 없을 때 등등

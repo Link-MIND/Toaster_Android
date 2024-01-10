@@ -1,7 +1,6 @@
 package org.sopt.savelink.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -30,7 +29,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
   override fun onResume() {
     if (binding.etvSaveCopyLink.editText.text.isNotEmpty() && binding.etvSaveCopyLinkTitle.editText.text.isNotEmpty()) {
       showTitleEditText()
-     }
+    }
     super.onResume()
   }
 
@@ -49,7 +48,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
           hideSubTitleAndLinkTitle()
         }
         throttleAfterTextChanged {
-         if (binding.etvSaveCopyLinkTitle.editText.text.isEmpty()) hideSubTitleAndLinkTitle()
+          if (binding.etvSaveCopyLinkTitle.editText.text.isEmpty()) hideSubTitleAndLinkTitle()
           if (checkTextLength(15)) {
             showErrorState(tvSaveLinkError)
             return@throttleAfterTextChanged

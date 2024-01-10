@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.doAfterTextChanged
-import designsystem.components.button.state.LinkMIndFullWidthButtonState
 import designsystem.components.edittext.state.LinkMindEditTextState
 import org.sopt.common.util.throttleValue.ThrottleValue
 import org.sopt.mainfeature.R
