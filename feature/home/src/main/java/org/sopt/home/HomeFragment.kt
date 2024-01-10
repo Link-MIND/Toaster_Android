@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
+import coil.network.HttpException
 import designsystem.components.bottomsheet.LinkMindBottomSheet
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,6 +18,7 @@ import org.sopt.home.adapter.HomeWeekRecommendLinkAdapter
 import org.sopt.home.databinding.FragmentHomeBinding
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
+import java.io.IOException
 
 class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.inflate(it) }) {
 
@@ -53,12 +55,26 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   fun fetchWebContent() {
     CoroutineScope(Dispatchers.Main).launch {
       val result = withContext(Dispatchers.IO) {
-        val url = "https://www.naver.com"
-        val document = Jsoup.connect(url).get()
-        val content = document.select("title")
-        content.map { it.text() }
+        val url = "https://www.figma.com/file/3PL8DmNIAOjJAErrb3I8JT/%ED%86%A0%EC%8A%A4%ED%84%B0-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=400%3A936&mode=devhjvhjvhjhvhvuhvuvyuvuyvukjWEFkjskjlbjkldfskbjakjsfdnkdnsjonwjwkjwdjn"
+        try {
+          val document = Jsoup.connect(url).get()
+          val content = document.select("title")
+          content.map { it.text() }
+        } catch (e: HttpException) {
+          // 서버에서 HTTP 오류를 반환할 경우 (예: 404, 500 등)
+          Log.e("test", "HTTP 오류: ${e.response.body.toString()}}")
+          null
+        } catch (e: IOException) {
+          // 네트워크 오류, 인증 오류, 리디렉션을 찾을 수 없을 때 등등
+          Log.e("test1", "입출력 오류: ${e.message}")
+          null
+        } catch (e: Exception) {
+          // 그 외 모든 예외
+          Log.e("test2", "기타 오류: ${e.message}")
+          null
+        }
       }
-      result.forEach { text ->
+      result?.forEach { text ->
         Log.d("test", "$text")
       }
     }
