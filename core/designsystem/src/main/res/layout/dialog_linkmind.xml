@@ -14,6 +14,7 @@
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:gravity="center"
+    android:maxLines="1"
     android:textAppearance="@style/Typography.suit.bold_20"
     android:textColor="@color/neutrals800"
     app:layout_constraintEnd_toStartOf="@+id/iv_dialog_cancel"
