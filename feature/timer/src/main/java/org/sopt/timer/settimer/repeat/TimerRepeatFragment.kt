@@ -16,10 +16,7 @@ class TimerRepeatFragment : BindingFragment<FragmentTimerRepeatBinding>({ Fragme
   private val viewModel: SetTimerViewModel by activityViewModels()
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    binding.btnTimerRepeatComplete.state = LinkMindButtonState.DISABLE
-
     val list = viewModel.repeatList.value.map { Repeat(it.period, it.isSelected) }.toMutableList()
-
     initCompleteButtonState(list)
     initTimerRepeatAdapter(list)
     initCloseButtonClickListener()
@@ -44,6 +41,7 @@ class TimerRepeatFragment : BindingFragment<FragmentTimerRepeatBinding>({ Fragme
     )
     adapter.submitList(list)
     binding.rvTimerRepeat.adapter = adapter
+    binding.rvTimerRepeat.itemAnimator = null
   }
 
   private fun handleTimerRepeatItemClick(
@@ -51,19 +49,19 @@ class TimerRepeatFragment : BindingFragment<FragmentTimerRepeatBinding>({ Fragme
     list: MutableList<Repeat>,
     index: Int,
   ) {
-    if (repeat.isSelected) {
-      list[index].isSelected = true
-    } else {
-      list[index].isSelected = false
-    }
+    list[index].isSelected = repeat.isSelected
+    updateCompleteButtonState(list)
+  }
+
+  private fun updateCompleteButtonState(list: MutableList<Repeat>) {
     val newList = list.map {
       it.isSelected
-    }
+      }
     if (newList.contains(true)) {
       binding.btnTimerRepeatComplete.state = LinkMindButtonState.ENABLE
-    } else {
+      } else {
       binding.btnTimerRepeatComplete.state = LinkMindButtonState.DISABLE
-    }
+      }
   }
 
   private fun initCloseButtonClickListener() {
