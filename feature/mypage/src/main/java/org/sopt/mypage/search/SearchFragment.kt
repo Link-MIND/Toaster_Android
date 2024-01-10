@@ -18,7 +18,7 @@ import org.sopt.ui.view.onThrottleClick
 import org.sopt.ui.context.hideKeyboard
 
 class SearchFragment : BindingFragment<FragmentSearchBinding>(
-  { FragmentSearchBinding.inflate(it) }
+  { FragmentSearchBinding.inflate(it) },
 ) {
 
   private val viewModel: SearchViewModel by viewModels()
@@ -38,6 +38,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
     setupObservers()
     setupDummyData()
     setupClickListeners()
+    setOnEditText()
   }
 
   private fun setupObservers() {
@@ -48,16 +49,27 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
   private fun setupDummyData() {
     val linkResults = listOf(
       LinkResultDummy("Category", "토스트기", "URL"),
-      LinkResultDummy("Category2", "토스트", "URL2")
+      LinkResultDummy("Category2", "토스트", "URL2"),
     )
     val clipResults = listOf(
       ClipResultDummy("토스트 맛집", 6),
-      ClipResultDummy("토스트굿", 8)
+      ClipResultDummy("토스트굿", 8),
     )
 
     viewModel.updateResults(linkResults, clipResults)
   }
 
+  private fun setOnEditText() {
+    binding.editText.doAfterTextChanged {
+      binding.ivSearch.isVisible = true
+
+    }
+  }
+
+  // 1.문제) 에딧텍스트를 클릭하면 서치버튼이 보이지 않음, 2) 에딧텍스트에 변화를 감지했을 시 서치버튼 보임
+  // 3. 에딧텍스트 변화 감지 후 서치 버튼 보임
+  // 1.문제) 엑스 눌러도 엠프티뷰가 안 사라짐 2) 엑스버튼 누르면 에딧텍스트 활성화, 엠프티뷰 사라짐
+  // 에딧텍스트에 클로즈 눌렀을 시 엠프티 뷰 사라짐, 2. 에딧텍스트 변화시 엠프티 퓨 사라짐
   private fun setupClickListeners() {
     binding.ivSearch.onThrottleClick {
       val query = binding.editText.text.toString().trim()
@@ -79,19 +91,20 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
       } else {
         binding.rcSearchResult.isVisible = false
         binding.clNoneResults.isVisible = true
+
       }
       updateSearchQuery(query)
       requireContext().hideKeyboard(requireView())
     }
 
-      binding.ivCancel.onThrottleClick {
-        clearSearch()
-        binding.rcSearchResult.isVisible = false
-        requireContext().hideKeyboard(requireView())
+    binding.ivCancel.onThrottleClick {
+      clearSearch()
+      binding.rcSearchResult.isVisible = false
+      requireContext().hideKeyboard(requireView())
 
-        binding.clSearch.isVisible = true
-        binding.ivCancel.isVisible = false
-      }
+      binding.clSearch.isVisible = true
+      binding.ivCancel.isVisible = false
+    }
 
 
     binding.ivLeft.onThrottleClick {
@@ -100,15 +113,21 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
   }
 
   private fun observeLinkResults() {
-    viewModel.linkResultsLiveData.observe(viewLifecycleOwner, Observer { linkResults ->
-      linkResultAdapter.submitList(linkResults)
-    })
+    viewModel.linkResultsLiveData.observe(
+      viewLifecycleOwner,
+      Observer { linkResults ->
+        linkResultAdapter.submitList(linkResults)
+      },
+    )
   }
 
   private fun observeClipResults() {
-    viewModel.clipResultsLiveData.observe(viewLifecycleOwner, Observer { clipResults ->
-      clipResultAdapter.submitList(clipResults)
-    })
+    viewModel.clipResultsLiveData.observe(
+      viewLifecycleOwner,
+      Observer { clipResults ->
+        clipResultAdapter.submitList(clipResults)
+      },
+    )
   }
 
   private fun updateSearchQuery(query: String) {
