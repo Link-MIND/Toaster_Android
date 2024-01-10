@@ -141,6 +141,6 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBi
 
   private fun clearSearch() {
     binding.editText.text.clear()
-
+  }
 }
 
