@@ -28,8 +28,6 @@ class MainActivity : AppCompatActivity() {
 
     setContentView(binding.root)
     initView()
-
-
   }
 
   override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -39,15 +37,13 @@ class MainActivity : AppCompatActivity() {
       val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
       var pasteData = ""
       if (!clipboard.hasPrimaryClip()) {
-
       } else if ((clipboard.primaryClipDescription?.hasMimeType(MIMETYPE_TEXT_PLAIN)) == false) {
-
       } else {
         val item = clipboard.primaryClip?.getItemAt(0)!!.coerceToText(applicationContext)
         if (!item.isNullOrEmpty()) {
           pasteData = item.toString()
           if (pasteData.contains("http")) {
-            Log.d("test","$pasteData")
+            Log.d("test", "$pasteData")
           }
         }
       }
