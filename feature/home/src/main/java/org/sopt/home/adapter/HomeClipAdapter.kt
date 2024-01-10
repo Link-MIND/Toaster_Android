@@ -23,7 +23,9 @@ class HomeClipAdapter(
       onClickItemClip2,
     )
   }
-
+  override fun getItemCount(): Int {
+    return if (currentList.size > 4) 4 else currentList.size
+  }
   companion object {
     private val DiffUtil = ItemDiffCallback<ClipDummy>(
       onItemsTheSame = { old, new -> old.title == new.title },
