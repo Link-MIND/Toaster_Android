@@ -2,6 +2,7 @@ package designsystem.components.toast
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Resources
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
