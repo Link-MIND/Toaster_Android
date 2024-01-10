@@ -7,7 +7,6 @@ import android.text.style.StyleSpan
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.mypage.databinding.ItemSearchResultClipBinding
 import org.sopt.mypage.search.ClipResultDummy
-import org.sopt.mypage.search.LinkResultDummy
 
 class ClipResultViewHolder(val binding: ItemSearchResultClipBinding) :
   RecyclerView.ViewHolder(binding.root) {
@@ -27,7 +26,7 @@ class ClipResultViewHolder(val binding: ItemSearchResultClipBinding) :
         StyleSpan(Typeface.BOLD),
         startIndex,
         endIndex,
-        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE,
       )
     }
 

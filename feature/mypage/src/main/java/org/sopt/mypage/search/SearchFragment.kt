@@ -84,7 +84,6 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
     }
   }
 
-
   private fun setSearch() {
     val query = binding.editText.text.toString().trim()
 
@@ -146,4 +145,3 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
     binding.editText.text.clear()
   }
 }
-
