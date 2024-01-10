@@ -14,23 +14,27 @@ class ClipSelectAdapter(
 ) : ListAdapter<Clip, ClipSelectViewHolder>(DiffUtil) {
   var selectedPosition = -1
   override fun onBindViewHolder(holder: ClipSelectViewHolder, position: Int) {
-    holder.onBind(getItem(position)) { clip, position ->
-      if (selectedPosition != position) {
-        if (selectedPosition != -1) {
-          getItem(selectedPosition).isSelected = false
-          notifyItemChanged(selectedPosition)
-        }
-        clip.isSelected = true
-        selectedPosition = position
-      } else {
-        clip.isSelected = !clip.isSelected
-        if (!clip.isSelected) {
-          selectedPosition = -1
-        }
-      }
-      notifyItemChanged(position)
+    holder.onBind(getItem(position), position) { clip, position ->
+      selectItemByPosition(position, clip)
       onClick(clip, position)
     }
+  }
+
+  private fun selectItemByPosition(position: Int, clip: Clip) {
+    if (selectedPosition != position) {
+      if (selectedPosition != -1) {
+        getItem(selectedPosition).isSelected = false
+        notifyItemChanged(selectedPosition)
+      }
+      clip.isSelected = true
+      selectedPosition = position
+    } else {
+      clip.isSelected = !clip.isSelected
+      if (!clip.isSelected) {
+        selectedPosition = -1
+      }
+    }
+    notifyItemChanged(position)
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClipSelectViewHolder {
