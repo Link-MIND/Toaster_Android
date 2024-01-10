@@ -63,6 +63,8 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
   private fun setOnEditText() {
     binding.editText.doAfterTextChanged {
       binding.ivSearch.isVisible = true
+      binding.clNoneResults.isGone = true
+      binding.ivCancel.isGone = true
 
     }
   }
@@ -70,7 +72,8 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
   // 1.문제) 에딧텍스트를 클릭하면 서치버튼이 보이지 않음, 2) 에딧텍스트에 변화를 감지했을 시 서치버튼 보임
   // 3. 에딧텍스트 변화 감지 후 서치 버튼 보임
   // 1.문제) 엑스 눌러도 엠프티뷰가 안 사라짐 2) 엑스버튼 누르면 에딧텍스트 활성화, 엠프티뷰 사라짐
-  // 에딧텍스트에 클로즈 눌렀을 시 엠프티 뷰 사라짐, 2. 에딧텍스트 변화시 엠프티 퓨 사라짐
+  // 에딧텍스트에 클로즈 눌렀을 시 엠프티 뷰 사라짐, 2. 에딧텍스트 변화시 엠프티 퓨 결ㄴ사라짐
+  //3. 에딧텍스트창 변화시 검색버튼과 클로즈 버튼 동시에 보임 해결: 돋보기 버튼만 보여야함
   private fun setupClickListeners() {
     binding.ivSearch.onThrottleClick {
       val query = binding.editText.text.toString().trim()
