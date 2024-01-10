@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -62,59 +60,62 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
 
   private fun setOnEditText() {
     binding.editText.doAfterTextChanged {
-      binding.ivSearch.isVisible = true
-      binding.clNoneResults.isGone = true
-      binding.ivCancel.isGone = true
-
+      handleEditTextChanges()
     }
   }
 
-  // 1.문제) 에딧텍스트를 클릭하면 서치버튼이 보이지 않음, 2) 에딧텍스트에 변화를 감지했을 시 서치버튼 보임
-  // 3. 에딧텍스트 변화 감지 후 서치 버튼 보임
-  // 1.문제) 엑스 눌러도 엠프티뷰가 안 사라짐 2) 엑스버튼 누르면 에딧텍스트 활성화, 엠프티뷰 사라짐
-  // 에딧텍스트에 클로즈 눌렀을 시 엠프티 뷰 사라짐, 2. 에딧텍스트 변화시 엠프티 퓨 결ㄴ사라짐
-  //3. 에딧텍스트창 변화시 검색버튼과 클로즈 버튼 동시에 보임 해결: 돋보기 버튼만 보여야함
+  private fun handleEditTextChanges() {
+    binding.ivSearch.isVisible = true
+    binding.clNoneResults.isGone = true
+    binding.ivCancel.isGone = true
+  }
+
   private fun setupClickListeners() {
     binding.ivSearch.onThrottleClick {
-      val query = binding.editText.text.toString().trim()
-
-      if (query.isNotEmpty()) {
-        val isMatchedResults = viewModel.onClickSearch(query)
-
-        if (isMatchedResults) {
-          binding.rcSearchResult.isVisible = true
-          binding.clNoneResults.isVisible = false
-          binding.ivSearch.isVisible = false
-          binding.ivCancel.isVisible = true
-        } else {
-          binding.rcSearchResult.isVisible = false
-          binding.clNoneResults.isVisible = true
-          binding.ivSearch.isVisible = false
-          binding.ivCancel.isVisible = true
-        }
-      } else {
-        binding.rcSearchResult.isVisible = false
-        binding.clNoneResults.isVisible = true
-
-      }
-      updateSearchQuery(query)
-      requireContext().hideKeyboard(requireView())
+      setSearch()
     }
 
     binding.ivCancel.onThrottleClick {
-      clearSearch()
-      binding.rcSearchResult.isVisible = false
-      requireContext().hideKeyboard(requireView())
-
-      binding.clSearch.isVisible = true
-      binding.ivCancel.isVisible = false
-      binding.clNoneResults.isGone = true
+      setCancel()
     }
-
 
     binding.ivLeft.onThrottleClick {
       findNavController().navigateUp()
     }
+  }
+
+  private fun setSearch() {
+    val query = binding.editText.text.toString().trim()
+
+    if (query.isNotEmpty()) {
+      val isMatchedResults = viewModel.onClickSearch(query)
+      setSearchResultsVisibility(isMatchedResults)
+    } else {
+      setEmptyResults()
+    }
+    updateSearchQuery(query)
+    requireContext().hideKeyboard(requireView())
+  }
+
+  private fun setSearchResultsVisibility(isMatchedResults: Boolean) {
+    binding.rcSearchResult.isVisible = isMatchedResults
+    binding.clNoneResults.isVisible = !isMatchedResults
+    binding.ivSearch.isVisible = false
+    binding.ivCancel.isVisible = true
+  }
+
+  private fun setEmptyResults() {
+    binding.rcSearchResult.isVisible = false
+    binding.clNoneResults.isVisible = true
+  }
+
+  private fun setCancel() {
+    clearSearch()
+    binding.rcSearchResult.isVisible = false
+    requireContext().hideKeyboard(requireView())
+    binding.clSearch.isVisible = true
+    binding.ivCancel.isVisible = false
+    binding.clNoneResults.isGone = true
   }
 
   private fun observeLinkResults() {
@@ -138,11 +139,6 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
   private fun updateSearchQuery(query: String) {
     linkResultAdapter.setSearchQuery(query)
     clipResultAdapter.setSearchQuery(query)
-  }
-
-  private fun showNoneResults(show: Boolean) {
-    binding.clNoneResults.visibility = if (show) View.VISIBLE else View.GONE
-    binding.rcSearchResult.visibility = if (show) View.GONE else View.VISIBLE
   }
 
   private fun clearSearch() {
