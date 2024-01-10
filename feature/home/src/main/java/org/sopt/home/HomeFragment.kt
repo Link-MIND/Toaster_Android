@@ -84,7 +84,11 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       navigateToDestination("featureMyPage://fragmentSetting")
     }
   }
-
+  private fun navigateToSearch() {
+    binding.clHomeSearch.onThrottleClick {
+      navigateToDestination("featureMyPage://fragmentSearch")
+    }
+  }
   private fun navigateToDestination(destination: String) {
     val uri = Uri.parse(destination)
     findNavController().navigate(uri)
@@ -128,6 +132,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       setTitle(org.sopt.mainfeature.R.string.home_correction_clip)
       setErroMsg(org.sopt.mainfeature.R.string.home_error_clip_info)
       bottomSheetConfirmBtnClick {
+        dismiss()
+        requireContext().linkMindSnackBar(binding.root,"성공",false)
       }
     }
   }
