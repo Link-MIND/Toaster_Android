@@ -64,7 +64,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
           binding.btnSaveLinkNext.setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
         }
         throttleAfterTextChanged {
-          //링크저장에서 쓸코드가 아닌 클립이나 글자 수 제한에서 쓸 코드
+          // 링크저장에서 쓸코드가 아닌 클립이나 글자 수 제한에서 쓸 코드
           if (checkTextLength(15)) {
             showErrorState(tvSaveLinkError)
             binding.etvSaveCopyLink.editText.setText(binding.etvSaveCopyLink.editText.text.substring(0, 16))
