@@ -28,5 +28,8 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     binding.clClipSearch.onThrottleClick {
       findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_detail)
     }
+    binding.btnClipEdit.onThrottleClick {
+      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_edit)
+    }
   }
 }

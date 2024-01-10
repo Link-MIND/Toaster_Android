@@ -6,7 +6,22 @@
   app:startDestination="@id/navigation_clip">
   <fragment
     android:id="@+id/navigation_clip"
-    android:name="org.sopt.clip.ClipFragment"
+    android:name="org.sopt.clip.clip.ClipFragment"
     android:label="fragment_clip"
-    tools:layout="@layout/fragment_clip" />
+    tools:layout="@layout/fragment_clip" >
+
+    <action
+      android:id="@+id/action_navigation_clip_to_navigation_clip_edit"
+      app:destination="@id/navigation_clip_edit" />
+  </fragment>
+
+  <fragment
+    android:id="@+id/navigation_clip_edit"
+    android:name="org.sopt.clip.clipedit.ClipEditFragment"
+    android:label="fragment_clip_edit"
+    tools:layout="@layout/fragment_clip_edit">
+    <action
+      android:id="@+id/action_navigation_clip_edit_to_navigation_clip"
+      app:destination="@id/navigation_clip" />
+  </fragment>
 </navigation>
