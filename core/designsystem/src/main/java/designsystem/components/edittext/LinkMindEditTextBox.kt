@@ -77,7 +77,6 @@ class LinkMindEditTextBox @JvmOverloads constructor(
   fun throttleAfterTextChanged(onClickListener: () -> Unit) {
     binding.editText.doAfterTextChanged { text ->
       val isTextEmpty = text.isNullOrEmpty()
-
       binding.ivCancel.visibility = if (isTextEmpty) View.INVISIBLE else View.VISIBLE
 
       if (!isTextEmpty) {
