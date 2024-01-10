@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     mBinding = ActivityMainBinding.inflate(layoutInflater)
-
     setContentView(binding.root)
     initView()
   }
@@ -131,12 +130,14 @@ class MainActivity : AppCompatActivity() {
     }
   }
   private fun showRevokeCommonDialog() {
-    linkMindDialog.setTitle(org.sopt.mainfeature.R.string.text_home)
-      .setSubtitle(org.sopt.mainfeature.R.string.text_clip)
-      .setNegativeButton(org.sopt.mainfeature.R.string.text_home) {
+    linkMindDialog.setTitle(org.sopt.mainfeature.R.string.save_clip_dialog_title)
+      .setSubtitle(org.sopt.mainfeature.R.string.save_clip_dialog_sub_title)
+      .setNegativeButton(org.sopt.mainfeature.R.string.negative_close_msg) {
         linkMindDialog.dismiss()
       }
-      .setPositiveButton(org.sopt.mainfeature.R.string.text_home) {
+      .setPositiveButton(org.sopt.mainfeature.R.string.positive_ok_msg) {
+        val uri = Uri.parse("featureSaveLink://saveLinkFragment")
+        navController.navigate(uri)
         linkMindDialog.dismiss()
       }
       .show()
