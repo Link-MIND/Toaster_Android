@@ -38,4 +38,3 @@ class LinkResultViewHolder(val binding: ItemSearchResultClipLinkBinding) :
 
   }
 }
-

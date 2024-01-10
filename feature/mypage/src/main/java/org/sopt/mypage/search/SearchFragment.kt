@@ -79,11 +79,6 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
       setCancel()
     }
 
-    binding.ivLeft.onThrottleClick {
-      findNavController().navigateUp()
-    }
-  }
-
   private fun setSearch() {
     val query = binding.editText.text.toString().trim()
 
@@ -117,6 +112,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
     binding.ivCancel.isVisible = false
     binding.clNoneResults.isGone = true
   }
+
 
   private fun observeLinkResults() {
     viewModel.linkResultsLiveData.observe(

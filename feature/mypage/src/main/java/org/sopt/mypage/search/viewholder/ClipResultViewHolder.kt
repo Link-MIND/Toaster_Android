@@ -20,7 +20,6 @@ class ClipResultViewHolder(val binding: ItemSearchResultClipBinding) :
     binding.tvClipAmount.text = clipResult.amount.toString()
 
 
-    // 검색어를 굵게 하이라이팅
     val startIndex = title.indexOf(searchQuery)
     if (startIndex != -1) {
       val endIndex = startIndex + searchQuery.length
@@ -32,7 +31,7 @@ class ClipResultViewHolder(val binding: ItemSearchResultClipBinding) :
       )
     }
 
-    // TextView에 텍스트 설정
     binding.tvClipTitle.text = spannable
+
   }
 }

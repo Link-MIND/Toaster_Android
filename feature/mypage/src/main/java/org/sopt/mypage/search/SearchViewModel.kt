@@ -18,12 +18,12 @@ class SearchViewModel : ViewModel() {
     _clipResultsLiveData.value = clipResults
   }
 
+
   fun onClickSearch(query: String): Boolean {
     val filteredLinkResults = linkResultsLiveData.value.orEmpty().filter { it.title.contains(query, ignoreCase = true) }
     val filteredClipResults = clipResultsLiveData.value.orEmpty().filter { it.title.contains(query, ignoreCase = true) }
 
     updateResults(filteredLinkResults, filteredClipResults)
     return filteredLinkResults.isNotEmpty() || filteredClipResults.isNotEmpty()
-
   }
 }
