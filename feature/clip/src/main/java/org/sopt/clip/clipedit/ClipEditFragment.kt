@@ -16,7 +16,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val clipEditAdapter = ClipEditAdapter({})
+    val clipEditAdapter = ClipEditAdapter()
     binding.rvClipEdit.adapter = clipEditAdapter
     var state: Boolean = viewModel.mockClipData == null
 

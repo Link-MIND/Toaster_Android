@@ -82,7 +82,6 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
     }
   }
 
-
   private fun initDividerVisible(selectedNow: Int?) {
     with(binding) {
       when (selectedNow) {
