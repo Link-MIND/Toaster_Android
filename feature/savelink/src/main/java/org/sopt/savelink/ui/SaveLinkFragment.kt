@@ -8,6 +8,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
+import designsystem.components.dialog.LinkMindDialog
 import designsystem.components.edittext.state.LinkMindEditTextState
 import org.sopt.savelink.R
 import org.sopt.savelink.databinding.FragmentSaveLinkBinding
@@ -17,13 +18,35 @@ import org.sopt.ui.keyboard.OnKeyboardVisibilityListener
 import org.sopt.ui.view.onThrottleClick
 
 class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSaveLinkBinding.inflate(it) }) {
+  private val linkMindDialog by lazy {
+    LinkMindDialog(requireContext())
+  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     initView()
     handleEditTextLink()
     handleKeyboardHide()
-    navigateUp()
+    onClickCloseSaveLink()
+  }
+
+  private fun onClickCloseSaveLink() {
+    binding.ivSaveLinkClose.onThrottleClick {
+      showCloseDialog()
+    }
+  }
+
+  private fun showCloseDialog() {
+    linkMindDialog.setTitle(org.sopt.mainfeature.R.string.save_clip_dialog_title)
+      .setSubtitle(org.sopt.mainfeature.R.string.save_clip_dialog_sub_title)
+      .setNegativeButton(org.sopt.mainfeature.R.string.negative_close_msg) {
+        linkMindDialog.dismiss()
+      }
+      .setPositiveButton(org.sopt.mainfeature.R.string.positive_ok_msg) {
+        linkMindDialog.dismiss()
+        navigateUp()
+      }
+      .show()
   }
 
   private fun initView() {
@@ -41,8 +64,11 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
           binding.btnSaveLinkNext.setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
         }
         throttleAfterTextChanged {
+          //링크저장에서 쓸코드가 아닌 클립이나 글자 수 제한에서 쓸 코드
           if (checkTextLength(15)) {
             showErrorState(tvSaveLinkError)
+            binding.etvSaveCopyLink.editText.setText(binding.etvSaveCopyLink.editText.text.substring(0, 16))
+            binding.etvSaveCopyLink.editText.setSelection(16)
             return@throttleAfterTextChanged
           }
           handleSaveLinkNextClick()
@@ -121,8 +147,6 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
   }
 
   private fun navigateUp() {
-    binding.ivSaveLinkClose.onThrottleClick {
-      findNavController().navigateUp()
-    }
+    findNavController().navigateUp()
   }
 }
