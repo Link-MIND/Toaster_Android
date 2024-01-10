@@ -13,8 +13,7 @@ class MyFragment : BindingFragment<FragmentMyBinding>({ FragmentMyBinding.inflat
     super.onViewCreated(view, savedInstanceState)
     binding.ivSetting.setOnClickListener {
 
-      findNavController().navigate(R.id.action_navigation_my_to_navigation_search)
-      //findNavController().navigate(org.sopt.mypage.R.id.action_navigation_my_to_navigation_setting)
+      //findNavController().navigate(R.id.action_navigation_my_to_navigation_search)
     }
   }
 }
