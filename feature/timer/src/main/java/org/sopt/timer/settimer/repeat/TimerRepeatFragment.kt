@@ -20,10 +20,10 @@ class TimerRepeatFragment : BindingFragment<FragmentTimerRepeatBinding>({ Fragme
 
     val list = viewModel.repeatList.value.map { Repeat(it.period, it.isSelected) }.toMutableList()
 
-    initTimerRepeatAdapter(list)
     initCompleteButtonState(list)
-    initBackButtonClickListener()
+    initTimerRepeatAdapter(list)
     initCloseButtonClickListener()
+    initBackButtonClickListener()
     initCompleteButtonClickListener(list)
   }
 

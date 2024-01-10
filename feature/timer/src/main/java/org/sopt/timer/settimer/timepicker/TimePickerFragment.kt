@@ -31,40 +31,30 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   private val viewModel: SetTimerViewModel by activityViewModels()
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    setupRecyclerViews()
     listUpdater = ListUpdater()
     initTimePickerState()
     initRepeatState()
+    setupRecyclerViews()
     initRepeatButtonClickListener()
     initBackButtonClickListener()
     initCloseButtonClickListener()
     collectSelectedTime()
   }
 
-  private fun collectSelectedTime() {
-    viewModel.selectedTime.flowWithLifecycle(viewLifeCycle).onEach {
-      binding.tvTimePickerTime.text = "${it.timePeriod} ${it.hour}시 ${it.minute}분"
-    }.launchIn(viewLifeCycleScope)
-  }
-
-  private fun initCloseButtonClickListener() {
-    binding.ivTimePickerClose.onThrottleClick {
-      findNavController().navigateUp()
-    }
-  }
-
-  private fun initBackButtonClickListener() {
-    binding.ivTimePickerBack.onThrottleClick {
-      findNavController().navigateUp()
-    }
-  }
-
-  private fun initRepeatButtonClickListener() {
-    binding.clTimePickerRepeat.onThrottleClick {
-      if (periodClickEnable && hourClickEnable && minuteClickEnable) {
-        findNavController().navigate(R.id.action_navigation_time_picker_to_navigation_timer_repeat)
+  private fun initTimePickerState() {
+    if (viewModel.currentHourIndex.value != 1) {
+      viewModel.currentHourIndex.value.let {
+        binding.rvTimePickerHour.scrollToPosition(minuteAdapter.getMiddlePosition() + it - 1)
+      }
+      viewModel.currentMinuteIndex.value.let {
+        binding.rvTimePickerMinute.scrollToPosition(hourAdapter.getMiddlePosition() + it - 1)
+      }
+      viewModel.currentAmPmIndex.value.let {
+        binding.rvTimePickerAmpm.scrollToPosition(it - 1)
       }
     }
+    binding.btnTimePickerNext.state = LinkMindButtonState.DISABLE
+    binding.tvTimePickerCategory.text = "카테고리이름을"
   }
 
   private fun initRepeatState() {
@@ -101,22 +91,6 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
       }
       btnTimePickerNext.state = LinkMindButtonState.ENABLE
     }
-  }
-
-  private fun initTimePickerState() {
-    if (viewModel.currentHourIndex.value != 1) {
-      viewModel.currentHourIndex.value.let {
-        binding.rvTimePickerHour.scrollToPosition(minuteAdapter.getMiddlePosition() + it - 1)
-      }
-      viewModel.currentMinuteIndex.value.let {
-        binding.rvTimePickerMinute.scrollToPosition(hourAdapter.getMiddlePosition() + it - 1)
-      }
-      viewModel.currentAmPmIndex.value.let {
-        binding.rvTimePickerAmpm.scrollToPosition(it - 1)
-      }
-    }
-    binding.btnTimePickerNext.state = LinkMindButtonState.DISABLE
-    binding.tvTimePickerCategory.text = "카테고리이름을"
   }
 
   private fun setupRecyclerViews() {
@@ -233,4 +207,31 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   private fun setMinuteClickEnable(isEnable: Boolean) {
     minuteClickEnable = isEnable
   }
+
+  private fun initCloseButtonClickListener() {
+    binding.ivTimePickerClose.onThrottleClick {
+      findNavController().navigateUp()
+    }
+  }
+
+  private fun initBackButtonClickListener() {
+    binding.ivTimePickerBack.onThrottleClick {
+      findNavController().navigateUp()
+    }
+  }
+
+  private fun initRepeatButtonClickListener() {
+    binding.clTimePickerRepeat.onThrottleClick {
+      if (periodClickEnable && hourClickEnable && minuteClickEnable) {
+        findNavController().navigate(R.id.action_navigation_time_picker_to_navigation_timer_repeat)
+      }
+    }
+  }
+
+  private fun collectSelectedTime() {
+    viewModel.selectedTime.flowWithLifecycle(viewLifeCycle).onEach {
+      binding.tvTimePickerTime.text = "${it.timePeriod} ${it.hour}시 ${it.minute}분"
+    }.launchIn(viewLifeCycleScope)
+  }
+
 }
