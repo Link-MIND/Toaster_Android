@@ -30,7 +30,7 @@ import org.sopt.ui.fragment.snackBar
 import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
 
-class TimerFragment : BindingFragment<FragmentTimerBinding>({FragmentTimerBinding.inflate(it)}) {
+class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBinding.inflate(it) }) {
   private val setTimerViewModel: SetTimerViewModel by activityViewModels()
   private val viewModel: TimerViewModel by viewModels()
 
@@ -44,7 +44,7 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({FragmentTimerBindin
     registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
       isNotiPermissionAllowed = isGranted
       viewModel.setUiState(isGranted)
-      if(!isGranted){
+      if (!isGranted) {
         NotificationPermissionDialogFragment().show(parentFragmentManager, this.tag)
       }
     }
@@ -54,54 +54,7 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({FragmentTimerBindin
     requestNotificationPermission()
     setTimerViewModel.initSetTimer()
     viewModel.setUiState(isNotiPermissionAllowed)
-    viewModel.uiState.flowWithLifecycle(viewLifeCycle).onEach { state ->
-      when(state){
-        is TimerUiState.BothAllowed -> {
-          Log.e("both","both")
-          binding.clTimerPermissionOff.isGone = true
-          binding.clTimerNotiPermissionOff.isGone = true
-          if(state.data.isNotEmpty()){
-            binding.svTimerExist.isVisible = true
-            binding.clTimer.isGone = true
-          } else {
-            binding.btnTimerSetEnable.isVisible = true
-            binding.btnTimerSetDisable.isGone = true
-            binding.clTimer.isVisible = true
-            binding.clTimerPermissionOff.isGone = true
-            binding.svTimerExist.isGone = true
-          }
-        }
-        is TimerUiState.AppAllowed -> {
-          Log.e("app","app")
-          binding.clTimerPermissionOff.isGone = true
-          binding.svTimerExist.isGone = true
-          binding.clTimer.isGone = true
-          binding.clTimerNotiPermissionOff.isVisible = true
-        }
-        is TimerUiState.NotAllowed -> {
-          Log.e("not","not")
-          binding.clTimerPermissionOff.isVisible = true
-          binding.svTimerExist.isGone = true
-          binding.clTimer.isGone = true
-          binding.clTimerNotiPermissionOff.isVisible = true
-        }
-        is TimerUiState.DeviceAllowed -> {
-          Log.e("device","device")
-          binding.btnTimerSetEnable.isGone = true
-          binding.btnTimerSetDisable.isVisible = true
-          binding.clTimerPermissionOff.isVisible = true
-          binding.svTimerExist.isGone = true
-          binding.clTimer.isVisible = true
-          binding.clTimerNotiPermissionOff.isGone = true
-        }
-        is TimerUiState.Loading -> {
-
-        }
-        is TimerUiState.Empty -> {
-
-        }
-      }
-    }.launchIn(viewLifeCycleScope)
+    collectUiState()
     completeTimerAdapter = CompleteTimerAdapter({ snackBar(binding.root, { "안녕" }) })
     waitTimerAdapter = WaitTimerAdapter({}, { ModifyTimerBottomSheetFragment.newInstance(it.id).show(parentFragmentManager, this.tag) })
 
@@ -131,6 +84,86 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({FragmentTimerBindin
     }
   }
 
+  private fun collectUiState() {
+    viewModel.uiState.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is TimerUiState.BothAllowed -> {
+          handleBothAllowedState(state)
+        }
+
+        is TimerUiState.AppAllowed -> {
+          handleAppAllowedState()
+        }
+
+        is TimerUiState.NotAllowed -> {
+          handleNotAllowedState()
+        }
+
+        is TimerUiState.DeviceAllowed -> {
+          handleDeviceAllowedState()
+        }
+
+        is TimerUiState.Loading -> {
+
+        }
+
+        is TimerUiState.Empty -> {
+
+        }
+      }
+    }.launchIn(viewLifeCycleScope)
+  }
+
+  private fun handleDeviceAllowedState() {
+    Log.e("device", "device")
+    with(binding) {
+      btnTimerSetEnable.isGone = true
+      btnTimerSetDisable.isVisible = true
+      clTimerPermissionOff.isVisible = true
+      svTimerExist.isGone = true
+      clTimer.isVisible = true
+      clTimerNotiPermissionOff.isGone = true
+    }
+  }
+
+  private fun handleNotAllowedState() {
+    Log.e("not", "not")
+    with(binding) {
+      clTimerPermissionOff.isVisible = true
+      svTimerExist.isGone = true
+      clTimer.isGone = true
+      clTimerNotiPermissionOff.isVisible = true
+    }
+  }
+
+  private fun handleAppAllowedState() {
+    Log.e("app", "app")
+    with(binding) {
+      clTimerPermissionOff.isGone = true
+      svTimerExist.isGone = true
+      clTimer.isGone = true
+      clTimerNotiPermissionOff.isVisible = true
+    }
+  }
+
+  private fun handleBothAllowedState(state: TimerUiState.BothAllowed<List<Timer>>) {
+    Log.e("both", "both")
+    with(binding) {
+      clTimerPermissionOff.isGone = true
+      clTimerNotiPermissionOff.isGone = true
+      if (state.data.isNotEmpty()) {
+        svTimerExist.isVisible = true
+        clTimer.isGone = true
+        return
+      }
+      btnTimerSetEnable.isVisible = true
+      btnTimerSetDisable.isGone = true
+      clTimer.isVisible = true
+      clTimerPermissionOff.isGone = true
+      svTimerExist.isGone = true
+    }
+  }
+
   override fun onResume() {
     super.onResume()
     initCheckNotificationPermission()
@@ -140,7 +173,7 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({FragmentTimerBindin
   private fun requestNotificationPermission() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && ContextCompat.checkSelfPermission(
         requireContext(),
-        Manifest.permission.POST_NOTIFICATIONS
+        Manifest.permission.POST_NOTIFICATIONS,
       ) == PackageManager.PERMISSION_DENIED
     ) {
       notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
@@ -151,7 +184,7 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({FragmentTimerBindin
     isNotiPermissionAllowed = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
       ContextCompat.checkSelfPermission(
         requireContext(),
-        Manifest.permission.POST_NOTIFICATIONS
+        Manifest.permission.POST_NOTIFICATIONS,
       ) == PackageManager.PERMISSION_GRANTED
     } else {
       true
