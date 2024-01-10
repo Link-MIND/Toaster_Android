@@ -29,11 +29,10 @@ class LinkMindEditTextBox @JvmOverloads constructor(
       field = value
       when (field) {
         LinkMindEditTextState.ENABLE -> {
-          setBackgroundResource(R.drawable.shape_neutrals_fill_12_rect)
+          binding.clEtvBack.setBackgroundResource(R.drawable.shape_neutrals_fill_12_rect)
         }
-
         LinkMindEditTextState.ERROR -> {
-          setBackgroundResource(R.drawable.shape_neutrals_fill_error_line_12_rect)
+          binding.clEtvBack.setBackgroundResource(R.drawable.shape_neutrals_fill_error_line_12_rect)
         }
       }
     }
