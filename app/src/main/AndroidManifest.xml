@@ -65,7 +65,8 @@
           android:scheme="kakao${KAKAO_NATIVE_KEY}" />
       </intent-filter>
     </activity>
-
+    <activity android:name="org.sopt.clip.clipdetail.ClipDetailActivity"
+      android:exported="true"/>
 
   </application>
 

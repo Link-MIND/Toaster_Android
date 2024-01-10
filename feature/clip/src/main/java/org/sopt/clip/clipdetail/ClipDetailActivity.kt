@@ -1,21 +1,24 @@
 package org.sopt.clip.clipdetail
 
 import android.os.Bundle
-import android.view.View
+import android.os.PersistableBundle
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.LinkDTO
 import org.sopt.clip.R
-import org.sopt.clip.databinding.FragmentClipDetailBinding
-import org.sopt.ui.base.BindingFragment
+import org.sopt.clip.databinding.ActivityClipDetailBinding
 
-class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ FragmentClipDetailBinding.inflate(it) }) {
+class ClipDetailActivity : AppCompatActivity() {
+  private lateinit var binding: ActivityClipDetailBinding
   private val viewModel by viewModels<ClipViewModel>()
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    binding = ActivityClipDetailBinding.inflate(layoutInflater)
+    setContentView(binding.root)
 
     val clipDetailAdapter = ClipLinkAdapter()
     binding.rvCategoryLink.adapter = clipDetailAdapter
