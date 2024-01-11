@@ -50,7 +50,6 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
     super.onViewCreated(view, savedInstanceState)
     requestNotificationPermission()
     setTimerViewModel.initSetTimer()
-    viewModel.setUiState(isNotiPermissionAllowed)
     collectUiState()
     completeTimerAdapter = CompleteTimerAdapter({ snackBar(binding.root, { "안녕" }) })
     waitTimerAdapter = WaitTimerAdapter({}, { ModifyTimerBottomSheetFragment.newInstance(it.id).show(parentFragmentManager, this.tag) })

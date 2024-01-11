@@ -12,7 +12,7 @@ class TimerViewModel : ViewModel() {
   private val _uiState = MutableStateFlow<TimerUiState<List<Timer>>>(TimerUiState.Empty)
   val uiState: StateFlow<TimerUiState<List<Timer>>> get() = _uiState
 
-  private val fcmIsAllowed = MutableStateFlow(false)
+  private val fcmIsAllowed = MutableStateFlow(true)
 
   private val timerList = MutableStateFlow<List<Timer>>(
     listOf(
@@ -23,15 +23,21 @@ class TimerViewModel : ViewModel() {
 
   fun setUiState(isNotiPermissionAllowed: Boolean) {
     viewModelScope.launch {
-      if (fcmIsAllowed.value && isNotiPermissionAllowed) {
-        _uiState.emit(TimerUiState.BothAllowed(timerList.value))
-      } else if (fcmIsAllowed.value && !isNotiPermissionAllowed) {
-        _uiState.emit(TimerUiState.AppAllowed)
-      } else if (!fcmIsAllowed.value && isNotiPermissionAllowed) {
-        _uiState.emit(TimerUiState.DeviceAllowed)
-      } else {
-        _uiState.emit(TimerUiState.NotAllowed)
+      when {
+        fcmIsAllowed.value && isNotiPermissionAllowed -> {
+          _uiState.emit(TimerUiState.BothAllowed(timerList.value))
+          return@launch
+        }
+        fcmIsAllowed.value -> {
+          _uiState.emit(TimerUiState.AppAllowed)
+          return@launch
+        }
+        isNotiPermissionAllowed -> {
+          _uiState.emit(TimerUiState.DeviceAllowed)
+          return@launch
+        }
       }
+      _uiState.emit(TimerUiState.NotAllowed)
     }
   }
 }
