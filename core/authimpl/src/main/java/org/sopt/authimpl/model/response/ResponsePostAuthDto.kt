@@ -19,6 +19,8 @@ data class ResponsePostAuthDto(
   val isRegistered: Boolean,
   @SerialName("FcmIsAllowed")
   val fcmIsAllowed: Boolean,
+  @SerialName("profile")
+  val profile: String
 ) {
   fun toDomainModel() = Pair(
     Token(
