@@ -77,11 +77,12 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       navigateToDestination("featureMyPage://fragmentSetting")
     }
   }
-  private fun navigateToSearch() {
-    binding.clHomeSearch.onThrottleClick {
-      navigateToDestination("featureMyPage://fragmentSearch")
-    }
-  }
+
+//  private fun navigateToSearch() {
+//    binding.clHomeSearch.onThrottleClick {
+//      navigateToDestination("featureMyPage://fragmentSearch")
+//    }
+//  }
   private fun navigateToDestination(destination: String) {
     val uri = Uri.parse(destination)
     findNavController().navigate(uri)

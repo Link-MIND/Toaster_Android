@@ -37,23 +37,23 @@ class MainActivity : AppCompatActivity() {
 
   override fun onWindowFocusChanged(hasFocus: Boolean) {
     super.onWindowFocusChanged(hasFocus)
-// test
-    if (hasFocus) {
-      val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-      var pasteData = ""
-      if (!clipboard.hasPrimaryClip()) {
-      } else if ((clipboard.primaryClipDescription?.hasMimeType(MIMETYPE_TEXT_PLAIN)) == false) {
-      } else {
-        val item = clipboard.primaryClip?.getItemAt(0)!!.coerceToText(applicationContext)
-        if (!item.isNullOrEmpty() && !hasShownDialog) {
-          pasteData = item.toString()
-          if (pasteData.contains("http")) {
-            Log.d("test", "$pasteData")
-            showRevokeCommonDialog()
-            hasShownDialog = true
-          }
-        }
-      }
+
+    if (!hasFocus) return
+
+    val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+
+    if (!clipboard.hasPrimaryClip()) return
+
+    if ((clipboard.primaryClipDescription?.hasMimeType(MIMETYPE_TEXT_PLAIN)) == false) return
+
+    val item = clipboard.primaryClip?.getItemAt(0)!!.coerceToText(applicationContext)
+    if (item.isNullOrEmpty() || hasShownDialog) return
+
+    val pasteData = item.toString()
+    if (pasteData.contains("http")) {
+      Log.d("test", "$pasteData")
+      showRevokeCommonDialog()
+      hasShownDialog = true
     }
   }
 
