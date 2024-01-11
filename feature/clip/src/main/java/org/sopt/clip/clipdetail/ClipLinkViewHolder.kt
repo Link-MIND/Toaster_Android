@@ -1,6 +1,5 @@
 package org.sopt.clip.clipdetail
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.clip.LinkDTO
 import org.sopt.clip.databinding.ItemClipDetailLinkBinding
