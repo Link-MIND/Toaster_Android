@@ -9,7 +9,9 @@ class ClipLinkViewHolder(
   private val onClickItemLink: (Long) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(linkData: LinkDTO) {
-    if (linkData != null) {
+    if (linkData == null) {
+      return
+    } else {
       with(binding) {
         tvLinkTitle.text = linkData.linkTitle
         tvLinkUrl.text = linkData.url
