@@ -1,10 +1,10 @@
-package org.sopt.timer.di
+package org.sopt.timerremote.di
 
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import org.sopt.timer.source.TimerRemoteDataSourceImpl
+import org.sopt.timerremote.source.TimerRemoteDataSourceImpl
 import org.sopt.timer.source.remote.TimerRemoteDataSource
 import javax.inject.Singleton
 
