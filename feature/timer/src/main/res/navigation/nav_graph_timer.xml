@@ -11,7 +11,11 @@
     tools:layout="@layout/fragment_timer">
     <action
       android:id="@+id/action_navigation_timer_to_navigation_timer_clip_select"
-      app:destination="@id/navigation_timer_clip_select" />
+      app:destination="@id/navigation_timer_clip_select"
+      app:enterAnim="@anim/from_bottom"
+      app:exitAnim="@android:anim/fade_out"
+      app:popEnterAnim="@android:anim/fade_in"
+      app:popExitAnim="@anim/to_bottom" />
   </fragment>
   <fragment
     android:id="@+id/navigation_timer_clip_select"
@@ -20,7 +24,11 @@
     tools:layout="@layout/fragment_timer_clip_select">
     <action
       android:id="@+id/action_navigation_timer_clip_select_to_navigation_time_picker"
-      app:destination="@id/navigation_time_picker" />
+      app:destination="@id/navigation_time_picker"
+      app:enterAnim="@anim/from_right"
+      app:exitAnim="@anim/to_left"
+      app:popEnterAnim="@anim/from_left"
+      app:popExitAnim="@anim/to_right" />
   </fragment>
   <fragment
     android:id="@+id/navigation_time_picker"
@@ -29,7 +37,11 @@
     tools:layout="@layout/fragment_time_picker" >
     <action
       android:id="@+id/action_navigation_time_picker_to_navigation_timer_repeat"
-      app:destination="@id/navigation_timer_repeat" />
+      app:destination="@id/navigation_timer_repeat"
+      app:enterAnim="@anim/from_bottom"
+      app:exitAnim="@android:anim/fade_out"
+      app:popEnterAnim="@android:anim/fade_in"
+      app:popExitAnim="@anim/to_bottom" />
   </fragment>
   <fragment
     android:id="@+id/navigation_timer_repeat"

@@ -17,4 +17,10 @@
     android:id="@+id/clipDetailFragment"
     android:name="org.sopt.clip.clipdetail.ClipDetailFragment"
     android:label="ClipDetailFragment" />
+  </fragment>
+  <fragment
+    android:id="@+id/navigation_clip_detail"
+    android:name="org.sopt.clip.clipdetail.ClipDetailFragment"
+    android:label="ClipDetailFragment"
+    tools:layout="@layout/fragment_clip_detail"/>
 </navigation>

@@ -11,6 +11,7 @@ internal class FeatureConventionPlugin : Plugin<Project> {
       with(pluginManager) {
         apply("linkmind.android.library")
         apply("linkmind.android.hilt")
+        apply("androidx.navigation.safeargs.kotlin")
       }
 
       val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")

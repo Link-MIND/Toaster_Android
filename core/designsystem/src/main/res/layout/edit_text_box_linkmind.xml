@@ -4,6 +4,7 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   android:paddingVertical="9dp"
+  android:id="@+id/cl_etv_back"
   android:background="@drawable/shape_neutrals_fill_12_rect">
 
   <EditText

@@ -6,6 +6,7 @@ import androidx.navigation.fragment.findNavController
 import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.button.state.LinkMindButtonState
 import designsystem.components.dialog.LinkMindDialog
+import designsystem.components.toast.linkMindSnackBar
 import org.sopt.mainfeature.R
 import org.sopt.savelink.databinding.FragmentSaveLinkSetClipBinding
 import org.sopt.savelink.ui.adapter.ClipSelectAdapter
@@ -61,6 +62,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
         .setSubtitle(R.string.save_clip_dialog_sub_title)
         .setNegativeButton(R.string.negative_close_msg) {
           linkMindDialog.dismiss()
+          navigateToHome()
         }
         .setPositiveButton(R.string.positive_ok_msg) {
           linkMindDialog.dismiss()
@@ -69,12 +71,17 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
     }
 
     binding.btnSaveLinkComplete.btnClick {
-      val (request, navOptions) = DeepLinkUtil.getNavRequestPopUpAndOption(
-        findNavController().graph.id,
-        false,
-        "featureHome://homeFragment",
-      )
-      findNavController().navigate(request, navOptions)
+      navigateToHome()
+      requireContext().linkMindSnackBar(binding.root, "링크 저장 완료", false)
     }
+  }
+
+  private fun navigateToHome() {
+    val (request, navOptions) = DeepLinkUtil.getNavRequestPopUpAndOption(
+      findNavController().graph.id,
+      false,
+      "featureHome://homeFragment",
+    )
+    findNavController().navigate(request, navOptions)
   }
 }
