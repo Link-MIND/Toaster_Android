@@ -35,8 +35,6 @@ dependencies {
   implementation(projects.core.auth)
   implementation(projects.core.authimpl)
   implementation(projects.core.designsystem)
-  implementation(projects.domain.linkminddomain)
-  implementation(projects.domain.oauthdomain)
   implementation(projects.data.linkminddata)
   implementation(projects.data.oauthdata)
   implementation(projects.feature.maincontainer)
