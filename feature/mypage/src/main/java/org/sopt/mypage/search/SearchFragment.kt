@@ -36,8 +36,8 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
 
     setupObservers()
     setupDummyData()
-    setupClickListeners()
-    setOnEditText()
+    setOnClickListeners()
+    handleEditText()
   }
 
   private fun setupObservers() {
@@ -58,7 +58,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
     viewModel.updateResults(linkResults, clipResults)
   }
 
-  private fun setOnEditText() {
+  private fun handleEditText() {
     binding.editText.doAfterTextChanged {
       handleEditTextChanges()
     }
@@ -70,13 +70,13 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
     binding.ivCancel.isGone = true
   }
 
-  private fun setupClickListeners() {
+  private fun setOnClickListeners() {
     binding.ivSearch.onThrottleClick {
-      setSearch()
+      handleSearch()
     }
 
     binding.ivCancel.onThrottleClick {
-      setCancel()
+      handleCancel()
     }
 
     binding.ivLeft.onThrottleClick {
@@ -84,38 +84,42 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
     }
   }
 
-  private fun setSearch() {
+  private fun handleSearch() {
     val query = binding.editText.text.toString().trim()
 
     if (query.isNotEmpty()) {
       val isMatchedResults = viewModel.onClickSearch(query)
-      setSearchResultsVisibility(isMatchedResults)
+      handleSearchResultsVisibility(isMatchedResults)
     } else {
-      setEmptyResults()
+      handleEmptyResults()
     }
     updateSearchQuery(query)
     requireContext().hideKeyboard(requireView())
   }
 
-  private fun setSearchResultsVisibility(isMatchedResults: Boolean) {
-    binding.rcSearchResult.isVisible = isMatchedResults
-    binding.clNoneResults.isVisible = !isMatchedResults
-    binding.ivSearch.isVisible = false
-    binding.ivCancel.isVisible = true
+  private fun handleSearchResultsVisibility(isMatchedResults: Boolean) {
+    with(binding) {
+      rcSearchResult.isVisible = isMatchedResults
+      clNoneResults.isVisible = !isMatchedResults
+      ivSearch.isVisible = false
+      ivCancel.isVisible = true
+    }
   }
 
-  private fun setEmptyResults() {
+  private fun handleEmptyResults() {
     binding.rcSearchResult.isVisible = false
     binding.clNoneResults.isVisible = true
   }
 
-  private fun setCancel() {
-    clearSearch()
-    binding.rcSearchResult.isVisible = false
+  private fun handleCancel() {
+    with(binding) {
+      rcSearchResult.isVisible = false
+      clSearch.isVisible = true
+      ivCancel.isVisible = false
+      clNoneResults.isGone = true
+    }
     requireContext().hideKeyboard(requireView())
-    binding.clSearch.isVisible = true
-    binding.ivCancel.isVisible = false
-    binding.clNoneResults.isGone = true
+    clearSearch()
   }
 
   private fun observeLinkResults() {
