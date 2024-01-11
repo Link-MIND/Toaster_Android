@@ -1,8 +1,13 @@
 package org.sopt.clip
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
+import androidx.recyclerview.widget.RecyclerView
 
 class ClipViewModel : ViewModel() {
+  var toggleSelectedPast: SelectedToggle = SelectedToggle.ALL
+
   val mockClipData = listOf<ClipsDTO>(
     ClipsDTO("a", 1, 1),
     ClipsDTO("b", 2, 2),
@@ -32,4 +37,14 @@ class ClipViewModel : ViewModel() {
     LinkDTO("www.n.com", 12, "제목3", "맛집3"),
     LinkDTO("www.k.com", 12, "제목4", "맛집4"),
   )
+
+  fun navigateBack(navController: NavController) {
+    navController.navigateUp()
+  }
+
+  val mockDataListState = MutableLiveData<Boolean>(false)
+  fun set(value:Boolean) {
+    mockDataListState.value = value
+  }
+
 }

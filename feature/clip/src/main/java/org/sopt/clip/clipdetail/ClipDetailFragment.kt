@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.LinkDTO
+import org.sopt.clip.SelectedToggle
 import org.sopt.clip.databinding.FragmentClipDetailBinding
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
@@ -14,11 +15,11 @@ import org.sopt.ui.view.onThrottleClick
 class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ FragmentClipDetailBinding.inflate(it) }) {
   private val viewModel by viewModels<ClipViewModel>()
   private lateinit var clipDetailAdapter: ClipLinkAdapter
-  private var toggleSelectedPast: Int? = 1
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    initLinkAdapter()
+    clipDetailAdapter = ClipLinkAdapter()
+    binding.rvCategoryLink.adapter = clipDetailAdapter
     updateListView()
 
     initToggleClickListener()
@@ -27,82 +28,78 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
 
   private fun onClickBackButton() {
     binding.ivClipDetailBack.onThrottleClick {
-      findNavController().navigateUp()
+      viewModel.navigateBack(findNavController())
     }
   }
 
-  private fun initLinkAdapter() {
-    with(binding) {
-      clipDetailAdapter = ClipLinkAdapter()
-      rvCategoryLink.adapter = clipDetailAdapter
-    }
-  }
 
   private fun updateListView() {
-    var state: Boolean = viewModel.mockLinkData == null
-    initEmptyMsgVisible(state)
-    if (!state) {
-      clipDetailAdapter.submitList(viewModel.mockLinkData)
+    viewModel.mockDataListState.observe( viewLifecycleOwner
+    ) {
+      initEmptyMsgVisible(it)
+      if (!it) {
+        clipDetailAdapter.submitList(viewModel.mockLinkData)
+      }
     }
   }
 
   private fun initToggleClickListener(): List<LinkDTO> {
     with(binding) {
       btnClipAll.setOnClickListener {
-        updateTogglesNDividerVisible(toggleSelectedPast, 1)
+        updateTogglesNDividerVisible(SelectedToggle.ALL)
       }
 
       btnClipRead.setOnClickListener {
-        updateTogglesNDividerVisible(toggleSelectedPast, 2)
+        updateTogglesNDividerVisible(SelectedToggle.READ)
       }
 
       btnClipUnread.setOnClickListener {
-        updateTogglesNDividerVisible(toggleSelectedPast, 3)
+        updateTogglesNDividerVisible(SelectedToggle.UNREAD)
       }
     }
     return viewModel.mockLinkData
   }
 
-  private fun updateTogglesNDividerVisible(selectedPast: Int?, selectedNow: Int?) {
-    updateTogglesVisible(selectedPast, selectedNow)
+  private fun updateTogglesNDividerVisible(selectedNow: SelectedToggle) {
+    updateTogglesVisible(selectedNow)
     initDividerVisible(selectedNow)
   }
 
-  private fun updateTogglesVisible(selectedPast: Int?, selectedNow: Int?) {
-    if (selectedNow != selectedPast) {
-      initToggleVisible(selectedPast, false)
+
+  private fun updateTogglesVisible(selectedNow: SelectedToggle) {
+    if (selectedNow != viewModel.toggleSelectedPast) {
+      initToggleVisible(viewModel.toggleSelectedPast, false)
       initToggleVisible(selectedNow, true)
       initDividerVisible(selectedNow)
-      toggleSelectedPast = selectedNow
+      viewModel.toggleSelectedPast = selectedNow
       updateListView()
     }
   }
 
-  private fun initToggleVisible(toggle: Int?, state: Boolean) {
+  private fun initToggleVisible(toggle: SelectedToggle, state: Boolean) {
     with(binding) {
       when (toggle) {
-        1 -> tvClipAllSelected.isVisible = state
-        2 -> tvClipReadSelected.isVisible = state
-        3 -> tvClipUnreadSelected.isVisible = state
-        else -> {}
+        SelectedToggle.ALL -> tvClipAllSelected.isVisible = state
+        SelectedToggle.READ -> tvClipReadSelected.isVisible = state
+        SelectedToggle.UNREAD -> tvClipUnreadSelected.isVisible = state
       }
     }
   }
 
-  private fun initDividerVisible(selectedNow: Int?) {
+  private fun initDividerVisible(selectedNow: SelectedToggle) {
     with(binding) {
       when (selectedNow) {
-        1 -> {
+        SelectedToggle.ALL -> {
           dvClipPicker1.isVisible = false
           dvClipPicker2.isVisible = true
         }
 
-        2 -> {
+        SelectedToggle.READ -> {
           dvClipPicker1.isVisible = false
           dvClipPicker2.isVisible = false
         }
 
-        3 -> {
+        SelectedToggle.UNREAD -> {
           dvClipPicker1.isVisible = true
           dvClipPicker2.isVisible = false
         }
