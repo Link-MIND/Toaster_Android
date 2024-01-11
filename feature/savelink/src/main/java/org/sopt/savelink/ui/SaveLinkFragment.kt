@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
 import designsystem.components.dialog.LinkMindDialog
 import designsystem.components.edittext.state.LinkMindEditTextState
@@ -17,6 +18,7 @@ import org.sopt.ui.keyboard.KeyboardUtils
 import org.sopt.ui.keyboard.OnKeyboardVisibilityListener
 import org.sopt.ui.view.onThrottleClick
 
+@AndroidEntryPoint
 class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSaveLinkBinding.inflate(it) }) {
   private val linkMindDialog by lazy {
     LinkMindDialog(requireContext())
