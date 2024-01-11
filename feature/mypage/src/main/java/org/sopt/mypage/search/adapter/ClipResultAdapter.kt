@@ -11,6 +11,13 @@ import org.sopt.mypage.search.viewholder.ClipResultViewHolder
 class ClipResultAdapter :
   ListAdapter<ClipResultDummy, ClipResultViewHolder>(DiffUtilCallback) {
 
+  private var searchQuery: String = ""
+
+  fun setSearchQuery(query: String) {
+    searchQuery = query
+    notifyDataSetChanged()
+  }
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClipResultViewHolder {
     val inflater = LayoutInflater.from(parent.context)
     val binding = ItemSearchResultClipBinding.inflate(inflater, parent, false)
@@ -18,7 +25,8 @@ class ClipResultAdapter :
   }
 
   override fun onBindViewHolder(holder: ClipResultViewHolder, position: Int) {
-    holder.onBind(getItem(position))
+    val result = getItem(position)
+    holder.onBind(result, searchQuery)
   }
 
   private object DiffUtilCallback : DiffUtil.ItemCallback<ClipResultDummy>() {
