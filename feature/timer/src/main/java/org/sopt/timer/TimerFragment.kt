@@ -35,9 +35,7 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
 
   private lateinit var completeTimerAdapter: CompleteTimerAdapter
   private lateinit var waitTimerAdapter: WaitTimerAdapter
-  private var timerExist = true
   private var isNotiPermissionAllowed = true
-  private var isFcmAllowed = false
 
   private val notificationPermissionLauncher =
     registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
