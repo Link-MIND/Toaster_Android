@@ -7,7 +7,7 @@ import org.sopt.clip.databinding.ItemClipDetailLinkBinding
 
 class ClipLinkViewHolder(
   private val binding: ItemClipDetailLinkBinding,
-  private val onClickItemLink:(Long)-> Unit,
+  private val onClickItemLink: (Long) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(linkData: LinkDTO) {
     if (linkData != null) {
