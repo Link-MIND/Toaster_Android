@@ -7,8 +7,8 @@ import org.sopt.model.sample.category.CategoryList
 import javax.inject.Inject
 
 class RemoteCategoryDataSourceImpl @Inject constructor(
-  private val categoryService: CategoryService
-): RemoteCategoryDataSource {
+  private val categoryService: CategoryService,
+) : RemoteCategoryDataSource {
   override suspend fun getCategoryAll(): List<CategoryList> =
     categoryService.getCategoryAll().data!!.map {
       it.toCoreModel()

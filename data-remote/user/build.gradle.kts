@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "org.sopt.remote.user"
+  namespace = "org.sopt.remote.user"
 }
 
 dependencies {
