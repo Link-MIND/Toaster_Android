@@ -4,8 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import org.sopt.timerremote.source.TimerRemoteDataSourceImpl
 import org.sopt.timer.source.remote.TimerRemoteDataSource
+import org.sopt.timerremote.source.TimerRemoteDataSourceImpl
 import javax.inject.Singleton
 
 @Module

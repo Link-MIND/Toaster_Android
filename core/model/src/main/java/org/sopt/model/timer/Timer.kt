@@ -7,5 +7,5 @@ data class Timer(
   val remindDate: String?,
   val remindDates: String?,
   val comment: String?,
-  val isAlarm: Boolean?
+  val isAlarm: Boolean?,
 )

@@ -6,9 +6,8 @@ import org.sopt.timer.source.remote.TimerRemoteDataSource
 import javax.inject.Inject
 
 class TimerRepositoryImpl @Inject constructor(
-  private val timerRemoteDataSource: TimerRemoteDataSource
+  private val timerRemoteDataSource: TimerRemoteDataSource,
 ) : TimerRepository {
   override suspend fun getTimerMain(): Result<Pair<List<Timer>, List<Timer>>?> =
     runCatching { timerRemoteDataSource.getTimerMain().data?.toCoreModel() }
-
 }

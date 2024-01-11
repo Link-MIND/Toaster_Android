@@ -13,8 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TimerViewModel @Inject constructor(
-  private val getTimerMainUseCase: GetTimerMainUseCase
-): ViewModel() {
+  private val getTimerMainUseCase: GetTimerMainUseCase,
+) : ViewModel() {
   private val _uiState = MutableStateFlow<TimerUiState<List<Timer>>>(TimerUiState.Empty)
   val uiState: StateFlow<TimerUiState<List<Timer>>> get() = _uiState
 
