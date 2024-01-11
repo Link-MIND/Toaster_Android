@@ -7,5 +7,11 @@ import javax.inject.Inject
 class DeleteLinkUseCase @Inject constructor(
   private val linkRepository: LinkRepository
 ) {
-  suspend operator fun invoke(): Result<Int> = linkRepository.deleteLink()
+  suspend operator fun invoke(param:Param): Result<Int> = linkRepository.deleteLink(
+    toastId = param.toastId
+  )
+
+  data class Param(
+    val toastId: Long,
+  )
 }
