@@ -2,6 +2,7 @@ package org.sopt.clip.clipdetail
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -17,7 +18,9 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val clipDetailAdapter = ClipLinkAdapter()
+    val clipDetailAdapter = ClipLinkAdapter { itemId ->
+      Toast.makeText(context, "itemId: $itemId", Toast.LENGTH_SHORT).show()
+    }
     binding.rvCategoryLink.adapter = clipDetailAdapter
     var state: Boolean = viewModel.mockLinkData == null
     initEmptyMsgVisible(state)
