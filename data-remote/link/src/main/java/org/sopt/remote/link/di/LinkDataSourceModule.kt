@@ -16,5 +16,4 @@ abstract class LinkDataSourceModule {
   abstract fun bindRemoteLectureProviderDatasource(
     remoteLinkDataSourceImpl: RemoteLinkDataSourceImpl,
   ): RemoteLinkDataSource
-
 }

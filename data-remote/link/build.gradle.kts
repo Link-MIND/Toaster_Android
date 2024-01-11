@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "org.sopt.remote.link"
+  namespace = "org.sopt.remote.link"
 }
 
 dependencies {

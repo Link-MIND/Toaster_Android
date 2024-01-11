@@ -5,7 +5,6 @@ plugins {
   alias(libs.plugins.kotlin.serialization)
 }
 
-
 android {
   namespace = "org.sopt.data.link"
 }

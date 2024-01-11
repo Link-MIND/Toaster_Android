@@ -19,7 +19,6 @@ class SaveLinkViewModel @Inject constructor(
         toastId = toastId,
       ),
     ).onSuccess {
-
     }.onFailure { }
   }
 

@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ResponseIsReadDto (
+data class ResponseIsReadDto(
   @SerialName("isRead")
-  val isRead:Boolean
+  val isRead: Boolean,
 )
