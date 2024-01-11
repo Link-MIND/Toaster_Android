@@ -80,7 +80,8 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
   private fun onClickComplete() {
     binding.btnSaveLinkNext.btnClick {
       KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
-      findNavController().navigate(R.id.action_saveLinkFragment_to_saveLinkSetClipFragment)
+      val action = SaveLinkFragmentDirections.actionSaveLinkFragmentToSaveLinkSetClipFragment()
+      findNavController().navigate(action)
     }
   }
 

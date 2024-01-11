@@ -59,6 +59,7 @@ android-library = { id = "com.android.library", version.ref = "android-gradle-pl
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 google-service = { id = "com.google.gms.google-services", version.ref = "google-service" }
+navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "androidx-navigation" }
 
 linkmind-android-application = { id = "linkmind.android.application", version = "unspecified" }
 linkmind-android-library = { id = "linkmind.android.library", version = "unspecified" }
