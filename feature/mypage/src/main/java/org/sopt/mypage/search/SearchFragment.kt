@@ -1,22 +1,24 @@
 package org.sopt.mypage.search
 
-import android.graphics.Typeface
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.StyleSpan
 import android.view.View
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import org.sopt.mypage.databinding.FragmentSearchBinding
 import org.sopt.mypage.search.adapter.ClipResultAdapter
 import org.sopt.mypage.search.adapter.LinkResultAdapter
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.context.hideKeyboard
 import org.sopt.ui.view.onThrottleClick
 
-class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBinding.inflate(it) }) {
+class SearchFragment : BindingFragment<FragmentSearchBinding>(
+  { FragmentSearchBinding.inflate(it) },
+) {
 
   private val viewModel: SearchViewModel by viewModels()
   private lateinit var linkResultAdapter: LinkResultAdapter
@@ -28,76 +30,122 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBi
 
     linkResultAdapter = LinkResultAdapter()
     clipResultAdapter = ClipResultAdapter()
-
-    viewModel.linkResults.observe(
-      viewLifecycleOwner,
-      Observer {
-        linkResultAdapter.submitList(it)
-      },
-    )
-
-    viewModel.clipResults.observe(
-      viewLifecycleOwner,
-      Observer {
-        clipResultAdapter.submitList(it)
-      },
-    )
-
-    viewModel.matchingTitles.observe(
-      viewLifecycleOwner,
-      Observer {
-        handleMatchingTitlesUpdate(it)
-      },
-    )
-
     mResultAdapter = ConcatAdapter(linkResultAdapter, clipResultAdapter)
+
     binding.rcSearchResult.adapter = mResultAdapter
 
-    binding.ivLeft.onThrottleClick {
-      requireActivity().supportFragmentManager.popBackStack()
+    setupObservers()
+    setupDummyData()
+    setOnClickListeners()
+    handleEditText()
+  }
+
+  private fun setupObservers() {
+    observeLinkResults()
+    observeClipResults()
+  }
+
+  private fun setupDummyData() {
+    val linkResults = listOf(
+      LinkResultDummy("Category", "토스트기", "URL"),
+      LinkResultDummy("Category2", "토스트", "URL2"),
+    )
+    val clipResults = listOf(
+      ClipResultDummy("토스트 맛집", 6),
+      ClipResultDummy("토스트굿", 8),
+    )
+
+    viewModel.updateResults(linkResults, clipResults)
+  }
+
+  private fun handleEditText() {
+    binding.editText.doAfterTextChanged {
+      handleEditTextChanges()
+    }
+  }
+
+  private fun handleEditTextChanges() {
+    binding.ivSearch.isVisible = true
+    binding.clNoneResults.isGone = true
+    binding.ivCancel.isGone = true
+  }
+
+  private fun setOnClickListeners() {
+    binding.ivSearch.onThrottleClick {
+      handleSearch()
     }
 
     binding.ivCancel.onThrottleClick {
-      binding.editText.text.clear()
+      handleCancel()
     }
 
-    binding.ivSearch.onThrottleClick {
-      val searchTerm = binding.editText.text.toString()
-      viewModel.searchResults(searchTerm)
-    }
-
-    binding.editText.doAfterTextChanged { text ->
-      val isTextEmpty = text.isNullOrEmpty()
-      binding.ivCancel.visibility = if (isTextEmpty) View.INVISIBLE else View.VISIBLE
+    binding.ivLeft.onThrottleClick {
+      findNavController().navigateUp()
     }
   }
 
-  private fun handleMatchingTitlesUpdate(matchingTitles: List<String>) {
-    if (matchingTitles.isEmpty()) {
-      binding.clNoneResults.visibility = View.VISIBLE
-      binding.rcSearchResult.visibility = View.GONE
+  private fun handleSearch() {
+    val query = binding.editText.text.toString().trim()
+
+    if (query.isNotEmpty()) {
+      val isMatchedResults = viewModel.onClickSearch(query)
+      handleSearchResultsVisibility(isMatchedResults)
     } else {
-      binding.clNoneResults.visibility = View.GONE
-      binding.rcSearchResult.visibility = View.VISIBLE
-      mResultAdapter.notifyDataSetChanged()
-      applyTextToBold(matchingTitles, viewModel.searchTerm)
+      handleEmptyResults()
+    }
+    updateSearchQuery(query)
+    requireContext().hideKeyboard(requireView())
+  }
+
+  private fun handleSearchResultsVisibility(isMatchedResults: Boolean) {
+    with(binding) {
+      rcSearchResult.isVisible = isMatchedResults
+      clNoneResults.isVisible = !isMatchedResults
+      ivSearch.isVisible = false
+      ivCancel.isVisible = true
     }
   }
 
-  private fun applyTextToBold(matchingTitles: List<String>, searchTerm: String) {
-    for (matchingTitle in matchingTitles) {
-      val start = matchingTitle.indexOf(searchTerm, ignoreCase = true)
-      val end = start + searchTerm.length
+  private fun handleEmptyResults() {
+    binding.rcSearchResult.isVisible = false
+    binding.clNoneResults.isVisible = true
+  }
 
-      if (start != -1) {
-        val spannableString = SpannableString(matchingTitle)
-        spannableString.setSpan(
-          StyleSpan(Typeface.BOLD),
-          start,
-          end,
-          Spannable.SPAN_INCLUSIVE_INCLUSIVE,
-        )
-      }
+  private fun handleCancel() {
+    with(binding) {
+      rcSearchResult.isVisible = false
+      clSearch.isVisible = true
+      ivCancel.isVisible = false
+      clNoneResults.isGone = true
     }
+    requireContext().hideKeyboard(requireView())
+    clearSearch()
+  }
+
+  private fun observeLinkResults() {
+    viewModel.linkResultsLiveData.observe(
+      viewLifecycleOwner,
+      Observer { linkResults ->
+        linkResultAdapter.submitList(linkResults)
+      },
+    )
+  }
+
+  private fun observeClipResults() {
+    viewModel.clipResultsLiveData.observe(
+      viewLifecycleOwner,
+      Observer { clipResults ->
+        clipResultAdapter.submitList(clipResults)
+      },
+    )
+  }
+
+  private fun updateSearchQuery(query: String) {
+    linkResultAdapter.setSearchQuery(query)
+    clipResultAdapter.setSearchQuery(query)
+  }
+
+  private fun clearSearch() {
+    binding.editText.text.clear()
   }
 }
