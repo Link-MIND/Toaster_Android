@@ -31,17 +31,17 @@ class ClipViewModel : ViewModel() {
   )
 
   val mockLinkData = listOf<LinkDTO>(
-    LinkDTO("www.l.com", 12, "제목1", "맛집"),
-    LinkDTO("www.i.com", 12, "제목2", "맛집2"),
-    LinkDTO("www.n.com", 12, "제목3", "맛집3"),
-    LinkDTO("www.k.com", 12, "제목4", "맛집4"),
-    LinkDTO("www.l.com", 12, "제목1", "맛집"),
-    LinkDTO("www.i.com", 12, "제목2", "맛집2"),
-    LinkDTO("www.n.com", 12, "제목3", "맛집3"),
-    LinkDTO("www.k.com", 12, "제목4", "맛집4"),
-    LinkDTO("www.l.com", 12, "제목1", "맛집"),
-    LinkDTO("www.i.com", 12, "제목2", "맛집2"),
-    LinkDTO("www.n.com", 12, "제목3", "맛집3"),
-    LinkDTO("www.k.com", 12, "제목4", "맛집4"),
+    LinkDTO("www.l.com", 12, "제목1", "맛집", 1),
+    LinkDTO("www.i.com", 12, "제목2", "맛집2", 2),
+    LinkDTO("www.n.com", 12, "제목3", "맛집3",3),
+    LinkDTO("www.k.com", 12, "제목4", "맛집4",4),
+    LinkDTO("www.l.com", 12, "제목1", "맛집",5),
+    LinkDTO("www.i.com", 12, "제목2", "맛집2",6),
+    LinkDTO("www.n.com", 12, "제목3", "맛집3",7),
+    LinkDTO("www.k.com", 12, "제목4", "맛집4",8),
+    LinkDTO("www.l.com", 12, "제목1", "맛집",9),
+    LinkDTO("www.i.com", 12, "제목2", "맛집2",10),
+    LinkDTO("www.n.com", 12, "제목3", "맛집3",11),
+    LinkDTO("www.k.com", 12, "제목4", "맛집4",12),
   )
 }
