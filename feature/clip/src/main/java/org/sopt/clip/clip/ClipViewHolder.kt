@@ -6,7 +6,7 @@ import org.sopt.clip.databinding.ItemClipClipBinding
 
 class ClipViewHolder(
   private val binding: ItemClipClipBinding,
-  private val onClickItemClip: (ClipsDTO) -> Unit,
+  private val onClickItemClip: (Long) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(clipData: ClipsDTO?) {
     if (clipData != null) {
@@ -14,7 +14,7 @@ class ClipViewHolder(
         tvClipName.text = clipData.clipName
         tvClipAmount.text = clipData.clipAmount.toString() + "개"
         root.setOnClickListener {
-          onClickItemClip(clipData)
+          onClickItemClip(clipData.clipId)
         }
       }
     }
