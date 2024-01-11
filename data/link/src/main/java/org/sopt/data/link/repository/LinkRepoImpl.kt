@@ -11,9 +11,9 @@ class LinkRepoImpl @Inject constructor(
   override suspend fun postSaveLink(): Result<Int> =
   runCatching { remoteCategoryDataSource.postSaveLink() }
 
-  override suspend fun deleteLink(): Result<Int> =
-    runCatching { remoteCategoryDataSource.deleteLink() }
+  override suspend fun deleteLink(toastId:Long): Result<Int> =
+    runCatching { remoteCategoryDataSource.deleteLink(toastId) }
 
-  override suspend fun patchReadLink(): Result<Int> =
-    runCatching { remoteCategoryDataSource.patchReadLink() }
+  override suspend fun patchReadLink(toastId:Long): Result<Int> =
+    runCatching { remoteCategoryDataSource.patchReadLink(toastId) }
 }
