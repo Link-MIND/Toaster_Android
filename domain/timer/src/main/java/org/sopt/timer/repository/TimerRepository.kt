@@ -1,5 +1,7 @@
 package org.sopt.timer.repository
 
+import org.sopt.model.timer.Timer
+
 interface TimerRepository {
-  //TODO
+  suspend fun getTimerMain(): Result<Pair<List<Timer>, List<Timer>>?>
 }
