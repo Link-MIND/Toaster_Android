@@ -7,7 +7,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.LinkDTO
-import org.sopt.clip.R
 import org.sopt.clip.databinding.FragmentClipDetailBinding
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
@@ -19,15 +18,23 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    initLinkAdapter()
+    updateListView()
+
+    initToggleClickListener()
+    onClickBackButton()
+  }
+
+  private fun onClickBackButton() {
+    binding.ivClipDetailBack.onThrottleClick {
+      findNavController().navigateUp()
+    }
+  }
+
+  private fun initLinkAdapter() {
     with(binding) {
       clipDetailAdapter = ClipLinkAdapter()
       rvCategoryLink.adapter = clipDetailAdapter
-      updateListView()
-
-      initToggleClickListener()
-      ivClipDetailBack.onThrottleClick {
-        findNavController().navigate(R.id.action_navigation_clip_detail_to_navigation_clip)
-      }
     }
   }
 
@@ -46,11 +53,11 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
       }
 
       btnClipRead.setOnClickListener {
-        updateTogglesVisible(toggleSelectedPast, 2)
+        updateTogglesNDividerVisible(toggleSelectedPast, 2)
       }
 
       btnClipUnread.setOnClickListener {
-        updateTogglesVisible(toggleSelectedPast, 3)
+        updateTogglesNDividerVisible(toggleSelectedPast, 3)
       }
     }
     return viewModel.mockLinkData
