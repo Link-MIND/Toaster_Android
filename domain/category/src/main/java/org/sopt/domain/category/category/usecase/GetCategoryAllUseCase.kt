@@ -8,6 +8,4 @@ class GetCategoryAllUseCase @Inject constructor(
   private val categoryRepository: CategoryRepository,
 ) {
   suspend operator fun invoke(): Result<List<CategoryList>> = categoryRepository.getCategoryAll()
-
 }
-

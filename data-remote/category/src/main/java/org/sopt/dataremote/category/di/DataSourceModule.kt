@@ -8,7 +8,6 @@ import org.sopt.data.category.datasource.RemoteCategoryDataSource
 import org.sopt.dataremote.category.datasource.RemoteCategoryDataSourceImpl
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class DataSourceModule {

@@ -5,22 +5,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import org.sopt.domain.category.category.repository.CategoryRepository
 import org.sopt.domain.category.category.usecase.GetCategoryAllUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class ClipViewModel @Inject constructor(
-  private val getCategoryAll: GetCategoryAllUseCase
+  private val getCategoryAll: GetCategoryAllUseCase,
 ) : ViewModel() {
   init {
-      getCategoryAll()
+    getCategoryAll()
   }
   fun getCategoryAll() = viewModelScope.launch {
     getCategoryAll.invoke().onSuccess {
-      Log.d("test","$it")
+      Log.d("test", "$it")
     }.onFailure {
-
     }
   }
 
@@ -53,5 +51,4 @@ class ClipViewModel @Inject constructor(
     LinkDTO("www.n.com", 12, "제목3", "맛집3"),
     LinkDTO("www.k.com", 12, "제목4", "맛집4"),
   )
-
 }
