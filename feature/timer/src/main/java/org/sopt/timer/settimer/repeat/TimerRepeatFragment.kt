@@ -56,12 +56,12 @@ class TimerRepeatFragment : BindingFragment<FragmentTimerRepeatBinding>({ Fragme
   private fun updateCompleteButtonState(list: MutableList<Repeat>) {
     val newList = list.map {
       it.isSelected
-      }
+    }
     if (newList.contains(true)) {
       binding.btnTimerRepeatComplete.state = LinkMindButtonState.ENABLE
-      } else {
+    } else {
       binding.btnTimerRepeatComplete.state = LinkMindButtonState.DISABLE
-      }
+    }
   }
 
   private fun initCloseButtonClickListener() {

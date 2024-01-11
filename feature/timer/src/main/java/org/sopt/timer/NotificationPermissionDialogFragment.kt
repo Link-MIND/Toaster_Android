@@ -11,7 +11,9 @@ import org.sopt.timer.databinding.FragmentNotificationPermissionDialogBinding
 import org.sopt.ui.base.BindingDialogFragment
 import org.sopt.ui.view.onThrottleClick
 
-class NotificationPermissionDialogFragment : BindingDialogFragment<FragmentNotificationPermissionDialogBinding>({ FragmentNotificationPermissionDialogBinding.inflate(it)}){
+class NotificationPermissionDialogFragment : BindingDialogFragment<FragmentNotificationPermissionDialogBinding>(
+  { FragmentNotificationPermissionDialogBinding.inflate(it) },
+) {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
