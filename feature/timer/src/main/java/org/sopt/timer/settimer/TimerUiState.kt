@@ -2,7 +2,7 @@ package org.sopt.timer.settimer
 
 sealed interface TimerUiState<out T> {
   data class BothAllowed<T>(
-    val data: T
+    val data: T,
   ) : TimerUiState<T>
   object AppAllowed : TimerUiState<Nothing>
 

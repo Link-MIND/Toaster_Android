@@ -14,7 +14,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -104,11 +103,9 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
         }
 
         is TimerUiState.Loading -> {
-
         }
 
         is TimerUiState.Empty -> {
-
         }
       }
     }.launchIn(viewLifeCycleScope)

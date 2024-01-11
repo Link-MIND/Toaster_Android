@@ -1,7 +1,6 @@
 package org.sopt.timer.settimer.clipselect
 
 import android.content.Context
-import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.timer.R
@@ -35,14 +34,14 @@ class ClipSelectViewHolder(
     if (data.isSelected) {
       ivItemTimerClip.setImageResource(
         org.sopt.mainfeature.R.drawable.ic_clip_all_24_primary.takeIf { pos == 0 }
-          ?: org.sopt.mainfeature.R.drawable.ic_clip_24_primary
+          ?: org.sopt.mainfeature.R.drawable.ic_clip_24_primary,
       )
       tvItemTimerClipCount.setTextColor(selectedColor)
       tvItemTimerClipName.setTextColor(selectedColor)
     } else {
       ivItemTimerClip.setImageResource(
         org.sopt.mainfeature.R.drawable.ic_clip_all_24.takeIf { pos == 0 }
-          ?: org.sopt.mainfeature.R.drawable.ic_clip_24
+          ?: org.sopt.mainfeature.R.drawable.ic_clip_24,
       )
       tvItemTimerClipCount.setTextColor(defaultColor)
       tvItemTimerClipName.setTextColor(defaultColor)

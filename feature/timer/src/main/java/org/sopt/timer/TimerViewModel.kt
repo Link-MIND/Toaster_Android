@@ -10,19 +10,20 @@ import org.sopt.timer.settimer.TimerUiState
 
 class TimerViewModel : ViewModel() {
   private val _uiState = MutableStateFlow<TimerUiState<List<Timer>>>(TimerUiState.Empty)
-  val uiState : StateFlow<TimerUiState<List<Timer>>> get() = _uiState
+  val uiState: StateFlow<TimerUiState<List<Timer>>> get() = _uiState
 
   private val fcmIsAllowed = MutableStateFlow(false)
 
-  private val timerList = MutableStateFlow<List<Timer>>(listOf(
-    Timer(1, "네이버", "일요일", true, 8, 37),
-    Timer(1, "네이버", "일요일", true, 8, 37),
-  ))
-
+  private val timerList = MutableStateFlow<List<Timer>>(
+    listOf(
+      Timer(1, "네이버", "일요일", true, 8, 37),
+      Timer(1, "네이버", "일요일", true, 8, 37),
+    ),
+  )
 
   fun setUiState(isNotiPermissionAllowed: Boolean) {
     viewModelScope.launch {
-      if(fcmIsAllowed.value && isNotiPermissionAllowed) {
+      if (fcmIsAllowed.value && isNotiPermissionAllowed) {
         _uiState.emit(TimerUiState.BothAllowed(timerList.value))
       } else if (fcmIsAllowed.value && !isNotiPermissionAllowed) {
         _uiState.emit(TimerUiState.AppAllowed)
