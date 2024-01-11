@@ -2,10 +2,10 @@ package org.sopt.home
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import designsystem.components.bottomsheet.LinkMindBottomSheet
+import designsystem.components.toast.linkMindSnackBar
 import org.sopt.home.adapter.HomeClipAdapter
 import org.sopt.home.adapter.HomeWeekLinkAdapter
 import org.sopt.home.adapter.HomeWeekRecommendLinkAdapter
@@ -20,25 +20,13 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   private lateinit var homeWeekRecommendLinkAdapter: HomeWeekRecommendLinkAdapter
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    binding.root.setOnClickListener {
-//      val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
-//        "featureTimer://fragmentExample",
-//      )
-//      val (request, navOptions) = DeepLinkUtil.getNavRequestPopUpAndOption(
-//        findNavController().graph.id,
-//        false,
-//        "featureTimer://fragmentExample",
-//      )
-//      findNavController().navigate(request, navOptions)
-      binding.clHomeSearch.onThrottleClick {
-        // Todo
-      }
+//    fetchWebContent()
+    binding.clHomeSearch.onThrottleClick {
     }
     initAdapter()
     val list = listOf(
       ClipDummy("전체클립", 1),
       ClipDummy("TitleCheck", 1),
-      ClipDummy("Title", 2),
       ClipDummy("LeeSak", 3),
       null,
     )
@@ -55,12 +43,46 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     navigateToSetting()
   }
 
+//  <test>
+//  fun fetchWebContent() {
+//    CoroutineScope(Dispatchers.Main).launch {
+//      val result = withContext(Dispatchers.IO) {
+//        val url = ""
+//        try {
+//          val document = Jsoup.connect(url).get()
+//          val content = document.select("title")
+//          content.map { it.text() }
+//        } catch (e: HttpException) {
+//          // 서버에서 HTTP 오류를 반환할 경우 (예: 404, 500 등)
+//          Log.e("test", "HTTP 오류: ${e.response.body}}")
+//          null
+//        } catch (e: IOException) {
+//          // 네트워크 오류, 인증 오류, 리디렉션을 찾을 수 없을 때 등등
+//          Log.e("test1", "입출력 오류: ${e.message}")
+//          null
+//        } catch (e: Exception) {
+//          // 그 외 모든 예외
+//          Log.e("test2", "기타 오류: ${e.message}")
+//          null
+//        }
+//      }
+//      result?.forEach { text ->
+//        Log.d("test", "$text")
+//      }
+//    }
+//  }
+
   private fun navigateToSetting() {
     binding.ivHomeSetting.onThrottleClick {
       navigateToDestination("featureMyPage://fragmentSetting")
     }
   }
 
+//  private fun navigateToSearch() {
+//    binding.clHomeSearch.onThrottleClick {
+//      navigateToDestination("featureMyPage://fragmentSearch")
+//    }
+//  }
   private fun navigateToDestination(destination: String) {
     val uri = Uri.parse(destination)
     findNavController().navigate(uri)
@@ -104,7 +126,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       setTitle(org.sopt.mainfeature.R.string.home_correction_clip)
       setErroMsg(org.sopt.mainfeature.R.string.home_error_clip_info)
       bottomSheetConfirmBtnClick {
-        Log.d("test", "test")
+        dismiss()
+        requireContext().linkMindSnackBar(binding.root, "성공", false)
       }
     }
   }

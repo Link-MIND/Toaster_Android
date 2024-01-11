@@ -26,12 +26,16 @@ class TimerRepeatViewHolder(
       val selectedColor = ContextCompat.getColor(context, org.sopt.mainfeature.R.color.primary)
       val defaultColor = ContextCompat.getColor(context, org.sopt.mainfeature.R.color.neutrals900)
       if (data.isSelected) {
-        tvTimerRepeatDay.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_bold_16)
-        tvTimerRepeatDay.setTextColor(selectedColor)
+        tvTimerRepeatDay.apply {
+          setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_bold_16)
+          setTextColor(selectedColor)
+        }
         ivTimerRepeatCheck.isVisible = true
       } else {
-        tvTimerRepeatDay.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_medium_16)
-        tvTimerRepeatDay.setTextColor(defaultColor)
+        tvTimerRepeatDay.apply {
+          setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_medium_16)
+          tvTimerRepeatDay.setTextColor(defaultColor)
+        }
         ivTimerRepeatCheck.isGone = true
       }
     }
