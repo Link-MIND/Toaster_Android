@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-  namespace = "org.sopt.timer"
+  namespace = "org.sopt.timerdata"
 }
 
 dependencies {
