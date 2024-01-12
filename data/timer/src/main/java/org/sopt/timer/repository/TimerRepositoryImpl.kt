@@ -1,7 +1,7 @@
 package org.sopt.timer.repository
 
-import org.sopt.model.timer.TimerData
 import org.sopt.model.timer.Timer
+import org.sopt.model.timer.TimerData
 import org.sopt.timer.model.remote.request.toDataModel
 import org.sopt.timer.model.remote.response.toCoreModel
 import org.sopt.timer.source.remote.TimerRemoteDataSource

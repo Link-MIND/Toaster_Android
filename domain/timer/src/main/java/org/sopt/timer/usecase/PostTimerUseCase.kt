@@ -6,7 +6,7 @@ import org.sopt.timer.repository.TimerRepository
 import javax.inject.Inject
 
 class PostTimerUseCase @Inject constructor(
-  private val timerRepository: TimerRepository
+  private val timerRepository: TimerRepository,
 ) {
   suspend operator fun invoke(categoryId: Long, time: String, days: List<Repeat>) =
     timerRepository.postTimer(TimerData(categoryId, time, days.getSelectedDays()))
@@ -16,7 +16,7 @@ class PostTimerUseCase @Inject constructor(
 
     this.forEachIndexed { index, repeat ->
       if (repeat.isSelected) {
-        when(index) {
+        when (index) {
           0 -> return (1..7).toList()
           1 -> selectedDays.addAll(1..5)
           2 -> selectedDays.addAll(listOf(6, 7))

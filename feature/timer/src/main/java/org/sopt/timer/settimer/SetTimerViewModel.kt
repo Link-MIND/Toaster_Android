@@ -8,9 +8,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import org.sopt.model.timer.TimerData
-import org.sopt.timer.dummymodel.Clip
 import org.sopt.model.timer.Repeat
+import org.sopt.timer.dummymodel.Clip
 import org.sopt.timer.dummymodel.TimePicker
 import org.sopt.timer.usecase.PostTimerUseCase
 import org.sopt.ui.view.UiState
@@ -18,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SetTimerViewModel @Inject constructor(
-  private val postTimerUseCase: PostTimerUseCase
+  private val postTimerUseCase: PostTimerUseCase,
 ) : ViewModel() {
   private val _clipList = MutableStateFlow<List<Clip>>(emptyList())
   val clipList: StateFlow<List<Clip>> = _clipList.asStateFlow()
@@ -65,12 +64,12 @@ class SetTimerViewModel @Inject constructor(
     currentAmPmIndex.value = 1
   }
 
-  fun postTimer(){
+  fun postTimer() {
     viewModelScope.launch {
       _postTimerState.emit(UiState.Loading)
       val category = clipList.value.first { it.isSelected }
       val time = "${selectedTime.value.hour}:${selectedTime.value.minute}"
-      postTimerUseCase(/*category.*/17,time,repeatList.value).onSuccess {
+      postTimerUseCase(/*category.*/17, time, repeatList.value).onSuccess {
         Log.e("성공", "성공")
         _postTimerState.emit(UiState.Success(it))
       }.onFailure {

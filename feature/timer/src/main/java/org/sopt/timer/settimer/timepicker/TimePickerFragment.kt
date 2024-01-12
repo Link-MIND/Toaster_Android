@@ -239,7 +239,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
 
   private fun initCompleteButtonClickListener() {
     binding.btnTimePickerNext.btnClick {
-      Log.e("클릭","클릭")
+      Log.e("클릭", "클릭")
       findNavController().apply {
         navigate(R.id.action_navigation_time_picker_to_navigation_timer)
       }
@@ -249,11 +249,12 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
 
   private fun collectPostTimerState() {
     viewModel.postTimerState.flowWithLifecycle(viewLifeCycle).onEach { state ->
-      when(state){
+      when (state) {
         is UiState.Success -> {
           findNavController().apply {
             navigate(R.id.action_navigation_time_picker_to_navigation_timer)
-        }}
+          } 
+        }
         is UiState.Failure -> {}
         is UiState.Loading -> {}
         is UiState.Empty -> {}

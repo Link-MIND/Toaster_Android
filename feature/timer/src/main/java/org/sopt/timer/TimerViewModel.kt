@@ -15,12 +15,12 @@ import javax.inject.Inject
 class TimerViewModel @Inject constructor(
   private val getTimerMainUseCase: GetTimerMainUseCase,
 ) : ViewModel() {
-  private val _uiState = MutableStateFlow<TimerUiState<Pair<List<Timer>?,List<Timer>>?>>(TimerUiState.Empty)
-  val uiState: StateFlow<TimerUiState<Pair<List<Timer>?,List<Timer>>?>> get() = _uiState
+  private val _uiState = MutableStateFlow<TimerUiState<Pair<List<Timer>?, List<Timer>>?>>(TimerUiState.Empty)
+  val uiState: StateFlow<TimerUiState<Pair<List<Timer>?, List<Timer>>?>> get() = _uiState
 
   private val fcmIsAllowed = MutableStateFlow(true)
 
-  private val timerList = MutableStateFlow<Pair<List<Timer>,List<Timer>>?>(null)
+  private val timerList = MutableStateFlow<Pair<List<Timer>, List<Timer>>?>(null)
 
   fun setUiState(isNotiPermissionAllowed: Boolean) {
     viewModelScope.launch {
@@ -43,7 +43,7 @@ class TimerViewModel @Inject constructor(
   }
 
   fun getTimerMain() {
-    if(uiState.value !is TimerUiState.BothAllowed) return
+    if (uiState.value !is TimerUiState.BothAllowed) return
     viewModelScope.launch {
       getTimerMainUseCase().onSuccess {
         _uiState.emit(TimerUiState.BothAllowed(it))

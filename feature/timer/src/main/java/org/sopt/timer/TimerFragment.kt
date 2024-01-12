@@ -124,14 +124,14 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
     }
   }
 
-  private fun handleBothAllowedState(state: TimerUiState.BothAllowed<Pair<List<Timer>?,List<Timer>>?>) {
+  private fun handleBothAllowedState(state: TimerUiState.BothAllowed<Pair<List<Timer>?, List<Timer>>?>) {
     with(binding) {
       clTimerPermissionOff.isGone = true
       clTimerNotiPermissionOff.isGone = true
       if (state.data != null) {
         svTimerExist.isVisible = true
         clTimer.isGone = true
-        if(state.data.first == null) {
+        if (state.data.first == null) {
           val color = colorOf(R.color.primary)
           val textColor = colorOf(R.color.white)
           val colorStateList = ColorStateList.valueOf(color)

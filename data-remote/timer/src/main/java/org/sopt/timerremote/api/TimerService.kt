@@ -13,6 +13,6 @@ interface TimerService {
 
   @POST("timer")
   suspend fun postTimer(
-    @Body requestPostTimerDto: RequestPostTimerDto
+    @Body requestPostTimerDto: RequestPostTimerDto,
   ): BaseResponse<Unit>
 }

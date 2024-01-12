@@ -17,5 +17,5 @@ data class RequestPostTimerDto(
 fun TimerData.toDataModel() = RequestPostTimerDto(
   categoryId = this.categoryId,
   remindTime = this.remindTime,
-  remindDates = this.remindDates
+  remindDates = this.remindDates,
 )
