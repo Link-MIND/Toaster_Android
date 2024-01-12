@@ -1,4 +1,4 @@
-package org.sopt.timer.model.remote
+package org.sopt.timer.model.remote.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -23,6 +23,8 @@ data class ResponseGetTimerPageDto(
     val remindTime: String,
     @SerialName("timerId")
     val timerId: Int,
+    @SerialName("updateAt")
+    val updateAt: String,
   )
 
   @Serializable
@@ -37,6 +39,8 @@ data class ResponseGetTimerPageDto(
     val remindTime: String,
     @SerialName("timerId")
     val timerId: Int,
+    @SerialName("comment")
+    val comment: String,
   )
 }
 
@@ -60,7 +64,7 @@ fun ResponseGetTimerPageDto.toCoreModel(): Pair<List<Timer>, List<Timer>> {
       remindTime = waitingTimer.remindTime,
       remindDate = null,
       remindDates = waitingTimer.remindDates,
-      comment = null,
+      comment = waitingTimer.comment,
       isAlarm = waitingTimer.isAlarm,
     )
   }
