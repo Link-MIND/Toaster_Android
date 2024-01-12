@@ -4,13 +4,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import org.sopt.clip.ClipsDTO
+import org.sopt.clip.ItemTouchHelperListener
 import org.sopt.clip.databinding.ItemClipEditClipBinding
 import org.sopt.ui.view.ItemDiffCallback
 
-class ClipEditAdapter : ListAdapter<ClipsDTO, ClipEditViewHolder>(DiffUtil) {
+class ClipEditAdapter(
+  private val itemClick: (Long , String) -> Unit
+) : ListAdapter<ClipsDTO, ClipEditViewHolder>(DiffUtil), ItemTouchHelperListener
+{
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClipEditViewHolder {
     return ClipEditViewHolder(
       ItemClipEditClipBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+      itemClick
     )
   }
 
@@ -23,5 +28,15 @@ class ClipEditAdapter : ListAdapter<ClipsDTO, ClipEditViewHolder>(DiffUtil) {
       onItemsTheSame = { old, new -> old.clipName == new.clipName },
       onContentsTheSame = { old, new -> old == new },
     )
+  }
+
+
+  override fun onItemMove(from: Int, to: Int) {
+    val item: ClipsDTO = currentList[from]
+    val newList = ArrayList<ClipsDTO>()
+    newList.addAll(currentList)
+    newList.removeAt(from)
+    newList.add(to, item)
+    notifyItemMoved(from, to)
   }
 }
