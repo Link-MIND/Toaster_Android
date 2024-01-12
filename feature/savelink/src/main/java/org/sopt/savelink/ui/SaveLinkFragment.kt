@@ -79,6 +79,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
 
   private fun onClickComplete() {
     binding.btnSaveLinkNext.btnClick {
+      //유효성 검사 통과했을떄만 눌리도록
       KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
       val action = SaveLinkFragmentDirections.actionSaveLinkFragmentToSaveLinkSetClipFragment()
       findNavController().navigate(action)

@@ -1,6 +1,7 @@
 package org.sopt.savelink.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import designsystem.components.bottomsheet.LinkMindBottomSheet
@@ -56,6 +57,8 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
         setTitle(R.string.clip_add_clip)
         setErroMsg(R.string.error_clip_length)
         bottomSheetConfirmBtnClick {
+          if (showErrorMsg()) return@bottomSheetConfirmBtnClick
+          dismiss()
         }
       }
     }
