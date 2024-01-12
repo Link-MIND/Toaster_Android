@@ -4,13 +4,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.button.state.LinkMindButtonState
 import org.sopt.timer.databinding.FragmentTimerRepeatBinding
-import org.sopt.timer.dummymodel.Repeat
+import org.sopt.model.timer.Repeat
 import org.sopt.timer.settimer.SetTimerViewModel
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
 
+@AndroidEntryPoint
 class TimerRepeatFragment : BindingFragment<FragmentTimerRepeatBinding>({ FragmentTimerRepeatBinding.inflate(it) }) {
   lateinit var adapter: TimerRepeatAdapter
   private val viewModel: SetTimerViewModel by activityViewModels()
@@ -45,9 +47,9 @@ class TimerRepeatFragment : BindingFragment<FragmentTimerRepeatBinding>({ Fragme
   }
 
   private fun handleTimerRepeatItemClick(
-    repeat: Repeat,
-    list: MutableList<Repeat>,
-    index: Int,
+      repeat: Repeat,
+      list: MutableList<Repeat>,
+      index: Int,
   ) {
     list[index].isSelected = repeat.isSelected
     updateCompleteButtonState(list)
