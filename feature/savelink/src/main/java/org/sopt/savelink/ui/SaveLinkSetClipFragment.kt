@@ -70,9 +70,12 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
         .show()
     }
 
-    binding.btnSaveLinkComplete.btnClick {
-      navigateToHome()
-      requireContext().linkMindSnackBar(binding.root, "링크 저장 완료", false)
+    binding.btnSaveLinkComplete.apply {
+      btnClick {
+        if (state == LinkMindButtonState.DISABLE) return@btnClick
+        navigateToHome()
+        requireContext().linkMindSnackBar(binding.root, "링크 저장 완료", false)
+      }
     }
   }
 

@@ -3,6 +3,7 @@ package org.sopt.ui.nav
 import androidx.core.net.toUri
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.NavOptions
+import org.sopt.ui.R
 
 object DeepLinkUtil {
   fun getNavRequestPopUpAndOption(
