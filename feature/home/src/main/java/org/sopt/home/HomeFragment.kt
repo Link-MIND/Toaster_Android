@@ -1,6 +1,5 @@
 package org.sopt.home
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -11,6 +10,7 @@ import org.sopt.home.adapter.HomeWeekLinkAdapter
 import org.sopt.home.adapter.HomeWeekRecommendLinkAdapter
 import org.sopt.home.databinding.FragmentHomeBinding
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.onThrottleClick
 
 class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.inflate(it) }) {
@@ -21,8 +21,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 //    fetchWebContent()
-    binding.clHomeSearch.onThrottleClick {
-    }
     initAdapter()
     val list = listOf(
       ClipDummy("전체클립", 1),
@@ -41,6 +39,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     homeWeekRecommendLinkAdapter.submitList(list2)
     binding.pbLinkmindHome.setProgressBarMain(54)
     navigateToSetting()
+    navigateToSearch()
   }
 
 //  <test>
@@ -78,14 +77,20 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     }
   }
 
-//  private fun navigateToSearch() {
-//    binding.clHomeSearch.onThrottleClick {
-//      navigateToDestination("featureMyPage://fragmentSearch")
-//    }
-//  }
+  private fun navigateToSearch() {
+    binding.clHomeSearch.onThrottleClick {
+      navigateToDestination("featureMyPage://fragmentSearch")
+    }
+  }
   private fun navigateToDestination(destination: String) {
-    val uri = Uri.parse(destination)
-    findNavController().navigate(uri)
+    val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
+      destination,
+      enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
+      exitAnim = android.R.anim.fade_out,
+      popEnterAnim = android.R.anim.fade_in,
+      popExitAnim = org.sopt.mainfeature.R.anim.to_bottom,
+    )
+    findNavController().navigate(request, navOptions)
   }
 
   private fun initAdapter() {
@@ -126,6 +131,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       setTitle(org.sopt.mainfeature.R.string.home_correction_clip)
       setErroMsg(org.sopt.mainfeature.R.string.home_error_clip_info)
       bottomSheetConfirmBtnClick {
+        if (showErrorMsg()) return@bottomSheetConfirmBtnClick
         dismiss()
         requireContext().linkMindSnackBar(binding.root, "성공", false)
       }

@@ -7,16 +7,18 @@ import android.widget.TextView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
 import designsystem.components.dialog.LinkMindDialog
 import designsystem.components.edittext.state.LinkMindEditTextState
-import org.sopt.savelink.R
 import org.sopt.savelink.databinding.FragmentSaveLinkBinding
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.context.hideKeyboard
 import org.sopt.ui.keyboard.KeyboardUtils
 import org.sopt.ui.keyboard.OnKeyboardVisibilityListener
 import org.sopt.ui.view.onThrottleClick
 
+@AndroidEntryPoint
 class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSaveLinkBinding.inflate(it) }) {
   private val linkMindDialog by lazy {
     LinkMindDialog(requireContext())
@@ -64,11 +66,9 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
           binding.btnSaveLinkNext.setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
         }
         throttleAfterTextChanged {
-          // 링크저장에서 쓸코드가 아닌 클립이나 글자 수 제한에서 쓸 코드
+          btnSaveLinkNext.state = LinkMIndFullWidthButtonState.DISABLE
           if (checkTextLength(15)) {
             showErrorState(tvSaveLinkError)
-            binding.etvSaveCopyLink.editText.setText(binding.etvSaveCopyLink.editText.text.substring(0, 16))
-            binding.etvSaveCopyLink.editText.setSelection(16)
             return@throttleAfterTextChanged
           }
           handleSaveLinkNextClick()
@@ -79,6 +79,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
 
   private fun onClickComplete() {
     binding.btnSaveLinkNext.btnClick {
+      // 유효성 검사 통과했을떄만 눌리도록
       KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
       val action = SaveLinkFragmentDirections.actionSaveLinkFragmentToSaveLinkSetClipFragment()
       findNavController().navigate(action)
@@ -148,6 +149,8 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
   }
 
   private fun navigateUp() {
+    KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
+    requireContext().hideKeyboard(binding.root)
     findNavController().navigateUp()
   }
 }

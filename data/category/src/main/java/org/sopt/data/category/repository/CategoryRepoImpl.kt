@@ -2,7 +2,7 @@ package org.sopt.data.category.repository
 
 import org.sopt.data.category.datasource.RemoteCategoryDataSource
 import org.sopt.domain.category.category.repository.CategoryRepository
-import org.sopt.model.sample.category.CategoryList
+import org.sopt.model.category.CategoryList
 import javax.inject.Inject
 
 class CategoryRepoImpl @Inject constructor(

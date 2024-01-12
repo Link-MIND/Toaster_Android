@@ -1,20 +1,20 @@
-package org.sopt.dataremote.category.di
+package org.sopt.remote.link.di
 
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import org.sopt.dataremote.category.api.CategoryService
 import org.sopt.network.di.AuthLinkMindRetrofit
+import org.sopt.remote.link.api.LinkService
 import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object ServiceModule {
+object LinkServiceModule {
 
   @Singleton
   @Provides
-  fun provideCategoryService(@AuthLinkMindRetrofit retrofit: Retrofit): CategoryService =
-    retrofit.create(CategoryService::class.java)
+  fun provideCategoryService(@AuthLinkMindRetrofit retrofit: Retrofit): LinkService =
+    retrofit.create(LinkService::class.java)
 }
