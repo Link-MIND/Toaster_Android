@@ -24,6 +24,9 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     binding.btnSaveLinkComplete.state = LinkMindButtonState.DISABLE
+    binding.ivSaveLinkClipBack.onThrottleClick {
+      findNavController().navigateUp()
+    }
     var list = listOf(
       Clip("전체 클립", 3, false),
       Clip("전체 클립", 3, false),
