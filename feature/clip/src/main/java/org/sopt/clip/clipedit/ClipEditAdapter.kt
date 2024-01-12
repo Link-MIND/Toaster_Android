@@ -9,13 +9,12 @@ import org.sopt.clip.databinding.ItemClipEditClipBinding
 import org.sopt.ui.view.ItemDiffCallback
 
 class ClipEditAdapter(
-  private val itemClick: (Long , String) -> Unit
-) : ListAdapter<ClipsDTO, ClipEditViewHolder>(DiffUtil), ItemTouchHelperListener
-{
+  private val itemClick: (Long, String) -> Unit,
+) : ListAdapter<ClipsDTO, ClipEditViewHolder>(DiffUtil), ItemTouchHelperListener {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClipEditViewHolder {
     return ClipEditViewHolder(
-      ItemClipEditClipBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-      itemClick
+        ItemClipEditClipBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+        itemClick,
     )
   }
 
@@ -38,5 +37,11 @@ class ClipEditAdapter(
     newList.removeAt(from)
     newList.add(to, item)
     notifyItemMoved(from, to)
+  }
+
+  override fun onItemSwipe(position: Int) {
+    val newList = ArrayList(currentList)
+    newList.removeAt(position)
+    notifyItemRemoved(position)
   }
 }
