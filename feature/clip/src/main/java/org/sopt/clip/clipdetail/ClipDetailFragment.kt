@@ -2,87 +2,111 @@ package org.sopt.clip.clipdetail
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.LinkDTO
 import org.sopt.clip.R
 import org.sopt.clip.databinding.FragmentClipDetailBinding
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.view.onThrottleClick
 
 class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ FragmentClipDetailBinding.inflate(it) }) {
   private val viewModel by viewModels<ClipViewModel>()
+  private lateinit var clipDetailAdapter: ClipLinkAdapter
+  private var toggleSelectedPast: Int? = 1
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    with(binding) {
+      clipDetailAdapter = ClipLinkAdapter()
+      rvCategoryLink.adapter = clipDetailAdapter
+      updateListView()
 
-    val clipDetailAdapter = ClipLinkAdapter()
-    binding.rvCategoryLink.adapter = clipDetailAdapter
+      initToggleClickListener()
+      ivClipDetailBack.onThrottleClick {
+        findNavController().navigate(R.id.action_navigation_clip_detail_to_navigation_clip)
+      }
+    }
+  }
+
+  private fun updateListView() {
     var state: Boolean = viewModel.mockLinkData == null
     initEmptyMsgVisible(state)
     if (!state) {
       clipDetailAdapter.submitList(viewModel.mockLinkData)
     }
-
-    initToggleClickListener()
   }
 
   private fun initToggleClickListener(): List<LinkDTO> {
     with(binding) {
       btnClipAll.setOnClickListener {
-        initButtonTransparent()
-        initTextGrey()
-        dvClipPicker1.isVisible = false
-        dvClipPicker2.isVisible = true
-        btnClipAll.setBackgroundResource(R.drawable.shape_white_fill_12_rect)
-        btnClipAll.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_bold_14)
+        updateTogglesNDividerVisible(toggleSelectedPast, 1)
       }
 
       btnClipRead.setOnClickListener {
-        initButtonTransparent()
-        initTextGrey()
-        dvClipPicker1.isVisible = false
-        dvClipPicker2.isVisible = false
-        btnClipRead.setBackgroundResource(R.drawable.shape_white_fill_12_rect)
-        btnClipRead.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_bold_14)
+        updateTogglesVisible(toggleSelectedPast, 2)
       }
 
       btnClipUnread.setOnClickListener {
-        initButtonTransparent()
-        initTextGrey()
-        dvClipPicker1.isVisible = true
-        dvClipPicker2.isVisible = false
-        btnClipUnread.setBackgroundResource(R.drawable.shape_white_fill_12_rect)
-        btnClipUnread.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_bold_14)
+        updateTogglesVisible(toggleSelectedPast, 3)
       }
     }
     return viewModel.mockLinkData
   }
 
-  fun initButtonTransparent() {
-    with(binding) {
-      btnClipAll.setBackgroundResource(org.sopt.mainfeature.R.color.transparent)
-      btnClipRead.setBackgroundResource(org.sopt.mainfeature.R.color.transparent)
-      btnClipUnread.setBackgroundResource(org.sopt.mainfeature.R.color.transparent)
+  private fun updateTogglesNDividerVisible(selectedPast: Int?, selectedNow: Int?) {
+    updateTogglesVisible(selectedPast, selectedNow)
+    initDividerVisible(selectedNow)
+  }
+
+  private fun updateTogglesVisible(selectedPast: Int?, selectedNow: Int?) {
+    if (selectedNow != selectedPast) {
+      initToggleVisible(selectedPast, false)
+      initToggleVisible(selectedNow, true)
+      initDividerVisible(selectedNow)
+      toggleSelectedPast = selectedNow
+      updateListView()
     }
   }
 
-  fun initEmptyMsgVisible(state: Boolean) {
+  private fun initToggleVisible(toggle: Int?, state: Boolean) {
+    with(binding) {
+      when (toggle) {
+        1 -> tvClipAllSelected.isVisible = state
+        2 -> tvClipReadSelected.isVisible = state
+        3 -> tvClipUnreadSelected.isVisible = state
+        else -> {}
+      }
+    }
+  }
+
+  private fun initDividerVisible(selectedNow: Int?) {
+    with(binding) {
+      when (selectedNow) {
+        1 -> {
+          dvClipPicker1.isVisible = false
+          dvClipPicker2.isVisible = true
+        }
+
+        2 -> {
+          dvClipPicker1.isVisible = false
+          dvClipPicker2.isVisible = false
+        }
+
+        3 -> {
+          dvClipPicker1.isVisible = true
+          dvClipPicker2.isVisible = false
+        }
+      }
+    }
+  }
+
+  private fun initEmptyMsgVisible(state: Boolean) {
     with(binding) {
       ivClipCategoryEmpty.isVisible = state
       tvClipDetailEmpty.isVisible = state
-    }
-  }
-
-  fun initTextGrey() {
-    with(binding) {
-      btnClipAll.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_semibold_14)
-      btnClipRead.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_semibold_14)
-      btnClipUnread.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_semibold_14)
-      btnClipAll.setTextColor(ContextCompat.getColor(root.context, org.sopt.mainfeature.R.color.neutrals400))
-      btnClipRead.setTextColor(ContextCompat.getColor(root.context, org.sopt.mainfeature.R.color.neutrals400))
-      btnClipUnread.setTextColor(ContextCompat.getColor(root.context, org.sopt.mainfeature.R.color.neutrals400))
     }
   }
 }
