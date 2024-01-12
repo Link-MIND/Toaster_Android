@@ -6,17 +6,17 @@ import org.sopt.clip.databinding.ItemClipEditClipBinding
 
 class ClipEditViewHolder(
   private val binding: ItemClipEditClipBinding,
-  private val onClickItemClip: (Long, String) -> Unit,
+  private val onClickItemClip: (Long, String, Long) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(clipData: ClipsDTO) {
     if (clipData == null) return
     with(binding) {
       tvClipEditTitle.text = clipData.clipName
       ivClipEditTitleEdit.setOnClickListener {
-        onClickItemClip(clipData.clipId, "edit")
+        onClickItemClip(clipData.clipId, "edit", itemId)
       }
       ivClipEditDelete.setOnClickListener {
-        onClickItemClip(clipData.clipId, "delete")
+        onClickItemClip(clipData.clipId, "delete", itemId)
       }
     }
   }

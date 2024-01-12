@@ -9,7 +9,7 @@ import org.sopt.clip.databinding.ItemClipEditClipBinding
 import org.sopt.ui.view.ItemDiffCallback
 
 class ClipEditAdapter(
-  private val itemClick: (Long, String) -> Unit,
+  private val itemClick: (Long, String, Long) -> Unit,
 ) : ListAdapter<ClipsDTO, ClipEditViewHolder>(DiffUtil), ItemTouchHelperListener {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClipEditViewHolder {
     return ClipEditViewHolder(
