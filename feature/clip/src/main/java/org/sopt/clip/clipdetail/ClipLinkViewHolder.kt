@@ -12,7 +12,7 @@ class ClipLinkViewHolder(
       with(binding) {
         tvLinkTitle.text = linkData.linkTitle
         tvLinkUrl.text = linkData.url
-        tvLinkClipTitle.text=linkData.upperClipName
+        tvLinkClipTitle.text = linkData.upperClipName
       }
     }
   }

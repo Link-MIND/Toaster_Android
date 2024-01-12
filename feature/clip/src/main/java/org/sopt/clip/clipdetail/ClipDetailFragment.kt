@@ -34,9 +34,9 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
     }
   }
 
-
   private fun updateListView() {
-    viewModel.mockDataListState.observe( viewLifecycleOwner
+    viewModel.mockDataListState.observe(
+      viewLifecycleOwner,
     ) {
       initEmptyMsgVisible(it)
       if (!it) {
@@ -66,7 +66,6 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
     updateTogglesVisible(selectedNow)
     initDividerVisible(selectedNow)
   }
-
 
   private fun updateTogglesVisible(selectedNow: SelectedToggle) {
     if (selectedNow != viewModel.toggleSelectedPast) {

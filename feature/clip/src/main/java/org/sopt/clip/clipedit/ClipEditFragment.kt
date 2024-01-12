@@ -28,18 +28,18 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
 
   private fun updateEditListView() {
     viewModel.mockDataListState.observe(
-      viewLifecycleOwner) {
-        if (!it) {
-          clipEditAdapter.submitList(viewModel.mockClipData)
-        }
+      viewLifecycleOwner,
+    ) {
+      if (!it) {
+        clipEditAdapter.submitList(viewModel.mockClipData)
       }
+    }
 
     var state: Boolean = viewModel.mockClipData == null
     if (!state) {
       clipEditAdapter.submitList(viewModel.mockClipData)
     }
   }
-
 
   private fun onClickBackButton() {
     binding.ivClipEditBack.onThrottleClick {
