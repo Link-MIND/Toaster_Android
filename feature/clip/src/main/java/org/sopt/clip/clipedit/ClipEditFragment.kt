@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.databinding.FragmentClipEditBinding
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
 
+@AndroidEntryPoint
 class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClipEditBinding.inflate(it) }) {
   private val viewModel by viewModels<ClipViewModel>()
   private lateinit var clipEditAdapter: ClipEditAdapter

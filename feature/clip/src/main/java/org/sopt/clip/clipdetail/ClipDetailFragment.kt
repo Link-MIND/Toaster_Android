@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.LinkDTO
 import org.sopt.clip.SelectedToggle
@@ -12,6 +13,7 @@ import org.sopt.clip.databinding.FragmentClipDetailBinding
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
 
+@AndroidEntryPoint
 class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ FragmentClipDetailBinding.inflate(it) }) {
   private val viewModel by viewModels<ClipViewModel>()
   private lateinit var clipDetailAdapter: ClipLinkAdapter
