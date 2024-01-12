@@ -19,8 +19,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.sopt.mainfeature.R
+import org.sopt.model.timer.Timer
 import org.sopt.timer.databinding.FragmentTimerBinding
-import org.sopt.timer.dummymodel.Timer
 import org.sopt.timer.modifytimer.ModifyTimerBottomSheetFragment
 import org.sopt.timer.settimer.SetTimerViewModel
 import org.sopt.timer.settimer.TimerUiState
@@ -55,25 +55,6 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
     collectUiState()
     completeTimerAdapter = CompleteTimerAdapter({ snackBar(binding.root, { "안녕" }) })
     waitTimerAdapter = WaitTimerAdapter({}, { ModifyTimerBottomSheetFragment.newInstance(it.id).show(parentFragmentManager, this.tag) })
-
-    val list = listOf(
-      Timer(1, "네이버", "일요일", true, 8, 37),
-      Timer(1, "네이버", "일요일", true, 8, 37),
-    )
-    // val list = emptyList<Timer>()
-    completeTimerAdapter.submitList(list)
-    waitTimerAdapter.submitList(list)
-    binding.tvTimerCompleteCount.text = list.count().toString()
-    if (list.count() != 0) {
-      val color = colorOf(R.color.primary)
-      val textColor = colorOf(R.color.white)
-      val colorStateList = ColorStateList.valueOf(color)
-      binding.flTimerCompleteCount.backgroundTintList = colorStateList
-      binding.tvTimerCompleteCount.setTextColor(textColor)
-      binding.tvTimerNotComplete.isGone = true
-    } else {
-      binding.tvTimerNotComplete.isVisible = true
-    }
     binding.rvTimerComplete.adapter = completeTimerAdapter
     binding.rvTimerWait.adapter = waitTimerAdapter
 
@@ -86,6 +67,7 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
     viewModel.uiState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is TimerUiState.BothAllowed -> {
+          viewModel.getTimerMain()
           handleBothAllowedState(state)
         }
 
@@ -142,14 +124,26 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
     }
   }
 
-  private fun handleBothAllowedState(state: TimerUiState.BothAllowed<List<Timer>>) {
-    Log.e("both", "both")
+  private fun handleBothAllowedState(state: TimerUiState.BothAllowed<Pair<List<Timer>?,List<Timer>>?>) {
     with(binding) {
       clTimerPermissionOff.isGone = true
       clTimerNotiPermissionOff.isGone = true
-      if (state.data.isNotEmpty()) {
+      if (state.data != null) {
         svTimerExist.isVisible = true
         clTimer.isGone = true
+        if(state.data.first == null) {
+          val color = colorOf(R.color.primary)
+          val textColor = colorOf(R.color.white)
+          val colorStateList = ColorStateList.valueOf(color)
+          flTimerCompleteCount.backgroundTintList = colorStateList
+          tvTimerCompleteCount.setTextColor(textColor)
+          tvTimerNotComplete.isGone = true
+        } else {
+          completeTimerAdapter.submitList(state.data.first)
+          binding.tvTimerCompleteCount.text = state.data.first?.count().toString()
+          tvTimerNotComplete.isVisible = true
+        }
+        waitTimerAdapter.submitList(state.data.second)
         return
       }
       btnTimerSetEnable.isVisible = true
