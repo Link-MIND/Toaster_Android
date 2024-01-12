@@ -1,7 +1,6 @@
 package org.sopt.savelink.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import designsystem.components.bottomsheet.LinkMindBottomSheet
@@ -91,8 +90,8 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
       false,
       "featureHome://homeFragment",
       enterAnim = R.anim.from_bottom,
-      exitAnim =android.R.anim.fade_out,
-      popEnterAnim =android.R.anim.fade_in,
+      exitAnim = android.R.anim.fade_out,
+      popEnterAnim = android.R.anim.fade_in,
       popExitAnim = R.anim.to_bottom,
     )
     findNavController().navigate(request, navOptions)

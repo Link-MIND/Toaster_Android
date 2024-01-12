@@ -19,7 +19,9 @@ object DeepLinkUtil {
       inclusive,
       uri,
       enterAnim,
-      exitAnim, popEnterAnim, popExitAnim,
+      exitAnim,
+      popEnterAnim,
+      popExitAnim,
     )
   }
 
@@ -33,7 +35,9 @@ object DeepLinkUtil {
     return setNavRequestNotPopUpAndAnimOption(
       uri,
       enterAnim,
-      exitAnim, popEnterAnim, popExitAnim,
+      exitAnim,
+      popEnterAnim,
+      popExitAnim,
     )
   }
 
@@ -61,7 +65,6 @@ object DeepLinkUtil {
       return (request to navOptions)
     }
   }
-
 
   private fun setNavRequestPopUpAndAnimOption(
     popUpToId: Int = -1,

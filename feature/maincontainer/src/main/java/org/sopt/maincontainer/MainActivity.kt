@@ -1,12 +1,11 @@
 package org.sopt.maincontainer
 
+import android.content.ClipData
 import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -15,6 +14,7 @@ import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.dialog.LinkMindDialog
 import org.sopt.maincontainer.databinding.ActivityMainBinding
+import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
   private val linkMindDialog by lazy {
     LinkMindDialog(this)
   }
-  private var hasShownDialog = false
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     mBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -46,14 +46,14 @@ class MainActivity : AppCompatActivity() {
 
     if ((clipboard.primaryClipDescription?.hasMimeType(MIMETYPE_TEXT_PLAIN)) == false) return
 
-    val item = clipboard.primaryClip?.getItemAt(0)!!.coerceToText(applicationContext)
-    if (item.isNullOrEmpty() || hasShownDialog) return
+    var item = clipboard.primaryClip?.getItemAt(0)!!.coerceToText(applicationContext)
+    if (item.isNullOrEmpty()) return
 
     val pasteData = item.toString()
     if (pasteData.contains("http")) {
-      Log.d("test", "$pasteData")
       showRevokeCommonDialog()
-      hasShownDialog = true
+      clipboard.setPrimaryClip(ClipData.newPlainText("", ""))
+      return
     }
   }
 
@@ -95,9 +95,19 @@ class MainActivity : AppCompatActivity() {
 
   private fun onClickFab() {
     binding.fabMain.onThrottleClick {
-      val uri = Uri.parse("featureSaveLink://saveLinkFragment")
-      navController.navigate(uri)
+      navigateToDestination("featureSaveLink://saveLinkFragment")
     }
+  }
+
+  private fun navigateToDestination(url: String) {
+    val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
+      url,
+      enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
+      exitAnim = android.R.anim.fade_out,
+      popEnterAnim = android.R.anim.fade_in,
+      popExitAnim = org.sopt.mainfeature.R.anim.to_bottom,
+    )
+    navController.navigate(request, navOptions)
   }
 
   private val navigationMap = mapOf(
@@ -137,8 +147,7 @@ class MainActivity : AppCompatActivity() {
         linkMindDialog.dismiss()
       }
       .setPositiveButton(org.sopt.mainfeature.R.string.positive_ok_msg) {
-        val uri = Uri.parse("featureSaveLink://saveLinkFragment")
-        navController.navigate(uri)
+        navigateToDestination("featureSaveLink://saveLinkFragment")
         linkMindDialog.dismiss()
       }
       .show()

@@ -1,8 +1,6 @@
 package org.sopt.home
 
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import designsystem.components.bottomsheet.LinkMindBottomSheet
@@ -85,14 +83,14 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     }
   }
   private fun navigateToDestination(destination: String) {
-  val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
-    destination,
-    enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
-    exitAnim =android.R.anim.fade_out,
-    popEnterAnim =android.R.anim.fade_in,
-    popExitAnim = org.sopt.mainfeature.R.anim.to_bottom,
-  )
-  findNavController().navigate(request, navOptions)
+    val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
+      destination,
+      enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
+      exitAnim = android.R.anim.fade_out,
+      popEnterAnim = android.R.anim.fade_in,
+      popExitAnim = org.sopt.mainfeature.R.anim.to_bottom,
+    )
+    findNavController().navigate(request, navOptions)
   }
 
   private fun initAdapter() {
