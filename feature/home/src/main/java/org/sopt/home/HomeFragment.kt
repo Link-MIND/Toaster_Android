@@ -41,7 +41,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     homeWeekRecommendLinkAdapter.submitList(list2)
     binding.pbLinkmindHome.setProgressBarMain(54)
     navigateToSetting()
-//    navigateToSearch()
+    navigateToSearch()
   }
 
 //  <test>
