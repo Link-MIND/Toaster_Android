@@ -23,7 +23,7 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val clipDetailAdapter = ClipLinkAdapter { itemId ->
+    clipDetailAdapter = ClipLinkAdapter { itemId ->
       Toast.makeText(context, "itemId: $itemId", Toast.LENGTH_SHORT).show()
     }
     binding.rvCategoryLink.adapter = clipDetailAdapter
@@ -111,7 +111,6 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
         }
       }
     }
-    return viewModel.mockLinkData
   }
 
   private fun initEmptyMsgVisible(state: Boolean) {

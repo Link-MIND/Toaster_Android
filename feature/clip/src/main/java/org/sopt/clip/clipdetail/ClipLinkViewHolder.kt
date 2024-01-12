@@ -15,7 +15,9 @@ class ClipLinkViewHolder(
       with(binding) {
         tvLinkTitle.text = linkData.linkTitle
         tvLinkUrl.text = linkData.url
+/*
         initLinkClipTitleVisible(linkData)
+*/
         root.setOnClickListener {
           onClickItemLink(linkData.linkId)
         }
