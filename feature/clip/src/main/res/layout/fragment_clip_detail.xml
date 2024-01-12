@@ -10,14 +10,14 @@
     android:id="@+id/iv_clip_detail_back"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:contentDescription="@string/clip_detail_back_description"
     android:paddingStart="20dp"
     android:paddingTop="17dp"
     android:paddingEnd="8dp"
     android:paddingBottom="8dp"
     android:src="@drawable/ic_arrow_left_24"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:contentDescription="@string/clip_detail_back_description" />
+    app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
     android:id="@+id/tv_clip_detail_title"
@@ -45,17 +45,31 @@
     <androidx.appcompat.widget.AppCompatButton
       android:id="@+id/btn_clip_all"
       style="@style/Widget.AppCompat.Button.Borderless"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:minHeight="0dp"
-      android:background="@drawable/shape_white_fill_8_rect"
       android:paddingHorizontal="42dp"
       android:paddingVertical="8dp"
       android:text="@string/text_all"
-      android:textAppearance="@style/Typography.suit.bold_14"
-      android:textColor="@color/neutrals850"
+      android:textAppearance="@style/Typography.suit.semibold_14"
+      android:textColor="@color/neutrals400"
       app:layout_constraintStart_toStartOf="@id/cl_clip_picker"
       app:layout_constraintTop_toTopOf="@id/cl_clip_picker" />
+
+    <TextView
+      android:id="@+id/tv_clip_all_selected"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:background="@drawable/shape_white_fill_8_rect"
+      android:gravity="center"
+      android:text="@string/text_all"
+      android:textAppearance="@style/Typography.suit.semibold_14"
+      android:textColor="@color/neutrals850"
+      android:visibility="visible"
+      app:layout_constraintBottom_toBottomOf="@id/btn_clip_all"
+      app:layout_constraintEnd_toEndOf="@id/btn_clip_all"
+      app:layout_constraintStart_toStartOf="@id/btn_clip_all"
+      app:layout_constraintTop_toTopOf="@id/btn_clip_all" />
 
     <com.google.android.material.divider.MaterialDivider
       android:id="@+id/dv_clip_picker1"
@@ -63,6 +77,7 @@
       android:layout_height="0dp"
       android:layout_marginTop="10dp"
       android:layout_marginBottom="9dp"
+      android:visibility="invisible"
       app:layout_constraintBottom_toBottomOf="@id/cl_clip_picker"
       app:layout_constraintStart_toEndOf="@id/btn_clip_all"
       app:layout_constraintTop_toTopOf="@id/cl_clip_picker" />
@@ -71,9 +86,8 @@
       android:id="@+id/btn_clip_read"
       style="@style/Widget.AppCompat.Button.Borderless"
       android:layout_width="0dp"
-      android:minHeight="0dp"
       android:layout_height="wrap_content"
-      android:background="@color/neutrals050"
+      android:minHeight="0dp"
       android:paddingHorizontal="42dp"
       android:paddingVertical="8dp"
       android:text="@string/clip_detail_read"
@@ -81,6 +95,21 @@
       android:textColor="@color/neutrals400"
       app:layout_constraintStart_toEndOf="@id/dv_clip_picker1"
       app:layout_constraintTop_toTopOf="@id/cl_clip_picker" />
+
+    <TextView
+      android:id="@+id/tv_clip_read_selected"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:background="@drawable/shape_white_fill_8_rect"
+      android:gravity="center"
+      android:text="@string/clip_detail_read"
+      android:textAppearance="@style/Typography.suit.semibold_14"
+      android:textColor="@color/neutrals850"
+      android:visibility="invisible"
+      app:layout_constraintBottom_toBottomOf="@id/btn_clip_read"
+      app:layout_constraintEnd_toEndOf="@id/btn_clip_read"
+      app:layout_constraintStart_toStartOf="@id/btn_clip_read"
+      app:layout_constraintTop_toTopOf="@id/btn_clip_read" />
 
     <com.google.android.material.divider.MaterialDivider
       android:id="@+id/dv_clip_picker2"
@@ -94,11 +123,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
       android:id="@+id/btn_clip_unread"
-      android:minHeight="0dp"
       style="@style/Widget.AppCompat.Button.Borderless"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:background="@color/neutrals050"
+      android:minHeight="0dp"
       android:paddingVertical="8dp"
       android:text="@string/clip_detail_unread"
       android:textAppearance="@style/Typography.suit.semibold_14"
@@ -107,6 +135,20 @@
       app:layout_constraintStart_toEndOf="@id/dv_clip_picker2"
       app:layout_constraintTop_toTopOf="@id/cl_clip_picker" />
 
+    <TextView
+      android:id="@+id/tv_clip_unread_selected"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:background="@drawable/shape_white_fill_8_rect"
+      android:gravity="center"
+      android:text="@string/clip_detail_unread"
+      android:textAppearance="@style/Typography.suit.semibold_14"
+      android:textColor="@color/neutrals850"
+      android:visibility="invisible"
+      app:layout_constraintBottom_toBottomOf="@id/btn_clip_unread"
+      app:layout_constraintEnd_toEndOf="@id/btn_clip_unread"
+      app:layout_constraintStart_toStartOf="@id/btn_clip_unread"
+      app:layout_constraintTop_toTopOf="@id/btn_clip_unread" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -141,10 +183,10 @@
     android:layout_marginTop="14dp"
     android:background="@color/background"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/tv_clip_category_all"
-    app:layout_constraintBottom_toBottomOf="parent"
     tools:itemCount="2"
     tools:listitem="@layout/item_clip_detail_link" />
 
@@ -152,18 +194,18 @@
     android:id="@+id/iv_clip_category_empty"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:contentDescription="@string/clip_detail_empty_description"
     android:src="@drawable/img_link_empty"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:contentDescription="@string/clip_detail_empty_description" />
+    app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
+    android:id="@+id/tv_clip_detail_empty"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="4dp"
-    android:id="@+id/tv_clip_detail_empty"
     android:gravity="center"
     android:text="@string/clip_detail_empty"
     android:textAppearance="@style/Typography.suit.regular_16_128"

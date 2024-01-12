@@ -27,6 +27,7 @@ class LinkMindDialog constructor(private val context: Context) {
 
   private var dialog: AlertDialog? = null
   fun show() {
+    dismiss()
     val dialogMarginWidth = caculateMarignDialog(37.0f)
     dialog = builder.create()
     dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
@@ -72,26 +73,29 @@ class LinkMindDialog constructor(private val context: Context) {
 
   fun setPositiveButton(
     @StringRes text: Int,
-    onClickListener: (view: View) -> (Unit),
+    onClickListener: () -> (Unit),
   ): LinkMindDialog {
     binding.btnPositive.apply {
       state = LinkMindButtonState.ENABLE
       setText(context.getText(text).toString())
-      setOnClickListener(onClickListener)
-      dismiss()
+      btnClick {
+        onClickListener()
+      }
     }
     return this
   }
 
   fun setNegativeButton(
     @StringRes text: Int,
-    onClickListener: (view: View) -> (Unit) = {},
+    onClickListener: () -> (Unit),
   ): LinkMindDialog {
     binding.btnNegative.apply {
       state = LinkMindButtonState.DISABLE
       visibility = View.VISIBLE
       setText(context.getText(text).toString())
-      setOnClickListener(onClickListener)
+      btnClick {
+        onClickListener()
+      }
     }
     return this
   }

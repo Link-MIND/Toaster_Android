@@ -36,14 +36,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-      <designsystem.components.edittext.LinkMindEditTextSearch
-        android:id="@+id/etv_home_search"
+      <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_home_search"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="20dp"
-        app:editTextSearchHint="검색어를 입력해주세요"
-        app:layout_constraintTop_toBottomOf="@+id/iv_home_setting" />
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/shape_neutrals_fill_12_rect"
+        app:layout_constraintTop_toBottomOf="@+id/iv_home_setting"
+        android:layout_height="wrap_content">
 
+        <ImageView
+          android:id="@+id/iv_home_search"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/ic_search_20"
+          android:paddingVertical="11dp"
+          android:paddingStart="12dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          android:paddingEnd="8dp"/>
+
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="검색어를 입력해주세요"
+          android:textAppearance="@style/Typography.suit.regular_16"
+          android:textColor="@color/neutrals400"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toEndOf="@id/iv_home_search"
+          app:layout_constraintTop_toTopOf="parent" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
 
       <TextView
         android:id="@+id/tv_home_user_name"
@@ -55,7 +77,7 @@
         android:textAppearance="@style/Typography.suit.bold_20"
         android:textColor="@color/neutrals900"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etv_home_search" />
+        app:layout_constraintTop_toBottomOf="@+id/cl_home_search" />
 
       <TextView
         android:layout_width="wrap_content"
@@ -172,6 +194,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:nestedScrollingEnabled="false"
         android:paddingHorizontal="20dp"
         android:paddingTop="15dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
@@ -207,6 +230,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
+        android:nestedScrollingEnabled="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_home_week_link_title"
@@ -238,7 +262,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:nestedScrollingEnabled="false"
         android:paddingHorizontal="20dp"
         app:spanCount="3"
         android:paddingBottom="80dp"

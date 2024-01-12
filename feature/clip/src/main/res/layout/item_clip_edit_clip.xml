@@ -10,20 +10,21 @@
     android:id="@+id/iv_clip_edit_delete"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="13dp"
     android:layout_marginEnd="8dp"
-    android:layout_marginBottom="9dp"
     android:contentDescription="@string/edit_clip_minus_description"
+    android:paddingStart="10dp"
+    android:paddingTop="13dp"
+    android:paddingBottom="9dp"
     android:src="@drawable/ic_minus_28"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 
   <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/ll_clip_edit_clip"
+    android:id="@+id/cl_clip_edit_clip"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
-    android:background="@color/white"
+    android:background="@drawable/shape_white_fill_12_rect"
     android:orientation="horizontal"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toEndOf="@id/iv_clip_edit_delete"
@@ -31,6 +32,7 @@
 
 
     <TextView
+      android:id="@+id/tv_clip_edit_title"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginVertical="15dp"
@@ -39,8 +41,8 @@
       android:text="clip"
       android:textAppearance="@style/Typography.suit.semibold_16"
       android:textColor="@color/neutrals850"
-      app:layout_constraintStart_toStartOf="@id/ll_clip_edit_clip"
-      app:layout_constraintTop_toTopOf="@id/ll_clip_edit_clip" />
+      app:layout_constraintStart_toStartOf="@id/cl_clip_edit_clip"
+      app:layout_constraintTop_toTopOf="@id/cl_clip_edit_clip" />
 
     <ImageView
       android:layout_width="wrap_content"
@@ -48,11 +50,11 @@
       android:layout_marginTop="3dp"
       android:layout_marginEnd="2dp"
       android:layout_marginBottom="-1dp"
+      android:contentDescription="@string/edit_clip_edit_description"
       android:padding="12dp"
       android:src="@drawable/ic_edit_24"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="@id/ll_clip_edit_clip"
-      android:contentDescription="@string/edit_clip_edit_description" />
+      app:layout_constraintTop_toTopOf="@id/cl_clip_edit_clip" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

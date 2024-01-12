@@ -6,11 +6,12 @@ import androidx.navigation.fragment.findNavController
 import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.button.state.LinkMindButtonState
 import designsystem.components.dialog.LinkMindDialog
+import designsystem.components.toast.linkMindSnackBar
 import org.sopt.mainfeature.R
 import org.sopt.savelink.databinding.FragmentSaveLinkSetClipBinding
 import org.sopt.savelink.ui.adapter.ClipSelectAdapter
-import org.sopt.ui.DeepLinkUtil
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.onThrottleClick
 
 class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>({ FragmentSaveLinkSetClipBinding.inflate(it) }) {
@@ -41,7 +42,6 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
           binding.btnSaveLinkComplete.state = LinkMindButtonState.DISABLE
         }
       },
-      context = requireContext(),
     )
     adapter.submitList(list)
     binding.rvItemTimerClipSelect.adapter = adapter
@@ -50,30 +50,38 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
       val linkMindBottomSheet = LinkMindBottomSheet(requireContext())
       linkMindBottomSheet.show()
       linkMindBottomSheet.apply {
-        setTitle(R.string.text_clip)
-        setErroMsg(R.string.text_clip)
+        setTitle(R.string.clip_add_clip)
+        setErroMsg(R.string.error_clip_length)
         bottomSheetConfirmBtnClick {
         }
       }
     }
+
     binding.ivSaveLinkClose.onThrottleClick {
-      linkMindDialog.setTitle(R.string.text_home)
-        .setSubtitle(R.string.text_clip)
-        .setNegativeButton(R.string.text_home) {
+      linkMindDialog.setTitle(R.string.save_clip_dialog_title)
+        .setSubtitle(R.string.save_clip_dialog_sub_title)
+        .setNegativeButton(R.string.negative_close_msg) {
           linkMindDialog.dismiss()
+          navigateToHome()
         }
-        .setPositiveButton(R.string.text_home) {
+        .setPositiveButton(R.string.positive_ok_msg) {
           linkMindDialog.dismiss()
         }
         .show()
     }
+
     binding.btnSaveLinkComplete.btnClick {
-      val (request, navOptions) = DeepLinkUtil.getNavRequestPopUpAndOption(
-        findNavController().graph.id,
-        false,
-        "featureHome://homeFragment",
-      )
-      findNavController().navigate(request, navOptions)
+      navigateToHome()
+      requireContext().linkMindSnackBar(binding.root, "링크 저장 완료", false)
     }
+  }
+
+  private fun navigateToHome() {
+    val (request, navOptions) = DeepLinkUtil.getNavRequestPopUpAndOption(
+      findNavController().graph.id,
+      false,
+      "featureHome://homeFragment",
+    )
+    findNavController().navigate(request, navOptions)
   }
 }
