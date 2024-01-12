@@ -10,14 +10,11 @@ class ClipViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(clipData: ClipsDTO?) {
     with(binding) {
-      if (clipData == null) {
-        return
-      } else {
-        tvClipName.text = clipData.clipName
-        tvClipAmount.text = clipData.clipAmount.toString() + "개"
-        root.setOnClickListener {
-          onClickItemClip(clipData.clipId)
-        }
+      if (clipData == null) return
+      tvClipName.text = clipData.clipName
+      tvClipAmount.text = clipData.clipAmount.toString() + "개"
+      root.setOnClickListener {
+        onClickItemClip(clipData.clipId)
       }
     }
   }
