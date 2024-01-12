@@ -1,12 +1,14 @@
 package org.sopt.timer.settimer.timepicker
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.button.state.LinkMindButtonState
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -18,8 +20,10 @@ import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.fragment.colorOf
 import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
+import org.sopt.ui.view.UiState
 import org.sopt.ui.view.onThrottleClick
 
+@AndroidEntryPoint
 class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ FragmentTimePickerBinding.inflate(it) }) {
   private lateinit var timePeriodAdapter: TimePeriodAdapter
   private lateinit var hourAdapter: NumberAdapter
@@ -39,6 +43,8 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
     initBackButtonClickListener()
     initCloseButtonClickListener()
     collectSelectedTime()
+    initCompleteButtonClickListener()
+    collectPostTimerState()
   }
 
   private fun initTimePickerState() {
@@ -54,6 +60,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
       }
     }
     binding.btnTimePickerNext.state = LinkMindButtonState.DISABLE
+    binding.btnTimePickerNext.isClickable = false
     binding.tvTimePickerCategory.text = "카테고리이름을"
   }
 
@@ -78,6 +85,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
         text = "반복"
       }
       btnTimePickerNext.state = LinkMindButtonState.DISABLE
+      btnTimePickerNext.isClickable = false
     }
   }
 
@@ -90,6 +98,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
         text = modified
       }
       btnTimePickerNext.state = LinkMindButtonState.ENABLE
+      btnTimePickerNext.isClickable = true
     }
   }
 
@@ -210,7 +219,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
 
   private fun initCloseButtonClickListener() {
     binding.ivTimePickerClose.onThrottleClick {
-      findNavController().navigateUp()
+      findNavController().navigate(R.id.action_navigation_time_picker_to_navigation_timer)
     }
   }
 
@@ -226,6 +235,30 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
         findNavController().navigate(R.id.action_navigation_time_picker_to_navigation_timer_repeat)
       }
     }
+  }
+
+  private fun initCompleteButtonClickListener() {
+    binding.btnTimePickerNext.btnClick {
+      Log.e("클릭","클릭")
+      findNavController().apply {
+        navigate(R.id.action_navigation_time_picker_to_navigation_timer)
+      }
+      viewModel.postTimer()
+    }
+  }
+
+  private fun collectPostTimerState() {
+    viewModel.postTimerState.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when(state){
+        is UiState.Success -> {
+          findNavController().apply {
+            navigate(R.id.action_navigation_time_picker_to_navigation_timer)
+        }}
+        is UiState.Failure -> {}
+        is UiState.Loading -> {}
+        is UiState.Empty -> {}
+      }
+    }.launchIn(viewLifeCycleScope)
   }
 
   private fun collectSelectedTime() {
