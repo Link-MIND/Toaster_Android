@@ -11,6 +11,13 @@ import org.sopt.mypage.search.viewholder.LinkResultViewHolder
 class LinkResultAdapter :
   ListAdapter<LinkResultDummy, LinkResultViewHolder>(DiffUtilCallback) {
 
+  private var searchQuery: String = ""
+
+  fun setSearchQuery(query: String) {
+    searchQuery = query
+    notifyDataSetChanged()
+  }
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LinkResultViewHolder {
     val inflater = LayoutInflater.from(parent.context)
     val binding = ItemSearchResultClipLinkBinding.inflate(inflater, parent, false)
@@ -18,7 +25,8 @@ class LinkResultAdapter :
   }
 
   override fun onBindViewHolder(holder: LinkResultViewHolder, position: Int) {
-    holder.onBind(getItem(position))
+    val result = getItem(position)
+    holder.onBind(result, searchQuery)
   }
 
   private object DiffUtilCallback : DiffUtil.ItemCallback<LinkResultDummy>() {

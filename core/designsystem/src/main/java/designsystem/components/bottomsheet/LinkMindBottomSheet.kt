@@ -2,15 +2,19 @@ package designsystem.components.bottomsheet
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.WindowManager
 import androidx.annotation.StringRes
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
+import designsystem.components.edittext.state.LinkMindEditTextState
+import designsystem.components.toast.linkMindSnackBar
 import org.sopt.mainfeature.databinding.BottomSheetDialogLinkmindBinding
 import org.sopt.ui.view.onThrottleClick
 
 class LinkMindBottomSheet(context: Context) {
+  private val context: Context = context
   private val binding: BottomSheetDialogLinkmindBinding = BottomSheetDialogLinkmindBinding.inflate(LayoutInflater.from(context))
   private val bottomSheetDialog: BottomSheetDialog = BottomSheetDialog(context).apply {
     setContentView(binding.root)
@@ -34,6 +38,8 @@ class LinkMindBottomSheet(context: Context) {
 
       onClickTextClear {
         binding.btnBottomSheet.state = LinkMIndFullWidthButtonState.DISABLE
+        binding.tvBottomSheetErrorText.isGone = true
+        binding.etvBottomSheet.state = LinkMindEditTextState.ENABLE
       }
     }
   }
@@ -41,6 +47,7 @@ class LinkMindBottomSheet(context: Context) {
   fun setBottomSheetHint(@StringRes textId: Int) {
     binding.etvBottomSheet.editText.setHint(textId)
   }
+
   fun bottomSheetConfirmBtnClick(onClick: () -> Unit) {
     binding.btnBottomSheet.btnClick {
       onClick()
@@ -48,9 +55,12 @@ class LinkMindBottomSheet(context: Context) {
   }
 
   private fun handleTextChange() {
-    binding.tvBottomSheetErrorText.visibility = if (showErrorMsg()) View.VISIBLE else View.GONE
-    binding.btnBottomSheet.state =
-      if (!showErrorMsg() && isTextLongEnough()) LinkMIndFullWidthButtonState.ENABLE_PRIMARY else LinkMIndFullWidthButtonState.DISABLE
+    val isError = showErrorMsg()
+    binding.apply {
+      tvBottomSheetErrorText.isVisible = isError
+      etvBottomSheet.state = if (isError) LinkMindEditTextState.ERROR else LinkMindEditTextState.ENABLE
+      btnBottomSheet.state = if (!isError && isTextLongEnough()) LinkMIndFullWidthButtonState.ENABLE_PRIMARY else LinkMIndFullWidthButtonState.DISABLE
+    }
   }
 
   private fun isTextLongEnough() = binding.etvBottomSheet.editText.text.length > 1
@@ -63,6 +73,10 @@ class LinkMindBottomSheet(context: Context) {
 
   fun setErroMsg(@StringRes textId: Int) {
     binding.tvBottomSheetErrorText.setText(textId)
+  }
+
+  fun showSnackBar(message: String, isLongDuration: Boolean) {
+    context.linkMindSnackBar(binding.root, message, isLongDuration)
   }
 
   fun show() {

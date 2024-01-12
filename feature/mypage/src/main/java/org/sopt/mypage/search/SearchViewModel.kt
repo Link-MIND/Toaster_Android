@@ -1,42 +1,27 @@
 package org.sopt.mypage.search
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class SearchViewModel : ViewModel() {
-  val linkResults = MutableLiveData<List<LinkResultDummy>>()
-  val clipResults = MutableLiveData<List<ClipResultDummy>>()
-  val matchingTitles = MutableLiveData<List<String>>()
-  var searchTerm: String = ""
 
-  fun searchResults(searchTerm: String) {
-    this.searchTerm = searchTerm
-    val matchingResults = findSameResults(searchTerm)
+  private val _linkResultsLiveData = MutableLiveData<List<LinkResultDummy>>()
+  val linkResultsLiveData: LiveData<List<LinkResultDummy>> get() = _linkResultsLiveData
 
-    linkResults.value = matchingResults.linkResults
-    clipResults.value = matchingResults.clipResults
-    matchingTitles.value = matchingResults.matchingTitles
+  private val _clipResultsLiveData = MutableLiveData<List<ClipResultDummy>>()
+  val clipResultsLiveData: LiveData<List<ClipResultDummy>> get() = _clipResultsLiveData
+
+  fun updateResults(linkResults: List<LinkResultDummy>, clipResults: List<ClipResultDummy>) {
+    _linkResultsLiveData.value = linkResults
+    _clipResultsLiveData.value = clipResults
   }
 
-  private fun findSameResults(searchTerm: String): MatchingResult {
-    val matchingTitles = mutableListOf<String>()
-    val matchingLinkResults = mutableListOf<LinkResultDummy>()
-    val matchingClipResults = mutableListOf<ClipResultDummy>()
+  fun onClickSearch(query: String): Boolean {
+    val filteredLinkResults = linkResultsLiveData.value.orEmpty().filter { it.title.contains(query, ignoreCase = true) }
+    val filteredClipResults = clipResultsLiveData.value.orEmpty().filter { it.title.contains(query, ignoreCase = true) }
 
-    for (linkResult in linkResults.value.orEmpty()) {
-      if (linkResult.title.contains(searchTerm, ignoreCase = true)) {
-        matchingTitles.add(linkResult.title)
-        matchingLinkResults.add(linkResult)
-      }
-    }
-
-    for (clipResult in clipResults.value.orEmpty()) {
-      if (clipResult.title.contains(searchTerm, ignoreCase = true)) {
-        matchingTitles.add(clipResult.title)
-        matchingClipResults.add(clipResult)
-      }
-    }
-
-    return MatchingResult(matchingLinkResults, matchingClipResults, matchingTitles)
+    updateResults(filteredLinkResults, filteredClipResults)
+    return filteredLinkResults.isNotEmpty() || filteredClipResults.isNotEmpty()
   }
 }

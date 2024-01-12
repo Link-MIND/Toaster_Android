@@ -1,15 +1,19 @@
 package org.sopt.maincontainer
 
+import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
+import designsystem.components.dialog.LinkMindDialog
 import org.sopt.maincontainer.databinding.ActivityMainBinding
 import org.sopt.ui.view.onThrottleClick
 
@@ -19,12 +23,38 @@ class MainActivity : AppCompatActivity() {
   private val binding get() = mBinding!!
 
   private lateinit var navController: NavController
+
+  private val linkMindDialog by lazy {
+    LinkMindDialog(this)
+  }
+  private var hasShownDialog = false
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     mBinding = ActivityMainBinding.inflate(layoutInflater)
-
     setContentView(binding.root)
     initView()
+  }
+
+  override fun onWindowFocusChanged(hasFocus: Boolean) {
+    super.onWindowFocusChanged(hasFocus)
+
+    if (!hasFocus) return
+
+    val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+
+    if (!clipboard.hasPrimaryClip()) return
+
+    if ((clipboard.primaryClipDescription?.hasMimeType(MIMETYPE_TEXT_PLAIN)) == false) return
+
+    val item = clipboard.primaryClip?.getItemAt(0)!!.coerceToText(applicationContext)
+    if (item.isNullOrEmpty() || hasShownDialog) return
+
+    val pasteData = item.toString()
+    if (pasteData.contains("http")) {
+      Log.d("test", "$pasteData")
+      showRevokeCommonDialog()
+      hasShownDialog = true
+    }
   }
 
   private fun initView() {
@@ -99,6 +129,21 @@ class MainActivity : AppCompatActivity() {
       }
     }
   }
+
+  private fun showRevokeCommonDialog() {
+    linkMindDialog.setTitle(org.sopt.mainfeature.R.string.save_clip_dialog_title)
+      .setSubtitle(org.sopt.mainfeature.R.string.save_clip_dialog_sub_title)
+      .setNegativeButton(org.sopt.mainfeature.R.string.negative_close_msg) {
+        linkMindDialog.dismiss()
+      }
+      .setPositiveButton(org.sopt.mainfeature.R.string.positive_ok_msg) {
+        val uri = Uri.parse("featureSaveLink://saveLinkFragment")
+        navController.navigate(uri)
+        linkMindDialog.dismiss()
+      }
+      .show()
+  }
+
   companion object {
     @JvmStatic
     fun newInstance(context: Context) = Intent(context, MainActivity::class.java).apply {

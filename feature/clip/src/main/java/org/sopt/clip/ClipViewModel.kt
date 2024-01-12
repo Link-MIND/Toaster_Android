@@ -1,11 +1,29 @@
 package org.sopt.clip
 
-import androidx.lifecycle.MutableLiveData
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import org.sopt.domain.category.category.usecase.GetCategoryAllUseCase
+import javax.inject.Inject
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 
-class ClipViewModel : ViewModel() {
+@HiltViewModel
+class ClipViewModel @Inject constructor(
+  private val getCategoryAll: GetCategoryAllUseCase,
+) : ViewModel() {
+  init {
+    getCategoryAll()
+  }
+  fun getCategoryAll() = viewModelScope.launch {
+    getCategoryAll.invoke().onSuccess {
+      Log.d("test", "$it")
+    }.onFailure {
+    }
+  
   var toggleSelectedPast: SelectedToggle = SelectedToggle.ALL
 
   val mockClipData = listOf<ClipsDTO>(
@@ -47,4 +65,5 @@ class ClipViewModel : ViewModel() {
     mockDataListState.value = value
   }
 
+}
 }
