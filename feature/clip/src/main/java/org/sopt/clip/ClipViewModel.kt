@@ -1,8 +1,10 @@
 package org.sopt.clip
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.sopt.domain.category.category.usecase.GetCategoryAllUseCase
@@ -12,15 +14,12 @@ import javax.inject.Inject
 class ClipViewModel @Inject constructor(
   private val getCategoryAll: GetCategoryAllUseCase,
 ) : ViewModel() {
+
   init {
     getCategoryAll()
   }
-  fun getCategoryAll() = viewModelScope.launch {
-    getCategoryAll.invoke().onSuccess {
-      Log.d("test", "$it")
-    }.onFailure {
-    }
-  }
+
+  var toggleSelectedPast: SelectedToggle = SelectedToggle.ALL
 
   val mockClipData = listOf<ClipsDTO>(
     ClipsDTO("a", 1, 1),
@@ -51,4 +50,20 @@ class ClipViewModel @Inject constructor(
     LinkDTO("www.n.com", 12, "제목3", "맛집3"),
     LinkDTO("www.k.com", 12, "제목4", "맛집4"),
   )
+
+  fun navigateBack(navController: NavController) {
+    navController.navigateUp()
+  }
+
+  val mockDataListState = MutableLiveData<Boolean>(false)
+  fun set(value: Boolean) {
+    mockDataListState.value = value
+  }
+
+  fun getCategoryAll() = viewModelScope.launch {
+    getCategoryAll.invoke().onSuccess {
+      Log.d("test", "$it")
+    }.onFailure {
+    }
+  }
 }

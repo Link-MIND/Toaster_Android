@@ -7,7 +7,7 @@ import org.sopt.clip.databinding.ItemClipEditClipBinding
 class ClipEditViewHolder(
   private val binding: ItemClipEditClipBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
-  fun onBind(clipData: ClipsDTO?) {
+  fun onBind(clipData: ClipsDTO) {
     if (clipData == null) return
     with(binding) {
       tvClipEditTitle.text = clipData.clipName

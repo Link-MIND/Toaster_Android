@@ -4,33 +4,46 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.clip.ClipViewModel
-import org.sopt.clip.R
 import org.sopt.clip.databinding.FragmentClipEditBinding
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
 
+@AndroidEntryPoint
 class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClipEditBinding.inflate(it) }) {
   private val viewModel by viewModels<ClipViewModel>()
+  private lateinit var clipEditAdapter: ClipEditAdapter
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val clipEditAdapter = ClipEditAdapter()
+    clipEditAdapter = ClipEditAdapter()
     binding.rvClipEdit.adapter = clipEditAdapter
-    var state: Boolean = viewModel.mockClipData == null
 
-    if (!state) {
-      clipEditAdapter.submitList(viewModel.mockClipData)
-    }
+    updateEditListView()
 
-    with(binding) {
-      ivClipEditBack.setOnClickListener {
+    onClickBackButton()
+  }
+
+  private fun updateEditListView() {
+    viewModel.mockDataListState.observe(
+      viewLifecycleOwner,
+    ) {
+      if (!it) {
+        clipEditAdapter.submitList(viewModel.mockClipData)
       }
     }
 
+    var state: Boolean = viewModel.mockClipData == null
+    if (!state) {
+      clipEditAdapter.submitList(viewModel.mockClipData)
+    }
+  }
+
+  private fun onClickBackButton() {
     binding.ivClipEditBack.onThrottleClick {
-      findNavController().navigate(R.id.action_navigation_clip_edit_to_navigation_clip)
+      findNavController().navigateUp()
     }
   }
 }
