@@ -10,8 +10,9 @@ class ClipLinkViewHolder(
   fun onBind(linkData: LinkDTO) {
     if (linkData != null) {
       with(binding) {
-        tvLinkUrl.text = linkData.linkTitle
+        tvLinkTitle.text = linkData.linkTitle
         tvLinkUrl.text = linkData.url
+        tvLinkClipTitle.text = linkData.upperClipName
       }
     }
   }

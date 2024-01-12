@@ -20,12 +20,30 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     val clipAdapter = ClipAdapter({})
     binding.rvClipClip.adapter = clipAdapter
     if (viewModel.mockClipData == null) {
-      clipAdapter.submitList((viewModel.mockClipData))
+      clipAdapter.submitList(viewModel.mockClipData)
     } else {
       binding.ivClipEmpty.visibility = View.GONE
       binding.tvClipEmpty.visibility = View.GONE
       clipAdapter.submitList(viewModel.mockClipData)
     }
+    onClickSearchButton()
+    onClickListView()
+    onClickEditButton()
+  }
+
+  private fun onClickEditButton() {
+    binding.btnClipEdit.onThrottleClick {
+      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_edit)
+    }
+  }
+
+  private fun onClickListView() {
+    binding.rvClipClip.onThrottleClick {
+      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_detail)
+    }
+  }
+
+  private fun onClickSearchButton() {
     binding.clClipSearch.onThrottleClick {
       findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_detail)
     }
