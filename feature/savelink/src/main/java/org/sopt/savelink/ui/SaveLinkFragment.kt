@@ -11,9 +11,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
 import designsystem.components.dialog.LinkMindDialog
 import designsystem.components.edittext.state.LinkMindEditTextState
-import org.sopt.savelink.R
 import org.sopt.savelink.databinding.FragmentSaveLinkBinding
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.context.hideKeyboard
 import org.sopt.ui.keyboard.KeyboardUtils
 import org.sopt.ui.keyboard.OnKeyboardVisibilityListener
 import org.sopt.ui.view.onThrottleClick
@@ -66,11 +66,9 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
           binding.btnSaveLinkNext.setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
         }
         throttleAfterTextChanged {
-          // 링크저장에서 쓸코드가 아닌 클립이나 글자 수 제한에서 쓸 코드
+          btnSaveLinkNext.state = LinkMIndFullWidthButtonState.DISABLE
           if (checkTextLength(15)) {
             showErrorState(tvSaveLinkError)
-            binding.etvSaveCopyLink.editText.setText(binding.etvSaveCopyLink.editText.text.substring(0, 16))
-            binding.etvSaveCopyLink.editText.setSelection(16)
             return@throttleAfterTextChanged
           }
           handleSaveLinkNextClick()
@@ -150,6 +148,9 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
   }
 
   private fun navigateUp() {
+    KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
+    requireContext().hideKeyboard(binding.root)
     findNavController().navigateUp()
   }
+
 }
