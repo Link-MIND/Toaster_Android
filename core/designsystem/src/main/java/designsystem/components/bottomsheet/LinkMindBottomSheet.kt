@@ -43,7 +43,6 @@ class LinkMindBottomSheet(context: Context) {
       }
     }
   }
-
   fun setBottomSheetHint(@StringRes textId: Int) {
     binding.etvBottomSheet.editText.setHint(textId)
   }
@@ -69,7 +68,7 @@ class LinkMindBottomSheet(context: Context) {
     binding.tvBottomSheetTitle.setText(textId)
   }
 
-  fun showErrorMsg(): Boolean = binding.etvBottomSheet.editText.text.length > 10
+  fun showErrorMsg(): Boolean = binding.etvBottomSheet.editText.text.length > 10 || binding.etvBottomSheet.editText.text.isEmpty()
 
   fun setErroMsg(@StringRes textId: Int) {
     binding.tvBottomSheetErrorText.setText(textId)

@@ -2,6 +2,7 @@ package org.sopt.home
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import designsystem.components.bottomsheet.LinkMindBottomSheet
@@ -22,8 +23,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 //    fetchWebContent()
-    binding.clHomeSearch.onThrottleClick {
-    }
     initAdapter()
     val list = listOf(
       ClipDummy("전체클립", 1),
@@ -134,6 +133,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       setTitle(org.sopt.mainfeature.R.string.home_correction_clip)
       setErroMsg(org.sopt.mainfeature.R.string.home_error_clip_info)
       bottomSheetConfirmBtnClick {
+        if (showErrorMsg()) return@bottomSheetConfirmBtnClick
         dismiss()
         requireContext().linkMindSnackBar(binding.root, "성공", false)
       }
