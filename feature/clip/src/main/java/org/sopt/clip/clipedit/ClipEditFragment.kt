@@ -7,6 +7,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import dagger.hilt.android.AndroidEntryPoint
+import designsystem.components.bottomsheet.LinkMindBottomSheet
+import designsystem.components.toast.linkMindSnackBar
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.databinding.FragmentClipEditBinding
 import org.sopt.ui.base.BindingFragment
@@ -22,11 +24,14 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     super.onViewCreated(view, savedInstanceState)
 
     clipEditAdapter = ClipEditAdapter { itemId, state ->
-      val todo: String
-      if (state == "delete")
-        todo = "삭제"
-      else todo = "수정"
-      Toast.makeText(context, "$todo + itemId: $itemId", Toast.LENGTH_SHORT).show()
+      when (state) {
+        "delete" -> {}
+
+        "edit" -> {
+          showHomeBottomSheet()
+        }
+      }
+      Toast.makeText(context, "$state + itemId: $itemId", Toast.LENGTH_SHORT).show()
     }
     binding.rvClipEdit.adapter = clipEditAdapter
     itemTouchHelper.attachToRecyclerView(binding.rvClipEdit)
@@ -56,4 +61,19 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
       findNavController().navigateUp()
     }
   }
+
+  private fun showHomeBottomSheet() {
+    val linkMindBottomSheet = LinkMindBottomSheet(requireContext())
+    linkMindBottomSheet.show()
+    linkMindBottomSheet.apply {
+      setBottomSheetHint(org.sopt.mainfeature.R.string.home_new_clip_info)
+      setTitle(org.sopt.mainfeature.R.string.edit_clip_edit_title)
+      setErroMsg(org.sopt.mainfeature.R.string.error_clip_length)
+      bottomSheetConfirmBtnClick {
+        dismiss()
+        requireContext().linkMindSnackBar(binding.root, "클립 수정 완료!", false)
+      }
+    }
+  }
+
 }
