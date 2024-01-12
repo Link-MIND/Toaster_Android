@@ -7,8 +7,8 @@ import javax.inject.Inject
 class LinkRepoImpl @Inject constructor(
   private val remoteCategoryDataSource: RemoteLinkDataSource,
 ) : LinkRepository {
-  override suspend fun postSaveLink(): Result<Int> =
-    runCatching { remoteCategoryDataSource.postSaveLink() }
+  override suspend fun postSaveLink(linkUrl:String , categoryId:Long): Result<Int> =
+    runCatching { remoteCategoryDataSource.postSaveLink(linkUrl,categoryId) }
 
   override suspend fun deleteLink(toastId: Long): Result<Int> =
     runCatching { remoteCategoryDataSource.deleteLink(toastId) }
