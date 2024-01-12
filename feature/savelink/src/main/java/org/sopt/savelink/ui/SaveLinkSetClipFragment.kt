@@ -80,10 +80,14 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
   }
 
   private fun navigateToHome() {
-    val (request, navOptions) = DeepLinkUtil.getNavRequestPopUpAndOption(
+    val (request, navOptions) = DeepLinkUtil.getNavRequestPopUpAndAnimption(
       findNavController().graph.id,
       false,
       "featureHome://homeFragment",
+      enterAnim = R.anim.from_bottom,
+      exitAnim =android.R.anim.fade_out,
+      popEnterAnim =android.R.anim.fade_in,
+      popExitAnim = R.anim.to_bottom,
     )
     findNavController().navigate(request, navOptions)
   }
