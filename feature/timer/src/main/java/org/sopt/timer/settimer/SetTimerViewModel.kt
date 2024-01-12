@@ -1,14 +1,25 @@
 package org.sopt.timer.settimer
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import org.sopt.model.timer.TimerData
 import org.sopt.timer.dummymodel.Clip
-import org.sopt.timer.dummymodel.Repeat
+import org.sopt.model.timer.Repeat
 import org.sopt.timer.dummymodel.TimePicker
+import org.sopt.timer.usecase.PostTimerUseCase
+import org.sopt.ui.view.UiState
+import javax.inject.Inject
 
-class SetTimerViewModel : ViewModel() {
+@HiltViewModel
+class SetTimerViewModel @Inject constructor(
+  private val postTimerUseCase: PostTimerUseCase
+) : ViewModel() {
   private val _clipList = MutableStateFlow<List<Clip>>(emptyList())
   val clipList: StateFlow<List<Clip>> = _clipList.asStateFlow()
 
@@ -17,6 +28,9 @@ class SetTimerViewModel : ViewModel() {
 
   private val _selectedTime = MutableStateFlow(TimePicker("오전", "01", "00"))
   val selectedTime: StateFlow<TimePicker> = _selectedTime.asStateFlow()
+
+  private val _postTimerState = MutableStateFlow<UiState<Any>>(UiState.Empty)
+  val postTimerState: StateFlow<UiState<Any>> = _postTimerState.asStateFlow()
 
   val currentHourIndex = MutableStateFlow(1)
   val currentMinuteIndex = MutableStateFlow(1)
@@ -42,12 +56,28 @@ class SetTimerViewModel : ViewModel() {
       Repeat("일요일마다", false),
     )
     _selectedTime.value = TimePicker("오전", "01", "00")
+    _postTimerState.value = UiState.Empty
 
     currentHourIndex.value = 1
 
     currentMinuteIndex.value = 1
 
     currentAmPmIndex.value = 1
+  }
+
+  fun postTimer(){
+    viewModelScope.launch {
+      _postTimerState.emit(UiState.Loading)
+      val category = clipList.value.first { it.isSelected }
+      val time = "${selectedTime.value.hour}:${selectedTime.value.minute}"
+      postTimerUseCase(/*category.*/17,time,repeatList.value).onSuccess {
+        Log.e("성공", "성공")
+        _postTimerState.emit(UiState.Success(it))
+      }.onFailure {
+        Log.e("실패", "${it.message}")
+        _postTimerState.emit(UiState.Failure(it.message.toString()))
+      }
+    }
   }
 
   fun setSelectedHour(hour: String) {
