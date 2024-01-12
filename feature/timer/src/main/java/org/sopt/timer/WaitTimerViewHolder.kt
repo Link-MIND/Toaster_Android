@@ -1,8 +1,9 @@
 package org.sopt.timer
 
 import androidx.recyclerview.widget.RecyclerView
+import org.sopt.model.timer.Timer
 import org.sopt.timer.databinding.ItemTimerWaitBinding
-import org.sopt.timer.dummymodel.Timer
+import org.sopt.ui.view.onThrottleClick
 
 class WaitTimerViewHolder(
   private val binding: ItemTimerWaitBinding,
@@ -13,24 +14,19 @@ class WaitTimerViewHolder(
   fun onBind(data: Timer?) {
     if (data == null) return
     with(binding) {
-      tvItemTimerWaitCategory.text = data.category
-      val ampm = if (data.am) AM else PM
-      val minute = if (data.minute != 0) MINUTE_FORMAT.format(data.minute) else ""
-      tvItemTimerWaitWhen.text = TIME_FORMAT.format(data.day, ampm, data.hour, minute)
-
-      tgItemTimerWait.setOnClickListener {
+      tvItemTimerWaitCategory.text = data.comment
+      tvItemTimerWaitWhen.text = TIME_FORMAT.format(data.remindDates, data.remindTime)
+      tgItemTimerWait.initToggleState(data.isAlarm!!)
+      tgItemTimerWait.onThrottleClick {
         onToggleClicked(data)
       }
-      ivItemTimerWaitMore.setOnClickListener {
+      ivItemTimerWaitMore.onThrottleClick {
         onMoreClicked(data)
       }
     }
   }
 
   companion object {
-    private const val TIME_FORMAT = "매주 %s %s %d시%s마다"
-    private const val MINUTE_FORMAT = " %d분"
-    private const val AM = "오전"
-    private const val PM = "오후"
+    private const val TIME_FORMAT = "매주 %s %s마다"
   }
 }
