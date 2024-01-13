@@ -10,8 +10,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.toast.linkMindSnackBar
 import org.sopt.clip.ClipViewModel
-import org.sopt.clip.ClipsDTO
 import org.sopt.clip.databinding.FragmentClipEditBinding
+import org.sopt.mainfeature.R
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
 
@@ -65,9 +65,9 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
   }
 
   private fun showHomeBottomSheet() {
-    val linkMindBottomSheet = LinkMindBottomSheet(requireContext())
-    linkMindBottomSheet.show()
-    linkMindBottomSheet.apply {
+    val editTitleBottomSheet = LinkMindBottomSheet(requireContext())
+    editTitleBottomSheet.show()
+    editTitleBottomSheet.apply {
       setBottomSheetHint(org.sopt.mainfeature.R.string.home_new_clip_info)
       setTitle(org.sopt.mainfeature.R.string.edit_clip_edit_title)
       setErroMsg(org.sopt.mainfeature.R.string.error_clip_length)

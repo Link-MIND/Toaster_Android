@@ -13,8 +13,8 @@ class ClipEditAdapter(
 ) : ListAdapter<ClipsDTO, ClipEditViewHolder>(DiffUtil), ItemTouchHelperListener {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClipEditViewHolder {
     return ClipEditViewHolder(
-        ItemClipEditClipBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-        itemClick,
+      ItemClipEditClipBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+      itemClick,
     )
   }
 
@@ -28,7 +28,6 @@ class ClipEditAdapter(
       onContentsTheSame = { old, new -> old == new },
     )
   }
-
 
   override fun onItemMove(from: Int, to: Int) {
     val item: ClipsDTO = currentList[from]
