@@ -9,10 +9,12 @@ import org.sopt.ui.view.ItemDiffCallback
 
 class ClipLinkAdapter(
   val onClick: (LinkDTO) -> Unit,
+  private val onClickItemLink: (Long, String) -> Unit,
 ) : ListAdapter<LinkDTO, ClipLinkViewHolder>(DiffUtil) {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClipLinkViewHolder {
     return ClipLinkViewHolder(
       ItemClipDetailLinkBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+      onClickItemLink,
     )
   }
 

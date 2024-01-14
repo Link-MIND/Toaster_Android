@@ -9,14 +9,19 @@
     android:id="@+id/saveLinkFragment"
     android:name="org.sopt.savelink.ui.SaveLinkFragment"
     android:label="fragment_save_link"
-    tools:layout="@layout/fragment_save_link" >
+    tools:layout="@layout/fragment_save_link">
     <deepLink app:uri="featureSaveLink://saveLinkFragment" />
     <action
       android:id="@+id/action_saveLinkFragment_to_saveLinkSetClipFragment"
-      app:destination="@id/saveLinkSetClipFragment" />
+      app:destination="@id/saveLinkSetClipFragment"
+      app:enterAnim="@anim/from_right"
+      app:exitAnim="@anim/to_left"
+      app:popEnterAnim="@anim/from_left"
+      app:popExitAnim="@anim/to_right" />
   </fragment>
   <fragment
     android:id="@+id/saveLinkSetClipFragment"
     android:name="org.sopt.savelink.ui.SaveLinkSetClipFragment"
-    android:label="SaveLinkSetClipFragment" />
+    android:label="SaveLinkSetClipFragment"
+    tools:layout="@layout/fragment_save_link_set_clip" />
 </navigation>

@@ -45,7 +45,7 @@
   <string name="edit_clip_guide_msg">클립을 누른 뒤 위아래로 드래그하여 순서를 수정하세요!</string>
   <string name="edit_clip_minus_description">클립을 삭제하려면 누르세요</string>
   <string name="edit_clip_edit_description">클립을 수정하려면 누르세요</string>
-
+  <string name="edit_clip_edit_title">클립 이름 수정</string>
 
   <!-- modify timer -->
   <string name="modify_timer_mod">타이머 수정하기</string>
@@ -73,7 +73,7 @@
   <string name="home_error_clip_info">공백 또는 10글자 이상은 안됩니다.</string>
 
   <!-- error -->
-  <string name="error_clip_length">링크 제목은 최대 15까지 입력 가능해요</string>
+  <string name="error_clip_length">링크 제목은 최대 15자까지 입력 가능해요</string>
   <string name="error_clip_name">이미 같은 이름의 클립이 있어요</string>
 
   <!-- dialog intro -->

@@ -7,4 +7,5 @@
   <string name="clip_title">클립명</string>
   <string name="clip_amount_n">n</string>
   <string name="clip_amount_nn">nn</string>
+  <string name="mypage_nn">nn</string>
 </resources>

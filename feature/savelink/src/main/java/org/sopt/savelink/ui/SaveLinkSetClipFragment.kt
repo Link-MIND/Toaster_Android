@@ -24,6 +24,9 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     binding.btnSaveLinkComplete.state = LinkMindButtonState.DISABLE
+    binding.ivSaveLinkClipBack.onThrottleClick {
+      findNavController().navigateUp()
+    }
     var list = listOf(
       Clip("전체 클립", 3, false),
       Clip("전체 클립", 3, false),
@@ -53,6 +56,8 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
         setTitle(R.string.clip_add_clip)
         setErroMsg(R.string.error_clip_length)
         bottomSheetConfirmBtnClick {
+          if (showErrorMsg()) return@bottomSheetConfirmBtnClick
+          dismiss()
         }
       }
     }
@@ -70,17 +75,24 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
         .show()
     }
 
-    binding.btnSaveLinkComplete.btnClick {
-      navigateToHome()
-      requireContext().linkMindSnackBar(binding.root, "링크 저장 완료", false)
+    binding.btnSaveLinkComplete.apply {
+      btnClick {
+        if (state == LinkMindButtonState.DISABLE) return@btnClick
+        navigateToHome()
+        requireContext().linkMindSnackBar(binding.root, "링크 저장 완료", false)
+      }
     }
   }
 
   private fun navigateToHome() {
-    val (request, navOptions) = DeepLinkUtil.getNavRequestPopUpAndOption(
+    val (request, navOptions) = DeepLinkUtil.getNavRequestPopUpAndAnimption(
       findNavController().graph.id,
       false,
       "featureHome://homeFragment",
+      enterAnim = R.anim.from_bottom,
+      exitAnim = android.R.anim.fade_out,
+      popEnterAnim = android.R.anim.fade_in,
+      popExitAnim = R.anim.to_bottom,
     )
     findNavController().navigate(request, navOptions)
   }
