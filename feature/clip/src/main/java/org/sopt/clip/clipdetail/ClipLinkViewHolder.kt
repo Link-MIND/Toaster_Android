@@ -6,13 +6,21 @@ import org.sopt.clip.databinding.ItemClipDetailLinkBinding
 
 class ClipLinkViewHolder(
   private val binding: ItemClipDetailLinkBinding,
+  private val onClickItemLink: (Long) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(linkData: LinkDTO) {
-    if (linkData != null) {
+    if (linkData == null) {
+      return
+    } else {
       with(binding) {
         tvLinkTitle.text = linkData.linkTitle
         tvLinkUrl.text = linkData.url
-        tvLinkClipTitle.text = linkData.upperClipName
+/*
+        initLinkClipTitleVisible(linkData)
+*/
+        root.setOnClickListener {
+          onClickItemLink(linkData.linkId)
+        }
       }
     }
   }

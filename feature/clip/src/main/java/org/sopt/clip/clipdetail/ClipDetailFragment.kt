@@ -2,6 +2,8 @@ package org.sopt.clip.clipdetail
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -20,7 +22,10 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    clipDetailAdapter = ClipLinkAdapter()
+
+    clipDetailAdapter = ClipLinkAdapter { itemId, state ->
+      Toast.makeText(context, "$state itemId: $itemId", Toast.LENGTH_SHORT).show()
+    }
     binding.rvCategoryLink.adapter = clipDetailAdapter
     updateListView()
 
@@ -112,6 +117,17 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
     with(binding) {
       ivClipCategoryEmpty.isVisible = state
       tvClipDetailEmpty.isVisible = state
+    }
+  }
+
+  fun initTextGrey() {
+    with(binding) {
+      btnClipAll.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_semibold_14)
+      btnClipRead.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_semibold_14)
+      btnClipUnread.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_semibold_14)
+      btnClipAll.setTextColor(ContextCompat.getColor(root.context, org.sopt.mainfeature.R.color.neutrals400))
+      btnClipRead.setTextColor(ContextCompat.getColor(root.context, org.sopt.mainfeature.R.color.neutrals400))
+      btnClipUnread.setTextColor(ContextCompat.getColor(root.context, org.sopt.mainfeature.R.color.neutrals400))
     }
   }
 }

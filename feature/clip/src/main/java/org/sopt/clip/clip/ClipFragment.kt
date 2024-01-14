@@ -2,6 +2,7 @@ package org.sopt.clip.clip
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -10,6 +11,7 @@ import org.sopt.clip.R
 import org.sopt.clip.databinding.FragmentClipBinding
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
+
 @AndroidEntryPoint
 class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.inflate(it) }) {
   private val viewModel by viewModels<ClipViewModel>()
@@ -17,7 +19,9 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val clipAdapter = ClipAdapter({})
+    val clipAdapter = ClipAdapter { clipId ->
+      Toast.makeText(context, "클릭된 item id: $clipId", Toast.LENGTH_SHORT).show()
+    }
     binding.rvClipClip.adapter = clipAdapter
     if (viewModel.mockClipData == null) {
       clipAdapter.submitList(viewModel.mockClipData)
