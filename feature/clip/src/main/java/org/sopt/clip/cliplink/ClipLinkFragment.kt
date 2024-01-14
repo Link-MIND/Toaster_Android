@@ -29,7 +29,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
         val bundle = Bundle().apply {
           putString("url", linkDTO.url)
         }
-        findNavController().navigate(R.id.action_navigation_clip_detail_to_webViewFragment, bundle)
+        findNavController().navigate(R.id.action_navigation_clip_link_to_webViewFragment, bundle)
       },
     ) { itemId, state ->
       Toast.makeText(context, "$state itemId: $itemId", Toast.LENGTH_SHORT).show()

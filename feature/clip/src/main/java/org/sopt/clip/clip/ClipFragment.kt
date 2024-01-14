@@ -23,7 +23,7 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
 
     val clipAdapter = ClipAdapter { clipId ->
       Toast.makeText(context, "클릭된 item id: $clipId", Toast.LENGTH_SHORT).show()
-      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_detail)
+      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_link)
     }
     binding.rvClipClip.adapter = clipAdapter
     if (viewModel.mockClipData == null) {
@@ -62,13 +62,13 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
 
   private fun onClickListView() {
     binding.rvClipClip.onThrottleClick {
-      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_detail)
+      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_link)
     }
   }
 
   private fun onClickSearchButton() {
     binding.clClipSearch.onThrottleClick {
-      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_detail)
+      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_link)
     }
   }
 }
