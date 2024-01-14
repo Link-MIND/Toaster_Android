@@ -47,17 +47,21 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
       WebViewAddress.setText(it)
 
       WebViewAddress.setOnEditorActionListener { _, actionId, _ ->
-        if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_NULL) {
+        if (actionId == EditorInfo.IME_ACTION_DONE ||
+          actionId == EditorInfo.IME_NULL ||
+          actionId == EditorInfo.IME_ACTION_SEND ||
+          actionId == EditorInfo.IME_ACTION_NEXT
+        ) {
           val enteredUrl = WebViewAddress.text.toString()
           if (enteredUrl.isNotBlank()) {
             webView.loadUrl(enteredUrl)
+            requireContext().hideKeyboard(requireView())
           }
           true
         } else {
           false
         }
       }
-      requireContext().hideKeyboard(requireView())
     }
   }
 
