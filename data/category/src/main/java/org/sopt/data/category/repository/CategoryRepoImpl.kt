@@ -8,7 +8,7 @@ import javax.inject.Inject
 class CategoryRepoImpl @Inject constructor(
   private val remoteCategoryDataSource: RemoteCategoryDataSource,
 ) : CategoryRepository {
-  override suspend fun getCategoryAll(): Result<List<CategoryList>> =
+  override suspend fun getCategoryAll(): Result<CategoryList> =
     runCatching { remoteCategoryDataSource.getCategoryAll() }
 
   override suspend fun postAddCategory(categoryTitle: String): Result<Int> =

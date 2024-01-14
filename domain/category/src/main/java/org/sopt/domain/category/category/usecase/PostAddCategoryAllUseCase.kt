@@ -1,7 +1,7 @@
 package org.sopt.domain.category.category.usecase
 
 import org.sopt.domain.category.category.repository.CategoryRepository
-import org.sopt.model.category.CategoryList
+import org.sopt.model.category.Category
 import javax.inject.Inject
 
 class PostAddCategoryTitleUseCase @Inject constructor(
