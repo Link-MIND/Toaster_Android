@@ -45,36 +45,35 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
       webView.webViewClient = WebViewClient()
       webView.loadUrl(it)
       WebViewAddress.setText(it)
+    }
 
-      WebViewAddress.setOnEditorActionListener { _, actionId, _ ->
-        if (actionId == EditorInfo.IME_ACTION_DONE ||
-          actionId == EditorInfo.IME_NULL ||
-          actionId == EditorInfo.IME_ACTION_SEND ||
-          actionId == EditorInfo.IME_ACTION_NEXT
-        ) {
-          val enteredUrl = WebViewAddress.text.toString()
-          if (enteredUrl.isNotBlank()) {
-            webView.loadUrl(enteredUrl)
-            requireContext().hideKeyboard(requireView())
-          }
-          true
-        } else {
-          false
+    WebViewAddress.setOnEditorActionListener { _, actionId, _ ->
+      if (actionId == EditorInfo.IME_ACTION_DONE ||
+        actionId == EditorInfo.IME_NULL ||
+        actionId == EditorInfo.IME_ACTION_SEND ||
+        actionId == EditorInfo.IME_ACTION_NEXT
+      ) {
+        val enteredUrl = WebViewAddress.text.toString()
+        if (enteredUrl.isNotBlank()) {
+          webView.loadUrl(enteredUrl)
+          requireContext().hideKeyboard(requireView())
         }
+        true
+      } else {
+        false
       }
     }
   }
 
   private fun handleReadBtn() {
-    val btnReadAfter = binding.ivReadAfter
-    val btnReadBefore = binding.ivReadBefore
+    with(binding) {
+      ivReadBefore.onThrottleClick {
+        handleVisibility(ivReadBefore, ivReadAfter)
+      }
 
-    btnReadBefore.onThrottleClick {
-      handleVisibility(btnReadBefore, btnReadAfter)
-    }
-
-    btnReadAfter.onThrottleClick {
-      handleVisibility(btnReadAfter, btnReadBefore)
+      ivReadAfter.onThrottleClick {
+        handleVisibility(ivReadAfter, ivReadBefore)
+      }
     }
   }
 
@@ -97,43 +96,44 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
   }
 
   private fun handleWebViewNavigation() {
-    val ivBack = binding.ivBack
-    val ivNext = binding.ivNext
-
-    ivBack.onThrottleClick {
-      if (binding.wbClip.canGoBack()) {
-        binding.wbClip.goBack()
+    with(binding) {
+      ivBack.onThrottleClick {
+        if (wbClip.canGoBack()) {
+          wbClip.goBack()
+        }
       }
-    }
 
-    ivNext.onThrottleClick {
-      if (binding.wbClip.canGoForward()) {
-        binding.wbClip.goForward()
+      ivNext.onThrottleClick {
+        if (wbClip.canGoForward()) {
+          wbClip.goForward()
+        }
       }
-    }
-    updateColors()
 
-    binding.wbClip.webViewClient = object : WebViewClient() {
-      override fun onPageFinished(view: WebView?, url: String?) {
-        updateColors()
+      updateColors()
+
+      wbClip.webViewClient = object : WebViewClient() {
+        override fun onPageFinished(view: WebView?, url: String?) {
+          updateColors()
+        }
       }
     }
   }
 
   private fun updateColors() {
-    val ivBack = binding.ivBack
-    val ivNext = binding.ivNext
+    with(binding) {
+      ivBack.setColorFilter(
+        ContextCompat.getColor(
+          requireContext(),
+          if (wbClip.canGoBack()) org.sopt.mainfeature.R.color.neutrals800 else org.sopt.mainfeature.R.color.neutrals150,
+        ),
+      )
 
-    if (binding.wbClip.canGoBack()) {
-      ivBack.setColorFilter(ContextCompat.getColor(requireContext(), org.sopt.mainfeature.R.color.neutrals800))
-    } else {
-      ivBack.setColorFilter(ContextCompat.getColor(requireContext(), org.sopt.mainfeature.R.color.neutrals150))
-    }
-
-    if (binding.wbClip.canGoForward()) {
-      ivNext.setColorFilter(ContextCompat.getColor(requireContext(), org.sopt.mainfeature.R.color.neutrals800))
-    } else {
-      ivNext.setColorFilter(ContextCompat.getColor(requireContext(), org.sopt.mainfeature.R.color.neutrals150))
+      ivNext.setColorFilter(
+        ContextCompat.getColor(
+          requireContext(),
+          if (wbClip.canGoForward()) org.sopt.mainfeature.R.color.neutrals800 else org.sopt.mainfeature.R.color.neutrals150,
+        ),
+      )
     }
   }
 
