@@ -13,6 +13,7 @@ class ClipLinkAdapter(
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClipLinkViewHolder {
     return ClipLinkViewHolder(
       ItemClipDetailLinkBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+      onClickItemLink,
     )
   }
 

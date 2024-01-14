@@ -2,23 +2,29 @@ package org.sopt.clip.clipdetail
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.LinkDTO
-import org.sopt.clip.R
+import org.sopt.clip.SelectedToggle
 import org.sopt.clip.databinding.FragmentClipDetailBinding
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.view.onThrottleClick
 
+@AndroidEntryPoint
 class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ FragmentClipDetailBinding.inflate(it) }) {
   private val viewModel by viewModels<ClipViewModel>()
+  private lateinit var clipDetailAdapter: ClipLinkAdapter
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val clipDetailAdapter = ClipLinkAdapter { linkDTO ->
+
+      val clipDetailAdapter = ClipLinkAdapter { linkDTO ->
       val bundle = Bundle().apply {
         putString("url", linkDTO.url)
       }
@@ -30,52 +36,97 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
     initEmptyMsgVisible(state)
     if (!state) {
       clipDetailAdapter.submitList(viewModel.mockLinkData)
+      clipDetailAdapter = ClipLinkAdapter { itemId, state ->
+      Toast.makeText(context, "$state itemId: $itemId", Toast.LENGTH_SHORT).show()
     }
+    binding.rvCategoryLink.adapter = clipDetailAdapter
+    updateListView()
 
     initToggleClickListener()
+    onClickBackButton()
+  }
+
+  private fun onClickBackButton() {
+    binding.ivClipDetailBack.onThrottleClick {
+      viewModel.navigateBack(findNavController())
+    }
+  }
+
+  private fun updateListView() {
+    viewModel.mockDataListState.observe(
+      viewLifecycleOwner,
+    ) {
+      initEmptyMsgVisible(it)
+      if (!it) {
+        clipDetailAdapter.submitList(viewModel.mockLinkData)
+      }
+    }
   }
 
   private fun initToggleClickListener(): List<LinkDTO> {
     with(binding) {
       btnClipAll.setOnClickListener {
-        initButtonTransparent()
-        initTextGrey()
-        dvClipPicker1.isVisible = false
-        dvClipPicker2.isVisible = true
-        btnClipAll.setBackgroundResource(R.drawable.shape_white_fill_12_rect)
-        btnClipAll.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_bold_14)
+        updateTogglesNDividerVisible(SelectedToggle.ALL)
       }
 
       btnClipRead.setOnClickListener {
-        initButtonTransparent()
-        initTextGrey()
-        dvClipPicker1.isVisible = false
-        dvClipPicker2.isVisible = false
-        btnClipRead.setBackgroundResource(R.drawable.shape_white_fill_12_rect)
-        btnClipRead.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_bold_14)
+        updateTogglesNDividerVisible(SelectedToggle.READ)
       }
 
       btnClipUnread.setOnClickListener {
-        initButtonTransparent()
-        initTextGrey()
-        dvClipPicker1.isVisible = true
-        dvClipPicker2.isVisible = false
-        btnClipUnread.setBackgroundResource(R.drawable.shape_white_fill_12_rect)
-        btnClipUnread.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_bold_14)
+        updateTogglesNDividerVisible(SelectedToggle.UNREAD)
       }
     }
     return viewModel.mockLinkData
   }
 
-  fun initButtonTransparent() {
-    with(binding) {
-      btnClipAll.setBackgroundResource(org.sopt.mainfeature.R.color.transparent)
-      btnClipRead.setBackgroundResource(org.sopt.mainfeature.R.color.transparent)
-      btnClipUnread.setBackgroundResource(org.sopt.mainfeature.R.color.transparent)
+  private fun updateTogglesNDividerVisible(selectedNow: SelectedToggle) {
+    updateTogglesVisible(selectedNow)
+    initDividerVisible(selectedNow)
+  }
+
+  private fun updateTogglesVisible(selectedNow: SelectedToggle) {
+    if (selectedNow != viewModel.toggleSelectedPast) {
+      initToggleVisible(viewModel.toggleSelectedPast, false)
+      initToggleVisible(selectedNow, true)
+      initDividerVisible(selectedNow)
+      viewModel.toggleSelectedPast = selectedNow
+      updateListView()
     }
   }
 
-  fun initEmptyMsgVisible(state: Boolean) {
+  private fun initToggleVisible(toggle: SelectedToggle, state: Boolean) {
+    with(binding) {
+      when (toggle) {
+        SelectedToggle.ALL -> tvClipAllSelected.isVisible = state
+        SelectedToggle.READ -> tvClipReadSelected.isVisible = state
+        SelectedToggle.UNREAD -> tvClipUnreadSelected.isVisible = state
+      }
+    }
+  }
+
+  private fun initDividerVisible(selectedNow: SelectedToggle) {
+    with(binding) {
+      when (selectedNow) {
+        SelectedToggle.ALL -> {
+          dvClipPicker1.isVisible = false
+          dvClipPicker2.isVisible = true
+        }
+
+        SelectedToggle.READ -> {
+          dvClipPicker1.isVisible = false
+          dvClipPicker2.isVisible = false
+        }
+
+        SelectedToggle.UNREAD -> {
+          dvClipPicker1.isVisible = true
+          dvClipPicker2.isVisible = false
+        }
+      }
+    }
+  }
+
+  private fun initEmptyMsgVisible(state: Boolean) {
     with(binding) {
       ivClipCategoryEmpty.isVisible = state
       tvClipDetailEmpty.isVisible = state

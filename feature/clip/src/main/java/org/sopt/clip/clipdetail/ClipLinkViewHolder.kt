@@ -7,14 +7,22 @@ import org.sopt.ui.view.onThrottleClick
 
 class ClipLinkViewHolder(
   private val binding: ItemClipDetailLinkBinding,
+  private val onClickItemLink: (Long) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
+
   fun onBind(linkData: LinkDTO, onClick: (LinkDTO) -> Unit) {
     if (linkData != null) {
       with(binding) {
-        tvLinkUrl.text = linkData.linkTitle
+        tvLinkTitle.text = linkData.linkTitle
         tvLinkUrl.text = linkData.url
         root.onThrottleClick {
           onClick(linkData)
+        }
+/*
+        initLinkClipTitleVisible(linkData)
+*/
+        root.setOnClickListener {
+          onClickItemLink(linkData.linkId)
         }
       }
     }

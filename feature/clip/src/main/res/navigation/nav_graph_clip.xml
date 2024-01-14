@@ -11,7 +11,10 @@
     tools:layout="@layout/fragment_clip" >
     <action
       android:id="@+id/action_navigation_clip_to_navigation_clip_detail"
-      app:destination="@id/navigation_clip_detail" />
+       app:destination="@id/navigation_clip_detail" />
+    <action
+      android:id="@+id/action_navigation_clip_to_navigation_clip_edit"
+      app:destination="@id/navigation_clip_edit" />
   </fragment>
   <fragment
     android:id="@+id/navigation_clip_detail"
@@ -26,4 +29,11 @@
     android:id="@+id/webViewFragment"
     android:name="org.sopt.clip.webview.WebViewFragment"
     android:label="WebViewFragment" />
+    tools:layout="@layout/fragment_clip_detail" >
+  </fragment>
+  <fragment
+    android:id="@+id/navigation_clip_edit"
+    android:name="org.sopt.clip.clipedit.ClipEditFragment"
+    android:label="ClipEditFragment"
+    tools:layout="@layout/fragment_clip_edit"/>
 </navigation>
