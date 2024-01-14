@@ -23,8 +23,6 @@ data class ResponseGetTimerPageDto(
     val remindTime: String,
     @SerialName("timerId")
     val timerId: Int,
-    @SerialName("updateAt")
-    val updateAt: String,
   )
 
   @Serializable
@@ -41,6 +39,8 @@ data class ResponseGetTimerPageDto(
     val timerId: Int,
     @SerialName("comment")
     val comment: String,
+    @SerialName("updateAt")
+    val updateAt: String,
   )
 }
 
