@@ -65,12 +65,14 @@
   <string name="clip_toolbar_all_clip">전체 클립</string>
   <string name="clip_new_clip_info">클립의 이름을 입력해주세요</string>
 
-  <!-- clip detail-->
-  <string name="clip_detail_read">열람</string>
-  <string name="clip_detail_unread">미열람</string>
-  <string name="clip_detail_empty">아직 클립에 저장된 링크가 없어요\n아래 + 버튼을 통해 링크를 저장해보세요!</string>
-  <string name="clip_detail_empty_description">저장된 링크가 없습니다</string>
-  <string name="clip_detail_back_description">뒤로 가기</string>
+  <!-- clip link-->
+  <string name="clip_link_read">열람</string>
+  <string name="clip_link_unread">미열람</string>
+  <string name="clip_link_empty">아직 클립에 저장된 링크가 없어요\n아래 + 버튼을 통해 링크를 저장해보세요!</string>
+  <string name="clip_link_empty_description">저장된 링크가 없습니다</string>
+  <string name="clip_link_back_description">뒤로 가기</string>
+  <string name="clip_link_bottom_sheet_title">수정하기</string>
+  <string name="clip_link_bottom_sheet_delete">삭제</string>
 
   <!-- home -->
   <string name="home_correction_clip">클립수정</string>
