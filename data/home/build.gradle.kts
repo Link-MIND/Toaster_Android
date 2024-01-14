@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-  namespace = "org.sopt.home"
+  namespace = "org.sopt.data.home"
 }
 
 dependencies {

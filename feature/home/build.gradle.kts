@@ -12,7 +12,7 @@ android {
 }
 
 dependencies {
-  implementation(projects.core.designsystem)
+  implementation(projects.domain.home)
   implementation(libs.coil)
   implementation(libs.jsoup)
 }
