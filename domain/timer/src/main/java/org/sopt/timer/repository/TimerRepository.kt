@@ -7,4 +7,6 @@ interface TimerRepository {
   suspend fun getTimerMain(): Result<Pair<List<Timer>, List<Timer>>?>
 
   suspend fun postTimer(timerData: TimerData): Result<Unit>
+
+  suspend fun deleteTimer(timerId: Int): Result<Unit>
 }

@@ -15,4 +15,7 @@ class TimerRepositoryImpl @Inject constructor(
 
   override suspend fun postTimer(timerData: TimerData): Result<Unit> =
     runCatching { timerRemoteDataSource.postTimer(timerData.toDataModel()) }
+
+  override suspend fun deleteTimer(timerId: Int): Result<Unit> =
+    runCatching { timerRemoteDataSource.deleteTimer(timerId) }
 }
