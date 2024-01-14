@@ -2,7 +2,9 @@ package org.sopt.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.toast.linkMindSnackBar
 import org.sopt.home.adapter.HomeClipAdapter
@@ -13,13 +15,18 @@ import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.onThrottleClick
 
+@AndroidEntryPoint
 class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.inflate(it) }) {
 
   private lateinit var homeClipAdapter: HomeClipAdapter
   private lateinit var homeWeekLinkAdapter: HomeWeekLinkAdapter
   private lateinit var homeWeekRecommendLinkAdapter: HomeWeekRecommendLinkAdapter
+  private val viewModel by viewModels<HomeViewModel>()
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    viewModel.getRecommendSite()
+    viewModel.getWeekBestLink()
+    viewModel.getMainPageUserClip()
 //    fetchWebContent()
     initAdapter()
     val list = listOf(
@@ -82,6 +89,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       navigateToDestination("featureMyPage://fragmentSearch")
     }
   }
+
   private fun navigateToDestination(destination: String) {
     val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
       destination,

@@ -11,7 +11,7 @@ data class ResponseWeekBestLinkDto(
   @SerialName("toastTitle")
   val toastTitle: String,
   @SerialName("toastImg")
-  val toastImg: String,
+  val toastImg: String?,
   @SerialName("toastLink")
   val toastLink: String,
 )

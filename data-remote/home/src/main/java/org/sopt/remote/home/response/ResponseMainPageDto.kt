@@ -3,7 +3,7 @@ package org.sopt.remote.home.response
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import org.sopt.model.category.CategoryList
-import org.sopt.model.home.MainPage
+import org.sopt.model.home.MainPageData
 
 @Serializable
 data class ResponseMainPageDto(
@@ -13,7 +13,7 @@ data class ResponseMainPageDto(
   val readToastNum: Int,
   @SerialName("allToastNum")
   val allToastNum: Int,
-  @SerialName("mainCateogoryListDto")
+  @SerialName("mainCategoryListDto")
   val mainCategoryListDto: List<CategoryListDto>,
 ) {
   @Serializable
@@ -27,7 +27,7 @@ data class ResponseMainPageDto(
   )
 }
 
-internal fun ResponseMainPageDto.toCoreModel() = MainPage(
+internal fun ResponseMainPageDto.toCoreModel() = MainPageData(
   nickName = nickName,
   readToastNum = readToastNum,
   allToastNum = allToastNum,

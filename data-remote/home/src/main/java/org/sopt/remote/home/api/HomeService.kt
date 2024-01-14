@@ -1,8 +1,5 @@
 package org.sopt.remote.home.api
 
-import org.sopt.model.home.MainPage
-import org.sopt.model.home.RecommendLink
-import org.sopt.model.home.WeekBestLink
 import org.sopt.network.model.response.base.BaseResponse
 import org.sopt.remote.home.response.ResponseMainPageDto
 import org.sopt.remote.home.response.ResponseRecommendLinkDto

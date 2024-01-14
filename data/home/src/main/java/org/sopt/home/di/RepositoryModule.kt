@@ -10,10 +10,10 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class RepositoryModule {
+abstract class RepositoryHomeModule {
   @Singleton
   @Binds
-  abstract fun bindCategoryRepository(
+  abstract fun bindHomeRepository(
     homeRepoImpl: HomeRepoImpl,
   ): HomeRepository
 }

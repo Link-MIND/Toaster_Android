@@ -9,13 +9,13 @@ data class ResponseRecommendLinkDto(
   @SerialName("siteId")
   val siteId: Long,
   @SerialName("siteTitle")
-  val siteTitle: String,
+  val siteTitle: String?,
   @SerialName("siteSub")
-  val siteSub: String,
+  val siteSub: String?,
   @SerialName("siteImg")
-  val siteImg: String,
+  val siteImg: String?,
   @SerialName("siteUrl")
-  val siteUrl: String,
+  val siteUrl: String?,
 )
 
 
