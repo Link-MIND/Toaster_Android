@@ -6,6 +6,8 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import designsystem.components.bottomsheet.LinkMindBottomSheet
+import designsystem.components.toast.linkMindSnackBar
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.R
 import org.sopt.clip.databinding.FragmentClipBinding
@@ -33,7 +35,24 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     onClickSearchButton()
     onClickListView()
     onClickEditButton()
+    onClickAddButton()
   }
+
+  private fun onClickAddButton(){
+    binding.btnClipAdd.onThrottleClick {
+      val addClipBottomSheet= LinkMindBottomSheet(requireContext())
+      addClipBottomSheet.show()
+      addClipBottomSheet.apply {
+        setBottomSheetHint(org.sopt.mainfeature.R.string.clip_new_clip_info)
+        setTitle(org.sopt.mainfeature.R.string.clip_add_clip)
+        setErroMsg(org.sopt.mainfeature.R.string.error_clip_length)
+        bottomSheetConfirmBtnClick {
+          dismiss()
+          requireContext().linkMindSnackBar(binding.root, "클립 생성 완료!", false)
+        }
+      }
+      }
+    }
 
   private fun onClickEditButton() {
     binding.btnClipEdit.onThrottleClick {
