@@ -28,6 +28,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     viewModel.getCategortAll()
+    viewModel.saveCategoryTitle("이삭이다나는")
 //    viewModel.deleteLink(23)
 //    viewModel.saveLink("http://www.naver.com",null)
 //    viewModel.patchReadLink(23)

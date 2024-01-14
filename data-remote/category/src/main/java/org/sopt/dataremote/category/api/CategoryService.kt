@@ -16,7 +16,7 @@ interface CategoryService {
   @GET("/$CATEGORY/$ALL")
   suspend fun getCategoryAll(): BaseResponse<List<ResponseCategoryDto>>
 
-  @POST("$/$CATEGORY")
+  @POST("/$CATEGORY")
   suspend fun postAddCategoryTitle(@Body categoryTitleDto: RequestCategoryTitleDto):
     BaseResponse<Int>
 }

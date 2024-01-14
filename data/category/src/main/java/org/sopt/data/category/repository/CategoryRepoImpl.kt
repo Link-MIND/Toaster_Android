@@ -10,4 +10,7 @@ class CategoryRepoImpl @Inject constructor(
 ) : CategoryRepository {
   override suspend fun getCategoryAll(): Result<List<CategoryList>> =
     runCatching { remoteCategoryDataSource.getCategoryAll() }
+
+  override suspend fun postAddCategory(categoryTitle: String): Result<Int> =
+    runCatching { remoteCategoryDataSource.postAddCategoryTitle(categoryTitle) }
 }

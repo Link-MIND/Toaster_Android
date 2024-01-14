@@ -4,7 +4,7 @@ import org.sopt.domain.category.category.repository.CategoryRepository
 import org.sopt.model.category.CategoryList
 import javax.inject.Inject
 
-class PostAddCategoryAllUseCase @Inject constructor(
+class PostAddCategoryTitleUseCase @Inject constructor(
   private val categoryRepository: CategoryRepository,
 ) {
   suspend operator fun invoke(param:Param): Result<Int> = categoryRepository.postAddCategory(

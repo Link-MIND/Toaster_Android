@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.sopt.domain.category.category.usecase.GetCategoryAllUseCase
+import org.sopt.domain.category.category.usecase.PostAddCategoryTitleUseCase
 import org.sopt.domain.link.usecase.DeleteLinkUseCase
 import org.sopt.domain.link.usecase.PatchReadLinkUseCase
 import org.sopt.domain.link.usecase.PostSaveLinkUseCase
@@ -17,7 +18,18 @@ class SaveLinkViewModel @Inject constructor(
   private val patchReadLinkUseCase: PatchReadLinkUseCase,
   private val saveLinkUseCase: PostSaveLinkUseCase,
   private val getCategoryAllUseCase: GetCategoryAllUseCase,
+  private val postAddCategoryTitle: PostAddCategoryTitleUseCase,
 ) : ViewModel() {
+
+  fun saveCategoryTitle(categoryTitle: String) = viewModelScope.launch {
+    postAddCategoryTitle(
+      PostAddCategoryTitleUseCase.Param(
+        categoryTitle = categoryTitle
+      ),
+    ).onSuccess {
+      Log.d("saveCategoryTitleSuccess", "$it")
+    }.onFailure { Log.d("saveCategoryTitleFail", "$it") }
+  }
 
   fun getCategortAll() = viewModelScope.launch {
     getCategoryAllUseCase(
@@ -54,7 +66,6 @@ class SaveLinkViewModel @Inject constructor(
       PatchReadLinkUseCase.Param(
         toastId = toastId,
       ),
-    ).onSuccess { Log.d("patchReadLinkSuccess", "$it") }.
-    onFailure { Log.d("patchReadLinkFail", "$it") }
+    ).onSuccess { Log.d("patchReadLinkSuccess", "$it") }.onFailure { Log.d("patchReadLinkFail", "$it") }
   }
 }
