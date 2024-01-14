@@ -25,16 +25,21 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
       Toast.makeText(context, "클릭된 item id: $clipId", Toast.LENGTH_SHORT).show()
       findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_link)
     }
-    binding.rvClipClip.adapter = clipAdapter
-    if (viewModel.mockClipData == null) return
-    binding.ivClipEmpty.visibility = View.GONE
-    binding.tvClipEmpty.visibility = View.GONE
+    if (setListVisible(clipAdapter)) return
 
     clipAdapter.submitList(viewModel.mockClipData)
     onClickSearchButton()
     onClickListView()
     onClickEditButton()
     onClickAddButton()
+  }
+
+  private fun setListVisible(clipAdapter: ClipAdapter): Boolean {
+    binding.rvClipClip.adapter = clipAdapter
+    if (viewModel.mockClipData == null) return true
+    binding.ivClipEmpty.visibility = View.GONE
+    binding.tvClipEmpty.visibility = View.GONE
+    return false
   }
 
   private fun onClickAddButton() {

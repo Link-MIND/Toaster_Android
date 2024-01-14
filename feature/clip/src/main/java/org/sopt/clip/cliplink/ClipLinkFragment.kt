@@ -26,16 +26,10 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     super.onViewCreated(view, savedInstanceState)
     clipLinkAdapter = ClipLinkAdapter(
       { linkDTO ->
-        val bundle = Bundle().apply {
-          putString("url", linkDTO.url)
-        }
-        findNavController().navigate(R.id.action_navigation_clip_link_to_webViewFragment, bundle)
+        naviagateToWebViewFragment(linkDTO)
       },
     ) { itemId, state ->
-      Toast.makeText(context, "$state itemId: $itemId", Toast.LENGTH_SHORT).show()
-      if (state == "delete") {
-        DeleteLinkBottomSheetFragment.newInstance(this.id).show(parentFragmentManager, this.tag)
-      }
+      updateItemEvent(state, itemId)
     }
     binding.rvCategoryLink.adapter = clipLinkAdapter
 
@@ -44,10 +38,24 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     if (!state) {
       clipLinkAdapter.submitList(viewModel.mockLinkData)
 
-      updateListView()
+      updateClipList()
 
       initToggleClickListener()
       onClickBackButton()
+    }
+  }
+
+  private fun naviagateToWebViewFragment(linkDTO: LinkDTO) {
+    val bundle = Bundle().apply {
+      putString("url", linkDTO.url)
+    }
+    findNavController().navigate(R.id.action_navigation_clip_link_to_webViewFragment, bundle)
+  }
+
+  private fun updateItemEvent(state: String, itemId: Long) {
+    Toast.makeText(context, "$state itemId: $itemId", Toast.LENGTH_SHORT).show()
+    if (state == "delete") {
+      DeleteLinkBottomSheetFragment.newInstance(this.id).show(parentFragmentManager, this.tag)
     }
   }
 
@@ -57,7 +65,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     }
   }
 
-  private fun updateListView() {
+  private fun updateClipList() {
     viewModel.mockDataListState.observe(
       viewLifecycleOwner,
     ) {
@@ -96,7 +104,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
       initToggleVisible(selectedNow, true)
       initDividerVisible(selectedNow)
       viewModel.toggleSelectedPast = selectedNow
-      updateListView()
+      updateClipList()
     }
   }
 
