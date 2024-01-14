@@ -8,7 +8,7 @@ import org.sopt.clip.databinding.ItemClipDetailLinkBinding
 import org.sopt.ui.view.ItemDiffCallback
 
 class ClipLinkAdapter(
-  private val onClickItemLink: (Long) -> Unit,
+  private val onClickItemLink: (Long, String) -> Unit,
 ) : ListAdapter<LinkDTO, ClipLinkViewHolder>(DiffUtil) {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClipLinkViewHolder {
     return ClipLinkViewHolder(
