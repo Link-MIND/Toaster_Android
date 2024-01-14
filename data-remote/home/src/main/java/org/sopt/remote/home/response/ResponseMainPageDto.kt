@@ -2,7 +2,7 @@ package org.sopt.remote.home.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import org.sopt.model.category.CategoryList
+import org.sopt.model.category.Category
 import org.sopt.model.home.MainPageData
 
 @Serializable
@@ -31,11 +31,11 @@ internal fun ResponseMainPageDto.toCoreModel() = MainPageData(
   nickName = nickName,
   readToastNum = readToastNum,
   allToastNum = allToastNum,
-  mainCategoryListDto = mainCategoryListDto.map { it.toCoreListModel() },
+  mainCategoryDto = mainCategoryListDto.map { it.toCoreListModel() },
 )
 
 internal fun ResponseMainPageDto.CategoryListDto.toCoreListModel() =
-  CategoryList(
+  Category(
     categoryId = categoryId,
     categoryTitle = categoryTitle,
     toastNum = toastNum,
