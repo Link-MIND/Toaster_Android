@@ -1,6 +1,7 @@
 package org.sopt.network.authenticator
 
 import android.content.Context
+import android.util.Log
 import com.jakewharton.processphoenix.ProcessPhoenix
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.first
@@ -13,6 +14,7 @@ import org.sopt.common.intentprovider.IntentProvider
 import org.sopt.common.intentprovider.LOGIN
 import org.sopt.datastore.datastore.SecurityDataStore
 import org.sopt.network.service.TokenRefreshService
+import retrofit2.HttpException
 import javax.inject.Inject
 
 class LinkMindAuthenticator @Inject constructor(
@@ -28,13 +30,6 @@ class LinkMindAuthenticator @Inject constructor(
           tokenRefreshService.postAuthRefresh(dataStore.flowRefreshToken().first())
         }
       }.onSuccess {
-        if (it.code == CODE_TOKEN_EXPIRED) {
-          runBlocking {
-            dataStore.setAutoLogin(false)
-          }
-          ProcessPhoenix.triggerRebirth(context, intentProvider.getIntent())
-          return@onSuccess
-        }
         runBlocking {
           dataStore.apply {
             setAccessToken(it.data?.accessToken ?: "")
@@ -42,10 +37,12 @@ class LinkMindAuthenticator @Inject constructor(
           }
         }
       }.onFailure {
-        runBlocking {
-          dataStore.setAutoLogin(false)
+        if(it is HttpException && it.code() == CODE_TOKEN_EXPIRED){
+          runBlocking {
+            dataStore.setAutoLogin(false)
+          }
+          ProcessPhoenix.triggerRebirth(context, intentProvider.getIntent())
         }
-        ProcessPhoenix.triggerRebirth(context, intentProvider.getIntent())
       }.getOrThrow()
 
       return response.request.newBuilder()
