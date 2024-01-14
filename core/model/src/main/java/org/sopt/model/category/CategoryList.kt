@@ -1,4 +1,4 @@
-package org.sopt.model.sample.category
+package org.sopt.model.category
 
 data class CategoryList(
   val categoryId: Long,
