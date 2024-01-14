@@ -18,6 +18,7 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
+
     val clipDetailAdapter = ClipLinkAdapter { linkDTO ->
       val bundle = Bundle().apply {
         putString("url", linkDTO.url)
