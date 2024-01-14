@@ -1,4 +1,4 @@
-package org.sopt.clip.clipdetail
+package org.sopt.clip.cliplink
 
 import android.os.Bundle
 import android.view.View
@@ -8,22 +8,23 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import designsystem.components.bottomsheet.LinkMindBottomSheet
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.LinkDTO
 import org.sopt.clip.R
 import org.sopt.clip.SelectedToggle
-import org.sopt.clip.databinding.FragmentClipDetailBinding
+import org.sopt.clip.databinding.FragmentClipLinkBinding
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
-class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ FragmentClipDetailBinding.inflate(it) }) {
+class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClipLinkBinding.inflate(it) }) {
   private val viewModel by viewModels<ClipViewModel>()
-  private lateinit var clipDetailAdapter: ClipLinkAdapter
+  private lateinit var clipLinkAdapter: ClipLinkAdapter
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    clipDetailAdapter = ClipLinkAdapter(
+    clipLinkAdapter = ClipLinkAdapter(
       { linkDTO ->
         val bundle = Bundle().apply {
           putString("url", linkDTO.url)
@@ -33,12 +34,12 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
     ) { itemId, state ->
       Toast.makeText(context, "$state itemId: $itemId", Toast.LENGTH_SHORT).show()
     }
-    binding.rvCategoryLink.adapter = clipDetailAdapter
+    binding.rvCategoryLink.adapter = clipLinkAdapter
 
     var state: Boolean = viewModel.mockLinkData == null
     initEmptyMsgVisible(state)
     if (!state) {
-      clipDetailAdapter.submitList(viewModel.mockLinkData)
+      clipLinkAdapter.submitList(viewModel.mockLinkData)
 
       updateListView()
 
@@ -59,7 +60,7 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
     ) {
       initEmptyMsgVisible(it)
       if (!it) {
-        clipDetailAdapter.submitList(viewModel.mockLinkData)
+        clipLinkAdapter.submitList(viewModel.mockLinkData)
       }
     }
   }
