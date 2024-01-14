@@ -188,7 +188,7 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/tv_clip_category_all"
     tools:itemCount="2"
-    tools:listitem="@layout/item_clip_detail_link" />
+    tools:listitem="@layout/item_clip_link" />
 
   <ImageView
     android:id="@+id/iv_clip_category_empty"
