@@ -58,6 +58,7 @@
         android:id="@+id/cl_timer_permission_off"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:background="@drawable/shape_gray_fill_12_rect"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -132,7 +133,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/cl_timer"
-      android:visibility="visible"
+      android:visibility="gone"
       android:layout_width="match_parent"
       android:layout_height="match_parent">
 
@@ -256,7 +257,7 @@
     android:id="@+id/sv_timer_exist"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:visibility="invisible"
+    android:visibility="visible"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/cl_timer_title">
@@ -295,6 +296,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
+          android:text="0"
           android:textAppearance="@style/Typography.suit.bold_12"
           android:textColor="@color/neutrals300"
           tools:text="0" />
