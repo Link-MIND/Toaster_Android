@@ -13,4 +13,8 @@ class RemoteCategoryDataSourceImpl @Inject constructor(
     categoryService.getCategoryAll().data!!.map {
       it.toCoreModel()
     }
+
+  override suspend fun postCategoryAdd() {
+    categoryService.postCategoryAdd()
+  }
 }
