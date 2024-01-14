@@ -13,6 +13,7 @@ import designsystem.components.button.state.LinkMindButtonState
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.sopt.timer.R
+import org.sopt.timer.TimerViewModel
 import org.sopt.timer.databinding.FragmentTimePickerBinding
 import org.sopt.timer.dummymodel.PickerItem
 import org.sopt.timer.settimer.SetTimerViewModel
@@ -32,7 +33,8 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   private var periodClickEnable = true
   private var hourClickEnable = true
   private var minuteClickEnable = true
-  private val viewModel: SetTimerViewModel by activityViewModels()
+  private val setTimerViewModel: SetTimerViewModel by activityViewModels()
+  private val timerViewModel: TimerViewModel by activityViewModels()
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     listUpdater = ListUpdater()
@@ -48,14 +50,14 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   }
 
   private fun initTimePickerState() {
-    if (viewModel.currentHourIndex.value != 1 || viewModel.currentMinuteIndex.value != 1) {
-      viewModel.currentHourIndex.value.let {
+    if (setTimerViewModel.currentHourIndex.value != 1 || setTimerViewModel.currentMinuteIndex.value != 1) {
+      setTimerViewModel.currentHourIndex.value.let {
         binding.rvTimePickerHour.scrollToPosition(minuteAdapter.getMiddlePosition() + it - 1)
       }
-      viewModel.currentMinuteIndex.value.let {
+      setTimerViewModel.currentMinuteIndex.value.let {
         binding.rvTimePickerMinute.scrollToPosition(hourAdapter.getMiddlePosition() + it - 1)
       }
-      viewModel.currentAmPmIndex.value.let {
+      setTimerViewModel.currentAmPmIndex.value.let {
         binding.rvTimePickerAmpm.scrollToPosition(it - 1)
       }
     }
@@ -65,11 +67,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   }
 
   private fun initRepeatState() {
-    val list = viewModel.repeatList.value.filter {
-      it.isSelected
-    }.map {
-      it.period
-    }
+    val list = setTimerViewModel.selectedList.value
     if (list.isEmpty()) {
       handleEmptyList()
       return
@@ -90,7 +88,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   }
 
   private fun handleNotEmptyList(list: List<String>) {
-    val modified = list.toString().substring(1, list.toString().length - 1)
+    val modified = list.joinToString(separator = ", ")
     with(binding) {
       tvTimePickerPeriod.apply {
         setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_bold_16)
@@ -107,13 +105,13 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
     val hourList = generateNumberList(1, 12)
     val minuteList = generateNumberList(0, 59)
     val newAmpmList = ampmList.mapIndexed { index, item ->
-      item.copy(isSelected = index == viewModel.currentAmPmIndex.value)
+      item.copy(isSelected = index == setTimerViewModel.currentAmPmIndex.value)
     }
     val newHourList = hourList.mapIndexed { index, item ->
-      item.copy(isSelected = index == viewModel.currentHourIndex.value)
+      item.copy(isSelected = index == setTimerViewModel.currentHourIndex.value)
     }
     val newMinuteList = minuteList.mapIndexed { index, item ->
-      item.copy(isSelected = index == viewModel.currentMinuteIndex.value)
+      item.copy(isSelected = index == setTimerViewModel.currentMinuteIndex.value)
     }
     timePeriodAdapter = TimePeriodAdapter()
     hourAdapter = NumberAdapter()
@@ -189,20 +187,20 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
 
   private fun updateHour(item: PickerItem, index: Int) {
     val hour = item.convertToText()
-    viewModel.setSelectedHour(hour)
-    viewModel.currentHourIndex.value = index
+    setTimerViewModel.setSelectedHour(hour)
+    setTimerViewModel.currentHourIndex.value = index
   }
 
   private fun updateMinute(item: PickerItem, index: Int) {
     val minute = item.convertToText()
-    viewModel.setSelectedMinute(minute)
-    viewModel.currentMinuteIndex.value = index
+    setTimerViewModel.setSelectedMinute(minute)
+    setTimerViewModel.currentMinuteIndex.value = index
   }
 
   private fun updateAmPm(item: PickerItem, index: Int) {
     val timePeriod = item.convertToText()
-    viewModel.setSelectedPeriod(timePeriod)
-    viewModel.currentAmPmIndex.value = index
+    setTimerViewModel.setSelectedPeriod(timePeriod)
+    setTimerViewModel.currentAmPmIndex.value = index
   }
 
   private fun setPeriodClickEnable(isEnable: Boolean) {
@@ -240,20 +238,18 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   private fun initCompleteButtonClickListener() {
     binding.btnTimePickerNext.btnClick {
       Log.e("클릭", "클릭")
-      findNavController().apply {
-        navigate(R.id.action_navigation_time_picker_to_navigation_timer)
-      }
-      viewModel.postTimer()
+      setTimerViewModel.postTimer()
     }
   }
 
   private fun collectPostTimerState() {
-    viewModel.postTimerState.flowWithLifecycle(viewLifeCycle).onEach { state ->
+    setTimerViewModel.postTimerState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
+          timerViewModel.getTimerMain()
           findNavController().apply {
             navigate(R.id.action_navigation_time_picker_to_navigation_timer)
-          } 
+          }
         }
         is UiState.Failure -> {}
         is UiState.Loading -> {}
@@ -263,7 +259,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   }
 
   private fun collectSelectedTime() {
-    viewModel.selectedTime.flowWithLifecycle(viewLifeCycle).onEach {
+    setTimerViewModel.selectedTime.flowWithLifecycle(viewLifeCycle).onEach {
       binding.tvTimePickerTime.text = "${it.timePeriod} ${it.hour}시 ${it.minute}분"
     }.launchIn(viewLifeCycleScope)
   }
