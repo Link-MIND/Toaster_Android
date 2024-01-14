@@ -1,5 +1,6 @@
 package org.sopt.timer
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -8,19 +9,21 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.sopt.model.timer.Timer
 import org.sopt.timer.settimer.TimerUiState
+import org.sopt.timer.usecase.DeleteTimerUseCase
 import org.sopt.timer.usecase.GetTimerMainUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class TimerViewModel @Inject constructor(
   private val getTimerMainUseCase: GetTimerMainUseCase,
+  private val deleteTimerUseCase: DeleteTimerUseCase
 ) : ViewModel() {
-  private val _uiState = MutableStateFlow<TimerUiState<Pair<List<Timer>?, List<Timer>>?>>(TimerUiState.Empty)
-  val uiState: StateFlow<TimerUiState<Pair<List<Timer>?, List<Timer>>?>> get() = _uiState
+  private val _uiState = MutableStateFlow<TimerUiState<Pair<List<Timer>, List<Timer>>?>>(TimerUiState.Empty)
+  val uiState: StateFlow<TimerUiState<Pair<List<Timer>, List<Timer>>?>> get() = _uiState
 
   private val fcmIsAllowed = MutableStateFlow(true)
 
-  private val timerList = MutableStateFlow<Pair<List<Timer>, List<Timer>>?>(null)
+  val timerList = MutableStateFlow<Pair<List<Timer>, List<Timer>>?>(Pair(emptyList(), emptyList()))
 
   fun setUiState(isNotiPermissionAllowed: Boolean) {
     viewModelScope.launch {
@@ -47,9 +50,18 @@ class TimerViewModel @Inject constructor(
     viewModelScope.launch {
       getTimerMainUseCase().onSuccess {
         _uiState.emit(TimerUiState.BothAllowed(it))
+        timerList.emit(it)
       }.onFailure {
         _uiState.emit(TimerUiState.BothAllowed(null))
       }
+    }
+  }
+
+  fun deleteTimer(timerId: Int) = viewModelScope.launch {
+    deleteTimerUseCase(timerId).onSuccess {
+      getTimerMain()
+    }.onFailure {
+      Log.e("실패",it.message.toString())
     }
   }
 }
