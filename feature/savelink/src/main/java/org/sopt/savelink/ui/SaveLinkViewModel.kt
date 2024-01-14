@@ -24,7 +24,7 @@ class SaveLinkViewModel @Inject constructor(
   fun saveCategoryTitle(categoryTitle: String) = viewModelScope.launch {
     postAddCategoryTitle(
       PostAddCategoryTitleUseCase.Param(
-        categoryTitle = categoryTitle
+        categoryTitle = categoryTitle,
       ),
     ).onSuccess {
       Log.d("saveCategoryTitleSuccess", "$it")
@@ -32,11 +32,9 @@ class SaveLinkViewModel @Inject constructor(
   }
 
   fun getCategortAll() = viewModelScope.launch {
-    getCategoryAllUseCase(
-    ).onSuccess {
+    getCategoryAllUseCase().onSuccess {
       Log.d("getCategortSuccess", "$it")
     }.onFailure {
-
       Log.d("getCategortFail", "$it")
     }
   }
@@ -44,7 +42,8 @@ class SaveLinkViewModel @Inject constructor(
   fun saveLink(linkUrl: String, categoryId: Long?) = viewModelScope.launch {
     saveLinkUseCase(
       PostSaveLinkUseCase.Param(
-        linkUrl = linkUrl, categoryId = categoryId,
+        linkUrl = linkUrl,
+        categoryId = categoryId,
       ),
     ).onSuccess {
       Log.d("saveLinkSuccess", "$it")

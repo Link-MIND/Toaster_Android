@@ -87,7 +87,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
     binding.btnSaveLinkComplete.apply {
       btnClick {
         if (state == LinkMindButtonState.DISABLE) return@btnClick
-        viewModel.saveLink("www.naver.com",11)
+        viewModel.saveLink("www.naver.com", 11)
         navigateToHome()
         requireContext().linkMindSnackBar(binding.root, "링크 저장 완료", false)
       }

@@ -5,7 +5,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class RequestCategoryTitleDto(
   @SerialName("categoryTitle")
-  val categoryTitle:String
+  val categoryTitle: String,
 )
-
-

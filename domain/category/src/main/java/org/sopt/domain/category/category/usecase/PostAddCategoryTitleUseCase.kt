@@ -1,17 +1,15 @@
 package org.sopt.domain.category.category.usecase
 
 import org.sopt.domain.category.category.repository.CategoryRepository
-import org.sopt.model.category.Category
 import javax.inject.Inject
 
 class PostAddCategoryTitleUseCase @Inject constructor(
   private val categoryRepository: CategoryRepository,
 ) {
-  suspend operator fun invoke(param:Param): Result<Int> = categoryRepository.postAddCategory(
-    categoryTitle = param.categoryTitle
+  suspend operator fun invoke(param: Param): Result<Int> = categoryRepository.postAddCategory(
+    categoryTitle = param.categoryTitle,
   )
   data class Param(
-    val categoryTitle:String,
+    val categoryTitle: String,
   )
-
 }

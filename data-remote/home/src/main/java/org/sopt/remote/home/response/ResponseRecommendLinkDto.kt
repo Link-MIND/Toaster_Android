@@ -18,7 +18,6 @@ data class ResponseRecommendLinkDto(
   val siteUrl: String?,
 )
 
-
 internal fun ResponseRecommendLinkDto.toCoreModel() = RecommendLink(
   siteId = siteId,
   siteTitle = siteTitle,

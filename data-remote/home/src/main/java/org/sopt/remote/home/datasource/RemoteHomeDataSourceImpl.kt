@@ -14,12 +14,9 @@ class RemoteHomeDataSourceImpl @Inject constructor(
   override suspend fun getMainPageUserClip(): MainPageData =
     homeService.getMainUserClip().data!!.toCoreModel()
 
-
   override suspend fun getRecommendSite(): List<RecommendLink> =
     homeService.getRecommendSites().data!!.map { it.toCoreModel() }
-
 
   override suspend fun getWeekBestLink(): List<WeekBestLink> =
     homeService.getWeekBestLink().data!!.map { it.toCoreModel() }
 }
-

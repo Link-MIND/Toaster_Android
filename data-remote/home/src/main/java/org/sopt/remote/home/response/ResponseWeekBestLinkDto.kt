@@ -16,7 +16,6 @@ data class ResponseWeekBestLinkDto(
   val toastLink: String,
 )
 
-
 internal fun ResponseWeekBestLinkDto.toCoreModel() = WeekBestLink(
   toastId = toastId,
   toastTitle = toastTitle,

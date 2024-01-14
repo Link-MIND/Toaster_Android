@@ -1,6 +1,5 @@
 package org.sopt.remote.link.datasource
 
-import android.util.Log
 import org.sopt.data.link.datasource.RemoteLinkDataSource
 import org.sopt.remote.link.api.LinkService
 import org.sopt.remote.link.request.RequestIsReadDto
@@ -11,7 +10,7 @@ class RemoteLinkDataSourceImpl @Inject constructor(
   private val linkService: LinkService,
 ) : RemoteLinkDataSource {
   override suspend fun postSaveLink(linkUrl: String, categoryId: Long?): Int =
-   linkService.postLink(
+    linkService.postLink(
       RequestWriteDto(
         linkUrl = linkUrl,
         categoryId = categoryId,

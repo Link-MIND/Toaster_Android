@@ -17,5 +17,4 @@ class HomeRepoImpl @Inject constructor(
 
   override suspend fun getWeekBestLink(): Result<List<WeekBestLink>> =
     runCatching { remoteHomeDataSource.getWeekBestLink() }
-
 }

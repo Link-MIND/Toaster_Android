@@ -1,7 +1,6 @@
 package org.sopt.domain.category.category.usecase
 
 import org.sopt.domain.category.category.repository.CategoryRepository
-import org.sopt.model.category.Category
 import org.sopt.model.category.CategoryList
 import javax.inject.Inject
 

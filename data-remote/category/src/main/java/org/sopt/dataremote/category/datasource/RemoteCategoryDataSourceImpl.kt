@@ -4,7 +4,6 @@ import org.sopt.data.category.datasource.RemoteCategoryDataSource
 import org.sopt.dataremote.category.api.CategoryService
 import org.sopt.dataremote.category.request.RequestCategoryTitleDto
 import org.sopt.dataremote.category.response.toCoreModel
-import org.sopt.model.category.Category
 import org.sopt.model.category.CategoryList
 import javax.inject.Inject
 
