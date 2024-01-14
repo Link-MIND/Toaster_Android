@@ -12,15 +12,15 @@
     <action
       android:id="@+id/action_navigation_clip_to_navigation_clip_detail"
        app:destination="@id/navigation_clip_detail" />
+    <action
+      android:id="@+id/action_navigation_clip_to_navigation_clip_edit"
+      app:destination="@id/navigation_clip_edit" />
   </fragment>
   <fragment
     android:id="@+id/navigation_clip_detail"
     android:name="org.sopt.clip.clipdetail.ClipDetailFragment"
     android:label="ClipDetailFragment"
     tools:layout="@layout/fragment_clip_detail" >
-    <action
-      android:id="@+id/action_navigation_clip_to_navigation_clip_edit"
-      app:destination="@id/navigation_clip_edit" />
   </fragment>
   <fragment
     android:id="@+id/navigation_clip_edit"
