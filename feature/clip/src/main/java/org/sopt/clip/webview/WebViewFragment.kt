@@ -25,10 +25,10 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
     onClickClipLink()
     onClickWebViewClose()
     onClickWebViewReStart()
-    handleReadBtn()
-    handleWebViewNavigation()
-    handleOpenInBrowser()
-    setOnWebViewAddress()
+    initReadBtnClickLister()
+    initNavigationBtnClickListener()
+    initBrowserBtnClickListener()
+    initEditorActionListener()
   }
 
   private fun onClickClipLink() {
@@ -49,7 +49,7 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
     }
   }
 
-  private fun setOnWebViewAddress() {
+  private fun initEditorActionListener() {
     binding.tvWebviewAddress.setOnEditorActionListener { _, actionId, _ ->
       if (actionId == EditorInfo.IME_ACTION_DONE ||
         actionId == EditorInfo.IME_NULL ||
@@ -68,7 +68,7 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
     }
   }
 
-  private fun handleReadBtn() {
+  private fun initReadBtnClickLister() {
     with(binding) {
       ivReadBefore.onThrottleClick {
         handleVisibility(ivReadBefore, ivReadAfter)
@@ -98,7 +98,7 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
     }
   }
 
-  private fun handleWebViewNavigation() {
+  private fun initNavigationBtnClickListener() {
     with(binding) {
       ivBack.onThrottleClick {
         if (wbClip.canGoBack()) {
@@ -140,15 +140,12 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
     }
   }
 
-  private fun handleOpenInBrowser() {
+  private fun initBrowserBtnClickListener() {
     binding.ivInternet.onThrottleClick {
       val url = binding.wbClip.url
-      if (url != null) {
-        if (url.isNotBlank()) {
-          val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-          startActivity(intent)
-        }
-      }
+      if (url.isNullOrEmpty()) return@onThrottleClick
+      val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+      startActivity(intent)
     }
   }
 }
