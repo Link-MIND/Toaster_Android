@@ -15,7 +15,8 @@ class WaitTimerViewHolder(
     if (data == null) return
     with(binding) {
       tvItemTimerWaitCategory.text = data.comment
-      tvItemTimerWaitWhen.text = TIME_FORMAT.format(data.remindDates, data.remindTime)
+      val time = data.remindTime.replace("AM","오전").replace("PM","오후")
+      tvItemTimerWaitWhen.text = TIME_FORMAT.format(data.remindDates, time)
       tgItemTimerWait.initToggleState(data.isAlarm!!)
       tgItemTimerWait.onThrottleClick {
         onToggleClicked(data)
