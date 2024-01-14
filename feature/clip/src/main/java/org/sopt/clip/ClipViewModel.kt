@@ -49,7 +49,7 @@ class ClipViewModel @Inject constructor(
   )
 
   val mockLinkData = listOf<LinkDTO>(
-    LinkDTO("www.l.com", 12, "제목1", "맛집", 1),
+    LinkDTO("https://www.daum.net", 12, "제목1", "맛집", 1),
     LinkDTO("www.i.com", 12, "제목2", "맛집2", 2),
     LinkDTO("www.n.com", 12, "제목3", "맛집3", 3),
     LinkDTO("www.k.com", 12, "제목4", "맛집4", 4),

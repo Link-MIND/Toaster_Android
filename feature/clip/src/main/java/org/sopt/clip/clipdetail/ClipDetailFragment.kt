@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.LinkDTO
+import org.sopt.clip.R
 import org.sopt.clip.SelectedToggle
 import org.sopt.clip.databinding.FragmentClipDetailBinding
 import org.sopt.ui.base.BindingFragment
@@ -22,15 +23,28 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
-    clipDetailAdapter = ClipLinkAdapter { itemId, state ->
+    clipDetailAdapter = ClipLinkAdapter(
+      { linkDTO ->
+        val bundle = Bundle().apply {
+          putString("url", linkDTO.url)
+        }
+        findNavController().navigate(R.id.action_navigation_clip_detail_to_webViewFragment, bundle)
+      },
+    ) { itemId, state ->
       Toast.makeText(context, "$state itemId: $itemId", Toast.LENGTH_SHORT).show()
     }
     binding.rvCategoryLink.adapter = clipDetailAdapter
-    updateListView()
 
-    initToggleClickListener()
-    onClickBackButton()
+    var state: Boolean = viewModel.mockLinkData == null
+    initEmptyMsgVisible(state)
+    if (!state) {
+      clipDetailAdapter.submitList(viewModel.mockLinkData)
+
+      updateListView()
+
+      initToggleClickListener()
+      onClickBackButton()
+    }
   }
 
   private fun onClickBackButton() {

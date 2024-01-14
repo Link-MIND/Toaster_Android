@@ -11,7 +11,7 @@
     tools:layout="@layout/fragment_clip" >
     <action
       android:id="@+id/action_navigation_clip_to_navigation_clip_detail"
-       app:destination="@id/navigation_clip_detail" />
+      app:destination="@id/navigation_clip_detail" />
     <action
       android:id="@+id/action_navigation_clip_to_navigation_clip_edit"
       app:destination="@id/navigation_clip_edit" />
@@ -20,8 +20,15 @@
     android:id="@+id/navigation_clip_detail"
     android:name="org.sopt.clip.clipdetail.ClipDetailFragment"
     android:label="ClipDetailFragment"
-    tools:layout="@layout/fragment_clip_detail" >
+    tools:layout="@layout/fragment_clip_detail">
+    <action
+      android:id="@+id/action_navigation_clip_detail_to_webViewFragment"
+      app:destination="@id/webViewFragment" />
   </fragment>
+  <fragment
+    android:id="@+id/webViewFragment"
+    android:name="org.sopt.clip.webview.WebViewFragment"
+    android:label="WebViewFragment" />
   <fragment
     android:id="@+id/navigation_clip_edit"
     android:name="org.sopt.clip.clipedit.ClipEditFragment"
