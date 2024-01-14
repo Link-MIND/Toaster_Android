@@ -23,6 +23,7 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
 
     val clipAdapter = ClipAdapter { clipId ->
       Toast.makeText(context, "클릭된 item id: $clipId", Toast.LENGTH_SHORT).show()
+      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_detail)
     }
     binding.rvClipClip.adapter = clipAdapter
     if (viewModel.mockClipData == null) {
@@ -38,9 +39,9 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     onClickAddButton()
   }
 
-  private fun onClickAddButton(){
+  private fun onClickAddButton() {
     binding.btnClipAdd.onThrottleClick {
-      val addClipBottomSheet= LinkMindBottomSheet(requireContext())
+      val addClipBottomSheet = LinkMindBottomSheet(requireContext())
       addClipBottomSheet.show()
       addClipBottomSheet.apply {
         setBottomSheetHint(org.sopt.mainfeature.R.string.clip_new_clip_info)
@@ -51,8 +52,8 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
           requireContext().linkMindSnackBar(binding.root, "클립 생성 완료!", false)
         }
       }
-      }
     }
+  }
 
   private fun onClickEditButton() {
     binding.btnClipEdit.onThrottleClick {
