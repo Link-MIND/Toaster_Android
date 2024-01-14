@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.LinkDTO
 import org.sopt.clip.R
@@ -17,7 +18,13 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val clipDetailAdapter = ClipLinkAdapter()
+    val clipDetailAdapter = ClipLinkAdapter { linkDTO ->
+      val bundle = Bundle().apply {
+        putString("url", linkDTO.url)
+      }
+      findNavController().navigate(R.id.action_navigation_clip_detail_to_webViewFragment, bundle)
+    }
+
     binding.rvCategoryLink.adapter = clipDetailAdapter
     var state: Boolean = viewModel.mockLinkData == null
     initEmptyMsgVisible(state)
