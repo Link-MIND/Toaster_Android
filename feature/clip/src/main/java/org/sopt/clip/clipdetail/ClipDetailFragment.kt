@@ -23,8 +23,8 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    clipDetailAdapter = ClipLinkAdapter { itemId ->
-      Toast.makeText(context, "itemId: $itemId", Toast.LENGTH_SHORT).show()
+    clipDetailAdapter = ClipLinkAdapter { itemId, state ->
+      Toast.makeText(context, "$state itemId: $itemId", Toast.LENGTH_SHORT).show()
     }
     binding.rvCategoryLink.adapter = clipDetailAdapter
     updateListView()

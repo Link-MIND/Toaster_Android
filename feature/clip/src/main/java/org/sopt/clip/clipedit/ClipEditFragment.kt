@@ -26,8 +26,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
 
     clipEditAdapter = ClipEditAdapter { itemId, state, position ->
       when (state) {
-        "delete" -> {
-        }
+        "delete" -> {}
 
         "edit" -> {
           showHomeBottomSheet()
