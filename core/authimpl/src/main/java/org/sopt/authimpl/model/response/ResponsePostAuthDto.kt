@@ -17,7 +17,7 @@ data class ResponsePostAuthDto(
   val fcmToken: String,
   @SerialName("isRegistered")
   val isRegistered: Boolean,
-  @SerialName("FcmIsAllowed")
+  @SerialName("fcmIsAllowed")
   val fcmIsAllowed: Boolean,
   @SerialName("profile")
   val profile: String,
