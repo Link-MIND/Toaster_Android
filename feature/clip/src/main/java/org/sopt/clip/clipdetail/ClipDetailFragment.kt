@@ -35,7 +35,7 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
 
   private fun onClickBackButton() {
     binding.ivClipDetailBack.onThrottleClick {
-      viewModel.navigateBack(findNavController())
+      findNavController().navigateUp()
     }
   }
 

@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavController
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.sopt.domain.category.category.usecase.GetCategoryAllUseCase
@@ -62,10 +61,6 @@ class ClipViewModel @Inject constructor(
     LinkDTO("www.n.com", 12, "제목3", "맛집3", 11),
     LinkDTO("www.k.com", 12, "제목4", "맛집4", 12),
   )
-
-  fun navigateBack(navController: NavController) {
-    navController.navigateUp()
-  }
 
   val mockDataListState = MutableLiveData<Boolean>(false)
   fun set(value: Boolean) {

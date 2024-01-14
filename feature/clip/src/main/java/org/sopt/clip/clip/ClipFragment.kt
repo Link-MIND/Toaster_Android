@@ -27,12 +27,11 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     }
     binding.rvClipClip.adapter = clipAdapter
     if (viewModel.mockClipData == null) {
-      clipAdapter.submitList(viewModel.mockClipData)
     } else {
       binding.ivClipEmpty.visibility = View.GONE
       binding.tvClipEmpty.visibility = View.GONE
-      clipAdapter.submitList(viewModel.mockClipData)
     }
+    clipAdapter.submitList(viewModel.mockClipData)
     onClickSearchButton()
     onClickListView()
     onClickEditButton()
