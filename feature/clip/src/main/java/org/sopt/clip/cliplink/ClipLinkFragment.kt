@@ -8,8 +8,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import designsystem.components.bottomsheet.LinkMindBottomSheet
 import org.sopt.clip.ClipViewModel
+import org.sopt.clip.DeleteLinkBottomSheetFragment
 import org.sopt.clip.LinkDTO
 import org.sopt.clip.R
 import org.sopt.clip.SelectedToggle
@@ -34,8 +34,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     ) { itemId, state ->
       Toast.makeText(context, "$state itemId: $itemId", Toast.LENGTH_SHORT).show()
       if (state == "delete") {
-        val deleteLinkBottomSheet = LinkMindBottomSheet(requireContext())
-        deleteLinkBottomSheet.show()
+        DeleteLinkBottomSheetFragment.newInstance(this.id).show(parentFragmentManager, this.tag)
       }
     }
     binding.rvCategoryLink.adapter = clipLinkAdapter
@@ -53,7 +52,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
   }
 
   private fun onClickBackButton() {
-    binding.ivClipDetailBack.onThrottleClick {
+    binding.ivClipLinkBack.onThrottleClick {
       findNavController().navigateUp()
     }
   }
@@ -135,7 +134,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
   private fun initEmptyMsgVisible(state: Boolean) {
     with(binding) {
       ivClipCategoryEmpty.isVisible = state
-      tvClipDetailEmpty.isVisible = state
+      tvClipLinkEmpty.isVisible = state
     }
   }
 
