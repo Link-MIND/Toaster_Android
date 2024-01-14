@@ -17,9 +17,10 @@ interface LinkService {
     const val ISREAD = "is-read"
     const val SAVE = "save"
   }
+
   @POST("/$TOAST/$SAVE")
   suspend fun postLink(
-    @Body requestWriteDto: RequestWriteDto
+    @Body requestWriteDto: RequestWriteDto,
   ): BaseResponse<Unit>
 
   @DELETE("/$TOAST/$DELETE/{toastId}}")
