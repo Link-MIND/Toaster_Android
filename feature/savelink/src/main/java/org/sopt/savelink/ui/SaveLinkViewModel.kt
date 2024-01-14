@@ -6,13 +6,24 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.sopt.domain.link.usecase.DeleteLinkUseCase
 import org.sopt.domain.link.usecase.PatchReadLinkUseCase
+import org.sopt.domain.link.usecase.PostSaveLinkUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class SaveLinkViewModel @Inject constructor(
   private val deleteLinkUseCase: DeleteLinkUseCase,
   private val patchReadLinkUseCase: PatchReadLinkUseCase,
+  private val saveLinkUseCase: PostSaveLinkUseCase
 ) : ViewModel() {
+
+  fun saveLink(linkUrl:String,categoryId:Long) = viewModelScope.launch {
+    saveLinkUseCase(
+      PostSaveLinkUseCase.Param(
+        linkUrl=linkUrl, categoryId=categoryId
+      ),
+    ).onSuccess {
+    }.onFailure { }
+  }
   fun deleteLink(toastId: Long) = viewModelScope.launch {
     deleteLinkUseCase(
       DeleteLinkUseCase.Param(
