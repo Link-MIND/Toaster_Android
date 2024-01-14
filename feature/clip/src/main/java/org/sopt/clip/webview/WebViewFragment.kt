@@ -28,6 +28,7 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
     handleReadBtn()
     handleWebViewNavigation()
     handleOpenInBrowser()
+    setOnWebViewAddress()
   }
 
   private fun onClickClipLink() {
@@ -46,16 +47,18 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
       webView.loadUrl(it)
       WebViewAddress.setText(it)
     }
+  }
 
-    WebViewAddress.setOnEditorActionListener { _, actionId, _ ->
+  private fun setOnWebViewAddress() {
+    binding.tvWebviewAddress.setOnEditorActionListener { _, actionId, _ ->
       if (actionId == EditorInfo.IME_ACTION_DONE ||
         actionId == EditorInfo.IME_NULL ||
         actionId == EditorInfo.IME_ACTION_SEND ||
         actionId == EditorInfo.IME_ACTION_NEXT
       ) {
-        val enteredUrl = WebViewAddress.text.toString()
+        val enteredUrl = binding.tvWebviewAddress.text.toString()
         if (enteredUrl.isNotBlank()) {
-          webView.loadUrl(enteredUrl)
+          binding.wbClip.loadUrl(enteredUrl)
           requireContext().hideKeyboard(requireView())
         }
         true
