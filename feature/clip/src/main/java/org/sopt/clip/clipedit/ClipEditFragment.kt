@@ -76,5 +76,4 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
       }
     }
   }
-
 }
