@@ -12,8 +12,9 @@ class ClipViewHolder(
     with(binding) {
       if (clipData == null) return
       val totalClipId: Long = 0
-      if (clipData.clipId == totalClipId)
+      if (clipData.clipId == totalClipId) {
         ivClipIcon.setImageResource(org.sopt.mainfeature.R.drawable.ic_clip_all_24)
+      }
       tvClipName.text = clipData.clipName
       tvClipAmount.text = clipData.clipAmount.toString() + "개"
       root.setOnClickListener {
