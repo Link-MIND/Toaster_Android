@@ -23,6 +23,9 @@ class ClipLinkViewHolder(
         initLinkClipTitleVisible(linkData)
 */
         }
+        ivLinkDelete.onThrottleClick {
+          onClickItemLink(linkData.linkId, "delete")
+        }
       }
     }
   }

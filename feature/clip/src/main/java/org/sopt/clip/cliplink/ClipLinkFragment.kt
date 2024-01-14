@@ -33,6 +33,10 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
       },
     ) { itemId, state ->
       Toast.makeText(context, "$state itemId: $itemId", Toast.LENGTH_SHORT).show()
+      if (state == "delete") {
+        val deleteLinkBottomSheet = LinkMindBottomSheet(requireContext())
+        deleteLinkBottomSheet.show()
+      }
     }
     binding.rvCategoryLink.adapter = clipLinkAdapter
 
