@@ -8,4 +8,6 @@ interface TimerRemoteDataSource {
   suspend fun getTimerMain(): BaseResponse<ResponseGetTimerPageDto>
 
   suspend fun postTimer(requestPostTimerDto: RequestPostTimerDto): BaseResponse<Unit>
+
+  suspend fun deleteTimer(timerId: Int): BaseResponse<Unit>
 }

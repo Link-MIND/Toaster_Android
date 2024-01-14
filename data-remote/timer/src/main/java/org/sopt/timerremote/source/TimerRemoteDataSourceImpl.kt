@@ -12,4 +12,6 @@ class TimerRemoteDataSourceImpl @Inject constructor(
 ) : TimerRemoteDataSource {
   override suspend fun getTimerMain(): BaseResponse<ResponseGetTimerPageDto> = timerService.getTimerMain()
   override suspend fun postTimer(requestPostTimerDto: RequestPostTimerDto): BaseResponse<Unit> = timerService.postTimer(requestPostTimerDto)
+
+  override suspend fun deleteTimer(timerId: Int): BaseResponse<Unit> = timerService.deleteTimer(timerId)
 }
