@@ -4,6 +4,7 @@
   <string name="search_result_detail_clip_name">세부 클립명</string>
   <string name="search_result_clip_num">개</string>
   <string name="search_none_results">검색결과가 없어요.\n다른 검색어로 찾아보실래요?</string>
-    <string name="clip_title">클립명</string>
+  <string name="clip_title">클립명</string>
   <string name="clip_amount_n">n</string>
+  <string name="clip_amount_nn">nn</string>
 </resources>
