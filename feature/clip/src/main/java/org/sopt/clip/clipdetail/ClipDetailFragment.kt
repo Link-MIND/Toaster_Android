@@ -24,7 +24,6 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
       }
       findNavController().navigate(R.id.action_navigation_clip_detail_to_webViewFragment, bundle)
     }
-
     binding.rvCategoryLink.adapter = clipDetailAdapter
     var state: Boolean = viewModel.mockLinkData == null
     initEmptyMsgVisible(state)
