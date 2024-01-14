@@ -33,6 +33,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="20dp"
+가    android:padding="8dp"
     android:src="@drawable/ic_setting_24"
     app:layout_constraintBottom_toBottomOf="@+id/cl_mypage_title"
     app:layout_constraintEnd_toEndOf="parent"
@@ -71,6 +72,19 @@
       app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+      android:id="@+id/tv_my_total_link_num"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="3dp"
+      android:text="@string/clip_amount_n"
+      android:textAppearance="@style/Typography.suit.bold_28"
+      android:textColor="@color/primary"
+      app:layout_constraintBaseline_toBaselineOf="@id/tv_my_total_link"
+      app:layout_constraintEnd_toStartOf="@id/tv_my_total_link"
+      />
+
+    <TextView
+      android:id="@+id/tv_my_total_link"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="@string/mypage_number"
@@ -96,6 +110,7 @@
     app:layout_constraintTop_toBottomOf="@+id/cl_mypage_now_link" />
 
   <TextView
+    android:id="@+id/tv_read_link_this_week"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="14dp"
@@ -107,6 +122,19 @@
     app:layout_constraintTop_toTopOf="@+id/bg_link_record" />
 
   <TextView
+    android:id="@+id/tv_read_link_this_week_num"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="string/clip_amount_nn"
+    android:textAppearance="@style/Typography.suit.bold_24"
+    android:textColor="@color/neutrals900"
+    android:layout_marginEnd="14dp"
+    android:layout_marginBottom="14dp"
+    app:layout_constraintEnd_toStartOf="@id/v_mypage_line"
+    app:layout_constraintBottom_toBottomOf="@id/bg_link_record"/>
+
+  <TextView
+    android:id="@+id/tv_save_link_this_week"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="14dp"
@@ -116,6 +144,19 @@
     android:textColor="@color/neutrals400"
     app:layout_constraintStart_toEndOf="@+id/v_mypage_line"
     app:layout_constraintTop_toTopOf="@+id/bg_link_record" />
+
+  <TextView
+    android:id="@+id/tv_save_link_this_week_num"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/clip_amount_nn"
+    android:textAppearance="@style/Typography.suit.bold_24"
+    android:textColor="@color/neutrals900"
+    android:layout_marginEnd="14dp"
+    android:layout_marginBottom="14dp"
+    app:layout_constraintEnd_toEndOf="@id/bg_link_record"
+    app:layout_constraintBottom_toBottomOf="@id/bg_link_record"
+    />
 
   <View
     android:id="@+id/v_mypage_line"
@@ -136,7 +177,7 @@
     app:layout_constraintTop_toBottomOf="@id/bg_link_record" />
 
   <ImageView
-    android:id="@+id/iv_please_wait"
+    android:id="@+id/iv_mypage_please_wait"
     android:layout_width="200dp"
     android:layout_height="200dp"
     android:src="@drawable/img_mypage_alarm"
@@ -145,6 +186,7 @@
     app:layout_constraintTop_toBottomOf="@id/v_mypage_1" />
 
   <TextView
+    android:id="@+id/tv_mypage_please_wait"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/mypage_please_wait"
@@ -152,10 +194,6 @@
     android:textColor="@color/neutrals500"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/iv_please_wait" />
+    app:layout_constraintTop_toBottomOf="@id/iv_mypage_please_wait" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
