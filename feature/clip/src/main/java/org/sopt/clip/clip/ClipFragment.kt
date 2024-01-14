@@ -26,11 +26,10 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
       findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_link)
     }
     binding.rvClipClip.adapter = clipAdapter
-    if (viewModel.mockClipData == null) {
-    } else {
-      binding.ivClipEmpty.visibility = View.GONE
-      binding.tvClipEmpty.visibility = View.GONE
-    }
+    if (viewModel.mockClipData == null) return
+    binding.ivClipEmpty.visibility = View.GONE
+    binding.tvClipEmpty.visibility = View.GONE
+
     clipAdapter.submitList(viewModel.mockClipData)
     onClickSearchButton()
     onClickListView()
