@@ -27,6 +27,10 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+//    viewModel.getCategortAll()
+//    viewModel.deleteLink(23)
+//    viewModel.saveLink("http://www.naver.com",null)
+//    viewModel.patchReadLink(23)
     binding.btnSaveLinkComplete.state = LinkMindButtonState.DISABLE
     binding.ivSaveLinkClipBack.onThrottleClick {
       findNavController().navigateUp()

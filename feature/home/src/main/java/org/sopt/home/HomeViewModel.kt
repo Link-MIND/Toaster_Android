@@ -16,11 +16,6 @@ class HomeViewModel @Inject constructor(
   private val getRecommendSite: GetRecommendSite,
   private val getWeekBestLink: GetWeekBestLink,
 ) : ViewModel() {
-  init {
-    getMainPageUserClip()
-    getRecommendSite()
-    getWeekBestLink()
-  }
 
   fun getMainPageUserClip() = viewModelScope.launch {
     getMainPageUserClip.invoke().onSuccess {

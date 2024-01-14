@@ -9,11 +9,12 @@ import retrofit2.http.DELETE
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface LinkService {
   companion object {
     const val TOAST = "toast"
-    const val DELETE = "all"
+    const val DELETE = "delete"
     const val ISREAD = "is-read"
     const val SAVE = "save"
   }
@@ -22,9 +23,8 @@ interface LinkService {
     @Body requestWriteDto: RequestWriteDto
   ): BaseResponse<Unit>
 
-  @DELETE("/$TOAST/$DELETE/{toastId}}")
-  suspend fun deleteLink(@Path("toastId", encoded = true) toastId: Long): BaseResponse<Unit>
-
+  @DELETE("/$TOAST/$DELETE")
+  suspend fun deleteLink(@Query("toastId") toastId: Long): BaseResponse<Unit>
   @PATCH("/$TOAST/$ISREAD")
   suspend fun patchLink(@Body requestIsReadDto: RequestIsReadDto): BaseResponse<ResponseIsReadDto>
 }

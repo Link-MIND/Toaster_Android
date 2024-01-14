@@ -10,12 +10,12 @@ data class ResponseCategoryDto(
   val categoryId: Long,
   @SerialName("categoryTitle")
   val categoryTitle: String,
-  @SerialName("categotoastNumryId")
-  val categotoastNumryId: Int,
+  @SerialName("toastNum")
+  val toastNum: Int,
 )
 
 internal fun ResponseCategoryDto.toCoreModel() = CategoryList(
   categoryId = categoryId,
   categoryTitle = categoryTitle,
-  toastNum = categotoastNumryId,
+  toastNum = toastNum,
 )

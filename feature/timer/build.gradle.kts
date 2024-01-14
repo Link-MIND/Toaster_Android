@@ -12,7 +12,5 @@ android {
 }
 
 dependencies {
-  implementation(projects.core.designsystem)
   implementation(projects.domain.timer)
-  implementation(projects.core.model)
 }
