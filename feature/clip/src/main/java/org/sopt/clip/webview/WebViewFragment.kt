@@ -61,7 +61,6 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
     }
   }
 
-
   private fun handleReadBtn() {
     val btnReadAfter = binding.ivReadAfter
     val btnReadBefore = binding.ivReadBefore
