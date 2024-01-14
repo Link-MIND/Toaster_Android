@@ -17,15 +17,12 @@ import org.sopt.ui.view.onThrottleClick
 @AndroidEntryPoint
 class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.inflate(it) }) {
   private val viewModel by viewModels<ClipViewModel>()
-
+  private lateinit var clipAdapter: ClipAdapter
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val clipAdapter = ClipAdapter { clipId ->
-      Toast.makeText(context, "클릭된 item id: $clipId", Toast.LENGTH_SHORT).show()
-      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_link)
-    }
-    if (setListVisible(clipAdapter)) return
+    initClipAdapter()
+    if (setEmptyMsgVisible()) return
 
     clipAdapter.submitList(viewModel.mockClipData)
     onClickSearchButton()
@@ -34,9 +31,16 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     onClickAddButton()
   }
 
-  private fun setListVisible(clipAdapter: ClipAdapter): Boolean {
+  private fun initClipAdapter() {
+    clipAdapter = ClipAdapter { clipId ->
+      Toast.makeText(context, "클릭된 item id: $clipId", Toast.LENGTH_SHORT).show()
+      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_link)
+    }
     binding.rvClipClip.adapter = clipAdapter
-    if (viewModel.mockClipData == null) return true
+  }
+
+  private fun setEmptyMsgVisible(): Boolean {
+    if (viewModel.mockClipData.isNullOrEmpty()) return true
     binding.ivClipEmpty.visibility = View.GONE
     binding.tvClipEmpty.visibility = View.GONE
     return false

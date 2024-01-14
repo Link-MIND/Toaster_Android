@@ -3,7 +3,6 @@ package org.sopt.clip.cliplink
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -24,6 +23,24 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    initClipAdapter()
+    initViewState(viewModel.mockLinkData.isNullOrEmpty())
+  }
+
+  private fun initViewState(isDataNull: Boolean) {
+    with(binding) {
+      ivClipCategoryEmpty.isVisible = isDataNull
+      tvClipLinkEmpty.isVisible = isDataNull
+
+      if (isDataNull) return
+      clipLinkAdapter.submitList(viewModel.mockLinkData)
+
+      initToggleClickListener()
+      onClickBackButton()
+    }
+  }
+
+  private fun initClipAdapter() {
     clipLinkAdapter = ClipLinkAdapter(
       { linkDTO ->
         naviagateToWebViewFragment(linkDTO)
@@ -32,17 +49,6 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
       updateItemEvent(state, itemId)
     }
     binding.rvCategoryLink.adapter = clipLinkAdapter
-
-    var state: Boolean = viewModel.mockLinkData == null
-    initEmptyMsgVisible(state)
-    if (!state) {
-      clipLinkAdapter.submitList(viewModel.mockLinkData)
-
-      updateClipList()
-
-      initToggleClickListener()
-      onClickBackButton()
-    }
   }
 
   private fun naviagateToWebViewFragment(linkDTO: LinkDTO) {
@@ -62,17 +68,6 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
   private fun onClickBackButton() {
     binding.ivClipLinkBack.onThrottleClick {
       findNavController().navigateUp()
-    }
-  }
-
-  private fun updateClipList() {
-    viewModel.mockDataListState.observe(
-      viewLifecycleOwner,
-    ) {
-      initEmptyMsgVisible(it)
-      if (!it) {
-        clipLinkAdapter.submitList(viewModel.mockLinkData)
-      }
     }
   }
 
@@ -104,7 +99,6 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
       initToggleVisible(selectedNow, true)
       initDividerVisible(selectedNow)
       viewModel.toggleSelectedPast = selectedNow
-      updateClipList()
     }
   }
 
@@ -136,24 +130,6 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
           dvClipPicker2.isVisible = false
         }
       }
-    }
-  }
-
-  private fun initEmptyMsgVisible(state: Boolean) {
-    with(binding) {
-      ivClipCategoryEmpty.isVisible = state
-      tvClipLinkEmpty.isVisible = state
-    }
-  }
-
-  fun initTextGrey() {
-    with(binding) {
-      btnClipAll.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_semibold_14)
-      btnClipRead.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_semibold_14)
-      btnClipUnread.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_semibold_14)
-      btnClipAll.setTextColor(ContextCompat.getColor(root.context, org.sopt.mainfeature.R.color.neutrals400))
-      btnClipRead.setTextColor(ContextCompat.getColor(root.context, org.sopt.mainfeature.R.color.neutrals400))
-      btnClipUnread.setTextColor(ContextCompat.getColor(root.context, org.sopt.mainfeature.R.color.neutrals400))
     }
   }
 }
