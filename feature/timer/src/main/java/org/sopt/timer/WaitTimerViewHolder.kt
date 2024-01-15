@@ -1,5 +1,6 @@
 package org.sopt.timer
 
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.model.timer.Timer
 import org.sopt.timer.databinding.ItemTimerWaitBinding
@@ -15,12 +16,13 @@ class WaitTimerViewHolder(
     if (data == null) return
     with(binding) {
       tvItemTimerWaitCategory.text = data.comment
-      val time = data.remindTime.replace("AM","오전").replace("PM","오후")
+      val time = data.remindTime.replace("AM", "오전").replace("PM", "오후")
       tvItemTimerWaitWhen.text = TIME_FORMAT.format(data.remindDates, time)
-      tgItemTimerWait.initToggleState(data.isAlarm!!)
-      tgItemTimerWait.onThrottleClick {
+      vItemTimerWait.setOnClickListener {
+        tgItemTimerWait.trasition()
         onToggleClicked(data)
       }
+      tgItemTimerWait.initToggleState(data.isAlarm!!)
       ivItemTimerWaitMore.onThrottleClick {
         onMoreClicked(data)
       }
