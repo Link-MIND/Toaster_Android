@@ -20,9 +20,9 @@
     app:layout_constraintTop_toTopOf="parent" />
 
   <androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/btn_clip_edit"
     android:layout_width="wrap_content"
     android:layout_height="0dp"
-    android:id="@+id/btn_clip_edit"
     android:background="@color/transparent"
     android:paddingHorizontal="28dp"
     android:paddingTop="19dp"

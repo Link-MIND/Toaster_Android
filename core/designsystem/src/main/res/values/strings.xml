@@ -45,7 +45,11 @@
   <string name="edit_clip_guide_msg">클립을 누른 뒤 위아래로 드래그하여 순서를 수정하세요!</string>
   <string name="edit_clip_minus_description">클립을 삭제하려면 누르세요</string>
   <string name="edit_clip_edit_description">클립을 수정하려면 누르세요</string>
-
+  <string name="edit_clip_edit_title">클립 이름 수정</string>
+  <string name="edit_clip_delete_dialog_title">클립을 삭제하시겠어요?</string>
+  <string name="edit_clip_delete_dialog_subtitle">지금까지 저장된 모든 링크가 사라져요</string>
+  <string name="edit_clip_delete_dialog_delete">삭제</string>
+  <string name="string.negative_close_msg">닫기</string>
 
   <!-- modify timer -->
   <string name="modify_timer_mod">타이머 수정하기</string>
@@ -54,18 +58,21 @@
 
   <!-- clip -->
   <string name="clip_search">검색어를 입력하세요</string>
-  <string name="clip_add_clip">클립추가</string>
+  <string name="clip_add_clip">클립 추가</string>
   <string name="clip_all">전체 클립</string>
   <string name="clip_empty">클립을 추가해\n링크를 정리해보세요!</string>
   <string name="clip_toolbar_edit">편집</string>
   <string name="clip_toolbar_all_clip">전체 클립</string>
+  <string name="clip_new_clip_info">클립의 이름을 입력해주세요</string>
 
-  <!-- clip detail-->
-  <string name="clip_detail_read">열람</string>
-  <string name="clip_detail_unread">미열람</string>
-  <string name="clip_detail_empty">아직 클립에 저장된 링크가 없어요\n아래 + 버튼을 통해 링크를 저장해보세요!</string>
-  <string name="clip_detail_empty_description">저장된 링크가 없습니다</string>
-  <string name="clip_detail_back_description">뒤로 가기</string>
+  <!-- clip link-->
+  <string name="clip_link_read">열람</string>
+  <string name="clip_link_unread">미열람</string>
+  <string name="clip_link_empty">아직 클립에 저장된 링크가 없어요\n아래 + 버튼을 통해 링크를 저장해보세요!</string>
+  <string name="clip_link_empty_description">저장된 링크가 없습니다</string>
+  <string name="clip_link_back_description">뒤로 가기</string>
+  <string name="clip_link_bottom_sheet_title">수정하기</string>
+  <string name="clip_link_bottom_sheet_delete">삭제</string>
 
   <!-- home -->
   <string name="home_correction_clip">클립수정</string>
@@ -73,7 +80,7 @@
   <string name="home_error_clip_info">공백 또는 10글자 이상은 안됩니다.</string>
 
   <!-- error -->
-  <string name="error_clip_length">링크 제목은 최대 15까지 입력 가능해요</string>
+  <string name="error_clip_length">링크 제목은 최대 15자까지 입력 가능해요</string>
   <string name="error_clip_name">이미 같은 이름의 클립이 있어요</string>
 
   <!-- dialog intro -->

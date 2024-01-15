@@ -5,4 +5,5 @@ data class LinkDTO(
   val thumbnail: Int,
   val linkTitle: String,
   val upperClipName: String,
+  val linkId: Long,
 )
