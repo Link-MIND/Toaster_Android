@@ -42,7 +42,7 @@ interface TimerService {
     @Path(TIMER_ID) timerId: Int,
   ): BaseResponse<Unit>
 
-  companion object{
+  companion object {
     const val TIMER = "timer"
     const val MAIN = "main"
     const val DATE_TIME = "datetime"
