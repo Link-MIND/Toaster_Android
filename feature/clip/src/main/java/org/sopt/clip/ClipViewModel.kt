@@ -6,12 +6,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import org.sopt.domain.category.category.usecase.DeleteCategoryUseCase
 import org.sopt.domain.category.category.usecase.GetCategoryAllUseCase
+import org.sopt.domain.category.category.usecase.GetCategoryDuplicateUseCase
+import org.sopt.domain.category.category.usecase.GetCategoryLinkUseCase
+import org.sopt.domain.category.category.usecase.PatchCategoryEditUseCase
+import org.sopt.domain.category.category.usecase.PostAddCategoryTitleUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class ClipViewModel @Inject constructor(
   private val getCategoryAll: GetCategoryAllUseCase,
+  private val deleteCategory: DeleteCategoryUseCase,
+  private val getCategoryDuplicate: GetCategoryDuplicateUseCase,
+  private val getCategoryLink: GetCategoryLinkUseCase,
+  private val patchCategoryEdit: PatchCategoryEditUseCase,
+  private val postAddCategoryTitle: PostAddCategoryTitleUseCase
 ) : ViewModel() {
 
   init {
@@ -71,6 +81,38 @@ class ClipViewModel @Inject constructor(
     getCategoryAll.invoke().onSuccess {
       Log.d("test", "$it")
     }.onFailure {
+    }
+  }
+
+  fun deleteCategory(deleteCategoryList: List<Long>) = viewModelScope.launch {
+    deleteCategory.invoke(param = DeleteCategoryUseCase.Param(deleteCategoryList)).onSuccess{
+      Log.d("카테 삭제", "성공")
+    }.onFailure{
+
+    }
+  }
+
+  fun getCategoryDuplicate(title: String) =viewModelScope.launch {
+    getCategoryDuplicate.invoke(param=GetCategoryDuplicateUseCase.Param(title)).onSuccess {
+      Log.d("카테 중복 체크", "$title")
+    }.onFailure{
+      Log.d("카테 중복 체크", "실패")
+    }
+  }
+
+  fun getCategoryLink(filter: String, isAllCategory: Boolean)= viewModelScope.launch{
+    getCategoryLink.invoke(param=GetCategoryLinkUseCase.Param(filter = filter, isAllCategory = isAllCategory)).onSuccess {
+      Log.d("카테 안의 링크 검색", "성공")
+    }.onFailure {
+      Log.d("카테 안의 링크 검색", "실패")
+    }
+  }
+
+  fun postAddCategoryTitle(categoryTitle: String)=viewModelScope.launch {
+    postAddCategoryTitle.invoke(param=PostAddCategoryTitleUseCase.Param(categoryTitle)).onSuccess {
+      Log.d("카테 추가", "성공")
+    }.onFailure {
+      Log.d("카테 추가", "실패")
     }
   }
 }
