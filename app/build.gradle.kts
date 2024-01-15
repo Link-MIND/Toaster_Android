@@ -13,7 +13,6 @@ android {
     versionCode = 6
     versionName = "1.0"
   }
-
   viewBinding.enable = true
   buildTypes {
     getByName("release") {
