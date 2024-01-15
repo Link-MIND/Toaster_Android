@@ -1,5 +1,7 @@
 package org.sopt.data.category.datasource
 
+import org.sopt.model.category.CategoryDuplicate
+import org.sopt.model.category.CategoryLinkCondition
 import org.sopt.model.category.CategoryList
 
 interface RemoteCategoryDataSource {
@@ -9,9 +11,9 @@ interface RemoteCategoryDataSource {
 
   suspend fun deleteCategory(deleteCategoryList: List<Long>)
 
-  suspend fun getCategoryDuplicate(title: String)
+  suspend fun getCategoryDuplicate(title: String) : CategoryDuplicate
 
-  suspend fun getCategoryLink(filter: String, isAllCategory: Boolean)
+  suspend fun getCategoryLink(filter: String, isAllCategory: Boolean) : CategoryLinkCondition
 
   suspend fun patchCategoryEdit()
 }
