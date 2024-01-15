@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.orbitmvi.orbit.Container
 import org.orbitmvi.orbit.ContainerHost
+import org.orbitmvi.orbit.syntax.simple.blockingIntent
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
@@ -54,9 +55,15 @@ class HomeViewModel @Inject constructor(
       Log.d("getWeekBestLink", "$it")
     }
   }
-  fun navigateSearch() = intent { postSideEffect(HomeSideEffect.NavigateSearcg) }
+
+  fun navigateSearch() = intent { postSideEffect(HomeSideEffect.NavigateSearch) }
   fun navigateSetting() = intent { postSideEffect(HomeSideEffect.NavigateSetting) }
   fun showBottomSheet() = intent { postSideEffect(HomeSideEffect.showBottomSheet) }
 
-
+  fun navigateWebview(url: String) = blockingIntent {
+    reduce { state.copy(url = url) }
+    postSideEffect(HomeSideEffect.NavigateWebview)
+  }
 }
+
+

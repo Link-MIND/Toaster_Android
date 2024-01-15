@@ -9,7 +9,7 @@ import org.sopt.model.home.RecommendLink
 import org.sopt.ui.view.ItemDiffCallback
 
 class HomeWeekRecommendLinkAdapter(
-  private val onClickRecommendLink: () -> Unit,
+  private val onClickRecommendLink: (RecommendLink) -> Unit,
 ) : ListAdapter<RecommendLink, HomeWeekRecommendLinkViewHolder>(DiffUtil) {
   override fun onBindViewHolder(holder: HomeWeekRecommendLinkViewHolder, position: Int) {
     holder.onBind(getItem(position))

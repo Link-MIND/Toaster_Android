@@ -8,7 +8,7 @@ import org.sopt.model.home.RecommendLink
 
 class HomeWeekRecommendLinkViewHolder(
   private val binding: ItemWeekRecommendLinkBinding,
-  private val onClickRecommendLink: () -> Unit,
+  private val onClickRecommendLink: (RecommendLink) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
 
   fun onBind(data: RecommendLink?) {
@@ -21,7 +21,7 @@ class HomeWeekRecommendLinkViewHolder(
         crossfade(true)
         transformations(CircleCropTransformation())
         root.setOnClickListener {
-          onClickRecommendLink()
+          onClickRecommendLink(data)
         }
       }
     }
