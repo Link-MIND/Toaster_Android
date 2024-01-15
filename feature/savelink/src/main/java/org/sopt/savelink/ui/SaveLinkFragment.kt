@@ -6,12 +6,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
 import designsystem.components.dialog.LinkMindDialog
 import designsystem.components.edittext.state.LinkMindEditTextState
+import org.orbitmvi.orbit.viewmodel.observe
 import org.sopt.savelink.databinding.FragmentSaveLinkBinding
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.context.hideKeyboard
@@ -25,9 +27,12 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     LinkMindDialog(requireContext())
   }
 
+  private val viewModel by viewModels<SaveLinkViewModel>()
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     initView()
+    collectState()
     handleEditTextLink()
     handleKeyboardHide()
     onClickCloseSaveLink()
@@ -47,6 +52,21 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     }
   }
 
+  private fun collectState() {
+    viewModel.observe(viewLifecycleOwner, state = ::render, sideEffect = ::handleSideEffect)
+  }
+
+  private fun render(homeState: LinkState) {
+  }
+
+  private fun handleSideEffect(sideEffect: LinkSideEffect) {
+    when (sideEffect) {
+      is LinkSideEffect.NavigateUp -> navigateUp()
+      is LinkSideEffect.NavigateSetLink -> navigateSetLink()
+      is LinkSideEffect.ShowBottomSheet -> showCloseDialog()
+    }
+  }
+
   private fun handleEditTextLink() {
     with(binding) {
       etvSaveCopyLink.apply {
@@ -56,7 +76,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
         }
         throttleAfterTextChanged {
           btnSaveLinkNext.state = LinkMIndFullWidthButtonState.DISABLE
-          if (checkTextLength(15)) {
+          if (!editText.text.contains("http")) {
             showErrorState(tvSaveLinkError)
             return@throttleAfterTextChanged
           }
@@ -87,6 +107,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
       showCloseDialog()
     }
   }
+
   private fun getArgumentToMain(): String {
     val args: SaveLinkFragmentArgs by navArgs()
     val clipboardLink = args.clipboardLink
@@ -147,7 +168,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
       }
       .setPositiveButton(org.sopt.mainfeature.R.string.positive_ok_msg) {
         linkMindDialog.dismiss()
-        navigateUp()
+        viewModel.navigateUp()
       }
       .show()
   }
@@ -160,9 +181,13 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
 
   private fun onClickComplete() {
     binding.btnSaveLinkNext.btnClick {
-      KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
-      val action = SaveLinkFragmentDirections.actionSaveLinkFragmentToSaveLinkSetClipFragment()
-      findNavController().navigate(action)
+      viewModel.navigateSetLink()
     }
+  }
+
+  private fun navigateSetLink() {
+    KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
+    val action = SaveLinkFragmentDirections.actionSaveLinkFragmentToSaveLinkSetClipFragment()
+    findNavController().navigate(action)
   }
 }

@@ -48,6 +48,7 @@
     android:paddingTop="12dp"
     app:editTextSearchHint="복사한 링크를 붙여 넣어 주세요"
     app:layout_constraintTop_toBottomOf="@id/tv_save_link_sub" />
+
   <TextView
     android:id="@+id/tv_save_link_error"
     android:layout_width="match_parent"
