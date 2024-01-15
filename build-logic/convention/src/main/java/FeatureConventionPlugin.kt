@@ -38,6 +38,7 @@ internal class FeatureConventionPlugin : Plugin<Project> {
         "implementation"(libs.findLibrary("kotlinx.coroutines.core").get())
 
         "implementation"(libs.findLibrary("timber").get())
+        "implementation"(libs.findBundle("orbit").get())
       }
     }
   }
