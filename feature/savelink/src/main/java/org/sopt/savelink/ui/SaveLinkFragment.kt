@@ -29,8 +29,8 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     val args: SaveLinkFragmentArgs by navArgs()
-    val id = args.id
-    initView(id)
+    val clipboardLink = args.clipboardLink
+    initView(clipboardLink)
     handleEditTextLink()
     handleKeyboardHide()
     onClickCloseSaveLink()
@@ -55,9 +55,9 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
       .show()
   }
 
-  private fun initView(id: String) {
-    if (id.isNotEmpty()) {
-      binding.etvSaveCopyLink.editText.setText(id)
+  private fun initView(clipboardLink: String) {
+    if (clipboardLink.isNotEmpty()) {
+      binding.etvSaveCopyLink.editText.setText(clipboardLink)
       handleSaveLinkNextClick()
       binding.btnSaveLinkNext.setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals850_fill_12_rect)
     } else {

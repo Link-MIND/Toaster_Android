@@ -11,10 +11,10 @@
     android:label="fragment_save_link"
     tools:layout="@layout/fragment_save_link">
     <argument
-      android:name="id"
+      android:name="clipboardLink"
       app:argType="string" />
     <deepLink
-      app:uri="featureSaveLink://saveLinkFragment?id={id}" />
+      app:uri="featureSaveLink://saveLinkFragment?clipboardLink={clipboardLink}" />
     <action
       android:id="@+id/action_saveLinkFragment_to_saveLinkSetClipFragment"
       app:destination="@id/saveLinkSetClipFragment"
