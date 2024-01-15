@@ -45,6 +45,7 @@
       app:layout_constraintTop_toTopOf="@id/cl_clip_edit_clip" />
 
     <ImageView
+      android:id="@+id/iv_clip_edit_title_edit"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="3dp"
