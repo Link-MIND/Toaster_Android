@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.button.state.LinkMindButtonState
 import org.sopt.timer.R
 import org.sopt.timer.databinding.FragmentTimerClipSelectBinding
-import org.sopt.timer.dummymodel.Clip
+import org.sopt.timer.model.Clip
 import org.sopt.timer.settimer.SetTimerViewModel
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
 
+@AndroidEntryPoint
 class TimerClipSelectFragment : BindingFragment<FragmentTimerClipSelectBinding>({ FragmentTimerClipSelectBinding.inflate(it) }) {
   private lateinit var adapter: ClipSelectAdapter
 

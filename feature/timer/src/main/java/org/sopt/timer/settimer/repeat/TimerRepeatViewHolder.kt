@@ -5,9 +5,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import org.sopt.timer.R
+import org.sopt.model.timer.Repeat
 import org.sopt.timer.databinding.ItemTimerRepeatBinding
-import org.sopt.timer.dummymodel.Repeat
 import org.sopt.ui.view.onThrottleClick
 
 class TimerRepeatViewHolder(

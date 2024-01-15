@@ -4,8 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import org.sopt.model.timer.Repeat
 import org.sopt.timer.databinding.ItemTimerRepeatBinding
-import org.sopt.timer.dummymodel.Repeat
 import org.sopt.ui.view.ItemDiffCallback
 
 class TimerRepeatAdapter(

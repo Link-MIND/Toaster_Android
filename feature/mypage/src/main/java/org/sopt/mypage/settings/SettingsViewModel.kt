@@ -33,7 +33,7 @@ class SettingsViewModel @Inject constructor(
   }
 
   fun withdraw() = viewModelScope.launch {
-    authRepository.signout().onSuccess {
+    authRepository.withdraw().onSuccess {
       _withdrawState.emit(UiState.Success(it))
     }.onFailure {
       _withdrawState.emit(UiState.Failure(it.message.toString()))

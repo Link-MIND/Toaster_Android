@@ -28,13 +28,6 @@ class LinkMindAuthenticator @Inject constructor(
           tokenRefreshService.postAuthRefresh(dataStore.flowRefreshToken().first())
         }
       }.onSuccess {
-        if (it.code == CODE_TOKEN_EXPIRED || it.code == 404) {
-          runBlocking {
-            dataStore.setAutoLogin(false)
-          }
-          ProcessPhoenix.triggerRebirth(context, intentProvider.getIntent())
-          return@onSuccess
-        }
         runBlocking {
           dataStore.apply {
             setAccessToken(it.data?.accessToken ?: "")

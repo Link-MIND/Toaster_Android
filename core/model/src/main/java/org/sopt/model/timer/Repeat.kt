@@ -1,4 +1,4 @@
-package org.sopt.timer.dummymodel
+package org.sopt.model.timer
 
 data class Repeat(
   val period: String,

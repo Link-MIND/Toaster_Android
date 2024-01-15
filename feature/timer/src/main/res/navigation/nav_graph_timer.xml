@@ -9,9 +9,17 @@
     android:name="org.sopt.timer.TimerFragment"
     android:label="fragment_timer"
     tools:layout="@layout/fragment_timer">
+
     <action
       android:id="@+id/action_navigation_timer_to_navigation_timer_clip_select"
       app:destination="@id/navigation_timer_clip_select"
+      app:enterAnim="@anim/from_bottom"
+      app:exitAnim="@android:anim/fade_out"
+      app:popEnterAnim="@android:anim/fade_in"
+      app:popExitAnim="@anim/to_bottom" />
+    <action
+      android:id="@+id/action_navigation_timer_to_navigation_time_picker"
+      app:destination="@id/navigation_time_picker"
       app:enterAnim="@anim/from_bottom"
       app:exitAnim="@android:anim/fade_out"
       app:popEnterAnim="@android:anim/fade_in"
@@ -35,6 +43,30 @@
     android:name="org.sopt.timer.settimer.timepicker.TimePickerFragment"
     android:label="fragment_time_picker"
     tools:layout="@layout/fragment_time_picker" >
+    <argument
+      android:name="arg_patch"
+      app:argType="boolean"
+      android:defaultValue="false" />
+
+    <argument
+      android:name="arg_timer_id"
+      app:argType="integer"
+      android:defaultValue="0"/>
+
+    <argument
+      android:name="arg_category_name"
+      app:argType="string"
+      android:defaultValue="카테고리"/>
+
+    <argument
+      android:name="arg_remind_time"
+      app:argType="string"
+      android:defaultValue="오전 01:00" />
+
+    <argument
+      android:name="arg_remind_dates"
+      app:argType="string"
+      android:defaultValue="" />
     <action
       android:id="@+id/action_navigation_time_picker_to_navigation_timer_repeat"
       app:destination="@id/navigation_timer_repeat"
@@ -42,6 +74,13 @@
       app:exitAnim="@android:anim/fade_out"
       app:popEnterAnim="@android:anim/fade_in"
       app:popExitAnim="@anim/to_bottom" />
+    <action
+      android:id="@+id/action_navigation_time_picker_to_navigation_timer"
+      app:destination="@id/navigation_timer"
+      app:enterAnim="@android:anim/fade_in"
+      app:exitAnim="@anim/to_bottom"
+      app:popUpTo="@id/navigation_timer"
+      app:popUpToInclusive="true"/>
   </fragment>
   <fragment
     android:id="@+id/navigation_timer_repeat"
