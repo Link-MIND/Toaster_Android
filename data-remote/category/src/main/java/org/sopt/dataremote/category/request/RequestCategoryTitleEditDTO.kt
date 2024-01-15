@@ -14,15 +14,14 @@ data class RequestCategoryTitleEditDTO(
 @Serializable
 data class ChangeCategoryTitle(
   @SerialName("categoryId")
-  val categoryId: Int,
+  val categoryId: Long,
   @SerialName("newTitle")
   val newTitle: String
 )
 @Serializable
 data class ChangeCategoryPriority(
   @SerialName("categoryId")
-  val categoryId: Int,
-  @SerialName("newTitle")
-  val newPriority: Int
+  val categoryId: Long,
+  @SerialName("newPriority")
+  val newPriority: Long
 )
-
