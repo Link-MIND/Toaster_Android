@@ -9,4 +9,8 @@ interface TimerRepository {
   suspend fun postTimer(timerData: TimerData): Result<Unit>
 
   suspend fun deleteTimer(timerId: Int): Result<Unit>
+
+  suspend fun patchTimer(timerId: Int, timerData: TimerData): Result<Unit>
+
+  suspend fun patchAlarm(timerId: Int): Result<Unit>
 }
