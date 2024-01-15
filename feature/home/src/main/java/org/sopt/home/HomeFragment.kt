@@ -33,7 +33,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   }
 
   private fun initView() {
-    binding.pbLinkmindHome.setProgressBarMain(54)
     initAdapter()
   }
 
@@ -42,6 +41,11 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   }
 
   private fun render(homeState: HomeState) {
+    binding.tvHomeToastProgressLink.text = homeState.readToastNum.toString()
+    binding.tvAllToastNum.text = "/" + homeState.allToastNum.toString()
+    binding.tvHomeUserName.text = homeState.nickName
+    binding.tvHomeUserClipName.text = homeState.nickName
+    binding.pbLinkmindHome.setProgressBarMain(homeState.calculateProgress())
     homeClipAdapter.submitList(homeState.categoryList)
     homeWeekLinkAdapter.submitList(homeState.weekBestLink)
     homeWeekRecommendLinkAdapter.submitList(homeState.recommendLink)
@@ -90,16 +94,20 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   }
 
   private fun setWeekLinkAdapter() {
-    homeWeekLinkAdapter = HomeWeekLinkAdapter(onClickWeekLink = {
-      viewModel.navigateWebview(it.toastLink)
-    })
+    homeWeekLinkAdapter = HomeWeekLinkAdapter(
+      onClickWeekLink = {
+        viewModel.navigateWebview(it.toastLink)
+      },
+    )
     binding.rvWeekLink.adapter = homeWeekLinkAdapter
   }
 
   private fun setWeekRecommendAdapter() {
-    homeWeekRecommendLinkAdapter = HomeWeekRecommendLinkAdapter(onClickRecommendLink = {
-      viewModel.navigateWebview(it.siteUrl?:"")
-    })
+    homeWeekRecommendLinkAdapter = HomeWeekRecommendLinkAdapter(
+      onClickRecommendLink = {
+        viewModel.navigateWebview(it.siteUrl ?: "")
+      },
+    )
     binding.rvHomeWeekRecommend.adapter = homeWeekRecommendLinkAdapter
     val spacingWeekRecommendInPixels = resources.getDimensionPixelSize(R.dimen.spacing_12)
     binding.rvHomeWeekRecommend.addItemDecoration(ItemDecoration(3, spacingWeekRecommendInPixels))

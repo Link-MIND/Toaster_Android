@@ -27,7 +27,11 @@ class HomeViewModel @Inject constructor(
   fun getMainPageUserClip() = intent {
     getMainPageUserClip.invoke().onSuccess {
       reduce {
-        state.copy(categoryList = (container.stateFlow.value.categoryList + it.mainCategoryDto + null).distinctBy { it?.categoryId })
+        state.copy(
+          nickName = it.nickName,
+          allToastNum = it.allToastNum,
+          readToastNum = it.readToastNum,
+          categoryList = (container.stateFlow.value.categoryList + it.mainCategoryDto + null).distinctBy { it?.categoryId },)
       }
     }.onFailure {
       Log.d("MainUser", "$it")
@@ -36,7 +40,6 @@ class HomeViewModel @Inject constructor(
 
   fun getRecommendSite() = intent {
     getRecommendSite.invoke().onSuccess {
-      Log.d("RecommendSuccess", "$it")
       reduce {
         state.copy(recommendLink = (container.stateFlow.value.recommendLink + it).distinctBy { it.siteId })
       }
@@ -47,7 +50,6 @@ class HomeViewModel @Inject constructor(
 
   fun getWeekBestLink() = intent {
     getWeekBestLink.invoke().onSuccess {
-      Log.d("getWeekBestLinkSuccess", "$it")
       reduce {
         state.copy(weekBestLink = (container.stateFlow.value.weekBestLink + it).distinctBy { it.toastId })
       }
