@@ -14,5 +14,5 @@ data class RequestPatchTimerDto(
 
 fun TimerData.toPatchDto() = RequestPatchTimerDto(
   remindTime = this.remindTime,
-  remindDates = this.remindDates
+  remindDates = this.remindDates,
 )

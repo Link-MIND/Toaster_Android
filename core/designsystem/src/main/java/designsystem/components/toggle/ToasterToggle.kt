@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import org.sopt.mainfeature.R
 import org.sopt.mainfeature.databinding.ToggleLinkmindBinding
 import org.sopt.ui.view.onThrottleClick
@@ -37,7 +36,7 @@ class ToasterToggle @JvmOverloads constructor(
 
   fun btnClick(onClick: () -> Unit) {
     binding.mlToggle.onThrottleClick {
-      Log.e("클릭","클릭")
+      Log.e("클릭", "클릭")
       when (binding.mlToggle.currentState) {
         R.id.start -> {
           binding.mlToggle.transitionToState(R.id.end, 200)

@@ -1,6 +1,5 @@
 package org.sopt.timer
 
-import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.model.timer.Timer
 import org.sopt.timer.databinding.ItemTimerWaitBinding

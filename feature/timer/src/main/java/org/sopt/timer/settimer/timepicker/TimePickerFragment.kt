@@ -52,7 +52,6 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   }
 
   private fun initTimePickerState() {
-
     if (setTimerViewModel.currentHourIndex.value != 1 || setTimerViewModel.currentMinuteIndex.value != 1) {
       setTimerViewModel.currentHourIndex.value.let {
         binding.rvTimePickerHour.scrollToPosition(minuteAdapter.getMiddlePosition() + it - 1)
@@ -113,7 +112,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
     val minuteList = generateNumberList(0, 59)
     val newMinuteList = minuteList.mapIndexed { index, item ->
       item.copy(isSelected = index == setTimerViewModel.currentMinuteIndex.value)
-      }
+    }
     minuteAdapter = NumberAdapter()
     setupRecyclerView(binding.rvTimePickerMinute, newMinuteList, minuteAdapter, ::updateMinute) { setMinuteClickEnable(it) }
   }
@@ -122,7 +121,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
     val hourList = generateNumberList(1, 12)
     val newHourList = hourList.mapIndexed { index, item ->
       item.copy(isSelected = index == setTimerViewModel.currentHourIndex.value)
-      }
+    }
     hourAdapter = NumberAdapter()
     setupRecyclerView(binding.rvTimePickerHour, newHourList, hourAdapter, ::updateHour) { setHourClickEnable(it) }
   }
@@ -131,7 +130,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
     val ampmList = generateAmpmList()
     val newAmpmList = ampmList.mapIndexed { index, item ->
       item.copy(isSelected = index == setTimerViewModel.currentAmPmIndex.value)
-      }
+    }
     timePeriodAdapter = TimePeriodAdapter()
     setupRecyclerView(binding.rvTimePickerAmpm, newAmpmList, timePeriodAdapter, ::updateAmPm) { setPeriodClickEnable(it) }
   }
@@ -253,7 +252,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   private fun initCompleteButtonClickListener() {
     binding.btnTimePickerNext.btnClick {
       Log.e("클릭", "클릭")
-      if(args.argPatch) setTimerViewModel.patchTimer(args.argTimerId) else setTimerViewModel.postTimer()
+      if (args.argPatch) setTimerViewModel.patchTimer(args.argTimerId) else setTimerViewModel.postTimer()
     }
   }
 

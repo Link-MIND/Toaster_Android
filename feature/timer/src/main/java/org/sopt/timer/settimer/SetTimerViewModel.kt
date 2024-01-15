@@ -77,8 +77,8 @@ class SetTimerViewModel @Inject constructor(
       _postTimerState.emit(UiState.Loading)
       val category = clipList.value.first { it.isSelected }
       var hour = _selectedTime.value.hour.toInt()
-      if(_selectedTime.value.timePeriod == "오후") hour += 12
-      val time = "${ if(hour < 10) "0${hour}" else hour.toString()}:${selectedTime.value.minute}"
+      if (_selectedTime.value.timePeriod == "오후") hour += 12
+      val time = "${ if (hour < 10) "0$hour" else hour.toString()}:${selectedTime.value.minute}"
       postTimerUseCase(/*category.*/17, time, repeatList.value).onSuccess {
         Log.e("성공", "성공")
         _postTimerState.emit(UiState.Success(it))
@@ -93,13 +93,13 @@ class SetTimerViewModel @Inject constructor(
     viewModelScope.launch {
       _postTimerState.emit(UiState.Loading)
       var hour = _selectedTime.value.hour.toInt()
-      if(_selectedTime.value.timePeriod == "오후") hour += 12
-      val time = "${ if(hour < 10) "0${hour}" else if (hour == 24) "00" else hour.toString()}:${selectedTime.value.minute}"
+      if (_selectedTime.value.timePeriod == "오후") hour += 12
+      val time = "${ if (hour < 10) "0$hour" else if (hour == 24) "00" else hour.toString()}:${selectedTime.value.minute}"
       patchTimerUseCase(timerId, time, repeatList.value).onSuccess {
-        Log.e("성공","성공")
+        Log.e("성공", "성공")
         _postTimerState.emit(UiState.Success(it))
       }.onFailure {
-        Log.e("실패",it.message.toString())
+        Log.e("실패", it.message.toString())
         _postTimerState.emit(UiState.Failure(it.message.toString()))
       }
     }

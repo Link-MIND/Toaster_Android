@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -87,7 +86,10 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
       findNavController().navigate(
         TimerFragmentDirections.actionNavigationTimerToNavigationTimePicker(
           argPatch = true,
-          argTimerId = it.id, argCategoryName = it.comment!!, argRemindTime = it.remindTime, argRemindDates = it.remindDates!!,
+          argTimerId = it.id,
+          argCategoryName = it.comment!!,
+          argRemindTime = it.remindTime,
+          argRemindDates = it.remindDates!!,
         ),
       )
     }.show(parentFragmentManager, this.tag)
@@ -104,8 +106,9 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
       when (state) {
         is TimerUiState.BothAllowed -> {
           handleBothAllowedState(state)
-          if (state.data?.first.isNullOrEmpty() && state.data?.second.isNullOrEmpty())
+          if (state.data?.first.isNullOrEmpty() && state.data?.second.isNullOrEmpty()) {
             viewModel.getTimerMain()
+          }
         }
 
         is TimerUiState.AppAllowed -> {

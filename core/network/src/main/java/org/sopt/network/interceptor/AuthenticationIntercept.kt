@@ -15,7 +15,7 @@ class AuthenticationIntercept @Inject constructor(
     val originalRequest = chain.request()
     val authRequest = handleRequest(originalRequest)
     val response = chain.proceed(authRequest)
-    
+
     return response
   }
 

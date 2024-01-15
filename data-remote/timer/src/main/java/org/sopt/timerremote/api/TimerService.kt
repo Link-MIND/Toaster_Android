@@ -24,7 +24,7 @@ interface TimerService {
   @PATCH("timer/datetime/{timerId}")
   suspend fun patchTimer(
     @Path("timerId") timerId: Int,
-    @Body requestPatchTimerDto: RequestPatchTimerDto
+    @Body requestPatchTimerDto: RequestPatchTimerDto,
   ): BaseResponse<Unit>
 
   @DELETE("timer/{timerId}")

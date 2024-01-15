@@ -63,7 +63,7 @@ class TimerViewModel @Inject constructor(
     deleteTimerUseCase(timerId).onSuccess {
       getTimerMain()
     }.onFailure {
-      Log.e("실패",it.message.toString())
+      Log.e("실패", it.message.toString())
     }
   }
 
@@ -71,7 +71,7 @@ class TimerViewModel @Inject constructor(
     patchAlarmUseCase(timerId).onSuccess {
       getTimerMain()
     }.onFailure {
-      Log.e("실패",it.message.toString())
+      Log.e("실패", it.message.toString())
     }
   }
 }
