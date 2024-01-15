@@ -1,10 +1,10 @@
-package org.sopt.clip.clipdetail
+package org.sopt.clip.cliplink
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import org.sopt.clip.LinkDTO
-import org.sopt.clip.databinding.ItemClipDetailLinkBinding
+import org.sopt.clip.databinding.ItemClipLinkBinding
 import org.sopt.ui.view.ItemDiffCallback
 
 class ClipLinkAdapter(
@@ -13,7 +13,7 @@ class ClipLinkAdapter(
 ) : ListAdapter<LinkDTO, ClipLinkViewHolder>(DiffUtil) {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClipLinkViewHolder {
     return ClipLinkViewHolder(
-      ItemClipDetailLinkBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+      ItemClipLinkBinding.inflate(LayoutInflater.from(parent.context), parent, false),
       onClickItemLink,
     )
   }

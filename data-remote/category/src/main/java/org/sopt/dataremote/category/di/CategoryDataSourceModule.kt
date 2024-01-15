@@ -13,7 +13,7 @@ import javax.inject.Singleton
 abstract class CategoryDataSourceModule {
   @Singleton
   @Binds
-  abstract fun bindRemoteLectureProviderDatasource(
+  abstract fun bindRemoteCategoryDatasource(
     remoteCategoryDataSourceImpl: RemoteCategoryDataSourceImpl,
   ): RemoteCategoryDataSource
 }

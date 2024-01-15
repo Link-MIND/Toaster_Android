@@ -20,6 +20,21 @@
     app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:background="@drawable/shape_grey900_fill_8_rect"
+    android:gravity="center"
+    android:paddingHorizontal="26dp"
+    android:paddingVertical="29dp"
+    android:text="읽음"
+    android:textAppearance="@style/Typography.suit.medium_12"
+    android:textColor="@color/neutrals100"
+    app:layout_constraintBottom_toBottomOf="@id/iv_link_thumnail"
+    app:layout_constraintEnd_toEndOf="@id/iv_link_thumnail"
+    app:layout_constraintStart_toStartOf="@id/iv_link_thumnail"
+    app:layout_constraintTop_toTopOf="@id/iv_link_thumnail" />
+
+  <TextView
     android:id="@+id/tv_link_clip_title"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -35,6 +50,7 @@
     app:layout_constraintTop_toTopOf="parent" />
 
   <ImageView
+    android:id="@+id/iv_link_delete"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="-12dp"

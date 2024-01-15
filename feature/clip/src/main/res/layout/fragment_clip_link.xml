@@ -7,10 +7,10 @@
   android:background="@color/background">
 
   <ImageView
-    android:id="@+id/iv_clip_detail_back"
+    android:id="@+id/iv_clip_link_back"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:contentDescription="@string/clip_detail_back_description"
+    android:contentDescription="@string/clip_link_back_description"
     android:paddingStart="20dp"
     android:paddingTop="17dp"
     android:paddingEnd="8dp"
@@ -20,14 +20,14 @@
     app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
-    android:id="@+id/tv_clip_detail_title"
+    android:id="@+id/tv_clip_link_title"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingVertical="17dp"
     android:text="@string/clip_all"
     android:textAppearance="@style/Typography.suit.bold_18"
     android:textColor="@color/neutrals900"
-    app:layout_constraintStart_toEndOf="@id/iv_clip_detail_back"
+    app:layout_constraintStart_toEndOf="@id/iv_clip_link_back"
     app:layout_constraintTop_toTopOf="parent" />
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,7 +40,7 @@
     android:padding="2dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tv_clip_detail_title">
+    app:layout_constraintTop_toBottomOf="@id/tv_clip_link_title">
 
     <androidx.appcompat.widget.AppCompatButton
       android:id="@+id/btn_clip_all"
@@ -90,7 +90,7 @@
       android:minHeight="0dp"
       android:paddingHorizontal="42dp"
       android:paddingVertical="8dp"
-      android:text="@string/clip_detail_read"
+      android:text="@string/clip_link_read"
       android:textAppearance="@style/Typography.suit.semibold_14"
       android:textColor="@color/neutrals400"
       app:layout_constraintStart_toEndOf="@id/dv_clip_picker1"
@@ -102,7 +102,7 @@
       android:layout_height="0dp"
       android:background="@drawable/shape_white_fill_8_rect"
       android:gravity="center"
-      android:text="@string/clip_detail_read"
+      android:text="@string/clip_link_read"
       android:textAppearance="@style/Typography.suit.semibold_14"
       android:textColor="@color/neutrals850"
       android:visibility="invisible"
@@ -128,7 +128,7 @@
       android:layout_height="wrap_content"
       android:minHeight="0dp"
       android:paddingVertical="8dp"
-      android:text="@string/clip_detail_unread"
+      android:text="@string/clip_link_unread"
       android:textAppearance="@style/Typography.suit.semibold_14"
       android:textColor="@color/neutrals400"
       app:layout_constraintEnd_toEndOf="@id/cl_clip_picker"
@@ -141,7 +141,7 @@
       android:layout_height="0dp"
       android:background="@drawable/shape_white_fill_8_rect"
       android:gravity="center"
-      android:text="@string/clip_detail_unread"
+      android:text="@string/clip_link_unread"
       android:textAppearance="@style/Typography.suit.semibold_14"
       android:textColor="@color/neutrals850"
       android:visibility="invisible"
@@ -188,13 +188,13 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/tv_clip_category_all"
     tools:itemCount="2"
-    tools:listitem="@layout/item_clip_detail_link" />
+    tools:listitem="@layout/item_clip_link" />
 
   <ImageView
     android:id="@+id/iv_clip_category_empty"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:contentDescription="@string/clip_detail_empty_description"
+    android:contentDescription="@string/clip_link_empty_description"
     android:src="@drawable/img_link_empty"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
@@ -202,12 +202,12 @@
     app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
-    android:id="@+id/tv_clip_detail_empty"
+    android:id="@+id/tv_clip_link_empty"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="4dp"
     android:gravity="center"
-    android:text="@string/clip_detail_empty"
+    android:text="@string/clip_link_empty"
     android:textAppearance="@style/Typography.suit.regular_16_128"
     android:textColor="@color/neutrals500"
     app:layout_constraintEnd_toEndOf="parent"

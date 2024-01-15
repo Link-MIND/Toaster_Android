@@ -9,6 +9,6 @@ android {
 }
 
 dependencies {
-  implementation(projects.core.designsystem)
   implementation(projects.domain.link)
+  implementation(projects.domain.category)
 }

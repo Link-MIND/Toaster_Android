@@ -6,6 +6,8 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import designsystem.components.bottomsheet.LinkMindBottomSheet
+import designsystem.components.toast.linkMindSnackBar
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.R
 import org.sopt.clip.databinding.FragmentClipBinding
@@ -15,24 +17,49 @@ import org.sopt.ui.view.onThrottleClick
 @AndroidEntryPoint
 class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.inflate(it) }) {
   private val viewModel by viewModels<ClipViewModel>()
-
+  private lateinit var clipAdapter: ClipAdapter
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val clipAdapter = ClipAdapter { clipId ->
-      Toast.makeText(context, "클릭된 item id: $clipId", Toast.LENGTH_SHORT).show()
-    }
-    binding.rvClipClip.adapter = clipAdapter
-    if (viewModel.mockClipData == null) {
-      clipAdapter.submitList(viewModel.mockClipData)
-    } else {
-      binding.ivClipEmpty.visibility = View.GONE
-      binding.tvClipEmpty.visibility = View.GONE
-      clipAdapter.submitList(viewModel.mockClipData)
-    }
+    initClipAdapter()
+    if (setEmptyMsgVisible()) return
+
+    clipAdapter.submitList(viewModel.mockClipData)
     onClickSearchButton()
     onClickListView()
     onClickEditButton()
+    onClickAddButton()
+  }
+
+  private fun initClipAdapter() {
+    clipAdapter = ClipAdapter { clipId ->
+      Toast.makeText(context, "클릭된 item id: $clipId", Toast.LENGTH_SHORT).show()
+      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_link)
+    }
+    binding.rvClipClip.adapter = clipAdapter
+  }
+
+  private fun setEmptyMsgVisible(): Boolean {
+    if (viewModel.mockClipData.isNullOrEmpty()) return true
+    binding.ivClipEmpty.visibility = View.GONE
+    binding.tvClipEmpty.visibility = View.GONE
+    return false
+  }
+
+  private fun onClickAddButton() {
+    binding.btnClipAdd.onThrottleClick {
+      val addClipBottomSheet = LinkMindBottomSheet(requireContext())
+      addClipBottomSheet.show()
+      addClipBottomSheet.apply {
+        setBottomSheetHint(org.sopt.mainfeature.R.string.clip_new_clip_info)
+        setTitle(org.sopt.mainfeature.R.string.clip_add_clip)
+        setErroMsg(org.sopt.mainfeature.R.string.error_clip_length)
+        bottomSheetConfirmBtnClick {
+          dismiss()
+          requireContext().linkMindSnackBar(binding.root, "클립 생성 완료!", false)
+        }
+      }
+    }
   }
 
   private fun onClickEditButton() {
@@ -43,13 +70,13 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
 
   private fun onClickListView() {
     binding.rvClipClip.onThrottleClick {
-      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_detail)
+      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_link)
     }
   }
 
   private fun onClickSearchButton() {
     binding.clClipSearch.onThrottleClick {
-      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_detail)
+      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_link)
     }
   }
 }

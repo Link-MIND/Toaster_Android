@@ -10,19 +10,19 @@
     android:label="fragment_clip"
     tools:layout="@layout/fragment_clip" >
     <action
-      android:id="@+id/action_navigation_clip_to_navigation_clip_detail"
-      app:destination="@id/navigation_clip_detail" />
+      android:id="@+id/action_navigation_clip_to_navigation_clip_link"
+      app:destination="@id/navigation_clip_link" />
     <action
       android:id="@+id/action_navigation_clip_to_navigation_clip_edit"
       app:destination="@id/navigation_clip_edit" />
   </fragment>
   <fragment
-    android:id="@+id/navigation_clip_detail"
-    android:name="org.sopt.clip.clipdetail.ClipDetailFragment"
-    android:label="ClipDetailFragment"
-    tools:layout="@layout/fragment_clip_detail">
+    android:id="@+id/navigation_clip_link"
+    android:name="org.sopt.clip.cliplink.ClipLinkFragment"
+    android:label="ClipLinkFragment"
+    tools:layout="@layout/fragment_clip_link">
     <action
-      android:id="@+id/action_navigation_clip_detail_to_webViewFragment"
+      android:id="@+id/action_navigation_clip_link_to_webViewFragment"
       app:destination="@id/webViewFragment" />
   </fragment>
   <fragment

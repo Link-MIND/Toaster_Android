@@ -1,66 +1,73 @@
-package org.sopt.clip.clipdetail
+package org.sopt.clip.cliplink
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.clip.ClipViewModel
+import org.sopt.clip.DeleteLinkBottomSheetFragment
 import org.sopt.clip.LinkDTO
 import org.sopt.clip.R
 import org.sopt.clip.SelectedToggle
-import org.sopt.clip.databinding.FragmentClipDetailBinding
+import org.sopt.clip.databinding.FragmentClipLinkBinding
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
-class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ FragmentClipDetailBinding.inflate(it) }) {
+class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClipLinkBinding.inflate(it) }) {
   private val viewModel by viewModels<ClipViewModel>()
-  private lateinit var clipDetailAdapter: ClipLinkAdapter
+  private lateinit var clipLinkAdapter: ClipLinkAdapter
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    clipDetailAdapter = ClipLinkAdapter(
-      { linkDTO ->
-        val bundle = Bundle().apply {
-          putString("url", linkDTO.url)
-        }
-        findNavController().navigate(R.id.action_navigation_clip_detail_to_webViewFragment, bundle)
-      },
-    ) { itemId, state ->
-      Toast.makeText(context, "$state itemId: $itemId", Toast.LENGTH_SHORT).show()
-    }
-    binding.rvCategoryLink.adapter = clipDetailAdapter
+    initClipAdapter()
+    initViewState(viewModel.mockLinkData.isNullOrEmpty())
+  }
 
-    var state: Boolean = viewModel.mockLinkData == null
-    initEmptyMsgVisible(state)
-    if (!state) {
-      clipDetailAdapter.submitList(viewModel.mockLinkData)
+  private fun initViewState(isDataNull: Boolean) {
+    with(binding) {
+      ivClipCategoryEmpty.isVisible = isDataNull
+      tvClipLinkEmpty.isVisible = isDataNull
 
-      updateListView()
+      if (isDataNull) return
+      clipLinkAdapter.submitList(viewModel.mockLinkData)
 
       initToggleClickListener()
       onClickBackButton()
     }
   }
 
-  private fun onClickBackButton() {
-    binding.ivClipDetailBack.onThrottleClick {
-      viewModel.navigateBack(findNavController())
+  private fun initClipAdapter() {
+    clipLinkAdapter = ClipLinkAdapter(
+      { linkDTO ->
+        naviagateToWebViewFragment(linkDTO)
+      },
+    ) { itemId, state ->
+      updateItemEvent(state, itemId)
+    }
+    binding.rvCategoryLink.adapter = clipLinkAdapter
+  }
+
+  private fun naviagateToWebViewFragment(linkDTO: LinkDTO) {
+    val bundle = Bundle().apply {
+      putString("url", linkDTO.url)
+    }
+    findNavController().navigate(R.id.action_navigation_clip_link_to_webViewFragment, bundle)
+  }
+
+  private fun updateItemEvent(state: String, itemId: Long) {
+    Toast.makeText(context, "$state itemId: $itemId", Toast.LENGTH_SHORT).show()
+    if (state == "delete") {
+      DeleteLinkBottomSheetFragment.newInstance(this.id).show(parentFragmentManager, this.tag)
     }
   }
 
-  private fun updateListView() {
-    viewModel.mockDataListState.observe(
-      viewLifecycleOwner,
-    ) {
-      initEmptyMsgVisible(it)
-      if (!it) {
-        clipDetailAdapter.submitList(viewModel.mockLinkData)
-      }
+  private fun onClickBackButton() {
+    binding.ivClipLinkBack.onThrottleClick {
+      findNavController().navigateUp()
     }
   }
 
@@ -92,7 +99,6 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
       initToggleVisible(selectedNow, true)
       initDividerVisible(selectedNow)
       viewModel.toggleSelectedPast = selectedNow
-      updateListView()
     }
   }
 
@@ -124,24 +130,6 @@ class ClipDetailFragment : BindingFragment<FragmentClipDetailBinding>({ Fragment
           dvClipPicker2.isVisible = false
         }
       }
-    }
-  }
-
-  private fun initEmptyMsgVisible(state: Boolean) {
-    with(binding) {
-      ivClipCategoryEmpty.isVisible = state
-      tvClipDetailEmpty.isVisible = state
-    }
-  }
-
-  fun initTextGrey() {
-    with(binding) {
-      btnClipAll.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_semibold_14)
-      btnClipRead.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_semibold_14)
-      btnClipUnread.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_semibold_14)
-      btnClipAll.setTextColor(ContextCompat.getColor(root.context, org.sopt.mainfeature.R.color.neutrals400))
-      btnClipRead.setTextColor(ContextCompat.getColor(root.context, org.sopt.mainfeature.R.color.neutrals400))
-      btnClipUnread.setTextColor(ContextCompat.getColor(root.context, org.sopt.mainfeature.R.color.neutrals400))
     }
   }
 }

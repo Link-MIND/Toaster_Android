@@ -24,11 +24,14 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <EditText
       android:id="@+id/tv_webview_address"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:text=""
+      android:background="@drawable/shape_parent_fill_rect"
+      android:inputType="textUri"
+      android:maxLines="1"
+      android:gravity="center"
       android:textAppearance="@style/Typography.suit.semibold_14"
       android:textColor="@color/neutrals900"
       app:layout_constraintBottom_toBottomOf="parent"
