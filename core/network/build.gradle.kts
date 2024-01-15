@@ -11,7 +11,6 @@ android {
 
 dependencies {
   implementation(projects.core.common)
-  implementation(projects.core.model)
   implementation(projects.core.datastore)
   implementation(libs.bundles.coroutine)
   implementation(libs.kotlinx.serialization.json)
