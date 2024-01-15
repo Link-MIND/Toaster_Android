@@ -11,12 +11,14 @@ import org.sopt.model.timer.Timer
 import org.sopt.timer.settimer.TimerUiState
 import org.sopt.timer.usecase.DeleteTimerUseCase
 import org.sopt.timer.usecase.GetTimerMainUseCase
+import org.sopt.timer.usecase.PatchAlarmUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class TimerViewModel @Inject constructor(
   private val getTimerMainUseCase: GetTimerMainUseCase,
-  private val deleteTimerUseCase: DeleteTimerUseCase
+  private val deleteTimerUseCase: DeleteTimerUseCase,
+  private val patchAlarmUseCase: PatchAlarmUseCase,
 ) : ViewModel() {
   private val _uiState = MutableStateFlow<TimerUiState<Pair<List<Timer>, List<Timer>>?>>(TimerUiState.Empty)
   val uiState: StateFlow<TimerUiState<Pair<List<Timer>, List<Timer>>?>> get() = _uiState
@@ -59,6 +61,14 @@ class TimerViewModel @Inject constructor(
 
   fun deleteTimer(timerId: Int) = viewModelScope.launch {
     deleteTimerUseCase(timerId).onSuccess {
+      getTimerMain()
+    }.onFailure {
+      Log.e("실패",it.message.toString())
+    }
+  }
+
+  fun patchAlarm(timerId: Int) = viewModelScope.launch {
+    patchAlarmUseCase(timerId).onSuccess {
       getTimerMain()
     }.onFailure {
       Log.e("실패",it.message.toString())
