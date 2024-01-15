@@ -187,15 +187,21 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
 
   private fun setTimerExistState(data: Pair<List<Timer>, List<Timer>>) {
     if (data.first.isEmpty()) {
-      setCompleteTimerNotExistState()
+      setCompleteTimerNotExistState(data.first)
     } else {
       setCompleteTimerExistState(data.first)
     }
     waitTimerAdapter.submitList(data.second)
   }
 
-  private fun setCompleteTimerNotExistState() {
+  private fun setCompleteTimerNotExistState(timers: List<Timer>) {
     with(binding) {
+      val color = colorOf(R.color.neutrals100)
+      val textColor = colorOf(R.color.neutrals300)
+      val colorStateList = ColorStateList.valueOf(color)
+      flTimerCompleteCount.backgroundTintList = colorStateList
+      tvTimerCompleteCount.setTextColor(textColor)
+      tvTimerCompleteCount.text = timers.count().toString()
       tvTimerNotComplete.isVisible = true
       rvTimerComplete.isGone = true
     }
