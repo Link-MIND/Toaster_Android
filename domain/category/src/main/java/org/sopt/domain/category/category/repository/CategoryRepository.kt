@@ -4,4 +4,5 @@ import org.sopt.model.category.CategoryList
 
 interface CategoryRepository {
   suspend fun getCategoryAll(): Result<List<CategoryList>>
+  suspend fun postCategoryAdd(): Unit
 }
