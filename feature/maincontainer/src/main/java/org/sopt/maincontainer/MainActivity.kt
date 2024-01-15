@@ -152,7 +152,8 @@ class MainActivity : AppCompatActivity() {
         deleteClipBoard()
       }
       .setPositiveButton(org.sopt.mainfeature.R.string.positive_ok_save) {
-        navigateToDestination("featureSaveLink://saveLinkFragment?clipboardLink=$clipboardLink")
+        if (clipboardLink.contains("http"))
+          navigateToDestination("featureSaveLink://saveLinkFragment?clipboardLink=$clipboardLink")
         deleteClipBoard()
         linkMindDialog.dismiss()
       }

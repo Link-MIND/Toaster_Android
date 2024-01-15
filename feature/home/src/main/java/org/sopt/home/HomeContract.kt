@@ -16,15 +16,13 @@ data class HomeState(
   fun calculateProgress(): Int {
     if ( readToastNum > allToastNum) return 0
     if (allToastNum==0) return 0
-      else return readToastNum / allToastNum
+      else return readToastNum / allToastNum * 100
   }
-
 }
 
 sealed interface HomeSideEffect {
   data object NavigateSetting : HomeSideEffect
   data object NavigateSearch : HomeSideEffect
-
   data object NavigateWebview : HomeSideEffect
   data object showBottomSheet : HomeSideEffect
 }
