@@ -6,13 +6,13 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.sopt.model.timer.Repeat
-import org.sopt.timer.dummymodel.Clip
-import org.sopt.timer.dummymodel.TimePicker
+import org.sopt.timer.model.Clip
+import org.sopt.timer.model.TimePicker
 import org.sopt.timer.usecase.GetSelectedDaysUseCase
+import org.sopt.timer.usecase.PatchTimerUseCase
 import org.sopt.timer.usecase.PostTimerUseCase
 import org.sopt.ui.view.UiState
 import javax.inject.Inject
@@ -21,6 +21,7 @@ import javax.inject.Inject
 class SetTimerViewModel @Inject constructor(
   private val postTimerUseCase: PostTimerUseCase,
   private val getSelectedDaysUseCase: GetSelectedDaysUseCase,
+  private val patchTimerUseCase: PatchTimerUseCase,
 ) : ViewModel() {
   private val _clipList = MutableStateFlow<List<Clip>>(emptyList())
   val clipList: StateFlow<List<Clip>> = _clipList.asStateFlow()
@@ -83,6 +84,22 @@ class SetTimerViewModel @Inject constructor(
         _postTimerState.emit(UiState.Success(it))
       }.onFailure {
         Log.e("실패", "${it.message}")
+        _postTimerState.emit(UiState.Failure(it.message.toString()))
+      }
+    }
+  }
+
+  fun patchTimer(timerId: Int) {
+    viewModelScope.launch {
+      _postTimerState.emit(UiState.Loading)
+      var hour = _selectedTime.value.hour.toInt()
+      if(_selectedTime.value.timePeriod == "오후") hour += 12
+      val time = "${ if(hour < 10) "0${hour}" else if (hour == 24) "00" else hour.toString()}:${selectedTime.value.minute}"
+      patchTimerUseCase(timerId, time, repeatList.value).onSuccess {
+        Log.e("성공","성공")
+        _postTimerState.emit(UiState.Success(it))
+      }.onFailure {
+        Log.e("실패",it.message.toString())
         _postTimerState.emit(UiState.Failure(it.message.toString()))
       }
     }
