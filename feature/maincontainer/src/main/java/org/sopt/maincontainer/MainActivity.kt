@@ -1,6 +1,5 @@
 package org.sopt.maincontainer
 
-import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.ClipboardManager
@@ -10,7 +9,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.NavDeepLinkBuilder
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,15 +58,21 @@ class MainActivity : AppCompatActivity() {
 
     val pasteData = item.toString()
     if (pasteData.contains("http")) {
-      showRevokeCommonDialog ({
-        clipboard.setPrimaryClip(ClipData.newPlainText("", ""))
-      },pasteData)
+      showRevokeCommonDialog(
+        {
+          clipboard.setPrimaryClip(ClipData.newPlainText("", ""))
+        },
+        pasteData,
+      )
       return
     } else {
-      showRevokeCommonDialog ({
-        this.linkMindSnackBar(binding.root, "올바르지 않은 링크입니다", false)
-        clipboard.setPrimaryClip(ClipData.newPlainText("", ""))
-      },"")
+      showRevokeCommonDialog(
+        {
+          this.linkMindSnackBar(binding.root, "올바르지 않은 링크입니다", false)
+          clipboard.setPrimaryClip(ClipData.newPlainText("", ""))
+        },
+        "",
+      )
       return
     }
   }
@@ -121,11 +125,11 @@ class MainActivity : AppCompatActivity() {
 
   private fun onClickFab() {
     binding.fabMain.onThrottleClick {
-      navigateToDestination("featureSaveLink://saveLinkFragment?id=test")
+      navigateToDestination("featureSaveLink://saveLinkFragment?id=")
     }
   }
 
-  private fun navigateToDestination(url : String) {
+  private fun navigateToDestination(url: String) {
     val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
       url,
       enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
@@ -150,7 +154,7 @@ class MainActivity : AppCompatActivity() {
     } ?: false
   }
 
-  private fun showRevokeCommonDialog(deleteClipBoard: () -> Unit , clipboardLink:String) {
+  private fun showRevokeCommonDialog(deleteClipBoard: () -> Unit, clipboardLink: String) {
     linkMindDialog.setTitle(org.sopt.mainfeature.R.string.clipboard_dialog_title)
       .setSubtitle(org.sopt.mainfeature.R.string.clipboard_dialog_sub_title)
       .setNegativeButton(org.sopt.mainfeature.R.string.negative_close_cancel) {
