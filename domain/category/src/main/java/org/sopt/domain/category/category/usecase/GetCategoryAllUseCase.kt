@@ -7,5 +7,5 @@ import javax.inject.Inject
 class GetCategoryAllUseCase @Inject constructor(
   private val categoryRepository: CategoryRepository,
 ) {
-  suspend operator fun invoke(): Result<List<CategoryList>> = categoryRepository.getCategoryAll()
+  suspend operator fun invoke(): Result<CategoryList> = categoryRepository.getCategoryAll()
 }

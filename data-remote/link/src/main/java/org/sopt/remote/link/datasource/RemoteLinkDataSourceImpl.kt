@@ -9,7 +9,7 @@ import javax.inject.Inject
 class RemoteLinkDataSourceImpl @Inject constructor(
   private val linkService: LinkService,
 ) : RemoteLinkDataSource {
-  override suspend fun postSaveLink(linkUrl: String, categoryId: Long): Int =
+  override suspend fun postSaveLink(linkUrl: String, categoryId: Long?): Int =
     linkService.postLink(
       RequestWriteDto(
         linkUrl = linkUrl,
@@ -17,8 +17,9 @@ class RemoteLinkDataSourceImpl @Inject constructor(
       ),
     ).code
 
-  override suspend fun deleteLink(toastId: Long): Int =
-    linkService.deleteLink(toastId).code
+  override suspend fun deleteLink(toastId: Long): Int {
+    return linkService.deleteLink(toastId).code
+  }
 
   override suspend fun patchReadLink(toastId: Long): Int =
     linkService.patchLink(

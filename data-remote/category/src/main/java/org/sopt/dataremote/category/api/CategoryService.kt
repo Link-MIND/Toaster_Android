@@ -1,12 +1,15 @@
 package org.sopt.dataremote.category.api
 
-import org.sopt.dataremote.category.response.ResponseCategoryDto
+import org.sopt.dataremote.category.request.RequestCategoryTitleDto
 import org.sopt.dataremote.category.response.ResponseCategoryDuplicateDTO
+import org.sopt.dataremote.category.response.ResponseCategoryEntireDto
 import org.sopt.dataremote.category.response.ResponseLinksDTO
 import org.sopt.network.model.response.base.BaseResponse
+import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.PATCH
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface CategoryService {
@@ -18,7 +21,10 @@ interface CategoryService {
   }
 
   @GET("/$CATEGORY/$ALL")
-  suspend fun getCategoryAll(): BaseResponse<List<ResponseCategoryDto>>
+  suspend fun getCategoryAll(): BaseResponse<ResponseCategoryEntireDto>
+
+  @POST("/$CATEGORY")
+  suspend fun postAddCategoryTitle(@Body categoryTitleDto: RequestCategoryTitleDto): BaseResponse<Int>
 
   @DELETE("/$CATEGORY")
   suspend fun deleteCategory(): BaseResponse<Unit>

@@ -8,5 +8,5 @@ data class RequestWriteDto(
   @SerialName("linkUrl")
   val linkUrl: String,
   @SerialName("categoryId")
-  val categoryId: Long,
+  val categoryId: Long?,
 )
