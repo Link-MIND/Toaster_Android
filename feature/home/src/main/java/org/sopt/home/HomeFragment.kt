@@ -10,6 +10,7 @@ import designsystem.components.toast.linkMindSnackBar
 import org.sopt.home.adapter.HomeClipAdapter
 import org.sopt.home.adapter.HomeWeekLinkAdapter
 import org.sopt.home.adapter.HomeWeekRecommendLinkAdapter
+import org.sopt.home.adapter.ItemDecoration
 import org.sopt.home.databinding.FragmentHomeBinding
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.nav.DeepLinkUtil
@@ -27,8 +28,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     viewModel.getRecommendSite()
     viewModel.getWeekBestLink()
     viewModel.getMainPageUserClip()
-//    fetchWebContent()
     initAdapter()
+
     val list = listOf(
       ClipDummy("전체클립", 1),
       ClipDummy("TitleCheck", 1),
@@ -48,35 +49,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     navigateToSetting()
     navigateToSearch()
   }
-
-//  <test>
-//  fun fetchWebContent() {
-//    CoroutineScope(Dispatchers.Main).launch {
-//      val result = withContext(Dispatchers.IO) {
-//        val url = ""
-//        try {
-//          val document = Jsoup.connect(url).get()
-//          val content = document.select("title")
-//          content.map { it.text() }
-//        } catch (e: HttpException) {
-//          // 서버에서 HTTP 오류를 반환할 경우 (예: 404, 500 등)
-//          Log.e("test", "HTTP 오류: ${e.response.body}}")
-//          null
-//        } catch (e: IOException) {
-//          // 네트워크 오류, 인증 오류, 리디렉션을 찾을 수 없을 때 등등
-//          Log.e("test1", "입출력 오류: ${e.message}")
-//          null
-//        } catch (e: Exception) {
-//          // 그 외 모든 예외
-//          Log.e("test2", "기타 오류: ${e.message}")
-//          null
-//        }
-//      }
-//      result?.forEach { text ->
-//        Log.d("test", "$text")
-//      }
-//    }
-//  }
 
   private fun navigateToSetting() {
     binding.ivHomeSetting.onThrottleClick {
@@ -109,8 +81,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
 
   private fun setClipAdapter() {
     homeClipAdapter = HomeClipAdapter(
-      onClickItemClip = {},
-      onClickItemClip2 = {
+      onClickClip = {},
+      onClickEmptyClip = {
         showHomeBottomSheet()
       },
     )
@@ -120,12 +92,12 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   }
 
   private fun setWeekLinkAdapter() {
-    homeWeekLinkAdapter = HomeWeekLinkAdapter(onClickItem = {})
+    homeWeekLinkAdapter = HomeWeekLinkAdapter(onClickWeekLink = {})
     binding.rvWeekLink.adapter = homeWeekLinkAdapter
   }
 
   private fun setWeekRecommendAdapter() {
-    homeWeekRecommendLinkAdapter = HomeWeekRecommendLinkAdapter(onClickItem = {})
+    homeWeekRecommendLinkAdapter = HomeWeekRecommendLinkAdapter(onClickRecommendLink = {})
     binding.rvHomeWeekRecommend.adapter = homeWeekRecommendLinkAdapter
     val spacingWeekRecommendInPixels = resources.getDimensionPixelSize(R.dimen.spacing_12)
     binding.rvHomeWeekRecommend.addItemDecoration(ItemDecoration(3, spacingWeekRecommendInPixels))
@@ -145,4 +117,5 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       }
     }
   }
+
 }

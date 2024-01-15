@@ -30,7 +30,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
     viewModel.getCategortAll()
     viewModel.saveCategoryTitle("이삭이다나는")
 //    viewModel.deleteLink(23)
-//    viewModel.saveLink("http://www.naver.com",null)
+    viewModel.saveLink("https://www.instagram.com/p/C2CXFxpvc1avTdzKkcycxuUqRsfhJWjklRGjqw0/?igsh=MTh6MGppYzZydzdsYg==",null)
 //    viewModel.patchReadLink(23)
     binding.btnSaveLinkComplete.state = LinkMindButtonState.DISABLE
     binding.ivSaveLinkClipBack.onThrottleClick {

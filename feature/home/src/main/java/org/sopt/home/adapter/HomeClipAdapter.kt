@@ -9,8 +9,8 @@ import org.sopt.home.viewholder.HomeClipViewHolder
 import org.sopt.ui.view.ItemDiffCallback
 
 class HomeClipAdapter(
-  private val onClickItemClip: (ClipDummy) -> Unit,
-  private val onClickItemClip2: () -> Unit,
+  private val onClickClip: (ClipDummy) -> Unit,
+  private val onClickEmptyClip: () -> Unit,
 ) : ListAdapter<ClipDummy, HomeClipViewHolder>(DiffUtil) {
   override fun onBindViewHolder(holder: HomeClipViewHolder, position: Int) {
     holder.onBind(getItem(position), position)
@@ -19,15 +19,18 @@ class HomeClipAdapter(
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeClipViewHolder {
     return HomeClipViewHolder(
       ItemHomeClipBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-      onClickItemClip,
-      onClickItemClip2,
+      onClickClip,
+      onClickEmptyClip,
     )
   }
+
   override fun getItemCount() = currentList.size.coerceAtMost(4)
+
   companion object {
     private val DiffUtil = ItemDiffCallback<ClipDummy>(
       onItemsTheSame = { old, new -> old.title == new.title },
       onContentsTheSame = { old, new -> old == new },
     )
   }
+
 }
