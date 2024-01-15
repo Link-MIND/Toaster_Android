@@ -11,7 +11,8 @@ import kotlinx.coroutines.launch
 import org.sopt.model.timer.Repeat
 import org.sopt.timer.model.Clip
 import org.sopt.timer.model.TimePicker
-import org.sopt.timer.usecase.GetSelectedDaysUseCase
+import org.sopt.timer.usecase.FormatRepeatListToIntList
+import org.sopt.timer.usecase.FormatRepeatListToStringList
 import org.sopt.timer.usecase.PatchTimerUseCase
 import org.sopt.timer.usecase.PostTimerUseCase
 import org.sopt.ui.view.UiState
@@ -20,8 +21,9 @@ import javax.inject.Inject
 @HiltViewModel
 class SetTimerViewModel @Inject constructor(
   private val postTimerUseCase: PostTimerUseCase,
-  private val getSelectedDaysUseCase: GetSelectedDaysUseCase,
+  private val formatRepeatListToStringList: FormatRepeatListToStringList,
   private val patchTimerUseCase: PatchTimerUseCase,
+  private val formatRepeatListToIntList: FormatRepeatListToIntList,
 ) : ViewModel() {
   private val _clipList = MutableStateFlow<List<Clip>>(emptyList())
   val clipList: StateFlow<List<Clip>> = _clipList.asStateFlow()
@@ -30,7 +32,7 @@ class SetTimerViewModel @Inject constructor(
   val repeatList: StateFlow<List<Repeat>> = _repeatList.asStateFlow()
 
   val selectedList: StateFlow<List<String>> get() {
-    return MutableStateFlow(getSelectedDaysUseCase(_repeatList.value))
+    return MutableStateFlow(formatRepeatListToStringList(_repeatList.value))
   }
 
   private val _selectedTime = MutableStateFlow(TimePicker("오전", "01", "00"))
@@ -79,7 +81,7 @@ class SetTimerViewModel @Inject constructor(
       var hour = _selectedTime.value.hour.toInt()
       if (_selectedTime.value.timePeriod == "오후") hour += 12
       val time = "${ if (hour < 10) "0$hour" else hour.toString()}:${selectedTime.value.minute}"
-      postTimerUseCase(/*category.*/17, time, repeatList.value).onSuccess {
+      postTimerUseCase(/*category.*/17, time, formatRepeatListToIntList(repeatList.value)).onSuccess {
         Log.e("성공", "성공")
         _postTimerState.emit(UiState.Success(it))
       }.onFailure {
@@ -95,7 +97,7 @@ class SetTimerViewModel @Inject constructor(
       var hour = _selectedTime.value.hour.toInt()
       if (_selectedTime.value.timePeriod == "오후") hour += 12
       val time = "${ if (hour < 10) "0$hour" else if (hour == 24) "00" else hour.toString()}:${selectedTime.value.minute}"
-      patchTimerUseCase(timerId, time, repeatList.value).onSuccess {
+      patchTimerUseCase(timerId, time, formatRepeatListToIntList(repeatList.value)).onSuccess {
         Log.e("성공", "성공")
         _postTimerState.emit(UiState.Success(it))
       }.onFailure {

@@ -3,7 +3,7 @@ package org.sopt.timer.usecase
 import org.sopt.model.timer.Repeat
 import javax.inject.Inject
 
-class GetSelectedDaysUseCase @Inject constructor() {
+class FormatRepeatListToStringList @Inject constructor() {
   operator fun invoke(repeatList: List<Repeat>): List<String> {
     val selectedDays = mutableSetOf<String>()
     val order = listOf("월", "화", "수", "목", "금", "토", "일")
