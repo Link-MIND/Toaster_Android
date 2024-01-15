@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,7 +16,7 @@ import kotlinx.coroutines.flow.onEach
 import org.sopt.timer.R
 import org.sopt.timer.TimerViewModel
 import org.sopt.timer.databinding.FragmentTimePickerBinding
-import org.sopt.timer.dummymodel.PickerItem
+import org.sopt.timer.model.PickerItem
 import org.sopt.timer.settimer.SetTimerViewModel
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.fragment.colorOf
@@ -35,6 +36,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   private var minuteClickEnable = true
   private val setTimerViewModel: SetTimerViewModel by activityViewModels()
   private val timerViewModel: TimerViewModel by activityViewModels()
+  val args: TimePickerFragmentArgs by navArgs()
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     listUpdater = ListUpdater()
@@ -50,6 +52,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   }
 
   private fun initTimePickerState() {
+
     if (setTimerViewModel.currentHourIndex.value != 1 || setTimerViewModel.currentMinuteIndex.value != 1) {
       setTimerViewModel.currentHourIndex.value.let {
         binding.rvTimePickerHour.scrollToPosition(minuteAdapter.getMiddlePosition() + it - 1)
@@ -63,7 +66,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
     }
     binding.btnTimePickerNext.state = LinkMindButtonState.DISABLE
     binding.btnTimePickerNext.isClickable = false
-    binding.tvTimePickerCategory.text = "카테고리이름을"
+    binding.tvTimePickerCategory.text = if (args.argPatch) "${args.argCategoryName}클립을" else "카테고리이름클립을"
   }
 
   private fun initRepeatState() {
@@ -101,24 +104,36 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   }
 
   private fun setupRecyclerViews() {
-    val ampmList = generateAmpmList()
-    val hourList = generateNumberList(1, 12)
+    setUpTimePeriodRecyclerView()
+    setUpHourRecyclerView()
+    setUpMinuteRecyclerView()
+  }
+
+  private fun setUpMinuteRecyclerView() {
     val minuteList = generateNumberList(0, 59)
-    val newAmpmList = ampmList.mapIndexed { index, item ->
-      item.copy(isSelected = index == setTimerViewModel.currentAmPmIndex.value)
-    }
-    val newHourList = hourList.mapIndexed { index, item ->
-      item.copy(isSelected = index == setTimerViewModel.currentHourIndex.value)
-    }
     val newMinuteList = minuteList.mapIndexed { index, item ->
       item.copy(isSelected = index == setTimerViewModel.currentMinuteIndex.value)
-    }
-    timePeriodAdapter = TimePeriodAdapter()
-    hourAdapter = NumberAdapter()
+      }
     minuteAdapter = NumberAdapter()
-    setupRecyclerView(binding.rvTimePickerAmpm, newAmpmList, timePeriodAdapter, ::updateAmPm) { setPeriodClickEnable(it) }
-    setupRecyclerView(binding.rvTimePickerHour, newHourList, hourAdapter, ::updateHour) { setHourClickEnable(it) }
     setupRecyclerView(binding.rvTimePickerMinute, newMinuteList, minuteAdapter, ::updateMinute) { setMinuteClickEnable(it) }
+  }
+
+  private fun setUpHourRecyclerView() {
+    val hourList = generateNumberList(1, 12)
+    val newHourList = hourList.mapIndexed { index, item ->
+      item.copy(isSelected = index == setTimerViewModel.currentHourIndex.value)
+      }
+    hourAdapter = NumberAdapter()
+    setupRecyclerView(binding.rvTimePickerHour, newHourList, hourAdapter, ::updateHour) { setHourClickEnable(it) }
+  }
+
+  private fun setUpTimePeriodRecyclerView() {
+    val ampmList = generateAmpmList()
+    val newAmpmList = ampmList.mapIndexed { index, item ->
+      item.copy(isSelected = index == setTimerViewModel.currentAmPmIndex.value)
+      }
+    timePeriodAdapter = TimePeriodAdapter()
+    setupRecyclerView(binding.rvTimePickerAmpm, newAmpmList, timePeriodAdapter, ::updateAmPm) { setPeriodClickEnable(it) }
   }
 
   private fun generateAmpmList() = listOf(
@@ -238,7 +253,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   private fun initCompleteButtonClickListener() {
     binding.btnTimePickerNext.btnClick {
       Log.e("클릭", "클릭")
-      setTimerViewModel.postTimer()
+      if(args.argPatch) setTimerViewModel.patchTimer(args.argTimerId) else setTimerViewModel.postTimer()
     }
   }
 
