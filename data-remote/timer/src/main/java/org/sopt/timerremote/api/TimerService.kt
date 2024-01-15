@@ -13,32 +13,40 @@ import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface TimerService {
-  @GET("timer/main")
+  @GET("$TIMER/$MAIN")
   suspend fun getTimerMain(): BaseResponse<ResponseGetTimerPageDto>
 
-  @POST("timer")
+  @POST(TIMER)
   suspend fun postTimer(
     @Body requestPostTimerDto: RequestPostTimerDto,
   ): BaseResponse<Unit>
 
-  @PATCH("timer/datetime/{timerId}")
+  @PATCH("$TIMER/$DATE_TIME/{$TIMER_ID}")
   suspend fun patchTimer(
-    @Path("timerId") timerId: Int,
+    @Path(TIMER_ID) timerId: Int,
     @Body requestPatchTimerDto: RequestPatchTimerDto,
   ): BaseResponse<Unit>
 
-  @DELETE("timer/{timerId}")
+  @DELETE("$TIMER/{$TIMER_ID}")
   suspend fun deleteTimer(
-    @Path("timerId") timerId: Int,
+    @Path(TIMER_ID) timerId: Int,
   ): BaseResponse<Unit>
 
-  @GET("timer")
+  @GET(TIMER)
   suspend fun getTimer(
-    @Path("timerId") timerId: Int,
+    @Path(TIMER_ID) timerId: Int,
   ): BaseResponse<ResponseGetTimerDto>
 
-  @PATCH("timer/alarm/{timerId}")
+  @PATCH("$TIMER/$ALARM/{$TIMER_ID}")
   suspend fun patchAlarm(
-    @Path("timerId") timerId: Int,
+    @Path(TIMER_ID) timerId: Int,
   ): BaseResponse<Unit>
+
+  companion object{
+    const val TIMER = "timer"
+    const val MAIN = "main"
+    const val DATE_TIME = "datetime"
+    const val ALARM = "alarm"
+    const val TIMER_ID = "timerId"
+  }
 }
