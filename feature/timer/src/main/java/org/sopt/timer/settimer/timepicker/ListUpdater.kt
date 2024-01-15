@@ -2,7 +2,7 @@ package org.sopt.timer.settimer.timepicker
 
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import org.sopt.timer.dummymodel.PickerItem
+import org.sopt.timer.model.PickerItem
 
 class ListUpdater<T : ListAdapter<PickerItem, PickerViewHolder>> {
   fun getNewList(
