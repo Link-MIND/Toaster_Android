@@ -10,10 +10,16 @@ class ModifyTimerBottomSheetFragment :
   BindingBottomSheetDialogFragment<FragmentModifyTimerBottomSheetBinding>({ FragmentModifyTimerBottomSheetBinding.inflate(it) }) {
   var id: Int? = null
   private var handleDelete: () -> Unit = {}
+  private var handleModify: () -> Unit = {}
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
     binding.ivModifyTimerClose.setOnClickListener {
+      dismiss()
+    }
+
+    binding.tvModifyTimerModify.onThrottleClick {
+      handleModify.invoke()
       dismiss()
     }
 
@@ -32,6 +38,7 @@ class ModifyTimerBottomSheetFragment :
     fun newInstance(
       id: Int,
       handleDeleteButton: () -> Unit,
+      handleModifyButton: () -> Unit,
     ): ModifyTimerBottomSheetFragment {
       val args = Bundle().apply {
         putInt("id", id)
@@ -39,6 +46,7 @@ class ModifyTimerBottomSheetFragment :
       return ModifyTimerBottomSheetFragment().apply {
         arguments = args
         handleDelete = handleDeleteButton
+        handleModify = handleModifyButton
       }
     }
   }
