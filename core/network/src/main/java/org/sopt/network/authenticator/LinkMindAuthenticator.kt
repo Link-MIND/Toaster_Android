@@ -37,12 +37,10 @@ class LinkMindAuthenticator @Inject constructor(
           }
         }
       }.onFailure {
-        if(it is HttpException && it.code() == CODE_TOKEN_EXPIRED){
-          runBlocking {
-            dataStore.setAutoLogin(false)
-          }
-          ProcessPhoenix.triggerRebirth(context, intentProvider.getIntent())
+        runBlocking {
+          dataStore.setAutoLogin(false)
         }
+        ProcessPhoenix.triggerRebirth(context, intentProvider.getIntent())
       }.getOrThrow()
 
       return response.request.newBuilder()
