@@ -1,5 +1,5 @@
 package org.sopt.model.category
 
 data class CategoryDuplicate (
-  val title: String
+  val isDuplicate: Boolean,
 )
