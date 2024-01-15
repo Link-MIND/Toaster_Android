@@ -1,6 +1,5 @@
 package org.sopt.timer
 
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -33,11 +32,7 @@ class NotificationPermissionDialogFragment : BindingDialogFragment<FragmentNotif
     } else {
       setNorificationIntentActionOreoLess(context)
     }
-    try {
-      context.startActivity(intent)
-    } catch (e: ActivityNotFoundException) {
-      e.printStackTrace()
-    }
+    context.startActivity(intent)
   }
 
   private fun setNotificationIntentActionOreo(context: Context): Intent {

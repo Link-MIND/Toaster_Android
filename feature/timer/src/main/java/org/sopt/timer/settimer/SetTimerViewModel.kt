@@ -75,7 +75,7 @@ class SetTimerViewModel @Inject constructor(
   fun postTimer() {
     viewModelScope.launch {
       _postTimerState.emit(UiState.Loading)
-      val category = clipList.value.first { it.isSelected }
+      // val category = clipList.value.first { it.isSelected }
       var hour = _selectedTime.value.hour.toInt()
       if (_selectedTime.value.timePeriod == "오후") hour += 12
       val time = "${ if (hour < 10) "0$hour" else hour.toString()}:${selectedTime.value.minute}"
