@@ -18,6 +18,8 @@ internal class FeatureConventionPlugin : Plugin<Project> {
       dependencies {
         "implementation"(project(":core:ui"))
         "implementation"(project(":core:common"))
+        "implementation"(project(":core:model"))
+        "implementation"(project(":core:designsystem"))
 
         "implementation"(libs.findLibrary("appcompat").get())
         "implementation"(libs.findLibrary("core.ktx").get())

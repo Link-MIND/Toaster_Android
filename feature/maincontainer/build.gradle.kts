@@ -12,7 +12,6 @@ android {
 }
 
 dependencies {
-  implementation(projects.core.designsystem)
   implementation(projects.feature.home)
   implementation(projects.feature.clip)
   implementation(projects.feature.mypage)

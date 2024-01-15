@@ -13,6 +13,6 @@ class PostSaveLinkUseCase @Inject constructor(
 
   data class Param(
     val linkUrl: String,
-    val categoryId: Long,
+    val categoryId: Long?,
   )
 }

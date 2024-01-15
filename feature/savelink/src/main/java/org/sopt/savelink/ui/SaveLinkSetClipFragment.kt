@@ -2,7 +2,9 @@ package org.sopt.savelink.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.button.state.LinkMindButtonState
 import designsystem.components.dialog.LinkMindDialog
@@ -14,8 +16,10 @@ import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.onThrottleClick
 
+@AndroidEntryPoint
 class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>({ FragmentSaveLinkSetClipBinding.inflate(it) }) {
 
+  private val viewModel: SaveLinkViewModel by viewModels()
   private lateinit var adapter: ClipSelectAdapter
   private val linkMindDialog by lazy {
     LinkMindDialog(requireContext())
@@ -23,6 +27,11 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    viewModel.getCategortAll()
+    viewModel.saveCategoryTitle("이삭이다나는")
+//    viewModel.deleteLink(23)
+//    viewModel.saveLink("http://www.naver.com",null)
+//    viewModel.patchReadLink(23)
     binding.btnSaveLinkComplete.state = LinkMindButtonState.DISABLE
     binding.ivSaveLinkClipBack.onThrottleClick {
       findNavController().navigateUp()
@@ -78,6 +87,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
     binding.btnSaveLinkComplete.apply {
       btnClick {
         if (state == LinkMindButtonState.DISABLE) return@btnClick
+        viewModel.saveLink("www.naver.com", 11)
         navigateToHome()
         requireContext().linkMindSnackBar(binding.root, "링크 저장 완료", false)
       }
