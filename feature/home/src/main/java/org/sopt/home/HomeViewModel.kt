@@ -2,9 +2,13 @@ package org.sopt.home
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
+import org.orbitmvi.orbit.Container
+import org.orbitmvi.orbit.ContainerHost
+import org.orbitmvi.orbit.syntax.simple.intent
+import org.orbitmvi.orbit.syntax.simple.postSideEffect
+import org.orbitmvi.orbit.syntax.simple.reduce
+import org.orbitmvi.orbit.viewmodel.container
 import org.sopt.home.usecase.GetMainPageUserClip
 import org.sopt.home.usecase.GetRecommendSite
 import org.sopt.home.usecase.GetWeekBestLink
@@ -15,29 +19,44 @@ class HomeViewModel @Inject constructor(
   private val getMainPageUserClip: GetMainPageUserClip,
   private val getRecommendSite: GetRecommendSite,
   private val getWeekBestLink: GetWeekBestLink,
-) : ViewModel() {
+) : ContainerHost<HomeState, HomeSideEffect>, ViewModel() {
+  override val container: Container<HomeState, HomeSideEffect> =
+    container(HomeState())
 
-  fun getMainPageUserClip() = viewModelScope.launch {
+  fun getMainPageUserClip() = intent {
     getMainPageUserClip.invoke().onSuccess {
-      Log.d("MainUserSuccess", "$it")
+      reduce {
+        state.copy(categoryList = (container.stateFlow.value.categoryList + it.mainCategoryDto + null).distinctBy { it?.categoryId })
+      }
     }.onFailure {
       Log.d("MainUser", "$it")
     }
   }
 
-  fun getRecommendSite() = viewModelScope.launch {
+  fun getRecommendSite() = intent {
     getRecommendSite.invoke().onSuccess {
       Log.d("RecommendSuccess", "$it")
+      reduce {
+        state.copy(recommendLink = (container.stateFlow.value.recommendLink + it).distinctBy { it.siteId })
+      }
     }.onFailure {
       Log.d("Recommend", "$it")
     }
   }
 
-  fun getWeekBestLink() = viewModelScope.launch {
+  fun getWeekBestLink() = intent {
     getWeekBestLink.invoke().onSuccess {
       Log.d("getWeekBestLinkSuccess", "$it")
+      reduce {
+        state.copy(weekBestLink = (container.stateFlow.value.weekBestLink + it).distinctBy { it.toastId })
+      }
     }.onFailure {
       Log.d("getWeekBestLink", "$it")
     }
   }
+  fun navigateSearch() = intent { postSideEffect(HomeSideEffect.NavigateSearcg) }
+  fun navigateSetting() = intent { postSideEffect(HomeSideEffect.NavigateSetting) }
+  fun showBottomSheet() = intent { postSideEffect(HomeSideEffect.showBottomSheet) }
+
+
 }
