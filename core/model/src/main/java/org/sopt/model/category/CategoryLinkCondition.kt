@@ -1,6 +1,6 @@
 package org.sopt.model.category
 
-data class CategoryLinkGet(
+data class CategoryLinkCondition(
   val filter: String,
   val isAllCategory: Boolean
 )
