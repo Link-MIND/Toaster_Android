@@ -28,23 +28,32 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     viewModel.getCategortAll()
-    viewModel.saveCategoryTitle("이삭이다나는")
+//    viewModel.saveCategoryTitle("이삭이다나는")
 //    viewModel.deleteLink(23)
     viewModel.saveLink("https://www.instagram.com/p/C2CXFxpvc1avTdzKkcycxuUqRsfhJWjklRGjqw0/?igsh=MTh6MGppYzZydzdsYg==", null)
 //    viewModel.patchReadLink(23)
-    binding.btnSaveLinkComplete.state = LinkMindButtonState.DISABLE
-    binding.ivSaveLinkClipBack.onThrottleClick {
-      findNavController().navigateUp()
-    }
     var list = listOf(
       Clip("전체 클립", 3, false),
       Clip("전체 클립", 3, false),
       Clip("전체 클립", 3, false),
       Clip("전체 클립", 3, false),
     )
+    initView()
+    initSetClipAdapter(list)
+    collectGetClip(list)
+    onClickAddClip()
+    onClickNavigateUp()
+    onCLickNavigateCloseDialog()
+    onClickCompleteBtn()
+  }
 
+  private fun initView() {
+    binding.btnSaveLinkComplete.state = LinkMindButtonState.DISABLE
+  }
+
+  private fun initSetClipAdapter(list: List<Clip>) {
     adapter = ClipSelectAdapter(
-      onClick = { a, b ->
+      onClickClip = { a, b ->
         if (a.isSelected) {
           list.onEach { it.isSelected = false }
           list[b].isSelected = true
@@ -55,9 +64,14 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
         }
       },
     )
-    adapter.submitList(list)
     binding.rvItemTimerClipSelect.adapter = adapter
+  }
 
+  private fun collectGetClip(list: List<Clip>) {
+    adapter.submitList(list)
+  }
+
+  private fun onClickAddClip() {
     binding.tvSaveLinkAddClip.onThrottleClick {
       val linkMindBottomSheet = LinkMindBottomSheet(requireContext())
       linkMindBottomSheet.show()
@@ -70,7 +84,15 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
         }
       }
     }
+  }
 
+  private fun onClickNavigateUp() {
+    binding.ivSaveLinkClipBack.onThrottleClick {
+      findNavController().navigateUp()
+    }
+  }
+
+  private fun onCLickNavigateCloseDialog() {
     binding.ivSaveLinkClose.onThrottleClick {
       linkMindDialog.setTitle(R.string.save_clip_dialog_title)
         .setSubtitle(R.string.save_clip_dialog_sub_title)
@@ -83,7 +105,9 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
         }
         .show()
     }
+  }
 
+  private fun onClickCompleteBtn() {
     binding.btnSaveLinkComplete.apply {
       btnClick {
         if (state == LinkMindButtonState.DISABLE) return@btnClick
