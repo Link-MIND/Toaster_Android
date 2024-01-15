@@ -30,8 +30,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     super.onViewCreated(view, savedInstanceState)
     val args: SaveLinkFragmentArgs by navArgs()
     val id = args.id
-    Log.d("test","$id")
-    initView()
+    initView(id)
     handleEditTextLink()
     handleKeyboardHide()
     onClickCloseSaveLink()
@@ -56,10 +55,16 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
       .show()
   }
 
-  private fun initView() {
-    binding.btnSaveLinkNext.apply {
-      state = LinkMIndFullWidthButtonState.DISABLE
-      setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
+  private fun initView(id: String) {
+    if (id.isNotEmpty()) {
+      binding.etvSaveCopyLink.editText.setText(id)
+      handleSaveLinkNextClick()
+      binding.btnSaveLinkNext.setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals850_fill_12_rect)
+    } else {
+      binding.btnSaveLinkNext.apply {
+        state = LinkMIndFullWidthButtonState.DISABLE
+        setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
+      }
     }
   }
 
@@ -84,7 +89,6 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
 
   private fun onClickComplete() {
     binding.btnSaveLinkNext.btnClick {
-      // 유효성 검사 통과했을떄만 눌리도록
       KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
       val action = SaveLinkFragmentDirections.actionSaveLinkFragmentToSaveLinkSetClipFragment()
       findNavController().navigate(action)
