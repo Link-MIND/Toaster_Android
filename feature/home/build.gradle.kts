@@ -15,4 +15,6 @@ dependencies {
   implementation(projects.domain.home)
   implementation(libs.coil)
   implementation(libs.jsoup)
+  implementation(libs.orbit.core)
+  implementation(libs.orbit.viewmodel)
 }
