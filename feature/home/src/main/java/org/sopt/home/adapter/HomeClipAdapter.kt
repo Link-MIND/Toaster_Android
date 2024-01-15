@@ -32,5 +32,4 @@ class HomeClipAdapter(
       onContentsTheSame = { old, new -> old == new },
     )
   }
-
 }
