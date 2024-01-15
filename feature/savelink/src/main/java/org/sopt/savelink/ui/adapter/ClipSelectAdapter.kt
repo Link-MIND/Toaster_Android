@@ -9,13 +9,13 @@ import org.sopt.savelink.ui.viewholder.ClipSelectViewHolder
 import org.sopt.ui.view.ItemDiffCallback
 
 class ClipSelectAdapter(
-  private val onClick: (Clip, Int) -> Unit,
+  private val onClickClip: (Clip, Int) -> Unit,
 ) : ListAdapter<Clip, ClipSelectViewHolder>(DiffUtil) {
   private var selectedPosition = -1
   override fun onBindViewHolder(holder: ClipSelectViewHolder, position: Int) {
     holder.onBind(getItem(position), position) { clip, position ->
       handleClipSelection(clip, position)
-      onClick(clip, position)
+      onClickClip(clip, position)
     }
   }
 

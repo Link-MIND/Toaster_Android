@@ -9,12 +9,12 @@ import org.sopt.ui.view.onThrottleClick
 class ClipSelectViewHolder(
   val binding: ItemTimerClipSelectBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
-  fun onBind(data: Clip?, position: Int, onClick: (Clip, Int) -> Unit) {
+  fun onBind(data: Clip?, position: Int, onClickClip: (Clip, Int) -> Unit) {
     if (data == null) return
     setImage(position)
     setTexts(data)
     setTextColor(data, position)
-    setOnClickListener(data, onClick)
+    setOnClickListener(data, onClickClip)
   }
   private fun setImage(position: Int) {
     val imageResource = if (position == 0) {
