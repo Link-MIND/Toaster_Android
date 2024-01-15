@@ -1,6 +1,8 @@
 package org.sopt.dataremote.category.api
 
+import org.sopt.dataremote.category.request.RequestCategoryDeleteDTO
 import org.sopt.dataremote.category.request.RequestCategoryTitleDto
+import org.sopt.dataremote.category.request.RequestCategoryTitleEditDTO
 import org.sopt.dataremote.category.response.ResponseCategoryDuplicateDTO
 import org.sopt.dataremote.category.response.ResponseCategoryEntireDto
 import org.sopt.dataremote.category.response.ResponseLinksDTO
@@ -27,7 +29,7 @@ interface CategoryService {
   suspend fun postAddCategoryTitle(@Body categoryTitleDto: RequestCategoryTitleDto): BaseResponse<Int>
 
   @DELETE("/$CATEGORY")
-  suspend fun deleteCategory(): BaseResponse<Unit>
+  suspend fun deleteCategory(@Body deleteCategory: RequestCategoryDeleteDTO): BaseResponse<Unit>
 
   @GET("/$CATEGORY/$CHECK")
   suspend fun getCategoryDuplicate(
@@ -41,5 +43,5 @@ interface CategoryService {
   ): BaseResponse<ResponseLinksDTO>
 
   @PATCH("/$CATEGORY/$EDIT")
-  suspend fun patchCategoryEdit(): BaseResponse<Unit>
+  suspend fun patchCategoryEdit(@Body requestBody: RequestCategoryTitleEditDTO): BaseResponse<Unit>
 }
