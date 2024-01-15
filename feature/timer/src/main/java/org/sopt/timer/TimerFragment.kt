@@ -12,15 +12,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import org.sopt.mainfeature.R
 import org.sopt.model.timer.Timer
 import org.sopt.timer.databinding.FragmentTimerBinding
@@ -32,7 +28,6 @@ import org.sopt.ui.fragment.colorOf
 import org.sopt.ui.fragment.snackBar
 import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
-import org.sopt.ui.view.UiState
 
 @AndroidEntryPoint
 class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBinding.inflate(it) }) {
@@ -57,16 +52,51 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
     requestNotificationPermission()
     setTimerViewModel.initSetTimer()
     collectUiState()
-    completeTimerAdapter = CompleteTimerAdapter({ snackBar(binding.root, { "안녕" }) })
-    waitTimerAdapter =
-      WaitTimerAdapter({}, { ModifyTimerBottomSheetFragment.newInstance(it.id) { viewModel.deleteTimer(it.id) }.show(parentFragmentManager, this.tag) })
-    binding.rvTimerComplete.adapter = completeTimerAdapter
-    binding.rvTimerWait.adapter = waitTimerAdapter
-    completeTimerAdapter.submitList(viewModel.timerList.value?.first)
-    waitTimerAdapter.submitList(viewModel.timerList.value?.second)
+    if (viewModel.uiState.value is TimerUiState.BothAllowed) viewModel.getTimerMain()
+    initCompleteTimerAdapter()
+    initWaitTimerAdapter()
+    initPlusButtonClickListener()
+  }
+
+  override fun onResume() {
+    super.onResume()
+    initCheckNotificationPermission()
+    viewModel.setUiState(isNotiPermissionAllowed)
+  }
+
+  private fun initPlusButtonClickListener() {
     binding.ivTimerPlus.setOnClickListener {
       findNavController().navigate(org.sopt.timer.R.id.action_navigation_timer_to_navigation_timer_clip_select)
     }
+  }
+
+  private fun initWaitTimerAdapter() {
+    waitTimerAdapter =
+      WaitTimerAdapter(
+        { viewModel.patchAlarm(it.id) },
+        {
+          showModifyTimerBottomSheetFragment(it)
+        },
+      )
+    binding.rvTimerWait.adapter = waitTimerAdapter
+    waitTimerAdapter.submitList(viewModel.timerList.value?.second)
+  }
+
+  private fun showModifyTimerBottomSheetFragment(it: Timer) {
+    ModifyTimerBottomSheetFragment.newInstance(it.id, { viewModel.deleteTimer(it.id) }) {
+      findNavController().navigate(
+        TimerFragmentDirections.actionNavigationTimerToNavigationTimePicker(
+          argPatch = true,
+          argTimerId = it.id, argCategoryName = it.comment!!, argRemindTime = it.remindTime, argRemindDates = it.remindDates!!,
+        ),
+      )
+    }.show(parentFragmentManager, this.tag)
+  }
+
+  private fun initCompleteTimerAdapter() {
+    completeTimerAdapter = CompleteTimerAdapter({ snackBar(binding.root, { "안녕" }) })
+    completeTimerAdapter.submitList(viewModel.timerList.value?.first)
+    binding.rvTimerComplete.adapter = completeTimerAdapter
   }
 
   private fun collectUiState() {
@@ -100,7 +130,6 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
   }
 
   private fun handleDeviceAllowedState() {
-    Log.e("device", "device")
     with(binding) {
       btnTimerSetEnable.isGone = true
       btnTimerSetDisable.isVisible = true
@@ -112,7 +141,6 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
   }
 
   private fun handleNotAllowedState() {
-    Log.e("not", "not")
     with(binding) {
       clTimerPermissionOff.isVisible = true
       svTimerExist.isGone = true
@@ -122,7 +150,6 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
   }
 
   private fun handleAppAllowedState() {
-    Log.e("app", "app")
     with(binding) {
       clTimerPermissionOff.isGone = true
       svTimerExist.isGone = true
@@ -135,38 +162,64 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
     with(binding) {
       clTimerPermissionOff.isGone = true
       clTimerNotiPermissionOff.isGone = true
-      if (state.data?.first!!.isNotEmpty() || state.data.second.isNotEmpty()) {
+    }
+    state.data?.let {
+      handleTimerData(it)
+    } ?: run {
+      setNoDataState()
+    }
+  }
+
+  private fun handleTimerData(data: Pair<List<Timer>, List<Timer>>) {
+    if (data.first.isNotEmpty() || data.second.isNotEmpty()) {
+      with(binding) {
         svTimerExist.isVisible = true
         clTimer.isGone = true
-        if (state.data.first.isNullOrEmpty()) {
-          tvTimerNotComplete.isVisible = true
-          rvTimerComplete.isGone = true
-        } else {
-          val color = colorOf(R.color.primary)
-          val textColor = colorOf(R.color.white)
-          val colorStateList = ColorStateList.valueOf(color)
-          flTimerCompleteCount.backgroundTintList = colorStateList
-          tvTimerCompleteCount.setTextColor(textColor)
-          binding.tvTimerCompleteCount.text = state.data.first.count().toString()
-          tvTimerNotComplete.isGone = true
-          rvTimerComplete.isVisible = true
-          completeTimerAdapter.submitList(state.data.first)
-        }
-        waitTimerAdapter.submitList(state.data.second)
-        return
       }
+      setTimerExistState(data)
+    } else {
+      setNoDataState()
+    }
+  }
+
+  private fun setTimerExistState(data: Pair<List<Timer>, List<Timer>>) {
+    if (data.first.isEmpty()) {
+      setCompleteTimerNotExistState()
+    } else {
+      setCompleteTimerExistState(data.first)
+    }
+    waitTimerAdapter.submitList(data.second)
+  }
+
+  private fun setCompleteTimerNotExistState() {
+    with(binding) {
+      tvTimerNotComplete.isVisible = true
+      rvTimerComplete.isGone = true
+    }
+  }
+
+  private fun setCompleteTimerExistState(timers: List<Timer>) {
+    with(binding) {
+      val color = colorOf(R.color.primary)
+      val textColor = colorOf(R.color.white)
+      val colorStateList = ColorStateList.valueOf(color)
+      flTimerCompleteCount.backgroundTintList = colorStateList
+      tvTimerCompleteCount.setTextColor(textColor)
+      tvTimerCompleteCount.text = timers.count().toString()
+      tvTimerNotComplete.isGone = true
+      rvTimerComplete.isVisible = true
+      completeTimerAdapter.submitList(timers)
+    }
+  }
+
+  private fun setNoDataState() {
+    with(binding) {
       btnTimerSetEnable.isVisible = true
       btnTimerSetDisable.isGone = true
       clTimer.isVisible = true
       clTimerPermissionOff.isGone = true
       svTimerExist.isGone = true
     }
-  }
-
-  override fun onResume() {
-    super.onResume()
-    initCheckNotificationPermission()
-    viewModel.setUiState(isNotiPermissionAllowed)
   }
 
   private fun requestNotificationPermission() {
