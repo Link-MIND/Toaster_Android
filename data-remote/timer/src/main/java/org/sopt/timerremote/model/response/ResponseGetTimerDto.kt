@@ -1,4 +1,4 @@
-package org.sopt.timer.model.remote.response
+package org.sopt.timerremote.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

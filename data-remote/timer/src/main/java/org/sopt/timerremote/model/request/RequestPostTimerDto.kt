@@ -1,4 +1,4 @@
-package org.sopt.timer.model.remote.request
+package org.sopt.timerremote.model.request
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -14,7 +14,7 @@ data class RequestPostTimerDto(
   val remindDates: List<Int>,
 )
 
-fun TimerData.toDataModel() = RequestPostTimerDto(
+fun TimerData.toPostDto() = RequestPostTimerDto(
   categoryId = this.categoryId,
   remindTime = this.remindTime,
   remindDates = this.remindDates,

@@ -1,4 +1,4 @@
-package org.sopt.timer.model.remote.response
+package org.sopt.timerremote.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -6,9 +6,9 @@ import org.sopt.model.timer.Timer
 
 @Serializable
 data class ResponseGetTimerPageDto(
-  @SerialName("completedTimerList")
+    @SerialName("completedTimerList")
   val completedTimerList: List<CompletedTimer>,
-  @SerialName("waitingTimerList")
+    @SerialName("waitingTimerList")
   val waitingTimerList: List<WaitingTimer>,
 ) {
   @Serializable
