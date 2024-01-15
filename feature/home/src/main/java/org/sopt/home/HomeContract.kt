@@ -12,7 +12,14 @@ data class HomeState(
   val weekBestLink: List<WeekBestLink> = emptyList(),
   val recommendLink: List<RecommendLink> = emptyList(),
   val url: String = "",
-)
+) {
+  fun calculateProgress(): Int {
+    if ( readToastNum > allToastNum) return 0
+    if (allToastNum==0) return 0
+      else return readToastNum / allToastNum
+  }
+
+}
 
 sealed interface HomeSideEffect {
   data object NavigateSetting : HomeSideEffect
