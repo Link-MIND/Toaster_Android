@@ -9,7 +9,7 @@ import org.sopt.model.home.WeekBestLink
 import org.sopt.ui.view.ItemDiffCallback
 
 class HomeWeekLinkAdapter(
-  private val onClickWeekLink: () -> Unit,
+  private val onClickWeekLink: (WeekBestLink) -> Unit,
 ) : ListAdapter<WeekBestLink, HomeWeekLinkViewHolder>(DiffUtil) {
   override fun onBindViewHolder(holder: HomeWeekLinkViewHolder, position: Int) {
     holder.onBind(getItem(position))

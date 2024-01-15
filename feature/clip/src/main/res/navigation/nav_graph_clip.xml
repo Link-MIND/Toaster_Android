@@ -28,7 +28,13 @@
   <fragment
     android:id="@+id/webViewFragment"
     android:name="org.sopt.clip.webview.WebViewFragment"
-    android:label="WebViewFragment" />
+    android:label="WebViewFragment" >
+    <argument
+      android:name="site"
+      app:argType="string" />
+    <deepLink
+      app:uri="featureSaveLink://webViewFragment?site={site}" />
+  </fragment>
   <fragment
     android:id="@+id/navigation_clip_edit"
     android:name="org.sopt.clip.clipedit.ClipEditFragment"

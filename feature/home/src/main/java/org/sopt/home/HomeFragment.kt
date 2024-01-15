@@ -1,7 +1,6 @@
 package org.sopt.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -32,10 +31,12 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     navigateToSetting()
     navigateToSearch()
   }
+
   private fun initView() {
     binding.pbLinkmindHome.setProgressBarMain(54)
     initAdapter()
   }
+
   private fun collectState() {
     viewModel.observe(viewLifecycleOwner, state = ::render, sideEffect = ::handleSideEffect)
   }
@@ -48,9 +49,10 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
 
   private fun handleSideEffect(sideEffect: HomeSideEffect) {
     when (sideEffect) {
-      is HomeSideEffect.NavigateSearcg -> navigateToDestination("featureMyPage://fragmentSetting")
+      is HomeSideEffect.NavigateSearch -> navigateToDestination("featureMyPage://fragmentSetting")
       is HomeSideEffect.NavigateSetting -> navigateToDestination("featureMyPage://fragmentSearch")
       is HomeSideEffect.showBottomSheet -> showHomeBottomSheet()
+      is HomeSideEffect.NavigateWebview -> navigateToDestination("featureSaveLink://webViewFragment?site=${viewModel.container.stateFlow.value.url}")
     }
   }
 
@@ -62,6 +64,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     viewModel.getRecommendSite()
     viewModel.getWeekBestLink()
   }
+
   private fun navigateToSetting() {
     binding.ivHomeSetting.onThrottleClick {
       viewModel.navigateSetting()
@@ -87,12 +90,16 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   }
 
   private fun setWeekLinkAdapter() {
-    homeWeekLinkAdapter = HomeWeekLinkAdapter(onClickWeekLink = {})
+    homeWeekLinkAdapter = HomeWeekLinkAdapter(onClickWeekLink = {
+      viewModel.navigateWebview(it.toastLink)
+    })
     binding.rvWeekLink.adapter = homeWeekLinkAdapter
   }
 
   private fun setWeekRecommendAdapter() {
-    homeWeekRecommendLinkAdapter = HomeWeekRecommendLinkAdapter(onClickRecommendLink = {})
+    homeWeekRecommendLinkAdapter = HomeWeekRecommendLinkAdapter(onClickRecommendLink = {
+      viewModel.navigateWebview(it.siteUrl?:"")
+    })
     binding.rvHomeWeekRecommend.adapter = homeWeekRecommendLinkAdapter
     val spacingWeekRecommendInPixels = resources.getDimensionPixelSize(R.dimen.spacing_12)
     binding.rvHomeWeekRecommend.addItemDecoration(ItemDecoration(3, spacingWeekRecommendInPixels))

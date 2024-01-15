@@ -7,7 +7,7 @@ import org.sopt.model.home.WeekBestLink
 
 class HomeWeekLinkViewHolder(
   private val binding: ItemWeekLinkBinding,
-  private val onClickWeekLink: () -> Unit,
+  private val onClickWeekLink: (WeekBestLink) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
 
   fun onBind(data: WeekBestLink?) {
@@ -18,7 +18,7 @@ class HomeWeekLinkViewHolder(
       binding.tvWeekLinkTitle.text = data.toastTitle
       binding.ivWeekLink.load(data.toastImg)
       root.setOnClickListener {
-        onClickWeekLink()
+        onClickWeekLink(data)
       }
     }
   }
