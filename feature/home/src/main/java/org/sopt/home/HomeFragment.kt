@@ -12,6 +12,9 @@ import org.sopt.home.adapter.HomeWeekLinkAdapter
 import org.sopt.home.adapter.HomeWeekRecommendLinkAdapter
 import org.sopt.home.adapter.ItemDecoration
 import org.sopt.home.databinding.FragmentHomeBinding
+import org.sopt.model.category.Category
+import org.sopt.model.home.RecommendLink
+import org.sopt.model.home.WeekBestLink
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.onThrottleClick
@@ -30,17 +33,22 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     viewModel.getMainPageUserClip()
     initAdapter()
     val list = listOf(
-      ClipDummy("전체클립", 1),
-      ClipDummy("TitleCheck", 1),
-      ClipDummy("LeeSak", 3),
+      Category(1, "전체클립", 1),
+      Category(2, "TitleCheck", 1),
+      Category(3, "LeeSak", 3),
       null,
     )
     val list2 = listOf(
-      WeekLinkDummy("Title", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
-      WeekLinkDummy("Category", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
-      WeekLinkDummy("LeeSak", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
+      WeekBestLink(1, "Title", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
+      WeekBestLink(2, "Category", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
+      WeekBestLink(3, "LeeSak", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
     )
-    initView(list, list2)
+    val list3 = listOf(
+      RecommendLink(1, "Title", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
+      RecommendLink(2, "Category", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
+      RecommendLink(3, "LeeSak", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
+    )
+    initView(list, list2, list3)
     navigateToSetting()
     navigateToSearch()
   }
@@ -52,12 +60,13 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   }
 
   private fun initView(
-    list: List<ClipDummy?>,
-    list2: List<WeekLinkDummy>,
+    list: List<Category?>,
+    list2: List<WeekBestLink>,
+    list3: List<RecommendLink>,
   ) {
     collectClip(list)
     collectWeekLink(list2)
-    collectRecommendLink(list2)
+    collectRecommendLink(list3)
     binding.pbLinkmindHome.setProgressBarMain(54)
   }
 
@@ -97,15 +106,15 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     binding.rvHomeWeekRecommend.addItemDecoration(ItemDecoration(3, spacingWeekRecommendInPixels))
   }
 
-  private fun collectRecommendLink(list2: List<WeekLinkDummy>) {
+  private fun collectRecommendLink(list2: List<RecommendLink>) {
     homeWeekRecommendLinkAdapter.submitList(list2)
   }
 
-  private fun collectWeekLink(list2: List<WeekLinkDummy>) {
+  private fun collectWeekLink(list2: List<WeekBestLink>) {
     homeWeekLinkAdapter.submitList(list2)
   }
 
-  private fun collectClip(list: List<ClipDummy?>) {
+  private fun collectClip(list: List<Category?>) {
     homeClipAdapter.submitList(list)
   }
 
@@ -119,6 +128,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     )
     findNavController().navigate(request, navOptions)
   }
+
   private fun showHomeBottomSheet() {
     val linkMindBottomSheet = LinkMindBottomSheet(requireContext())
     linkMindBottomSheet.show()
