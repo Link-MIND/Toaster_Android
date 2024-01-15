@@ -1,5 +1,6 @@
 package org.sopt.maincontainer
 
+import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipDescription.MIMETYPE_TEXT_PLAIN
 import android.content.ClipboardManager
@@ -9,10 +10,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.NavDeepLinkBuilder
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.dialog.LinkMindDialog
+import designsystem.components.toast.linkMindSnackBar
 import org.sopt.maincontainer.databinding.ActivityMainBinding
 import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.onThrottleClick
@@ -35,6 +38,12 @@ class MainActivity : AppCompatActivity() {
     initView()
   }
 
+  private fun initView() {
+    setFcv()
+    changeBottomNavigationFragment()
+    setBottomVisible()
+  }
+
   override fun onWindowFocusChanged(hasFocus: Boolean) {
     super.onWindowFocusChanged(hasFocus)
 
@@ -51,16 +60,17 @@ class MainActivity : AppCompatActivity() {
 
     val pasteData = item.toString()
     if (pasteData.contains("http")) {
-      showRevokeCommonDialog()
-      clipboard.setPrimaryClip(ClipData.newPlainText("", ""))
+      showRevokeCommonDialog ({
+        clipboard.setPrimaryClip(ClipData.newPlainText("", ""))
+      },pasteData)
+      return
+    } else {
+      showRevokeCommonDialog ({
+        this.linkMindSnackBar(binding.root, "올바르지 않은 링크입니다", false)
+        clipboard.setPrimaryClip(ClipData.newPlainText("", ""))
+      },"")
       return
     }
-  }
-
-  private fun initView() {
-    setFcv()
-    changeBottomNavigationFragment()
-    setBottomVisible()
   }
 
   private fun setFcv() {
@@ -93,13 +103,29 @@ class MainActivity : AppCompatActivity() {
     }
   }
 
-  private fun onClickFab() {
-    binding.fabMain.onThrottleClick {
-      navigateToDestination("featureSaveLink://saveLinkFragment")
+  private fun setBottomVisible() {
+    navController.addOnDestinationChangedListener { _, destination, _ ->
+      binding.bnvMain.visibility = if (destination.id in listOf(
+          R.id.navigation_home,
+          R.id.navigation_clip,
+          R.id.navigation_timer,
+          R.id.navigation_my,
+        )
+      ) {
+        View.VISIBLE
+      } else {
+        View.GONE
+      }
     }
   }
 
-  private fun navigateToDestination(url: String) {
+  private fun onClickFab() {
+    binding.fabMain.onThrottleClick {
+      navigateToDestination("featureSaveLink://saveLinkFragment?id=test")
+    }
+  }
+
+  private fun navigateToDestination(url : String) {
     val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
       url,
       enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
@@ -124,30 +150,16 @@ class MainActivity : AppCompatActivity() {
     } ?: false
   }
 
-  private fun setBottomVisible() {
-    navController.addOnDestinationChangedListener { _, destination, _ ->
-      binding.bnvMain.visibility = if (destination.id in listOf(
-          R.id.navigation_home,
-          R.id.navigation_clip,
-          R.id.navigation_timer,
-          R.id.navigation_my,
-        )
-      ) {
-        View.VISIBLE
-      } else {
-        View.GONE
-      }
-    }
-  }
-
-  private fun showRevokeCommonDialog() {
-    linkMindDialog.setTitle(org.sopt.mainfeature.R.string.save_clip_dialog_title)
-      .setSubtitle(org.sopt.mainfeature.R.string.save_clip_dialog_sub_title)
-      .setNegativeButton(org.sopt.mainfeature.R.string.negative_close_msg) {
+  private fun showRevokeCommonDialog(deleteClipBoard: () -> Unit , clipboardLink:String) {
+    linkMindDialog.setTitle(org.sopt.mainfeature.R.string.clipboard_dialog_title)
+      .setSubtitle(org.sopt.mainfeature.R.string.clipboard_dialog_sub_title)
+      .setNegativeButton(org.sopt.mainfeature.R.string.negative_close_cancel) {
         linkMindDialog.dismiss()
+        deleteClipBoard()
       }
-      .setPositiveButton(org.sopt.mainfeature.R.string.positive_ok_msg) {
-        navigateToDestination("featureSaveLink://saveLinkFragment")
+      .setPositiveButton(org.sopt.mainfeature.R.string.positive_ok_save) {
+        navigateToDestination("featureSaveLink://saveLinkFragment?id=$clipboardLink")
+        deleteClipBoard()
         linkMindDialog.dismiss()
       }
       .show()
