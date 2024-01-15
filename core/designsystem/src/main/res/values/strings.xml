@@ -86,6 +86,11 @@
   <!-- dialog intro -->
   <string name="save_clip_dialog_title">링크 저장을 취소하시겠어요?</string>
   <string name="save_clip_dialog_sub_title">저장 중인 링크가 사라져요</string>
+  <string name="clipboard_dialog_title">토스터에 링크 저장하기</string>
+  <string name="clipboard_dialog_sub_title">붙여 넣기 동작을 허용하시겠어요?</string>
+  <string name="positive_ok_save">저장</string>
+  <string name="negative_close_cancel">취소</string>
   <string name="positive_ok_msg">확인</string>
   <string name="negative_close_msg">닫기</string>
+
 </resources>

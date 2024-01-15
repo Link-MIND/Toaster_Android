@@ -1,12 +1,14 @@
 package org.sopt.savelink.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
 import designsystem.components.dialog.LinkMindDialog
@@ -26,6 +28,9 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    val args: SaveLinkFragmentArgs by navArgs()
+    val id = args.id
+    Log.d("test","$id")
     initView()
     handleEditTextLink()
     handleKeyboardHide()

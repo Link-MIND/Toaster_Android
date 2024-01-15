@@ -10,7 +10,11 @@
     android:name="org.sopt.savelink.ui.SaveLinkFragment"
     android:label="fragment_save_link"
     tools:layout="@layout/fragment_save_link">
-    <deepLink app:uri="featureSaveLink://saveLinkFragment" />
+    <argument
+      android:name="id"
+      app:argType="string" />
+    <deepLink
+      app:uri="featureSaveLink://saveLinkFragment?id={id}" />
     <action
       android:id="@+id/action_saveLinkFragment_to_saveLinkSetClipFragment"
       app:destination="@id/saveLinkSetClipFragment"
