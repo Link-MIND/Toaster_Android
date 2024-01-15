@@ -1,20 +1,19 @@
 package org.sopt.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.toast.linkMindSnackBar
+import org.orbitmvi.orbit.viewmodel.observe
 import org.sopt.home.adapter.HomeClipAdapter
 import org.sopt.home.adapter.HomeWeekLinkAdapter
 import org.sopt.home.adapter.HomeWeekRecommendLinkAdapter
 import org.sopt.home.adapter.ItemDecoration
 import org.sopt.home.databinding.FragmentHomeBinding
-import org.sopt.model.category.Category
-import org.sopt.model.home.RecommendLink
-import org.sopt.model.home.WeekBestLink
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.onThrottleClick
@@ -28,57 +27,50 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   private val viewModel by viewModels<HomeViewModel>()
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    viewModel.getRecommendSite()
-    viewModel.getWeekBestLink()
-    viewModel.getMainPageUserClip()
-    initAdapter()
-    val list = listOf(
-      Category(1, "전체클립", 1),
-      Category(2, "TitleCheck", 1),
-      Category(3, "LeeSak", 3),
-      null,
-    )
-    val list2 = listOf(
-      WeekBestLink(1, "Title", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
-      WeekBestLink(2, "Category", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
-      WeekBestLink(3, "LeeSak", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
-    )
-    val list3 = listOf(
-      RecommendLink(1, "Title", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
-      RecommendLink(2, "Category", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
-      RecommendLink(3, "LeeSak", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
-    )
-    initView(list, list2, list3)
+    initView()
+    collectState()
     navigateToSetting()
     navigateToSearch()
+  }
+  private fun initView() {
+    binding.pbLinkmindHome.setProgressBarMain(54)
+    initAdapter()
+  }
+  private fun collectState() {
+    viewModel.observe(viewLifecycleOwner, state = ::render, sideEffect = ::handleSideEffect)
+  }
+
+  private fun render(homeState: HomeState) {
+    homeClipAdapter.submitList(homeState.categoryList)
+    homeWeekLinkAdapter.submitList(homeState.weekBestLink)
+    homeWeekRecommendLinkAdapter.submitList(homeState.recommendLink)
+  }
+
+  private fun handleSideEffect(sideEffect: HomeSideEffect) {
+    when (sideEffect) {
+      is HomeSideEffect.NavigateSearcg -> navigateToDestination("featureMyPage://fragmentSetting")
+      is HomeSideEffect.NavigateSetting -> navigateToDestination("featureMyPage://fragmentSearch")
+      is HomeSideEffect.showBottomSheet -> showHomeBottomSheet()
+    }
   }
 
   private fun initAdapter() {
     setClipAdapter()
     setWeekLinkAdapter()
     setWeekRecommendAdapter()
+    viewModel.getMainPageUserClip()
+    viewModel.getRecommendSite()
+    viewModel.getWeekBestLink()
   }
-
-  private fun initView(
-    list: List<Category?>,
-    list2: List<WeekBestLink>,
-    list3: List<RecommendLink>,
-  ) {
-    collectClip(list)
-    collectWeekLink(list2)
-    collectRecommendLink(list3)
-    binding.pbLinkmindHome.setProgressBarMain(54)
-  }
-
   private fun navigateToSetting() {
     binding.ivHomeSetting.onThrottleClick {
-      navigateToDestination("featureMyPage://fragmentSetting")
+      viewModel.navigateSetting()
     }
   }
 
   private fun navigateToSearch() {
     binding.clHomeSearch.onThrottleClick {
-      navigateToDestination("featureMyPage://fragmentSearch")
+      viewModel.navigateSearch()
     }
   }
 
@@ -86,7 +78,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     homeClipAdapter = HomeClipAdapter(
       onClickClip = {},
       onClickEmptyClip = {
-        showHomeBottomSheet()
+        viewModel.showBottomSheet()
       },
     )
     binding.rvHomeClip.adapter = homeClipAdapter
@@ -104,18 +96,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     binding.rvHomeWeekRecommend.adapter = homeWeekRecommendLinkAdapter
     val spacingWeekRecommendInPixels = resources.getDimensionPixelSize(R.dimen.spacing_12)
     binding.rvHomeWeekRecommend.addItemDecoration(ItemDecoration(3, spacingWeekRecommendInPixels))
-  }
-
-  private fun collectRecommendLink(list2: List<RecommendLink>) {
-    homeWeekRecommendLinkAdapter.submitList(list2)
-  }
-
-  private fun collectWeekLink(list2: List<WeekBestLink>) {
-    homeWeekLinkAdapter.submitList(list2)
-  }
-
-  private fun collectClip(list: List<Category?>) {
-    homeClipAdapter.submitList(list)
   }
 
   private fun navigateToDestination(destination: String) {

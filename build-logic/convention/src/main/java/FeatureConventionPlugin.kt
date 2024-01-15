@@ -21,6 +21,8 @@ internal class FeatureConventionPlugin : Plugin<Project> {
         "implementation"(project(":core:model"))
         "implementation"(project(":core:designsystem"))
 
+        "implementation"(libs.findBundle("orbit").get())
+
         "implementation"(libs.findLibrary("appcompat").get())
         "implementation"(libs.findLibrary("core.ktx").get())
         "implementation"(libs.findLibrary("constraintlayout").get())
@@ -38,7 +40,6 @@ internal class FeatureConventionPlugin : Plugin<Project> {
         "implementation"(libs.findLibrary("kotlinx.coroutines.core").get())
 
         "implementation"(libs.findLibrary("timber").get())
-        "implementation"(libs.findBundle("orbit").get())
       }
     }
   }
