@@ -1,10 +1,10 @@
 package org.sopt.timerremote.api
 
 import org.sopt.network.model.response.base.BaseResponse
-import org.sopt.timer.model.remote.request.RequestPatchTimerDto
-import org.sopt.timer.model.remote.request.RequestPostTimerDto
-import org.sopt.timer.model.remote.response.ResponseGetTimerDto
-import org.sopt.timer.model.remote.response.ResponseGetTimerPageDto
+import org.sopt.timerremote.model.request.RequestPatchTimerDto
+import org.sopt.timerremote.model.request.RequestPostTimerDto
+import org.sopt.timerremote.model.response.ResponseGetTimerDto
+import org.sopt.timerremote.model.response.ResponseGetTimerPageDto
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -21,7 +21,7 @@ interface TimerService {
     @Body requestPostTimerDto: RequestPostTimerDto,
   ): BaseResponse<Unit>
 
-  @PATCH("timer/datetime")
+  @PATCH("timer/datetime/{timerId}")
   suspend fun patchTimer(
     @Path("timerId") timerId: Int,
     @Body requestPatchTimerDto: RequestPatchTimerDto
@@ -36,4 +36,9 @@ interface TimerService {
   suspend fun getTimer(
     @Path("timerId") timerId: Int,
   ): BaseResponse<ResponseGetTimerDto>
+
+  @PATCH("timer/alarm/{timerId}")
+  suspend fun patchAlarm(
+    @Path("timerId") timerId: Int,
+  ): BaseResponse<Unit>
 }
