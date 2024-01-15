@@ -38,7 +38,7 @@ interface CategoryService {
 
   @GET("/{categoryId}")
   suspend fun getCategoryLink(
-    @Query("filter") filter: ReadFilterEnum,
+    @Query("filter") filter: String,
     @Query("isAllCategory") isAllCategory: Boolean,
   ): BaseResponse<ResponseLinksDTO>
 
