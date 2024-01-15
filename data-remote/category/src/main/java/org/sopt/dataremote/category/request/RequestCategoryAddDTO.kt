@@ -1,4 +1,4 @@
-package org.sopt.data.category.dto.request
+package org.sopt.dataremote.category.request
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

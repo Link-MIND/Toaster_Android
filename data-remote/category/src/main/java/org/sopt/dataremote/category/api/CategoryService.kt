@@ -1,6 +1,6 @@
 package org.sopt.dataremote.category.api
 
-import org.sopt.data.category.dto.request.RequestCategoryAddDTO
+import org.sopt.dataremote.category.request.RequestCategoryAddDTO
 import org.sopt.dataremote.category.response.ResponseCategoryDto
 import org.sopt.network.model.response.base.BaseResponse
 import retrofit2.http.GET
