@@ -10,8 +10,7 @@ class HomeClipViewHolder(
   private val binding: ItemHomeClipBinding,
   private val onClickClip: (ClipDummy) -> Unit,
   private val onClickEmptyClip: () -> Unit,
-
-  ) : RecyclerView.ViewHolder(binding.root) {
+) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(data: ClipDummy?, position: Int) {
     if (position == 0) {
       binding.ivHomeClip.setImageResource(org.sopt.mainfeature.R.drawable.ic_clip_all_24)

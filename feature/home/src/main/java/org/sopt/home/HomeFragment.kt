@@ -29,25 +29,36 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     viewModel.getWeekBestLink()
     viewModel.getMainPageUserClip()
     initAdapter()
-
     val list = listOf(
       ClipDummy("전체클립", 1),
       ClipDummy("TitleCheck", 1),
       ClipDummy("LeeSak", 3),
       null,
     )
-
     val list2 = listOf(
       WeekLinkDummy("Title", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
       WeekLinkDummy("Category", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
       WeekLinkDummy("LeeSak", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
     )
-    homeClipAdapter.submitList(list)
-    homeWeekLinkAdapter.submitList(list2)
-    homeWeekRecommendLinkAdapter.submitList(list2)
-    binding.pbLinkmindHome.setProgressBarMain(54)
+    initView(list, list2)
     navigateToSetting()
     navigateToSearch()
+  }
+
+  private fun initAdapter() {
+    setClipAdapter()
+    setWeekLinkAdapter()
+    setWeekRecommendAdapter()
+  }
+
+  private fun initView(
+    list: List<ClipDummy?>,
+    list2: List<WeekLinkDummy>,
+  ) {
+    collectClip(list)
+    collectWeekLink(list2)
+    collectRecommendLink(list2)
+    binding.pbLinkmindHome.setProgressBarMain(54)
   }
 
   private fun navigateToSetting() {
@@ -60,23 +71,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     binding.clHomeSearch.onThrottleClick {
       navigateToDestination("featureMyPage://fragmentSearch")
     }
-  }
-
-  private fun navigateToDestination(destination: String) {
-    val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
-      destination,
-      enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
-      exitAnim = android.R.anim.fade_out,
-      popEnterAnim = android.R.anim.fade_in,
-      popExitAnim = org.sopt.mainfeature.R.anim.to_bottom,
-    )
-    findNavController().navigate(request, navOptions)
-  }
-
-  private fun initAdapter() {
-    setClipAdapter()
-    setWeekLinkAdapter()
-    setWeekRecommendAdapter()
   }
 
   private fun setClipAdapter() {
@@ -103,6 +97,28 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     binding.rvHomeWeekRecommend.addItemDecoration(ItemDecoration(3, spacingWeekRecommendInPixels))
   }
 
+  private fun collectRecommendLink(list2: List<WeekLinkDummy>) {
+    homeWeekRecommendLinkAdapter.submitList(list2)
+  }
+
+  private fun collectWeekLink(list2: List<WeekLinkDummy>) {
+    homeWeekLinkAdapter.submitList(list2)
+  }
+
+  private fun collectClip(list: List<ClipDummy?>) {
+    homeClipAdapter.submitList(list)
+  }
+
+  private fun navigateToDestination(destination: String) {
+    val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
+      destination,
+      enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
+      exitAnim = android.R.anim.fade_out,
+      popEnterAnim = android.R.anim.fade_in,
+      popExitAnim = org.sopt.mainfeature.R.anim.to_bottom,
+    )
+    findNavController().navigate(request, navOptions)
+  }
   private fun showHomeBottomSheet() {
     val linkMindBottomSheet = LinkMindBottomSheet(requireContext())
     linkMindBottomSheet.show()
@@ -117,5 +133,4 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       }
     }
   }
-
 }
