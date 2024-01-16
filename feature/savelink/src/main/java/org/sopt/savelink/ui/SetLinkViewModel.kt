@@ -24,6 +24,7 @@ class SetLinkViewModel @Inject constructor(
 ) : ContainerHost<SetLinkState, SetLinkSideEffect>, ViewModel() {
   override val container: Container<SetLinkState, SetLinkSideEffect> =
     container(SetLinkState())
+
   fun saveCategoryTitle(categoryTitle: String) = viewModelScope.launch {
     postAddCategoryTitle(
       PostAddCategoryTitleUseCase.Param(
@@ -38,7 +39,7 @@ class SetLinkViewModel @Inject constructor(
     getCategoryAllUseCase().onSuccess {
       reduce {
         state.copy(
-          categoryList = it.categories.map { it.toModel() }
+          categoryList = (container.stateFlow.value.categoryList + it.categories.map { it.toModel() }).distinctBy { it?.categoryId },
         )
       }
     }.onFailure {
@@ -57,12 +58,17 @@ class SetLinkViewModel @Inject constructor(
     }.onFailure { Log.d("SaveLinkFail", "$it") }
   }
 
-  fun updateCategoryId(categoryId:Long) = intent {
+  fun updateCategoryId(categoryId: Long) = intent {
     reduce {
       state.copy(categoryId = categoryId)
     }
   }
 
+  fun updateUrl(url: String) = intent {
+    reduce {
+      state.copy(url = url)
+    }
+  }
   private fun navigateSetLink() = intent { postSideEffect(SetLinkSideEffect.NavigateSetLink) }
   fun showBottomSheet() = intent { postSideEffect(SetLinkSideEffect.ShowBottomSheet) }
   fun showDialog() = intent { postSideEffect(SetLinkSideEffect.ShowDialog) }

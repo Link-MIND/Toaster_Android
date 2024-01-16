@@ -29,5 +29,9 @@
     android:id="@+id/saveLinkSetClipFragment"
     android:name="org.sopt.savelink.ui.SaveLinkSetClipFragment"
     android:label="SaveLinkSetClipFragment"
-    tools:layout="@layout/fragment_save_link_set_clip" />
+    tools:layout="@layout/fragment_save_link_set_clip" >
+    <argument
+      android:name="clipboardLink"
+      app:argType="string" />
+  </fragment>
 </navigation>

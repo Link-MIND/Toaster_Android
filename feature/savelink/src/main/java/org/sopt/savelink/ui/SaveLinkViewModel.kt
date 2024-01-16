@@ -22,6 +22,12 @@ class SaveLinkViewModel @Inject constructor(
   override val container: Container<LinkState, LinkSideEffect> =
     container(LinkState())
 
+  fun updataEditText(text:String) = intent {
+    reduce {
+      state.copy(edittextLink = container.stateFlow.value.edittextLink+text)
+    }
+  }
+
   fun navigateUp() = intent { postSideEffect(LinkSideEffect.NavigateUp) }
   fun navigateSetLink() = intent { postSideEffect(LinkSideEffect.NavigateSetLink) }
   fun showBottomSheet() = intent { postSideEffect(LinkSideEffect.ShowBottomSheet) }
