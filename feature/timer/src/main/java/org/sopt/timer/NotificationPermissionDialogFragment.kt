@@ -2,6 +2,8 @@ package org.sopt.timer
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -10,9 +12,14 @@ import org.sopt.timer.databinding.FragmentNotificationPermissionDialogBinding
 import org.sopt.ui.base.BindingDialogFragment
 import org.sopt.ui.view.onThrottleClick
 
+
 class NotificationPermissionDialogFragment : BindingDialogFragment<FragmentNotificationPermissionDialogBinding>(
   { FragmentNotificationPermissionDialogBinding.inflate(it) },
 ) {
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setStyle(STYLE_NO_FRAME, android.R.style.Theme_Dialog);
+  }
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
@@ -23,6 +30,14 @@ class NotificationPermissionDialogFragment : BindingDialogFragment<FragmentNotif
     binding.btnNotificationPermissionDialog.onThrottleClick {
       navigateToNotificationSetting(requireContext())
       dismiss()
+    }
+  }
+
+  override fun onStart() {
+    super.onStart()
+    val dialog = dialog
+    if (dialog != null) {
+      dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
   }
 
