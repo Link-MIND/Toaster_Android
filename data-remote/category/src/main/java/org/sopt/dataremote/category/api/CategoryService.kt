@@ -43,5 +43,5 @@ interface CategoryService {
   ): BaseResponse<ResponseLinksDTO>
 
   @PATCH("/$CATEGORY/$EDIT")
-  suspend fun patchCategoryEdit(@Body requestBody: RequestCategoryTitleEditDTO): BaseResponse<Unit>
+  suspend fun patchCategoryEdit(@Body requestBody: RequestCategoryEditDTO): BaseResponse<Unit>
 }

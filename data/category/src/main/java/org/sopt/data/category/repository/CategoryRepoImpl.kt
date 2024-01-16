@@ -2,6 +2,8 @@ package org.sopt.data.category.repository
 
 import org.sopt.data.category.datasource.RemoteCategoryDataSource
 import org.sopt.domain.category.category.repository.CategoryRepository
+import org.sopt.model.category.CategoryChangePriority
+import org.sopt.model.category.CategoryChangeTitle
 import org.sopt.model.category.CategoryDuplicate
 import org.sopt.model.category.CategoryLinkList
 import org.sopt.model.category.CategoryList
@@ -25,6 +27,6 @@ class CategoryRepoImpl @Inject constructor(
     override suspend fun getCategoryLink(filter: String, isAllCategory: Boolean): Result<CategoryLinkList> =
       runCatching { remoteCategoryDataSource.getCategoryLink(filter, isAllCategory) }
 
-    override suspend fun patchCategoryEdit(): Result<Unit> =
-      runCatching { remoteCategoryDataSource.patchCategoryEdit() }
+    override suspend fun patchCategoryEdit(changeCategoryTitle:List<CategoryChangeTitle>, changeCategoryChangePriority: List<CategoryChangePriority> ): Result<Unit> =
+      runCatching { remoteCategoryDataSource.patchCategoryEdit(changeCategoryTitle, changeCategoryChangePriority) }
   }

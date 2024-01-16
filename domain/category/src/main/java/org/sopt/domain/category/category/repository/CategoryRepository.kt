@@ -1,5 +1,7 @@
 package org.sopt.domain.category.category.repository
 
+import org.sopt.model.category.CategoryChangePriority
+import org.sopt.model.category.CategoryChangeTitle
 import org.sopt.model.category.CategoryDuplicate
 import org.sopt.model.category.CategoryLinkList
 import org.sopt.model.category.CategoryList
@@ -15,5 +17,5 @@ interface CategoryRepository {
 
   suspend fun getCategoryLink(filter: String, isAllCategory: Boolean): Result<CategoryLinkList>
 
-  suspend fun patchCategoryEdit(): Result<Unit>
+  suspend fun patchCategoryEdit(changeCategoryTitle:List<CategoryChangeTitle>, changeCategoryChangePriority: List<CategoryChangePriority>): Result<Unit>
 }
