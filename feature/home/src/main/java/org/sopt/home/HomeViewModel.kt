@@ -62,6 +62,11 @@ class HomeViewModel @Inject constructor(
   fun navigateSetting() = intent { postSideEffect(HomeSideEffect.NavigateSetting) }
   fun showBottomSheet() = intent { postSideEffect(HomeSideEffect.showBottomSheet) }
 
+  fun navigateClipLink(categoryId:Long) = blockingIntent  {
+    reduce { state.copy(categoryId = categoryId) }
+    postSideEffect(HomeSideEffect.NavigateClipLink)
+  }
+
   fun navigateWebview(url: String) = blockingIntent {
     reduce { state.copy(url = url) }
     postSideEffect(HomeSideEffect.NavigateWebview)

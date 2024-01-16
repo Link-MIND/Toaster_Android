@@ -55,6 +55,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     when (sideEffect) {
       is HomeSideEffect.NavigateSearch -> navigateToDestination("featureMyPage://fragmentSetting")
       is HomeSideEffect.NavigateSetting -> navigateToDestination("featureMyPage://fragmentSearch")
+      is HomeSideEffect.NavigateClipLink -> navigateToDestination("featureSaveLink://ClipLinkFragment?categoryId=${viewModel.container.stateFlow.value.categoryId}")
       is HomeSideEffect.showBottomSheet -> showHomeBottomSheet()
       is HomeSideEffect.NavigateWebview -> navigateToDestination("featureSaveLink://webViewFragment?site=${viewModel.container.stateFlow.value.url}")
     }
@@ -68,7 +69,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     viewModel.getRecommendSite()
     viewModel.getWeekBestLink()
   }
-
   private fun navigateToSetting() {
     binding.ivHomeSetting.onThrottleClick {
       viewModel.navigateSetting()
@@ -83,7 +83,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
 
   private fun setClipAdapter() {
     homeClipAdapter = HomeClipAdapter(
-      onClickClip = {},
+      onClickClip = {
+        viewModel.navigateClipLink(it.categoryId)
+      },
       onClickEmptyClip = {
         viewModel.showBottomSheet()
       },

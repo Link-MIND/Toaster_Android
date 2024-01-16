@@ -21,6 +21,11 @@
     android:name="org.sopt.clip.cliplink.ClipLinkFragment"
     android:label="ClipLinkFragment"
     tools:layout="@layout/fragment_clip_link">
+    <argument
+      android:name="categoryId"
+      app:argType="long" />
+    <deepLink
+      app:uri="featureSaveLink://ClipLinkFragment?categoryId={categoryId}" />
     <action
       android:id="@+id/action_navigation_clip_link_to_webViewFragment"
       app:destination="@id/webViewFragment" />
