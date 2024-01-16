@@ -7,6 +7,6 @@ import javax.inject.Inject
 class PostTimerUseCase @Inject constructor(
   private val timerRepository: TimerRepository,
 ) {
-  suspend operator fun invoke(categoryId: Long, time: String, days: List<Int>) =
+  suspend operator fun invoke(categoryId: Long?, time: String, days: List<Int>) =
     timerRepository.postTimer(TimerData(categoryId, time, days))
 }
