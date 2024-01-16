@@ -28,7 +28,8 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
+    val clipboardLink = arguments?.getString("clipboardLink")
+    viewModel.updateUrl(clipboardLink ?: "")
     initView()
     collectState()
     onClickAddClip()
@@ -130,7 +131,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
     binding.btnSaveLinkComplete.apply {
       btnClick {
         if (state == LinkMindButtonState.DISABLE) return@btnClick
-        viewModel.saveLink("http://www.naver.com", viewModel.container.stateFlow.value.categoryId)
+        viewModel.saveLink(viewModel.container.stateFlow.value.url, viewModel.container.stateFlow.value.categoryId)
       }
     }
   }

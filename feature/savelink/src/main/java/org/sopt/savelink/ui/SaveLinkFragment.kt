@@ -129,6 +129,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
   private fun handleSaveLinkNextClick() {
     with(binding) {
       hideErrorState(tvSaveLinkError, LinkMIndFullWidthButtonState.ENABLE_BLACK)
+      viewModel.updataEditText(etvSaveCopyLink.editText.text.toString())
       onClickComplete()
     }
   }
@@ -186,7 +187,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
 
   private fun navigateSetLink() {
     KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
-    val action = SaveLinkFragmentDirections.actionSaveLinkFragmentToSaveLinkSetClipFragment()
+    val action = SaveLinkFragmentDirections.actionSaveLinkFragmentToSaveLinkSetClipFragment(viewModel.container.stateFlow.value.edittextLink)
     findNavController().navigate(action)
   }
 }
