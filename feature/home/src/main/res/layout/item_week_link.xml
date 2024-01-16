@@ -13,6 +13,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp"
+    android:elevation="0dp"
+    app:cardElevation="0dp"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
@@ -41,6 +43,7 @@
     android:textColor="@color/neutrals200"
     android:layout_height="wrap_content"
     android:paddingStart="12dp"
+    android:maxLines="1"
     app:layout_constraintBottom_toBottomOf="@id/cv_week_link"
     app:layout_constraintStart_toEndOf="@id/cv_week_link"
     tools:text="title" />
