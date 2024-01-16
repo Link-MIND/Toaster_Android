@@ -2,9 +2,11 @@ package org.sopt.dataremote.category.request
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import org.sopt.model.category.CategoryChangePriority
+import org.sopt.model.category.CategoryChangeTitle
 
 @Serializable
-data class RequestCategoryTitleEditDTO(
+data class RequestCategoryEditDTO(
   @SerialName("changeCategoryPriorityList")
   val changeCategoryPriorityList: List<ChangeCategoryPriority>,
   @SerialName("changeCategoryTitleList")
@@ -24,4 +26,19 @@ data class ChangeCategoryPriority(
   val categoryId: Long,
   @SerialName("newPriority")
   val newPriority: Long
+)
+
+fun CategoryChangePriority.toRequestDTO() = ChangeCategoryPriority(
+  categoryId = this.categoryId,
+  newPriority = this.newPrioritiy,
+)
+
+fun CategoryChangeTitle.toRequestDTO()= ChangeCategoryTitle(
+  categoryId=this.categoryId,
+  newTitle = this.newTitle
+)
+
+fun Pair<List<ChangeCategoryTitle>, List<ChangeCategoryPriority>>.toRequestDIO()= RequestCategoryEditDTO(
+  changeCategoryTitleList = first,
+  changeCategoryPriorityList = second
 )
