@@ -234,7 +234,7 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
 
   private fun collectDeleteState() {
     viewModel.deleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
-      when(state) {
+      when (state) {
         is UiState.Success -> {
           requireContext().linkMindSnackBar(binding.root, "타이머 삭제 완료", false)
         }

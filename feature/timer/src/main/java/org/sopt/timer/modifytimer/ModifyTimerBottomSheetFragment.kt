@@ -2,7 +2,6 @@ package org.sopt.timer.modifytimer
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.ui.NavigationUI.navigateUp
 import designsystem.components.dialog.LinkMindDialog
 import org.sopt.timer.R
 import org.sopt.timer.databinding.FragmentModifyTimerBottomSheetBinding
