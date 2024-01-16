@@ -322,7 +322,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
         is UiState.Failure -> {
           if (state.msg.contains("422")) {
             Log.e("로그", state.msg)
-            requireContext().linkMindSnackBar(binding.root, "한 클립당 하나의 타이머만 설정 가능해요", true)
+            requireContext().linkMindSnackBar(binding.btnTimePickerNext, "한 클립당 하나의 타이머만 설정 가능해요", true)
           }
         }
 
