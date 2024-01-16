@@ -102,17 +102,13 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
     }
     binding.btnTimePickerNext.state = LinkMindButtonState.DISABLE
     binding.btnTimePickerNext.isClickable = false
-    binding.tvTimePickerCategory.text = if (args.argPatch) {
-      "${args.argCategoryName} 클립을"
-    } else {
-      "${
-      if ((setTimerViewModel.clipState.value as UiState.Success).data.first { it.isSelected }.name == "전체 클립") {
-        "전체"
-      } else {
-        (setTimerViewModel.clipState.value as UiState.Success).data.first { it.isSelected }.name
-      }
-      } 클립을"
-    }
+    binding.tvTimePickerCategory.text = "${if (args.argPatch) args.argCategoryName else getClipName()} 클립을"
+  }
+
+  private fun getClipName(): String {
+    val clipStateData = (setTimerViewModel.clipState.value as UiState.Success).data
+    val selectedClip = clipStateData.first { it.isSelected }
+    return if (selectedClip.name == "전체 클립") "전체" else selectedClip.name
   }
 
   private fun initRepeatState() {

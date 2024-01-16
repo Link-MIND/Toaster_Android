@@ -95,7 +95,7 @@ class SetTimerViewModel @Inject constructor(
       var hour = _selectedTime.value.hour.toInt()
       if (_selectedTime.value.timePeriod == "오후") hour += 12
       val time = "${ if (hour < 10) "0$hour" else hour.toString()}:${selectedTime.value.minute}"
-      postTimerUseCase(if (categoryId < 1)null else categoryId, time, formatRepeatListToIntList(repeatList.value)).onSuccess {
+      postTimerUseCase(categoryId, time, formatRepeatListToIntList(repeatList.value)).onSuccess {
         Log.e("성공", "성공")
         _postTimerState.emit(UiState.Success(it))
       }.onFailure {
