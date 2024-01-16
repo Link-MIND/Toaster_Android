@@ -12,11 +12,16 @@ class ClipEditViewHolder(
     if (clipData == null) return
     with(binding) {
       tvClipEditTitle.text = clipData.categoryTitle
-      ivClipEditTitleEdit.setOnClickListener {
-        onClickItemClip(clipData.categoryId, "edit", itemId)
-      }
-      ivClipEditDelete.setOnClickListener {
-        onClickItemClip(clipData.categoryId, "delete", itemId)
+      if (clipData.categoryTitle == "전체 클립") {
+        ivClipEditDelete.setImageResource(org.sopt.mainfeature.R.drawable.ic_pin_24)
+        ivClipEditTitleEdit.visibility = View.GONE
+      } else {
+        ivClipEditTitleEdit.setOnClickListener {
+          onClickItemClip(clipData.categoryId, "edit", itemId)
+        }
+        ivClipEditDelete.setOnClickListener {
+          onClickItemClip(clipData.categoryId, "delete", itemId)
+        }
       }
     }
   }
