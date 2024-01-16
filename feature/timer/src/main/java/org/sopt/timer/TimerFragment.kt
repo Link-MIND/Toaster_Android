@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -14,6 +15,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import designsystem.components.toast.linkMindSnackBar
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.sopt.mainfeature.R
@@ -27,6 +29,8 @@ import org.sopt.ui.fragment.colorOf
 import org.sopt.ui.fragment.snackBar
 import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
+import org.sopt.ui.view.UiState
+import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
 class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBinding.inflate(it) }) {
@@ -51,22 +55,18 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
     requestNotificationPermission()
     setTimerViewModel.initSetTimer()
     collectUiState()
+    collectDeleteState()
     if (viewModel.uiState.value is TimerUiState.BothAllowed) viewModel.getTimerMain()
     initCompleteTimerAdapter()
     initWaitTimerAdapter()
     initPlusButtonClickListener()
+    initSetTimerButtonClickListener()
   }
 
   override fun onResume() {
     super.onResume()
     initCheckNotificationPermission()
     viewModel.setUiState(isNotiPermissionAllowed)
-  }
-
-  private fun initPlusButtonClickListener() {
-    binding.ivTimerPlus.setOnClickListener {
-      findNavController().navigate(org.sopt.timer.R.id.action_navigation_timer_to_navigation_timer_clip_select)
-    }
   }
 
   private fun initWaitTimerAdapter() {
@@ -107,6 +107,7 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
         is TimerUiState.BothAllowed -> {
           handleBothAllowedState(state)
           if (state.data?.first.isNullOrEmpty() && state.data?.second.isNullOrEmpty()) {
+            Log.e("타이머", "널")
             viewModel.getTimerMain()
           }
         }
@@ -231,6 +232,19 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
     }
   }
 
+  private fun collectDeleteState() {
+    viewModel.deleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when(state) {
+        is UiState.Success -> {
+          requireContext().linkMindSnackBar(binding.root, "타이머 삭제 완료", false)
+        }
+        is UiState.Failure -> {}
+        is UiState.Empty -> {}
+        is UiState.Loading -> {}
+      }
+    }.launchIn(viewLifeCycleScope)
+  }
+
   private fun requestNotificationPermission() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && ContextCompat.checkSelfPermission(
         requireContext(),
@@ -249,6 +263,18 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
       ) == PackageManager.PERMISSION_GRANTED
     } else {
       true
+    }
+  }
+
+  private fun initPlusButtonClickListener() {
+    binding.ivTimerPlus.onThrottleClick {
+      findNavController().navigate(org.sopt.timer.R.id.action_navigation_timer_to_navigation_timer_clip_select)
+    }
+  }
+
+  private fun initSetTimerButtonClickListener() {
+    binding.btnTimerSetEnable.onThrottleClick {
+      findNavController().navigate(org.sopt.timer.R.id.action_navigation_timer_to_navigation_timer_clip_select)
     }
   }
 }
