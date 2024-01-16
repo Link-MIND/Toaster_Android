@@ -12,13 +12,12 @@ import org.sopt.timer.databinding.FragmentNotificationPermissionDialogBinding
 import org.sopt.ui.base.BindingDialogFragment
 import org.sopt.ui.view.onThrottleClick
 
-
 class NotificationPermissionDialogFragment : BindingDialogFragment<FragmentNotificationPermissionDialogBinding>(
   { FragmentNotificationPermissionDialogBinding.inflate(it) },
 ) {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setStyle(STYLE_NO_FRAME, android.R.style.Theme_Dialog);
+    setStyle(STYLE_NO_FRAME, android.R.style.Theme_Dialog)
   }
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

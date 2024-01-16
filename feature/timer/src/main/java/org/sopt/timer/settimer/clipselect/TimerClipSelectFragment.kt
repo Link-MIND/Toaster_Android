@@ -34,7 +34,7 @@ class TimerClipSelectFragment : BindingFragment<FragmentTimerClipSelectBinding>(
   private fun getCategoryAll() {
     if (viewModel.clipState.value !is UiState.Success) {
       viewModel.getCategoryAll()
-      }
+    }
   }
 
   private fun collectClipState() {
@@ -47,7 +47,7 @@ class TimerClipSelectFragment : BindingFragment<FragmentTimerClipSelectBinding>(
 
         else -> {}
       }
-      }.launchIn(viewLifeCycleScope)
+    }.launchIn(viewLifeCycleScope)
   }
 
   private fun initClipSelectAdapter(list: List<Clip>) {

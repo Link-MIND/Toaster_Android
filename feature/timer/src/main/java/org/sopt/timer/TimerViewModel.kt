@@ -30,7 +30,7 @@ class TimerViewModel @Inject constructor(
   val timerList = MutableStateFlow<Pair<List<Timer>, List<Timer>>?>(Pair(emptyList(), emptyList()))
 
   private val _deleteState = MutableStateFlow<UiState<Boolean>>(UiState.Empty)
-  val deleteState : StateFlow<UiState<Boolean>> = _deleteState.asStateFlow()
+  val deleteState: StateFlow<UiState<Boolean>> = _deleteState.asStateFlow()
 
   fun setUiState(isNotiPermissionAllowed: Boolean) {
     viewModelScope.launch {

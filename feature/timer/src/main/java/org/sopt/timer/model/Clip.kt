@@ -14,6 +14,6 @@ fun List<Category>.toUiModel(): List<Clip> = this.map {
     id = it.categoryId,
     name = it.categoryTitle,
     count = it.toastNum,
-    isSelected = false
+    isSelected = false,
   )
 }
