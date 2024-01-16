@@ -53,8 +53,18 @@ class SetLinkViewModel @Inject constructor(
         categoryId = categoryId,
       ),
     ).onSuccess {
-      Log.d("saveLinkSuccess", "$it")
+      navigateSetLink()
     }.onFailure { Log.d("SaveLinkFail", "$it") }
   }
+
+  fun updateCategoryId(categoryId:Long) = intent {
+    reduce {
+      state.copy(categoryId = categoryId)
+    }
+  }
+
+  private fun navigateSetLink() = intent { postSideEffect(SetLinkSideEffect.NavigateSetLink) }
+  fun showBottomSheet() = intent { postSideEffect(SetLinkSideEffect.ShowBottomSheet) }
+  fun showDialog() = intent { postSideEffect(SetLinkSideEffect.ShowDialog) }
 
 }

@@ -1,7 +1,6 @@
 package org.sopt.savelink.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -31,7 +30,6 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
     super.onViewCreated(view, savedInstanceState)
 
 //    viewModel.saveCategoryTitle("이삭이다나는")
-//    viewModel.saveLink("https://www.instagram.com/p/C2CXFxpvc1avTdzKkcycxuUqRsfhJWjklRGjqw0/?igsh=MTh6MGppYzZydzdsYg==", null)
     initView()
     collectState()
     onClickAddClip()
@@ -44,6 +42,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
     binding.btnSaveLinkComplete.state = LinkMindButtonState.DISABLE
     viewModel.getCategortAll()
   }
+
   private fun collectState() {
     viewModel.observe(viewLifecycleOwner, state = ::render, sideEffect = ::handleSideEffect)
   }
@@ -55,16 +54,23 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
 
   private fun handleSideEffect(sideEffect: SetLinkSideEffect) {
     when (sideEffect) {
-      is SetLinkSideEffect.NavigateSetLink -> Log.d("test","test")
-      is SetLinkSideEffect.ShowBottomSheet -> Log.d("test","test")
-   }
+      is SetLinkSideEffect.NavigateSetLink -> {
+        navigateToHome()
+        requireContext().linkMindSnackBar(binding.root, "링크 저장 완료", false)
+      }
+
+      is SetLinkSideEffect.ShowBottomSheet -> showAddClipBottomSheet()
+      is SetLinkSideEffect.ShowDialog -> showCloseDialog()
+    }
   }
+
   private fun initSetClipAdapter(list: List<Clip>) {
     adapter = ClipSelectAdapter(
-      onClickClip = { a, b ->
-        if (a.isSelected) {
+      onClickClip = { clip, position ->
+        if (clip.isSelected) {
           list.onEach { it.isSelected = false }
-          list[b].isSelected = true
+          list[position].isSelected = true
+          viewModel.updateCategoryId(clip.categoryId)
           binding.btnSaveLinkComplete.state = LinkMindButtonState.ENABLE
         } else {
           list.onEach { it.isSelected = false }
@@ -78,15 +84,19 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
 
   private fun onClickAddClip() {
     binding.tvSaveLinkAddClip.onThrottleClick {
-      val linkMindBottomSheet = LinkMindBottomSheet(requireContext())
-      linkMindBottomSheet.show()
-      linkMindBottomSheet.apply {
-        setTitle(R.string.clip_add_clip)
-        setErroMsg(R.string.error_clip_length)
-        bottomSheetConfirmBtnClick {
-          if (showErrorMsg()) return@bottomSheetConfirmBtnClick
-          dismiss()
-        }
+      viewModel.showBottomSheet()
+    }
+  }
+
+  private fun showAddClipBottomSheet() {
+    val linkMindBottomSheet = LinkMindBottomSheet(requireContext())
+    linkMindBottomSheet.show()
+    linkMindBottomSheet.apply {
+      setTitle(R.string.clip_add_clip)
+      setErroMsg(R.string.error_clip_length)
+      bottomSheetConfirmBtnClick {
+        if (showErrorMsg()) return@bottomSheetConfirmBtnClick
+        dismiss()
       }
     }
   }
@@ -99,26 +109,28 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
 
   private fun onCLickNavigateCloseDialog() {
     binding.ivSaveLinkClose.onThrottleClick {
-      linkMindDialog.setTitle(R.string.save_clip_dialog_title)
-        .setSubtitle(R.string.save_clip_dialog_sub_title)
-        .setNegativeButton(R.string.negative_close_msg) {
-          linkMindDialog.dismiss()
-          navigateToHome()
-        }
-        .setPositiveButton(R.string.positive_ok_msg) {
-          linkMindDialog.dismiss()
-        }
-        .show()
+      viewModel.showDialog()
     }
+  }
+
+  private fun showCloseDialog() {
+    linkMindDialog.setTitle(R.string.save_clip_dialog_title)
+      .setSubtitle(R.string.save_clip_dialog_sub_title)
+      .setNegativeButton(R.string.negative_close_msg) {
+        linkMindDialog.dismiss()
+        navigateToHome()
+      }
+      .setPositiveButton(R.string.positive_ok_msg) {
+        linkMindDialog.dismiss()
+      }
+      .show()
   }
 
   private fun onClickCompleteBtn() {
     binding.btnSaveLinkComplete.apply {
       btnClick {
         if (state == LinkMindButtonState.DISABLE) return@btnClick
-        viewModel.saveLink("www.naver.com", 11)
-        navigateToHome()
-        requireContext().linkMindSnackBar(binding.root, "링크 저장 완료", false)
+        viewModel.saveLink("http://www.naver.com", viewModel.container.stateFlow.value.categoryId)
       }
     }
   }
