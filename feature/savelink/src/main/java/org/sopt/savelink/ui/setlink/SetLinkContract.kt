@@ -1,4 +1,6 @@
-package org.sopt.savelink.ui
+package org.sopt.savelink.ui.setlink
+
+import org.sopt.savelink.ui.Clip
 
 data class SetLinkState(
   val categoryList: List<Clip> = emptyList(),

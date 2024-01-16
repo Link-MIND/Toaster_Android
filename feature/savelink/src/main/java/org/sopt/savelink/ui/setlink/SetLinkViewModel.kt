@@ -1,4 +1,4 @@
-package org.sopt.savelink.ui
+package org.sopt.savelink.ui.setlink
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -14,6 +14,8 @@ import org.orbitmvi.orbit.viewmodel.container
 import org.sopt.domain.category.category.usecase.GetCategoryAllUseCase
 import org.sopt.domain.category.category.usecase.PostAddCategoryTitleUseCase
 import org.sopt.domain.link.usecase.PostSaveLinkUseCase
+import org.sopt.savelink.ui.Clip
+import org.sopt.savelink.ui.toModel
 import javax.inject.Inject
 
 @HiltViewModel

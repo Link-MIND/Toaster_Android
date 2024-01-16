@@ -12,7 +12,7 @@ data class HomeState(
   val weekBestLink: List<WeekBestLink> = emptyList(),
   val recommendLink: List<RecommendLink> = emptyList(),
   val url: String = "",
-  val categoryId: Long = 0,
+  val categoryId: Long? = 0,
 ) {
   fun calculateProgress(): Int {
     if (readToastNum > allToastNum) return 0

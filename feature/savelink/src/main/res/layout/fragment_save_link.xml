@@ -6,7 +6,7 @@
   android:layout_height="match_parent"
   android:paddingBottom="12dp"
   android:background="@color/background"
-  tools:context=".ui.SaveLinkFragment">
+  tools:context=".ui.savelink.SaveLinkFragment">
 
   <TextView
     android:id="@+id/tv_save_link_title"

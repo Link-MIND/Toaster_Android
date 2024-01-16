@@ -7,7 +7,7 @@
 
   <fragment
     android:id="@+id/saveLinkFragment"
-    android:name="org.sopt.savelink.ui.SaveLinkFragment"
+    android:name="org.sopt.savelink.ui.savelink.SaveLinkFragment"
     android:label="fragment_save_link"
     tools:layout="@layout/fragment_save_link">
     <argument
@@ -27,7 +27,7 @@
   </fragment>
   <fragment
     android:id="@+id/saveLinkSetClipFragment"
-    android:name="org.sopt.savelink.ui.SaveLinkSetClipFragment"
+    android:name="org.sopt.savelink.ui.setlink.SaveLinkSetClipFragment"
     android:label="SaveLinkSetClipFragment"
     tools:layout="@layout/fragment_save_link_set_clip" >
     <argument

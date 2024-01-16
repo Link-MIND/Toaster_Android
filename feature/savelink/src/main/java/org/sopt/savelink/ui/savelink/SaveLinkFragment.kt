@@ -1,4 +1,4 @@
-package org.sopt.savelink.ui
+package org.sopt.savelink.ui.savelink
 
 import android.os.Bundle
 import android.view.View
