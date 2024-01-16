@@ -1,6 +1,7 @@
 package org.sopt.savelink.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -9,6 +10,7 @@ import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.button.state.LinkMindButtonState
 import designsystem.components.dialog.LinkMindDialog
 import designsystem.components.toast.linkMindSnackBar
+import org.orbitmvi.orbit.viewmodel.observe
 import org.sopt.mainfeature.R
 import org.sopt.savelink.databinding.FragmentSaveLinkSetClipBinding
 import org.sopt.savelink.ui.adapter.ClipSelectAdapter
@@ -19,7 +21,7 @@ import org.sopt.ui.view.onThrottleClick
 @AndroidEntryPoint
 class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>({ FragmentSaveLinkSetClipBinding.inflate(it) }) {
 
-  private val viewModel: SaveLinkViewModel by viewModels()
+  private val viewModel: SetLinkViewModel by viewModels()
   private lateinit var adapter: ClipSelectAdapter
   private val linkMindDialog by lazy {
     LinkMindDialog(requireContext())
@@ -27,20 +29,11 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    viewModel.getCategortAll()
+
 //    viewModel.saveCategoryTitle("이삭이다나는")
-//    viewModel.deleteLink(23)
 //    viewModel.saveLink("https://www.instagram.com/p/C2CXFxpvc1avTdzKkcycxuUqRsfhJWjklRGjqw0/?igsh=MTh6MGppYzZydzdsYg==", null)
-//    viewModel.patchReadLink(23)
-    var list = listOf(
-      Clip("전체 클립", 3, false),
-      Clip("전체 클립", 3, false),
-      Clip("전체 클립", 3, false),
-      Clip("전체 클립", 3, false),
-    )
     initView()
-    initSetClipAdapter(list)
-    collectGetClip(list)
+    collectState()
     onClickAddClip()
     onClickNavigateUp()
     onCLickNavigateCloseDialog()
@@ -49,8 +42,23 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
 
   private fun initView() {
     binding.btnSaveLinkComplete.state = LinkMindButtonState.DISABLE
+    viewModel.getCategortAll()
+  }
+  private fun collectState() {
+    viewModel.observe(viewLifecycleOwner, state = ::render, sideEffect = ::handleSideEffect)
   }
 
+  private fun render(homeState: SetLinkState) {
+    initSetClipAdapter(homeState.categoryList)
+    adapter.submitList(homeState.categoryList)
+  }
+
+  private fun handleSideEffect(sideEffect: SetLinkSideEffect) {
+    when (sideEffect) {
+      is SetLinkSideEffect.NavigateSetLink -> Log.d("test","test")
+      is SetLinkSideEffect.ShowBottomSheet -> Log.d("test","test")
+   }
+  }
   private fun initSetClipAdapter(list: List<Clip>) {
     adapter = ClipSelectAdapter(
       onClickClip = { a, b ->
@@ -67,9 +75,6 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
     binding.rvItemTimerClipSelect.adapter = adapter
   }
 
-  private fun collectGetClip(list: List<Clip>) {
-    adapter.submitList(list)
-  }
 
   private fun onClickAddClip() {
     binding.tvSaveLinkAddClip.onThrottleClick {

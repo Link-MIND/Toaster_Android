@@ -1,14 +1,17 @@
 package org.sopt.savelink.ui
 
+import org.sopt.model.category.Category
+
 data class Clip(
-  val name: String,
-  val count: Int,
+  val categoryId: Long,
+  val categoryTitle: String,
+  val toastNum: Int,
   var isSelected: Boolean,
-) {
-  fun selectNewClip() {
-    isSelected = true
-  }
-  fun toggleSelection() {
-    isSelected = !isSelected
-  }
-}
+)
+
+internal fun Category.toModel()=Clip(
+  categoryId=categoryId,
+  categoryTitle=categoryTitle,
+  toastNum=toastNum,
+  isSelected = false
+)
