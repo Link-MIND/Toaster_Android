@@ -1,7 +1,7 @@
 package org.sopt.domain.category.category.repository
 
 import org.sopt.model.category.CategoryDuplicate
-import org.sopt.model.category.CategoryLinkCondition
+import org.sopt.model.category.CategoryLinkList
 import org.sopt.model.category.CategoryList
 
 interface CategoryRepository {
@@ -13,7 +13,7 @@ interface CategoryRepository {
 
   suspend fun getCategoryDuplicate(title: String): Result<CategoryDuplicate>
 
-  suspend fun getCategoryLink(filter: String, isAllCategory: Boolean): Result<CategoryLinkCondition>
+  suspend fun getCategoryLink(filter: String, isAllCategory: Boolean): Result<CategoryLinkList>
 
   suspend fun patchCategoryEdit(): Result<Unit>
 }

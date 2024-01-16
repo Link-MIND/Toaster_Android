@@ -28,16 +28,17 @@ class RemoteCategoryDataSourceImpl @Inject constructor(
     )
   }
 
-  override suspend fun getCategoryDuplicate(title: String) {
-    categoryService.getCategoryDuplicate(title = title)
-  }
+  override suspend fun getCategoryDuplicate(title: String): CategoryDuplicate =
+    requireNotNull(categoryService.getCategoryDuplicate(title = title).data).toCoreModel()
 
-  override suspend fun getCategoryLink(filter: String, isAllCategory: Boolean) {
-    categoryService.getCategoryLink(
-      filter = filter,
-      isAllCategory = isAllCategory,
-    )
-  }
+  override suspend fun getCategoryLink(filter: String, isAllCategory: Boolean): CategoryLinkList =
+    requireNotNull(
+      categoryService.getCategoryLink(
+        filter = filter,
+        isAllCategory = isAllCategory,
+      ).data,
+    ).toCoreModel()
+
 
   override suspend fun patchCategoryEdit() {
 
