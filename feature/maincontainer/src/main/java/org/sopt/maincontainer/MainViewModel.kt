@@ -15,17 +15,18 @@ class MainViewModel @Inject constructor() : ContainerHost<MainState, MainSideEff
   override val container: Container<MainState, MainSideEffect> =
     container(MainState())
 
-  fun updateClipBoard(clipboard:String) = intent {
+  fun updateClipBoard(clipboard: String) = intent {
     reduce {
       state.copy(clipboard = clipboard)
     }
   }
 
-  fun updateBnvVisible(isCheck:Boolean) = intent {
+  fun updateBnvVisible(isCheck: Boolean) = intent {
     reduce {
       state.copy(isBottomNavigationBarVisible = isCheck)
     }
   }
+
   fun navigateSaveLink() = intent {
     postSideEffect(MainSideEffect.NavigateSaveLink)
   }

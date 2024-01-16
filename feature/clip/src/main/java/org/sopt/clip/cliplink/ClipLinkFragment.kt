@@ -15,7 +15,6 @@ import org.sopt.clip.LinkDTO
 import org.sopt.clip.R
 import org.sopt.clip.SelectedToggle
 import org.sopt.clip.databinding.FragmentClipLinkBinding
-import org.sopt.clip.webview.WebViewFragmentArgs
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
 
@@ -28,7 +27,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     super.onViewCreated(view, savedInstanceState)
     val args: ClipLinkFragmentArgs by navArgs()
     val categoryId = args.categoryId
-    Log.d("test","$categoryId")
+    Log.d("test", "$categoryId")
     initClipAdapter()
     initViewState(viewModel.mockLinkData.isNullOrEmpty())
   }

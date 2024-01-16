@@ -1,8 +1,8 @@
 package org.sopt.savelink.ui
 
-data class LinkState (
-  val edittextLink : String = ""
-){
+data class LinkState(
+  val edittextLink: String = "",
+) {
   fun checkEtvLink() =
     edittextLink.contains("http")
 }

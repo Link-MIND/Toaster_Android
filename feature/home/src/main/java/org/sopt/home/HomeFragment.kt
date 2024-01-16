@@ -55,7 +55,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     when (sideEffect) {
       is HomeSideEffect.NavigateSearch -> navigateToDestination("featureMyPage://fragmentSetting")
       is HomeSideEffect.NavigateSetting -> navigateToDestination("featureMyPage://fragmentSearch")
-      is HomeSideEffect.NavigateClipLink -> navigateToDestination("featureSaveLink://ClipLinkFragment?categoryId=${viewModel.container.stateFlow.value.categoryId}")
+      is HomeSideEffect.NavigateClipLink -> navigateToDestination(
+        "featureSaveLink://ClipLinkFragment?categoryId=${viewModel.container.stateFlow.value.categoryId}",
+      )
       is HomeSideEffect.showBottomSheet -> showHomeBottomSheet()
       is HomeSideEffect.NavigateWebview -> navigateToDestination("featureSaveLink://webViewFragment?site=${viewModel.container.stateFlow.value.url}")
     }

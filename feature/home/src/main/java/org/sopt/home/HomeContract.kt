@@ -15,9 +15,12 @@ data class HomeState(
   val categoryId: Long = 0,
 ) {
   fun calculateProgress(): Int {
-    if ( readToastNum > allToastNum) return 0
-    if (allToastNum==0) return 0
-    else return ((readToastNum.toDouble() / allToastNum.toDouble()) * 100).toInt()
+    if (readToastNum > allToastNum) return 0
+    if (allToastNum == 0) {
+      return 0
+    } else {
+      return ((readToastNum.toDouble() / allToastNum.toDouble()) * 100).toInt()
+    }
   }
 }
 
