@@ -1,17 +1,24 @@
 package org.sopt.clip.clip
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.toast.linkMindSnackBar
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.R
 import org.sopt.clip.databinding.FragmentClipBinding
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.fragment.viewLifeCycle
+import org.sopt.ui.fragment.viewLifeCycleScope
+import org.sopt.ui.view.UiState
 import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
@@ -23,12 +30,25 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
 
     initClipAdapter()
     if (setEmptyMsgVisible()) return
-
-    clipAdapter.submitList(viewModel.mockClipData)
+    viewModel.getCategoryAll()
+    updateClipList()
     onClickSearchButton()
     onClickListView()
     onClickEditButton()
     onClickAddButton()
+  }
+
+  private fun updateClipList() {
+    viewModel.categoryState.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is UiState.Success -> {
+          clipAdapter.submitList(state.data)
+        }
+
+        else -> {}
+      }
+
+    }.launchIn(viewLifeCycleScope)
   }
 
   private fun initClipAdapter() {

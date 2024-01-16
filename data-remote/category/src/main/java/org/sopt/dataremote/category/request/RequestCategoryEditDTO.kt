@@ -30,7 +30,7 @@ data class ChangeCategoryPriority(
 
 fun CategoryChangePriority.toRequestDTO() = ChangeCategoryPriority(
   categoryId = this.categoryId,
-  newPriority = this.newPrioritiy,
+  newPriority = this.newPriority,
 )
 
 fun CategoryChangeTitle.toRequestDTO()= ChangeCategoryTitle(

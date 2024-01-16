@@ -5,6 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.sopt.domain.category.category.usecase.DeleteCategoryUseCase
 import org.sopt.domain.category.category.usecase.GetCategoryAllUseCase
@@ -12,6 +15,8 @@ import org.sopt.domain.category.category.usecase.GetCategoryDuplicateUseCase
 import org.sopt.domain.category.category.usecase.GetCategoryLinkUseCase
 import org.sopt.domain.category.category.usecase.PatchCategoryEditUseCase
 import org.sopt.domain.category.category.usecase.PostAddCategoryTitleUseCase
+import org.sopt.model.category.Category
+import org.sopt.ui.view.UiState
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,8 +26,11 @@ class ClipViewModel @Inject constructor(
   private val getCategoryDuplicate: GetCategoryDuplicateUseCase,
   private val getCategoryLink: GetCategoryLinkUseCase,
   private val patchCategoryEdit: PatchCategoryEditUseCase,
-  private val postAddCategoryTitle: PostAddCategoryTitleUseCase
+  private val postAddCategoryTitle: PostAddCategoryTitleUseCase,
 ) : ViewModel() {
+  private val _categoryState = MutableStateFlow<UiState<List<Category>>>(UiState.Empty)
+  val categoryState: StateFlow<UiState<List<Category>>> = _categoryState.asStateFlow()
+  val totalClip = Category(categoryId = 0, categoryTitle = "전체 클립", toastNum = 0)
 
   init {
     getCategoryAll()
@@ -80,7 +88,12 @@ class ClipViewModel @Inject constructor(
   fun getCategoryAll() = viewModelScope.launch {
     getCategoryAll.invoke().onSuccess {
       Log.d("test", "$it")
+      val list: MutableList<Category> = it.categories.toMutableList()
+      totalClip.toastNum = it.toastNumberInEntire.toInt
+      list.add(0, totalClip)
+      _categoryState.emit(UiState.Success(list))
     }.onFailure {
+      Log.e("실패", it.message.toString())
     }
   }
 
