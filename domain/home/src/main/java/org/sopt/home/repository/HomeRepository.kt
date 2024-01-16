@@ -8,4 +8,5 @@ interface HomeRepository {
   suspend fun getMainPageUserClip(): Result<MainPageData>
   suspend fun getRecommendSite(): Result<List<RecommendLink>>
   suspend fun getWeekBestLink(): Result<List<WeekBestLink>>
+
 }

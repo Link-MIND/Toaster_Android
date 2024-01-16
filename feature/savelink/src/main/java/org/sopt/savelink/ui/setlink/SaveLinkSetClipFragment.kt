@@ -1,4 +1,4 @@
-package org.sopt.savelink.ui
+package org.sopt.savelink.ui.setlink
 
 import android.os.Bundle
 import android.view.View
@@ -12,6 +12,7 @@ import designsystem.components.toast.linkMindSnackBar
 import org.orbitmvi.orbit.viewmodel.observe
 import org.sopt.mainfeature.R
 import org.sopt.savelink.databinding.FragmentSaveLinkSetClipBinding
+import org.sopt.savelink.ui.Clip
 import org.sopt.savelink.ui.adapter.ClipSelectAdapter
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.nav.DeepLinkUtil

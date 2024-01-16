@@ -1,7 +1,7 @@
 package org.sopt.model.category
 
 data class Category(
-  val categoryId: Long,
+  val categoryId: Long?,
   val categoryTitle: String,
   val toastNum: Int,
 )

@@ -1,4 +1,4 @@
-package org.sopt.savelink.ui
+package org.sopt.savelink.ui.savelink
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -8,6 +8,8 @@ import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
+import org.sopt.savelink.ui.savelink.LinkSideEffect
+import org.sopt.savelink.ui.savelink.LinkState
 import javax.inject.Inject
 
 @HiltViewModel

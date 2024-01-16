@@ -45,6 +45,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     binding.tvAllToastNum.text = "/" + homeState.allToastNum.toString()
     binding.tvHomeUserName.text = homeState.nickName
     binding.tvHomeUserClipName.text = homeState.nickName
+    binding.tvHomeToastLinkCount.text = "${homeState.readToastNum}개의 링크"
     binding.pbLinkmindHome.setProgressBarMain(homeState.calculateProgress())
     homeClipAdapter.submitList(homeState.categoryList)
     homeWeekLinkAdapter.submitList(homeState.weekBestLink)
@@ -67,9 +68,11 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     setClipAdapter()
     setWeekLinkAdapter()
     setWeekRecommendAdapter()
-    viewModel.getMainPageUserClip()
-    viewModel.getRecommendSite()
-    viewModel.getWeekBestLink()
+    viewModel.apply {
+      getMainPageUserClip()
+      getRecommendSite()
+      getWeekBestLink()
+    }
   }
   private fun navigateToSetting() {
     binding.ivHomeSetting.onThrottleClick {
@@ -137,6 +140,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       setErroMsg(org.sopt.mainfeature.R.string.home_error_clip_info)
       bottomSheetConfirmBtnClick {
         if (showErrorMsg()) return@bottomSheetConfirmBtnClick
+        viewModel.saveCategoryTitle(it)
         dismiss()
         requireContext().linkMindSnackBar(binding.root, "성공", false)
       }
