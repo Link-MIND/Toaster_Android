@@ -1,11 +1,13 @@
 package org.sopt.clip.cliplink
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.DeleteLinkBottomSheetFragment
@@ -13,6 +15,7 @@ import org.sopt.clip.LinkDTO
 import org.sopt.clip.R
 import org.sopt.clip.SelectedToggle
 import org.sopt.clip.databinding.FragmentClipLinkBinding
+import org.sopt.clip.webview.WebViewFragmentArgs
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.view.onThrottleClick
 
@@ -23,6 +26,9 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    val args: ClipLinkFragmentArgs by navArgs()
+    val categoryId = args.categoryId
+    Log.d("test","$categoryId")
     initClipAdapter()
     initViewState(viewModel.mockLinkData.isNullOrEmpty())
   }
