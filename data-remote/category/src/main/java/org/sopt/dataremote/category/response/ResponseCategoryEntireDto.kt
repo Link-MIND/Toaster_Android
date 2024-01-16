@@ -26,7 +26,7 @@ data class ResponseCategoryEntireDto(
 internal fun ResponseCategoryEntireDto.ResponseCategoryDto.toCoreModel() = Category(
   categoryId = categoryId,
   categoryTitle = categoryTitle,
-  toastNum = toastNum,
+  toastNum = toastNum.toLong(),
 )
 
 internal fun ResponseCategoryEntireDto.toCoreModel() = CategoryList(

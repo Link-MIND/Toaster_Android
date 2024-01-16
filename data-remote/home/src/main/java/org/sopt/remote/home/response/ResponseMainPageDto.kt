@@ -38,5 +38,5 @@ internal fun ResponseMainPageDto.CategoryListDto.toCoreListModel() =
   Category(
     categoryId = categoryId,
     categoryTitle = categoryTitle,
-    toastNum = toastNum,
+    toastNum = toastNum.toLong(),
   )
