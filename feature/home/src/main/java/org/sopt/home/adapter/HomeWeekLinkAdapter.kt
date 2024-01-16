@@ -9,7 +9,7 @@ import org.sopt.home.viewholder.HomeWeekLinkViewHolder
 import org.sopt.ui.view.ItemDiffCallback
 
 class HomeWeekLinkAdapter(
-  private val onClickItem: () -> Unit,
+  private val onClickWeekLink: () -> Unit,
 ) : ListAdapter<WeekLinkDummy, HomeWeekLinkViewHolder>(DiffUtil) {
   override fun onBindViewHolder(holder: HomeWeekLinkViewHolder, position: Int) {
     holder.onBind(getItem(position))
@@ -18,7 +18,7 @@ class HomeWeekLinkAdapter(
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeWeekLinkViewHolder {
     return HomeWeekLinkViewHolder(
       ItemWeekLinkBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-      onClickItem,
+      onClickWeekLink,
     )
   }
 

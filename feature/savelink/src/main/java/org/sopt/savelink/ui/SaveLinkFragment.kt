@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.button.state.LinkMIndFullWidthButtonState
 import designsystem.components.dialog.LinkMindDialog
@@ -32,29 +33,17 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     onClickCloseSaveLink()
   }
 
-  private fun onClickCloseSaveLink() {
-    binding.ivSaveLinkClose.onThrottleClick {
-      showCloseDialog()
-    }
-  }
-
-  private fun showCloseDialog() {
-    linkMindDialog.setTitle(org.sopt.mainfeature.R.string.save_clip_dialog_title)
-      .setSubtitle(org.sopt.mainfeature.R.string.save_clip_dialog_sub_title)
-      .setNegativeButton(org.sopt.mainfeature.R.string.negative_close_msg) {
-        linkMindDialog.dismiss()
-      }
-      .setPositiveButton(org.sopt.mainfeature.R.string.positive_ok_msg) {
-        linkMindDialog.dismiss()
-        navigateUp()
-      }
-      .show()
-  }
-
   private fun initView() {
-    binding.btnSaveLinkNext.apply {
-      state = LinkMIndFullWidthButtonState.DISABLE
-      setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
+    val clipboardLink = getArgumentToMain()
+    if (clipboardLink.isNotEmpty()) {
+      binding.etvSaveCopyLink.editText.setText(clipboardLink)
+      handleSaveLinkNextClick()
+      binding.btnSaveLinkNext.setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals850_fill_12_rect)
+    } else {
+      binding.btnSaveLinkNext.apply {
+        state = LinkMIndFullWidthButtonState.DISABLE
+        setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
+      }
     }
   }
 
@@ -77,13 +66,31 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     }
   }
 
-  private fun onClickComplete() {
-    binding.btnSaveLinkNext.btnClick {
-      // 유효성 검사 통과했을떄만 눌리도록
-      KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
-      val action = SaveLinkFragmentDirections.actionSaveLinkFragmentToSaveLinkSetClipFragment()
-      findNavController().navigate(action)
+  private fun handleKeyboardHide() {
+    val layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
+    KeyboardUtils.setKeyboardVisibilityListener(
+      binding.root,
+      object : OnKeyboardVisibilityListener {
+        override fun onVisibilityChanged(isVisible: Boolean) {
+          if (isVisible) {
+            handleKeyboardVisible(layoutParams)
+          } else {
+            handleKeyboardHidden(layoutParams)
+          }
+        }
+      },
+    )
+  }
+
+  private fun onClickCloseSaveLink() {
+    binding.ivSaveLinkClose.onThrottleClick {
+      showCloseDialog()
     }
+  }
+  private fun getArgumentToMain(): String {
+    val args: SaveLinkFragmentArgs by navArgs()
+    val clipboardLink = args.clipboardLink
+    return clipboardLink
   }
 
   private fun hideErrorState(errorText: TextView, state: LinkMIndFullWidthButtonState) {
@@ -103,22 +110,6 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
       hideErrorState(tvSaveLinkError, LinkMIndFullWidthButtonState.ENABLE_BLACK)
       onClickComplete()
     }
-  }
-
-  private fun handleKeyboardHide() {
-    val layoutParams = binding.btnSaveLinkNext.layoutParams as ViewGroup.MarginLayoutParams
-    KeyboardUtils.setKeyboardVisibilityListener(
-      binding.root,
-      object : OnKeyboardVisibilityListener {
-        override fun onVisibilityChanged(isVisible: Boolean) {
-          if (isVisible) {
-            handleKeyboardVisible(layoutParams)
-          } else {
-            handleKeyboardHidden(layoutParams)
-          }
-        }
-      },
-    )
   }
 
   private fun handleKeyboardVisible(layoutParams: ViewGroup.MarginLayoutParams) {
@@ -148,9 +139,30 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     }
   }
 
+  private fun showCloseDialog() {
+    linkMindDialog.setTitle(org.sopt.mainfeature.R.string.save_clip_dialog_title)
+      .setSubtitle(org.sopt.mainfeature.R.string.save_clip_dialog_sub_title)
+      .setNegativeButton(org.sopt.mainfeature.R.string.negative_close_msg) {
+        linkMindDialog.dismiss()
+      }
+      .setPositiveButton(org.sopt.mainfeature.R.string.positive_ok_msg) {
+        linkMindDialog.dismiss()
+        navigateUp()
+      }
+      .show()
+  }
+
   private fun navigateUp() {
     KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
     requireContext().hideKeyboard(binding.root)
     findNavController().navigateUp()
+  }
+
+  private fun onClickComplete() {
+    binding.btnSaveLinkNext.btnClick {
+      KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
+      val action = SaveLinkFragmentDirections.actionSaveLinkFragmentToSaveLinkSetClipFragment()
+      findNavController().navigate(action)
+    }
   }
 }

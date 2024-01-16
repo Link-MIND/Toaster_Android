@@ -8,9 +8,8 @@ import org.sopt.home.databinding.ItemHomeClipBinding
 
 class HomeClipViewHolder(
   private val binding: ItemHomeClipBinding,
-  private val onClickItemClip: (ClipDummy) -> Unit,
-  private val onClickItemClip2: () -> Unit,
-
+  private val onClickClip: (ClipDummy) -> Unit,
+  private val onClickEmptyClip: () -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(data: ClipDummy?, position: Int) {
     if (position == 0) {
@@ -21,7 +20,7 @@ class HomeClipViewHolder(
         clItemClip.isGone = true
         clItemClipEmpty.isVisible = true
         root.setOnClickListener {
-          onClickItemClip2()
+          onClickEmptyClip()
         }
       }
       return
@@ -30,7 +29,7 @@ class HomeClipViewHolder(
       tvItemClipTitle.text = data.title
       tvItemClipCount.text = data.count.toString() + "개"
       root.setOnClickListener {
-        onClickItemClip(data)
+        onClickClip(data)
       }
     }
   }

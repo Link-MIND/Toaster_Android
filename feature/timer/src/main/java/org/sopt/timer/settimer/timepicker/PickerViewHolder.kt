@@ -3,7 +3,7 @@ package org.sopt.timer.settimer.timepicker
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.mainfeature.R
 import org.sopt.timer.databinding.ItemNumberPickerBinding
-import org.sopt.timer.dummymodel.PickerItem
+import org.sopt.timer.model.PickerItem
 
 class PickerViewHolder(
   val binding: ItemNumberPickerBinding,

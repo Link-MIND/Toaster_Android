@@ -3,8 +3,8 @@ package org.sopt.timer
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
+import org.sopt.model.timer.Timer
 import org.sopt.timer.databinding.ItemTimerCompleteBinding
-import org.sopt.timer.dummymodel.Timer
 import org.sopt.ui.view.ItemDiffCallback
 
 class CompleteTimerAdapter(

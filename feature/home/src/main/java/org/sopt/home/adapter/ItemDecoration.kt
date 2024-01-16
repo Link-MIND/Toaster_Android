@@ -1,4 +1,4 @@
-package org.sopt.home
+package org.sopt.home.adapter
 
 import android.graphics.Rect
 import android.view.View

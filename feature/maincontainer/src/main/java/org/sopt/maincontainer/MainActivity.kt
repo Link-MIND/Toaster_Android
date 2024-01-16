@@ -13,14 +13,15 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.dialog.LinkMindDialog
+import designsystem.components.toast.linkMindSnackBar
 import org.sopt.maincontainer.databinding.ActivityMainBinding
 import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-  private var mBinding: ActivityMainBinding? = null
-  private val binding get() = mBinding!!
+
+  private lateinit var binding: ActivityMainBinding
 
   private lateinit var navController: NavController
 
@@ -30,31 +31,9 @@ class MainActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    mBinding = ActivityMainBinding.inflate(layoutInflater)
+    binding = ActivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
     initView()
-  }
-
-  override fun onWindowFocusChanged(hasFocus: Boolean) {
-    super.onWindowFocusChanged(hasFocus)
-
-    if (!hasFocus) return
-
-    val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-
-    if (!clipboard.hasPrimaryClip()) return
-
-    if ((clipboard.primaryClipDescription?.hasMimeType(MIMETYPE_TEXT_PLAIN)) == false) return
-
-    var item = clipboard.primaryClip?.getItemAt(0)!!.coerceToText(applicationContext)
-    if (item.isNullOrEmpty()) return
-
-    val pasteData = item.toString()
-    if (pasteData.contains("http")) {
-      showRevokeCommonDialog()
-      clipboard.setPrimaryClip(ClipData.newPlainText("", ""))
-      return
-    }
   }
 
   private fun initView() {
@@ -93,10 +72,33 @@ class MainActivity : AppCompatActivity() {
     }
   }
 
+  private fun setBottomVisible() {
+    navController.addOnDestinationChangedListener { _, destination, _ ->
+      binding.bnvMain.visibility = if (destination.id in listOf(
+          R.id.navigation_home,
+          R.id.navigation_clip,
+          R.id.navigation_timer,
+          R.id.navigation_my,
+        )
+      ) {
+        View.VISIBLE
+      } else {
+        View.GONE
+      }
+    }
+  }
+
   private fun onClickFab() {
     binding.fabMain.onThrottleClick {
-      navigateToDestination("featureSaveLink://saveLinkFragment")
+      navigateToDestination("featureSaveLink://saveLinkFragment?clipboardLink=")
     }
+  }
+
+  private fun navigateToDestination(itemId: Int): Boolean {
+    return navigationMap[itemId]?.let { destination ->
+      navController.navigate(destination)
+      true
+    } ?: false
   }
 
   private fun navigateToDestination(url: String) {
@@ -117,37 +119,41 @@ class MainActivity : AppCompatActivity() {
     R.id.navigation_timer to org.sopt.timer.R.id.nav_graph_timer,
   )
 
-  private fun navigateToDestination(itemId: Int): Boolean {
-    return navigationMap[itemId]?.let { destination ->
-      navController.navigate(destination)
-      true
-    } ?: false
-  }
+  override fun onWindowFocusChanged(hasFocus: Boolean) {
+    super.onWindowFocusChanged(hasFocus)
 
-  private fun setBottomVisible() {
-    navController.addOnDestinationChangedListener { _, destination, _ ->
-      binding.bnvMain.visibility = if (destination.id in listOf(
-          R.id.navigation_home,
-          R.id.navigation_clip,
-          R.id.navigation_timer,
-          R.id.navigation_my,
-        )
-      ) {
-        View.VISIBLE
-      } else {
-        View.GONE
+    if (!hasFocus) return
+
+    val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    if (!clipboard.hasPrimaryClip()) return
+
+    if (clipboard.primaryClipDescription?.hasMimeType(MIMETYPE_TEXT_PLAIN) == false) return
+
+    val item = clipboard.primaryClip?.getItemAt(0)?.coerceToText(applicationContext)
+    if (item.isNullOrEmpty()) return
+
+    val pasteData = item.toString()
+    val action: () -> Unit = if (pasteData.contains("http")) {
+      { clipboard.setPrimaryClip(ClipData.newPlainText("", "")) }
+    } else {
+      {
+        this.linkMindSnackBar(binding.root, "올바르지 않은 링크입니다", false)
+        clipboard.setPrimaryClip(ClipData.newPlainText("", ""))
       }
     }
+    showRevokeCommonDialog(action, pasteData)
   }
 
-  private fun showRevokeCommonDialog() {
-    linkMindDialog.setTitle(org.sopt.mainfeature.R.string.save_clip_dialog_title)
-      .setSubtitle(org.sopt.mainfeature.R.string.save_clip_dialog_sub_title)
-      .setNegativeButton(org.sopt.mainfeature.R.string.negative_close_msg) {
+  private fun showRevokeCommonDialog(deleteClipBoard: () -> Unit, clipboardLink: String) {
+    linkMindDialog.setTitle(org.sopt.mainfeature.R.string.clipboard_dialog_title)
+      .setSubtitle(org.sopt.mainfeature.R.string.clipboard_dialog_sub_title)
+      .setNegativeButton(org.sopt.mainfeature.R.string.negative_close_cancel) {
         linkMindDialog.dismiss()
+        deleteClipBoard()
       }
-      .setPositiveButton(org.sopt.mainfeature.R.string.positive_ok_msg) {
-        navigateToDestination("featureSaveLink://saveLinkFragment")
+      .setPositiveButton(org.sopt.mainfeature.R.string.positive_ok_save) {
+        navigateToDestination("featureSaveLink://saveLinkFragment?clipboardLink=$clipboardLink")
+        deleteClipBoard()
         linkMindDialog.dismiss()
       }
       .show()

@@ -1,22 +1,45 @@
 package org.sopt.timer.settimer
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import org.sopt.timer.dummymodel.Clip
-import org.sopt.timer.dummymodel.Repeat
-import org.sopt.timer.dummymodel.TimePicker
+import kotlinx.coroutines.launch
+import org.sopt.model.timer.Repeat
+import org.sopt.timer.model.Clip
+import org.sopt.timer.model.TimePicker
+import org.sopt.timer.usecase.FormatRepeatListToIntList
+import org.sopt.timer.usecase.FormatRepeatListToStringList
+import org.sopt.timer.usecase.PatchTimerUseCase
+import org.sopt.timer.usecase.PostTimerUseCase
+import org.sopt.ui.view.UiState
+import javax.inject.Inject
 
-class SetTimerViewModel : ViewModel() {
+@HiltViewModel
+class SetTimerViewModel @Inject constructor(
+  private val postTimerUseCase: PostTimerUseCase,
+  private val formatRepeatListToStringList: FormatRepeatListToStringList,
+  private val patchTimerUseCase: PatchTimerUseCase,
+  private val formatRepeatListToIntList: FormatRepeatListToIntList,
+) : ViewModel() {
   private val _clipList = MutableStateFlow<List<Clip>>(emptyList())
   val clipList: StateFlow<List<Clip>> = _clipList.asStateFlow()
 
   private val _repeatList = MutableStateFlow<List<Repeat>>(emptyList())
   val repeatList: StateFlow<List<Repeat>> = _repeatList.asStateFlow()
 
+  val selectedList: StateFlow<List<String>> get() {
+    return MutableStateFlow(formatRepeatListToStringList(_repeatList.value))
+  }
+
   private val _selectedTime = MutableStateFlow(TimePicker("오전", "01", "00"))
   val selectedTime: StateFlow<TimePicker> = _selectedTime.asStateFlow()
+
+  private val _postTimerState = MutableStateFlow<UiState<Any>>(UiState.Empty)
+  val postTimerState: StateFlow<UiState<Any>> = _postTimerState.asStateFlow()
 
   val currentHourIndex = MutableStateFlow(1)
   val currentMinuteIndex = MutableStateFlow(1)
@@ -42,12 +65,46 @@ class SetTimerViewModel : ViewModel() {
       Repeat("일요일마다", false),
     )
     _selectedTime.value = TimePicker("오전", "01", "00")
+    _postTimerState.value = UiState.Empty
 
     currentHourIndex.value = 1
 
     currentMinuteIndex.value = 1
 
     currentAmPmIndex.value = 1
+  }
+
+  fun postTimer() {
+    viewModelScope.launch {
+      _postTimerState.emit(UiState.Loading)
+      // val category = clipList.value.first { it.isSelected }
+      var hour = _selectedTime.value.hour.toInt()
+      if (_selectedTime.value.timePeriod == "오후") hour += 12
+      val time = "${ if (hour < 10) "0$hour" else hour.toString()}:${selectedTime.value.minute}"
+      postTimerUseCase(/*category.*/17, time, formatRepeatListToIntList(repeatList.value)).onSuccess {
+        Log.e("성공", "성공")
+        _postTimerState.emit(UiState.Success(it))
+      }.onFailure {
+        Log.e("실패", "${it.message}")
+        _postTimerState.emit(UiState.Failure(it.message.toString()))
+      }
+    }
+  }
+
+  fun patchTimer(timerId: Int) {
+    viewModelScope.launch {
+      _postTimerState.emit(UiState.Loading)
+      var hour = _selectedTime.value.hour.toInt()
+      if (_selectedTime.value.timePeriod == "오후") hour += 12
+      val time = "${ if (hour < 10) "0$hour" else if (hour == 24) "00" else hour.toString()}:${selectedTime.value.minute}"
+      patchTimerUseCase(timerId, time, formatRepeatListToIntList(repeatList.value)).onSuccess {
+        Log.e("성공", "성공")
+        _postTimerState.emit(UiState.Success(it))
+      }.onFailure {
+        Log.e("실패", it.message.toString())
+        _postTimerState.emit(UiState.Failure(it.message.toString()))
+      }
+    }
   }
 
   fun setSelectedHour(hour: String) {

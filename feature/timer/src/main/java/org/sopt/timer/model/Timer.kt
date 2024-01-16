@@ -1,4 +1,4 @@
-package org.sopt.timer.dummymodel
+package org.sopt.timer.model
 
 data class Timer(
   val id: Int,
