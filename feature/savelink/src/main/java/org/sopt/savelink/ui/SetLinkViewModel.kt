@@ -25,6 +25,26 @@ class SetLinkViewModel @Inject constructor(
   override val container: Container<SetLinkState, SetLinkSideEffect> =
     container(SetLinkState())
 
+  fun getCategortAll() = intent {
+    getCategoryAllUseCase().onSuccess {
+      reduce {
+        state.copy(
+          categoryList = (
+            listOf(
+              Clip(
+                null,
+                "전체 카테고리",
+                it.toastNumberInEntire.toInt(),
+                false,
+              ),
+            ) + container.stateFlow.value.categoryList + it.categories.map { it.toModel() }).distinctBy { it?.categoryId },
+        )
+      }
+    }.onFailure {
+      Log.d("getCategortFail", "$it")
+    }
+  }
+
   fun saveCategoryTitle(categoryTitle: String) = viewModelScope.launch {
     postAddCategoryTitle(
       PostAddCategoryTitleUseCase.Param(
@@ -33,18 +53,6 @@ class SetLinkViewModel @Inject constructor(
     ).onSuccess {
       Log.d("saveCategoryTitleSuccess", "$it")
     }.onFailure { Log.d("saveCategoryTitleFail", "$it") }
-  }
-
-  fun getCategortAll() = intent {
-    getCategoryAllUseCase().onSuccess {
-      reduce {
-        state.copy(
-          categoryList = (container.stateFlow.value.categoryList + it.categories.map { it.toModel() }).distinctBy { it?.categoryId },
-        )
-      }
-    }.onFailure {
-      Log.d("getCategortFail", "$it")
-    }
   }
 
   fun saveLink(linkUrl: String, categoryId: Long?) = viewModelScope.launch {
@@ -58,7 +66,7 @@ class SetLinkViewModel @Inject constructor(
     }.onFailure { Log.d("SaveLinkFail", "$it") }
   }
 
-  fun updateCategoryId(categoryId: Long) = intent {
+  fun updateCategoryId(categoryId: Long?) = intent {
     reduce {
       state.copy(categoryId = categoryId)
     }
@@ -69,6 +77,7 @@ class SetLinkViewModel @Inject constructor(
       state.copy(url = url)
     }
   }
+
   private fun navigateSetLink() = intent { postSideEffect(SetLinkSideEffect.NavigateSetLink) }
   fun showBottomSheet() = intent { postSideEffect(SetLinkSideEffect.ShowBottomSheet) }
   fun showDialog() = intent { postSideEffect(SetLinkSideEffect.ShowDialog) }

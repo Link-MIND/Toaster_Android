@@ -3,7 +3,7 @@ package org.sopt.savelink.ui
 import org.sopt.model.category.Category
 
 data class Clip(
-  val categoryId: Long,
+  val categoryId: Long?,
   val categoryTitle: String,
   val toastNum: Int,
   var isSelected: Boolean,
