@@ -50,11 +50,11 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun collectState() {
-    viewModel.observe(this , state = ::render, sideEffect = ::handleSideEffect)
+    viewModel.observe(this, state = ::render, sideEffect = ::handleSideEffect)
   }
 
   private fun render(mainState: MainState) {
-        binding.bnvMain.isVisible =  mainState.isBottomNavigationBarVisible
+    binding.bnvMain.isVisible = mainState.isBottomNavigationBarVisible
   }
 
   private fun handleSideEffect(sideEffect: MainSideEffect) {
@@ -96,7 +96,8 @@ class MainActivity : AppCompatActivity() {
   private fun setBottomVisible() {
     navController.addOnDestinationChangedListener { _, destination, _ ->
       if (destination.id == R.id.navigation_home || destination.id == R.id.navigation_clip ||
-        destination.id == R.id.navigation_timer || destination.id == R.id.navigation_my) {
+        destination.id == R.id.navigation_timer || destination.id == R.id.navigation_my
+      ) {
         viewModel.updateBnvVisible(true)
       } else {
         viewModel.updateBnvVisible(false)
@@ -152,10 +153,12 @@ class MainActivity : AppCompatActivity() {
 
     val pasteData = item.toString()
     viewModel.updateClipBoard(pasteData)
-    KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
-    this.hideKeyboard(binding.root)
+    hideKeyBoard()
+
     val action: () -> Unit = if (pasteData.contains("http")) {
-      { clipboard.setPrimaryClip(ClipData.newPlainText("", "")) }
+      {
+        clipboard.setPrimaryClip(ClipData.newPlainText("", ""))
+      }
     } else {
       {
         this.linkMindSnackBar(binding.root, "올바르지 않은 링크입니다", false)
@@ -173,12 +176,18 @@ class MainActivity : AppCompatActivity() {
         deleteClipBoard()
       }
       .setPositiveButton(org.sopt.mainfeature.R.string.positive_ok_save) {
-        if (viewModel.container.stateFlow.value.clipboard.contains("http"))
+        if (viewModel.container.stateFlow.value.clipboard.contains("http")) {
           navigateToDestination("featureSaveLink://saveLinkFragment?clipboardLink=${viewModel.container.stateFlow.value.clipboard}")
+        }
         deleteClipBoard()
         linkMindDialog.dismiss()
       }
       .show()
+  }
+
+  private fun hideKeyBoard() {
+    KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
+    this.hideKeyboard(binding.root)
   }
 
   companion object {

@@ -31,7 +31,8 @@ class HomeViewModel @Inject constructor(
           nickName = it.nickName,
           allToastNum = it.allToastNum,
           readToastNum = it.readToastNum,
-          categoryList = (container.stateFlow.value.categoryList + it.mainCategoryDto + null).distinctBy { it?.categoryId },)
+          categoryList = (container.stateFlow.value.categoryList + it.mainCategoryDto + null).distinctBy { it?.categoryId },
+        )
       }
     }.onFailure {
       Log.d("MainUser", "$it")
@@ -62,7 +63,7 @@ class HomeViewModel @Inject constructor(
   fun navigateSetting() = intent { postSideEffect(HomeSideEffect.NavigateSetting) }
   fun showBottomSheet() = intent { postSideEffect(HomeSideEffect.showBottomSheet) }
 
-  fun navigateClipLink(categoryId:Long) = blockingIntent  {
+  fun navigateClipLink(categoryId: Long) = blockingIntent {
     reduce { state.copy(categoryId = categoryId) }
     postSideEffect(HomeSideEffect.NavigateClipLink)
   }
@@ -72,5 +73,3 @@ class HomeViewModel @Inject constructor(
     postSideEffect(HomeSideEffect.NavigateWebview)
   }
 }
-
-

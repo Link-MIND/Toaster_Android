@@ -20,7 +20,7 @@ class SaveLinkViewModel @Inject constructor(
   private val saveLinkUseCase: PostSaveLinkUseCase,
   private val getCategoryAllUseCase: GetCategoryAllUseCase,
   private val postAddCategoryTitle: PostAddCategoryTitleUseCase,
-) : ContainerHost<LinkState,LinkSideEffect>,ViewModel() {
+) : ContainerHost<LinkState, LinkSideEffect>, ViewModel() {
   override val container: Container<LinkState, LinkSideEffect> =
     container(LinkState())
   fun saveCategoryTitle(categoryTitle: String) = viewModelScope.launch {
@@ -55,5 +55,4 @@ class SaveLinkViewModel @Inject constructor(
   fun navigateUp() = intent { postSideEffect(LinkSideEffect.NavigateUp) }
   fun navigateSetLink() = intent { postSideEffect(LinkSideEffect.NavigateSetLink) }
   fun showBottomSheet() = intent { postSideEffect(LinkSideEffect.ShowBottomSheet) }
-
 }
