@@ -17,6 +17,8 @@
       app:uri="featureSaveLink://saveLinkFragment?clipboardLink={clipboardLink}" />
     <action
       android:id="@+id/action_saveLinkFragment_to_saveLinkSetClipFragment"
+      app:popUpTo="@id/saveLinkFragment"
+      app:popUpToInclusive="true"
       app:destination="@id/saveLinkSetClipFragment"
       app:enterAnim="@anim/from_right"
       app:exitAnim="@anim/to_left"

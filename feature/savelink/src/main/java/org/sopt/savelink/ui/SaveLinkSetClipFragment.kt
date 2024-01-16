@@ -30,7 +30,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
     viewModel.getCategortAll()
 //    viewModel.saveCategoryTitle("이삭이다나는")
 //    viewModel.deleteLink(23)
-    viewModel.saveLink("https://www.instagram.com/p/C2CXFxpvc1avTdzKkcycxuUqRsfhJWjklRGjqw0/?igsh=MTh6MGppYzZydzdsYg==", null)
+//    viewModel.saveLink("https://www.instagram.com/p/C2CXFxpvc1avTdzKkcycxuUqRsfhJWjklRGjqw0/?igsh=MTh6MGppYzZydzdsYg==", null)
 //    viewModel.patchReadLink(23)
     var list = listOf(
       Clip("전체 클립", 3, false),

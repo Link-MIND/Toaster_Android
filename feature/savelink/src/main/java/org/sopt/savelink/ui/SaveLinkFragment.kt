@@ -172,7 +172,6 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
       }
       .show()
   }
-
   private fun navigateUp() {
     KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
     requireContext().hideKeyboard(binding.root)
