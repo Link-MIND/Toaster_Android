@@ -1,8 +1,8 @@
 package org.sopt.dataremote.category.api
 
 import org.sopt.dataremote.category.request.RequestCategoryDeleteDTO
+import org.sopt.dataremote.category.request.RequestCategoryEditDTO
 import org.sopt.dataremote.category.request.RequestCategoryTitleDto
-import org.sopt.dataremote.category.request.RequestCategoryTitleEditDTO
 import org.sopt.dataremote.category.response.ResponseCategoryDuplicateDTO
 import org.sopt.dataremote.category.response.ResponseCategoryEntireDto
 import org.sopt.dataremote.category.response.ResponseLinksDTO
@@ -39,7 +39,6 @@ interface CategoryService {
   @GET("/{categoryId}")
   suspend fun getCategoryLink(
     @Query("filter") filter: String,
-    @Query("isAllCategory") isAllCategory: Boolean,
   ): BaseResponse<ResponseLinksDTO>
 
   @PATCH("/$CATEGORY/$EDIT")

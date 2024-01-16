@@ -2,10 +2,13 @@ package org.sopt.dataremote.category.datasource
 
 import org.sopt.data.category.datasource.RemoteCategoryDataSource
 import org.sopt.dataremote.category.api.CategoryService
-import org.sopt.dataremote.category.request.RequestCategoryDeleteDTO
 import org.sopt.dataremote.category.request.RequestCategoryTitleDto
 import org.sopt.dataremote.category.request.toRequestDTO
 import org.sopt.dataremote.category.response.toCoreModel
+import org.sopt.model.category.CategoryChangePriority
+import org.sopt.model.category.CategoryChangeTitle
+import org.sopt.model.category.CategoryDuplicate
+import org.sopt.model.category.CategoryLinkList
 import org.sopt.model.category.CategoryList
 import javax.inject.Inject
 
@@ -31,11 +34,10 @@ class RemoteCategoryDataSourceImpl @Inject constructor(
   override suspend fun getCategoryDuplicate(title: String): CategoryDuplicate =
     requireNotNull(categoryService.getCategoryDuplicate(title = title).data).toCoreModel()
 
-  override suspend fun getCategoryLink(filter: String, isAllCategory: Boolean): CategoryLinkList =
+  override suspend fun getCategoryLink(filter: String): CategoryLinkList =
     requireNotNull(
       categoryService.getCategoryLink(
         filter = filter,
-        isAllCategory = isAllCategory,
       ).data,
     ).toCoreModel()
 

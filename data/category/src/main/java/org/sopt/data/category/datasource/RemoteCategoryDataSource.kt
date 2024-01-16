@@ -13,7 +13,7 @@ interface RemoteCategoryDataSource {
 
   suspend fun getCategoryDuplicate(title: String) : CategoryDuplicate
 
-  suspend fun getCategoryLink(filter: String, isAllCategory: Boolean) : CategoryLinkList
+  suspend fun getCategoryLink(filter: String) : CategoryLinkList
 
   suspend fun patchCategoryEdit()
 }

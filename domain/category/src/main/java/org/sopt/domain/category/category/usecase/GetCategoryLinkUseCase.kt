@@ -9,11 +9,9 @@ class GetCategoryLinkUseCase @Inject constructor(
 ) {
   suspend operator fun invoke(param: Param): Result<CategoryLinkList> = categoryRepository.getCategoryLink(
     filter = param.filter,
-    isAllCategory = param.isAllCategory
   )
 
   data class Param(
     val filter: String,
-    val isAllCategory: Boolean,
   )
 }

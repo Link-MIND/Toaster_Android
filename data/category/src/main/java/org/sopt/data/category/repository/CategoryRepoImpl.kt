@@ -24,8 +24,8 @@ class CategoryRepoImpl @Inject constructor(
     override suspend fun getCategoryDuplicate(title: String): Result<CategoryDuplicate> =
       runCatching { remoteCategoryDataSource.getCategoryDuplicate(title) }
 
-    override suspend fun getCategoryLink(filter: String, isAllCategory: Boolean): Result<CategoryLinkList> =
-      runCatching { remoteCategoryDataSource.getCategoryLink(filter, isAllCategory) }
+    override suspend fun getCategoryLink(filter: String): Result<CategoryLinkList> =
+      runCatching { remoteCategoryDataSource.getCategoryLink(filter) }
 
     override suspend fun patchCategoryEdit(changeCategoryTitle:List<CategoryChangeTitle>, changeCategoryChangePriority: List<CategoryChangePriority> ): Result<Unit> =
       runCatching { remoteCategoryDataSource.patchCategoryEdit(changeCategoryTitle, changeCategoryChangePriority) }

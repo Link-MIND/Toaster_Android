@@ -15,7 +15,7 @@ interface CategoryRepository {
 
   suspend fun getCategoryDuplicate(title: String): Result<CategoryDuplicate>
 
-  suspend fun getCategoryLink(filter: String, isAllCategory: Boolean): Result<CategoryLinkList>
+  suspend fun getCategoryLink(filter: String): Result<CategoryLinkList>
 
   suspend fun patchCategoryEdit(changeCategoryTitle:List<CategoryChangeTitle>, changeCategoryChangePriority: List<CategoryChangePriority>): Result<Unit>
 }
