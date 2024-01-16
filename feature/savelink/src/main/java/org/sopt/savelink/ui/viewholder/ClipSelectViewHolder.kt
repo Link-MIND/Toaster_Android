@@ -27,8 +27,8 @@ class ClipSelectViewHolder(
 
   private fun setTexts(data: Clip) {
     with(binding) {
-      tvItemTimerClipName.text = data.name
-      tvItemTimerClipCount.text = "${data.count}개"
+      tvItemTimerClipName.text = data.categoryTitle
+      tvItemTimerClipCount.text = "${data.toastNum}개"
     }
   }
 
