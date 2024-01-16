@@ -3,27 +3,36 @@ package org.sopt.clip.clipedit
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.dialog.LinkMindDialog
 import designsystem.components.toast.linkMindSnackBar
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.databinding.FragmentClipEditBinding
 import org.sopt.mainfeature.R
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.fragment.viewLifeCycle
+import org.sopt.ui.fragment.viewLifeCycleScope
+import org.sopt.ui.view.UiState
 import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
 class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClipEditBinding.inflate(it) }) {
-  private val viewModel by viewModels<ClipViewModel>()
+  private val viewModel by activityViewModels<ClipViewModel>()
   private lateinit var clipEditAdapter: ClipEditAdapter
   private val itemTouchHelper by lazy { ItemTouchHelper(ItemTouchCallback(clipEditAdapter)) }
-
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    val categoryTitle:String ="전체 클립" //인텐드나 번들로 받으면 될듯
+/*
+    viewModel.getCategoryLink(categoryTitle)
+*/
 
     clipEditAdapter = ClipEditAdapter { itemId, state, position ->
       when (state) {
@@ -39,25 +48,21 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     }
     binding.rvClipEdit.adapter = clipEditAdapter
     itemTouchHelper.attachToRecyclerView(binding.rvClipEdit)
-
+    clipEditAdapter.submitList((viewModel.categoryState.value as UiState.Success).data)
     updateEditListView()
 
     onClickBackButton()
   }
 
   private fun updateEditListView() {
-    viewModel.mockDataListState.observe(
-      viewLifecycleOwner,
-    ) {
-      if (!it) {
-        clipEditAdapter.submitList(viewModel.mockClipData)
+    viewModel.categoryState.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is UiState.Success -> {
+          clipEditAdapter.submitList(state.data)
+        }
+        else -> {}
       }
-    }
-
-    var state: Boolean = viewModel.mockClipData == null
-    if (!state) {
-      clipEditAdapter.submitList(viewModel.mockClipData)
-    }
+    }.launchIn(viewLifeCycleScope)
   }
 
   private fun onClickBackButton() {
