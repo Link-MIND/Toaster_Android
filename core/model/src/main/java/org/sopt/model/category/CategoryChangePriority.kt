@@ -1,6 +1,6 @@
 package org.sopt.model.category
 
-data class CategoryChangePriority (
+data class CategoryChangePriority(
   val categoryId: Long,
-  val newTitle:String
+  val newPrioritiy: Long,
 )
