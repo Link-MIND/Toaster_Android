@@ -28,8 +28,6 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    val clipboardLink = arguments?.getString("clipboardLink")
-    viewModel.updateUrl(clipboardLink ?: "")
     initView()
     collectState()
     onClickAddClip()
@@ -41,6 +39,8 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
   private fun initView() {
     binding.btnSaveLinkComplete.state = LinkMindButtonState.DISABLE
     viewModel.getCategortAll()
+    val clipboardLink = arguments?.getString("clipboardLink")
+    viewModel.updateUrl(clipboardLink ?: "")
   }
 
   private fun collectState() {
