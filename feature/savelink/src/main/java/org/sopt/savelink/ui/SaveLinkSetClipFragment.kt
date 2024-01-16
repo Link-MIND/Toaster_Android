@@ -29,7 +29,6 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-//    viewModel.saveCategoryTitle("이삭이다나는")
     initView()
     collectState()
     onClickAddClip()
@@ -96,6 +95,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
       setErroMsg(R.string.error_clip_length)
       bottomSheetConfirmBtnClick {
         if (showErrorMsg()) return@bottomSheetConfirmBtnClick
+        viewModel.saveCategoryTitle(it)
         dismiss()
       }
     }
