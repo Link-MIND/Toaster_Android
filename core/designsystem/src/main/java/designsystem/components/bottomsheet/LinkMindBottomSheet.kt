@@ -78,6 +78,8 @@ class LinkMindBottomSheet(context: Context) {
     context.linkMindSnackBar(binding.root, message, isLongDuration)
   }
 
+  fun getText(): String = binding.etvBottomSheet.editText.text.toString()
+
   fun show() {
     bottomSheetDialog.show()
   }

@@ -56,6 +56,7 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
         setErroMsg(org.sopt.mainfeature.R.string.error_clip_length)
         bottomSheetConfirmBtnClick {
           dismiss()
+          viewModel.postAddCategoryTitle(getText())
           requireContext().linkMindSnackBar(binding.root, "클립 생성 완료!", false)
         }
       }
