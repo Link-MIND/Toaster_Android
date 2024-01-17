@@ -58,6 +58,7 @@ class LoginActivity : AppCompatActivity() {
     viewModel.authState.flowWithLifecycle(lifecycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
+          dataStore.setFcmAllowed(state.data.fcmIsAllowed)
           when (state.data.isRegistered) {
             true -> {
               dataStore.setAutoLogin(true)

@@ -76,7 +76,7 @@ class HomeViewModel @Inject constructor(
   fun getWeekBestLink() = intent {
     getWeekBestLink.invoke().onSuccess {
       reduce {
-        state.copy(weekBestLink = (container.stateFlow.value.weekBestLink + it).distinctBy { it.toastId })
+        state.copy(weekBestLink = (it).distinctBy { it.toastId })
       }
     }.onFailure {
       Log.d("getWeekBestLink", "$it")
