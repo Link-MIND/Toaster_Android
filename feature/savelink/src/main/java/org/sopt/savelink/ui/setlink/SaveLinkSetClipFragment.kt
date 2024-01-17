@@ -39,7 +39,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
 
   private fun initView() {
     binding.btnSaveLinkComplete.state = LinkMindButtonState.DISABLE
-    viewModel.getCategortAll()
+    viewModel.getCategoryAll()
     val clipboardLink = arguments?.getString("clipboardLink")
     viewModel.updateUrl(clipboardLink ?: "")
   }
@@ -60,6 +60,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
         requireContext().linkMindSnackBar(binding.root, "링크 저장 완료", false)
       }
 
+      is SetLinkSideEffect.NavigateUp -> findNavController().navigateUp()
       is SetLinkSideEffect.ShowBottomSheet -> showAddClipBottomSheet()
       is SetLinkSideEffect.ShowDialog -> showCloseDialog()
     }
@@ -89,29 +90,24 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
     }
   }
 
-  private fun showAddClipBottomSheet() {
-    val linkMindBottomSheet = LinkMindBottomSheet(requireContext())
-    linkMindBottomSheet.show()
-    linkMindBottomSheet.apply {
-      setTitle(R.string.clip_add_clip)
-      setErroMsg(R.string.error_clip_length)
-      bottomSheetConfirmBtnClick {
-        if (showErrorMsg()) return@bottomSheetConfirmBtnClick
-        viewModel.saveCategoryTitle(it)
-        dismiss()
-      }
-    }
-  }
-
   private fun onClickNavigateUp() {
     binding.ivSaveLinkClipBack.onThrottleClick {
-      findNavController().navigateUp()
+      viewModel.navigateUp()
     }
   }
 
   private fun onCLickNavigateCloseDialog() {
     binding.ivSaveLinkClose.onThrottleClick {
       viewModel.showDialog()
+    }
+  }
+
+  private fun onClickCompleteBtn() {
+    binding.btnSaveLinkComplete.apply {
+      btnClick {
+        if (state == LinkMindButtonState.DISABLE) return@btnClick
+        viewModel.saveLink(viewModel.container.stateFlow.value.url, viewModel.container.stateFlow.value.categoryId)
+      }
     }
   }
 
@@ -128,11 +124,16 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
       .show()
   }
 
-  private fun onClickCompleteBtn() {
-    binding.btnSaveLinkComplete.apply {
-      btnClick {
-        if (state == LinkMindButtonState.DISABLE) return@btnClick
-        viewModel.saveLink(viewModel.container.stateFlow.value.url, viewModel.container.stateFlow.value.categoryId)
+  private fun showAddClipBottomSheet() {
+    val linkMindBottomSheet = LinkMindBottomSheet(requireContext())
+    linkMindBottomSheet.show()
+    linkMindBottomSheet.apply {
+      setTitle(R.string.clip_add_clip)
+      setErroMsg(R.string.error_clip_length)
+      bottomSheetConfirmBtnClick {
+        if (showErrorMsg()) return@bottomSheetConfirmBtnClick
+        viewModel.saveCategoryTitle(it)
+        dismiss()
       }
     }
   }
