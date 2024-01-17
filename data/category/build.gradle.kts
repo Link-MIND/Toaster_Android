@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-  namespace = "org.sopt.category"
+  namespace = "org.sopt.data.category"
 }
 
 dependencies {

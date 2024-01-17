@@ -5,11 +5,12 @@ plugins {
 }
 
 android {
-  namespace = "org.sopt.user"
+  namespace = "org.sopt.category"
 }
 
 dependencies {
   implementation(projects.core.network)
-  implementation(projects.domain.user)
+  implementation(projects.domain.category)
   implementation(libs.retrofit.kotlin.serialization)
+  implementation(project(":domain:user"))
 }
