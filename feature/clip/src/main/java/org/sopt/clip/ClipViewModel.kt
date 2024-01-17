@@ -161,7 +161,7 @@ class ClipViewModel @Inject constructor(
     Log.d("뷰모델", "$newTitle") // string 값 잘 가져옴
     patchCategoryEditTitle.invoke(param = PatchCategoryEditTitleUseCase.Param(categoryId, newTitle)).onSuccess {
       Log.d("카테 이름 수정", "성공 ")
-      _editPriorityState.emit(UiState.Success(Unit))
+      _editTitleState.emit(UiState.Success(Unit))
     }.onFailure {
       Log.d("카테 이름 수정", "실패")
       Log.d("들어온 id 타이틀", "$categoryId $newTitle")
