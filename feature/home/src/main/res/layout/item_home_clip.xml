@@ -29,9 +29,10 @@
       android:id="@+id/tv_item_clip_title"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:maxLines="1"
       android:paddingHorizontal="12dp"
       android:paddingTop="8dp"
-      android:paddingBottom="24dp"
+      android:paddingBottom="23dp"
       android:textAppearance="@style/Typography.suit.medium_16"
       android:textColor="@color/neutrals900"
       app:layout_constraintStart_toStartOf="parent"
@@ -54,45 +55,46 @@
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/cl_item_clip_empty"
     android:layout_width="match_parent"
-    android:visibility="gone"
-    android:paddingVertical="34dp"
     android:layout_height="wrap_content"
     android:background="@drawable/shape_test"
+    android:paddingVertical="34dp"
     android:paddingTop="12dp"
     android:paddingBottom="16dp"
+    android:visibility="gone"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
-  <ImageView
-    android:id="@+id/iv_elipse"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:scaleType="fitXY"
-    android:src="@drawable/ic_ellipse_99"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
 
-  <ImageView
-    android:id="@+id/iv_plus"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:scaleType="fitXY"
-    android:src="@drawable/ic_plus_white_24"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toBottomOf="@id/iv_elipse"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@id/iv_elipse" />
+    <ImageView
+      android:id="@+id/iv_elipse"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:scaleType="fitXY"
+      android:src="@drawable/ic_ellipse_99"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
-  <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingTop="1dp"
-    android:textAppearance="@style/Typography.suit.bold_14"
-    android:textColor="@color/neutrals200"
-    android:text="클립추가"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/iv_elipse" />
+    <ImageView
+      android:id="@+id/iv_plus"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:scaleType="fitXY"
+      android:src="@drawable/ic_plus_white_24"
+      app:layout_constraintBottom_toBottomOf="@id/iv_elipse"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="@id/iv_elipse" />
+
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingTop="1dp"
+      android:text="클립추가"
+      android:textAppearance="@style/Typography.suit.bold_14"
+      android:textColor="@color/neutrals200"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/iv_elipse" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,6 +34,7 @@ okhttp = "4.11.0"
 
 hilt = "2.48"
 room = "2.5.2"
+orbit = "6.1.0"
 
 timber = "5.0.1"
 encrypted-datastore = "1.7.21-1.0.8-1.1.0-alpha01"
@@ -88,6 +89,9 @@ hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", v
 hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hilt" }
 hilt-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
 hilt-testing-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+
+orbit-core = { group = "org.orbit-mvi", name = "orbit-core", version.ref = "orbit" }
+orbit-viewmodel = { group = "org.orbit-mvi", name = "orbit-viewmodel", version.ref = "orbit" }
 
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
@@ -150,3 +154,5 @@ androidx-navigation = ["navigation-fragment-ktx", "navigation-ui-ktx"]
 coroutine = ["kotlinx-coroutines-android", "kotlinx-coroutines-core"]
 encrypted-datastore = ["encrypted-datastore-preference-ksp-annotations","encrypted-datastore-preference-security"]
 datastore = ["androidx-datastore-core", "androidx-datastore-preferences"]
+
+orbit = ["orbit-core", "orbit-viewmodel"]

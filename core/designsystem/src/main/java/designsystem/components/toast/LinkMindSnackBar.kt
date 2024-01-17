@@ -15,7 +15,6 @@ import org.sopt.mainfeature.databinding.LayoutToasterSnackbarBinding
 fun Context.linkMindSnackBar(view: View, message: String, warning: Boolean = false) {
   Snackbar.make(view, "", Snackbar.LENGTH_LONG).apply {
     val snackbarBinding = LayoutToasterSnackbarBinding.inflate(LayoutInflater.from(this@linkMindSnackBar))
-
     (this.view as Snackbar.SnackbarLayout).apply {
       removeAllViews()
       setPadding(0, 0, 0, 0)
@@ -33,6 +32,7 @@ fun Context.linkMindSnackBar(view: View, message: String, warning: Boolean = fal
     ).apply {
       gravity = Gravity.CENTER
     }
+    anchorView = view
 
     show()
   }

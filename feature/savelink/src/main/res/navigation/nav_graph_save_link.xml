@@ -7,7 +7,7 @@
 
   <fragment
     android:id="@+id/saveLinkFragment"
-    android:name="org.sopt.savelink.ui.SaveLinkFragment"
+    android:name="org.sopt.savelink.ui.savelink.SaveLinkFragment"
     android:label="fragment_save_link"
     tools:layout="@layout/fragment_save_link">
     <argument
@@ -17,6 +17,8 @@
       app:uri="featureSaveLink://saveLinkFragment?clipboardLink={clipboardLink}" />
     <action
       android:id="@+id/action_saveLinkFragment_to_saveLinkSetClipFragment"
+      app:popUpTo="@id/saveLinkFragment"
+      app:popUpToInclusive="true"
       app:destination="@id/saveLinkSetClipFragment"
       app:enterAnim="@anim/from_right"
       app:exitAnim="@anim/to_left"
@@ -25,7 +27,11 @@
   </fragment>
   <fragment
     android:id="@+id/saveLinkSetClipFragment"
-    android:name="org.sopt.savelink.ui.SaveLinkSetClipFragment"
+    android:name="org.sopt.savelink.ui.savelinksetclip.SaveLinkSetClipFragment"
     android:label="SaveLinkSetClipFragment"
-    tools:layout="@layout/fragment_save_link_set_clip" />
+    tools:layout="@layout/fragment_save_link_set_clip" >
+    <argument
+      android:name="clipboardLink"
+      app:argType="string" />
+  </fragment>
 </navigation>

@@ -3,14 +3,14 @@ package org.sopt.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import org.sopt.home.WeekLinkDummy
 import org.sopt.home.databinding.ItemWeekLinkBinding
 import org.sopt.home.viewholder.HomeWeekLinkViewHolder
+import org.sopt.model.home.WeekBestLink
 import org.sopt.ui.view.ItemDiffCallback
 
 class HomeWeekLinkAdapter(
-  private val onClickWeekLink: () -> Unit,
-) : ListAdapter<WeekLinkDummy, HomeWeekLinkViewHolder>(DiffUtil) {
+  private val onClickWeekLink: (WeekBestLink) -> Unit,
+) : ListAdapter<WeekBestLink, HomeWeekLinkViewHolder>(DiffUtil) {
   override fun onBindViewHolder(holder: HomeWeekLinkViewHolder, position: Int) {
     holder.onBind(getItem(position))
   }
@@ -23,8 +23,8 @@ class HomeWeekLinkAdapter(
   }
 
   companion object {
-    private val DiffUtil = ItemDiffCallback<WeekLinkDummy>(
-      onItemsTheSame = { old, new -> old.title == new.title },
+    private val DiffUtil = ItemDiffCallback<WeekBestLink>(
+      onItemsTheSame = { old, new -> old.toastId == new.toastId },
       onContentsTheSame = { old, new -> old == new },
     )
   }

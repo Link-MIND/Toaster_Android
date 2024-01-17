@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.button.state.LinkMindButtonState
+import designsystem.components.dialog.LinkMindDialog
+import designsystem.components.toast.linkMindSnackBar
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.sopt.timer.R
@@ -40,6 +42,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     listUpdater = ListUpdater()
+    setupForPatch()
     setupRecyclerViews()
     initTimePickerState()
     initRepeatState()
@@ -49,6 +52,40 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
     collectSelectedTime()
     initCompleteButtonClickListener()
     collectPostTimerState()
+  }
+
+  private fun setupForPatch() {
+    if (args.argPatch && setTimerViewModel.isFirst.value) {
+      setTimerViewModel.isFirst.value = false
+      setupTime()
+      setupRepeatDays()
+    }
+  }
+
+  private fun setupTime() {
+    val splitString = args.argRemindTime.replace("시", "").replace("분", "").split(" ")
+    val period = splitString[0]
+    val hour = splitString[1]
+    val minute = if (splitString.size > 2) splitString[2] else null
+
+    setTimerViewModel.apply {
+      setSelectedPeriod(period)
+      currentAmPmIndex.value = if (period == "오전") 1 else 2
+      setSelectedHour(hour)
+      currentHourIndex.value = hour.toInt()
+      minute?.let {
+        setSelectedMinute(it)
+        currentMinuteIndex.value = it.toInt() + 1
+      }
+    }
+  }
+
+  private fun setupRepeatDays() {
+    val daysOfWeek = listOf("월", "화", "수", "목", "금", "토", "일")
+    val repeatDays = args.argRemindDates.split(", ")
+    val repeatDaysIndex = repeatDays.map { day -> daysOfWeek.indexOf(day) }
+
+    repeatDaysIndex.filter { it < 7 }.forEach { setTimerViewModel.setRepeat(it + 3) }
   }
 
   private fun initTimePickerState() {
@@ -65,7 +102,13 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
     }
     binding.btnTimePickerNext.state = LinkMindButtonState.DISABLE
     binding.btnTimePickerNext.isClickable = false
-    binding.tvTimePickerCategory.text = if (args.argPatch) "${args.argCategoryName}클립을" else "카테고리이름클립을"
+    binding.tvTimePickerCategory.text = "${if (args.argPatch) args.argCategoryName else getClipName()} 클립을"
+  }
+
+  private fun getClipName(): String {
+    val clipStateData = (setTimerViewModel.clipState.value as UiState.Success).data
+    val selectedClip = clipStateData.first { it.isSelected }
+    return if (selectedClip.name == "전체 클립") "전체" else selectedClip.name
   }
 
   private fun initRepeatState() {
@@ -95,7 +138,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
       tvTimePickerPeriod.apply {
         setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_bold_16)
         setTextColor(colorOf(org.sopt.mainfeature.R.color.primary))
-        text = modified
+        text = modified + " 마다"
       }
       btnTimePickerNext.state = LinkMindButtonState.ENABLE
       btnTimePickerNext.isClickable = true
@@ -231,7 +274,17 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
 
   private fun initCloseButtonClickListener() {
     binding.ivTimePickerClose.onThrottleClick {
-      findNavController().navigate(R.id.action_navigation_time_picker_to_navigation_timer)
+      val linkMindDialog = LinkMindDialog(requireContext())
+      linkMindDialog.setTitle(org.sopt.mainfeature.R.string.timer_cancel_dialog_title)
+      linkMindDialog.setSubtitle(org.sopt.mainfeature.R.string.timer_cancel_dialog_sub_title)
+      linkMindDialog.setPositiveButton(org.sopt.mainfeature.R.string.positive_ok_msg) {
+        findNavController().navigate(R.id.action_navigation_time_picker_to_navigation_timer)
+        linkMindDialog.dismiss()
+      }
+      linkMindDialog.setNegativeButton(org.sopt.mainfeature.R.string.negative_close_cancel) {
+        linkMindDialog.dismiss()
+      }
+      linkMindDialog.show()
     }
   }
 
@@ -265,7 +318,14 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
             navigate(R.id.action_navigation_time_picker_to_navigation_timer)
           }
         }
-        is UiState.Failure -> {}
+
+        is UiState.Failure -> {
+          if (state.msg.contains("422")) {
+            Log.e("로그", state.msg)
+            requireContext().linkMindSnackBar(binding.btnTimePickerNext, "한 클립당 하나의 타이머만 설정 가능해요", true)
+          }
+        }
+
         is UiState.Loading -> {}
         is UiState.Empty -> {}
       }

@@ -10,6 +10,7 @@ import android.webkit.WebViewClient
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import org.sopt.clip.R
 import org.sopt.clip.databinding.FragmentWebviewBinding
 import org.sopt.ui.base.BindingFragment
@@ -21,7 +22,9 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     binding.wbClip.settings.javaScriptEnabled = true
-
+    val args: WebViewFragmentArgs by navArgs()
+    val site = args.site
+    setupWebView(site)
     onClickClipLink()
     onClickWebViewClose()
     onClickWebViewReStart()

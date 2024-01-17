@@ -3,14 +3,20 @@ package org.sopt.timer.settimer.clipselect
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.button.state.LinkMindButtonState
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.sopt.timer.R
 import org.sopt.timer.databinding.FragmentTimerClipSelectBinding
 import org.sopt.timer.model.Clip
 import org.sopt.timer.settimer.SetTimerViewModel
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.fragment.viewLifeCycle
+import org.sopt.ui.fragment.viewLifeCycleScope
+import org.sopt.ui.view.UiState
 import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
@@ -20,12 +26,30 @@ class TimerClipSelectFragment : BindingFragment<FragmentTimerClipSelectBinding>(
   private val viewModel: SetTimerViewModel by activityViewModels()
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
-    val list = viewModel.clipList.value
-    initClipSelectAdapter(list)
-    initNextButtonClickListener(list)
+    getCategoryAll()
     initCloseButtonClickListener()
+    collectClipState()
   }
+
+  private fun getCategoryAll() {
+    if (viewModel.clipState.value !is UiState.Success) {
+      viewModel.getCategoryAll()
+    }
+  }
+
+  private fun collectClipState() {
+    viewModel.clipState.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is UiState.Success -> {
+          initClipSelectAdapter(state.data)
+          initNextButtonClickListener(state.data)
+        }
+
+        else -> {}
+      }
+    }.launchIn(viewLifeCycleScope)
+  }
+
   private fun initClipSelectAdapter(list: List<Clip>) {
     adapter = ClipSelectAdapter(
       onClick = { clip, index ->
