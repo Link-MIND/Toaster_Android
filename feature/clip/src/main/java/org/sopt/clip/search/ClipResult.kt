@@ -1,6 +1,6 @@
 package org.sopt.clip.search
 
-data class ClipResultDummy(
+data class ClipResult(
   val title: String,
   val amount: Int,
 )
