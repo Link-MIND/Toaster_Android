@@ -2,13 +2,10 @@ package org.sopt.clip.search.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import org.sopt.clip.databinding.ItemSearchResultClipBinding
-import org.sopt.clip.search.ClipResult
 import org.sopt.clip.search.viewholder.ClipResultViewHolder
 import org.sopt.model.category.Category
-import org.sopt.model.timer.Timer
 import org.sopt.ui.view.ItemDiffCallback
 
 class ClipResultAdapter :

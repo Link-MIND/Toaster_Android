@@ -2,12 +2,9 @@ package org.sopt.clip.search.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import org.sopt.clip.databinding.ItemSearchResultClipLinkBinding
-import org.sopt.clip.search.LinkResult
 import org.sopt.clip.search.viewholder.LinkResultViewHolder
-import org.sopt.model.category.Category
 import org.sopt.model.category.Toast
 import org.sopt.ui.view.ItemDiffCallback
 
