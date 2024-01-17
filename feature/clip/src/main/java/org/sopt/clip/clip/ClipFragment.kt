@@ -34,7 +34,9 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
   private fun initClipAdapter() {
     clipAdapter = ClipAdapter { clipId ->
       Toast.makeText(context, "클릭된 item id: $clipId", Toast.LENGTH_SHORT).show()
-      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_link)
+      val action = ClipFragmentDirections.actionNavigationClipToNavigationClipLink(clipId)
+      findNavController().navigate(action)
+
     }
     binding.rvClipClip.adapter = clipAdapter
   }
