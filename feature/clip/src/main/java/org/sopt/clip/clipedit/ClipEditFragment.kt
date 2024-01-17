@@ -1,6 +1,7 @@
 package org.sopt.clip.clipedit
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
@@ -26,13 +27,14 @@ import org.sopt.ui.view.onThrottleClick
 class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClipEditBinding.inflate(it) }) {
   private val viewModel by activityViewModels<ClipViewModel>()
   private lateinit var clipEditAdapter: ClipEditAdapter
-  private val itemTouchHelper by lazy { ItemTouchHelper(ItemTouchCallback(clipEditAdapter))
+  private val itemTouchHelper by lazy {
+    ItemTouchHelper(ItemTouchCallback(clipEditAdapter))
   }
-  private var _categoryDeleteList :  MutableList<Long> = mutableListOf()
+  private var _categoryDeleteList: MutableList<Long> = mutableListOf()
   val categoryDeleteList: MutableList<Long> = _categoryDeleteList
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    val categoryTitle:String ="전체 클립" //인텐드나 번들로 받으면 될듯
+    val categoryTitle: String = "전체 클립" // 인텐드나 번들로 받으면 될듯
 /*
     viewModel.getCategoryLink(categoryTitle)
 */
@@ -40,12 +42,14 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     clipEditAdapter = ClipEditAdapter { itemId, state, position ->
       when (state) {
         "delete" -> {
-          showDeleteDialog()
+          showDeleteDialog(itemId)
+/*
           _categoryDeleteList.add(itemId)
+*/
         }
 
         "edit" -> {
-          showHomeBottomSheet()
+          showHomeBottomSheet(itemId)
         }
       }
       Toast.makeText(context, "$state + itemId: $itemId", Toast.LENGTH_SHORT).show()
@@ -83,7 +87,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     }
   }
 
-  private fun showHomeBottomSheet() {
+  private fun showHomeBottomSheet(itemId: Long) {
     val editTitleBottomSheet = LinkMindBottomSheet(requireContext())
     editTitleBottomSheet.show()
     editTitleBottomSheet.apply {
@@ -95,15 +99,34 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
         }else {
         setErroMsg(org.sopt.mainfeature.R.string.error_clip_length)
       }*/
-      bottomSheetConfirmBtnClick { //dto 수정됨
+      bottomSheetConfirmBtnClick { // dto 수정됨
+        val clipNewName = getText()
+        Log.d("사용자가 입력한 클립명", "$clipNewName") // string 값 잘 가져옴
+        viewModel.patchCategoryEditTitle(itemId, clipNewName)
 
+        editCategoryTitle()
+
+/*
+        updateEditListView()
+*/
         dismiss()
         requireContext().linkMindSnackBar(binding.root, "클립 수정 완료!", false)
       }
     }
   }
 
-  private fun showDeleteDialog() {
+  fun editCategoryTitle() {
+    viewModel.editTitleState.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is UiState.Success -> {
+          updateEditListView()
+        }
+        else -> {}
+      }
+    }.launchIn(viewLifeCycleScope)
+  }
+
+  private fun showDeleteDialog(itemId: Long) {
     val deleteDialog = LinkMindDialog(requireContext())
     deleteDialog.setTitle(R.string.edit_clip_delete_dialog_title)
       .setSubtitle(R.string.edit_clip_delete_dialog_subtitle)
@@ -111,6 +134,9 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
         deleteDialog.dismiss()
       }
       .setPositiveButton(R.string.edit_clip_delete_dialog_delete) {
+        viewModel.deleteCategory(listOf(itemId))
+/*        viewModel.getCategoryAll()
+        updateEditListView()*/
         deleteDialog.dismiss()
       }
       .show()

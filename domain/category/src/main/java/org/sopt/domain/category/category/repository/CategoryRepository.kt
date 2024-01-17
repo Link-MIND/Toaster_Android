@@ -1,7 +1,5 @@
 package org.sopt.domain.category.category.repository
 
-import org.sopt.model.category.CategoryChangePriority
-import org.sopt.model.category.CategoryChangeTitle
 import org.sopt.model.category.CategoryDuplicate
 import org.sopt.model.category.CategoryLinkList
 import org.sopt.model.category.CategoryList
@@ -11,11 +9,19 @@ interface CategoryRepository {
 
   suspend fun postAddCategory(categoryTitle: String): Result<Int>
 
-  suspend fun deleteCategory(deleteCategoryList: List<Long>) : Result<Unit>
+  suspend fun deleteCategory(deleteCategoryList: List<Long>): Result<Unit>
 
   suspend fun getCategoryDuplicate(title: String): Result<CategoryDuplicate>
 
-  suspend fun getCategoryLink(filter: String): Result<CategoryLinkList>
+  suspend fun getCategoryLink(filter: String?, categoryId: Long?): Result<CategoryLinkList>
 
-  suspend fun patchCategoryEdit(changeCategoryTitle:List<CategoryChangeTitle>, changeCategoryChangePriority: List<CategoryChangePriority>): Result<Unit>
+  suspend fun patchCategoryEditTitle(
+    categoryId: Long,
+    newTitle: String?,
+  ): Result<Unit>
+
+  suspend fun patchCategoryEditPriority(
+    categoryId: Long,
+    newPriority: Int,
+  ): Result<Unit>
 }
