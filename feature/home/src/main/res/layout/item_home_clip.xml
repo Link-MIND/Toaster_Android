@@ -32,7 +32,7 @@
       android:maxLines="1"
       android:paddingHorizontal="12dp"
       android:paddingTop="8dp"
-      android:paddingBottom="11dp"
+      android:paddingBottom="23dp"
       android:textAppearance="@style/Typography.suit.medium_16"
       android:textColor="@color/neutrals900"
       app:layout_constraintStart_toStartOf="parent"
