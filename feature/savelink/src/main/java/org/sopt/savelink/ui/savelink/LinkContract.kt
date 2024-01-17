@@ -1,6 +1,6 @@
 package org.sopt.savelink.ui.savelink
 
-import org.sopt.savelink.ui.Clip
+import org.sopt.savelink.ui.model.Clip
 
 data class LinkState(
   val edittextLink: String = "",

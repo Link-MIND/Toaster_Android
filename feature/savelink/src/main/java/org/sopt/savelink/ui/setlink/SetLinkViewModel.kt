@@ -14,8 +14,8 @@ import org.orbitmvi.orbit.viewmodel.container
 import org.sopt.domain.category.category.usecase.GetCategoryAllUseCase
 import org.sopt.domain.category.category.usecase.PostAddCategoryTitleUseCase
 import org.sopt.domain.link.usecase.PostSaveLinkUseCase
-import org.sopt.savelink.ui.Clip
-import org.sopt.savelink.ui.toModel
+import org.sopt.savelink.ui.model.Clip
+import org.sopt.savelink.ui.model.toModel
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,9 +23,9 @@ class SetLinkViewModel @Inject constructor(
   private val saveLinkUseCase: PostSaveLinkUseCase,
   private val getCategoryAllUseCase: GetCategoryAllUseCase,
   private val postAddCategoryTitle: PostAddCategoryTitleUseCase,
-) : ContainerHost<SetLinkState, SetLinkSideEffect>, ViewModel() {
-  override val container: Container<SetLinkState, SetLinkSideEffect> =
-    container(SetLinkState())
+) : ContainerHost<SaveLinkSetClipState, SaveLinkSetClipSideEffect>, ViewModel() {
+  override val container: Container<SaveLinkSetClipState, SaveLinkSetClipSideEffect> =
+    container(SaveLinkSetClipState())
 
   fun getCategoryAll() = intent {
     getCategoryAllUseCase().onSuccess {
@@ -80,9 +80,9 @@ class SetLinkViewModel @Inject constructor(
     }
   }
 
-  private fun navigateSetLink() = intent { postSideEffect(SetLinkSideEffect.NavigateSetLink) }
-  fun navigateUp() = intent { postSideEffect(SetLinkSideEffect.NavigateUp) }
-  fun showBottomSheet() = intent { postSideEffect(SetLinkSideEffect.ShowBottomSheet) }
-  fun showDialog() = intent { postSideEffect(SetLinkSideEffect.ShowDialog) }
+  private fun navigateSetLink() = intent { postSideEffect(SaveLinkSetClipSideEffect.NavigateSaveLinkSetClip) }
+  fun navigateUp() = intent { postSideEffect(SaveLinkSetClipSideEffect.NavigateUp) }
+  fun showBottomSheet() = intent { postSideEffect(SaveLinkSetClipSideEffect.ShowBottomSheet) }
+  fun showDialog() = intent { postSideEffect(SaveLinkSetClipSideEffect.ShowDialog) }
 
 }

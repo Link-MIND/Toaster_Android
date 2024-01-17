@@ -1,4 +1,4 @@
-package org.sopt.savelink.ui
+package org.sopt.savelink.ui.model
 
 import org.sopt.model.category.Category
 
@@ -9,7 +9,7 @@ data class Clip(
   var isSelected: Boolean,
 )
 
-internal fun Category.toModel()=Clip(
+internal fun Category.toModel()= Clip(
   categoryId=categoryId,
   categoryTitle=categoryTitle,
   toastNum=toastNum,

@@ -95,7 +95,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
   private fun handleSaveLinkNextClick() {
     with(binding) {
       hideErrorState(tvSaveLinkError, LinkMIndFullWidthButtonState.ENABLE_BLACK)
-      viewModel.updataEditText(etvSaveCopyLink.editText.text.toString())
+      viewModel.updateEditText(etvSaveCopyLink.editText.text.toString())
       onClickComplete()
     }
   }
