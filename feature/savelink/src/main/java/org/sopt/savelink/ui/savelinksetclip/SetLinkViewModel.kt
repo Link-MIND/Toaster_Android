@@ -39,7 +39,8 @@ class SetLinkViewModel @Inject constructor(
                 it.toastNumberInEntire.toInt(),
                 false,
               ),
-            ) + container.stateFlow.value.categoryList + it.categories.map { it.toModel() }).distinctBy { it.categoryId },
+            ) + container.stateFlow.value.categoryList + it.categories.map { it.toModel() }
+            ).distinctBy { it.categoryId },
         )
       }
     }.onFailure {
@@ -88,5 +89,4 @@ class SetLinkViewModel @Inject constructor(
   fun showDialog() = intent { postSideEffect(SaveLinkSetClipSideEffect.ShowDialog) }
 
   private fun showSnackBar() = intent { postSideEffect(SaveLinkSetClipSideEffect.ShowSnackBar) }
-
 }

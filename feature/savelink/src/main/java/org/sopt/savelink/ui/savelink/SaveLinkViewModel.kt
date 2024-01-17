@@ -11,8 +11,7 @@ import org.orbitmvi.orbit.viewmodel.container
 import javax.inject.Inject
 
 @HiltViewModel
-class SaveLinkViewModel @Inject constructor(
-) : ContainerHost<LinkState, LinkSideEffect>, ViewModel() {
+class SaveLinkViewModel @Inject constructor() : ContainerHost<LinkState, LinkSideEffect>, ViewModel() {
   override val container: Container<LinkState, LinkSideEffect> =
     container(LinkState())
 

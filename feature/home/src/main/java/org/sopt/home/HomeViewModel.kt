@@ -54,7 +54,8 @@ class HomeViewModel @Inject constructor(
                 "전체 카테고리",
                 it.allToastNum,
               ),
-            ) + container.stateFlow.value.categoryList + it.mainCategoryDto + null).distinctBy { it?.categoryId },
+            ) + container.stateFlow.value.categoryList + it.mainCategoryDto + null
+            ).distinctBy { it?.categoryId },
         )
       }
     }.onFailure {
