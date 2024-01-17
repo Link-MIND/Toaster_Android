@@ -18,6 +18,20 @@
     android:src="@drawable/ic_minus_28"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
+  <ImageView
+    android:id="@+id/iv_clip_edit_fix"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:contentDescription="@string/edit_clip_fix_description"
+    android:paddingStart="10dp"
+    android:paddingTop="13dp"
+    android:paddingBottom="9dp"
+    android:src="@drawable/ic_pin_24"
+    android:visibility="invisible"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"/>
+
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/cl_clip_edit_clip"
