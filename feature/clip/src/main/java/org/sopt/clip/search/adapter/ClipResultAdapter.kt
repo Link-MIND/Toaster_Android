@@ -29,7 +29,7 @@ class ClipResultAdapter :
 
   override fun onBindViewHolder(holder: ClipResultViewHolder, position: Int) {
     val result = getItem(position)
-    holder.onBind(result/*, searchQuery*/)
+    holder.onBind(result)
   }
 
   companion object {

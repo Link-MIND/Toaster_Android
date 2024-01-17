@@ -7,9 +7,8 @@ import org.sopt.model.category.Category
 class ClipResultViewHolder(val binding: ItemSearchResultClipBinding) :
   RecyclerView.ViewHolder(binding.root) {
 
-  fun onBind(clipResult: Category/*, searchQuery: String*/) {
+  fun onBind(clipResult: Category) {
     binding.tvClipTitle.text = clipResult.categoryTitle
-      //applyBoldStyle(clipResult.categoryTitle, searchQuery)
     binding.tvClipAmount.text = clipResult.toastNum.toString()
   }
 }

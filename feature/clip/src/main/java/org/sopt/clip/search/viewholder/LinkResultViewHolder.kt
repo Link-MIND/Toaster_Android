@@ -1,7 +1,6 @@
 package org.sopt.clip.search.viewholder
 
 import androidx.core.view.isGone
-import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import org.sopt.clip.databinding.ItemSearchResultClipLinkBinding
