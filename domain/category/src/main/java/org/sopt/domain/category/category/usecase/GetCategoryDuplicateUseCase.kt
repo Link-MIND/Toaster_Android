@@ -8,9 +8,9 @@ class GetCategoryDuplicateUseCase @Inject constructor(
   private val categoryRepository: CategoryRepository,
 ) {
   suspend operator fun invoke(param: Param): Result<CategoryDuplicate> = categoryRepository.getCategoryDuplicate(
-    title = param.title
+    title = param.title,
   )
   data class Param(
-    val title: String
+    val title: String,
   )
 }

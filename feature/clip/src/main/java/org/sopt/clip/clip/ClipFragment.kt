@@ -24,7 +24,7 @@ import org.sopt.ui.view.onThrottleClick
 class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.inflate(it) }) {
   private val viewModel by activityViewModels<ClipViewModel>()
   private lateinit var clipAdapter: ClipAdapter
-  val bundle= Bundle()
+  val bundle = Bundle()
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
@@ -49,7 +49,6 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
 
         else -> {}
       }
-
     }.launchIn(viewLifeCycleScope)
   }
 
@@ -64,7 +63,6 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
       val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment(clipTitle = category.categoryTitle)
         Navigation.findNavController(view!!).navigate(action)
 */
-
     }
     binding.rvClipClip.adapter = clipAdapter
   }

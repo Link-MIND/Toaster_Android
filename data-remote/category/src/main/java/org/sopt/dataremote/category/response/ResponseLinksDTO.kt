@@ -43,4 +43,3 @@ internal fun ResponseLinksDTO.toCoreModel() = CategoryLinkList(
   allToastNum = allToastNum,
   toastListDto = toastListDto.map { it.toCoreModel() },
 )
-

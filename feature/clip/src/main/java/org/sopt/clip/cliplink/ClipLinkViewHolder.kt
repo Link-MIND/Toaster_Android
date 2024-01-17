@@ -16,7 +16,7 @@ class ClipLinkViewHolder(
       with(binding) {
         tvLinkTitle.text = linkData.toastTitle
         tvLinkUrl.text = linkData.linkUrl
-        tvLinkClipTitle.text= linkData.categoryTitle
+        tvLinkClipTitle.text = linkData.categoryTitle
         root.onThrottleClick {
           /*onClick(linkData)*/
           onClickItemLink(linkData, "click")

@@ -105,19 +105,16 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
       btnClipAll.setOnClickListener {
         updateTogglesNDividerVisible(SelectedToggle.ALL)
         updateLinkView()
-
       }
 
       btnClipRead.setOnClickListener {
         updateTogglesNDividerVisible(SelectedToggle.READ)
         updateLinkView()
-
       }
 
       btnClipUnread.setOnClickListener {
         updateTogglesNDividerVisible(SelectedToggle.UNREAD)
         updateLinkView()
-
       }
     }
     return viewModel.mockLinkData
