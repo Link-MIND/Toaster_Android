@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.toast.linkMindSnackBar
+import org.orbitmvi.orbit.viewmodel.observe
 import org.sopt.home.adapter.HomeClipAdapter
 import org.sopt.home.adapter.HomeWeekLinkAdapter
 import org.sopt.home.adapter.HomeWeekRecommendLinkAdapter
@@ -25,59 +26,73 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   private val viewModel by viewModels<HomeViewModel>()
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    viewModel.getRecommendSite()
-    viewModel.getWeekBestLink()
-    viewModel.getMainPageUserClip()
-    initAdapter()
-    val list = listOf(
-      ClipDummy("전체클립", 1),
-      ClipDummy("TitleCheck", 1),
-      ClipDummy("LeeSak", 3),
-      null,
-    )
-    val list2 = listOf(
-      WeekLinkDummy("Title", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
-      WeekLinkDummy("Category", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
-      WeekLinkDummy("LeeSak", "www.naver.com", "https://avatars.githubusercontent.com/u/93514333?v=4"),
-    )
-    initView(list, list2)
+    initView()
+    collectState()
     navigateToSetting()
     navigateToSearch()
+  }
+
+  private fun initView() {
+    initAdapter()
+  }
+
+  private fun collectState() {
+    viewModel.observe(viewLifecycleOwner, state = ::render, sideEffect = ::handleSideEffect)
+  }
+
+  private fun render(homeState: HomeState) {
+    binding.tvHomeToastProgressLink.text = homeState.readToastNum.toString()
+    binding.tvAllToastNum.text = "/" + homeState.allToastNum.toString()
+    binding.tvHomeUserName.text = homeState.nickName
+    binding.tvHomeUserClipName.text = homeState.nickName
+    binding.tvHomeToastLinkCount.text = "${homeState.readToastNum}개의 링크"
+    binding.pbLinkmindHome.setProgressBarMain(homeState.calculateProgress())
+    homeClipAdapter.submitList(homeState.categoryList)
+    homeWeekLinkAdapter.submitList(homeState.weekBestLink)
+    homeWeekRecommendLinkAdapter.submitList(homeState.recommendLink)
+  }
+
+  private fun handleSideEffect(sideEffect: HomeSideEffect) {
+    when (sideEffect) {
+      is HomeSideEffect.NavigateSearch -> navigateToDestination("featureMyPage://fragmentSearch")
+      is HomeSideEffect.NavigateSetting -> navigateToDestination("featureMyPage://fragmentSetting")
+      is HomeSideEffect.NavigateClipLink -> navigateToDestination(
+        "featureSaveLink://ClipLinkFragment?categoryId=${viewModel.container.stateFlow.value.categoryId}",
+      )
+      is HomeSideEffect.ShowBottomSheet -> showHomeBottomSheet()
+      is HomeSideEffect.NavigateWebView -> navigateToDestination("featureSaveLink://webViewFragment?site=${viewModel.container.stateFlow.value.url}")
+    }
   }
 
   private fun initAdapter() {
     setClipAdapter()
     setWeekLinkAdapter()
     setWeekRecommendAdapter()
+    viewModel.apply {
+      getMainPageUserClip()
+      getRecommendSite()
+      getWeekBestLink()
+    }
   }
-
-  private fun initView(
-    list: List<ClipDummy?>,
-    list2: List<WeekLinkDummy>,
-  ) {
-    collectClip(list)
-    collectWeekLink(list2)
-    collectRecommendLink(list2)
-    binding.pbLinkmindHome.setProgressBarMain(54)
-  }
-
   private fun navigateToSetting() {
     binding.ivHomeSetting.onThrottleClick {
-      navigateToDestination("featureMyPage://fragmentSetting")
+      viewModel.navigateSetting()
     }
   }
 
   private fun navigateToSearch() {
     binding.clHomeSearch.onThrottleClick {
-      navigateToDestination("featureMyPage://fragmentSearch")
+      viewModel.navigateSearch()
     }
   }
 
   private fun setClipAdapter() {
     homeClipAdapter = HomeClipAdapter(
-      onClickClip = {},
+      onClickClip = {
+        viewModel.navigateClipLink(it.categoryId)
+      },
       onClickEmptyClip = {
-        showHomeBottomSheet()
+        viewModel.showBottomSheet()
       },
     )
     binding.rvHomeClip.adapter = homeClipAdapter
@@ -86,27 +101,23 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   }
 
   private fun setWeekLinkAdapter() {
-    homeWeekLinkAdapter = HomeWeekLinkAdapter(onClickWeekLink = {})
+    homeWeekLinkAdapter = HomeWeekLinkAdapter(
+      onClickWeekLink = {
+        viewModel.navigateWebview(it.toastLink)
+      },
+    )
     binding.rvWeekLink.adapter = homeWeekLinkAdapter
   }
 
   private fun setWeekRecommendAdapter() {
-    homeWeekRecommendLinkAdapter = HomeWeekRecommendLinkAdapter(onClickRecommendLink = {})
+    homeWeekRecommendLinkAdapter = HomeWeekRecommendLinkAdapter(
+      onClickRecommendLink = {
+        viewModel.navigateWebview(it.siteUrl ?: "")
+      },
+    )
     binding.rvHomeWeekRecommend.adapter = homeWeekRecommendLinkAdapter
     val spacingWeekRecommendInPixels = resources.getDimensionPixelSize(R.dimen.spacing_12)
     binding.rvHomeWeekRecommend.addItemDecoration(ItemDecoration(3, spacingWeekRecommendInPixels))
-  }
-
-  private fun collectRecommendLink(list2: List<WeekLinkDummy>) {
-    homeWeekRecommendLinkAdapter.submitList(list2)
-  }
-
-  private fun collectWeekLink(list2: List<WeekLinkDummy>) {
-    homeWeekLinkAdapter.submitList(list2)
-  }
-
-  private fun collectClip(list: List<ClipDummy?>) {
-    homeClipAdapter.submitList(list)
   }
 
   private fun navigateToDestination(destination: String) {
@@ -119,6 +130,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     )
     findNavController().navigate(request, navOptions)
   }
+
   private fun showHomeBottomSheet() {
     val linkMindBottomSheet = LinkMindBottomSheet(requireContext())
     linkMindBottomSheet.show()
@@ -127,9 +139,11 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       setTitle(org.sopt.mainfeature.R.string.home_correction_clip)
       setErroMsg(org.sopt.mainfeature.R.string.home_error_clip_info)
       bottomSheetConfirmBtnClick {
-        if (showErrorMsg()) return@bottomSheetConfirmBtnClick
-        dismiss()
         requireContext().linkMindSnackBar(binding.root, "성공", false)
+        if (showErrorMsg()) return@bottomSheetConfirmBtnClick
+        viewModel.saveCategoryTitle(it)
+        dismiss()
+//        requireContext().linkMindSnackBar(binding.root, "성공", false)
       }
     }
   }

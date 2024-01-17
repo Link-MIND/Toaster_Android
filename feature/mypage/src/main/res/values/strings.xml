@@ -8,4 +8,6 @@
   <string name="clip_amount_n">n</string>
   <string name="clip_amount_nn">nn</string>
   <string name="mypage_nn">nn</string>
+    <string name="mypage_nim">님이</string>
+  <string name="mypage_name_ex">홍길동</string>
 </resources>

@@ -11,8 +11,8 @@ data class Clip(
 
 fun List<Category>.toUiModel(): List<Clip> = this.map {
   Clip(
-    id = it.categoryId,
-    name = it.categoryTitle,
+    id = it.categoryId ?: 0,
+    name = it.categoryTitle ?: "",
     count = it.toastNum,
     isSelected = false,
   )

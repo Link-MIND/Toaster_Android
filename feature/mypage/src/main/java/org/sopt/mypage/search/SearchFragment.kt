@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
+import dagger.hilt.android.AndroidEntryPoint
 import org.sopt.mypage.databinding.FragmentSearchBinding
 import org.sopt.mypage.search.adapter.ClipResultAdapter
 import org.sopt.mypage.search.adapter.LinkResultAdapter
@@ -16,6 +17,7 @@ import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.context.hideKeyboard
 import org.sopt.ui.view.onThrottleClick
 
+@AndroidEntryPoint
 class SearchFragment : BindingFragment<FragmentSearchBinding>(
   { FragmentSearchBinding.inflate(it) },
 ) {

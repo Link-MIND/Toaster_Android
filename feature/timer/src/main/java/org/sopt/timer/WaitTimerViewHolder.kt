@@ -18,7 +18,7 @@ class WaitTimerViewHolder(
       val time = data.remindTime.replace("AM", "오전").replace("PM", "오후")
       tvItemTimerWaitWhen.text = TIME_FORMAT.format(data.remindDates, time)
       vItemTimerWait.setOnClickListener {
-        tgItemTimerWait.trasition()
+        tgItemTimerWait.transition()
         onToggleClicked(data)
       }
       tgItemTimerWait.initToggleState(data.isAlarm!!)

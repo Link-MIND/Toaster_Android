@@ -3,7 +3,7 @@ package org.sopt.savelink.ui.viewholder
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.savelink.databinding.ItemTimerClipSelectBinding
-import org.sopt.savelink.ui.Clip
+import org.sopt.savelink.ui.model.Clip
 import org.sopt.ui.view.onThrottleClick
 
 class ClipSelectViewHolder(
@@ -27,8 +27,8 @@ class ClipSelectViewHolder(
 
   private fun setTexts(data: Clip) {
     with(binding) {
-      tvItemTimerClipName.text = data.name
-      tvItemTimerClipCount.text = "${data.count}개"
+      tvItemTimerClipName.text = data.categoryTitle
+      tvItemTimerClipCount.text = "${data.toastNum}개"
     }
   }
 

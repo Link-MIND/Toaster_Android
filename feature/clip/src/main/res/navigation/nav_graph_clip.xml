@@ -11,7 +11,8 @@
     tools:layout="@layout/fragment_clip" >
     <action
       android:id="@+id/action_navigation_clip_to_navigation_clip_link"
-      app:destination="@id/navigation_clip_link" />
+      app:destination="@id/navigation_clip_link" >
+    </action>
     <action
       android:id="@+id/action_navigation_clip_to_navigation_clip_edit"
       app:destination="@id/navigation_clip_edit" />
@@ -21,6 +22,11 @@
     android:name="org.sopt.clip.cliplink.ClipLinkFragment"
     android:label="ClipLinkFragment"
     tools:layout="@layout/fragment_clip_link">
+    <argument
+      android:name="categoryId"
+      app:argType="long"/>
+    <deepLink
+      app:uri="featureSaveLink://ClipLinkFragment?categoryId={categoryId}" />
     <action
       android:id="@+id/action_navigation_clip_link_to_webViewFragment"
       app:destination="@id/webViewFragment" />
@@ -28,7 +34,13 @@
   <fragment
     android:id="@+id/webViewFragment"
     android:name="org.sopt.clip.webview.WebViewFragment"
-    android:label="WebViewFragment" />
+    android:label="WebViewFragment" >
+    <argument
+      android:name="site"
+      app:argType="string" />
+    <deepLink
+      app:uri="featureSaveLink://webViewFragment?site={site}" />
+  </fragment>
   <fragment
     android:id="@+id/navigation_clip_edit"
     android:name="org.sopt.clip.clipedit.ClipEditFragment"
