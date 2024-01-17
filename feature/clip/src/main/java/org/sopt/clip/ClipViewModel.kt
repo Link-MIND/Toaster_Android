@@ -1,7 +1,6 @@
 package org.sopt.clip
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -62,6 +61,7 @@ class ClipViewModel @Inject constructor(
   fun update2(a: Int) = viewModelScope.launch {
     _last2.emit(UiState.Success(a))
   }
+
   init {
     getCategoryAll()
   }
@@ -78,9 +78,13 @@ class ClipViewModel @Inject constructor(
       _deleteState.emit(UiState.Failure("fail"))
     }
   }
+
   fun getCategoryAll() = viewModelScope.launch {
     getCategoryAll.invoke().onSuccess {
-      _categoryState.emit(UiState.Success(it.categories))
+      val allCategoryList = listOf<Category>(
+        Category(0, "전체 클립", it.toastNumberInEntire),
+      )
+      _categoryState.emit(UiState.Success(allCategoryList+it.categories))
     }.onFailure {
       Log.e("실패", it.message.toString())
     }

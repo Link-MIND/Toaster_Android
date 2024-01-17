@@ -47,7 +47,6 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
           clipAdapter.submitList(state.data)
           setEmptyMsgVisible()
         }
-
         else -> {}
       }
     }.launchIn(viewLifeCycleScope)
