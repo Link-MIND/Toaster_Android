@@ -25,9 +25,9 @@ class RemoteCategoryDataSourceImpl @Inject constructor(
       ),
     ).code
 
-  override suspend fun deleteCategory(deleteCategoryList: List<Long>) {
+  override suspend fun deleteCategory(deleteCategoryList: Long) {
     categoryService.deleteCategory(
-      deleteCategoryList.toRequestDTO(),
+      deleteCategoryList,
     )
   }
 
@@ -51,7 +51,7 @@ class RemoteCategoryDataSourceImpl @Inject constructor(
     )
   }
 
-  override suspend fun patchCategoryEditTitle(categoryId: Long, newTitle: String?) {
+  override suspend fun patchCategoryEditTitle(categoryId: Long, newTitle: String) {
     requireNotNull(
       categoryService.patchCategoryEdit(
         RequestCategoryEditTitleDTO(categoryId, newTitle),

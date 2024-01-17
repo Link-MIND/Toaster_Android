@@ -9,7 +9,7 @@ interface CategoryRepository {
 
   suspend fun postAddCategory(categoryTitle: String): Result<Int>
 
-  suspend fun deleteCategory(deleteCategoryList: List<Long>): Result<Unit>
+  suspend fun deleteCategory(deleteCategoryList: Long): Result<Unit>
 
   suspend fun getCategoryDuplicate(title: String): Result<CategoryDuplicate>
 
@@ -17,7 +17,7 @@ interface CategoryRepository {
 
   suspend fun patchCategoryEditTitle(
     categoryId: Long,
-    newTitle: String?,
+    newTitle: String,
   ): Result<Unit>
 
   suspend fun patchCategoryEditPriority(

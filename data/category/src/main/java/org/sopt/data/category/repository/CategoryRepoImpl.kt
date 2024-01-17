@@ -16,7 +16,7 @@ class CategoryRepoImpl @Inject constructor(
   override suspend fun postAddCategory(categoryTitle: String): Result<Int> =
     runCatching { remoteCategoryDataSource.postAddCategoryTitle(categoryTitle) }
 
-  override suspend fun deleteCategory(deleteCategoryList: List<Long>): Result<Unit> =
+  override suspend fun deleteCategory(deleteCategoryList: Long): Result<Unit> =
     runCatching { remoteCategoryDataSource.deleteCategory(deleteCategoryList) }
 
   override suspend fun getCategoryDuplicate(title: String): Result<CategoryDuplicate> =
@@ -27,10 +27,13 @@ class CategoryRepoImpl @Inject constructor(
 
   override suspend fun patchCategoryEditTitle(
     categoryId: Long,
-    newTitle: String?,
+    newTitle: String,
   ): Result<Unit> =
     runCatching { remoteCategoryDataSource.patchCategoryEditTitle(categoryId, newTitle) }
 
-  override suspend fun patchCategoryEditPriority(categoryId: Long, newPriority: Int): Result<Unit> =
+  override suspend fun patchCategoryEditPriority(
+    categoryId: Long,
+    newPriority: Int)
+  : Result<Unit> =
     runCatching { remoteCategoryDataSource.patchCategoryPriority(categoryId, newPriority) }
 }
