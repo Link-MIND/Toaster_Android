@@ -18,7 +18,7 @@ data class ResponseLinksDTO(
     @SerialName("toastId")
     val toastId: Long,
     @SerialName("categoryTitle")
-    val categoryTitle: String,
+    val categoryTitle: String?,
     @SerialName("isRead")
     val isRead: Boolean,
     @SerialName("linkUrl")
@@ -26,7 +26,7 @@ data class ResponseLinksDTO(
     @SerialName("toastTitle")
     val toastTitle: String,
     @SerialName("thumbnailUrl")
-    val thumbnailUrl: String,
+    val thumbnailUrl: String?,
   )
 }
 

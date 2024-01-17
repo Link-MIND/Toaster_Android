@@ -18,7 +18,7 @@ class RemoteCategoryDataSourceImpl @Inject constructor(
   override suspend fun getCategoryAll(): CategoryList =
     categoryService.getCategoryAll().data!!.toCoreModel()
 
-  override suspend fun postAddCategoryTitle(categoryTitle: String): Int =
+  override suspend fun postAddCategoryTitle(categoryTitle: String?): Int =
     categoryService.postAddCategoryTitle(
       RequestCategoryTitleDto(
         categoryTitle = categoryTitle,
