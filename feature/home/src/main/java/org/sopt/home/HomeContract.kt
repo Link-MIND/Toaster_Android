@@ -16,10 +16,10 @@ data class HomeState(
 ) {
   fun calculateProgress(): Int {
     if (readToastNum > allToastNum) return 0
-    if (allToastNum == 0) {
-      return 0
+    return if (allToastNum == 0) {
+      0
     } else {
-      return ((readToastNum.toDouble() / allToastNum.toDouble()) * 100).toInt()
+      ((readToastNum.toDouble() / allToastNum.toDouble()) * 100).toInt()
     }
   }
 }
@@ -28,6 +28,6 @@ sealed interface HomeSideEffect {
   data object NavigateSetting : HomeSideEffect
   data object NavigateSearch : HomeSideEffect
   data object NavigateClipLink : HomeSideEffect
-  data object NavigateWebview : HomeSideEffect
-  data object showBottomSheet : HomeSideEffect
+  data object NavigateWebView : HomeSideEffect
+  data object ShowBottomSheet : HomeSideEffect
 }
