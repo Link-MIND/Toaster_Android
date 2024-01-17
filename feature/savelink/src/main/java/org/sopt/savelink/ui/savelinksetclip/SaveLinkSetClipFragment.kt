@@ -1,4 +1,4 @@
-package org.sopt.savelink.ui.setlink
+package org.sopt.savelink.ui.savelinksetclip
 
 import android.os.Bundle
 import android.view.View
@@ -12,8 +12,8 @@ import designsystem.components.toast.linkMindSnackBar
 import org.orbitmvi.orbit.viewmodel.observe
 import org.sopt.mainfeature.R
 import org.sopt.savelink.databinding.FragmentSaveLinkSetClipBinding
-import org.sopt.savelink.ui.model.Clip
 import org.sopt.savelink.ui.adapter.ClipSelectAdapter
+import org.sopt.savelink.ui.model.Clip
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.onThrottleClick
@@ -63,6 +63,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
       is SaveLinkSetClipSideEffect.NavigateUp -> findNavController().navigateUp()
       is SaveLinkSetClipSideEffect.ShowBottomSheet -> showAddClipBottomSheet()
       is SaveLinkSetClipSideEffect.ShowDialog -> showCloseDialog()
+      is SaveLinkSetClipSideEffect.ShowSnackBar -> requireContext().linkMindSnackBar(binding.root, "유효하지 않은 링크입니다.", false)
     }
   }
 

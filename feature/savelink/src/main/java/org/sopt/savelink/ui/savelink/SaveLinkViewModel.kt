@@ -18,7 +18,7 @@ class SaveLinkViewModel @Inject constructor(
 
   fun updateEditText(text: String) = intent {
     reduce {
-      state.copy(edittextLink = container.stateFlow.value.edittextLink + text)
+      state.copy(edittextLink = text)
     }
   }
 
