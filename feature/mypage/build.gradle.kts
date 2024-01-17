@@ -16,5 +16,4 @@ dependencies {
   implementation(projects.core.auth)
   implementation(libs.process.phoenix)
   implementation(libs.coil)
-  implementation(project(":domain:user"))
 }
