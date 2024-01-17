@@ -75,6 +75,17 @@
   <string name="clip_link_bottom_sheet_title">수정하기</string>
   <string name="clip_link_bottom_sheet_delete">삭제</string>
 
+  <string name="search_result_ex_url">https://example.com</string>
+  <string name="search_result_detail_clip_name">세부 클립명</string>
+  <string name="search_result_clip_num">개</string>
+  <string name="search_none_results">검색결과가 없어요.\n다른 검색어로 찾아보실래요?</string>
+  <string name="search_clip_title">클립명</string>
+  <string name="search_clip_amount_n">n</string>
+  <string name="search_clip_amount_nn">nn</string>
+  <string name="mypage_nn">nn</string>
+  <string name="mypage_nim">님이</string>
+  <string name="mypage_name_ex">홍길동</string>
+
   <!-- home -->
   <string name="home_correction_clip">클립수정</string>
   <string name="home_new_clip_info">"새로운 클립의 이름을 입력해주세요"</string>
@@ -98,5 +109,4 @@
   <string name="positive_ok_msg">확인</string>
   <string name="negative_close_msg">닫기</string>
   <string name="positive_delete">삭제할래요</string>
-
 </resources>
