@@ -7,6 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.orbitmvi.orbit.Container
 import org.orbitmvi.orbit.ContainerHost
+import org.orbitmvi.orbit.annotation.OrbitExperimental
 import org.orbitmvi.orbit.syntax.simple.blockingIntent
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
@@ -83,15 +84,17 @@ class HomeViewModel @Inject constructor(
 
   fun navigateSearch() = intent { postSideEffect(HomeSideEffect.NavigateSearch) }
   fun navigateSetting() = intent { postSideEffect(HomeSideEffect.NavigateSetting) }
-  fun showBottomSheet() = intent { postSideEffect(HomeSideEffect.showBottomSheet) }
+  fun showBottomSheet() = intent { postSideEffect(HomeSideEffect.ShowBottomSheet) }
 
+  @OptIn(OrbitExperimental::class)
   fun navigateClipLink(categoryId: Long?) = blockingIntent {
     reduce { state.copy(categoryId = categoryId) }
     postSideEffect(HomeSideEffect.NavigateClipLink)
   }
 
+  @OptIn(OrbitExperimental::class)
   fun navigateWebview(url: String) = blockingIntent {
     reduce { state.copy(url = url) }
-    postSideEffect(HomeSideEffect.NavigateWebview)
+    postSideEffect(HomeSideEffect.NavigateWebView)
   }
 }
