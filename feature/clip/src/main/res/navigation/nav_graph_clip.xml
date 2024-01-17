@@ -11,7 +11,12 @@
     tools:layout="@layout/fragment_clip" >
     <action
       android:id="@+id/action_navigation_clip_to_navigation_clip_link"
-      app:destination="@id/navigation_clip_link" />
+      app:destination="@id/navigation_clip_link" >
+      <argument
+        android:name="clipTitle"
+        app:argType="string"
+        android:defaultValue="전체 클립"/>
+    </action>
     <action
       android:id="@+id/action_navigation_clip_to_navigation_clip_edit"
       app:destination="@id/navigation_clip_edit" />
