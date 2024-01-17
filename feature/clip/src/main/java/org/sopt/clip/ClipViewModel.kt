@@ -16,6 +16,7 @@ import org.sopt.domain.category.category.usecase.GetCategoryLinkUseCase
 import org.sopt.domain.category.category.usecase.PatchCategoryEditPriorityUseCase
 import org.sopt.domain.category.category.usecase.PatchCategoryEditTitleUseCase
 import org.sopt.domain.category.category.usecase.PostAddCategoryTitleUseCase
+import org.sopt.domain.link.usecase.DeleteLinkUseCase
 import org.sopt.model.category.Category
 import org.sopt.model.category.CategoryDuplicate
 import org.sopt.model.category.CategoryLink
@@ -31,6 +32,7 @@ class ClipViewModel @Inject constructor(
   private val postAddCategoryTitle: PostAddCategoryTitleUseCase,
   private val patchCategoryEditTitle: PatchCategoryEditTitleUseCase,
   private val patchCategoryEditPriority: PatchCategoryEditPriorityUseCase,
+  private val deleteLinkUseCase: DeleteLinkUseCase,
 ) : ViewModel() {
   private val _categoryState = MutableStateFlow<UiState<List<Category>>>(UiState.Empty)
   val categoryState: StateFlow<UiState<List<Category>>> = _categoryState.asStateFlow()
@@ -51,6 +53,15 @@ class ClipViewModel @Inject constructor(
   private val _editPriorityState = MutableStateFlow<UiState<Unit>>(UiState.Empty)
   val editPriorityState: StateFlow<UiState<Unit>> = _editPriorityState.asStateFlow()
 
+  private val _deleteState = MutableStateFlow<UiState<Boolean>>(UiState.Empty)
+  val deleteState: StateFlow<UiState<Boolean>> = _deleteState.asStateFlow()
+
+  private val _last2 = MutableStateFlow<UiState<Int>>(UiState.Empty)
+  val last2: StateFlow<UiState<Int>> = _last2.asStateFlow()
+
+  fun update2(a: Int) = viewModelScope.launch {
+    _last2.emit(UiState.Success(a))
+  }
   init {
     getCategoryAll()
   }
@@ -103,14 +114,20 @@ class ClipViewModel @Inject constructor(
   fun set(value: Boolean) {
     mockDataListState.value = value
   }
-
+  fun deleteLink(toastId: Long) = viewModelScope.launch {
+    deleteLinkUseCase.invoke(param = DeleteLinkUseCase.Param(toastId = toastId)).onSuccess {
+      if (it == 200) {
+        _deleteState.emit(UiState.Success(true))
+      } else {
+        _deleteState.emit(UiState.Success(false))
+      }
+    }.onFailure {
+      _deleteState.emit(UiState.Failure("fail"))
+    }
+  }
   fun getCategoryAll() = viewModelScope.launch {
     getCategoryAll.invoke().onSuccess {
-      Log.d("test", "$it")
-      val list: MutableList<Category> = it.categories.toMutableList()
-      totalClip.toastNum = it.toastNumberInEntire
-      list.add(0, totalClip)
-      _categoryState.emit(UiState.Success(list))
+      _categoryState.emit(UiState.Success(it.categories))
     }.onFailure {
       Log.e("실패", it.message.toString())
     }

@@ -1,6 +1,5 @@
 package org.sopt.clip.clipedit
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -12,13 +11,14 @@ import org.sopt.ui.view.ItemDiffCallback
 class ClipEditAdapter(
   private val itemClick: (Long, String, Long) -> Unit,
   private val deleteClip: (Long) -> Unit,
-  private val patchClip: (Long, Int) -> Unit,
+  private val onLongClick: (Long) -> Unit,
+  private val onLongClick2: (Long) -> Unit,
 ) : ListAdapter<Category, ClipEditViewHolder>(DiffUtil), ItemTouchHelperListener {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClipEditViewHolder {
     return ClipEditViewHolder(
       ItemClipEditClipBinding.inflate(LayoutInflater.from(parent.context), parent, false),
       itemClick,
-      deleteClip,
+      onLongClick,
     )
   }
 
@@ -37,17 +37,16 @@ class ClipEditAdapter(
     val item: Category? = currentList[from]
     val newList = ArrayList<Category>()
     newList.addAll(currentList)
-    patchClip(item?.categoryId ?: 0, to)
     newList.removeAt(from)
     if (item != null) {
       newList.add(to, item)
     }
     notifyItemMoved(from, to)
+    onLongClick2(to.toLong())
   }
 
   override fun onItemSwipe(position: Int) {
     val newList = ArrayList(currentList)
-    Log.d("test", "${newList[position].categoryId ?: 0}")
     deleteClip(newList[position].categoryId ?: 0)
     newList.removeAt(position)
     notifyItemRemoved(position)

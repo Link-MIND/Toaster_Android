@@ -1,7 +1,6 @@
 package org.sopt.clip.cliplink
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -13,14 +12,12 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.DeleteLinkBottomSheetFragment
-import org.sopt.clip.LinkDTO
-import org.sopt.clip.R
 import org.sopt.clip.SelectedToggle
 import org.sopt.clip.databinding.FragmentClipLinkBinding
-import org.sopt.model.category.CategoryLink
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
+import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.UiState
 import org.sopt.ui.view.onThrottleClick
 
@@ -32,14 +29,16 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
   var isDataNull: Boolean = true
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    var clipId = arguments?.getLong("clipId")
-    viewModel.getCategoryLink(readFilter, clipId)
     val args: ClipLinkFragmentArgs by navArgs()
     val categoryId = args.categoryId
-    Log.d("test", "$categoryId")
+    if (args.categoryId.toInt() == 0) {
+      viewModel.getCategoryLink(readFilter, 0)
+    } else {
+      viewModel.getCategoryLink(readFilter, categoryId)
+    }
     initClipAdapter()
     initViewState(isDataNull)
-
+    updateLinkDelete(categoryId)
     updateLinkView()
     initToggleClickListener()
     onClickBackButton()
@@ -60,6 +59,19 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     }.launchIn(viewLifeCycleScope)
   }
 
+  private fun updateLinkDelete(categoryId: Long) {
+    viewModel.deleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is UiState.Success -> {
+          viewModel.getCategoryLink(readFilter, categoryId)
+        }
+
+        else -> {
+          initViewState(true)
+        }
+      }
+    }.launchIn(viewLifeCycleScope)
+  }
   private fun initViewState(isDataNull: Boolean) {
     with(binding) {
       ivClipCategoryEmpty.isVisible = isDataNull
@@ -71,22 +83,24 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     clipLinkAdapter = ClipLinkAdapter { linkDTO, state ->
       when (state) {
         "click" -> {
-          naviagateToWebViewFragment(linkDTO)
+          naviagateToWebViewFragment(linkDTO.linkUrl ?: "")
         }
 
         "delete" -> {
-          DeleteLinkBottomSheetFragment.newInstance(this.id).show(parentFragmentManager, this.tag)
+          DeleteLinkBottomSheetFragment.newInstance(
+            linkDTO.toastId.toInt(),
+            handleDeleteButton = {
+              viewModel.deleteLink(linkDTO.toastId)
+            },
+          ).show(parentFragmentManager, this.tag)
         }
       }
     }
     binding.rvCategoryLink.adapter = clipLinkAdapter
   }
 
-  private fun naviagateToWebViewFragment(link: CategoryLink) {
-    val bundle = Bundle().apply {
-      putString("url", link.linkUrl)
-    }
-    findNavController().navigate(R.id.action_navigation_clip_link_to_webViewFragment, bundle)
+  private fun naviagateToWebViewFragment(site: String) {
+    navigateToDestination("featureSaveLink://webViewFragment?site=$site")
   }
 
   private fun onClickBackButton() {
@@ -95,7 +109,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     }
   }
 
-  private fun initToggleClickListener(): List<LinkDTO> {
+  private fun initToggleClickListener() {
     with(binding) {
       btnClipAll.setOnClickListener {
         updateTogglesNDividerVisible(SelectedToggle.ALL)
@@ -112,7 +126,6 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
         updateLinkView()
       }
     }
-    return viewModel.mockLinkData
   }
 
   private fun updateTogglesNDividerVisible(selectedNow: SelectedToggle) {
@@ -137,6 +150,17 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
         SelectedToggle.UNREAD -> tvClipUnreadSelected.isVisible = state
       }
     }
+  }
+
+  private fun navigateToDestination(destination: String) {
+    val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
+      destination,
+      enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
+      exitAnim = android.R.anim.fade_out,
+      popEnterAnim = android.R.anim.fade_in,
+      popExitAnim = org.sopt.mainfeature.R.anim.to_bottom,
+    )
+    findNavController().navigate(request, navOptions)
   }
 
   private fun initDividerVisible(selectedNow: SelectedToggle) {
