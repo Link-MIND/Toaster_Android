@@ -34,10 +34,6 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
   val categoryDeleteList: MutableList<Long> = _categoryDeleteList
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    val categoryTitle: String = "전체 클립" // 인텐드나 번들로 받으면 될듯
-/*
-    viewModel.getCategoryLink(categoryTitle)
-*/
 
     clipEditAdapter = ClipEditAdapter { itemId, state, position ->
       when (state) {
@@ -50,7 +46,6 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
 
         "edit" -> {
           showHomeBottomSheet(itemId)
-
         }
       }
       Toast.makeText(context, "$state + itemId: $itemId", Toast.LENGTH_SHORT).show()
@@ -108,9 +103,6 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
 
         editCategoryTitle()
 
-/*
-        updateEditListView()
-*/
         dismiss()
         requireContext().linkMindSnackBar(binding.root, "클립 수정 완료!", false)
       }
@@ -121,7 +113,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     viewModel.editTitleState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          updateEditListView()
+          viewModel.getCategoryAll()
         }
         else -> {}
       }
@@ -137,6 +129,14 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
       }
       .setPositiveButton(R.string.edit_clip_delete_dialog_delete) {
         viewModel.deleteCategory(listOf(itemId))
+        viewModel.categoryDeleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
+          when (state) {
+            is UiState.Success -> {
+              viewModel.getCategoryAll()
+            }
+            else -> {}
+          }
+        }
 /*        viewModel.getCategoryAll()
         updateEditListView()*/
         deleteDialog.dismiss()
