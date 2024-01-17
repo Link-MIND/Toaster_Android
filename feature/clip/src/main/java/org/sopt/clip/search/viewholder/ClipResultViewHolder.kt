@@ -1,9 +1,9 @@
-package org.sopt.mypage.search.viewholder
+package org.sopt.clip.search.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
-import org.sopt.mypage.databinding.ItemSearchResultClipBinding
-import org.sopt.mypage.search.ClipResultDummy
-import org.sopt.mypage.search.util.applyBoldStyle
+import org.sopt.clip.databinding.ItemSearchResultClipBinding
+import org.sopt.clip.search.ClipResultDummy
+import org.sopt.clip.search.util.applyBoldStyle
 
 class ClipResultViewHolder(val binding: ItemSearchResultClipBinding) :
   RecyclerView.ViewHolder(binding.root) {

@@ -1,4 +1,4 @@
-package org.sopt.mypage.search
+package org.sopt.clip.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package org.sopt.mypage.search
+package org.sopt.clip.search
 
 data class LinkResultDummy(
   val detailcliptitle: String,

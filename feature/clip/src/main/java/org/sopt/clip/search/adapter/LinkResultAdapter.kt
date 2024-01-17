@@ -1,12 +1,12 @@
-package org.sopt.mypage.search.adapter
+package org.sopt.clip.search.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import org.sopt.mypage.databinding.ItemSearchResultClipLinkBinding
-import org.sopt.mypage.search.LinkResultDummy
-import org.sopt.mypage.search.viewholder.LinkResultViewHolder
+import org.sopt.clip.databinding.ItemSearchResultClipLinkBinding
+import org.sopt.clip.search.LinkResultDummy
+import org.sopt.clip.search.viewholder.LinkResultViewHolder
 
 class LinkResultAdapter :
   ListAdapter<LinkResultDummy, LinkResultViewHolder>(DiffUtilCallback) {
