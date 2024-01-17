@@ -120,7 +120,7 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
 
       wbClip.webViewClient = object : WebViewClient() {
         override fun onPageFinished(view: WebView?, url: String?) {
-          Log.d("test","test2")
+          Log.d("test", "test2")
         }
       }
     }

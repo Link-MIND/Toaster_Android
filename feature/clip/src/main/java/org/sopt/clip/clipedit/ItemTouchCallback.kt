@@ -1,6 +1,5 @@
 package org.sopt.clip.clipedit
 
-import android.util.Log
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.clip.ItemTouchHelperListener

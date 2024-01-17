@@ -18,7 +18,7 @@ class DeleteLinkBottomSheetFragment() :
       dismiss()
     }
     binding.clDeleteLinkSelect.onThrottleClick {
-      Log.d("test","test")
+      Log.d("test", "test")
       handleDelete.invoke()
       dismiss()
     }
@@ -30,7 +30,7 @@ class DeleteLinkBottomSheetFragment() :
   }
 
   companion object {
-    fun newInstance(id: Int,handleDeleteButton: () -> Unit, ): DeleteLinkBottomSheetFragment {
+    fun newInstance(id: Int, handleDeleteButton: () -> Unit): DeleteLinkBottomSheetFragment {
       val args = Bundle().apply {
         putInt("id", id)
       }

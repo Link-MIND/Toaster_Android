@@ -32,7 +32,7 @@ class ClipViewModel @Inject constructor(
   private val postAddCategoryTitle: PostAddCategoryTitleUseCase,
   private val patchCategoryEditTitle: PatchCategoryEditTitleUseCase,
   private val patchCategoryEditPriority: PatchCategoryEditPriorityUseCase,
-  private val deleteLinkUseCase: DeleteLinkUseCase
+  private val deleteLinkUseCase: DeleteLinkUseCase,
 ) : ViewModel() {
   private val _categoryState = MutableStateFlow<UiState<List<Category>>>(UiState.Empty)
   val categoryState: StateFlow<UiState<List<Category>>> = _categoryState.asStateFlow()
@@ -59,7 +59,7 @@ class ClipViewModel @Inject constructor(
   private val _last2 = MutableStateFlow<UiState<Int>>(UiState.Empty)
   val last2: StateFlow<UiState<Int>> = _last2.asStateFlow()
 
-  fun update2(a:Int) = viewModelScope.launch {
+  fun update2(a: Int) = viewModelScope.launch {
     _last2.emit(UiState.Success(a))
   }
   init {
@@ -115,9 +115,12 @@ class ClipViewModel @Inject constructor(
     mockDataListState.value = value
   }
   fun deleteLink(toastId: Long) = viewModelScope.launch {
-    deleteLinkUseCase.invoke(param = DeleteLinkUseCase.Param(toastId=toastId)).onSuccess {
-      if (it==200) _deleteState.emit(UiState.Success(true))
-      else _deleteState.emit(UiState.Success(false))
+    deleteLinkUseCase.invoke(param = DeleteLinkUseCase.Param(toastId = toastId)).onSuccess {
+      if (it == 200) {
+        _deleteState.emit(UiState.Success(true))
+      } else {
+        _deleteState.emit(UiState.Success(false))
+      }
     }.onFailure {
       _deleteState.emit(UiState.Failure("fail"))
     }

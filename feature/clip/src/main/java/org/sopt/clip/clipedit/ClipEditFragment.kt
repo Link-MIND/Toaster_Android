@@ -53,7 +53,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
         viewModel.last2.flowWithLifecycle(viewLifeCycle).onEach { state ->
           when (state) {
             is UiState.Success -> {
-              viewModel.patchCategoryEditPriority(it,state.data)
+              viewModel.patchCategoryEditPriority(it, state.data)
             }
 
             else -> {}
@@ -62,7 +62,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
       },
       onLongClick2 = {
         viewModel.update2(it.toInt())
-      }
+      },
     )
     binding.rvClipEdit.adapter = clipEditAdapter
     itemTouchHelper.attachToRecyclerView(binding.rvClipEdit)

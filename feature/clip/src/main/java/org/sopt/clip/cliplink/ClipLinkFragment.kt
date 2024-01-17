@@ -1,7 +1,6 @@
 package org.sopt.clip.cliplink
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
@@ -32,8 +31,11 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     super.onViewCreated(view, savedInstanceState)
     val args: ClipLinkFragmentArgs by navArgs()
     val categoryId = args.categoryId
-    if (args.categoryId.toInt() == 0) viewModel.getCategoryLink(readFilter, 0)
-    else viewModel.getCategoryLink(readFilter, categoryId)
+    if (args.categoryId.toInt() == 0) {
+      viewModel.getCategoryLink(readFilter, 0)
+    } else {
+      viewModel.getCategoryLink(readFilter, categoryId)
+    }
     initClipAdapter()
     initViewState(isDataNull)
     updateLinkDelete(categoryId)
@@ -57,7 +59,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     }.launchIn(viewLifeCycleScope)
   }
 
-  private fun updateLinkDelete(categoryId:Long) {
+  private fun updateLinkDelete(categoryId: Long) {
     viewModel.deleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
@@ -98,7 +100,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
   }
 
   private fun naviagateToWebViewFragment(site: String) {
-    navigateToDestination("featureSaveLink://webViewFragment?site=${site}")
+    navigateToDestination("featureSaveLink://webViewFragment?site=$site")
   }
 
   private fun onClickBackButton() {
