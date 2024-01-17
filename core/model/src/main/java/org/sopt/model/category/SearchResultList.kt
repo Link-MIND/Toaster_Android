@@ -1,7 +1,7 @@
 package org.sopt.model.category
 
 data class SearchResultList(
-  val toasts: List<Any>?,
-  val categories: List<Any>?,
+  val toasts: List<Toast>?,
+  val categories: List<Category>?,
   val keyword: String?,
 )

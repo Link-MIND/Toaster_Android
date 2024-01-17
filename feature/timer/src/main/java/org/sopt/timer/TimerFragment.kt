@@ -36,7 +36,6 @@ import org.sopt.ui.view.onThrottleClick
 class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBinding.inflate(it) }) {
   private val setTimerViewModel: SetTimerViewModel by activityViewModels()
   private val viewModel: TimerViewModel by activityViewModels()
-
   private lateinit var completeTimerAdapter: CompleteTimerAdapter
   private lateinit var waitTimerAdapter: WaitTimerAdapter
   private var isNotiPermissionAllowed = true
@@ -54,9 +53,9 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
     super.onViewCreated(view, savedInstanceState)
     requestNotificationPermission()
     setTimerViewModel.initSetTimer()
-    collectUiState()
-    collectDeleteState()
+    viewModel.getFcmAllowed(isNotiPermissionAllowed)
     if (viewModel.uiState.value is TimerUiState.BothAllowed) viewModel.getTimerMain()
+    collectDeleteState()
     initCompleteTimerAdapter()
     initWaitTimerAdapter()
     initPlusButtonClickListener()
@@ -66,7 +65,7 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
   override fun onResume() {
     super.onResume()
     initCheckNotificationPermission()
-    viewModel.setUiState(isNotiPermissionAllowed)
+    collectUiState()
   }
 
   private fun initWaitTimerAdapter() {
@@ -105,6 +104,7 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
     viewModel.uiState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is TimerUiState.BothAllowed -> {
+          viewModel.createEnable.value = true
           handleBothAllowedState(state)
           if (state.data?.first.isNullOrEmpty() && state.data?.second.isNullOrEmpty()) {
             Log.e("타이머", "널")
@@ -113,14 +113,17 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
         }
 
         is TimerUiState.AppAllowed -> {
+          viewModel.createEnable.value = false
           handleAppAllowedState()
         }
 
         is TimerUiState.NotAllowed -> {
+          viewModel.createEnable.value = false
           handleNotAllowedState()
         }
 
         is TimerUiState.DeviceAllowed -> {
+          viewModel.createEnable.value = false
           handleDeviceAllowedState()
         }
 
@@ -238,6 +241,7 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
         is UiState.Success -> {
           requireContext().linkMindSnackBar(binding.root, "타이머 삭제 완료", false)
         }
+
         is UiState.Failure -> {}
         is UiState.Empty -> {}
         is UiState.Loading -> {}
@@ -268,12 +272,20 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
 
   private fun initPlusButtonClickListener() {
     binding.ivTimerPlus.onThrottleClick {
+      if (!viewModel.createEnable.value) {
+        requireContext().linkMindSnackBar(binding.vTimer2, "알림이 꺼져있어요", true)
+        return@onThrottleClick
+      }
       findNavController().navigate(org.sopt.timer.R.id.action_navigation_timer_to_navigation_timer_clip_select)
     }
   }
 
   private fun initSetTimerButtonClickListener() {
     binding.btnTimerSetEnable.onThrottleClick {
+      if (!viewModel.createEnable.value) {
+        requireContext().linkMindSnackBar(binding.vTimer2, "알림이 꺼져있어요", true)
+        return@onThrottleClick
+      }
       findNavController().navigate(org.sopt.timer.R.id.action_navigation_timer_to_navigation_timer_clip_select)
     }
   }

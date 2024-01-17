@@ -98,7 +98,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginEnd="3dp"
-      android:text="@string/clip_amount_n"
+      android:text="@string/search_clip_amount_n"
       android:textAppearance="@style/Typography.suit.bold_28"
       android:textColor="@color/primary"
       app:layout_constraintBaseline_toBaselineOf="@id/tv_my_total_link"

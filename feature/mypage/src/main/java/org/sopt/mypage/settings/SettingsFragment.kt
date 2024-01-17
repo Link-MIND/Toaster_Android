@@ -1,5 +1,7 @@
 package org.sopt.mypage.settings
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +22,7 @@ import org.sopt.model.user.SettingPageData
 import org.sopt.mypage.databinding.FragmentSettingsBinding
 import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
+import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.UiState
 import org.sopt.ui.view.onThrottleClick
 import javax.inject.Inject
@@ -77,6 +80,7 @@ class SettingsFragment : Fragment() {
       when (state) {
         is UiState.Success -> {
           initSettingPageData(state.data)
+          dataStore.setFcmAllowed(state.data.fcmIsAllowed)
         }
 
         else -> {}
@@ -88,10 +92,12 @@ class SettingsFragment : Fragment() {
     viewModel.pushIsAllowed.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         true -> {
+          dataStore.setFcmAllowed(true)
           binding.tvSettingsAlertOff.isGone = true
         }
 
         false -> {
+          dataStore.setFcmAllowed(false)
           binding.tvSettingsAlertOff.isVisible = true
         }
       }
@@ -102,6 +108,8 @@ class SettingsFragment : Fragment() {
     onClickCloseBtn()
     onClickLeftBtn()
     onClickWithdrawBtn()
+    onClick1On1Btn()
+    onClickRuleBtn()
   }
 
   private fun onClickCloseBtn() {
@@ -116,8 +124,24 @@ class SettingsFragment : Fragment() {
     }
   }
 
+  private fun onClick1On1Btn() {
+    binding.clSetting2.onThrottleClick {
+      val url = URL_1ON1
+      val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+      startActivity(intent)
+    }
+  }
+
+  private fun onClickRuleBtn() {
+    binding.clSetting3.onThrottleClick {
+      val url = URL_RULE
+      val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+      startActivity(intent)
+    }
+  }
+
   private fun onClickLogoutBtn() {
-    binding.tvSetLogout.onThrottleClick {
+    binding.clSetting4.onThrottleClick {
       viewModel.logout()
     }
   }
@@ -130,7 +154,7 @@ class SettingsFragment : Fragment() {
   }
 
   private fun onClickWithdrawBtn() {
-    binding.tvWithdraw.setOnClickListener {
+    binding.clSetting5.setOnClickListener {
       viewModel.withdraw()
     }
   }
@@ -146,5 +170,21 @@ class SettingsFragment : Fragment() {
         settingsAlertToggle.initToggleState(false)
       }
     }
+  }
+
+  private fun navigateToDestination(destination: String) {
+    val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
+      destination,
+      enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
+      exitAnim = android.R.anim.fade_out,
+      popEnterAnim = android.R.anim.fade_in,
+      popExitAnim = org.sopt.mainfeature.R.anim.to_bottom,
+    )
+    findNavController().navigate(request, navOptions)
+  }
+
+  companion object {
+    const val URL_1ON1 = "https://open.kakao.com/o/sfN9Fr4f"
+    const val URL_RULE = "https://www.notion.so/db429c114629431f8301a969ed028e37"
   }
 }

@@ -57,7 +57,6 @@
     android:id="@+id/fl_settings_alert_off"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="12dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/cl_settings_title">
@@ -67,6 +66,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
+      android:layout_margin="12dp"
       android:background="@drawable/shape_neutrals050_fill_12_rect"
       android:gravity="center"
       android:padding="12dp"
@@ -123,80 +123,120 @@
     android:layout_height="wrap_content"
     app:layout_constraintTop_toTopOf="@id/v_settings_1">
 
-    <TextView
-      android:id="@+id/tv_set_alert"
-      android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/cl_setting_1"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginStart="20dp"
-      android:layout_marginTop="20dp"
-      android:padding="3dp"
-      android:text="@string/settings_alert"
-      android:textAppearance="@style/Typography.suit.regular_16"
-      android:textColor="@color/neutrals900"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@id/cl_settings_list" />
-
-    <designsystem.components.toggle.ToasterToggle
-      android:id="@+id/settings_alert_toggle"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="212dp"
-      android:layout_marginTop="20dp"
-      android:padding="3dp"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toEndOf="@id/tv_set_alert"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
 
-    <View
-      android:id="@+id/tg_push_allowed"
-      android:layout_width="0dp"
-      android:layout_height="0dp"
-      app:layout_constraintBottom_toBottomOf="@id/settings_alert_toggle"
-      app:layout_constraintEnd_toEndOf="@id/settings_alert_toggle"
-      app:layout_constraintStart_toStartOf="@id/settings_alert_toggle"
-      app:layout_constraintTop_toTopOf="@id/settings_alert_toggle" />
+      <TextView
+        android:id="@+id/tv_set_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:layout_marginStart="20dp"
+        android:text="@string/settings_alert"
+        android:textAppearance="@style/Typography.suit.regular_16"
+        android:textColor="@color/neutrals900"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-      android:id="@+id/tv_set_question"
+      <designsystem.components.toggle.ToasterToggle
+        android:id="@+id/settings_alert_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="212dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_set_alert"
+        app:layout_constraintTop_toTopOf="parent" />
+
+      <View
+        android:id="@+id/tg_push_allowed"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/settings_alert_toggle"
+        app:layout_constraintEnd_toEndOf="@id/settings_alert_toggle"
+        app:layout_constraintStart_toStartOf="@id/settings_alert_toggle"
+        app:layout_constraintTop_toTopOf="@id/settings_alert_toggle" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/cl_setting_2"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginStart="20dp"
-      android:layout_marginTop="40dp"
-      android:padding="3dp"
-      android:text="@string/settings_question"
-      android:textAppearance="@style/Typography.suit.regular_16"
-      android:textColor="@color/neutrals900"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tv_set_alert" />
+      app:layout_constraintTop_toBottomOf="@id/cl_setting_1">
+
+      <TextView
+        android:id="@+id/tv_set_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:layout_marginStart="20dp"
+        android:text="@string/settings_question"
+        android:textAppearance="@style/Typography.suit.regular_16"
+        android:textColor="@color/neutrals900"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <TextView
-      android:id="@+id/tv_set_term"
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/cl_setting_3"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginStart="20dp"
-      android:layout_marginTop="40dp"
-      android:padding="3dp"
-      android:text="@string/settings_term"
-      android:textAppearance="@style/Typography.suit.regular_16"
-      android:textColor="@color/neutrals900"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tv_set_question" />
+      app:layout_constraintTop_toBottomOf="@id/cl_setting_2">
 
-    <TextView
-      android:id="@+id/tv_set_logout"
+      <TextView
+        android:id="@+id/tv_set_term"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:layout_marginStart="20dp"
+        android:text="@string/settings_term"
+        android:textAppearance="@style/Typography.suit.regular_16"
+        android:textColor="@color/neutrals900"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/cl_setting_4"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginStart="20dp"
-      android:layout_marginTop="40dp"
-      android:layout_marginBottom="20dp"
-      android:padding="3dp"
-      android:text="@string/settings_logout"
-      android:textAppearance="@style/Typography.suit.regular_16"
-      android:textColor="@color/neutrals900"
-      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tv_set_term" />
+      app:layout_constraintTop_toBottomOf="@id/cl_setting_3">
+
+      <TextView
+        android:id="@+id/tv_set_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginVertical="20dp"
+        android:text="@string/settings_logout"
+        android:textAppearance="@style/Typography.suit.regular_16"
+        android:textColor="@color/neutrals900"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
   </androidx.constraintlayout.widget.ConstraintLayout>
@@ -208,15 +248,26 @@
     android:background="@color/neutrals050"
     app:layout_constraintTop_toBottomOf="@id/cl_settings_list" />
 
-  <TextView
-    android:id="@+id/tv_withdraw"
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/cl_setting_5"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="20dp"
-    android:layout_marginTop="23dp"
-    android:text="@string/settings_withdraw"
-    android:textAppearance="@style/Typography.suit.regular_16"
-    android:textColor="@color/neutrals400"
-    app:layout_constraintTop_toBottomOf="@id/v_settings_2" />
+    app:layout_constraintTop_toBottomOf="@id/v_settings_2">
+
+    <TextView
+      android:id="@+id/tv_withdraw"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginVertical="24dp"
+      android:layout_marginStart="20dp"
+      android:text="@string/settings_withdraw"
+      android:textAppearance="@style/Typography.suit.regular_16"
+      android:textColor="@color/neutrals400"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

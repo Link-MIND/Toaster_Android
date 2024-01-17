@@ -7,7 +7,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import org.sopt.datastore.datastore.SecurityDataStore
 import org.sopt.model.timer.Timer
 import org.sopt.timer.settimer.TimerUiState
 import org.sopt.timer.usecase.DeleteTimerUseCase
@@ -21,16 +23,19 @@ class TimerViewModel @Inject constructor(
   private val getTimerMainUseCase: GetTimerMainUseCase,
   private val deleteTimerUseCase: DeleteTimerUseCase,
   private val patchAlarmUseCase: PatchAlarmUseCase,
+  private val dataStore: SecurityDataStore,
 ) : ViewModel() {
   private val _uiState = MutableStateFlow<TimerUiState<Pair<List<Timer>, List<Timer>>?>>(TimerUiState.Empty)
   val uiState: StateFlow<TimerUiState<Pair<List<Timer>, List<Timer>>?>> get() = _uiState
 
-  private val fcmIsAllowed = MutableStateFlow(true)
+  private val fcmIsAllowed = MutableStateFlow(false)
 
   val timerList = MutableStateFlow<Pair<List<Timer>, List<Timer>>?>(Pair(emptyList(), emptyList()))
 
   private val _deleteState = MutableStateFlow<UiState<Boolean>>(UiState.Empty)
   val deleteState: StateFlow<UiState<Boolean>> = _deleteState.asStateFlow()
+
+  val createEnable = MutableStateFlow(false)
 
   fun setUiState(isNotiPermissionAllowed: Boolean) {
     viewModelScope.launch {
@@ -39,16 +44,30 @@ class TimerViewModel @Inject constructor(
           _uiState.emit(TimerUiState.BothAllowed(timerList.value))
           return@launch
         }
+
         fcmIsAllowed.value -> {
           _uiState.emit(TimerUiState.AppAllowed)
           return@launch
         }
+
         isNotiPermissionAllowed -> {
           _uiState.emit(TimerUiState.DeviceAllowed)
+          Log.e("디바이스", "디바이스")
           return@launch
         }
       }
       _uiState.emit(TimerUiState.NotAllowed)
+    }
+  }
+
+  fun getFcmAllowed(isNotiPermissionAllowed: Boolean) {
+    viewModelScope.launch {
+      runCatching {
+        fcmIsAllowed.emit(dataStore.flowFcmAllowed().first())
+        Log.e("값", dataStore.flowFcmAllowed().first().toString())
+      }.onSuccess {
+        setUiState(isNotiPermissionAllowed)
+      }
     }
   }
 

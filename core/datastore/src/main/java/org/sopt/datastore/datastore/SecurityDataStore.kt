@@ -32,6 +32,12 @@ interface SecurityDataStore {
   @SetValue(KEY_AUTOLOGIN)
   suspend fun setAutoLogin(boolean: Boolean)
 
+  @GetValue(KEY_FCM_ALLOWED)
+  fun flowFcmAllowed(): Flow<Boolean>
+
+  @SetValue(KEY_FCM_ALLOWED)
+  suspend fun setFcmAllowed(boolean: Boolean)
+
   @ClearValues
   suspend fun clearAll()
   companion object {
@@ -39,5 +45,6 @@ interface SecurityDataStore {
     const val KEY_REFRESHTOKEN = "key-refreshtoken"
     const val KEY_DEVICETOKEN = "key-devicetoken"
     const val KEY_AUTOLOGIN = "key-autologin"
+    const val KEY_FCM_ALLOWED = "key-fcm-allowed"
   }
 }

@@ -1,27 +1,29 @@
-package org.sopt.mypage.search
+package org.sopt.clip.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import org.sopt.mypage.databinding.FragmentSearchBinding
-import org.sopt.mypage.search.adapter.ClipResultAdapter
-import org.sopt.mypage.search.adapter.LinkResultAdapter
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import org.sopt.clip.databinding.FragmentSearchBinding
+import org.sopt.clip.search.adapter.ClipResultAdapter
+import org.sopt.clip.search.adapter.LinkResultAdapter
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.context.hideKeyboard
+import org.sopt.ui.fragment.viewLifeCycle
+import org.sopt.ui.fragment.viewLifeCycleScope
 import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
-class SearchFragment : BindingFragment<FragmentSearchBinding>(
-  { FragmentSearchBinding.inflate(it) },
-) {
-
+class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBinding.inflate(it) }) {
   private val viewModel: SearchViewModel by viewModels()
   private lateinit var linkResultAdapter: LinkResultAdapter
   private lateinit var clipResultAdapter: ClipResultAdapter
@@ -35,29 +37,29 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
     mResultAdapter = ConcatAdapter(linkResultAdapter, clipResultAdapter)
 
     binding.rcSearchResult.adapter = mResultAdapter
-
-    setupObservers()
-    setupDummyData()
     setOnClickListeners()
     handleEditText()
-  }
+    viewModel.searchState.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is SearchState.Success -> {
+          Log.e("카테고리 리스트", state.data.categories.toString())
+          clipResultAdapter.submitList(state.data.categories)
+          linkResultAdapter.submitList(state.data.toasts)
+          handleSearchResultsVisibility()
+        }
 
-  private fun setupObservers() {
-    observeLinkResults()
-    observeClipResults()
-  }
+        is SearchState.Empty -> {}
+        is SearchState.Failure -> {
+          handleEmptyResults()
+        }
 
-  private fun setupDummyData() {
-    val linkResults = listOf(
-      LinkResultDummy("Category", "토스트기", "URL"),
-      LinkResultDummy("Category2", "토스트", "URL2"),
-    )
-    val clipResults = listOf(
-      ClipResultDummy("토스트 맛집", 6),
-      ClipResultDummy("토스트굿", 8),
-    )
+        is SearchState.NoResult -> {
+          handleEmptyResults()
+        }
 
-    viewModel.updateResults(linkResults, clipResults)
+        else -> {}
+      }
+    }.launchIn(viewLifeCycleScope)
   }
 
   private fun handleEditText() {
@@ -77,6 +79,11 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
       handleSearch()
     }
 
+    binding.editText.setOnEditorActionListener { textView, i, keyEvent ->
+      handleSearch()
+      true
+    }
+
     binding.ivCancel.onThrottleClick {
       handleCancel()
     }
@@ -90,8 +97,8 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
     val query = binding.editText.text.toString().trim()
 
     if (query.isNotEmpty()) {
-      val isMatchedResults = viewModel.onClickSearch(query)
-      handleSearchResultsVisibility(isMatchedResults)
+      viewModel.getSearchResult(query)
+      handleSearchResultsVisibility()
     } else {
       handleEmptyResults()
     }
@@ -99,10 +106,10 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
     requireContext().hideKeyboard(requireView())
   }
 
-  private fun handleSearchResultsVisibility(isMatchedResults: Boolean) {
+  private fun handleSearchResultsVisibility() {
     with(binding) {
-      rcSearchResult.isVisible = isMatchedResults
-      clNoneResults.isVisible = !isMatchedResults
+      rcSearchResult.isVisible = true
+      clNoneResults.isGone = true
       ivSearch.isVisible = false
       ivCancel.isVisible = true
     }
@@ -122,24 +129,6 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>(
     }
     requireContext().hideKeyboard(requireView())
     clearSearch()
-  }
-
-  private fun observeLinkResults() {
-    viewModel.linkResultsLiveData.observe(
-      viewLifecycleOwner,
-      Observer { linkResults ->
-        linkResultAdapter.submitList(linkResults)
-      },
-    )
-  }
-
-  private fun observeClipResults() {
-    viewModel.clipResultsLiveData.observe(
-      viewLifecycleOwner,
-      Observer { clipResults ->
-        clipResultAdapter.submitList(clipResults)
-      },
-    )
   }
 
   private fun updateSearchQuery(query: String) {

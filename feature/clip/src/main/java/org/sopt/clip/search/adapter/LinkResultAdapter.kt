@@ -1,15 +1,15 @@
-package org.sopt.mypage.search.adapter
+package org.sopt.clip.search.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import org.sopt.mypage.databinding.ItemSearchResultClipLinkBinding
-import org.sopt.mypage.search.LinkResultDummy
-import org.sopt.mypage.search.viewholder.LinkResultViewHolder
+import org.sopt.clip.databinding.ItemSearchResultClipLinkBinding
+import org.sopt.clip.search.viewholder.LinkResultViewHolder
+import org.sopt.model.category.Toast
+import org.sopt.ui.view.ItemDiffCallback
 
 class LinkResultAdapter :
-  ListAdapter<LinkResultDummy, LinkResultViewHolder>(DiffUtilCallback) {
+  ListAdapter<Toast, LinkResultViewHolder>(DiffUtil) {
 
   private var searchQuery: String = ""
 
@@ -29,13 +29,10 @@ class LinkResultAdapter :
     holder.onBind(result, searchQuery)
   }
 
-  private object DiffUtilCallback : DiffUtil.ItemCallback<LinkResultDummy>() {
-    override fun areItemsTheSame(oldItem: LinkResultDummy, newItem: LinkResultDummy): Boolean {
-      return oldItem.title == newItem.title
-    }
-
-    override fun areContentsTheSame(oldItem: LinkResultDummy, newItem: LinkResultDummy): Boolean {
-      return oldItem == newItem
-    }
+  companion object {
+    private val DiffUtil = ItemDiffCallback<Toast>(
+      onItemsTheSame = { old, new -> old.toastId == new.toastId },
+      onContentsTheSame = { old, new -> old == new },
+    )
   }
 }

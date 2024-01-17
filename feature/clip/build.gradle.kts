@@ -13,5 +13,6 @@ android {
 
 dependencies {
   implementation(projects.domain.category)
+  implementation(libs.coil)
   implementation(projects.domain.link)
 }

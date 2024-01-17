@@ -14,4 +14,5 @@ android {
 dependencies {
   implementation(projects.domain.timer)
   implementation(projects.domain.category)
+  implementation(projects.core.datastore)
 }
