@@ -89,15 +89,6 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     findNavController().navigate(R.id.action_navigation_clip_link_to_webViewFragment, bundle)
   }
 
-/*  private fun updateItemEvent(state: String, itemId: Long) {
-    Toast.makeText(context, "$state itemId: $itemId", Toast.LENGTH_SHORT).show()
-    if (state == "delete") {
-      *//*
-            DeleteLinkBottomSheetFragment.newInstance(this.id).show(parentFragmentManager, this.tag)
-      *//*
-    }
-  }*/
-
   private fun onClickBackButton() {
     binding.ivClipLinkBack.onThrottleClick {
       findNavController().navigateUp()
