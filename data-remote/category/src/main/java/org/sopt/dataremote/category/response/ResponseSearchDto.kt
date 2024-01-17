@@ -36,7 +36,7 @@ data class ResponseSearchDto(
   data class ResponseCategoryDto(
     @SerialName("categoryId")
     val categoryId: Long,
-    @SerialName("categoryTitle")
+    @SerialName("title")
     val categoryTitle: String,
     @SerialName("toastNum")
     val toastNum: Int,
