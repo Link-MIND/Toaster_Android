@@ -12,7 +12,7 @@ import designsystem.components.toast.linkMindSnackBar
 import org.orbitmvi.orbit.viewmodel.observe
 import org.sopt.mainfeature.R
 import org.sopt.savelink.databinding.FragmentSaveLinkSetClipBinding
-import org.sopt.savelink.ui.Clip
+import org.sopt.savelink.ui.model.Clip
 import org.sopt.savelink.ui.adapter.ClipSelectAdapter
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.nav.DeepLinkUtil
@@ -48,21 +48,21 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
     viewModel.observe(viewLifecycleOwner, state = ::render, sideEffect = ::handleSideEffect)
   }
 
-  private fun render(homeState: SetLinkState) {
+  private fun render(homeState: SaveLinkSetClipState) {
     initSetClipAdapter(homeState.categoryList)
     adapter.submitList(homeState.categoryList)
   }
 
-  private fun handleSideEffect(sideEffect: SetLinkSideEffect) {
+  private fun handleSideEffect(sideEffect: SaveLinkSetClipSideEffect) {
     when (sideEffect) {
-      is SetLinkSideEffect.NavigateSetLink -> {
+      is SaveLinkSetClipSideEffect.NavigateSaveLinkSetClip -> {
         navigateToHome()
         requireContext().linkMindSnackBar(binding.root, "링크 저장 완료", false)
       }
 
-      is SetLinkSideEffect.NavigateUp -> findNavController().navigateUp()
-      is SetLinkSideEffect.ShowBottomSheet -> showAddClipBottomSheet()
-      is SetLinkSideEffect.ShowDialog -> showCloseDialog()
+      is SaveLinkSetClipSideEffect.NavigateUp -> findNavController().navigateUp()
+      is SaveLinkSetClipSideEffect.ShowBottomSheet -> showAddClipBottomSheet()
+      is SaveLinkSetClipSideEffect.ShowDialog -> showCloseDialog()
     }
   }
 
