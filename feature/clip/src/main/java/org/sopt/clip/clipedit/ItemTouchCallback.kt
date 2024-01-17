@@ -16,12 +16,10 @@ class ItemTouchCallback(private val listener: ItemTouchHelperListener) : ItemTou
 
   override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
     listener.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
-    Log.d("test", "test")
     return false
   }
 
   override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
     listener.onItemSwipe(viewHolder.layoutPosition)
-    Log.d("test", "test2")
   }
 }
