@@ -50,6 +50,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
 
         "edit" -> {
           showHomeBottomSheet(itemId)
+
         }
       }
       Toast.makeText(context, "$state + itemId: $itemId", Toast.LENGTH_SHORT).show()
@@ -103,6 +104,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
         val clipNewName = getText()
         Log.d("사용자가 입력한 클립명", "$clipNewName") // string 값 잘 가져옴
         viewModel.patchCategoryEditTitle(itemId, clipNewName)
+        Log.d("사용자가 입력한 클립명2", "$clipNewName") // string 값 잘 가져옴
 
         editCategoryTitle()
 

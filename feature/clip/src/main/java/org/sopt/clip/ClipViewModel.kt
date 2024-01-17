@@ -158,6 +158,7 @@ class ClipViewModel @Inject constructor(
   }
 
   fun patchCategoryEditTitle(categoryId: Long, newTitle: String) = viewModelScope.launch {
+    Log.d("뷰모델", "$newTitle") // string 값 잘 가져옴
     patchCategoryEditTitle.invoke(param = PatchCategoryEditTitleUseCase.Param(categoryId, newTitle)).onSuccess {
       Log.d("카테 이름 수정", "성공 ")
       _editPriorityState.emit(UiState.Success(Unit))

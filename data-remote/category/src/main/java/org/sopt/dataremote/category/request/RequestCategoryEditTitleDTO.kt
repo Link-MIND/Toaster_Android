@@ -8,11 +8,11 @@ import org.sopt.model.category.CategoryChangeTitle
 data class RequestCategoryEditTitleDTO(
   @SerialName("categoryId")
   val categoryId: Long,
-  @SerialName("categoryTitle")
-  val categoryTitle: String?,
+  @SerialName("newTitle")
+  val newTitle: String?,
 )
 
 fun RequestCategoryEditTitleDTO.toRequestDTO() = CategoryChangeTitle(
   categoryId = this.categoryId,
-  newTitle = this.categoryTitle,
+  newTitle = this.newTitle,
 )

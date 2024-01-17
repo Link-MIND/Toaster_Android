@@ -52,11 +52,9 @@ class RemoteCategoryDataSourceImpl @Inject constructor(
   }
 
   override suspend fun patchCategoryEditTitle(categoryId: Long, newTitle: String?) {
-    requireNotNull(
       categoryService.patchCategoryEdit(
         RequestCategoryEditTitleDTO(categoryId, newTitle),
-      ),
-    )
+      )
   }
 
   /*  override suspend fun patchCategoryEdit(categoryId: Long, newTitle: String?, newPriority: Long?) {
