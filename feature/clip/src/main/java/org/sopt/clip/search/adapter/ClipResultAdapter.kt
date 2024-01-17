@@ -5,11 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import org.sopt.clip.databinding.ItemSearchResultClipBinding
-import org.sopt.clip.search.ClipResultDummy
+import org.sopt.clip.search.ClipResult
 import org.sopt.clip.search.viewholder.ClipResultViewHolder
+import org.sopt.model.category.Category
+import org.sopt.model.timer.Timer
+import org.sopt.ui.view.ItemDiffCallback
 
 class ClipResultAdapter :
-  ListAdapter<ClipResultDummy, ClipResultViewHolder>(DiffUtilCallback) {
+  ListAdapter<Category, ClipResultViewHolder>(DiffUtil) {
 
   private var searchQuery: String = ""
 
@@ -26,16 +29,13 @@ class ClipResultAdapter :
 
   override fun onBindViewHolder(holder: ClipResultViewHolder, position: Int) {
     val result = getItem(position)
-    holder.onBind(result, searchQuery)
+    holder.onBind(result/*, searchQuery*/)
   }
 
-  private object DiffUtilCallback : DiffUtil.ItemCallback<ClipResultDummy>() {
-    override fun areItemsTheSame(oldItem: ClipResultDummy, newItem: ClipResultDummy): Boolean {
-      return oldItem.amount == newItem.amount
-    }
-
-    override fun areContentsTheSame(oldItem: ClipResultDummy, newItem: ClipResultDummy): Boolean {
-      return oldItem == newItem
-    }
+  companion object {
+    private val DiffUtil = ItemDiffCallback<Category>(
+      onItemsTheSame = { old, new -> old.categoryId == new.categoryId },
+      onContentsTheSame = { old, new -> old == new },
+    )
   }
 }
