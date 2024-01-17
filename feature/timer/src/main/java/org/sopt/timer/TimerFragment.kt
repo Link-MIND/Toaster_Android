@@ -16,10 +16,8 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.toast.linkMindSnackBar
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.runBlocking
 import org.sopt.mainfeature.R
 import org.sopt.model.timer.Timer
 import org.sopt.timer.databinding.FragmentTimerBinding
@@ -289,7 +287,6 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
         return@onThrottleClick
       }
       findNavController().navigate(org.sopt.timer.R.id.action_navigation_timer_to_navigation_timer_clip_select)
-
     }
   }
 }

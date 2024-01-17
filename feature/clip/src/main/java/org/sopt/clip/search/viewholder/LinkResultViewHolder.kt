@@ -12,7 +12,7 @@ class LinkResultViewHolder(val binding: ItemSearchResultClipLinkBinding) :
 
   fun onBind(linkResult: Toast, searchQuery: String) {
     binding.tvClipDetailTitle.text = linkResult.categoryTitle
-    if(linkResult.categoryTitle == null){
+    if (linkResult.categoryTitle == null) {
       binding.tvClipDetailTitle.isGone = true
     }
     binding.tvClipTitle.text = applyBoldStyle(linkResult.toastTitle, searchQuery)

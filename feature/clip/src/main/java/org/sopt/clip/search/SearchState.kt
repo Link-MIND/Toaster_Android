@@ -7,7 +7,7 @@ sealed interface SearchState<out T> {
   object NoResult : SearchState<Nothing>
 
   data class Failure(
-    val error: String
+    val error: String,
   ) : SearchState<Nothing>
 
   object Loading : SearchState<Nothing>

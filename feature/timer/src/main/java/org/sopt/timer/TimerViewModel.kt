@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import org.sopt.datastore.datastore.SecurityDataStore
 import org.sopt.model.timer.Timer
 import org.sopt.timer.settimer.TimerUiState
@@ -66,7 +65,6 @@ class TimerViewModel @Inject constructor(
       runCatching {
         fcmIsAllowed.emit(dataStore.flowFcmAllowed().first())
         Log.e("값", dataStore.flowFcmAllowed().first().toString())
-
       }.onSuccess {
         setUiState(isNotiPermissionAllowed)
       }
