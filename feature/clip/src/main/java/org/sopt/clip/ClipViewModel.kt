@@ -56,19 +56,20 @@ class ClipViewModel @Inject constructor(
   private val _deleteState = MutableStateFlow<UiState<Boolean>>(UiState.Empty)
   val deleteState: StateFlow<UiState<Boolean>> = _deleteState.asStateFlow()
 
-  private val _categoryState1 = MutableStateFlow<UiState<List<Category>>>(UiState.Empty)
-  val categoryState1: StateFlow<UiState<List<Category>>> = _categoryState.asStateFlow()
+  private val _last = MutableStateFlow<UiState<Long>>(UiState.Empty)
+  val last: StateFlow<UiState<Long>> = _last.asStateFlow()
 
-  private val _last = MutableStateFlow<UiState<Int>>(UiState.Empty)
-  val last: StateFlow<UiState<Int>> = _last.asStateFlow()
-  fun getCategoryAll2(list:List<Category>) = viewModelScope.launch {
-    Log.d("test","priority")
-      _categoryState1.emit(UiState.Success(list))
-  }
+  private val _last2 = MutableStateFlow<UiState<Int>>(UiState.Empty)
+  val last2: StateFlow<UiState<Int>> = _last2.asStateFlow()
 
-  fun update(a:Int) = viewModelScope.launch {
+  fun update(a:Long) = viewModelScope.launch {
     Log.d("test","priority")
     _last.emit(UiState.Success(a))
+  }
+
+  fun update2(a:Int) = viewModelScope.launch {
+    Log.d("test","priority")
+    _last2.emit(UiState.Success(a))
   }
   init {
     getCategoryAll()
@@ -132,8 +133,6 @@ class ClipViewModel @Inject constructor(
   }
   fun getCategoryAll() = viewModelScope.launch {
     getCategoryAll.invoke().onSuccess {
-      getCategoryAll2(it.categories)
-      Log.d("test", "$it")
       val list: MutableList<Category> = it.categories.toMutableList()
       totalClip.toastNum = it.toastNumberInEntire
       list.add(0, totalClip)

@@ -50,13 +50,25 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
         viewModel.deleteCategory(it)
       },
       onLongClick = {
-        Log.d("test","$it")
-//        viewModel.patchCategoryEditPriority(it,)
+        viewModel.update(it)
+        viewModel.last2.flowWithLifecycle(viewLifeCycle).onEach { state ->
+          when (state) {
+            is UiState.Success -> {
+              viewModel.patchCategoryEditPriority(it,state.data)
+            }
+
+            else -> {}
+          }
+        }.launchIn(viewLifeCycleScope)
+      },
+      onLongClick2 = {
+        viewModel.update2(it.toInt())
       }
     )
     binding.rvClipEdit.adapter = clipEditAdapter
     itemTouchHelper.attachToRecyclerView(binding.rvClipEdit)
     clipEditAdapter.submitList((viewModel.categoryState.value as UiState.Success).data ?: emptyList())
+
     updateEditListView()
     onClickBackButton()
   }

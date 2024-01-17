@@ -13,6 +13,7 @@ class ClipEditAdapter(
   private val itemClick: (Long, String, Long) -> Unit,
   private val deleteClip: (Long) -> Unit,
   private val onLongClick: (Long) -> Unit,
+  private val onLongClick2: (Long) -> Unit,
 ) : ListAdapter<Category, ClipEditViewHolder>(DiffUtil), ItemTouchHelperListener {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClipEditViewHolder {
     return ClipEditViewHolder(
@@ -42,6 +43,7 @@ class ClipEditAdapter(
       newList.add(to, item)
     }
     notifyItemMoved(from, to)
+    onLongClick2(to.toLong())
   }
 
   override fun onItemSwipe(position: Int) {
