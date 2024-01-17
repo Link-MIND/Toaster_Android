@@ -27,7 +27,7 @@ class SetLinkViewModel @Inject constructor(
   override val container: Container<SetLinkState, SetLinkSideEffect> =
     container(SetLinkState())
 
-  fun getCategortAll() = intent {
+  fun getCategoryAll() = intent {
     getCategoryAllUseCase().onSuccess {
       reduce {
         state.copy(
@@ -39,7 +39,7 @@ class SetLinkViewModel @Inject constructor(
                 it.toastNumberInEntire.toInt(),
                 false,
               ),
-            ) + container.stateFlow.value.categoryList + it.categories.map { it.toModel() }).distinctBy { it?.categoryId },
+            ) + container.stateFlow.value.categoryList + it.categories.map { it.toModel() }).distinctBy { it.categoryId },
         )
       }
     }.onFailure {
@@ -81,6 +81,7 @@ class SetLinkViewModel @Inject constructor(
   }
 
   private fun navigateSetLink() = intent { postSideEffect(SetLinkSideEffect.NavigateSetLink) }
+  fun navigateUp() = intent { postSideEffect(SetLinkSideEffect.NavigateUp) }
   fun showBottomSheet() = intent { postSideEffect(SetLinkSideEffect.ShowBottomSheet) }
   fun showDialog() = intent { postSideEffect(SetLinkSideEffect.ShowDialog) }
 
