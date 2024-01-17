@@ -3,7 +3,8 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="@color/neutrals_white">
+  android:layout_marginBottom="12dp"
+  android:background="@drawable/shape_white_fill_12_rect">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/cl_link_detail"
@@ -16,7 +17,8 @@
     <ImageView
       android:id="@+id/iv_link_thumnail"
       android:layout_width="74dp"
-      android:layout_height="wrap_content"
+      android:layout_height="74dp"
+      android:adjustViewBounds="true"
       android:src="@drawable/img_link_thumb"
       app:layout_constraintDimensionRatio="1:1"
       app:layout_constraintStart_toStartOf="parent"
@@ -30,8 +32,7 @@
       android:layout_marginBottom="-1dp"
       app:layout_constraintBottom_toBottomOf="@id/cl_link_detail"
       app:layout_constraintStart_toEndOf="@id/iv_link_thumnail"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.0">
+      app:layout_constraintTop_toTopOf="parent" >
 
       <TextView
         android:id="@+id/tv_clip_detail_title"
@@ -52,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:text="@string/settings_title"
+        android:maxLines="1"
         android:textAppearance="@style/Typography.suit.medium_16"
         android:textColor="@color/neutrals850"
         app:layout_constraintStart_toStartOf="@id/cl_clip_detail_text"
