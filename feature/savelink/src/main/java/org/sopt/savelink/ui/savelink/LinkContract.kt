@@ -12,5 +12,5 @@ data class LinkState(
 sealed interface LinkSideEffect {
   data object NavigateUp : LinkSideEffect
   data object NavigateSetLink : LinkSideEffect
-  data object ShowBottomSheet : LinkSideEffect
+  data object ShowDialog : LinkSideEffect
 }

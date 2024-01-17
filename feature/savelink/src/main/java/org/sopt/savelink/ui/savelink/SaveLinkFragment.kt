@@ -69,7 +69,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     when (sideEffect) {
       is LinkSideEffect.NavigateUp -> navigateUp()
       is LinkSideEffect.NavigateSetLink -> navigateSetLink()
-      is LinkSideEffect.ShowBottomSheet -> showCloseDialog()
+      is LinkSideEffect.ShowDialog -> showCloseDialog()
     }
   }
 
@@ -117,8 +117,8 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     KeyboardUtils.setKeyboardVisibilityListener(
       binding.root,
       object : OnKeyboardVisibilityListener {
-        override fun onVisibilityChanged(isVisible: Boolean) {
-          if (isVisible) {
+        override fun onVisibilityChanged(visible: Boolean) {
+          if (visible) {
             handleKeyboardVisible(layoutParams)
           } else {
             handleKeyboardHidden(layoutParams)
@@ -157,7 +157,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
 
   private fun onClickCloseSaveLink() {
     binding.ivSaveLinkClose.onThrottleClick {
-      showCloseDialog()
+      viewModel.showDialog()
     }
   }
 

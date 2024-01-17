@@ -8,8 +8,6 @@ import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
-import org.sopt.savelink.ui.savelink.LinkSideEffect
-import org.sopt.savelink.ui.savelink.LinkState
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,13 +16,13 @@ class SaveLinkViewModel @Inject constructor(
   override val container: Container<LinkState, LinkSideEffect> =
     container(LinkState())
 
-  fun updataEditText(text:String) = intent {
+  fun updataEditText(text: String) = intent {
     reduce {
-      state.copy(edittextLink = container.stateFlow.value.edittextLink+text)
+      state.copy(edittextLink = container.stateFlow.value.edittextLink + text)
     }
   }
 
   fun navigateUp() = intent { postSideEffect(LinkSideEffect.NavigateUp) }
   fun navigateSetLink() = intent { postSideEffect(LinkSideEffect.NavigateSetLink) }
-  fun showBottomSheet() = intent { postSideEffect(LinkSideEffect.ShowBottomSheet) }
+  fun showDialog() = intent { postSideEffect(LinkSideEffect.ShowDialog) }
 }
