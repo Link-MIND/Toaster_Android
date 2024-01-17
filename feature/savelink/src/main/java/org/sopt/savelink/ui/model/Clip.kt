@@ -9,9 +9,9 @@ data class Clip(
   var isSelected: Boolean,
 )
 
-internal fun Category.toModel()= Clip(
-  categoryId=categoryId,
-  categoryTitle=categoryTitle,
-  toastNum=toastNum,
-  isSelected = false
+internal fun Category.toModel() = Clip(
+  categoryId = categoryId,
+  categoryTitle = categoryTitle,
+  toastNum = toastNum,
+  isSelected = false,
 )

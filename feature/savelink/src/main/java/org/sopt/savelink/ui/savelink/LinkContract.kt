@@ -4,7 +4,7 @@ import org.sopt.savelink.ui.model.Clip
 
 data class LinkState(
   val edittextLink: String = "",
-  val categoryList: List<Clip?> = emptyList()
+  val categoryList: List<Clip?> = emptyList(),
 ) {
   fun checkEtvLink() =
     edittextLink.contains("http")

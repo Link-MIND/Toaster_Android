@@ -84,7 +84,6 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
     binding.rvItemTimerClipSelect.adapter = adapter
   }
 
-
   private fun onClickAddClip() {
     binding.tvSaveLinkAddClip.onThrottleClick {
       viewModel.showBottomSheet()
