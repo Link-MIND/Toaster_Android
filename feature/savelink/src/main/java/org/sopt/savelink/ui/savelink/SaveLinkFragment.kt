@@ -62,8 +62,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     viewModel.observe(viewLifecycleOwner, state = ::render, sideEffect = ::handleSideEffect)
   }
 
-  private fun render(homeState: LinkState) {
-  }
+  private fun render(homeState: LinkState) {}
 
   private fun handleSideEffect(sideEffect: LinkSideEffect) {
     when (sideEffect) {
