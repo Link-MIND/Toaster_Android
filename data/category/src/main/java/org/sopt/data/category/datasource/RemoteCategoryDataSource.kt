@@ -11,9 +11,11 @@ interface RemoteCategoryDataSource {
 
   suspend fun deleteCategory(deleteCategoryList: List<Long>)
 
-  suspend fun getCategoryDuplicate(title: String) : CategoryDuplicate
+  suspend fun getCategoryDuplicate(title: String): CategoryDuplicate
 
-  suspend fun getCategoryLink(filter: String) : CategoryLinkList
+  suspend fun getCategoryLink(filter: String?, categoryId: Long?): CategoryLinkList
 
-  suspend fun patchCategoryEdit()
+  suspend fun patchCategoryPriority(categoryId: Long, newPriority: Int)
+
+  suspend fun patchCategoryEditTitle(categoryId: Long, newTitle: String?)
 }
