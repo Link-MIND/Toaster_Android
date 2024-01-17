@@ -50,7 +50,7 @@ class ToasterToggle @JvmOverloads constructor(
     }
   }
 
-  fun trasition() {
+  fun transition() {
     when (binding.mlToggle.currentState) {
       R.id.start -> {
         binding.mlToggle.transitionToState(R.id.end, 200)
@@ -59,6 +59,13 @@ class ToasterToggle @JvmOverloads constructor(
       R.id.end -> {
         binding.mlToggle.transitionToState(R.id.start, 200)
       }
+    }
+  }
+
+  fun transitionTo(boolean: Boolean) {
+    when (boolean) {
+      true -> binding.mlToggle.transitionToState(R.id.end)
+      false -> binding.mlToggle.transitionToState(R.id.start)
     }
   }
 
