@@ -32,11 +32,10 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
   var isDataNull: Boolean = true
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    var clipId = arguments?.getLong("clipId")
-    viewModel.getCategoryLink(readFilter, clipId)
     val args: ClipLinkFragmentArgs by navArgs()
     val categoryId = args.categoryId
-    Log.d("test", "$categoryId")
+    if (args.categoryId.toInt()==0) viewModel.getCategoryLink(readFilter, 0)
+    else viewModel.getCategoryLink(readFilter, categoryId)
     initClipAdapter()
     initViewState(isDataNull)
 
