@@ -17,7 +17,7 @@ data class ResponseCategoryEntireDto(
     @SerialName("categoryId")
     val categoryId: Long,
     @SerialName("categoryTitle")
-    val categoryTitle: String,
+    val categoryTitle: String?,
     @SerialName("toastNum")
     val toastNum: Int,
   )

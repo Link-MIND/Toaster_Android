@@ -7,7 +7,7 @@ import org.sopt.model.category.CategoryList
 interface RemoteCategoryDataSource {
   suspend fun getCategoryAll(): CategoryList
 
-  suspend fun postAddCategoryTitle(categoryTitle: String): Int
+  suspend fun postAddCategoryTitle(categoryTitle: String?): Int
 
   suspend fun deleteCategory(deleteCategoryList: List<Long>)
 
