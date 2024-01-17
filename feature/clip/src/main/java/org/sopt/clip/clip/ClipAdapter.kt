@@ -8,7 +8,7 @@ import org.sopt.model.category.Category
 import org.sopt.ui.view.ItemDiffCallback
 
 class ClipAdapter(
-  private val onClickItemClip: (Long) -> Unit,
+  private val onClickItemClip: (Category) -> Unit,
 ) : ListAdapter<Category, ClipViewHolder>(DiffUtil) {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClipViewHolder {
     return ClipViewHolder(

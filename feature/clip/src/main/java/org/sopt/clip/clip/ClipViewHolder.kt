@@ -6,7 +6,7 @@ import org.sopt.model.category.Category
 
 class ClipViewHolder(
   private val binding: ItemClipClipBinding,
-  private val onClickItemClip: (Long) -> Unit,
+  private val onClickItemClip: (Category) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(clipData: Category) {
     with(binding) {
@@ -18,7 +18,7 @@ class ClipViewHolder(
       tvClipName.text = clipData.categoryTitle
       tvClipAmount.text = clipData.toastNum.toString() + "개"
       root.setOnClickListener {
-        onClickItemClip(clipData.categoryId)
+        onClickItemClip(clipData)
       }
     }
   }
