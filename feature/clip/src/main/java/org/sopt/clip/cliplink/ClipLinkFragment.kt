@@ -2,9 +2,8 @@ package org.sopt.clip.cliplink
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,14 +24,15 @@ import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
 class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClipLinkBinding.inflate(it) }) {
-  private val viewModel by viewModels<ClipViewModel>()
+  private val viewModel by activityViewModels<ClipViewModel>()
   private lateinit var clipLinkAdapter: ClipLinkAdapter
   var readFilter: String = "ALL"
   var isDataNull: Boolean = true
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     var clipId = arguments?.getLong("clipId")
-    viewModel.getCategoryLink(readFilter, clipId!!)
+
+    viewModel.getCategoryLink(readFilter, clipId)
     initClipAdapter()
     initViewState(isDataNull)
 
