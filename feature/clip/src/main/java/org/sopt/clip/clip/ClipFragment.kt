@@ -16,6 +16,7 @@ import org.sopt.clip.databinding.FragmentClipBinding
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
+import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.UiState
 import org.sopt.ui.view.onThrottleClick
 
@@ -98,7 +99,17 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
 
   private fun onClickSearchButton() {
     binding.clClipSearch.onThrottleClick {
-      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_link)
+      navigateToDestination("featureMyPage://fragmentSearch")
     }
+  }
+  private fun navigateToDestination(destination: String) {
+    val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
+      destination,
+      enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
+      exitAnim = android.R.anim.fade_out,
+      popEnterAnim = android.R.anim.fade_in,
+      popExitAnim = org.sopt.mainfeature.R.anim.to_bottom,
+    )
+    findNavController().navigate(request, navOptions)
   }
 }

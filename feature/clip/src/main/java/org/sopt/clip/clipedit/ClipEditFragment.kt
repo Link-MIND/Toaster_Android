@@ -30,8 +30,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
   private val itemTouchHelper by lazy {
     ItemTouchHelper(ItemTouchCallback(clipEditAdapter))
   }
-  private var _categoryDeleteList: MutableList<Long> = mutableListOf()
-  val categoryDeleteList: MutableList<Long> = _categoryDeleteList
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
@@ -40,30 +39,36 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
         when (state) {
           "delete" -> {
             showDeleteDialog(itemId)
-/*
-          _categoryDeleteList.add(itemId)
-*/
           }
           "edit" -> {
             showHomeBottomSheet(itemId)
           }
         }
-
         Toast.makeText(context, "$state + itemId: $itemId", Toast.LENGTH_SHORT).show()
       },
       deleteClip = {
         viewModel.deleteCategory(it)
       },
-      patchClip = { l: Long, i: Int ->
-        viewModel.patchCategoryEditPriority(l, i)
+      onLongClick = {
+        viewModel.last2.flowWithLifecycle(viewLifeCycle).onEach { state ->
+          when (state) {
+            is UiState.Success -> {
+              viewModel.patchCategoryEditPriority(it, state.data)
+            }
+
+            else -> {}
+          }
+        }.launchIn(viewLifeCycleScope)
+      },
+      onLongClick2 = {
+        viewModel.update2(it.toInt())
       },
     )
-
     binding.rvClipEdit.adapter = clipEditAdapter
     itemTouchHelper.attachToRecyclerView(binding.rvClipEdit)
-    clipEditAdapter.submitList((viewModel.categoryState.value as UiState.Success).data)
-    updateEditListView()
+    clipEditAdapter.submitList((viewModel.categoryState.value as UiState.Success).data ?: emptyList())
 
+    updateEditListView()
     onClickBackButton()
   }
 
@@ -73,6 +78,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
         is UiState.Success -> {
           clipEditAdapter.submitList(state.data)
         }
+
         else -> {}
       }
     }.launchIn(viewLifeCycleScope)
@@ -85,6 +91,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
           Log.d("test", "testsak")
           viewModel.getCategoryAll()
         }
+
         else -> {}
       }
     }
@@ -110,9 +117,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
         Log.d("사용자가 입력한 클립명", "$clipNewName") // string 값 잘 가져옴
         viewModel.patchCategoryEditTitle(itemId, clipNewName)
         Log.d("사용자가 입력한 클립명2", "$clipNewName") // string 값 잘 가져옴
-
         editCategoryTitle()
-
         dismiss()
         requireContext().linkMindSnackBar(binding.root, "클립 수정 완료!", false)
       }
@@ -123,9 +128,9 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     viewModel.editTitleState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          Log.d("test", "$state")
           viewModel.getCategoryAll()
         }
+
         else -> {
           Log.d("test", "$state")
         }
@@ -142,8 +147,8 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
       }
       .setPositiveButton(R.string.edit_clip_delete_dialog_delete) {
         viewModel.deleteCategory(itemId)
-/*        viewModel.getCategoryAll()
-        updateEditListView()*/
+        /*        viewModel.getCategoryAll()
+                updateEditListView()*/
         deleteDialog.dismiss()
       }
       .show()
