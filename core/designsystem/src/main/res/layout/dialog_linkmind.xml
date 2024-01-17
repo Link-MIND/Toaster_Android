@@ -4,29 +4,29 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="@drawable/shape_neutrals_fill_12_rect"
+  android:background="@drawable/shape_white_fill_12_rect"
   android:paddingHorizontal="24dp"
   android:paddingTop="20dp"
   android:paddingBottom="24dp">
 
   <TextView
     android:id="@+id/tv_dialog_title"
-    android:layout_width="0dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center"
     android:maxLines="1"
     android:textAppearance="@style/Typography.suit.bold_20"
     android:textColor="@color/neutrals800"
-    app:layout_constraintEnd_toStartOf="@+id/iv_dialog_cancel"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     tools:text="Title" />
 
   <ImageView
     android:id="@+id/iv_dialog_cancel"
-    android:layout_width="wrap_content"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:src="@drawable/ic_close_20"
+    android:visibility="gone"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="@id/tv_dialog_title" />
 
@@ -47,9 +47,10 @@
 
   <designsystem.components.button.LinkMindPopUpButton
     android:id="@+id/btn_negative"
-    android:layout_width="wrap_content"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="18dp"
+    android:layout_marginEnd="5dp"
     app:PopUpBtnText="test"
     app:layout_constraintEnd_toStartOf="@+id/btn_positive"
     app:layout_constraintStart_toStartOf="parent"
@@ -57,12 +58,12 @@
 
   <designsystem.components.button.LinkMindPopUpButton
     android:id="@+id/btn_positive"
-    android:layout_width="wrap_content"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_marginStart="10dp"
     android:layout_marginTop="18dp"
+    android:layout_marginStart="5dp"
     app:PopUpBtnText="test"
+    app:layout_constraintStart_toEndOf="@id/btn_negative"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toEndOf="@+id/btn_negative"
     app:layout_constraintTop_toBottomOf="@id/tv_dialog_subtitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>

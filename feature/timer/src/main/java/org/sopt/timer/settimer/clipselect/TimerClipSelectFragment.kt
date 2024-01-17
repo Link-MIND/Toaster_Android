@@ -7,6 +7,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.button.state.LinkMindButtonState
+import designsystem.components.dialog.LinkMindDialog
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.sopt.timer.R
@@ -88,7 +89,17 @@ class TimerClipSelectFragment : BindingFragment<FragmentTimerClipSelectBinding>(
 
   private fun initCloseButtonClickListener() {
     binding.ivTimerClipSelectClose.onThrottleClick {
-      findNavController().navigateUp()
+      val linkMindDialog = LinkMindDialog(requireContext())
+      linkMindDialog.setTitle(org.sopt.mainfeature.R.string.timer_cancel_dialog_title)
+      linkMindDialog.setSubtitle(org.sopt.mainfeature.R.string.timer_cancel_dialog_sub_title)
+      linkMindDialog.setPositiveButton(org.sopt.mainfeature.R.string.positive_ok_msg) {
+        findNavController().navigateUp()
+        linkMindDialog.dismiss()
+      }
+      linkMindDialog.setNegativeButton(org.sopt.mainfeature.R.string.negative_close_cancel) {
+        linkMindDialog.dismiss()
+      }
+      linkMindDialog.show()
     }
   }
 }

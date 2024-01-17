@@ -32,9 +32,8 @@
     android:id="@+id/iv_setting"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="2dp"
-    android:paddingHorizontal="20dp"
-    android:paddingVertical="16dp"
+    android:layout_marginEnd="12dp"
+    android:padding="8dp"
     android:src="@drawable/ic_setting_24"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
