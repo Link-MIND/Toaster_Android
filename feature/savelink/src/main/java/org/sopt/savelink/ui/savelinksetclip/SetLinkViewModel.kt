@@ -1,4 +1,4 @@
-package org.sopt.savelink.ui.setlink
+package org.sopt.savelink.ui.savelinksetclip
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -53,7 +53,7 @@ class SetLinkViewModel @Inject constructor(
         categoryTitle = categoryTitle,
       ),
     ).onSuccess {
-      Log.d("saveCategoryTitleSuccess", "$it")
+      getCategoryAll()
     }.onFailure { Log.d("saveCategoryTitleFail", "$it") }
   }
 
@@ -65,7 +65,9 @@ class SetLinkViewModel @Inject constructor(
       ),
     ).onSuccess {
       navigateSetLink()
-    }.onFailure { Log.d("SaveLinkFail", "$it") }
+    }.onFailure {
+      showSnackBar()
+    }
   }
 
   fun updateCategoryId(categoryId: Long?) = intent {
@@ -84,5 +86,7 @@ class SetLinkViewModel @Inject constructor(
   fun navigateUp() = intent { postSideEffect(SaveLinkSetClipSideEffect.NavigateUp) }
   fun showBottomSheet() = intent { postSideEffect(SaveLinkSetClipSideEffect.ShowBottomSheet) }
   fun showDialog() = intent { postSideEffect(SaveLinkSetClipSideEffect.ShowDialog) }
+
+  private fun showSnackBar() = intent { postSideEffect(SaveLinkSetClipSideEffect.ShowSnackBar) }
 
 }
