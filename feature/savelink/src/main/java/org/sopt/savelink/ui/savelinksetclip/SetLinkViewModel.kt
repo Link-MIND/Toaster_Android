@@ -36,7 +36,7 @@ class SetLinkViewModel @Inject constructor(
               Clip(
                 null,
                 "전체 카테고리",
-                it.toastNumberInEntire.toInt(),
+                it.toastNumberInEntire,
                 false,
               ),
             ) + container.stateFlow.value.categoryList + it.categories.map { it.toModel() }

@@ -35,7 +35,7 @@ class ClipViewModel @Inject constructor(
 ) : ViewModel() {
   private val _categoryState = MutableStateFlow<UiState<List<Category>>>(UiState.Empty)
   val categoryState: StateFlow<UiState<List<Category>>> = _categoryState.asStateFlow()
-  val totalClip = Category(categoryId = 0, categoryTitle = "전체 클립", toastNum = 0)
+  var totalClip = Category(categoryId = 0, categoryTitle = "전체 클립", toastNum = 0)
 
   private val _linkState = MutableStateFlow<UiState<List<CategoryLink>>>(UiState.Empty)
   val linkState: StateFlow<UiState<List<CategoryLink>>> = _linkState.asStateFlow()
@@ -109,7 +109,7 @@ class ClipViewModel @Inject constructor(
     getCategoryAll.invoke().onSuccess {
       Log.d("test", "$it")
       val list: MutableList<Category> = it.categories.toMutableList()
-      totalClip.toastNum = it.toastNumberInEntire.toInt()
+      totalClip.toastNum = it.toastNumberInEntire
       list.add(0, totalClip)
       _categoryState.emit(UiState.Success(list))
     }.onFailure {

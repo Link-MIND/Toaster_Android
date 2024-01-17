@@ -52,7 +52,7 @@ class HomeViewModel @Inject constructor(
               Category(
                 0,
                 "전체 카테고리",
-                it.allToastNum,
+                it.allToastNum.toLong(),
               ),
             ) + it.mainCategoryDto + null
             ).distinctBy { it?.categoryId },

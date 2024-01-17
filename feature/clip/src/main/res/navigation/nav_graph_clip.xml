@@ -12,10 +12,6 @@
     <action
       android:id="@+id/action_navigation_clip_to_navigation_clip_link"
       app:destination="@id/navigation_clip_link" >
-      <argument
-        android:name="clipTitle"
-        app:argType="string"
-        android:defaultValue="전체 클립"/>
     </action>
     <action
       android:id="@+id/action_navigation_clip_to_navigation_clip_edit"
@@ -28,7 +24,7 @@
     tools:layout="@layout/fragment_clip_link">
     <argument
       android:name="categoryId"
-      app:argType="long" />
+      app:argType="long"/>
     <deepLink
       app:uri="featureSaveLink://ClipLinkFragment?categoryId={categoryId}" />
     <action

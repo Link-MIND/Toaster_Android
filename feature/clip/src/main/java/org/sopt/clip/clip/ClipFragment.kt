@@ -2,7 +2,6 @@ package org.sopt.clip.clip
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
@@ -54,12 +53,7 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
 
   private fun initClipAdapter() {
     clipAdapter = ClipAdapter { category ->
-      Toast.makeText(context, "클릭된 item id: $category.categoryId", Toast.LENGTH_SHORT).show()
-      bundle.putLong("clipId", category.categoryId)
-      bundle.putString("clipTitle", category.categoryTitle)
-      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_link, bundle)
-      Toast.makeText(context, "클릭된 item id: $clipId", Toast.LENGTH_SHORT).show()
-      val action = ClipFragmentDirections.actionNavigationClipToNavigationClipLink(clipId)
+      val action = ClipFragmentDirections.actionNavigationClipToNavigationClipLink(category.categoryId ?: 0)
       findNavController().navigate(action)
     }
     binding.rvClipClip.adapter = clipAdapter

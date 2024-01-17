@@ -13,7 +13,7 @@ class ClipEditViewHolder(
     if (clipData == null) return
     with(binding) {
       tvClipEditTitle.text = clipData.categoryTitle
-      if (clipData.categoryId.toInt() == 0) {
+      if (clipData.categoryId!!.toInt() == 0) {
         ivClipEditDelete.visibility = View.GONE
         ivClipEditTitleEdit.visibility = View.GONE
         ivClipEditFix.visibility = View.VISIBLE
@@ -22,10 +22,10 @@ class ClipEditViewHolder(
         ivClipEditTitleEdit.visibility = View.VISIBLE
         ivClipEditFix.visibility = View.GONE
         ivClipEditTitleEdit.setOnClickListener {
-          onClickItemClip(clipData.categoryId, "edit", itemId)
+          onClickItemClip(clipData.categoryId!!.toLong(), "edit", itemId)
         }
         ivClipEditDelete.setOnClickListener {
-          onClickItemClip(clipData.categoryId, "delete", itemId)
+          onClickItemClip(clipData.categoryId!!.toLong(), "delete", itemId)
         }
       }
     }

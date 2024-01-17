@@ -5,7 +5,7 @@ import org.sopt.model.category.Category
 data class Clip(
   val categoryId: Long?,
   val categoryTitle: String,
-  val toastNum: Int,
+  val toastNum: Long,
   var isSelected: Boolean,
 )
 
