@@ -1,5 +1,6 @@
 package org.sopt.clip.clipedit
 
+import android.util.Log
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.clip.ItemTouchHelperListener
@@ -15,10 +16,12 @@ class ItemTouchCallback(private val listener: ItemTouchHelperListener) : ItemTou
 
   override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
     listener.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
+    Log.d("test", "test")
     return false
   }
 
   override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
     listener.onItemSwipe(viewHolder.layoutPosition)
+    Log.d("test", "test2")
   }
 }

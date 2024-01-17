@@ -9,7 +9,7 @@ interface RemoteCategoryDataSource {
 
   suspend fun postAddCategoryTitle(categoryTitle: String?): Int
 
-  suspend fun deleteCategory(deleteCategoryList: List<Long>)
+  suspend fun deleteCategory(deleteCategoryList: Long)
 
   suspend fun getCategoryDuplicate(title: String): CategoryDuplicate
 
@@ -17,5 +17,5 @@ interface RemoteCategoryDataSource {
 
   suspend fun patchCategoryPriority(categoryId: Long, newPriority: Int)
 
-  suspend fun patchCategoryEditTitle(categoryId: Long, newTitle: String?)
+  suspend fun patchCategoryEditTitle(categoryId: Long, newTitle: String)
 }

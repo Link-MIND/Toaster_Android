@@ -5,7 +5,6 @@ import org.sopt.dataremote.category.api.CategoryService
 import org.sopt.dataremote.category.request.RequestCategoryEditTitleDTO
 import org.sopt.dataremote.category.request.RequestCategoryPriorityDTO
 import org.sopt.dataremote.category.request.RequestCategoryTitleDto
-import org.sopt.dataremote.category.request.toRequestDTO
 import org.sopt.dataremote.category.response.toCoreModel
 import org.sopt.model.category.CategoryDuplicate
 import org.sopt.model.category.CategoryLinkList
@@ -25,9 +24,9 @@ class RemoteCategoryDataSourceImpl @Inject constructor(
       ),
     ).code
 
-  override suspend fun deleteCategory(deleteCategoryList: List<Long>) {
+  override suspend fun deleteCategory(deleteCategoryList: Long) {
     categoryService.deleteCategory(
-      deleteCategoryList.toRequestDTO(),
+      deleteCategoryList,
     )
   }
 
@@ -50,10 +49,11 @@ class RemoteCategoryDataSourceImpl @Inject constructor(
       ),
     )
   }
-
-  override suspend fun patchCategoryEditTitle(categoryId: Long, newTitle: String?) {
-    categoryService.patchCategoryEdit(
-      RequestCategoryEditTitleDTO(categoryId, newTitle),
+  override suspend fun patchCategoryEditTitle(categoryId: Long, newTitle: String) {
+    requireNotNull(
+      categoryService.patchCategoryEdit(
+        RequestCategoryEditTitleDTO(categoryId, newTitle),
+      ),
     )
   }
 

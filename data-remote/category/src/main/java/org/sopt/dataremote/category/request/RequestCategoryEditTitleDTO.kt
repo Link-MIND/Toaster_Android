@@ -9,7 +9,7 @@ data class RequestCategoryEditTitleDTO(
   @SerialName("categoryId")
   val categoryId: Long,
   @SerialName("newTitle")
-  val newTitle: String?,
+  val categoryTitle: String,
 )
 
 fun RequestCategoryEditTitleDTO.toRequestDTO() = CategoryChangeTitle(

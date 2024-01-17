@@ -35,21 +35,30 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    clipEditAdapter = ClipEditAdapter { itemId, state, position ->
-      when (state) {
-        "delete" -> {
-          showDeleteDialog(itemId)
+    clipEditAdapter = ClipEditAdapter(
+      { itemId, state, position ->
+        when (state) {
+          "delete" -> {
+            showDeleteDialog(itemId)
 /*
           _categoryDeleteList.add(itemId)
 */
+          }
+          "edit" -> {
+            showHomeBottomSheet(itemId)
+          }
         }
 
-        "edit" -> {
-          showHomeBottomSheet(itemId)
-        }
-      }
-      Toast.makeText(context, "$state + itemId: $itemId", Toast.LENGTH_SHORT).show()
-    }
+        Toast.makeText(context, "$state + itemId: $itemId", Toast.LENGTH_SHORT).show()
+      },
+      deleteClip = {
+        viewModel.deleteCategory(it)
+      },
+      patchClip = { l: Long, i: Int ->
+        viewModel.patchCategoryEditPriority(l, i)
+      },
+    )
+
     binding.rvClipEdit.adapter = clipEditAdapter
     itemTouchHelper.attachToRecyclerView(binding.rvClipEdit)
     clipEditAdapter.submitList((viewModel.categoryState.value as UiState.Success).data)
@@ -70,16 +79,17 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
   }
 
   private fun onClickBackButton() {
-    binding.ivClipEditBack.onThrottleClick {
-      viewModel.deleteCategory(categoryDeleteList)
-      viewModel.categoryDeleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
-        when (state) {
-          is UiState.Success -> {
-            findNavController().navigateUp()
-          }
-          else -> {}
+    viewModel.categoryDeleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is UiState.Success -> {
+          Log.d("test", "testsak")
+          viewModel.getCategoryAll()
         }
+        else -> {}
       }
+    }
+    binding.ivClipEditBack.onThrottleClick {
+      findNavController().navigateUp()
     }
   }
 
@@ -113,9 +123,12 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     viewModel.editTitleState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
+          Log.d("test", "$state")
           viewModel.getCategoryAll()
         }
-        else -> {}
+        else -> {
+          Log.d("test", "$state")
+        }
       }
     }.launchIn(viewLifeCycleScope)
   }
@@ -128,15 +141,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
         deleteDialog.dismiss()
       }
       .setPositiveButton(R.string.edit_clip_delete_dialog_delete) {
-        viewModel.deleteCategory(listOf(itemId))
-        viewModel.categoryDeleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
-          when (state) {
-            is UiState.Success -> {
-              viewModel.getCategoryAll()
-            }
-            else -> {}
-          }
-        }
+        viewModel.deleteCategory(itemId)
 /*        viewModel.getCategoryAll()
         updateEditListView()*/
         deleteDialog.dismiss()

@@ -29,7 +29,6 @@ class ClipViewModel @Inject constructor(
   private val getCategoryDuplicate: GetCategoryDuplicateUseCase,
   private val getCategoryLink: GetCategoryLinkUseCase,
   private val postAddCategoryTitle: PostAddCategoryTitleUseCase,
-
   private val patchCategoryEditTitle: PatchCategoryEditTitleUseCase,
   private val patchCategoryEditPriority: PatchCategoryEditPriorityUseCase,
 ) : ViewModel() {
@@ -117,13 +116,13 @@ class ClipViewModel @Inject constructor(
     }
   }
 
-  fun deleteCategory(deleteCategoryList: List<Long>) = viewModelScope.launch {
+  fun deleteCategory(deleteCategoryList: Long) = viewModelScope.launch {
     deleteCategory.invoke(param = DeleteCategoryUseCase.Param(deleteCategoryList)).onSuccess {
       _categoryDeleteState.emit(UiState.Success(it))
-
+      getCategoryAll()
       Log.d("카테 삭제-함수안", "성공")
     }.onFailure {
-      Log.d("카테 삭제-함수안", "실패")
+      Log.d("카테 삭제-함수안", "실패 $it")
     }
   }
 
@@ -166,14 +165,15 @@ class ClipViewModel @Inject constructor(
       Log.d("카테 이름 수정", "실패")
       Log.d("들어온 id 타이틀", "$categoryId $newTitle")
     }
+  }
 
-    fun patchCategoryEditPriority(categoryId: Long, newPriority: Int) = viewModelScope.launch {
-      patchCategoryEditPriority.invoke(param = PatchCategoryEditPriorityUseCase.Param(categoryId, newPriority)).onSuccess {
-        Log.d("순위 변경", "성공 ")
-        _editTitleState.emit(UiState.Success(Unit))
-      }.onFailure {
-        Log.d("순위 변경", "실패")
-      }
+  fun patchCategoryEditPriority(categoryId: Long, newPriority: Int) = viewModelScope.launch {
+    patchCategoryEditPriority.invoke(param = PatchCategoryEditPriorityUseCase.Param(categoryId, newPriority)).onSuccess {
+      Log.d("순위 변경", "성공 ")
+      _editPriorityState.emit(UiState.Success(Unit))
+      getCategoryAll()
+    }.onFailure {
+      Log.d("순위 변경", "실패 $it")
     }
   }
 }

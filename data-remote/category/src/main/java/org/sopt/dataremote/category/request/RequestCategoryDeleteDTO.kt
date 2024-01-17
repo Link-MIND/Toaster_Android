@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RequestCategoryDeleteDTO(
-  @SerialName("deleteCategoryList")
-  val deleteCategoryList: List<Long>,
+  @SerialName("deleteCategoryDto")
+  val deleteCategoryList: Long,
 )
 
-fun List<Long>.toRequestDTO() = RequestCategoryDeleteDTO(deleteCategoryList = this)
+fun Long.toRequestDTO() = RequestCategoryDeleteDTO(deleteCategoryList = this)

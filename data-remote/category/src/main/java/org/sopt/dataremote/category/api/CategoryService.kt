@@ -1,6 +1,5 @@
 package org.sopt.dataremote.category.api
 
-import org.sopt.dataremote.category.request.RequestCategoryDeleteDTO
 import org.sopt.dataremote.category.request.RequestCategoryEditTitleDTO
 import org.sopt.dataremote.category.request.RequestCategoryPriorityDTO
 import org.sopt.dataremote.category.request.RequestCategoryTitleDto
@@ -21,6 +20,7 @@ interface CategoryService {
     const val CATEGORY = "category"
     const val ALL = "all"
     const val EDIT = "edit"
+    const val PRIORITY = "priority"
     const val CHECK = "check"
     const val CATEGORYID = "categoryId"
     const val TITLE = "title"
@@ -33,7 +33,7 @@ interface CategoryService {
   suspend fun postAddCategoryTitle(@Body categoryTitleDto: RequestCategoryTitleDto): BaseResponse<Int>
 
   @DELETE("/$CATEGORY")
-  suspend fun deleteCategory(@Body deleteCategory: RequestCategoryDeleteDTO): BaseResponse<Unit>
+  suspend fun deleteCategory(@Query("deleteCategoryDto") deleteCategory: Long): BaseResponse<Unit>
 
   @GET("/$CATEGORY/$CHECK")
   suspend fun getCategoryDuplicate(
@@ -46,7 +46,7 @@ interface CategoryService {
     @Query("filter") filter: String?,
   ): BaseResponse<ResponseLinksDTO>
 
-  @PATCH("/$CATEGORY/$EDIT")
+  @PATCH("/$CATEGORY/$PRIORITY")
   suspend fun patchCategoryPriority(@Body requestBody: RequestCategoryPriorityDTO): BaseResponse<Unit>
 
   @PATCH("/$CATEGORY/$TITLE")

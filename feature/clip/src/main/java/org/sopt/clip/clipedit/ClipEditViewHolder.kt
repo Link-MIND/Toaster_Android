@@ -8,6 +8,7 @@ import org.sopt.model.category.Category
 class ClipEditViewHolder(
   private val binding: ItemClipEditClipBinding,
   private val onClickItemClip: (Long, String, Long) -> Unit,
+  private val deleteClip: (Long) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(clipData: Category) {
     if (clipData == null) return

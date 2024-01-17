@@ -10,6 +10,6 @@ class DeleteCategoryUseCase @Inject constructor(
     deleteCategoryList = param.deleteCategoryList,
   )
   data class Param(
-    val deleteCategoryList: List<Long>,
+    val deleteCategoryList: Long,
   )
 }
