@@ -44,6 +44,7 @@
   <!-- edit clip -->
   <string name="edit_clip_guide_msg">클립을 누른 뒤 위아래로 드래그하여 순서를 수정하세요!</string>
   <string name="edit_clip_minus_description">클립을 삭제하려면 누르세요</string>
+  <string name="edit_clip_fix_description">고정된 클립입니다</string>
   <string name="edit_clip_edit_description">클립을 수정하려면 누르세요</string>
   <string name="edit_clip_edit_title">클립 이름 수정</string>
   <string name="edit_clip_delete_dialog_title">클립을 삭제하시겠어요?</string>
