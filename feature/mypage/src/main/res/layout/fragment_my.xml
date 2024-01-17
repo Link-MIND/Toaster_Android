@@ -32,7 +32,7 @@
     android:id="@+id/iv_setting"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="20dp"
+    android:layout_marginEnd="12dp"
     android:padding="8dp"
     android:src="@drawable/ic_setting_24"
     app:layout_constraintBottom_toBottomOf="@+id/cl_mypage_title"
