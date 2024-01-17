@@ -323,6 +323,8 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
           if (state.msg.contains("422")) {
             Log.e("로그", state.msg)
             requireContext().linkMindSnackBar(binding.btnTimePickerNext, "한 클립당 하나의 타이머만 설정 가능해요", true)
+          } else if (state.msg.contains("400")) {
+            requireContext().linkMindSnackBar(binding.btnTimePickerNext, "최대 5개의 타이머만 설정 가능해요", true)
           }
         }
 
