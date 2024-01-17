@@ -36,7 +36,7 @@ internal fun ResponseLinksDTO.ToastDto.toCoreModel() = CategoryLink(
   isRead = isRead,
   linkUrl = linkUrl,
   toastTitle = toastTitle,
-  thumbnailUrl = thumbnailUrl ?:"",
+  thumbnailUrl = thumbnailUrl ?: "",
 )
 
 internal fun ResponseLinksDTO.toCoreModel() = CategoryLinkList(

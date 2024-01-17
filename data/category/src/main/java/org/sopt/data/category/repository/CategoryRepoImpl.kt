@@ -33,7 +33,7 @@ class CategoryRepoImpl @Inject constructor(
 
   override suspend fun patchCategoryEditPriority(
     categoryId: Long,
-    newPriority: Int)
-  : Result<Unit> =
+    newPriority: Int,
+  ): Result<Unit> =
     runCatching { remoteCategoryDataSource.patchCategoryPriority(categoryId, newPriority) }
 }

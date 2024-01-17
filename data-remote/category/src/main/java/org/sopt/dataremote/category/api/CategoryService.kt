@@ -1,6 +1,5 @@
 package org.sopt.dataremote.category.api
 
-import org.sopt.dataremote.category.request.RequestCategoryDeleteDTO
 import org.sopt.dataremote.category.request.RequestCategoryEditTitleDTO
 import org.sopt.dataremote.category.request.RequestCategoryPriorityDTO
 import org.sopt.dataremote.category.request.RequestCategoryTitleDto

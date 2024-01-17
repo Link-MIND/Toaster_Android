@@ -39,27 +39,28 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     viewModel.getCategoryLink(categoryTitle)
 */
 
-    clipEditAdapter = ClipEditAdapter ({ itemId, state, position ->
-      when (state) {
-        "delete" -> {
-          showDeleteDialog(itemId)
+    clipEditAdapter = ClipEditAdapter(
+      { itemId, state, position ->
+        when (state) {
+          "delete" -> {
+            showDeleteDialog(itemId)
 /*
           _categoryDeleteList.add(itemId)
 */
+          }
+          "edit" -> {
+            showHomeBottomSheet(itemId)
+          }
         }
-        "edit" -> {
-          showHomeBottomSheet(itemId)
-        }
-      }
 
-      Toast.makeText(context, "$state + itemId: $itemId", Toast.LENGTH_SHORT).show()
-    },
+        Toast.makeText(context, "$state + itemId: $itemId", Toast.LENGTH_SHORT).show()
+      },
       deleteClip = {
         viewModel.deleteCategory(it)
       },
-      patchClip ={ l: Long, i: Int ->
-        viewModel.patchCategoryEditPriority(l ,i )
-      }
+      patchClip = { l: Long, i: Int ->
+        viewModel.patchCategoryEditPriority(l, i)
+      },
     )
 
     binding.rvClipEdit.adapter = clipEditAdapter
@@ -85,7 +86,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     viewModel.categoryDeleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          Log.d("test","testsak")
+          Log.d("test", "testsak")
           viewModel.getCategoryAll()
         }
         else -> {}
@@ -128,11 +129,11 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     viewModel.editTitleState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          Log.d("test","$state")
+          Log.d("test", "$state")
           viewModel.getCategoryAll()
         }
         else -> {
-          Log.d("test","$state")
+          Log.d("test", "$state")
         }
       }
     }.launchIn(viewLifeCycleScope)

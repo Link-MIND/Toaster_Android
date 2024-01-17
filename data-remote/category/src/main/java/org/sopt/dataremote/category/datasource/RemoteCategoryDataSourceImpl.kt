@@ -5,7 +5,6 @@ import org.sopt.dataremote.category.api.CategoryService
 import org.sopt.dataremote.category.request.RequestCategoryEditTitleDTO
 import org.sopt.dataremote.category.request.RequestCategoryPriorityDTO
 import org.sopt.dataremote.category.request.RequestCategoryTitleDto
-import org.sopt.dataremote.category.request.toRequestDTO
 import org.sopt.dataremote.category.response.toCoreModel
 import org.sopt.model.category.CategoryDuplicate
 import org.sopt.model.category.CategoryLinkList

@@ -175,5 +175,4 @@ class ClipViewModel @Inject constructor(
       Log.d("순위 변경", "실패 $it")
     }
   }
-
 }
