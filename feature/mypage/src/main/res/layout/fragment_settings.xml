@@ -57,17 +57,19 @@
     android:id="@+id/fl_settings_alert_off"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="12dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/cl_settings_title">
 
     <TextView
       android:id="@+id/tv_settings_alert_off"
-      android:layout_width="320dp"
-      android:layout_height="40dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
       android:layout_gravity="center"
       android:background="@drawable/shape_neutrals050_fill_12_rect"
       android:gravity="center"
+      android:padding="12dp"
       android:text="@string/settings_alert_off"
       android:textColor="@color/neutrals400" />
   </FrameLayout>
