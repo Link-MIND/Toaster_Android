@@ -14,6 +14,7 @@ android {
 dependencies {
   implementation(projects.core.datastore)
   implementation(projects.core.auth)
+  implementation(projects.domain.user)
   implementation(libs.process.phoenix)
   implementation(libs.coil)
 }
