@@ -94,7 +94,7 @@ class SetTimerViewModel @Inject constructor(
       val categoryId = (clipState.value as UiState.Success).data.first { it.isSelected }.id
       var hour = _selectedTime.value.hour.toInt()
       if (_selectedTime.value.timePeriod == "오후") hour += 12
-      if(hour == 12 || hour == 24){
+      if (hour == 12 || hour == 24) {
         hour -= 12
       }
       val time = "${ if (hour < 10) "0$hour" else hour.toString()}:${selectedTime.value.minute}"
@@ -113,8 +113,8 @@ class SetTimerViewModel @Inject constructor(
       _postTimerState.emit(UiState.Loading)
       var hour = _selectedTime.value.hour.toInt()
       if (_selectedTime.value.timePeriod == "오후") hour += 12
-      if(hour == 12) hour = 0
-      if(hour == 24) hour = 12
+      if (hour == 12) hour = 0
+      if (hour == 24) hour = 12
       val time = "${ if (hour < 10) "0$hour" else if (hour == 24) "00" else hour.toString()}:${selectedTime.value.minute}"
       patchTimerUseCase(timerId, time, formatRepeatListToIntList(repeatList.value)).onSuccess {
         Log.e("성공", "성공")

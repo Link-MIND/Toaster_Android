@@ -72,7 +72,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
       setSelectedPeriod(period)
       currentAmPmIndex.value = if (period == "오전") 1 else 2
       setSelectedHour(hour)
-      currentHourIndex.value = if(hour.toInt() == 12) hour.toInt() - 12 else hour.toInt()
+      currentHourIndex.value = if (hour.toInt() == 12) hour.toInt() - 12 else hour.toInt()
       minute?.let {
         setSelectedMinute(it)
         currentMinuteIndex.value = it.toInt() + 1
