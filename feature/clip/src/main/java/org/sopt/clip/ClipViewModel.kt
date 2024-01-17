@@ -16,6 +16,7 @@ import org.sopt.domain.category.category.usecase.GetCategoryLinkUseCase
 import org.sopt.domain.category.category.usecase.PatchCategoryEditPriorityUseCase
 import org.sopt.domain.category.category.usecase.PatchCategoryEditTitleUseCase
 import org.sopt.domain.category.category.usecase.PostAddCategoryTitleUseCase
+import org.sopt.domain.link.usecase.DeleteLinkUseCase
 import org.sopt.model.category.Category
 import org.sopt.model.category.CategoryDuplicate
 import org.sopt.model.category.CategoryLink
@@ -31,6 +32,7 @@ class ClipViewModel @Inject constructor(
   private val postAddCategoryTitle: PostAddCategoryTitleUseCase,
   private val patchCategoryEditTitle: PatchCategoryEditTitleUseCase,
   private val patchCategoryEditPriority: PatchCategoryEditPriorityUseCase,
+  private val deleteLinkUseCase: DeleteLinkUseCase
 ) : ViewModel() {
   private val _categoryState = MutableStateFlow<UiState<List<Category>>>(UiState.Empty)
   val categoryState: StateFlow<UiState<List<Category>>> = _categoryState.asStateFlow()
@@ -103,7 +105,13 @@ class ClipViewModel @Inject constructor(
   fun set(value: Boolean) {
     mockDataListState.value = value
   }
-
+  fun deleteLink(toastId: Long) = viewModelScope.launch {
+    deleteLinkUseCase.invoke(param = DeleteLinkUseCase.Param(toastId=toastId)).onSuccess {
+      Log.d("링크 삭제", "성공")
+    }.onFailure {
+      Log.d("카테 삭제-함수안", "실패 $it")
+    }
+  }
   fun getCategoryAll() = viewModelScope.launch {
     getCategoryAll.invoke().onSuccess {
       Log.d("test", "$it")

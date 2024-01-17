@@ -21,6 +21,7 @@ import org.sopt.model.category.CategoryLink
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
+import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.UiState
 import org.sopt.ui.view.onThrottleClick
 
@@ -70,7 +71,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     clipLinkAdapter = ClipLinkAdapter { linkDTO, state ->
       when (state) {
         "click" -> {
-          naviagateToWebViewFragment(linkDTO)
+          naviagateToWebViewFragment(linkDTO.linkUrl?:"")
         }
 
         "delete" -> {
@@ -81,11 +82,9 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     binding.rvCategoryLink.adapter = clipLinkAdapter
   }
 
-  private fun naviagateToWebViewFragment(link: CategoryLink) {
-    val bundle = Bundle().apply {
-      putString("url", link.linkUrl)
-    }
-    findNavController().navigate(R.id.action_navigation_clip_link_to_webViewFragment, bundle)
+  private fun naviagateToWebViewFragment(site: String) {
+    navigateToDestination("featureSaveLink://webViewFragment?site=${site}")
+
   }
 
   private fun onClickBackButton() {
@@ -94,7 +93,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     }
   }
 
-  private fun initToggleClickListener(): List<LinkDTO> {
+  private fun initToggleClickListener(){
     with(binding) {
       btnClipAll.setOnClickListener {
         updateTogglesNDividerVisible(SelectedToggle.ALL)
@@ -111,7 +110,6 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
         updateLinkView()
       }
     }
-    return viewModel.mockLinkData
   }
 
   private fun updateTogglesNDividerVisible(selectedNow: SelectedToggle) {
@@ -137,7 +135,16 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
       }
     }
   }
-
+  private fun navigateToDestination(destination: String) {
+    val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
+      destination,
+      enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
+      exitAnim = android.R.anim.fade_out,
+      popEnterAnim = android.R.anim.fade_in,
+      popExitAnim = org.sopt.mainfeature.R.anim.to_bottom,
+    )
+    findNavController().navigate(request, navOptions)
+  }
   private fun initDividerVisible(selectedNow: SelectedToggle) {
     with(binding) {
       when (selectedNow) {
