@@ -2,6 +2,8 @@ package org.sopt.timer.modifytimer
 
 import android.os.Bundle
 import android.view.View
+import designsystem.components.dialog.LinkMindDialog
+import org.sopt.timer.R
 import org.sopt.timer.databinding.FragmentModifyTimerBottomSheetBinding
 import org.sopt.ui.base.BindingBottomSheetDialogFragment
 import org.sopt.ui.view.onThrottleClick
@@ -24,8 +26,18 @@ class ModifyTimerBottomSheetFragment :
     }
 
     binding.tvModifyTimerDelete.onThrottleClick {
-      handleDelete.invoke()
-      dismiss()
+      val linkMindDialog = LinkMindDialog(requireContext())
+      linkMindDialog.setTitle(org.sopt.mainfeature.R.string.timer_delete_dialog_title)
+        .setSubtitle(org.sopt.mainfeature.R.string.timer_delete_dialog_sub_title)
+        .setNegativeButton(org.sopt.mainfeature.R.string.negative_close_cancel) {
+          linkMindDialog.dismiss()
+        }
+        .setPositiveButton(org.sopt.mainfeature.R.string.positive_delete) {
+          linkMindDialog.dismiss()
+          handleDelete.invoke()
+          dismiss()
+        }
+        .show()
     }
   }
 

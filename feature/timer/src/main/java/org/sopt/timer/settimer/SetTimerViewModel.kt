@@ -8,9 +8,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import org.sopt.domain.category.category.usecase.GetCategoryAllUseCase
+import org.sopt.model.category.Category
 import org.sopt.model.timer.Repeat
 import org.sopt.timer.model.Clip
 import org.sopt.timer.model.TimePicker
+import org.sopt.timer.model.toUiModel
 import org.sopt.timer.usecase.FormatRepeatListToIntList
 import org.sopt.timer.usecase.FormatRepeatListToStringList
 import org.sopt.timer.usecase.PatchTimerUseCase
@@ -24,9 +27,10 @@ class SetTimerViewModel @Inject constructor(
   private val formatRepeatListToStringList: FormatRepeatListToStringList,
   private val patchTimerUseCase: PatchTimerUseCase,
   private val formatRepeatListToIntList: FormatRepeatListToIntList,
+  private val getCategoryAllUseCase: GetCategoryAllUseCase,
 ) : ViewModel() {
-  private val _clipList = MutableStateFlow<List<Clip>>(emptyList())
-  val clipList: StateFlow<List<Clip>> = _clipList.asStateFlow()
+  private val _clipState = MutableStateFlow<UiState<List<Clip>>>(UiState.Empty)
+  val clipState: StateFlow<UiState<List<Clip>>> = _clipState.asStateFlow()
 
   private val _repeatList = MutableStateFlow<List<Repeat>>(emptyList())
   val repeatList: StateFlow<List<Repeat>> = _repeatList.asStateFlow()
@@ -45,13 +49,9 @@ class SetTimerViewModel @Inject constructor(
   val currentMinuteIndex = MutableStateFlow(1)
   val currentAmPmIndex = MutableStateFlow(1)
 
+  val isFirst = MutableStateFlow(true)
   fun initSetTimer() {
-    _clipList.value = listOf(
-      Clip("전체 클립", 3, false),
-      Clip("전체 클립", 3, false),
-      Clip("전체 클립", 3, false),
-      Clip("전체 클립", 3, false),
-    )
+    _clipState.value = UiState.Empty
     _repeatList.value = listOf(
       Repeat("매일 (월~일)", false),
       Repeat("주중마다 (월~금)", false),
@@ -72,16 +72,30 @@ class SetTimerViewModel @Inject constructor(
     currentMinuteIndex.value = 1
 
     currentAmPmIndex.value = 1
+
+    isFirst.value = true
+  }
+
+  fun getCategoryAll() {
+    viewModelScope.launch {
+      getCategoryAllUseCase().onSuccess {
+        val list: MutableList<Category> = it.categories.toMutableList()
+        list.add(0, Category(0, "전체 클립", it.toastNumberInEntire))
+        _clipState.emit(UiState.Success(list.toUiModel()))
+      }.onFailure {
+        Log.e("실패", it.message.toString())
+      }
+    }
   }
 
   fun postTimer() {
     viewModelScope.launch {
       _postTimerState.emit(UiState.Loading)
-      // val category = clipList.value.first { it.isSelected }
+      val categoryId = (clipState.value as UiState.Success).data.first { it.isSelected }.id
       var hour = _selectedTime.value.hour.toInt()
       if (_selectedTime.value.timePeriod == "오후") hour += 12
       val time = "${ if (hour < 10) "0$hour" else hour.toString()}:${selectedTime.value.minute}"
-      postTimerUseCase(/*category.*/17, time, formatRepeatListToIntList(repeatList.value)).onSuccess {
+      postTimerUseCase(categoryId, time, formatRepeatListToIntList(repeatList.value)).onSuccess {
         Log.e("성공", "성공")
         _postTimerState.emit(UiState.Success(it))
       }.onFailure {
@@ -123,10 +137,14 @@ class SetTimerViewModel @Inject constructor(
   }
 
   fun setClipList(clipList: List<Clip>) {
-    _clipList.value = clipList
+    _clipState.value = UiState.Success(clipList)
   }
 
   fun setRepeatList(repeatList: List<Repeat>) {
     _repeatList.value = repeatList
+  }
+
+  fun setRepeat(num: Int) {
+    _repeatList.value[num].isSelected = !(_repeatList.value[num].isSelected)
   }
 }

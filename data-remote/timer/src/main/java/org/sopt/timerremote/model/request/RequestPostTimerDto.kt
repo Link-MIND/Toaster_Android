@@ -7,7 +7,7 @@ import org.sopt.model.timer.TimerData
 @Serializable
 data class RequestPostTimerDto(
   @SerialName("categoryId")
-  val categoryId: Long,
+  val categoryId: Long?,
   @SerialName("remindTime")
   val remindTime: String,
   @SerialName("remindDates")
