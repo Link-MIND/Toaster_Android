@@ -16,7 +16,6 @@ class HomeViewModel @Inject constructor(
   private val getRecommendSite: GetRecommendSite,
   private val getWeekBestLink: GetWeekBestLink,
 ) : ViewModel() {
-
   fun getMainPageUserClip() = viewModelScope.launch {
     getMainPageUserClip.invoke().onSuccess {
       Log.d("MainUserSuccess", "$it")
