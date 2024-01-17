@@ -26,7 +26,10 @@ import org.sopt.ui.view.onThrottleClick
 class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClipEditBinding.inflate(it) }) {
   private val viewModel by activityViewModels<ClipViewModel>()
   private lateinit var clipEditAdapter: ClipEditAdapter
-  private val itemTouchHelper by lazy { ItemTouchHelper(ItemTouchCallback(clipEditAdapter)) }
+  private val itemTouchHelper by lazy { ItemTouchHelper(ItemTouchCallback(clipEditAdapter))
+  }
+  private var _categoryDeleteList :  MutableList<Long> = mutableListOf()
+  val categoryDeleteList: MutableList<Long> = _categoryDeleteList
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     val categoryTitle:String ="전체 클립" //인텐드나 번들로 받으면 될듯
@@ -38,6 +41,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
       when (state) {
         "delete" -> {
           showDeleteDialog()
+          _categoryDeleteList.add(itemId)
         }
 
         "edit" -> {
@@ -67,7 +71,15 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
 
   private fun onClickBackButton() {
     binding.ivClipEditBack.onThrottleClick {
-      findNavController().navigateUp()
+      viewModel.deleteCategory(categoryDeleteList)
+      viewModel.categoryDeleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
+        when (state) {
+          is UiState.Success -> {
+            findNavController().navigateUp()
+          }
+          else -> {}
+        }
+      }
     }
   }
 
@@ -77,8 +89,14 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     editTitleBottomSheet.apply {
       setBottomSheetHint(org.sopt.mainfeature.R.string.home_new_clip_info)
       setTitle(org.sopt.mainfeature.R.string.edit_clip_edit_title)
-      setErroMsg(org.sopt.mainfeature.R.string.error_clip_length)
-      bottomSheetConfirmBtnClick {
+      /*if((viewModel.duplicateState.value is UiState.Success)){
+        if((viewModel.duplicateState.value as UiState.Success).data.isDuplicate)
+          setErroMsg(org.sopt.mainfeature.R.string.error_clip_name)
+        }else {
+        setErroMsg(org.sopt.mainfeature.R.string.error_clip_length)
+      }*/
+      bottomSheetConfirmBtnClick { //dto 수정됨
+
         dismiss()
         requireContext().linkMindSnackBar(binding.root, "클립 수정 완료!", false)
       }
