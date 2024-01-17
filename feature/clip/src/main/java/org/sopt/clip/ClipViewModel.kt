@@ -53,6 +53,9 @@ class ClipViewModel @Inject constructor(
   private val _editPriorityState = MutableStateFlow<UiState<Unit>>(UiState.Empty)
   val editPriorityState: StateFlow<UiState<Unit>> = _editPriorityState.asStateFlow()
 
+  private val _deleteState = MutableStateFlow<UiState<Boolean>>(UiState.Empty)
+  val deleteState: StateFlow<UiState<Boolean>> = _deleteState.asStateFlow()
+
   init {
     getCategoryAll()
   }
@@ -107,9 +110,10 @@ class ClipViewModel @Inject constructor(
   }
   fun deleteLink(toastId: Long) = viewModelScope.launch {
     deleteLinkUseCase.invoke(param = DeleteLinkUseCase.Param(toastId=toastId)).onSuccess {
-      Log.d("링크 삭제", "성공")
+      if (it==200) _deleteState.emit(UiState.Success(true))
+      else _deleteState.emit(UiState.Success(false))
     }.onFailure {
-      Log.d("카테 삭제-함수안", "실패 $it")
+      _deleteState.emit(UiState.Failure("fail"))
     }
   }
   fun getCategoryAll() = viewModelScope.launch {

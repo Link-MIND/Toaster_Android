@@ -61,7 +61,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
 
     binding.rvClipEdit.adapter = clipEditAdapter
     itemTouchHelper.attachToRecyclerView(binding.rvClipEdit)
-    clipEditAdapter.submitList((viewModel.categoryState.value as UiState.Success).data)
+    clipEditAdapter.submitList((viewModel.categoryState.value as UiState.Success).data?: emptyList())
     updateEditListView()
 
     onClickBackButton()
