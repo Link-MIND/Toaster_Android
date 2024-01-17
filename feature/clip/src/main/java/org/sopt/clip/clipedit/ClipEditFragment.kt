@@ -50,7 +50,6 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
         viewModel.deleteCategory(it)
       },
       onLongClick = {
-        viewModel.update(it)
         viewModel.last2.flowWithLifecycle(viewLifeCycle).onEach { state ->
           when (state) {
             is UiState.Success -> {
@@ -118,9 +117,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
         Log.d("사용자가 입력한 클립명", "$clipNewName") // string 값 잘 가져옴
         viewModel.patchCategoryEditTitle(itemId, clipNewName)
         Log.d("사용자가 입력한 클립명2", "$clipNewName") // string 값 잘 가져옴
-
         editCategoryTitle()
-
         dismiss()
         requireContext().linkMindSnackBar(binding.root, "클립 수정 완료!", false)
       }
@@ -131,7 +128,6 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     viewModel.editTitleState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          Log.d("test", "$state")
           viewModel.getCategoryAll()
         }
 

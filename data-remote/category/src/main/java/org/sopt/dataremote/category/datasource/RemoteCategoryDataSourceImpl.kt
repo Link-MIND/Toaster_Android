@@ -26,7 +26,7 @@ class RemoteCategoryDataSourceImpl @Inject constructor(
 
   override suspend fun deleteCategory(deleteCategoryList: Long) {
     categoryService.deleteCategory(
-      deleteCategoryList,
+      deleteCategoryList
     )
   }
 

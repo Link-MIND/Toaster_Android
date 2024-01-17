@@ -99,7 +99,6 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
 
   private fun naviagateToWebViewFragment(site: String) {
     navigateToDestination("featureSaveLink://webViewFragment?site=${site}")
-
   }
 
   private fun onClickBackButton() {
