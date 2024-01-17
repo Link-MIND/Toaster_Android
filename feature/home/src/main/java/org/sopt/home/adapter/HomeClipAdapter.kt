@@ -3,15 +3,15 @@ package org.sopt.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import org.sopt.home.ClipDummy
 import org.sopt.home.databinding.ItemHomeClipBinding
 import org.sopt.home.viewholder.HomeClipViewHolder
+import org.sopt.model.category.Category
 import org.sopt.ui.view.ItemDiffCallback
 
 class HomeClipAdapter(
-  private val onClickClip: (ClipDummy) -> Unit,
+  private val onClickClip: (Category) -> Unit,
   private val onClickEmptyClip: () -> Unit,
-) : ListAdapter<ClipDummy, HomeClipViewHolder>(DiffUtil) {
+) : ListAdapter<Category, HomeClipViewHolder>(DiffUtil) {
   override fun onBindViewHolder(holder: HomeClipViewHolder, position: Int) {
     holder.onBind(getItem(position), position)
   }
@@ -27,8 +27,8 @@ class HomeClipAdapter(
   override fun getItemCount() = currentList.size.coerceAtMost(4)
 
   companion object {
-    private val DiffUtil = ItemDiffCallback<ClipDummy>(
-      onItemsTheSame = { old, new -> old.title == new.title },
+    private val DiffUtil = ItemDiffCallback<Category>(
+      onItemsTheSame = { old, new -> old.categoryId == new.categoryId },
       onContentsTheSame = { old, new -> old == new },
     )
   }

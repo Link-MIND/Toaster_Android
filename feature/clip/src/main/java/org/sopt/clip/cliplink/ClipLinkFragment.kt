@@ -1,11 +1,13 @@
 package org.sopt.clip.cliplink
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -31,8 +33,10 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     var clipId = arguments?.getLong("clipId")
-
     viewModel.getCategoryLink(readFilter, clipId)
+    val args: ClipLinkFragmentArgs by navArgs()
+    val categoryId = args.categoryId
+    Log.d("test", "$categoryId")
     initClipAdapter()
     initViewState(isDataNull)
 

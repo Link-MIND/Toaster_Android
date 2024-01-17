@@ -47,9 +47,9 @@ class LinkMindBottomSheet(context: Context) {
     binding.etvBottomSheet.editText.setHint(textId)
   }
 
-  fun bottomSheetConfirmBtnClick(onClick: () -> Unit) {
+  fun bottomSheetConfirmBtnClick(onClick: (String) -> Unit) {
     binding.btnBottomSheet.btnClick {
-      onClick()
+      onClick(binding.etvBottomSheet.editText.text.toString())
     }
   }
 
@@ -68,7 +68,7 @@ class LinkMindBottomSheet(context: Context) {
     binding.tvBottomSheetTitle.setText(textId)
   }
 
-  fun showErrorMsg(): Boolean = binding.etvBottomSheet.editText.text.length > 10 || binding.etvBottomSheet.editText.text.isEmpty()
+  fun showErrorMsg(): Boolean = binding.etvBottomSheet.editText.text.length > 15 || binding.etvBottomSheet.editText.text.isEmpty()
 
   fun setErroMsg(@StringRes textId: Int) {
     binding.tvBottomSheetErrorText.setText(textId)

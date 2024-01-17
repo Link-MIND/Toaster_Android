@@ -6,15 +6,19 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.dialog.LinkMindDialog
 import designsystem.components.toast.linkMindSnackBar
+import org.orbitmvi.orbit.viewmodel.observe
 import org.sopt.maincontainer.databinding.ActivityMainBinding
+import org.sopt.ui.context.hideKeyboard
+import org.sopt.ui.keyboard.KeyboardUtils
 import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.onThrottleClick
 
@@ -25,6 +29,8 @@ class MainActivity : AppCompatActivity() {
 
   private lateinit var navController: NavController
 
+  private val viewModel by viewModels<MainViewModel>()
+
   private val linkMindDialog by lazy {
     LinkMindDialog(this)
   }
@@ -34,12 +40,27 @@ class MainActivity : AppCompatActivity() {
     binding = ActivityMainBinding.inflate(layoutInflater)
     setContentView(binding.root)
     initView()
+    collectState()
   }
 
   private fun initView() {
     setFcv()
     changeBottomNavigationFragment()
     setBottomVisible()
+  }
+
+  private fun collectState() {
+    viewModel.observe(this, state = ::render, sideEffect = ::handleSideEffect)
+  }
+
+  private fun render(mainState: MainState) {
+    binding.bnvMain.isVisible = mainState.isBottomNavigationBarVisible
+  }
+
+  private fun handleSideEffect(sideEffect: MainSideEffect) {
+    when (sideEffect) {
+      is MainSideEffect.NavigateSaveLink -> navigateToDestination("featureSaveLink://saveLinkFragment?clipboardLink=")
+    }
   }
 
   private fun setFcv() {
@@ -74,23 +95,19 @@ class MainActivity : AppCompatActivity() {
 
   private fun setBottomVisible() {
     navController.addOnDestinationChangedListener { _, destination, _ ->
-      binding.bnvMain.visibility = if (destination.id in listOf(
-          R.id.navigation_home,
-          R.id.navigation_clip,
-          R.id.navigation_timer,
-          R.id.navigation_my,
-        )
+      if (destination.id == R.id.navigation_home || destination.id == R.id.navigation_clip ||
+        destination.id == R.id.navigation_timer || destination.id == R.id.navigation_my
       ) {
-        View.VISIBLE
+        viewModel.updateBnvVisible(true)
       } else {
-        View.GONE
+        viewModel.updateBnvVisible(false)
       }
     }
   }
 
   private fun onClickFab() {
     binding.fabMain.onThrottleClick {
-      navigateToDestination("featureSaveLink://saveLinkFragment?clipboardLink=")
+      viewModel.navigateSaveLink()
     }
   }
 
@@ -102,7 +119,9 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun navigateToDestination(url: String) {
-    val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
+    val (request, navOptions) = DeepLinkUtil.getNavRequestPopUpAndAnimption(
+      popUpToId = org.sopt.savelink.R.id.nav_graph_save_link,
+      inclusive = true,
       url,
       enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
       exitAnim = android.R.anim.fade_out,
@@ -133,18 +152,23 @@ class MainActivity : AppCompatActivity() {
     if (item.isNullOrEmpty()) return
 
     val pasteData = item.toString()
+    viewModel.updateClipBoard(pasteData)
+    hideKeyBoard()
+
     val action: () -> Unit = if (pasteData.contains("http")) {
-      { clipboard.setPrimaryClip(ClipData.newPlainText("", "")) }
+      {
+        clipboard.setPrimaryClip(ClipData.newPlainText("", ""))
+      }
     } else {
       {
         this.linkMindSnackBar(binding.root, "올바르지 않은 링크입니다", false)
         clipboard.setPrimaryClip(ClipData.newPlainText("", ""))
       }
     }
-    showRevokeCommonDialog(action, pasteData)
+    showRevokeCommonDialog(action)
   }
 
-  private fun showRevokeCommonDialog(deleteClipBoard: () -> Unit, clipboardLink: String) {
+  private fun showRevokeCommonDialog(deleteClipBoard: () -> Unit) {
     linkMindDialog.setTitle(org.sopt.mainfeature.R.string.clipboard_dialog_title)
       .setSubtitle(org.sopt.mainfeature.R.string.clipboard_dialog_sub_title)
       .setNegativeButton(org.sopt.mainfeature.R.string.negative_close_cancel) {
@@ -152,11 +176,18 @@ class MainActivity : AppCompatActivity() {
         deleteClipBoard()
       }
       .setPositiveButton(org.sopt.mainfeature.R.string.positive_ok_save) {
-        navigateToDestination("featureSaveLink://saveLinkFragment?clipboardLink=$clipboardLink")
+        if (viewModel.container.stateFlow.value.clipboard.contains("http")) {
+          navigateToDestination("featureSaveLink://saveLinkFragment?clipboardLink=${viewModel.container.stateFlow.value.clipboard}")
+        }
         deleteClipBoard()
         linkMindDialog.dismiss()
       }
       .show()
+  }
+
+  private fun hideKeyBoard() {
+    KeyboardUtils.removeKeyboardVisibilityListener(binding.root)
+    this.hideKeyboard(binding.root)
   }
 
   companion object {
