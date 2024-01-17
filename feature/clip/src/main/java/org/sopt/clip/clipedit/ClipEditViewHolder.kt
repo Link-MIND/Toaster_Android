@@ -1,5 +1,6 @@
 package org.sopt.clip.clipedit
 
+import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import org.sopt.clip.databinding.ItemClipEditClipBinding
 import org.sopt.model.category.Category
@@ -12,10 +13,14 @@ class ClipEditViewHolder(
     if (clipData == null) return
     with(binding) {
       tvClipEditTitle.text = clipData.categoryTitle
-      if (clipData.categoryTitle == "전체 클립") {
-        ivClipEditDelete.setImageResource(org.sopt.mainfeature.R.drawable.ic_pin_24)
+      if (clipData.categoryId.toInt() == 0) {
+        ivClipEditDelete.visibility = View.GONE
         ivClipEditTitleEdit.visibility = View.GONE
+        ivClipEditFix.visibility = View.VISIBLE
       } else {
+        ivClipEditDelete.visibility = View.VISIBLE
+        ivClipEditTitleEdit.visibility = View.VISIBLE
+        ivClipEditFix.visibility = View.GONE
         ivClipEditTitleEdit.setOnClickListener {
           onClickItemClip(clipData.categoryId, "edit", itemId)
         }
