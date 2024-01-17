@@ -29,13 +29,9 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     super.onViewCreated(view, savedInstanceState)
 
     initClipAdapter()
-    if (setEmptyMsgVisible()) return
     viewModel.getCategoryAll()
     updateClipList()
     onClickSearchButton()
-/*
-    onClickListView()
-*/
     onClickEditButton()
     onClickAddButton()
   }
@@ -44,7 +40,12 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     viewModel.categoryState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
+          if (state.data.isEmpty()) {
+            binding.ivClipEmpty.visibility = View.VISIBLE
+            binding.tvClipEmpty.visibility = View.VISIBLE
+          }
           clipAdapter.submitList(state.data)
+          setEmptyMsgVisible()
         }
 
         else -> {}
@@ -60,11 +61,9 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     binding.rvClipClip.adapter = clipAdapter
   }
 
-  private fun setEmptyMsgVisible(): Boolean {
-    if (viewModel.mockClipData.isNullOrEmpty()) return true
+  private fun setEmptyMsgVisible() {
     binding.ivClipEmpty.visibility = View.GONE
     binding.tvClipEmpty.visibility = View.GONE
-    return false
   }
 
   private fun onClickAddButton() {
