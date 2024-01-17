@@ -14,5 +14,5 @@ data class RequestCategoryEditTitleDTO(
 
 fun RequestCategoryEditTitleDTO.toRequestDTO() = CategoryChangeTitle(
   categoryId = this.categoryId,
-  newTitle = this.categoryTitle,
+  newTitle = this.newTitle,
 )

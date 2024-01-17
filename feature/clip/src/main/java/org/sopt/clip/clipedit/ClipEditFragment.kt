@@ -34,10 +34,6 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
   val categoryDeleteList: MutableList<Long> = _categoryDeleteList
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    val categoryTitle: String = "전체 클립" // 인텐드나 번들로 받으면 될듯
-/*
-    viewModel.getCategoryLink(categoryTitle)
-*/
 
     clipEditAdapter = ClipEditAdapter(
       { itemId, state, position ->
@@ -113,12 +109,10 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
         val clipNewName = getText()
         Log.d("사용자가 입력한 클립명", "$clipNewName") // string 값 잘 가져옴
         viewModel.patchCategoryEditTitle(itemId, clipNewName)
+        Log.d("사용자가 입력한 클립명2", "$clipNewName") // string 값 잘 가져옴
 
         editCategoryTitle()
 
-/*
-        updateEditListView()
-*/
         dismiss()
         requireContext().linkMindSnackBar(binding.root, "클립 수정 완료!", false)
       }

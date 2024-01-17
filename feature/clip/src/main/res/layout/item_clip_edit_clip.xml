@@ -37,11 +37,11 @@
     android:id="@+id/cl_clip_edit_clip"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
     android:background="@drawable/shape_white_fill_12_rect"
     android:orientation="horizontal"
+    android:layout_marginStart="42dp"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toEndOf="@id/iv_clip_edit_delete"
+    app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
 

@@ -11,7 +11,7 @@ data class Clip(
 
 internal fun Category.toModel() = Clip(
   categoryId = categoryId,
-  categoryTitle = categoryTitle,
+  categoryTitle = categoryTitle ?: "",
   toastNum = toastNum,
   isSelected = false,
 )

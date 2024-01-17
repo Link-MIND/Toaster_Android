@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -14,6 +16,7 @@ import kotlinx.coroutines.flow.onEach
 import org.sopt.common.intentprovider.IntentProvider
 import org.sopt.common.intentprovider.LOGIN
 import org.sopt.datastore.datastore.SecurityDataStore
+import org.sopt.model.user.SettingPageData
 import org.sopt.mypage.databinding.FragmentSettingsBinding
 import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
@@ -44,21 +47,6 @@ class SettingsFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    val toasterToggle = binding.settingsAlertToggle
-    val tvSettingsAlertOff = binding.tvSettingsAlertOff
-
-    val startStateId = org.sopt.mainfeature.R.id.start
-
-    updateVisibility(tvSettingsAlertOff, toasterToggle.getState(), startStateId)
-
-    toasterToggle.btnClick {
-      updateVisibility(tvSettingsAlertOff, toasterToggle.getState(), startStateId)
-    }
-
-    binding.tvSetLogout.setOnClickListener {
-      viewModel.logout()
-    }
-
     viewModel.logoutState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
@@ -71,10 +59,6 @@ class SettingsFragment : Fragment() {
         else -> {}
       }
     }.launchIn(viewLifeCycleScope)
-
-    binding.tvWithdraw.setOnClickListener {
-      viewModel.withdraw()
-    }
 
     viewModel.withdrawState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
@@ -89,12 +73,78 @@ class SettingsFragment : Fragment() {
       }
     }.launchIn(viewLifeCycleScope)
 
+    viewModel.settingState.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is UiState.Success -> {
+          initSettingPageData(state.data)
+        }
+
+        else -> {}
+      }
+    }.launchIn(viewLifeCycleScope)
+
+    viewModel.getUserInfo()
+
+    viewModel.pushIsAllowed.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        true -> {
+          binding.tvSettingsAlertOff.isGone = true
+        }
+
+        false -> {
+          binding.tvSettingsAlertOff.isVisible = true
+        }
+      }
+    }.launchIn(viewLifeCycleScope)
+
+    onClickToggle()
+    onClickLogoutBtn()
+    onClickCloseBtn()
+    onClickLeftBtn()
+    onClickWithdrawBtn()
+  }
+
+  private fun onClickCloseBtn() {
+    binding.ivSettingsClose.onThrottleClick {
+      findNavController().navigateUp()
+    }
+  }
+
+  private fun onClickLeftBtn() {
     binding.ivSettingsLeft.onThrottleClick {
       findNavController().navigateUp()
     }
   }
 
-  private fun updateVisibility(view: View, state: Int, startStateId: Int) {
-    view.visibility = if (state == startStateId) View.VISIBLE else View.INVISIBLE
+  private fun onClickLogoutBtn() {
+    binding.tvSetLogout.onThrottleClick {
+      viewModel.logout()
+    }
+  }
+
+  private fun onClickToggle() {
+    binding.tgPushAllowed.onThrottleClick {
+      viewModel.patchPush(!viewModel.pushIsAllowed.value)
+      binding.settingsAlertToggle.transition()
+    }
+  }
+
+  private fun onClickWithdrawBtn() {
+    binding.tvWithdraw.setOnClickListener {
+      viewModel.withdraw()
+    }
+  }
+
+  private fun initSettingPageData(data: SettingPageData) {
+    with(binding) {
+      tvUserName.text = data.nickname
+      if (data.fcmIsAllowed) {
+        tvSettingsAlertOff.isGone = true
+        settingsAlertToggle.initToggleState(true)
+      } else {
+        tvSettingsAlertOff.isVisible = true
+        settingsAlertToggle.initToggleState(false)
+      }
+    }
   }
 }

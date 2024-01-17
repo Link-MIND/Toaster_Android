@@ -20,6 +20,9 @@
     android:label="fragment_setting"
     tools:layout="@layout/fragment_settings" >
     <deepLink app:uri="featureMyPage://fragmentSetting" />
+    <action
+      android:id="@+id/action_navigation_setting_to_navigation_my"
+      app:destination="@id/navigation_my" />
   </fragment>
   <fragment
     android:id="@+id/navigation_search"
