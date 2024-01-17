@@ -13,9 +13,12 @@ import org.sopt.domain.category.category.usecase.DeleteCategoryUseCase
 import org.sopt.domain.category.category.usecase.GetCategoryAllUseCase
 import org.sopt.domain.category.category.usecase.GetCategoryDuplicateUseCase
 import org.sopt.domain.category.category.usecase.GetCategoryLinkUseCase
-import org.sopt.domain.category.category.usecase.PatchCategoryEditUseCase
+import org.sopt.domain.category.category.usecase.PatchCategoryEditPriorityUseCase
+import org.sopt.domain.category.category.usecase.PatchCategoryEditTitleUseCase
 import org.sopt.domain.category.category.usecase.PostAddCategoryTitleUseCase
 import org.sopt.model.category.Category
+import org.sopt.model.category.CategoryDuplicate
+import org.sopt.model.category.CategoryLink
 import org.sopt.ui.view.UiState
 import javax.inject.Inject
 
@@ -25,12 +28,29 @@ class ClipViewModel @Inject constructor(
   private val deleteCategory: DeleteCategoryUseCase,
   private val getCategoryDuplicate: GetCategoryDuplicateUseCase,
   private val getCategoryLink: GetCategoryLinkUseCase,
-  private val patchCategoryEdit: PatchCategoryEditUseCase,
   private val postAddCategoryTitle: PostAddCategoryTitleUseCase,
+
+  private val patchCategoryEditTitle: PatchCategoryEditTitleUseCase,
+  private val patchCategoryEditPriority: PatchCategoryEditPriorityUseCase,
 ) : ViewModel() {
   private val _categoryState = MutableStateFlow<UiState<List<Category>>>(UiState.Empty)
   val categoryState: StateFlow<UiState<List<Category>>> = _categoryState.asStateFlow()
   val totalClip = Category(categoryId = 0, categoryTitle = "전체 클립", toastNum = 0)
+
+  private val _linkState = MutableStateFlow<UiState<List<CategoryLink>>>(UiState.Empty)
+  val linkState: StateFlow<UiState<List<CategoryLink>>> = _linkState.asStateFlow()
+
+  private val _duplicateState = MutableStateFlow<UiState<CategoryDuplicate>>(UiState.Empty)
+  val duplicateState: StateFlow<UiState<CategoryDuplicate>> = _duplicateState.asStateFlow()
+
+  private val _categoryDeleteState = MutableStateFlow<UiState<Unit>>(UiState.Empty)
+  val categoryDeleteState: StateFlow<UiState<Unit>> = _categoryDeleteState.asStateFlow()
+
+  private val _editTitleState = MutableStateFlow<UiState<Unit>>(UiState.Empty)
+  val editTitleState: StateFlow<UiState<Unit>> = _editTitleState.asStateFlow()
+
+  private val _editPriorityState = MutableStateFlow<UiState<Unit>>(UiState.Empty)
+  val editPriorityState: StateFlow<UiState<Unit>> = _editPriorityState.asStateFlow()
 
   init {
     getCategoryAll()
@@ -89,7 +109,7 @@ class ClipViewModel @Inject constructor(
     getCategoryAll.invoke().onSuccess {
       Log.d("test", "$it")
       val list: MutableList<Category> = it.categories.toMutableList()
-      totalClip.toastNum = it.toastNumberInEntire.toInt
+      totalClip.toastNum = it.toastNumberInEntire.toInt()
       list.add(0, totalClip)
       _categoryState.emit(UiState.Success(list))
     }.onFailure {
@@ -98,34 +118,61 @@ class ClipViewModel @Inject constructor(
   }
 
   fun deleteCategory(deleteCategoryList: List<Long>) = viewModelScope.launch {
-    deleteCategory.invoke(param = DeleteCategoryUseCase.Param(deleteCategoryList)).onSuccess{
-      Log.d("카테 삭제", "성공")
-    }.onFailure{
+    deleteCategory.invoke(param = DeleteCategoryUseCase.Param(deleteCategoryList)).onSuccess {
+      _categoryDeleteState.emit(UiState.Success(it))
 
+      Log.d("카테 삭제-함수안", "성공")
+    }.onFailure {
+      Log.d("카테 삭제-함수안", "실패")
     }
   }
 
-  fun getCategoryDuplicate(title: String) =viewModelScope.launch {
-    getCategoryDuplicate.invoke(param=GetCategoryDuplicateUseCase.Param(title)).onSuccess {
+  // 서버 통신 확인 완
+  fun getCategoryDuplicate(title: String) = viewModelScope.launch {
+    getCategoryDuplicate.invoke(param = GetCategoryDuplicateUseCase.Param(title)).onSuccess {
+      _duplicateState.emit(UiState.Success(it))
       Log.d("카테 중복 체크", "$title")
-    }.onFailure{
+    }.onFailure {
       Log.d("카테 중복 체크", "실패")
     }
   }
 
-  fun getCategoryLink(filter: String, isAllCategory: Boolean)= viewModelScope.launch{
-    getCategoryLink.invoke(param=GetCategoryLinkUseCase.Param(filter = filter, isAllCategory = isAllCategory)).onSuccess {
+  fun getCategoryLink(filter: String?, categoryId: Long?) = viewModelScope.launch {
+    getCategoryLink(param = GetCategoryLinkUseCase.Param(filter = filter, categoryId = categoryId)).onSuccess {
+      val list: MutableList<CategoryLink> = it.toastListDto.toMutableList()
+      _linkState.emit(UiState.Success(list))
       Log.d("카테 안의 링크 검색", "성공")
     }.onFailure {
-      Log.d("카테 안의 링크 검색", "실패")
+      Log.d("카테 안의 링크 검색", it.message.toString())
     }
   }
 
-  fun postAddCategoryTitle(categoryTitle: String)=viewModelScope.launch {
-    postAddCategoryTitle.invoke(param=PostAddCategoryTitleUseCase.Param(categoryTitle)).onSuccess {
-      Log.d("카테 추가", "성공")
+  // 확인 완
+  fun postAddCategoryTitle(categoryTitle: String) = viewModelScope.launch {
+    postAddCategoryTitle.invoke(param = PostAddCategoryTitleUseCase.Param(categoryTitle)).onSuccess {
+      Log.d("카테 추가", "성공 ")
+      getCategoryAll()
     }.onFailure {
       Log.d("카테 추가", "실패")
+    }
+  }
+
+  fun patchCategoryEditTitle(categoryId: Long, newTitle: String) = viewModelScope.launch {
+    patchCategoryEditTitle.invoke(param = PatchCategoryEditTitleUseCase.Param(categoryId, newTitle)).onSuccess {
+      Log.d("카테 이름 수정", "성공 ")
+      _editPriorityState.emit(UiState.Success(Unit))
+    }.onFailure {
+      Log.d("카테 이름 수정", "실패")
+      Log.d("들어온 id 타이틀", "$categoryId $newTitle")
+    }
+
+    fun patchCategoryEditPriority(categoryId: Long, newPriority: Int) = viewModelScope.launch {
+      patchCategoryEditPriority.invoke(param = PatchCategoryEditPriorityUseCase.Param(categoryId, newPriority)).onSuccess {
+        Log.d("순위 변경", "성공 ")
+        _editTitleState.emit(UiState.Success(Unit))
+      }.onFailure {
+        Log.d("순위 변경", "실패")
+      }
     }
   }
 }
