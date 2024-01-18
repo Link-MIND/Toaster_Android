@@ -33,7 +33,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBi
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    linkResultAdapter = LinkResultAdapter { naviagateToWebViewFragment(it.linkUrl!!, it.toastId) }
+    linkResultAdapter = LinkResultAdapter { naviagateToWebViewFragment(it.linkUrl!!, it.toastId, it.isRead!!) }
     clipResultAdapter = ClipResultAdapter {
       navigateToDestination(
         "featureSaveLink://ClipLinkFragment?categoryId=${it.categoryId}",
@@ -145,8 +145,8 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBi
     binding.editText.text.clear()
   }
 
-  private fun naviagateToWebViewFragment(site: String, toastId: Long) {
-    navigateToDestination("featureSaveLink://webViewFragment?site=$site,,,$toastId")
+  private fun naviagateToWebViewFragment(site: String, toastId: Long, isRead: Boolean) {
+    navigateToDestination("featureSaveLink://webViewFragment?site=$site,,,$toastId,,,$isRead")
   }
 
   private fun navigateToDestination(destination: String) {
