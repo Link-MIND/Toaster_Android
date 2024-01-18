@@ -39,7 +39,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
           }
 
           "edit" -> {
-            showHomeBottomSheet(itemId)
+            showHomeBottomSheet(itemId, title)
           }
         }
       },
@@ -101,12 +101,13 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     }
   }
 
-  private fun showHomeBottomSheet(itemId: Long) {
+  private fun showHomeBottomSheet(itemId: Long, itemText: String) {
     val editTitleBottomSheet = LinkMindBottomSheet(requireContext())
     editTitleBottomSheet.show()
     editTitleBottomSheet.apply {
       setBottomSheetHint(org.sopt.mainfeature.R.string.home_new_clip_info)
       setTitle(org.sopt.mainfeature.R.string.edit_clip_edit_title)
+      setBottomSheetText(itemText)
       bottomSheetConfirmBtnClick { // dto 수정됨
         val clipNewName = getText()
         viewModel.patchCategoryEditTitle(itemId, clipNewName)

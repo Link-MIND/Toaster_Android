@@ -89,18 +89,27 @@
     app:layout_constraintStart_toEndOf="@id/tv_clip_all"
     app:layout_constraintTop_toBottomOf="@id/cl_clip_search" />
 
-  <androidx.appcompat.widget.AppCompatButton
+  <ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_plus_18_orange"
+    app:layout_constraintTop_toTopOf="@id/btn_clip_add"
+    app:layout_constraintBottom_toBottomOf="@id/btn_clip_add"
+    app:layout_constraintStart_toStartOf="@id/btn_clip_add" />
+
+  <TextView
     android:id="@+id/btn_clip_add"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_marginTop="15dp"
-    android:layout_marginEnd="20dp"
     android:background="@color/transparent"
     android:minWidth="0dp"
     android:minHeight="0dp"
-    android:paddingVertical="4dp"
+    android:paddingTop="19dp"
+    android:paddingBottom="19dp"
+    android:paddingEnd="20dp"
+    android:paddingStart="20dp"
     android:text="@string/clip_add_clip"
-    android:textAppearance="@style/Typography.suit.medium_12"
+    android:textAppearance="@style/Typography.suit.bold_12"
     android:textColor="@color/primary"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toBottomOf="@id/cl_clip_search" />
