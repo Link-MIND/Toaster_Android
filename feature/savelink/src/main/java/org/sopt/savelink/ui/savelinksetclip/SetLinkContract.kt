@@ -6,6 +6,7 @@ data class SaveLinkSetClipState(
   val categoryList: List<Clip> = emptyList(),
   val categoryId: Long? = 0,
   val url: String = "",
+  val allClipCountNum : Long =0,
 )
 
 sealed interface SaveLinkSetClipSideEffect {

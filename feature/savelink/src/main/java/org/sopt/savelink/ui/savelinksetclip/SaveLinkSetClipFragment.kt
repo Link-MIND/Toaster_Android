@@ -38,7 +38,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
   }
 
   private fun initView() {
-    binding.btnSaveLinkComplete.state = LinkMindButtonState.DISABLE
+    binding.btnSaveLinkComplete.state = LinkMindButtonState.ENABLE
     viewModel.getCategoryAll()
     val clipboardLink = arguments?.getString("clipboardLink")
     viewModel.updateUrl(clipboardLink ?: "")
@@ -50,6 +50,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
 
   private fun render(homeState: SaveLinkSetClipState) {
     initSetClipAdapter(homeState.categoryList)
+    binding.tvSaveLinkClipCount.text="전체 (${homeState.allClipCountNum})"
     adapter.submitList(homeState.categoryList)
   }
 
@@ -78,7 +79,6 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
           binding.btnSaveLinkComplete.state = LinkMindButtonState.ENABLE
         } else {
           list.onEach { it.isSelected = false }
-          binding.btnSaveLinkComplete.state = LinkMindButtonState.DISABLE
         }
       },
     )

@@ -31,13 +31,14 @@ class SetLinkViewModel @Inject constructor(
     getCategoryAllUseCase().onSuccess {
       reduce {
         state.copy(
+          allClipCountNum = it.toastNumberInEntire,
           categoryList = (
             listOf(
               Clip(
                 null,
-                "전체 카테고리",
+                "전체 클립",
                 it.toastNumberInEntire,
-                false,
+                true,
               ),
             ) + container.stateFlow.value.categoryList + it.categories.map { it.toModel() }
             ).distinctBy { it.categoryId },
