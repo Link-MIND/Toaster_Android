@@ -8,6 +8,22 @@
 - Development Environment : `Hedgehog | 2023.1.1`
 
 <br>
+## Features
+Architecture
+- MV ~
+- 모듈 구조
+
+Technology Stacks
+- Dependency injection with Hilt
+- Local Data with DataStore(security)
+- Networking with Retrofit,OkHttp
+- Service with FireBase
+- Utils with detekt,ktlint
+- Navigation with JetPack Navigation
+
+Librarys
+- KaKao
+- orbit mvi
 
 ## AOS Developer
 
