@@ -144,7 +144,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
         if (showErrorMsg()) return@bottomSheetConfirmBtnClick
         viewModel.saveCategoryTitle(it)
         dismiss()
-        requireContext().linkMindSnackBar(binding.vSnack, "성공", false)
+        requireContext().linkMindSnackBar(binding.vSnack, "클립 생성 완료!", false)
       }
     }
   }
