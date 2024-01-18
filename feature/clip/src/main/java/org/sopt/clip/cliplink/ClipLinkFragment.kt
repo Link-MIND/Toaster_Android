@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -23,7 +24,7 @@ import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
 class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClipLinkBinding.inflate(it) }) {
-  private val viewModel by activityViewModels<ClipViewModel>()
+  private val viewModel : ClipLinkViewModel by viewModels()
   private lateinit var clipLinkAdapter: ClipLinkAdapter
   var readFilter: String = "ALL"
   var isDataNull: Boolean = true
@@ -40,6 +41,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     initViewState(isDataNull)
     updateLinkDelete(categoryId)
     updateLinkView()
+    updateAllClipCount()
     initToggleClickListener()
     onClickBackButton()
   }
@@ -141,7 +143,17 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
       viewModel.toggleSelectedPast = selectedNow
     }
   }
+  private fun updateAllClipCount() {
+    viewModel.allClipCount.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is UiState.Success -> {
+          binding.tvClipLinkAllCount.text= "(${state.data})"
+        }
 
+        else -> {}
+      }
+    }.launchIn(viewLifeCycleScope)
+  }
   private fun initToggleVisible(toggle: SelectedToggle, state: Boolean) {
     with(binding) {
       when (toggle) {
