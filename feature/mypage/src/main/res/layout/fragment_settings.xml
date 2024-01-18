@@ -102,7 +102,7 @@
       android:layout_marginTop="22dp"
       android:layout_marginBottom="22dp"
       android:text="@string/user_nim"
-      android:textAppearance="@style/Typography.suit.medium_18"
+      android:textAppearance="@style/Typography.suit.regular_18"
       android:textColor="@color/neutrals900"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toEndOf="@id/tv_user_name"

@@ -8,7 +8,7 @@ import org.sopt.model.category.Category
 import org.sopt.ui.view.ItemDiffCallback
 
 class ClipEditAdapter(
-  private val itemClick: (Long, String, Long) -> Unit,
+  private val itemClick: (Long, String, Long, String) -> Unit,
   private val deleteClip: (Long) -> Unit,
   private val onLongClick: (Long) -> Unit,
   private val onLongClick2: (Long) -> Unit,
