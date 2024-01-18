@@ -160,7 +160,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
       findNavController().navigateUp()
     }
   }
-  
+
   private fun navigateToDestination(destination: String) {
     val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
       destination,
