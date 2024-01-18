@@ -20,6 +20,7 @@ import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.context.hideKeyboard
 import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
+import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
@@ -32,8 +33,12 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBi
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    linkResultAdapter = LinkResultAdapter()
-    clipResultAdapter = ClipResultAdapter()
+    linkResultAdapter = LinkResultAdapter { naviagateToWebViewFragment(it.linkUrl!!, it.toastId) }
+    clipResultAdapter = ClipResultAdapter {
+      navigateToDestination(
+        "featureSaveLink://ClipLinkFragment?categoryId=${it.categoryId}",
+      )
+    }
     mResultAdapter = ConcatAdapter(linkResultAdapter, clipResultAdapter)
 
     binding.rcSearchResult.adapter = mResultAdapter
@@ -138,5 +143,20 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBi
 
   private fun clearSearch() {
     binding.editText.text.clear()
+  }
+
+  private fun naviagateToWebViewFragment(site: String, toastId: Long) {
+    navigateToDestination("featureSaveLink://webViewFragment?site=$site,,,$toastId")
+  }
+
+  private fun navigateToDestination(destination: String) {
+    val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
+      destination,
+      enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
+      exitAnim = android.R.anim.fade_out,
+      popEnterAnim = android.R.anim.fade_in,
+      popExitAnim = org.sopt.mainfeature.R.anim.to_bottom,
+    )
+    findNavController().navigate(request, navOptions)
   }
 }
