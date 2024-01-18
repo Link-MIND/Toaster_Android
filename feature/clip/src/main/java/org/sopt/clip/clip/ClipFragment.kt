@@ -31,6 +31,7 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     initClipAdapter()
     viewModel.getCategoryAll()
     updateClipList()
+    updateAllClipCount()
     collectAddCategory()
     onClickSearchButton()
     onClickEditButton()
@@ -54,6 +55,17 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     }.launchIn(viewLifeCycleScope)
   }
 
+  private fun updateAllClipCount() {
+    viewModel.allClipCount.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is UiState.Success -> {
+          binding.tvClipAllCount.text= "(${state.data})"
+        }
+
+        else -> {}
+      }
+    }.launchIn(viewLifeCycleScope)
+  }
   private fun collectAddCategory() {
     viewModel.duplicateState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {

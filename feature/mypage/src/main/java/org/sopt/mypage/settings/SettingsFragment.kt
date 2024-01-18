@@ -59,7 +59,12 @@ class SettingsFragment : Fragment() {
           requireActivity().finish()
         }
 
-        else -> {}
+        else -> {
+          dataStore.setAutoLogin(false)
+          val intent = intentProvider.getIntent()
+          startActivity(intent)
+          requireActivity().finish()
+        }
       }
     }.launchIn(viewLifeCycleScope)
 

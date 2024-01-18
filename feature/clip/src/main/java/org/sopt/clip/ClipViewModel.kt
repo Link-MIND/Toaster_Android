@@ -35,7 +35,6 @@ class ClipViewModel @Inject constructor(
 ) : ViewModel() {
   private val _categoryState = MutableStateFlow<UiState<List<Category>>>(UiState.Empty)
   val categoryState: StateFlow<UiState<List<Category>>> = _categoryState.asStateFlow()
-  var totalClip = Category(categoryId = 0, categoryTitle = "전체 클립", toastNum = 0)
 
   private val _linkState = MutableStateFlow<UiState<List<CategoryLink>>>(UiState.Empty)
   val linkState: StateFlow<UiState<List<CategoryLink>>> = _linkState.asStateFlow()
@@ -57,6 +56,9 @@ class ClipViewModel @Inject constructor(
 
   private val _last2 = MutableStateFlow<UiState<Int>>(UiState.Empty)
   val last2: StateFlow<UiState<Int>> = _last2.asStateFlow()
+
+  private val _allClipCount = MutableStateFlow<UiState<Long>>(UiState.Empty)
+  val allClipCount: StateFlow<UiState<Long>> = _allClipCount.asStateFlow()
 
   fun update2(a: Int) = viewModelScope.launch {
     _last2.emit(UiState.Success(a))
@@ -84,6 +86,7 @@ class ClipViewModel @Inject constructor(
       val allCategoryList = listOf<Category>(
         Category(0, "전체 클립", it.toastNumberInEntire),
       )
+      _allClipCount.emit(UiState.Success(it.toastNumberInEntire))
       _categoryState.emit(UiState.Success(allCategoryList + it.categories))
     }.onFailure {
       Log.e("실패", it.message.toString())
@@ -114,7 +117,6 @@ class ClipViewModel @Inject constructor(
     getCategoryLink(param = GetCategoryLinkUseCase.Param(filter = filter, categoryId = categoryId)).onSuccess {
       val list: MutableList<CategoryLink> = it.toastListDto.toMutableList()
       _linkState.emit(UiState.Success(list))
-      Log.d("카테 안의 링크 검색", "성공")
     }.onFailure {
       Log.d("카테 안의 링크 검색", it.message.toString())
     }
@@ -123,7 +125,6 @@ class ClipViewModel @Inject constructor(
   // 확인 완
   fun postAddCategoryTitle(categoryTitle: String) = viewModelScope.launch {
     postAddCategoryTitle.invoke(param = PostAddCategoryTitleUseCase.Param(categoryTitle)).onSuccess {
-      Log.d("카테 추가", "성공 ")
       getCategoryAll()
     }.onFailure {
       Log.d("카테 추가", "실패")
@@ -131,19 +132,15 @@ class ClipViewModel @Inject constructor(
   }
 
   fun patchCategoryEditTitle(categoryId: Long, newTitle: String) = viewModelScope.launch {
-    Log.d("뷰모델", "$newTitle") // string 값 잘 가져옴
     patchCategoryEditTitle.invoke(param = PatchCategoryEditTitleUseCase.Param(categoryId, newTitle)).onSuccess {
-      Log.d("카테 이름 수정", "성공 ")
       _editTitleState.emit(UiState.Success(Unit))
     }.onFailure {
-      Log.d("카테 이름 수정", "실패")
-      Log.d("들어온 id 타이틀", "$categoryId $newTitle")
+      Log.d("카테 이름 수정", "실패 $it")
     }
   }
 
   fun patchCategoryEditPriority(categoryId: Long, newPriority: Int) = viewModelScope.launch {
     patchCategoryEditPriority.invoke(param = PatchCategoryEditPriorityUseCase.Param(categoryId, newPriority)).onSuccess {
-      Log.d("순위 변경", "성공 ")
       _editPriorityState.emit(UiState.Success(Unit))
       getCategoryAll()
     }.onFailure {

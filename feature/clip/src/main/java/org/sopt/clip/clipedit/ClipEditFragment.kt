@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -25,7 +26,7 @@ import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
 class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClipEditBinding.inflate(it) }) {
-  private val viewModel by activityViewModels<ClipViewModel>()
+  private val viewModel: ClipEditViewModel by viewModels()
   private lateinit var clipEditAdapter: ClipEditAdapter
   private val itemTouchHelper by lazy {
     ItemTouchHelper(ItemTouchCallback(clipEditAdapter))
@@ -45,7 +46,6 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
             showHomeBottomSheet(itemId)
           }
         }
-        Toast.makeText(context, "$state + itemId: $itemId", Toast.LENGTH_SHORT).show()
       },
       deleteClip = {
         viewModel.deleteCategory(it)
@@ -54,7 +54,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
         viewModel.last2.flowWithLifecycle(viewLifeCycle).onEach { state ->
           when (state) {
             is UiState.Success -> {
-              viewModel.patchCategoryEditPriority(it, state.data)
+              viewModel.patchCategoryEditPriority(it, state.data+1)
             }
 
             else -> {}
@@ -67,12 +67,6 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     )
     binding.rvClipEdit.adapter = clipEditAdapter
     itemTouchHelper.attachToRecyclerView(binding.rvClipEdit)
-    val originalList = (viewModel.categoryState.value as UiState.Success).data ?: emptyList()
-    val newList = originalList.filter { it.categoryId?.toInt() != 0 }
-    Log.d("test", "$originalList")
-//    Log.d("test2","$newList")
-//    clipEditAdapter.submitList(newList)
-
     updateEditListView()
     onClickBackButton()
   }
@@ -112,17 +106,9 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     editTitleBottomSheet.apply {
       setBottomSheetHint(org.sopt.mainfeature.R.string.home_new_clip_info)
       setTitle(org.sopt.mainfeature.R.string.edit_clip_edit_title)
-      /*if((viewModel.duplicateState.value is UiState.Success)){
-        if((viewModel.duplicateState.value as UiState.Success).data.isDuplicate)
-          setErroMsg(org.sopt.mainfeature.R.string.error_clip_name)
-        }else {
-        setErroMsg(org.sopt.mainfeature.R.string.error_clip_length)
-      }*/
       bottomSheetConfirmBtnClick { // dto 수정됨
         val clipNewName = getText()
-        Log.d("사용자가 입력한 클립명", "$clipNewName") // string 값 잘 가져옴
         viewModel.patchCategoryEditTitle(itemId, clipNewName)
-        Log.d("사용자가 입력한 클립명2", "$clipNewName") // string 값 잘 가져옴
         editCategoryTitle()
         dismiss()
         requireContext().linkMindSnackBar(binding.root, "클립 수정 완료!", false)
@@ -153,8 +139,6 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
       }
       .setPositiveButton(R.string.edit_clip_delete_dialog_delete) {
         viewModel.deleteCategory(itemId)
-        /*        viewModel.getCategoryAll()
-                updateEditListView()*/
         deleteDialog.dismiss()
       }
       .show()
