@@ -24,7 +24,6 @@ import org.sopt.mypage.R
 import org.sopt.mypage.databinding.FragmentSettingsBinding
 import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
-import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.UiState
 import org.sopt.ui.view.onThrottleClick
 import javax.inject.Inject
@@ -69,7 +68,6 @@ class SettingsFragment : Fragment() {
         }
 
         else -> {
-
         }
       }
     }.launchIn(viewLifeCycleScope)
@@ -91,7 +89,6 @@ class SettingsFragment : Fragment() {
         }
 
         else -> {
-
         }
       }
     }.launchIn(viewLifeCycleScope)
@@ -178,11 +175,11 @@ class SettingsFragment : Fragment() {
       val dialog = LinkMindDialog(requireContext())
       dialog.setTitle(org.sopt.mainfeature.R.string.setting_withdraw_dialog_title)
       dialog.setSubtitle(org.sopt.mainfeature.R.string.setting_withdraw_dialog_sub_title)
-      dialog.setNegativeButton(org.sopt.mainfeature.R.string.negative_withdraw){
+      dialog.setNegativeButton(org.sopt.mainfeature.R.string.negative_withdraw) {
         viewModel.withdraw()
         dialog.dismiss()
       }
-      dialog.setPositiveButton(org.sopt.mainfeature.R.string.positive_withdraw){
+      dialog.setPositiveButton(org.sopt.mainfeature.R.string.positive_withdraw) {
         dialog.dismiss()
       }
       dialog.show()
