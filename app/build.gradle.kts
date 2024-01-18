@@ -32,13 +32,11 @@ dependencies {
   implementation(projects.core.authimpl)
   implementation(projects.core.designsystem)
 
-  implementation(projects.data.linkminddata)
   implementation(projects.data.oauthdata)
   implementation(projects.data.timer)
   implementation(projects.data.category)
   implementation(projects.data.user)
   implementation(projects.data.link)
-  implementation(projects.data.linkminddata)
   implementation(projects.data.oauthdata)
   implementation(projects.data.home)
 
