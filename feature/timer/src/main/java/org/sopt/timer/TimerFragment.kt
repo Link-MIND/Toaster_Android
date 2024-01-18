@@ -60,7 +60,9 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
     initWaitTimerAdapter()
     initPlusButtonClickListener()
     initSetTimerButtonClickListener()
+    initNotiOnButtonClickListener()
   }
+
 
   override fun onResume() {
     super.onResume()
@@ -296,6 +298,13 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
         return@onThrottleClick
       }
       findNavController().navigate(org.sopt.timer.R.id.action_navigation_timer_to_navigation_timer_clip_select)
+    }
+  }
+
+  private fun initNotiOnButtonClickListener() {
+    binding.clTimerPermission.onThrottleClick {
+      if(viewModel.uiState.value is TimerUiState.DeviceAllowed || viewModel.uiState.value is TimerUiState.NotAllowed)
+      navigateToDestination("featureMyPage://fragmentSetting")
     }
   }
 
