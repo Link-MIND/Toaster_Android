@@ -25,7 +25,8 @@
     android:background="@drawable/shape_neutrals050_fill_12_rect"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toEndOf="@id/iv_left"
-    app:layout_constraintTop_toTopOf="parent">
+    app:layout_constraintTop_toTopOf="@id/iv_left"
+    app:layout_constraintBottom_toBottomOf="@id/iv_left">
 
     <EditText
       android:id="@+id/edit_text"
@@ -35,6 +36,10 @@
       android:imeOptions="actionSearch"
       android:inputType="text"
       android:maxLines="1"
+      android:hint="검색어를 입력해주세요"
+      android:textAppearance="@style/Typography.suit.medium_16"
+      android:textColor="@color/neutrals900"
+      android:textColorHint="@color/neutrals400"
       android:paddingStart="12dp"
       android:paddingTop="11dp"
       android:paddingEnd="12dp"

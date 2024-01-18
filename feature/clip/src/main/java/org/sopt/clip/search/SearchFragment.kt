@@ -105,7 +105,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBi
       viewModel.getSearchResult(query)
       handleSearchResultsVisibility()
     } else {
-      handleEmptyResults()
+      handleEmptyQuery()
     }
     updateSearchQuery(query)
     requireContext().hideKeyboard(requireView())
@@ -123,6 +123,11 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBi
   private fun handleEmptyResults() {
     binding.rcSearchResult.isVisible = false
     binding.clNoneResults.isVisible = true
+  }
+
+  private fun handleEmptyQuery() {
+    binding.rcSearchResult.isVisible = false
+    binding.clNoneResults.isVisible = false
   }
 
   private fun handleCancel() {
