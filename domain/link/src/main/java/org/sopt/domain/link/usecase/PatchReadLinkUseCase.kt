@@ -8,9 +8,11 @@ class PatchReadLinkUseCase @Inject constructor(
 ) {
   suspend operator fun invoke(param: Param): Result<Boolean> = linkRepository.patchReadLink(
     toastId = param.toastId,
+    isRead = param.isRead
   )
 
   data class Param(
     val toastId: Long,
+    val isRead: Boolean
   )
 }
