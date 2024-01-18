@@ -185,7 +185,7 @@ class SettingsFragment : Fragment() {
       dialog.setPositiveButton(org.sopt.mainfeature.R.string.positive_withdraw){
         dialog.dismiss()
       }
-      viewModel.withdraw()
+      dialog.show()
     }
   }
 
