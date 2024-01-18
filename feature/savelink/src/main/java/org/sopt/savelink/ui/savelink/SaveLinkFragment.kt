@@ -52,7 +52,6 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
           showErrorState(binding.tvSaveLinkError)
         }
       }
-
     } else {
       binding.btnSaveLinkNext.apply {
         state = LinkMIndFullWidthButtonState.DISABLE
@@ -143,8 +142,9 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     binding.btnSaveLinkNext.apply {
       state = LinkMIndFullWidthButtonState.ENABLE_BLACK
       binding.btnSaveLinkNext.btnClick {
-        if (binding.etvSaveCopyLink.editText.text.isEmpty())
+        if (binding.etvSaveCopyLink.editText.text.isEmpty()) {
           showErrorState(binding.tvSaveLinkError)
+        }
       }
 //      state = if (state == LinkMIndFullWidthButtonState.DISABLE) {
 //        LinkMIndFullWidthButtonState.DISABLE
@@ -193,7 +193,6 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
       if (binding.btnSaveLinkNext.state != LinkMIndFullWidthButtonState.DISABLE) {
         viewModel.navigateSetLink()
       }
-
     }
   }
 

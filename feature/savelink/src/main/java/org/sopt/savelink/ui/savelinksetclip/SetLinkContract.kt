@@ -6,8 +6,8 @@ data class SaveLinkSetClipState(
   val categoryList: List<Clip> = emptyList(),
   val categoryId: Long? = 0,
   val url: String = "",
-  val allClipCountNum : Long =0,
-  val duplicate:Boolean =false
+  val allClipCountNum: Long = 0,
+  val duplicate: Boolean = false,
 )
 
 sealed interface SaveLinkSetClipSideEffect {
@@ -16,5 +16,5 @@ sealed interface SaveLinkSetClipSideEffect {
   data object ShowBottomSheet : SaveLinkSetClipSideEffect
   data object ShowDialog : SaveLinkSetClipSideEffect
   data object ShowSnackBar : SaveLinkSetClipSideEffect
-  data object ShowSnackBarError: SaveLinkSetClipSideEffect
+  data object ShowSnackBarError : SaveLinkSetClipSideEffect
 }

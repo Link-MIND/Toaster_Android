@@ -1,6 +1,7 @@
 package designsystem.components.bottomsheet
 
 import android.content.Context
+import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.annotation.StringRes
@@ -22,7 +23,7 @@ class LinkMindBottomSheet(context: Context) {
 
   init {
     binding.ivBottomSheetClose.onThrottleClick { dismiss() }
-
+    binding.etvBottomSheet.editText.filters = arrayOf(InputFilter.LengthFilter(15))
     binding.btnBottomSheet.state = LinkMIndFullWidthButtonState.DISABLE
 
     bottomSheetDialog.window?.let { window ->

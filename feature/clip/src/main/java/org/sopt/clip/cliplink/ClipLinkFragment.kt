@@ -81,7 +81,15 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     onClickBackButton()
   }
 
-  private fun updateState(stateId: Int, event: () -> Unit, selectedTextView: TextView, color1: Int, color2: Int,detailName:String, vararg otherTextViews: TextView) {
+  private fun updateState(
+    stateId: Int,
+    event: () -> Unit,
+    selectedTextView: TextView,
+    color1: Int,
+    color2: Int,
+    detailName: String,
+    vararg otherTextViews: TextView,
+  ) {
     if (binding.mlClipFilter.progress == 0f || binding.mlClipFilter.progress == 1f) {
       binding.mlClipFilter.transitionToState(stateId)
       selectedTextView.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_bold_14)
@@ -124,7 +132,6 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
       }
     }.launchIn(viewLifeCycleScope)
   }
-
 
   private fun updateLinkDelete(categoryId: Long) {
     viewModel.deleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
