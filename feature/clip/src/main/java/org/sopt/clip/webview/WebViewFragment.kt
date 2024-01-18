@@ -9,6 +9,7 @@ import android.view.inputmethod.EditorInfo
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.core.content.ContextCompat
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -29,13 +30,29 @@ import org.sopt.ui.view.onThrottleClick
 class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebviewBinding.inflate(it) }) {
   private val viewModel: WebViewViewModel by viewModels()
   val args: WebViewFragmentArgs by navArgs()
+  var isRead: Boolean = false
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     binding.wbClip.settings.javaScriptEnabled = true
     val arg = args.site.split(",,,")
+    if(arg.size == 3){
+      when (arg[2].toBoolean()) {
+        true -> {
+          viewModel.patchReadLinkResult.value = true
+        }
+
+        false -> {
+          viewModel.patchReadLinkResult.value = false
+        }
+      }
+    }
+    if(arg[1].toInt() == 0){
+      binding.ivRead.isInvisible = true
+      binding.ivRead.isClickable = false
+    }
     binding.ivRead.onThrottleClick {
       Log.e("읽음", "누름")
-      viewModel.patchReadLink(arg[1].toLong())
+      viewModel.patchReadLink(arg[1].toLong(), !viewModel.patchReadLinkResult.value)
     }
 
     viewModel.patchReadLinkResult.flowWithLifecycle(viewLifeCycle).onEach {
