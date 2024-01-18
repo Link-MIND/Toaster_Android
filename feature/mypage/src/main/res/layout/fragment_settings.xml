@@ -63,14 +63,16 @@
 
     <TextView
       android:id="@+id/tv_settings_alert_off"
-      android:layout_width="wrap_content"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_gravity="center"
-      android:layout_margin="12dp"
+      android:layout_marginVertical="12dp"
+      android:layout_marginHorizontal="20dp"
       android:background="@drawable/shape_neutrals050_fill_12_rect"
       android:gravity="center"
       android:padding="12dp"
       android:text="@string/settings_alert_off"
+      android:textAppearance="@style/Typography.suit.bold_12"
       android:textColor="@color/neutrals400" />
   </FrameLayout>
 
