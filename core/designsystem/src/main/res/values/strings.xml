@@ -105,9 +105,13 @@
   <string name="timer_delete_dialog_sub_title">더 이상 해당 클립의 리마인드를 받을 수 없어요.</string>
   <string name="timer_cancel_dialog_title">타이머 만들기를 취소할까요?</string>
   <string name="timer_cancel_dialog_sub_title">지금까지 진행한 타이머 설정이 사라져요</string>
+  <string name="setting_withdraw_dialog_title">정말로 탈퇴하시겠어요?</string>
+  <string name="setting_withdraw_dialog_sub_title">회원 탈퇴 시 지금까지\n저장한 모든 링크가 사라져요.</string>
   <string name="positive_ok_save">저장</string>
   <string name="negative_close_cancel">취소</string>
   <string name="positive_ok_msg">확인</string>
   <string name="negative_close_msg">닫기</string>
   <string name="positive_delete">삭제할래요</string>
+  <string name="negative_withdraw">네, 탈퇴할래요</string>
+  <string name="positive_withdraw">더 써볼래요</string>
 </resources>

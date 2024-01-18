@@ -13,12 +13,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import designsystem.components.dialog.LinkMindDialog
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.sopt.common.intentprovider.IntentProvider
 import org.sopt.common.intentprovider.LOGIN
 import org.sopt.datastore.datastore.SecurityDataStore
 import org.sopt.model.user.SettingPageData
+import org.sopt.mypage.R
 import org.sopt.mypage.databinding.FragmentSettingsBinding
 import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
@@ -59,7 +61,15 @@ class SettingsFragment : Fragment() {
           requireActivity().finish()
         }
 
+        is UiState.Failure -> {
+          dataStore.setAutoLogin(false)
+          val intent = intentProvider.getIntent()
+          startActivity(intent)
+          requireActivity().finish()
+        }
+
         else -> {
+
         }
       }
     }.launchIn(viewLifeCycleScope)
@@ -73,7 +83,16 @@ class SettingsFragment : Fragment() {
           requireActivity().finish()
         }
 
-        else -> {}
+        is UiState.Failure -> {
+          dataStore.setAutoLogin(false)
+          val intent = intentProvider.getIntent()
+          startActivity(intent)
+          requireActivity().finish()
+        }
+
+        else -> {
+
+        }
       }
     }.launchIn(viewLifeCycleScope)
 
@@ -156,6 +175,16 @@ class SettingsFragment : Fragment() {
 
   private fun onClickWithdrawBtn() {
     binding.clSetting5.setOnClickListener {
+      val dialog = LinkMindDialog(requireContext())
+      dialog.setTitle(org.sopt.mainfeature.R.string.setting_withdraw_dialog_title)
+      dialog.setSubtitle(org.sopt.mainfeature.R.string.setting_withdraw_dialog_sub_title)
+      dialog.setNegativeButton(org.sopt.mainfeature.R.string.negative_withdraw){
+        viewModel.withdraw()
+        dialog.dismiss()
+      }
+      dialog.setPositiveButton(org.sopt.mainfeature.R.string.positive_withdraw){
+        dialog.dismiss()
+      }
       viewModel.withdraw()
     }
   }
@@ -171,17 +200,6 @@ class SettingsFragment : Fragment() {
         settingsAlertToggle.initToggleState(false)
       }
     }
-  }
-
-  private fun navigateToDestination(destination: String) {
-    val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
-      destination,
-      enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
-      exitAnim = android.R.anim.fade_out,
-      popEnterAnim = android.R.anim.fade_in,
-      popExitAnim = org.sopt.mainfeature.R.anim.to_bottom,
-    )
-    findNavController().navigate(request, navOptions)
   }
 
   companion object {
