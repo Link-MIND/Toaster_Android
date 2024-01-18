@@ -1,4 +1,4 @@
-package org.sopt.clip
+package org.sopt.clip.clip
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import org.sopt.clip.SelectedToggle
 import org.sopt.domain.category.category.usecase.DeleteCategoryUseCase
 import org.sopt.domain.category.category.usecase.GetCategoryAllUseCase
 import org.sopt.domain.category.category.usecase.GetCategoryDuplicateUseCase

@@ -175,6 +175,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
 
   private fun onClickComplete() {
     binding.btnSaveLinkNext.btnClick {
+      if (binding.btnSaveLinkNext.state!=LinkMIndFullWidthButtonState.DISABLE)
       viewModel.navigateSetLink()
     }
   }

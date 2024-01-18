@@ -19,7 +19,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ClipLinkViewModel @Inject constructor(
-  private val getCategoryAll: GetCategoryAllUseCase,
   private val getCategoryLink: GetCategoryLinkUseCase,
   private val deleteLinkUseCase: DeleteLinkUseCase,
 ) : ViewModel() {

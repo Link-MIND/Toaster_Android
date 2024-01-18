@@ -1,5 +1,6 @@
 package org.sopt.maincontainer
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.orbitmvi.orbit.Container
@@ -17,6 +18,7 @@ class MainViewModel @Inject constructor() : ContainerHost<MainState, MainSideEff
 
   fun updateClipBoard(clipboard: String) = intent {
     reduce {
+      Log.d("test","$clipboard")
       state.copy(clipboard = clipboard)
     }
   }

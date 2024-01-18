@@ -3,7 +3,6 @@ package org.sopt.clip.clipedit
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import org.sopt.clip.ItemTouchHelperListener
 import org.sopt.clip.databinding.ItemClipEditClipBinding
 import org.sopt.model.category.Category
 import org.sopt.ui.view.ItemDiffCallback

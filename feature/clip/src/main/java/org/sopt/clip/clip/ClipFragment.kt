@@ -10,7 +10,6 @@ import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.toast.linkMindSnackBar
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.sopt.clip.ClipViewModel
 import org.sopt.clip.R
 import org.sopt.clip.databinding.FragmentClipBinding
 import org.sopt.ui.base.BindingFragment

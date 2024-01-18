@@ -1,4 +1,4 @@
-package org.sopt.clip
+package org.sopt.clip.clipedit
 
 interface ItemTouchHelperListener {
   fun onItemMove(from: Int, to: Int)

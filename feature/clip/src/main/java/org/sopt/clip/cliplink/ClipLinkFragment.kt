@@ -3,7 +3,6 @@ package org.sopt.clip.cliplink
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
@@ -11,7 +10,6 @@ import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.sopt.clip.ClipViewModel
 import org.sopt.clip.DeleteLinkBottomSheetFragment
 import org.sopt.clip.SelectedToggle
 import org.sopt.clip.databinding.FragmentClipLinkBinding

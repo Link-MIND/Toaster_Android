@@ -2,7 +2,6 @@ package org.sopt.clip.clipedit
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import org.sopt.clip.ItemTouchHelperListener
 
 class ItemTouchCallback(private val listener: ItemTouchHelperListener) : ItemTouchHelper.Callback() {
 

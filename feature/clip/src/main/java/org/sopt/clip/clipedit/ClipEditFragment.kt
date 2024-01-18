@@ -3,8 +3,6 @@ package org.sopt.clip.clipedit
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
@@ -15,7 +13,6 @@ import designsystem.components.dialog.LinkMindDialog
 import designsystem.components.toast.linkMindSnackBar
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.sopt.clip.ClipViewModel
 import org.sopt.clip.databinding.FragmentClipEditBinding
 import org.sopt.mainfeature.R
 import org.sopt.ui.base.BindingFragment
