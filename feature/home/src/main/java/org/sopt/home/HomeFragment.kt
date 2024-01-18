@@ -60,7 +60,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
         "featureSaveLink://ClipLinkFragment?categoryId=${viewModel.container.stateFlow.value.categoryId}",
       )
       is HomeSideEffect.ShowBottomSheet -> showHomeBottomSheet()
-      is HomeSideEffect.NavigateWebView -> navigateToDestination("featureSaveLink://webViewFragment?site=${viewModel.container.stateFlow.value.url}")
+      is HomeSideEffect.NavigateWebView -> navigateToDestination("featureSaveLink://webViewFragment?site=${viewModel.container.stateFlow.value.url},,,${0}")
     }
   }
 
