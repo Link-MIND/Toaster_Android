@@ -8,7 +8,9 @@ import org.sopt.clip.search.viewholder.LinkResultViewHolder
 import org.sopt.model.category.Toast
 import org.sopt.ui.view.ItemDiffCallback
 
-class LinkResultAdapter :
+class LinkResultAdapter(
+  private val onClick: (Toast) -> Unit
+) :
   ListAdapter<Toast, LinkResultViewHolder>(DiffUtil) {
 
   private var searchQuery: String = ""
@@ -26,7 +28,7 @@ class LinkResultAdapter :
 
   override fun onBindViewHolder(holder: LinkResultViewHolder, position: Int) {
     val result = getItem(position)
-    holder.onBind(result, searchQuery)
+    holder.onBind(result, searchQuery, onClick)
   }
 
   companion object {
