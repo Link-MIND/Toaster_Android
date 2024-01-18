@@ -99,5 +99,9 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
   </androidx.core.widget.NestedScrollView>
-
+  <View
+    android:id="@+id/v_snack"
+    android:layout_width="match_parent"
+    android:layout_height="20dp"
+    app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
