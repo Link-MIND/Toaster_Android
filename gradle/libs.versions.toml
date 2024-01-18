@@ -48,6 +48,7 @@ kakao-login = "2.19.0"
 google-service = "4.4.0"
 process-pheonix = "2.1.2"
 preference = "1.2.1"
+core-splashscreen = "1.0.1"
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

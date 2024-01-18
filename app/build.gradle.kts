@@ -55,6 +55,7 @@ dependencies {
   implementation(libs.kakao.login)
   implementation(libs.bundles.firebase)
   implementation(platform(libs.firebase.bom))
+  implementation(libs.androidx.splashscreen)
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.test.ext.junit)
   androidTestImplementation(libs.espresso.core)
