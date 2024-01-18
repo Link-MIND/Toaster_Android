@@ -26,8 +26,8 @@ class ClipEditViewModel @Inject constructor(
   private val _categoryState = MutableStateFlow<UiState<List<Category>>>(UiState.Empty)
   val categoryState: StateFlow<UiState<List<Category>>> = _categoryState.asStateFlow()
 
-  private val _categoryDeleteState = MutableStateFlow<UiState<Unit>>(UiState.Empty)
-  val categoryDeleteState: StateFlow<UiState<Unit>> = _categoryDeleteState.asStateFlow()
+  private val _categoryDeleteState = MutableStateFlow<UiState<Int>>(UiState.Empty)
+  val categoryDeleteState: StateFlow<UiState<Int>> = _categoryDeleteState.asStateFlow()
 
   private val _editTitleState = MutableStateFlow<UiState<Unit>>(UiState.Empty)
   val editTitleState: StateFlow<UiState<Unit>> = _editTitleState.asStateFlow()
@@ -56,7 +56,7 @@ class ClipEditViewModel @Inject constructor(
 
   fun deleteCategory(deleteCategoryList: Long) = viewModelScope.launch {
     deleteCategory.invoke(param = DeleteCategoryUseCase.Param(deleteCategoryList)).onSuccess {
-      _categoryDeleteState.emit(UiState.Success(it))
+      _categoryDeleteState.emit(UiState.Success(200))
       getCategoryAll()
     }.onFailure {
       Log.d("카테 삭제-함수안", "실패 $it")

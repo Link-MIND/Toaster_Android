@@ -64,6 +64,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
       is SaveLinkSetClipSideEffect.ShowBottomSheet -> showAddClipBottomSheet()
       is SaveLinkSetClipSideEffect.ShowDialog -> showCloseDialog()
       is SaveLinkSetClipSideEffect.ShowSnackBar -> requireContext().linkMindSnackBar(binding.root, "유효하지 않은 링크입니다.", false)
+     else -> {}
     }
   }
 

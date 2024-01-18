@@ -86,6 +86,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     viewModel.categoryDeleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
+          requireContext().linkMindSnackBar(binding.root,"클립 삭제 완료",false)
           viewModel.getCategoryAll()
         }
 
@@ -108,7 +109,6 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
         viewModel.patchCategoryEditTitle(itemId, clipNewName)
         editCategoryTitle()
         dismiss()
-        requireContext().linkMindSnackBar(binding.root, "클립 수정 완료!", false)
       }
     }
   }
@@ -117,11 +117,11 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     viewModel.editTitleState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
+          requireContext().linkMindSnackBar(binding.root, "클립 수정 완료!", false)
           viewModel.getCategoryAll()
         }
 
         else -> {
-          Log.d("test", "$state")
         }
       }
     }.launchIn(viewLifeCycleScope)

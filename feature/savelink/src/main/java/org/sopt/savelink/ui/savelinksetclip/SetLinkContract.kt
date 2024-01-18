@@ -12,7 +12,6 @@ sealed interface SaveLinkSetClipSideEffect {
   data object NavigateSaveLinkSetClip : SaveLinkSetClipSideEffect
   data object NavigateUp : SaveLinkSetClipSideEffect
   data object ShowBottomSheet : SaveLinkSetClipSideEffect
-  data object ShowDialog : SaveLinkSetClipSideEffect
-
+  data object ShowDialog: SaveLinkSetClipSideEffect
   data object ShowSnackBar : SaveLinkSetClipSideEffect
 }
