@@ -74,6 +74,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     initViewState(isDataNull)
     updateLinkDelete(categoryId)
     updateLinkView()
+    updateAllCount()
     onClickBackButton()
   }
 
@@ -98,6 +99,19 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
         is UiState.Success -> {
           clipLinkAdapter.submitList(state.data)
           initViewState(state.data.isNullOrEmpty())
+        }
+
+        else -> {
+          initViewState(true)
+        }
+      }
+    }.launchIn(viewLifeCycleScope)
+  }
+  private fun updateAllCount() {
+    viewModel.allClipCount.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is UiState.Success -> {
+          binding.tvClipLinkAllCount.text="(${state.data})"
         }
 
         else -> {
