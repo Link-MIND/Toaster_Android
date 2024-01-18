@@ -1,6 +1,7 @@
 package org.sopt.savelink.ui.savelink
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -132,11 +133,16 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     layoutParams.setMargins(0, 0, 0, 0)
     binding.btnSaveLinkNext.layoutParams = layoutParams
     binding.btnSaveLinkNext.apply {
-      state = if (state == LinkMIndFullWidthButtonState.DISABLE) {
-        LinkMIndFullWidthButtonState.DISABLE
-      } else {
-        LinkMIndFullWidthButtonState.ENABLE_BLACK
+      state=LinkMIndFullWidthButtonState.ENABLE_BLACK
+      binding.btnSaveLinkNext.btnClick {
+        if (binding.etvSaveCopyLink.editText.text.isEmpty())
+          showErrorState(binding.tvSaveLinkError)
       }
+//      state = if (state == LinkMIndFullWidthButtonState.DISABLE) {
+//        LinkMIndFullWidthButtonState.DISABLE
+//      } else {
+//        LinkMIndFullWidthButtonState.ENABLE_BLACK
+//      }
     }
   }
 
@@ -144,6 +150,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     val marginInPixels = (20 * resources.displayMetrics.density).toInt()
     layoutParams.leftMargin = marginInPixels
     layoutParams.rightMargin = marginInPixels
+    layoutParams.bottomMargin = (12 * resources.displayMetrics.density).toInt()
     binding.btnSaveLinkNext.layoutParams = layoutParams
     binding.btnSaveLinkNext.apply {
       if (state == LinkMIndFullWidthButtonState.DISABLE) {
@@ -178,6 +185,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
       if (binding.btnSaveLinkNext.state != LinkMIndFullWidthButtonState.DISABLE) {
         viewModel.navigateSetLink()
       }
+
     }
   }
 

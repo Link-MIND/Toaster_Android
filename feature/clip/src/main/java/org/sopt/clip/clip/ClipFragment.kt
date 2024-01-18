@@ -3,6 +3,7 @@ package org.sopt.clip.clip
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +22,7 @@ import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
 class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.inflate(it) }) {
-  private val viewModel by activityViewModels<ClipViewModel>()
+  private val viewModel : ClipViewModel by viewModels()
   private lateinit var clipAdapter: ClipAdapter
   val bundle = Bundle()
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -71,7 +72,6 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
         is UiState.Success -> {
           if (!state.data.isDuplicate) requireContext().linkMindSnackBar(binding.vSnack, "클립 생성 완료!", false)
         }
-
         else -> {}
       }
     }.launchIn(viewLifeCycleScope)
