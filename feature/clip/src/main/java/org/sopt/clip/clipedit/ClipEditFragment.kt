@@ -40,6 +40,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
           "delete" -> {
             showDeleteDialog(itemId)
           }
+
           "edit" -> {
             showHomeBottomSheet(itemId)
           }
@@ -66,7 +67,11 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     )
     binding.rvClipEdit.adapter = clipEditAdapter
     itemTouchHelper.attachToRecyclerView(binding.rvClipEdit)
-    clipEditAdapter.submitList((viewModel.categoryState.value as UiState.Success).data ?: emptyList())
+    val originalList = (viewModel.categoryState.value as UiState.Success).data ?: emptyList()
+    val newList = originalList.filter { it.categoryId?.toInt() != 0 }
+    Log.d("test","$originalList")
+//    Log.d("test2","$newList")
+//    clipEditAdapter.submitList(newList)
 
     updateEditListView()
     onClickBackButton()
@@ -76,7 +81,9 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     viewModel.categoryState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          clipEditAdapter.submitList(state.data)
+          val originalList = state.data ?: emptyList()
+          val newList = originalList.filter { it.categoryId?.toInt() != 0 }
+          clipEditAdapter.submitList(newList)
         }
 
         else -> {}
@@ -88,7 +95,6 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     viewModel.categoryDeleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          Log.d("test", "testsak")
           viewModel.getCategoryAll()
         }
 
