@@ -8,7 +8,9 @@ import org.sopt.clip.search.viewholder.ClipResultViewHolder
 import org.sopt.model.category.Category
 import org.sopt.ui.view.ItemDiffCallback
 
-class ClipResultAdapter :
+class ClipResultAdapter(
+  private val onClick: (Category) -> Unit,
+) :
   ListAdapter<Category, ClipResultViewHolder>(DiffUtil) {
 
   private var searchQuery: String = ""
@@ -26,7 +28,7 @@ class ClipResultAdapter :
 
   override fun onBindViewHolder(holder: ClipResultViewHolder, position: Int) {
     val result = getItem(position)
-    holder.onBind(result)
+    holder.onBind(result, onClick)
   }
 
   companion object {

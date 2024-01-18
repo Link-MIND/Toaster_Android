@@ -2,6 +2,7 @@ package org.sopt.clip.cliplink
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -11,9 +12,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.sopt.clip.DeleteLinkBottomSheetFragment
-import org.sopt.clip.SelectedToggle
+import org.sopt.clip.R
 import org.sopt.clip.databinding.FragmentClipLinkBinding
 import org.sopt.ui.base.BindingFragment
+import org.sopt.ui.fragment.colorOf
 import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
 import org.sopt.ui.nav.DeepLinkUtil
@@ -24,24 +26,69 @@ import org.sopt.ui.view.onThrottleClick
 class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClipLinkBinding.inflate(it) }) {
   private val viewModel: ClipLinkViewModel by viewModels()
   private lateinit var clipLinkAdapter: ClipLinkAdapter
-  var readFilter: String = "ALL"
   var isDataNull: Boolean = true
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     val args: ClipLinkFragmentArgs by navArgs()
     val categoryId = args.categoryId
     if (args.categoryId.toInt() == 0) {
-      viewModel.getCategoryLink(readFilter, 0)
+      viewModel.getCategoryLink("ALL", 0)
     } else {
-      viewModel.getCategoryLink(readFilter, categoryId)
+      viewModel.getCategoryLink("ALL", categoryId)
+    }
+    binding.tvClipLinkEntire.setOnClickListener {
+      updateState(
+        R.id.all,
+        { viewModel.getCategoryLink("ALL", args.categoryId) },
+        binding.tvClipLinkEntire,
+        org.sopt.mainfeature.R.color.neutrals050,
+        org.sopt.mainfeature.R.color.neutrals200,
+        binding.tvClipLinkRead,
+        binding.tvClipLinkUnread,
+      )
+    }
+    binding.tvClipLinkRead.setOnClickListener {
+      updateState(
+        R.id.read,
+        { viewModel.getCategoryLink("READ", args.categoryId) },
+        binding.tvClipLinkRead,
+        org.sopt.mainfeature.R.color.neutrals050,
+        org.sopt.mainfeature.R.color.neutrals050,
+        binding.tvClipLinkEntire,
+        binding.tvClipLinkUnread,
+      )
+    }
+    binding.tvClipLinkUnread.setOnClickListener {
+      updateState(
+        R.id.unread,
+        { viewModel.getCategoryLink("UNREAD", args.categoryId) },
+        binding.tvClipLinkUnread,
+        org.sopt.mainfeature.R.color.neutrals200,
+        org.sopt.mainfeature.R.color.neutrals050,
+        binding.tvClipLinkEntire,
+        binding.tvClipLinkRead,
+      )
     }
     initClipAdapter()
     initViewState(isDataNull)
     updateLinkDelete(categoryId)
     updateLinkView()
-    updateAllClipCount()
-    initToggleClickListener()
     onClickBackButton()
+  }
+
+  private fun updateState(stateId: Int, event: () -> Unit, selectedTextView: TextView, color1: Int, color2: Int, vararg otherTextViews: TextView) {
+    if (binding.mlClipFilter.progress == 0f || binding.mlClipFilter.progress == 1f) {
+      binding.mlClipFilter.transitionToState(stateId)
+      selectedTextView.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_bold_14)
+      selectedTextView.setTextColor(colorOf(org.sopt.mainfeature.R.color.neutrals850))
+      binding.vClipLink1.setBackgroundColor(colorOf(color1))
+      binding.vClipLink2.setBackgroundColor(colorOf(color2))
+      otherTextViews.forEach { textView ->
+        textView.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_semibold_14)
+        textView.setTextColor(colorOf(org.sopt.mainfeature.R.color.neutrals400))
+      }
+      event()
+    }
   }
 
   private fun updateLinkView() {
@@ -63,7 +110,11 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     viewModel.deleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          viewModel.getCategoryLink(readFilter, categoryId)
+          when (binding.mlClipFilter.currentState) {
+            R.id.all -> { viewModel.getCategoryLink("ALL", categoryId) }
+            R.id.read -> { viewModel.getCategoryLink("READ", categoryId) }
+            R.id.unread -> { viewModel.getCategoryLink("UNREAD", categoryId) }
+          }
         }
 
         else -> {
@@ -72,6 +123,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
       }
     }.launchIn(viewLifeCycleScope)
   }
+
   private fun initViewState(isDataNull: Boolean) {
     with(binding) {
       ivClipCategoryEmpty.isVisible = isDataNull
@@ -83,7 +135,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     clipLinkAdapter = ClipLinkAdapter { linkDTO, state ->
       when (state) {
         "click" -> {
-          naviagateToWebViewFragment(linkDTO.linkUrl ?: "")
+          naviagateToWebViewFragment(linkDTO.linkUrl ?: "", linkDTO.toastId)
         }
 
         "delete" -> {
@@ -99,66 +151,13 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     binding.rvCategoryLink.adapter = clipLinkAdapter
   }
 
-  private fun naviagateToWebViewFragment(site: String) {
-    navigateToDestination("featureSaveLink://webViewFragment?site=$site")
+  private fun naviagateToWebViewFragment(site: String, toastId: Long) {
+    navigateToDestination("featureSaveLink://webViewFragment?site=$site,,,$toastId")
   }
 
   private fun onClickBackButton() {
     binding.ivClipLinkBack.onThrottleClick {
       findNavController().navigateUp()
-    }
-  }
-
-  private fun initToggleClickListener() {
-    with(binding) {
-      btnClipAll.setOnClickListener {
-        updateTogglesNDividerVisible(SelectedToggle.ALL)
-        updateLinkView()
-      }
-
-      btnClipRead.setOnClickListener {
-        updateTogglesNDividerVisible(SelectedToggle.READ)
-        updateLinkView()
-      }
-
-      btnClipUnread.setOnClickListener {
-        updateTogglesNDividerVisible(SelectedToggle.UNREAD)
-        updateLinkView()
-      }
-    }
-  }
-
-  private fun updateTogglesNDividerVisible(selectedNow: SelectedToggle) {
-    updateTogglesVisible(selectedNow)
-    initDividerVisible(selectedNow)
-  }
-
-  private fun updateTogglesVisible(selectedNow: SelectedToggle) {
-    if (selectedNow != viewModel.toggleSelectedPast) {
-      initToggleVisible(viewModel.toggleSelectedPast, false)
-      initToggleVisible(selectedNow, true)
-      initDividerVisible(selectedNow)
-      viewModel.toggleSelectedPast = selectedNow
-    }
-  }
-  private fun updateAllClipCount() {
-    viewModel.allClipCount.flowWithLifecycle(viewLifeCycle).onEach { state ->
-      when (state) {
-        is UiState.Success -> {
-          binding.tvClipLinkAllCount.text = "(${state.data})"
-        }
-
-        else -> {}
-      }
-    }.launchIn(viewLifeCycleScope)
-  }
-  private fun initToggleVisible(toggle: SelectedToggle, state: Boolean) {
-    with(binding) {
-      when (toggle) {
-        SelectedToggle.ALL -> tvClipAllSelected.isVisible = state
-        SelectedToggle.READ -> tvClipReadSelected.isVisible = state
-        SelectedToggle.UNREAD -> tvClipUnreadSelected.isVisible = state
-      }
     }
   }
 
@@ -171,26 +170,5 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
       popExitAnim = org.sopt.mainfeature.R.anim.to_bottom,
     )
     findNavController().navigate(request, navOptions)
-  }
-
-  private fun initDividerVisible(selectedNow: SelectedToggle) {
-    with(binding) {
-      when (selectedNow) {
-        SelectedToggle.ALL -> {
-          dvClipPicker1.isVisible = false
-          dvClipPicker2.isVisible = true
-        }
-
-        SelectedToggle.READ -> {
-          dvClipPicker1.isVisible = false
-          dvClipPicker2.isVisible = false
-        }
-
-        SelectedToggle.UNREAD -> {
-          dvClipPicker1.isVisible = true
-          dvClipPicker2.isVisible = false
-        }
-      }
-    }
   }
 }
