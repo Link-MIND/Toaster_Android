@@ -65,11 +65,11 @@ class SetLinkViewModel @Inject constructor(
         categoryId = categoryId,
       ),
     ).onSuccess {
-      Log.d("save","$it")
+      Log.d("save", "$it")
       navigateSetLink()
-      if(it!=200) showSnackBar()
+      if (it != 200) showSnackBar()
     }.onFailure {
-      Log.d("save","$it")
+      Log.d("save", "$it")
       showSnackBar()
     }
   }
@@ -92,5 +92,4 @@ class SetLinkViewModel @Inject constructor(
   fun showDialog() = intent { postSideEffect(SaveLinkSetClipSideEffect.ShowDialog) }
 
   private fun showSnackBar() = intent { postSideEffect(SaveLinkSetClipSideEffect.ShowSnackBar) }
-
 }

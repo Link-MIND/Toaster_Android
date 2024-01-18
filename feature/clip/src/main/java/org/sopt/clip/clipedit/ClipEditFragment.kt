@@ -1,7 +1,6 @@
 package org.sopt.clip.clipedit
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -33,10 +32,10 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     super.onViewCreated(view, savedInstanceState)
 
     clipEditAdapter = ClipEditAdapter(
-      { itemId, state, position , title ->
+      { itemId, state, position, title ->
         when (state) {
           "delete" -> {
-            showDeleteDialog(itemId,title)
+            showDeleteDialog(itemId, title)
           }
 
           "edit" -> {
@@ -86,7 +85,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     viewModel.categoryDeleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          requireContext().linkMindSnackBar(binding.root,"클립 삭제 완료",false)
+          requireContext().linkMindSnackBar(binding.root, "클립 삭제 완료", false)
           viewModel.getCategoryAll()
         }
 
@@ -127,7 +126,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     }.launchIn(viewLifeCycleScope)
   }
 
-  private fun showDeleteDialog(itemId: Long,title:String) {
+  private fun showDeleteDialog(itemId: Long, title: String) {
     val deleteDialog = LinkMindDialog(requireContext())
     deleteDialog.setTitleText("'$title' 클립을 삭제하시겠어요?")
       .setSubtitle(R.string.edit_clip_delete_dialog_subtitle)
