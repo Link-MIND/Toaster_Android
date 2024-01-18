@@ -3,13 +3,12 @@ package org.sopt.clip.clipedit
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import org.sopt.clip.ItemTouchHelperListener
 import org.sopt.clip.databinding.ItemClipEditClipBinding
 import org.sopt.model.category.Category
 import org.sopt.ui.view.ItemDiffCallback
 
 class ClipEditAdapter(
-  private val itemClick: (Long, String, Long) -> Unit,
+  private val itemClick: (Long, String, Long, String) -> Unit,
   private val deleteClip: (Long) -> Unit,
   private val onLongClick: (Long) -> Unit,
   private val onLongClick2: (Long) -> Unit,

@@ -26,9 +26,9 @@ import org.sopt.timer.settimer.SetTimerViewModel
 import org.sopt.timer.settimer.TimerUiState
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.fragment.colorOf
-import org.sopt.ui.fragment.snackBar
 import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
+import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.UiState
 import org.sopt.ui.view.onThrottleClick
 
@@ -75,6 +75,11 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
         {
           showModifyTimerBottomSheetFragment(it)
         },
+        {
+          navigateToDestination(
+            "featureSaveLink://ClipLinkFragment?categoryId=${it.categoryId}",
+          )
+        },
       )
     binding.rvTimerWait.adapter = waitTimerAdapter
     waitTimerAdapter.submitList(viewModel.timerList.value?.second)
@@ -95,7 +100,11 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
   }
 
   private fun initCompleteTimerAdapter() {
-    completeTimerAdapter = CompleteTimerAdapter({ snackBar(binding.root, { "안녕" }) })
+    completeTimerAdapter = CompleteTimerAdapter {
+      navigateToDestination(
+        "featureSaveLink://ClipLinkFragment?categoryId=${it.categoryId}",
+      )
+    }
     completeTimerAdapter.submitList(viewModel.timerList.value?.first)
     binding.rvTimerComplete.adapter = completeTimerAdapter
   }
@@ -288,5 +297,16 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
       }
       findNavController().navigate(org.sopt.timer.R.id.action_navigation_timer_to_navigation_timer_clip_select)
     }
+  }
+
+  private fun navigateToDestination(destination: String) {
+    val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
+      destination,
+      enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
+      exitAnim = android.R.anim.fade_out,
+      popEnterAnim = android.R.anim.fade_in,
+      popExitAnim = org.sopt.mainfeature.R.anim.to_bottom,
+    )
+    findNavController().navigate(request, navOptions)
   }
 }

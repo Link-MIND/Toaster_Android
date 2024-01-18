@@ -10,6 +10,7 @@ import org.sopt.ui.view.ItemDiffCallback
 class WaitTimerAdapter(
   private val onToggleClicked: (Timer) -> Unit,
   private val onMoreClicked: (Timer) -> Unit,
+  private val navigateToCategory: (Timer) -> Unit,
 ) : ListAdapter<Timer, WaitTimerViewHolder>(DiffUtil) {
   override fun onBindViewHolder(holder: WaitTimerViewHolder, position: Int) {
     holder.onBind(getItem(position))
@@ -20,6 +21,7 @@ class WaitTimerAdapter(
       ItemTimerWaitBinding.inflate(LayoutInflater.from(parent.context), parent, false),
       onToggleClicked,
       onMoreClicked,
+      navigateToCategory,
     )
   }
 

@@ -37,7 +37,7 @@ class ClipSelectViewHolder(
       setClipImageResource(position, org.sopt.mainfeature.R.drawable.ic_clip_all_24_primary, org.sopt.mainfeature.R.drawable.ic_clip_24_primary)
       org.sopt.mainfeature.R.color.primary
     } else {
-      setClipImageResource(position, org.sopt.mainfeature.R.drawable.ic_home_clip_20, org.sopt.mainfeature.R.drawable.ic_clip_24)
+      setClipImageResource(position, org.sopt.mainfeature.R.drawable.ic_clip_all_24, org.sopt.mainfeature.R.drawable.ic_clip_24)
       org.sopt.mainfeature.R.color.neutrals900
     }
     val color = ContextCompat.getColor(binding.root.context, colorResource)
