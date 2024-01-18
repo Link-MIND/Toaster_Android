@@ -18,7 +18,6 @@ class MainViewModel @Inject constructor() : ContainerHost<MainState, MainSideEff
 
   fun updateClipBoard(clipboard: String) = intent {
     reduce {
-      Log.d("test", "$clipboard")
       state.copy(clipboard = clipboard)
     }
   }

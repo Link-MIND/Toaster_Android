@@ -30,7 +30,6 @@ class MyFragment : BindingFragment<FragmentMyBinding>({ FragmentMyBinding.inflat
         is UiState.Success -> {
           initMyPageData(state.data)
         }
-
         else -> {}
       }
     }.launchIn(viewLifeCycleScope)

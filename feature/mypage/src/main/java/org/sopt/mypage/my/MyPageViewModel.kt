@@ -22,9 +22,8 @@ class MyPageViewModel @Inject constructor(
   fun getUserMyPage() = viewModelScope.launch {
     getUserMyPageUseCase.invoke().onSuccess { data ->
       _myPageState.emit(UiState.Success(data))
-      Log.d("UserMyPageSuccess", "$data")
     }.onFailure { error ->
-      Log.d("UserMyPage", "$error")
+      _myPageState.emit(UiState.Failure(error.toString()))
     }
   }
 }
