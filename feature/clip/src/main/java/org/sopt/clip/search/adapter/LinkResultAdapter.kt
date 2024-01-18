@@ -3,7 +3,7 @@ package org.sopt.clip.search.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import org.sopt.clip.databinding.ItemSearchResultClipLinkBinding
+import org.sopt.clip.databinding.ItemClipLinkBinding
 import org.sopt.clip.search.viewholder.LinkResultViewHolder
 import org.sopt.model.category.Toast
 import org.sopt.ui.view.ItemDiffCallback
@@ -22,7 +22,7 @@ class LinkResultAdapter(
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LinkResultViewHolder {
     val inflater = LayoutInflater.from(parent.context)
-    val binding = ItemSearchResultClipLinkBinding.inflate(inflater, parent, false)
+    val binding = ItemClipLinkBinding.inflate(inflater, parent, false)
     return LinkResultViewHolder(binding)
   }
 

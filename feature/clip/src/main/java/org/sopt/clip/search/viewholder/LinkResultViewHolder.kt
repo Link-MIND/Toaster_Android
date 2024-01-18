@@ -1,26 +1,38 @@
 package org.sopt.clip.search.viewholder
 
 import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import org.sopt.clip.databinding.ItemSearchResultClipLinkBinding
+import org.sopt.clip.databinding.ItemClipLinkBinding
 import org.sopt.clip.search.util.applyBoldStyle
 import org.sopt.model.category.Toast
 import org.sopt.ui.view.onThrottleClick
 
-class LinkResultViewHolder(val binding: ItemSearchResultClipLinkBinding) :
+class LinkResultViewHolder(val binding: ItemClipLinkBinding) :
   RecyclerView.ViewHolder(binding.root) {
 
-  fun onBind(linkResult: Toast, searchQuery: String, onClick: (Toast) -> Unit) {
-    binding.tvClipDetailTitle.text = linkResult.categoryTitle
-    if (linkResult.categoryTitle == null) {
-      binding.tvClipDetailTitle.isGone = true
+  fun onBind(linkData: Toast?, searchQuery: String, onClick: (Toast) -> Unit) {
+    if (linkData == null) return
+    with(binding) {
+      tvLinkTitle.text = applyBoldStyle(linkData.toastTitle, searchQuery)
+      tvLinkUrl.text = linkData.linkUrl
+      if (linkData.categoryTitle.isNullOrEmpty()) {
+        tvLinkClipTitle.isGone = true
+      } else {
+        tvLinkClipTitle.isVisible = true
+        tvLinkClipTitle.text = linkData.categoryTitle
+      }
+      ivLinkThumnail.load(linkData.thumbnailUrl) {
+      }
+      if (linkData.isRead!!) {
+        tvItemClipLink.isVisible = true
+      } else {
+        tvItemClipLink.isGone = true
+      }
     }
-    binding.tvClipTitle.text = applyBoldStyle(linkResult.toastTitle, searchQuery)
-    binding.tvClipUrl.text = linkResult.linkUrl
-    binding.ivLinkThumnail.load(linkResult.thumbnailUrl)
     binding.root.onThrottleClick {
-      onClick(linkResult)
+      onClick(linkData)
     }
   }
 }
