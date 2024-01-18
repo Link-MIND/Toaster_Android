@@ -43,7 +43,6 @@ class HomeViewModel @Inject constructor(
   fun getMainPageUserClip() = intent {
     getMainPageUserClip.invoke().onSuccess {
       reduce {
-
         val tempCategoryList = listOf(
           Category(
             0,
@@ -59,7 +58,8 @@ class HomeViewModel @Inject constructor(
           readToastNum = it.readToastNum,
           categoryList = (
             finalCategoryList
-        ))
+            ),
+        )
       }
     }.onFailure {
       Log.d("MainUser", "$it")
