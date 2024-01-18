@@ -35,6 +35,7 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     onClickEditButton()
     onClickAddButton()
     isCheckClipCount()
+    collectAddCategory()
   }
 
   private fun updateClipList() {
@@ -71,8 +72,11 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     viewModel.duplicateState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          if (!state.data.isDuplicate) requireContext().linkMindSnackBar(binding.vSnack, "클립 생성 완료!", false)
-          else boolean = true
+          if (!state.data.isDuplicate) {
+            requireContext().linkMindSnackBar(binding.vSnack, "클립 생성 완료!", false)
+          } else {
+            boolean = true
+          }
         }
 
         else -> {}
@@ -116,7 +120,6 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
         setErroMsg(org.sopt.mainfeature.R.string.error_clip_length)
         bottomSheetConfirmBtnClick {
           viewModel.getCategoryDuplicate(getText())
-          collectAddCategory()
           dismiss()
         }
       }

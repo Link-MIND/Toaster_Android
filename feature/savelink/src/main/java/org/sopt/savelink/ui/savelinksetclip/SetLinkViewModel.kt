@@ -17,7 +17,6 @@ import org.sopt.domain.category.category.usecase.PostAddCategoryTitleUseCase
 import org.sopt.domain.link.usecase.PostSaveLinkUseCase
 import org.sopt.savelink.ui.model.Clip
 import org.sopt.savelink.ui.model.toModel
-import org.sopt.ui.view.UiState
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,7 +24,7 @@ class SetLinkViewModel @Inject constructor(
   private val saveLinkUseCase: PostSaveLinkUseCase,
   private val getCategoryAllUseCase: GetCategoryAllUseCase,
   private val postAddCategoryTitle: PostAddCategoryTitleUseCase,
-  private val getCategoryDuplicateUseCase: GetCategoryDuplicateUseCase
+  private val getCategoryDuplicateUseCase: GetCategoryDuplicateUseCase,
 ) : ContainerHost<SaveLinkSetClipState, SaveLinkSetClipSideEffect>, ViewModel() {
   override val container: Container<SaveLinkSetClipState, SaveLinkSetClipSideEffect> =
     container(SaveLinkSetClipState())
@@ -56,13 +55,13 @@ class SetLinkViewModel @Inject constructor(
       .onSuccess {
         reduce {
           state.copy(
-            duplicate = it.isDuplicate
+            duplicate = it.isDuplicate,
           )
         }
-        if(!it.isDuplicate) saveCategoryTitle(title)
-    }.onFailure {
-      Log.d("카테 중복 체크", "실패 $it")
-    }
+        if (!it.isDuplicate) saveCategoryTitle(title)
+      }.onFailure {
+        Log.d("카테 중복 체크", "실패 $it")
+      }
   }
   fun saveCategoryTitle(categoryTitle: String) = viewModelScope.launch {
     postAddCategoryTitle(
