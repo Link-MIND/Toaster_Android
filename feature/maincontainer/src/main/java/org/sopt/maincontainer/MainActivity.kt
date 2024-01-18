@@ -14,7 +14,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.dialog.LinkMindDialog
-import designsystem.components.toast.linkMindSnackBar
 import org.orbitmvi.orbit.viewmodel.observe
 import org.sopt.maincontainer.databinding.ActivityMainBinding
 import org.sopt.ui.context.hideKeyboard
@@ -155,15 +154,8 @@ class MainActivity : AppCompatActivity() {
     viewModel.updateClipBoard(pasteData)
     hideKeyBoard()
 
-    val action: () -> Unit = if (pasteData.contains("http")) {
-      {
-        clipboard.setPrimaryClip(ClipData.newPlainText("", ""))
-      }
-    } else {
-      {
-        this.linkMindSnackBar(binding.root, "올바르지 않은 링크입니다", false)
-        clipboard.setPrimaryClip(ClipData.newPlainText("", ""))
-      }
+    val action: () -> Unit = {
+      clipboard.setPrimaryClip(ClipData.newPlainText("", ""))
     }
     showRevokeCommonDialog(action)
   }
@@ -176,9 +168,7 @@ class MainActivity : AppCompatActivity() {
         deleteClipBoard()
       }
       .setPositiveButton(org.sopt.mainfeature.R.string.positive_ok_save) {
-        if (viewModel.container.stateFlow.value.clipboard.contains("http")) {
-          navigateToDestination("featureSaveLink://saveLinkFragment?clipboardLink=${viewModel.container.stateFlow.value.clipboard}")
-        }
+        navigateToDestination("featureSaveLink://saveLinkFragment?clipboardLink=${viewModel.container.stateFlow.value.clipboard}")
         deleteClipBoard()
         linkMindDialog.dismiss()
       }
