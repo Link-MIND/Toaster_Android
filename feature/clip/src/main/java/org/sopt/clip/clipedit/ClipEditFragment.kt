@@ -94,7 +94,6 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     }.launchIn(viewLifeCycleScope)
   }
   private fun onClickBackButton() {
-
     binding.ivClipEditBack.onThrottleClick {
       findNavController().navigateUp()
     }

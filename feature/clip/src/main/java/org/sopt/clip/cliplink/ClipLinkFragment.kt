@@ -111,7 +111,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     viewModel.allClipCount.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          binding.tvClipLinkAllCount.text="(${state.data})"
+          binding.tvClipLinkAllCount.text = "(${state.data})"
         }
 
         else -> {
@@ -125,7 +125,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     viewModel.deleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          requireContext().linkMindSnackBar(binding.vSnack,"링크 삭제 완료" , false)
+          requireContext().linkMindSnackBar(binding.vSnack, "링크 삭제 완료", false)
           when (binding.mlClipFilter.currentState) {
             R.id.all -> { viewModel.getCategoryLink("ALL", categoryId) }
             R.id.read -> { viewModel.getCategoryLink("READ", categoryId) }
