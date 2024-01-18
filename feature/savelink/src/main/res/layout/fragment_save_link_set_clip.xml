@@ -63,9 +63,10 @@
     android:layout_height="wrap_content"
     android:paddingTop="12dp"
     android:paddingEnd="2dp"
+    app:layout_constraintBottom_toBottomOf="@id/tv_save_link_clip_count"
     android:src="@drawable/ic_plus_18_orange"
     app:layout_constraintEnd_toStartOf="@id/tv_save_link_add_clip"
-    app:layout_constraintTop_toTopOf="@id/tv_save_link_add_clip" />
+    app:layout_constraintTop_toTopOf="@id/tv_save_link_clip_count" />
 
   <TextView
     android:id="@+id/tv_save_link_add_clip"
@@ -73,6 +74,7 @@
     android:layout_height="wrap_content"
     android:paddingTop="12dp"
     android:paddingEnd="16dp"
+    android:paddingBottom="16dp"
     android:text="클립 추가"
     android:textAppearance="@style/Typography.suit.bold_12"
     android:textColor="@color/primary"
@@ -84,7 +86,6 @@
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_marginHorizontal="20dp"
-    android:layout_marginTop="16dp"
     android:nestedScrollingEnabled="false"
     android:orientation="vertical"
     android:overScrollMode="never"
