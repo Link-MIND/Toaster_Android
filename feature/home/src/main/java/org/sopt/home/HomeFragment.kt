@@ -138,7 +138,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     linkMindBottomSheet.show()
     linkMindBottomSheet.apply {
       setBottomSheetHint(org.sopt.mainfeature.R.string.home_new_clip_info)
-      setTitle(org.sopt.mainfeature.R.string.home_correction_clip)
+      setTitle(org.sopt.mainfeature.R.string.home_add_clip)
       setErroMsg(org.sopt.mainfeature.R.string.home_error_clip_info)
       bottomSheetConfirmBtnClick {
         requireContext().linkMindSnackBar(binding.root, "성공", false)

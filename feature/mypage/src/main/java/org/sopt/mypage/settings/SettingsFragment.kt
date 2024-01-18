@@ -59,7 +59,8 @@ class SettingsFragment : Fragment() {
           requireActivity().finish()
         }
 
-        else -> {}
+        else -> {
+        }
       }
     }.launchIn(viewLifeCycleScope)
 

@@ -7,7 +7,7 @@ import org.sopt.model.category.Category
 
 class ClipEditViewHolder(
   private val binding: ItemClipEditClipBinding,
-  private val onClickItemClip: (Long, String, Long) -> Unit,
+  private val onClickItemClip: (Long, String, Long, String) -> Unit,
   private val onLongClick: (Long) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
   fun onBind(clipData: Category) {
@@ -23,10 +23,10 @@ class ClipEditViewHolder(
         ivClipEditTitleEdit.visibility = View.VISIBLE
         ivClipEditFix.visibility = View.GONE
         ivClipEditTitleEdit.setOnClickListener {
-          onClickItemClip(clipData.categoryId!!.toLong(), "edit", itemId)
+          onClickItemClip(clipData.categoryId!!.toLong(), "edit", itemId, clipData.categoryTitle ?: "")
         }
         ivClipEditDelete.setOnClickListener {
-          onClickItemClip(clipData.categoryId!!.toLong(), "delete", itemId)
+          onClickItemClip(clipData.categoryId!!.toLong(), "delete", itemId, clipData.categoryTitle ?: "")
         }
       }
       root.setOnLongClickListener {

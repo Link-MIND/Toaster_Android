@@ -65,8 +65,11 @@ class SetLinkViewModel @Inject constructor(
         categoryId = categoryId,
       ),
     ).onSuccess {
+      Log.d("save", "$it")
       navigateSetLink()
+      if (it != 200) showSnackBar()
     }.onFailure {
+      Log.d("save", "$it")
       showSnackBar()
     }
   }

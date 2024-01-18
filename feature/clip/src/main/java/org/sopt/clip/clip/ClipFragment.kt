@@ -10,7 +10,6 @@ import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.toast.linkMindSnackBar
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.sopt.clip.ClipViewModel
 import org.sopt.clip.R
 import org.sopt.clip.databinding.FragmentClipBinding
 import org.sopt.ui.base.BindingFragment
@@ -29,13 +28,11 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     super.onViewCreated(view, savedInstanceState)
 
     initClipAdapter()
-    if (setEmptyMsgVisible()) return
     viewModel.getCategoryAll()
     updateClipList()
+    updateAllClipCount()
+    collectAddCategory()
     onClickSearchButton()
-/*
-    onClickListView()
-*/
     onClickEditButton()
     onClickAddButton()
   }
@@ -44,7 +41,35 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     viewModel.categoryState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
+          if (state.data.isEmpty()) {
+            binding.ivClipEmpty.visibility = View.VISIBLE
+            binding.tvClipEmpty.visibility = View.VISIBLE
+          }
           clipAdapter.submitList(state.data)
+          setEmptyMsgVisible()
+        }
+
+        else -> {}
+      }
+    }.launchIn(viewLifeCycleScope)
+  }
+
+  private fun updateAllClipCount() {
+    viewModel.allClipCount.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is UiState.Success -> {
+          binding.tvClipAllCount.text = "(${state.data})"
+        }
+
+        else -> {}
+      }
+    }.launchIn(viewLifeCycleScope)
+  }
+  private fun collectAddCategory() {
+    viewModel.duplicateState.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is UiState.Success -> {
+          if (!state.data.isDuplicate) requireContext().linkMindSnackBar(binding.root, "클립 생성 완료!", false)
         }
 
         else -> {}
@@ -58,13 +83,12 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
       findNavController().navigate(action)
     }
     binding.rvClipClip.adapter = clipAdapter
+    binding.rvClipClip.itemAnimator = null
   }
 
-  private fun setEmptyMsgVisible(): Boolean {
-    if (viewModel.mockClipData.isNullOrEmpty()) return true
+  private fun setEmptyMsgVisible() {
     binding.ivClipEmpty.visibility = View.GONE
     binding.tvClipEmpty.visibility = View.GONE
-    return false
   }
 
   private fun onClickAddButton() {
@@ -77,8 +101,7 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
         setErroMsg(org.sopt.mainfeature.R.string.error_clip_length)
         bottomSheetConfirmBtnClick {
           dismiss()
-          viewModel.postAddCategoryTitle(getText())
-          requireContext().linkMindSnackBar(binding.root, "클립 생성 완료!", false)
+          viewModel.getCategoryDuplicate(getText())
         }
       }
     }
@@ -90,18 +113,12 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     }
   }
 
-/*  private fun onClickListView() {
-    bundle.putString("clipTitle",)
-    binding.rvClipClip.onThrottleClick {
-      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_link)
-    }
-  }*/
-
   private fun onClickSearchButton() {
     binding.clClipSearch.onThrottleClick {
       navigateToDestination("featureMyPage://fragmentSearch")
     }
   }
+
   private fun navigateToDestination(destination: String) {
     val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
       destination,

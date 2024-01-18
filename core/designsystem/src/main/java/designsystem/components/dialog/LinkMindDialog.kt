@@ -49,6 +49,12 @@ class LinkMindDialog constructor(private val context: Context) {
     return this
   }
 
+  fun setTitleText(message: String): LinkMindDialog {
+    binding.tvDialogTitle.apply {
+      text = message
+    }
+    return this
+  }
   fun setSubtitle(@StringRes messageId: Int?): LinkMindDialog {
     binding.tvDialogSubtitle.apply {
       if (messageId == null) {

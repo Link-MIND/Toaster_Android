@@ -64,6 +64,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
       is SaveLinkSetClipSideEffect.ShowBottomSheet -> showAddClipBottomSheet()
       is SaveLinkSetClipSideEffect.ShowDialog -> showCloseDialog()
       is SaveLinkSetClipSideEffect.ShowSnackBar -> requireContext().linkMindSnackBar(binding.root, "유효하지 않은 링크입니다.", false)
+      else -> {}
     }
   }
 
@@ -118,7 +119,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
         linkMindDialog.dismiss()
         navigateToHome()
       }
-      .setPositiveButton(R.string.positive_ok_msg) {
+      .setPositiveButton(R.string.negative_close_cancel) {
         linkMindDialog.dismiss()
       }
       .show()

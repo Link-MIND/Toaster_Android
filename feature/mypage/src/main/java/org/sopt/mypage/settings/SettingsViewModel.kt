@@ -36,7 +36,6 @@ class SettingsViewModel @Inject constructor(
     getUserSettingUseCase.invoke().onSuccess { data ->
       _settingState.emit(UiState.Success(data))
       pushIsAllowed.emit(data.fcmIsAllowed)
-      Log.d("UserSettingSuccess", "$data")
     }.onFailure { error ->
       Log.d("UserSetting", "$error")
     }
@@ -45,7 +44,6 @@ class SettingsViewModel @Inject constructor(
   fun patchPush(allowedPush: Boolean) = viewModelScope.launch {
     patchPushUseCase.invoke(allowedPush).onSuccess { data ->
       pushIsAllowed.emit(data)
-      Log.d("PatchPushSuccess", "$data")
     }.onFailure {
       Log.e("실패", it.message.toString())
     }
@@ -53,10 +51,8 @@ class SettingsViewModel @Inject constructor(
 
   fun logout() = viewModelScope.launch {
     authRepository.signout().onSuccess {
-      Log.e("로그아웃성공", "로그아웃성공")
       _logoutState.emit(UiState.Success(it))
     }.onFailure {
-      Log.e("로그아웃실패", "${it.message}")
       _logoutState.emit(UiState.Failure(it.message.toString()))
     }
   }

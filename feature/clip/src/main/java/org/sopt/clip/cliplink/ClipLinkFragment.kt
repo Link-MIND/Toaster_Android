@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.sopt.clip.ClipViewModel
 import org.sopt.clip.DeleteLinkBottomSheetFragment
 import org.sopt.clip.R
 import org.sopt.clip.databinding.FragmentClipLinkBinding
@@ -25,7 +24,7 @@ import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
 class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClipLinkBinding.inflate(it) }) {
-  private val viewModel by activityViewModels<ClipViewModel>()
+  private val viewModel: ClipLinkViewModel by viewModels()
   private lateinit var clipLinkAdapter: ClipLinkAdapter
   var isDataNull: Boolean = true
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -161,7 +160,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
       findNavController().navigateUp()
     }
   }
-
+  
   private fun navigateToDestination(destination: String) {
     val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
       destination,

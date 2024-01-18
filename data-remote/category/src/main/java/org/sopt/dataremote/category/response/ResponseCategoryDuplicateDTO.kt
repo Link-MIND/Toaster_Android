@@ -6,7 +6,7 @@ import org.sopt.model.category.CategoryDuplicate
 
 @Serializable
 data class ResponseCategoryDuplicateDTO(
-  @SerialName("isDuplicated")
+  @SerialName("isDupicated")
   val isDuplicated: Boolean,
 )
 

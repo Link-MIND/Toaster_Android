@@ -9,6 +9,7 @@ class WaitTimerViewHolder(
   private val binding: ItemTimerWaitBinding,
   private val onToggleClicked: (Timer) -> Unit,
   private val onMoreClicked: (Timer) -> Unit,
+  private val navigateToCategory: (Timer) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
 
   fun onBind(data: Timer?) {
@@ -24,6 +25,9 @@ class WaitTimerViewHolder(
       tgItemTimerWait.initToggleState(data.isAlarm!!)
       ivItemTimerWaitMore.onThrottleClick {
         onMoreClicked(data)
+      }
+      binding.root.onThrottleClick {
+        navigateToCategory(data)
       }
     }
   }
