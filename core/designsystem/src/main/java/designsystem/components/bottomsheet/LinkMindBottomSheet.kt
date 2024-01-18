@@ -23,7 +23,6 @@ class LinkMindBottomSheet(context: Context) {
 
   init {
     binding.ivBottomSheetClose.onThrottleClick { dismiss() }
-    binding.etvBottomSheet.editText.filters = arrayOf(InputFilter.LengthFilter(15))
     binding.btnBottomSheet.state = LinkMIndFullWidthButtonState.DISABLE
 
     bottomSheetDialog.window?.let { window ->
@@ -59,6 +58,7 @@ class LinkMindBottomSheet(context: Context) {
     val isError = showErrorMsg()
     binding.apply {
       tvBottomSheetErrorText.isVisible = isError
+      if (isError) binding.etvBottomSheet.editText.filters = arrayOf(InputFilter.LengthFilter(16))
       etvBottomSheet.state = if (isError) LinkMindEditTextState.ERROR else LinkMindEditTextState.ENABLE
       btnBottomSheet.state = if (!isError && isTextLongEnough()) LinkMIndFullWidthButtonState.ENABLE_PRIMARY else LinkMIndFullWidthButtonState.DISABLE
     }

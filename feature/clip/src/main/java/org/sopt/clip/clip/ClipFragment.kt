@@ -75,6 +75,7 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
           if (!state.data.isDuplicate) {
             requireContext().linkMindSnackBar(binding.vSnack, "클립 생성 완료!", false)
           } else {
+            requireContext().linkMindSnackBar(binding.vSnack, "중복된 클립 이름이 있습니다.", false)
             boolean = true
           }
         }
