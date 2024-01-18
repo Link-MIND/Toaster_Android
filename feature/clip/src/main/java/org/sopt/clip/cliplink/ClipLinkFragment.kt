@@ -151,7 +151,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     clipLinkAdapter = ClipLinkAdapter { linkDTO, state ->
       when (state) {
         "click" -> {
-          naviagateToWebViewFragment(linkDTO.linkUrl ?: "", linkDTO.toastId)
+          naviagateToWebViewFragment(linkDTO.linkUrl ?: "", linkDTO.toastId, linkDTO.isRead)
         }
 
         "delete" -> {
@@ -167,8 +167,8 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     binding.rvCategoryLink.adapter = clipLinkAdapter
   }
 
-  private fun naviagateToWebViewFragment(site: String, toastId: Long) {
-    navigateToDestination("featureSaveLink://webViewFragment?site=$site,,,$toastId")
+  private fun naviagateToWebViewFragment(site: String, toastId: Long, isRead: Boolean) {
+    navigateToDestination("featureSaveLink://webViewFragment?site=$site,,,$toastId,,,$isRead")
   }
 
   private fun onClickBackButton() {
