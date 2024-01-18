@@ -58,7 +58,7 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     viewModel.allClipCount.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          binding.tvClipAllCount.text= "(${state.data})"
+          binding.tvClipAllCount.text = "(${state.data})"
         }
 
         else -> {}

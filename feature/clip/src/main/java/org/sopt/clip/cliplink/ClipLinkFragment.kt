@@ -22,7 +22,7 @@ import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
 class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClipLinkBinding.inflate(it) }) {
-  private val viewModel : ClipLinkViewModel by viewModels()
+  private val viewModel: ClipLinkViewModel by viewModels()
   private lateinit var clipLinkAdapter: ClipLinkAdapter
   var readFilter: String = "ALL"
   var isDataNull: Boolean = true
@@ -145,7 +145,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     viewModel.allClipCount.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          binding.tvClipLinkAllCount.text= "(${state.data})"
+          binding.tvClipLinkAllCount.text = "(${state.data})"
         }
 
         else -> {}

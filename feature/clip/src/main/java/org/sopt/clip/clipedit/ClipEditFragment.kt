@@ -51,7 +51,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
         viewModel.last2.flowWithLifecycle(viewLifeCycle).onEach { state ->
           when (state) {
             is UiState.Success -> {
-              viewModel.patchCategoryEditPriority(it, state.data+1)
+              viewModel.patchCategoryEditPriority(it, state.data + 1)
             }
 
             else -> {}

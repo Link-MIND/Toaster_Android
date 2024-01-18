@@ -9,10 +9,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.sopt.clip.SelectedToggle
-import org.sopt.domain.category.category.usecase.GetCategoryAllUseCase
 import org.sopt.domain.category.category.usecase.GetCategoryLinkUseCase
 import org.sopt.domain.link.usecase.DeleteLinkUseCase
-import org.sopt.model.category.Category
 import org.sopt.model.category.CategoryLink
 import org.sopt.ui.view.UiState
 import javax.inject.Inject
@@ -52,5 +50,4 @@ class ClipLinkViewModel @Inject constructor(
       Log.d("카테 안의 링크 검색", it.message.toString())
     }
   }
-
 }

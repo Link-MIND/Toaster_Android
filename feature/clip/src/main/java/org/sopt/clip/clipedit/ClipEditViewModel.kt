@@ -26,7 +26,6 @@ class ClipEditViewModel @Inject constructor(
   private val _categoryState = MutableStateFlow<UiState<List<Category>>>(UiState.Empty)
   val categoryState: StateFlow<UiState<List<Category>>> = _categoryState.asStateFlow()
 
-
   private val _categoryDeleteState = MutableStateFlow<UiState<Unit>>(UiState.Empty)
   val categoryDeleteState: StateFlow<UiState<Unit>> = _categoryDeleteState.asStateFlow()
 
@@ -35,7 +34,6 @@ class ClipEditViewModel @Inject constructor(
 
   private val _last2 = MutableStateFlow<UiState<Int>>(UiState.Empty)
   val last2: StateFlow<UiState<Int>> = _last2.asStateFlow()
-
 
   fun update2(a: Int) = viewModelScope.launch {
     _last2.emit(UiState.Success(a))

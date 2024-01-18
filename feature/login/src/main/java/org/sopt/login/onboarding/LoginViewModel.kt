@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.sopt.auth.model.Auth
-import org.sopt.auth.model.Token
 import org.sopt.auth.model.UserData
 import org.sopt.auth.repository.AuthRepository
 import org.sopt.ui.view.UiState
