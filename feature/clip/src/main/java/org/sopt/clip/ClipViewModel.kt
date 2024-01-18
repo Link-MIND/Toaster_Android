@@ -94,7 +94,6 @@ class ClipViewModel @Inject constructor(
     deleteCategory.invoke(param = DeleteCategoryUseCase.Param(deleteCategoryList)).onSuccess {
       _categoryDeleteState.emit(UiState.Success(it))
       getCategoryAll()
-      Log.d("카테 삭제-함수안", "성공")
     }.onFailure {
       Log.d("카테 삭제-함수안", "실패 $it")
     }
