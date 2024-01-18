@@ -64,6 +64,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     binding.rvClipEdit.adapter = clipEditAdapter
     itemTouchHelper.attachToRecyclerView(binding.rvClipEdit)
     updateEditListView()
+    updateDelete()
     onClickBackButton()
   }
 
@@ -80,18 +81,20 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
       }
     }.launchIn(viewLifeCycleScope)
   }
-
-  private fun onClickBackButton() {
+  private fun updateDelete() {
     viewModel.categoryDeleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          requireContext().linkMindSnackBar(binding.root, "클립 삭제 완료", false)
+          requireContext().linkMindSnackBar(binding.vSnack, "클립 삭제 완료", false)
           viewModel.getCategoryAll()
         }
 
         else -> {}
       }
-    }
+    }.launchIn(viewLifeCycleScope)
+  }
+  private fun onClickBackButton() {
+
     binding.ivClipEditBack.onThrottleClick {
       findNavController().navigateUp()
     }
@@ -116,7 +119,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     viewModel.editTitleState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          requireContext().linkMindSnackBar(binding.root, "클립 수정 완료!", false)
+          requireContext().linkMindSnackBar(binding.vSnack, "클립 수정 완료!", false)
           viewModel.getCategoryAll()
         }
 

@@ -56,14 +56,14 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
   private fun handleSideEffect(sideEffect: SaveLinkSetClipSideEffect) {
     when (sideEffect) {
       is SaveLinkSetClipSideEffect.NavigateSaveLinkSetClip -> {
+        requireContext().linkMindSnackBar(binding.vSnack, "링크 저장 완료", false)
         navigateToHome()
-        requireContext().linkMindSnackBar(binding.root, "링크 저장 완료", false)
       }
 
       is SaveLinkSetClipSideEffect.NavigateUp -> findNavController().navigateUp()
       is SaveLinkSetClipSideEffect.ShowBottomSheet -> showAddClipBottomSheet()
       is SaveLinkSetClipSideEffect.ShowDialog -> showCloseDialog()
-      is SaveLinkSetClipSideEffect.ShowSnackBar -> requireContext().linkMindSnackBar(binding.root, "유효하지 않은 링크입니다.", false)
+      is SaveLinkSetClipSideEffect.ShowSnackBar -> requireContext().linkMindSnackBar(binding.btnSaveLinkComplete, "유효하지 않은 링크입니다.", false)
       else -> {}
     }
   }

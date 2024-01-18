@@ -142,5 +142,9 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/iv_clip_empty" />
 
-
+  <View
+    android:id="@+id/v_snack"
+    android:layout_width="match_parent"
+    android:layout_height="20dp"
+    app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
+import designsystem.components.toast.linkMindSnackBar
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.sopt.clip.DeleteLinkBottomSheetFragment
@@ -110,6 +111,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     viewModel.deleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
+          requireContext().linkMindSnackBar(binding.vSnack,"링크 삭제 완료" , false)
           when (binding.mlClipFilter.currentState) {
             R.id.all -> { viewModel.getCategoryLink("ALL", categoryId) }
             R.id.read -> { viewModel.getCategoryLink("READ", categoryId) }
