@@ -21,7 +21,7 @@ class WaitTimerAdapter(
       ItemTimerWaitBinding.inflate(LayoutInflater.from(parent.context), parent, false),
       onToggleClicked,
       onMoreClicked,
-      navigateToCategory
+      navigateToCategory,
     )
   }
 
