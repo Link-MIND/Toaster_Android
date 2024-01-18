@@ -1,7 +1,6 @@
 package org.sopt.savelink.ui.savelink
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -43,8 +42,17 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     val clipboardLink = getArgumentToMain()
     if (clipboardLink.isNotEmpty()) {
       binding.etvSaveCopyLink.editText.setText(clipboardLink)
-      handleSaveLinkNextClick()
-      binding.btnSaveLinkNext.setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals850_fill_12_rect)
+      if (binding.etvSaveCopyLink.editText.text.contains("http")) {
+        handleSaveLinkNextClick()
+        binding.btnSaveLinkNext.setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals850_fill_12_rect)
+      } else {
+        binding.btnSaveLinkNext.apply {
+          state = LinkMIndFullWidthButtonState.DISABLE
+          setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
+          showErrorState(binding.tvSaveLinkError)
+        }
+      }
+
     } else {
       binding.btnSaveLinkNext.apply {
         state = LinkMIndFullWidthButtonState.DISABLE
@@ -133,7 +141,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     layoutParams.setMargins(0, 0, 0, 0)
     binding.btnSaveLinkNext.layoutParams = layoutParams
     binding.btnSaveLinkNext.apply {
-      state=LinkMIndFullWidthButtonState.ENABLE_BLACK
+      state = LinkMIndFullWidthButtonState.ENABLE_BLACK
       binding.btnSaveLinkNext.btnClick {
         if (binding.etvSaveCopyLink.editText.text.isEmpty())
           showErrorState(binding.tvSaveLinkError)

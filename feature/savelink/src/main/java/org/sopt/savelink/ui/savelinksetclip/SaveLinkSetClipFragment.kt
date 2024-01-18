@@ -131,6 +131,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
     linkMindBottomSheet.apply {
       setTitle(R.string.clip_add_clip)
       setErroMsg(R.string.error_clip_length)
+      setBottomSheetHint(R.string.home_new_clip_info)
       bottomSheetConfirmBtnClick {
         if (showErrorMsg()) return@bottomSheetConfirmBtnClick
         viewModel.saveCategoryTitle(it)
