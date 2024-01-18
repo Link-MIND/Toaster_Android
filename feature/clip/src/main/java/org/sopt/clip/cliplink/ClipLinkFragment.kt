@@ -3,9 +3,6 @@ package org.sopt.clip.cliplink
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.core.view.isGone
-import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -17,7 +14,6 @@ import kotlinx.coroutines.flow.onEach
 import org.sopt.clip.ClipViewModel
 import org.sopt.clip.DeleteLinkBottomSheetFragment
 import org.sopt.clip.R
-import org.sopt.clip.SelectedToggle
 import org.sopt.clip.databinding.FragmentClipLinkBinding
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.fragment.colorOf
@@ -44,7 +40,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     binding.tvClipLinkEntire.setOnClickListener {
       updateState(
         R.id.all,
-        {viewModel.getCategoryLink("ALL",args.categoryId)},
+        { viewModel.getCategoryLink("ALL", args.categoryId) },
         binding.tvClipLinkEntire,
         org.sopt.mainfeature.R.color.neutrals050,
         org.sopt.mainfeature.R.color.neutrals200,
@@ -55,7 +51,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     binding.tvClipLinkRead.setOnClickListener {
       updateState(
         R.id.read,
-        {viewModel.getCategoryLink("READ",args.categoryId)},
+        { viewModel.getCategoryLink("READ", args.categoryId) },
         binding.tvClipLinkRead,
         org.sopt.mainfeature.R.color.neutrals050,
         org.sopt.mainfeature.R.color.neutrals050,
@@ -66,7 +62,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     binding.tvClipLinkUnread.setOnClickListener {
       updateState(
         R.id.unread,
-        {viewModel.getCategoryLink("UNREAD",args.categoryId)},
+        { viewModel.getCategoryLink("UNREAD", args.categoryId) },
         binding.tvClipLinkUnread,
         org.sopt.mainfeature.R.color.neutrals200,
         org.sopt.mainfeature.R.color.neutrals050,
@@ -115,12 +111,11 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     viewModel.deleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          when(binding.mlClipFilter.currentState){
+          when (binding.mlClipFilter.currentState) {
             R.id.all -> { viewModel.getCategoryLink("ALL", categoryId) }
             R.id.read -> { viewModel.getCategoryLink("READ", categoryId) }
             R.id.unread -> { viewModel.getCategoryLink("UNREAD", categoryId) }
           }
-
         }
 
         else -> {

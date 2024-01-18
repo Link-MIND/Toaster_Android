@@ -9,7 +9,7 @@ import org.sopt.model.category.Category
 import org.sopt.ui.view.ItemDiffCallback
 
 class ClipResultAdapter(
-  private val onClick: (Category) -> Unit
+  private val onClick: (Category) -> Unit,
 ) :
   ListAdapter<Category, ClipResultViewHolder>(DiffUtil) {
 

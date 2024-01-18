@@ -21,7 +21,7 @@ class WebViewViewModel @Inject constructor(
     patchReadLinkUseCase(param = PatchReadLinkUseCase.Param(toastId)).onSuccess {
       _patchReadLinkResult.emit(it)
     }.onFailure {
-      Log.e("실패",it.message.toString())
+      Log.e("실패", it.message.toString())
     }
   }
 }

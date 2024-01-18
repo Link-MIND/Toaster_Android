@@ -34,7 +34,7 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
     binding.wbClip.settings.javaScriptEnabled = true
     val arg = args.site.split(",,,")
     binding.ivRead.onThrottleClick {
-      Log.e("읽음","누름")
+      Log.e("읽음", "누름")
       viewModel.patchReadLink(arg[1].toLong())
     }
 
@@ -54,7 +54,7 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
     onClickClipLink()
     onClickWebViewClose()
     onClickWebViewReStart()
-    //initReadBtnClickLister()
+    // initReadBtnClickLister()
     initNavigationBtnClickListener()
     initBrowserBtnClickListener()
     initEditorActionListener()
@@ -100,8 +100,7 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
   private fun initReadBtnClickLister() {
     with(binding) {
       ivRead.onThrottleClick {
-
-        //handleVisibility(ivRead, ivReadAfter)
+        // handleVisibility(ivRead, ivReadAfter)
       }
 
       /*ivReadAfter.onThrottleClick {

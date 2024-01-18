@@ -9,7 +9,7 @@ import org.sopt.model.category.Toast
 import org.sopt.ui.view.ItemDiffCallback
 
 class LinkResultAdapter(
-  private val onClick: (Toast) -> Unit
+  private val onClick: (Toast) -> Unit,
 ) :
   ListAdapter<Toast, LinkResultViewHolder>(DiffUtil) {
 

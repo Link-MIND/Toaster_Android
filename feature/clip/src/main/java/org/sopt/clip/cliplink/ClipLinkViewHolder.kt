@@ -1,6 +1,5 @@
 package org.sopt.clip.cliplink
 
-import android.util.Log
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -18,14 +17,13 @@ class ClipLinkViewHolder(
     with(binding) {
       tvLinkTitle.text = linkData.toastTitle
       tvLinkUrl.text = linkData.linkUrl
-      if(linkData.categoryTitle.isNullOrEmpty()){
+      if (linkData.categoryTitle.isNullOrEmpty()) {
         tvLinkClipTitle.isGone = true
       } else {
         tvLinkClipTitle.isVisible = true
         tvLinkClipTitle.text = linkData.categoryTitle
       }
-      ivLinkThumnail.load(linkData.thumbnailUrl){
-
+      ivLinkThumnail.load(linkData.thumbnailUrl) {
       }
       if (linkData.isRead) {
         tvItemClipLink.isVisible = true
