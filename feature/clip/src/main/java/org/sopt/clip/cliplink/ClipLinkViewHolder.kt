@@ -18,11 +18,7 @@ class ClipLinkViewHolder(
         tvLinkUrl.text = linkData.linkUrl
         tvLinkClipTitle.text = linkData.categoryTitle
         root.onThrottleClick {
-          /*onClick(linkData)*/
           onClickItemLink(linkData, "click")
-/*
-        initLinkClipTitleVisible(linkData)
-*/
         }
         ivLinkDelete.onThrottleClick {
           onClickItemLink(linkData, "delete")

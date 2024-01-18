@@ -31,6 +31,7 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     initClipAdapter()
     viewModel.getCategoryAll()
     updateClipList()
+    collectAddCategory()
     onClickSearchButton()
     onClickEditButton()
     onClickAddButton()
@@ -47,6 +48,19 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
           clipAdapter.submitList(state.data)
           setEmptyMsgVisible()
         }
+
+        else -> {}
+      }
+    }.launchIn(viewLifeCycleScope)
+  }
+
+  private fun collectAddCategory() {
+    viewModel.duplicateState.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is UiState.Success -> {
+          if (!state.data.isDuplicate) requireContext().linkMindSnackBar(binding.root, "클립 생성 완료!", false)
+        }
+
         else -> {}
       }
     }.launchIn(viewLifeCycleScope)
@@ -58,6 +72,7 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
       findNavController().navigate(action)
     }
     binding.rvClipClip.adapter = clipAdapter
+    binding.rvClipClip.itemAnimator = null
   }
 
   private fun setEmptyMsgVisible() {
@@ -75,8 +90,7 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
         setErroMsg(org.sopt.mainfeature.R.string.error_clip_length)
         bottomSheetConfirmBtnClick {
           dismiss()
-          viewModel.postAddCategoryTitle(getText())
-          requireContext().linkMindSnackBar(binding.root, "클립 생성 완료!", false)
+          viewModel.getCategoryDuplicate(getText())
         }
       }
     }
@@ -88,18 +102,12 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     }
   }
 
-/*  private fun onClickListView() {
-    bundle.putString("clipTitle",)
-    binding.rvClipClip.onThrottleClick {
-      findNavController().navigate(R.id.action_navigation_clip_to_navigation_clip_link)
-    }
-  }*/
-
   private fun onClickSearchButton() {
     binding.clClipSearch.onThrottleClick {
       navigateToDestination("featureMyPage://fragmentSearch")
     }
   }
+
   private fun navigateToDestination(destination: String) {
     val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
       destination,
