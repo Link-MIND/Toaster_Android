@@ -35,7 +35,7 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
     super.onViewCreated(view, savedInstanceState)
     binding.wbClip.settings.javaScriptEnabled = true
     val arg = args.site.split(",,,")
-    if(arg.size == 3){
+    if (arg.size == 3) {
       when (arg[2].toBoolean()) {
         true -> {
           viewModel.patchReadLinkResult.value = true
@@ -46,7 +46,7 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
         }
       }
     }
-    if(arg[1].toInt() == 0){
+    if (arg[1].toInt() == 0) {
       binding.ivRead.isInvisible = true
       binding.ivRead.isClickable = false
     }
