@@ -43,6 +43,7 @@ class LinkMindBottomSheet(context: Context) {
       }
     }
   }
+
   fun setBottomSheetHint(@StringRes textId: Int) {
     binding.etvBottomSheet.editText.setHint(textId)
   }
@@ -53,7 +54,7 @@ class LinkMindBottomSheet(context: Context) {
     }
   }
 
-  private fun handleTextChange() {
+  fun handleTextChange() {
     val isError = showErrorMsg()
     binding.apply {
       tvBottomSheetErrorText.isVisible = isError

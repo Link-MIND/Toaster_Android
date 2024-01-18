@@ -44,6 +44,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
         binding.tvClipLinkEntire,
         org.sopt.mainfeature.R.color.neutrals050,
         org.sopt.mainfeature.R.color.neutrals200,
+        "전체",
         binding.tvClipLinkRead,
         binding.tvClipLinkUnread,
       )
@@ -55,6 +56,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
         binding.tvClipLinkRead,
         org.sopt.mainfeature.R.color.neutrals050,
         org.sopt.mainfeature.R.color.neutrals050,
+        "열람",
         binding.tvClipLinkEntire,
         binding.tvClipLinkUnread,
       )
@@ -66,6 +68,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
         binding.tvClipLinkUnread,
         org.sopt.mainfeature.R.color.neutrals200,
         org.sopt.mainfeature.R.color.neutrals050,
+        "미열람",
         binding.tvClipLinkEntire,
         binding.tvClipLinkRead,
       )
@@ -78,13 +81,14 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     onClickBackButton()
   }
 
-  private fun updateState(stateId: Int, event: () -> Unit, selectedTextView: TextView, color1: Int, color2: Int, vararg otherTextViews: TextView) {
+  private fun updateState(stateId: Int, event: () -> Unit, selectedTextView: TextView, color1: Int, color2: Int,detailName:String, vararg otherTextViews: TextView) {
     if (binding.mlClipFilter.progress == 0f || binding.mlClipFilter.progress == 1f) {
       binding.mlClipFilter.transitionToState(stateId)
       selectedTextView.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_bold_14)
       selectedTextView.setTextColor(colorOf(org.sopt.mainfeature.R.color.neutrals850))
       binding.vClipLink1.setBackgroundColor(colorOf(color1))
       binding.vClipLink2.setBackgroundColor(colorOf(color2))
+      binding.tvClipCategoryAll.text = detailName
       otherTextViews.forEach { textView ->
         textView.setTextAppearance(org.sopt.mainfeature.R.style.Typography_suit_semibold_14)
         textView.setTextColor(colorOf(org.sopt.mainfeature.R.color.neutrals400))
@@ -120,6 +124,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
       }
     }.launchIn(viewLifeCycleScope)
   }
+
 
   private fun updateLinkDelete(categoryId: Long) {
     viewModel.deleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->

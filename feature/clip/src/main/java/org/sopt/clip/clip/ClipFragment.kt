@@ -2,7 +2,6 @@ package org.sopt.clip.clip
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
@@ -22,7 +21,7 @@ import org.sopt.ui.view.onThrottleClick
 
 @AndroidEntryPoint
 class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.inflate(it) }) {
-  private val viewModel : ClipViewModel by viewModels()
+  private val viewModel: ClipViewModel by viewModels()
   private lateinit var clipAdapter: ClipAdapter
   val bundle = Bundle()
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,10 +31,10 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     viewModel.getCategoryAll()
     updateClipList()
     updateAllClipCount()
-    collectAddCategory()
     onClickSearchButton()
     onClickEditButton()
     onClickAddButton()
+    isCheckClipCount()
   }
 
   private fun updateClipList() {
@@ -66,13 +65,29 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
       }
     }.launchIn(viewLifeCycleScope)
   }
+
+  private var boolean = false
   private fun collectAddCategory() {
     viewModel.duplicateState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
           if (!state.data.isDuplicate) requireContext().linkMindSnackBar(binding.vSnack, "클립 생성 완료!", false)
+          else boolean = true
         }
+
         else -> {}
+      }
+    }.launchIn(viewLifeCycleScope)
+  }
+
+  private fun isCheckClipCount() {
+    viewModel.test.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is UiState.Success -> {
+          if (!state.data) requireContext().linkMindSnackBar(binding.vSnack, "클립 개수는 15개까지 가능합니다", true)
+        }
+        else -> {
+        }
       }
     }.launchIn(viewLifeCycleScope)
   }
@@ -100,8 +115,9 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
         setTitle(org.sopt.mainfeature.R.string.clip_add_clip)
         setErroMsg(org.sopt.mainfeature.R.string.error_clip_length)
         bottomSheetConfirmBtnClick {
-          dismiss()
           viewModel.getCategoryDuplicate(getText())
+          collectAddCategory()
+          dismiss()
         }
       }
     }
