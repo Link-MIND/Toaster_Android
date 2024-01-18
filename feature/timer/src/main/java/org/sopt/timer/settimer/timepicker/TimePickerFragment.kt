@@ -314,6 +314,7 @@ class TimePickerFragment : BindingFragment<FragmentTimePickerBinding>({ Fragment
       when (state) {
         is UiState.Success -> {
           timerViewModel.getTimerMain()
+          requireContext().linkMindSnackBar(binding.btnTimePickerNext, "타이머 설정 완료", false)
           findNavController().apply {
             navigate(R.id.action_navigation_time_picker_to_navigation_timer)
           }
