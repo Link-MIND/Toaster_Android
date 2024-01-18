@@ -45,6 +45,7 @@ class ClipLinkViewModel @Inject constructor(
   fun getCategoryLink(filter: String?, categoryId: Long?) = viewModelScope.launch {
     getCategoryLink(param = GetCategoryLinkUseCase.Param(filter = filter, categoryId = categoryId)).onSuccess {
       val list: MutableList<CategoryLink> = it.toastListDto.toMutableList()
+      _allClipCount.emit(UiState.Success(it.allToastNum))
       _linkState.emit(UiState.Success(list))
     }.onFailure {
       Log.d("카테 안의 링크 검색", it.message.toString())
