@@ -43,20 +43,23 @@ class HomeViewModel @Inject constructor(
   fun getMainPageUserClip() = intent {
     getMainPageUserClip.invoke().onSuccess {
       reduce {
+
+        val tempCategoryList = listOf(
+          Category(
+            0,
+            "전체 카테고리",
+            it.allToastNum.toLong(),
+          ),
+        ) + it.mainCategoryDto
+        val categoryList = if (tempCategoryList.size < 4) tempCategoryList + null else tempCategoryList
+        val finalCategoryList = categoryList.distinctBy { it?.categoryId }
         state.copy(
           nickName = it.nickName,
           allToastNum = it.allToastNum,
           readToastNum = it.readToastNum,
           categoryList = (
-            listOf(
-              Category(
-                0,
-                "전체 카테고리",
-                it.allToastNum.toLong(),
-              ),
-            ) + it.mainCategoryDto + null
-            ).distinctBy { it?.categoryId },
-        )
+            finalCategoryList
+        ))
       }
     }.onFailure {
       Log.d("MainUser", "$it")

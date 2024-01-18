@@ -141,11 +141,10 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       setTitle(org.sopt.mainfeature.R.string.home_add_clip)
       setErroMsg(org.sopt.mainfeature.R.string.home_error_clip_info)
       bottomSheetConfirmBtnClick {
-        requireContext().linkMindSnackBar(binding.root, "성공", false)
         if (showErrorMsg()) return@bottomSheetConfirmBtnClick
         viewModel.saveCategoryTitle(it)
         dismiss()
-//        requireContext().linkMindSnackBar(binding.root, "성공", false)
+        requireContext().linkMindSnackBar(binding.root, "성공", false)
       }
     }
   }
