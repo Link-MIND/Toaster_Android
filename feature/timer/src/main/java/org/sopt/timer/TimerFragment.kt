@@ -63,7 +63,6 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
     initNotiOnButtonClickListener()
   }
 
-
   override fun onResume() {
     super.onResume()
     initCheckNotificationPermission()
@@ -303,8 +302,9 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
 
   private fun initNotiOnButtonClickListener() {
     binding.clTimerPermission.onThrottleClick {
-      if(viewModel.uiState.value is TimerUiState.DeviceAllowed || viewModel.uiState.value is TimerUiState.NotAllowed)
-      navigateToDestination("featureMyPage://fragmentSetting")
+      if (viewModel.uiState.value is TimerUiState.DeviceAllowed || viewModel.uiState.value is TimerUiState.NotAllowed) {
+        navigateToDestination("featureMyPage://fragmentSetting")
+      }
     }
   }
 
