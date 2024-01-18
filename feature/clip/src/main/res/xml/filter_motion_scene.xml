@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+  <Transition
+    motion:constraintSetEnd="@id/read"
+    motion:constraintSetStart="@id/all"
+    motion:duration="200">
+
+    <OnClick />
+  </Transition>
+
+  <Transition
+    motion:constraintSetEnd="@id/unread"
+    motion:constraintSetStart="@id/all"
+    motion:duration="200">
+
+    <OnClick />
+  </Transition>
+
+  <Transition
+    motion:constraintSetEnd="@id/all"
+    motion:constraintSetStart="@id/read"
+    motion:duration="200">
+
+    <OnClick />
+  </Transition>
+
+  <Transition
+    motion:constraintSetEnd="@id/unread"
+    motion:constraintSetStart="@id/read"
+    motion:duration="200">
+
+    <OnClick />
+  </Transition>
+
+  <Transition
+    motion:constraintSetEnd="@id/read"
+    motion:constraintSetStart="@id/unread"
+    motion:duration="200">
+
+    <OnClick />
+  </Transition>
+
+  <Transition
+    motion:constraintSetEnd="@id/all"
+    motion:constraintSetStart="@id/unread"
+    motion:duration="200">
+
+    <OnClick />
+  </Transition>
+
+  <ConstraintSet android:id="@+id/all">
+    <Constraint
+      android:id="@id/v_clip_link_background"
+      android:layout_width="0dp"
+      android:layout_height="34dp"
+      android:background="@drawable/shape_white_fill_8_rect"
+      android:padding="4dp"
+      motion:layout_constraintTop_toTopOf="@id/tv_clip_link_entire"
+      motion:layout_constraintStart_toStartOf="@id/tv_clip_link_entire"
+      motion:layout_constraintEnd_toEndOf="@id/tv_clip_link_entire"
+      motion:layout_constraintBottom_toBottomOf="@id/tv_clip_link_entire" />
+
+    <Constraint
+      android:id="@id/tv_clip_link_entire"
+      android:layout_width="0dp"
+      android:layout_height="34dp"
+      android:text="전체"
+      android:paddingVertical="11dp"
+      android:gravity="center"
+      android:textAppearance="@style/Typography.suit.bold_14"
+      android:textColor="@color/neutrals850"
+      motion:layout_constraintTop_toTopOf="parent"
+      motion:layout_constraintBottom_toBottomOf="parent"
+      motion:layout_constraintStart_toStartOf="parent"
+      motion:layout_constraintEnd_toStartOf="@id/tv_clip_link_read"/>
+
+    <Constraint
+      android:id="@id/v_clip_link_1"
+      android:layout_width="1dp"
+      android:layout_height="19dp"
+      android:background="@color/neutrals200"
+      motion:layout_constraintTop_toTopOf="parent"
+      motion:layout_constraintBottom_toBottomOf="parent"
+      motion:layout_constraintStart_toEndOf="@id/tv_clip_link_entire"
+      motion:layout_constraintEnd_toStartOf="@id/tv_clip_link_read"/>
+
+    <Constraint
+      android:id="@id/tv_clip_link_read"
+      android:layout_width="0dp"
+      android:layout_height="34dp"
+      android:text="열람"
+      android:gravity="center"
+      android:paddingVertical="11dp"
+      android:textAppearance="@style/Typography.suit.semibold_14"
+      android:textColor="@color/neutrals400"
+      motion:layout_constraintTop_toTopOf="parent"
+      motion:layout_constraintBottom_toBottomOf="parent"
+      motion:layout_constraintStart_toEndOf="@id/tv_clip_link_entire"
+      motion:layout_constraintEnd_toStartOf="@id/tv_clip_link_unread"/>
+
+    <Constraint
+      android:id="@+id/v_clip_link_2"
+      android:layout_width="1dp"
+      android:layout_height="19dp"
+      android:background="@color/neutrals200"
+      motion:layout_constraintTop_toTopOf="parent"
+      motion:layout_constraintBottom_toBottomOf="parent"
+      motion:layout_constraintStart_toEndOf="@id/tv_clip_link_read"
+      motion:layout_constraintEnd_toStartOf="@id/tv_clip_link_unread"/>
+
+    <Constraint
+      android:id="@id/tv_clip_link_unread"
+      android:layout_width="0dp"
+      android:layout_height="34dp"
+      android:text="미열람"
+      android:gravity="center"
+      android:paddingVertical="11dp"
+      android:textAppearance="@style/Typography.suit.semibold_14"
+      android:textColor="@color/neutrals400"
+      motion:layout_constraintTop_toTopOf="parent"
+      motion:layout_constraintBottom_toBottomOf="parent"
+      motion:layout_constraintStart_toEndOf="@id/tv_clip_link_read"
+      motion:layout_constraintEnd_toEndOf="parent"/>
+  </ConstraintSet>
+
+  <ConstraintSet android:id="@+id/read">
+    <Constraint
+      android:id="@id/v_clip_link_background"
+      android:layout_width="0dp"
+      android:layout_height="34dp"
+      android:background="@drawable/shape_white_fill_8_rect"
+      android:padding="4dp"
+      motion:layout_constraintTop_toTopOf="@id/tv_clip_link_read"
+      motion:layout_constraintStart_toStartOf="@id/tv_clip_link_read"
+      motion:layout_constraintEnd_toEndOf="@id/tv_clip_link_read"
+      motion:layout_constraintBottom_toBottomOf="@id/tv_clip_link_read" />
+
+    <Constraint
+      android:id="@id/tv_clip_link_entire"
+      android:layout_width="0dp"
+      android:layout_height="34dp"
+      android:text="전체"
+      android:paddingVertical="11dp"
+      android:gravity="center"
+      android:textAppearance="@style/Typography.suit.semibold_14"
+      android:textColor="@color/neutrals400"
+      motion:layout_constraintTop_toTopOf="parent"
+      motion:layout_constraintBottom_toBottomOf="parent"
+      motion:layout_constraintStart_toStartOf="parent"
+      motion:layout_constraintEnd_toStartOf="@id/tv_clip_link_read"/>
+
+    <Constraint
+      android:id="@id/v_clip_link_1"
+      android:layout_width="1dp"
+      android:layout_height="19dp"
+      android:background="@color/neutrals200"
+      motion:layout_constraintTop_toTopOf="parent"
+      motion:layout_constraintBottom_toBottomOf="parent"
+      motion:layout_constraintStart_toEndOf="@id/tv_clip_link_entire"
+      motion:layout_constraintEnd_toStartOf="@id/tv_clip_link_read"/>
+
+    <Constraint
+      android:id="@id/tv_clip_link_read"
+      android:layout_width="0dp"
+      android:layout_height="34dp"
+      android:text="열람"
+      android:gravity="center"
+      android:paddingVertical="11dp"
+      android:textAppearance="@style/Typography.suit.bold_14"
+      android:textColor="@color/neutrals850"
+      motion:layout_constraintTop_toTopOf="parent"
+      motion:layout_constraintBottom_toBottomOf="parent"
+      motion:layout_constraintStart_toEndOf="@id/tv_clip_link_entire"
+      motion:layout_constraintEnd_toStartOf="@id/tv_clip_link_unread"/>
+
+    <Constraint
+      android:id="@+id/v_clip_link_2"
+      android:layout_width="1dp"
+      android:layout_height="19dp"
+      android:background="@color/neutrals200"
+      motion:layout_constraintTop_toTopOf="parent"
+      motion:layout_constraintBottom_toBottomOf="parent"
+      motion:layout_constraintStart_toEndOf="@id/tv_clip_link_read"
+      motion:layout_constraintEnd_toStartOf="@id/tv_clip_link_unread"/>
+
+    <Constraint
+      android:id="@id/tv_clip_link_unread"
+      android:layout_width="0dp"
+      android:layout_height="34dp"
+      android:text="미열람"
+      android:gravity="center"
+      android:paddingVertical="11dp"
+      android:textAppearance="@style/Typography.suit.semibold_14"
+      android:textColor="@color/neutrals400"
+      motion:layout_constraintTop_toTopOf="parent"
+      motion:layout_constraintBottom_toBottomOf="parent"
+      motion:layout_constraintStart_toEndOf="@id/tv_clip_link_read"
+      motion:layout_constraintEnd_toEndOf="parent"/>
+  </ConstraintSet>
+
+  <ConstraintSet android:id="@+id/unread">
+    <Constraint
+      android:id="@id/v_clip_link_background"
+      android:layout_width="0dp"
+      android:layout_height="34dp"
+      android:background="@drawable/shape_white_fill_8_rect"
+      android:padding="4dp"
+      motion:layout_constraintTop_toTopOf="@id/tv_clip_link_unread"
+      motion:layout_constraintStart_toStartOf="@id/tv_clip_link_unread"
+      motion:layout_constraintEnd_toEndOf="@id/tv_clip_link_unread"
+      motion:layout_constraintBottom_toBottomOf="@id/tv_clip_link_unread" />
+
+    <Constraint
+      android:id="@id/tv_clip_link_entire"
+      android:layout_width="0dp"
+      android:layout_height="34dp"
+      android:text="전체"
+      android:paddingVertical="11dp"
+      android:gravity="center"
+      android:textAppearance="@style/Typography.suit.semibold_14"
+      android:textColor="@color/neutrals400"
+      motion:layout_constraintTop_toTopOf="parent"
+      motion:layout_constraintBottom_toBottomOf="parent"
+      motion:layout_constraintStart_toStartOf="parent"
+      motion:layout_constraintEnd_toStartOf="@id/tv_clip_link_read"/>
+
+    <Constraint
+      android:id="@+id/v_clip_link_1"
+      android:layout_width="1dp"
+      android:layout_height="19dp"
+      android:background="@color/neutrals200"
+      motion:layout_constraintTop_toTopOf="parent"
+      motion:layout_constraintBottom_toBottomOf="parent"
+      motion:layout_constraintStart_toEndOf="@id/tv_clip_link_entire"
+      motion:layout_constraintEnd_toStartOf="@id/tv_clip_link_read"/>
+
+    <Constraint
+      android:id="@id/tv_clip_link_read"
+      android:layout_width="0dp"
+      android:layout_height="34dp"
+      android:text="열람"
+      android:gravity="center"
+      android:paddingVertical="11dp"
+      android:textAppearance="@style/Typography.suit.semibold_14"
+      android:textColor="@color/neutrals400"
+      motion:layout_constraintTop_toTopOf="parent"
+      motion:layout_constraintBottom_toBottomOf="parent"
+      motion:layout_constraintStart_toEndOf="@id/tv_clip_link_entire"
+      motion:layout_constraintEnd_toStartOf="@id/tv_clip_link_unread"/>
+
+    <Constraint
+      android:id="@+id/v_clip_link_2"
+      android:layout_width="1dp"
+      android:layout_height="19dp"
+      android:background="@color/neutrals200"
+      motion:layout_constraintTop_toTopOf="parent"
+      motion:layout_constraintBottom_toBottomOf="parent"
+      motion:layout_constraintStart_toEndOf="@id/tv_clip_link_read"
+      motion:layout_constraintEnd_toStartOf="@id/tv_clip_link_unread"/>
+
+    <Constraint
+      android:id="@id/tv_clip_link_unread"
+      android:layout_width="0dp"
+      android:layout_height="34dp"
+      android:text="미열람"
+      android:gravity="center"
+      android:paddingVertical="11dp"
+      android:textAppearance="@style/Typography.suit.bold_14"
+      android:textColor="@color/neutrals850"
+      motion:layout_constraintTop_toTopOf="parent"
+      motion:layout_constraintBottom_toBottomOf="parent"
+      motion:layout_constraintStart_toEndOf="@id/tv_clip_link_read"
+      motion:layout_constraintEnd_toEndOf="parent"/>
+  </ConstraintSet>
+</MotionScene>
