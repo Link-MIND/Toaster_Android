@@ -14,7 +14,7 @@ class CompleteTimerViewHolder(
       tvItemTimerCompleteCategory.text = data.comment
       val time = data.remindTime.replace("AM", "오전").replace("PM", "오후")
       tvItemTimerCompleteTime.text = "${data.remindDate} $time"
-      tvItemTimerCompleteRead.setOnClickListener {
+      root.setOnClickListener {
         onClicked(data)
       }
     }
