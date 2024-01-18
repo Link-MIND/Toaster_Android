@@ -50,7 +50,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
 
   private fun render(homeState: SaveLinkSetClipState) {
     initSetClipAdapter(homeState.categoryList)
-    binding.tvSaveLinkClipCount.text="전체 (${homeState.allClipCountNum})"
+    binding.tvSaveLinkClipCount.text = "전체 (${homeState.allClipCountNum})"
     adapter.submitList(homeState.categoryList)
   }
 
@@ -65,6 +65,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
       is SaveLinkSetClipSideEffect.ShowBottomSheet -> showAddClipBottomSheet()
       is SaveLinkSetClipSideEffect.ShowDialog -> showCloseDialog()
       is SaveLinkSetClipSideEffect.ShowSnackBar -> requireContext().linkMindSnackBar(binding.btnSaveLinkComplete, "유효하지 않은 링크입니다.", false)
+      is SaveLinkSetClipSideEffect.ShowSnackBarError -> requireContext().linkMindSnackBar(binding.btnSaveLinkComplete, "클립 개수는 15개까지 가능합니다", false)
       else -> {}
     }
   }
@@ -133,8 +134,8 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
       setErroMsg(R.string.error_clip_length)
       setBottomSheetHint(R.string.home_new_clip_info)
       bottomSheetConfirmBtnClick {
+        viewModel.getCategoryDuplicate(it)
         if (showErrorMsg()) return@bottomSheetConfirmBtnClick
-        viewModel.saveCategoryTitle(it)
         dismiss()
       }
     }

@@ -93,7 +93,7 @@
   <string name="home_error_clip_info">공백 또는 15글자 이상은 안됩니다.</string>
 
   <!-- error -->
-  <string name="error_clip_length">링크 제목은 최대 15자까지 입력 가능해요</string>
+  <string name="error_clip_length">클립의 이름은 최대 15자까지 입력 가능해요</string>
   <string name="error_clip_name">이미 같은 이름의 클립이 있어요</string>
 
   <!-- dialog intro -->

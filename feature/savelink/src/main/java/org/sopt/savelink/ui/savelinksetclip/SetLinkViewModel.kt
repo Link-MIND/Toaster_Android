@@ -12,10 +12,12 @@ import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import org.sopt.domain.category.category.usecase.GetCategoryAllUseCase
+import org.sopt.domain.category.category.usecase.GetCategoryDuplicateUseCase
 import org.sopt.domain.category.category.usecase.PostAddCategoryTitleUseCase
 import org.sopt.domain.link.usecase.PostSaveLinkUseCase
 import org.sopt.savelink.ui.model.Clip
 import org.sopt.savelink.ui.model.toModel
+import org.sopt.ui.view.UiState
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,6 +25,7 @@ class SetLinkViewModel @Inject constructor(
   private val saveLinkUseCase: PostSaveLinkUseCase,
   private val getCategoryAllUseCase: GetCategoryAllUseCase,
   private val postAddCategoryTitle: PostAddCategoryTitleUseCase,
+  private val getCategoryDuplicateUseCase: GetCategoryDuplicateUseCase
 ) : ContainerHost<SaveLinkSetClipState, SaveLinkSetClipSideEffect>, ViewModel() {
   override val container: Container<SaveLinkSetClipState, SaveLinkSetClipSideEffect> =
     container(SaveLinkSetClipState())
@@ -48,7 +51,19 @@ class SetLinkViewModel @Inject constructor(
       Log.d("getCategortFail", "$it")
     }
   }
-
+  fun getCategoryDuplicate(title: String) = intent {
+    getCategoryDuplicateUseCase.invoke(param = GetCategoryDuplicateUseCase.Param(title))
+      .onSuccess {
+        reduce {
+          state.copy(
+            duplicate = it.isDuplicate
+          )
+        }
+        if(!it.isDuplicate) saveCategoryTitle(title)
+    }.onFailure {
+      Log.d("카테 중복 체크", "실패 $it")
+    }
+  }
   fun saveCategoryTitle(categoryTitle: String) = viewModelScope.launch {
     postAddCategoryTitle(
       PostAddCategoryTitleUseCase.Param(
@@ -56,7 +71,9 @@ class SetLinkViewModel @Inject constructor(
       ),
     ).onSuccess {
       getCategoryAll()
-    }.onFailure { Log.d("saveCategoryTitleFail", "$it") }
+    }.onFailure {
+      showSnackBarError()
+    }
   }
 
   fun saveLink(linkUrl: String, categoryId: Long?) = viewModelScope.launch {
@@ -66,7 +83,6 @@ class SetLinkViewModel @Inject constructor(
         categoryId = categoryId,
       ),
     ).onSuccess {
-      Log.d("save", "$it")
       navigateSetLink()
       if (it != 201) showSnackBar()
     }.onFailure {
@@ -92,4 +108,5 @@ class SetLinkViewModel @Inject constructor(
   fun showDialog() = intent { postSideEffect(SaveLinkSetClipSideEffect.ShowDialog) }
 
   private fun showSnackBar() = intent { postSideEffect(SaveLinkSetClipSideEffect.ShowSnackBar) }
+  private fun showSnackBarError() = intent { postSideEffect(SaveLinkSetClipSideEffect.ShowSnackBarError) }
 }

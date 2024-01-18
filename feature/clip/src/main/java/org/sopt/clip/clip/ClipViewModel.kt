@@ -31,6 +31,8 @@ class ClipViewModel @Inject constructor(
   private val _allClipCount = MutableStateFlow<UiState<Long>>(UiState.Empty)
   val allClipCount: StateFlow<UiState<Long>> = _allClipCount.asStateFlow()
 
+  private val _test = MutableStateFlow<UiState<Boolean>>(UiState.Empty)
+  val test: StateFlow<UiState<Boolean>> = _test.asStateFlow()
   init {
     getCategoryAll()
   }
@@ -49,8 +51,8 @@ class ClipViewModel @Inject constructor(
 
   fun getCategoryDuplicate(title: String) = viewModelScope.launch {
     getCategoryDuplicate.invoke(param = GetCategoryDuplicateUseCase.Param(title)).onSuccess {
-      _duplicateState.emit(UiState.Success(it))
       if (it.isDuplicate) return@launch
+      _duplicateState.emit(UiState.Success(it))
       postAddCategoryTitle(title)
     }.onFailure {
       Log.d("카테 중복 체크", "실패 $it")
@@ -60,7 +62,9 @@ class ClipViewModel @Inject constructor(
   fun postAddCategoryTitle(categoryTitle: String) = viewModelScope.launch {
     postAddCategoryTitle.invoke(param = PostAddCategoryTitleUseCase.Param(categoryTitle)).onSuccess {
       getCategoryAll()
+      _test.emit(UiState.Success(true))
     }.onFailure {
+      _test.emit(UiState.Success(false))
       Log.d("카테 추가", "실패")
     }
   }
