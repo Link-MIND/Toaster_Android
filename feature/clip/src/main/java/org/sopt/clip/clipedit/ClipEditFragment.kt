@@ -69,7 +69,7 @@ class ClipEditFragment : BindingFragment<FragmentClipEditBinding>({ FragmentClip
     itemTouchHelper.attachToRecyclerView(binding.rvClipEdit)
     val originalList = (viewModel.categoryState.value as UiState.Success).data ?: emptyList()
     val newList = originalList.filter { it.categoryId?.toInt() != 0 }
-    Log.d("test","$originalList")
+    Log.d("test", "$originalList")
 //    Log.d("test2","$newList")
 //    clipEditAdapter.submitList(newList)
 

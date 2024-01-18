@@ -84,7 +84,7 @@ class ClipViewModel @Inject constructor(
       val allCategoryList = listOf<Category>(
         Category(0, "전체 클립", it.toastNumberInEntire),
       )
-      _categoryState.emit(UiState.Success(allCategoryList+it.categories))
+      _categoryState.emit(UiState.Success(allCategoryList + it.categories))
     }.onFailure {
       Log.e("실패", it.message.toString())
     }
