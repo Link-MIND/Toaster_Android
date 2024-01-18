@@ -21,11 +21,11 @@ class RemoteLinkDataSourceImpl @Inject constructor(
     return linkService.deleteLink(toastId).code
   }
 
-  override suspend fun patchReadLink(toastId: Long): Boolean =
+  override suspend fun patchReadLink(toastId: Long, isRead: Boolean): Boolean =
     linkService.patchLink(
       RequestIsReadDto(
         toastId = toastId,
-        isRead = true,
+        isRead = isRead,
       ),
     ).data!!.isRead
 }
