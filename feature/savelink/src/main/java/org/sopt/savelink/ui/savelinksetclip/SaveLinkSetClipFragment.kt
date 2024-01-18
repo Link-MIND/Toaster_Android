@@ -118,7 +118,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
         linkMindDialog.dismiss()
         navigateToHome()
       }
-      .setPositiveButton(R.string.positive_ok_msg) {
+      .setPositiveButton(R.string.negative_close_cancel) {
         linkMindDialog.dismiss()
       }
       .show()

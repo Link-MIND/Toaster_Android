@@ -88,6 +88,7 @@
 
   <!-- home -->
   <string name="home_correction_clip">클립수정</string>
+  <string name="home_add_clip">클립추가</string>
   <string name="home_new_clip_info">"새로운 클립의 이름을 입력해주세요"</string>
   <string name="home_error_clip_info">공백 또는 15글자 이상은 안됩니다.</string>
 
