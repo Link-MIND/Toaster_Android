@@ -1,6 +1,7 @@
 package org.sopt.clip.clip
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
@@ -67,19 +68,16 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     }.launchIn(viewLifeCycleScope)
   }
 
-  private var boolean = false
   private fun collectAddCategory() {
     viewModel.duplicateState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
+          Log.d("state","${state.data.isDuplicate}")
           if (!state.data.isDuplicate) {
             requireContext().linkMindSnackBar(binding.vSnack, "클립 생성 완료!", false)
-          } else {
-            requireContext().linkMindSnackBar(binding.vSnack, "중복된 클립 이름이 있습니다.", false)
-            boolean = true
-          }
+          }else
+            requireContext().linkMindSnackBar(binding.vSnack, "이미 같은 이름의 클립이 있습니다.", false)
         }
-
         else -> {}
       }
     }.launchIn(viewLifeCycleScope)

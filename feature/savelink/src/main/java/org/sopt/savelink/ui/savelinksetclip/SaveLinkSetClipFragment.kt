@@ -52,7 +52,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
     initSetClipAdapter(homeState.categoryList)
     binding.tvSaveLinkClipCount.text = "전체 (${homeState.allClipCountNum})"
     adapter.submitList(homeState.categoryList)
-    if(homeState.duplicate)  requireContext().linkMindSnackBar(binding.vSnack, "이미 존재하는 클립 이름 입니다.", false)
+    if (homeState.duplicate) requireContext().linkMindSnackBar(binding.vSnack, "이미 같은 이름의 클립이 있습니다.", false)
   }
 
   private fun handleSideEffect(sideEffect: SaveLinkSetClipSideEffect) {
@@ -67,7 +67,6 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
       is SaveLinkSetClipSideEffect.ShowDialog -> showCloseDialog()
       is SaveLinkSetClipSideEffect.ShowSnackBar -> requireContext().linkMindSnackBar(binding.btnSaveLinkComplete, "유효하지 않은 링크입니다.", false)
       is SaveLinkSetClipSideEffect.ShowSnackBarError -> requireContext().linkMindSnackBar(binding.btnSaveLinkComplete, "클립 개수는 15개까지 가능합니다", false)
-      else -> {}
     }
   }
 
