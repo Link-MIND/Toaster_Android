@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.dialog.LinkMindDialog
 import org.orbitmvi.orbit.viewmodel.observe
+import org.sopt.common.util.delSpace
 import org.sopt.maincontainer.databinding.ActivityMainBinding
 import org.sopt.ui.context.hideKeyboard
 import org.sopt.ui.keyboard.KeyboardUtils
@@ -121,7 +122,7 @@ class MainActivity : AppCompatActivity() {
     val (request, navOptions) = DeepLinkUtil.getNavRequestPopUpAndAnimption(
       popUpToId = org.sopt.savelink.R.id.nav_graph_save_link,
       inclusive = true,
-      url,
+      url.delSpace(),
       enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
       exitAnim = android.R.anim.fade_out,
       popEnterAnim = android.R.anim.fade_in,

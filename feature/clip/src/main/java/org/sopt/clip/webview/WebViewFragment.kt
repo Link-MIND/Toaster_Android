@@ -1,6 +1,7 @@
 package org.sopt.clip.webview
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -152,19 +153,21 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
         if (wbClip.canGoBack()) {
           wbClip.goBack()
         }
+        updateColors()
       }
 
       ivNext.onThrottleClick {
         if (wbClip.canGoForward()) {
           wbClip.goForward()
         }
+        updateColors()
       }
 
-      updateColors()
-
       wbClip.webViewClient = object : WebViewClient() {
-        override fun onPageFinished(view: WebView?, url: String?) {
-          Log.d("test", "test2")
+        override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+          super.onPageStarted(view, url, favicon)
+
+          updateColors()
         }
       }
     }
