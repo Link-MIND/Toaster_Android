@@ -44,6 +44,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
       binding.etvSaveCopyLink.editText.setText(clipboardLink)
       if (binding.etvSaveCopyLink.editText.text.contains("http")) {
         handleSaveLinkNextClick()
+        binding.btnSaveLinkNext.state = LinkMIndFullWidthButtonState.ENABLE_BLACK
         binding.btnSaveLinkNext.setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals850_fill_12_rect)
       } else {
         binding.btnSaveLinkNext.apply {
@@ -141,11 +142,6 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     binding.btnSaveLinkNext.layoutParams = layoutParams
     binding.btnSaveLinkNext.apply {
       state = LinkMIndFullWidthButtonState.ENABLE_BLACK
-      binding.btnSaveLinkNext.btnClick {
-        if (binding.etvSaveCopyLink.editText.text.isEmpty()) {
-          showErrorState(binding.tvSaveLinkError)
-        }
-      }
 //      state = if (state == LinkMIndFullWidthButtonState.DISABLE) {
 //        LinkMIndFullWidthButtonState.DISABLE
 //      } else {
@@ -192,6 +188,9 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     binding.btnSaveLinkNext.btnClick {
       if (binding.btnSaveLinkNext.state != LinkMIndFullWidthButtonState.DISABLE) {
         viewModel.navigateSetLink()
+      }
+      if (binding.etvSaveCopyLink.editText.text.isEmpty()) {
+        showErrorState(binding.tvSaveLinkError)
       }
     }
   }
