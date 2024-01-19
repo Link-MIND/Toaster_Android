@@ -190,7 +190,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     clipLinkAdapter = ClipLinkAdapter { linkDTO, state ->
       when (state) {
         "click" -> {
-          naviagateToWebViewFragment(linkDTO.linkUrl ?: "", linkDTO.toastId , linkDTO.isRead)
+          naviagateToWebViewFragment(linkDTO.linkUrl ?: "", linkDTO.toastId, linkDTO.isRead)
         }
 
         "delete" -> {
