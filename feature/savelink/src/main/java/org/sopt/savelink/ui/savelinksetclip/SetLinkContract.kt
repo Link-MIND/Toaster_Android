@@ -10,7 +10,6 @@ data class SaveLinkSetClipState(
   val duplicate: Boolean = false,
   val navHome: Boolean = false,
 )
-
 sealed interface SaveLinkSetClipSideEffect {
   data object NavigateSaveLinkSetClip : SaveLinkSetClipSideEffect
   data object NavigateUp : SaveLinkSetClipSideEffect
