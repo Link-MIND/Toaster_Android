@@ -50,6 +50,7 @@ class SetLinkViewModel @Inject constructor(
       Log.d("getCategortFail", "$it")
     }
   }
+
   fun getCategoryDuplicate(title: String) = intent {
     getCategoryDuplicateUseCase.invoke(param = GetCategoryDuplicateUseCase.Param(title))
       .onSuccess {
@@ -63,6 +64,16 @@ class SetLinkViewModel @Inject constructor(
         Log.d("카테 중복 체크", "실패 $it")
       }
   }
+
+  fun updateDuplicate() = intent {
+    reduce {
+      state.copy(
+        duplicate = false,
+      )
+    }
+
+  }
+
   fun saveCategoryTitle(categoryTitle: String) = viewModelScope.launch {
     postAddCategoryTitle(
       PostAddCategoryTitleUseCase.Param(
