@@ -34,9 +34,9 @@
     android:layout_height="wrap_content"
     android:layout_marginEnd="20dp"
     android:src="@drawable/ic_setting_24"
+    app:layout_constraintBottom_toBottomOf="@id/cl_mypage_title"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="@id/cl_mypage_title"
-    app:layout_constraintBottom_toBottomOf="@id/cl_mypage_title"/>
+    app:layout_constraintTop_toTopOf="@id/cl_mypage_title" />
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/cl_mypage_now_link"
@@ -52,10 +52,10 @@
       android:layout_width="48dp"
       android:layout_height="48dp"
       android:layout_marginTop="1dp"
-      android:background="@drawable/img_mypage_profile"
       android:scaleType="centerCrop"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintTop_toTopOf="parent"
+      tools:src="@drawable/img_mypage_profile" />
 
     <TextView
       android:id="@+id/tv_user_name"
@@ -63,11 +63,11 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="12dp"
       android:layout_marginBottom="2dp"
-      android:text="@string/mypage_name_ex"
       android:textAppearance="@style/Typography.suit.bold_18"
       android:textColor="@color/neutrals900"
       app:layout_constraintBottom_toTopOf="@id/tv_now_link"
-      app:layout_constraintStart_toEndOf="@id/iv_profile" />
+      app:layout_constraintStart_toEndOf="@id/iv_profile"
+      tools:text="@string/mypage_name_ex" />
 
     <TextView
       android:id="@+id/tv_user_name_nim"
@@ -148,7 +148,7 @@
     android:layout_height="wrap_content"
     android:layout_marginEnd="14dp"
     android:layout_marginBottom="14dp"
-    android:text="@string/mypage_nn"
+    tools:text="@string/mypage_nn"
     android:textAppearance="@style/Typography.suit.bold_24"
     android:textColor="@color/neutrals900"
     app:layout_constraintBottom_toBottomOf="@id/bg_link_record"
@@ -172,7 +172,7 @@
     android:layout_height="wrap_content"
     android:layout_marginEnd="14dp"
     android:layout_marginBottom="14dp"
-    android:text="@string/mypage_nn"
+    tools:text="@string/mypage_nn"
     android:textAppearance="@style/Typography.suit.bold_24"
     android:textColor="@color/neutrals900"
     app:layout_constraintBottom_toBottomOf="@id/bg_link_record"
