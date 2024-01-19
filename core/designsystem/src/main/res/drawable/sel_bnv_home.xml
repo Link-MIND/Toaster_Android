@@ -2,10 +2,10 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-  <item android:drawable="@drawable/ic_home_24"
+  <item android:drawable="@drawable/ic_home1_24"
     android:state_checked="true"
     android:color="@color/neutrals900" />
-  <item android:drawable="@drawable/ic_home_unclicked"
+  <item android:drawable="@drawable/ic_home1_unclicked"
     android:state_checked="false"
     android:color="@color/neutrals150"/>
 </selector>
