@@ -10,7 +10,7 @@
 <br>
 ## Features
 Architecture
-- MV ~
+- MVVM/I ~
 - 모듈 구조
 
 Technology Stacks
