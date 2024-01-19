@@ -53,7 +53,8 @@ class ClipViewModel @Inject constructor(
     getCategoryDuplicate.invoke(param = GetCategoryDuplicateUseCase.Param(title)).onSuccess {
       if (it.isDuplicate) {
         _duplicateState.emit(UiState.Success(it))
-        return@launch}
+        return@launch
+      }
       _duplicateState.emit(UiState.Success(it))
       postAddCategoryTitle(title)
     }.onFailure {
