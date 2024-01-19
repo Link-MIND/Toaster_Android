@@ -5,11 +5,12 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import org.sopt.clip.databinding.ItemClipLinkBinding
+import org.sopt.clip.databinding.ItemSearchLinkBinding
 import org.sopt.clip.search.util.applyBoldStyle
 import org.sopt.model.category.Toast
 import org.sopt.ui.view.onThrottleClick
 
-class LinkResultViewHolder(val binding: ItemClipLinkBinding) :
+class LinkResultViewHolder(val binding: ItemSearchLinkBinding) :
   RecyclerView.ViewHolder(binding.root) {
 
   fun onBind(linkData: Toast?, searchQuery: String, onClick: (Toast) -> Unit) {

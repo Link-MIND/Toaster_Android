@@ -9,7 +9,7 @@
   <TextView
     android:id="@+id/tv_clip_bar_title"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="56dp"
     android:paddingHorizontal="20dp"
     android:paddingVertical="17dp"
     android:text="@string/text_clip"
@@ -21,7 +21,7 @@
   <androidx.appcompat.widget.AppCompatButton
     android:id="@+id/btn_clip_edit"
     android:layout_width="wrap_content"
-    android:layout_height="0dp"
+    android:layout_height="56dp"
     android:background="@color/transparent"
     android:paddingHorizontal="28dp"
     android:paddingTop="19dp"
@@ -36,33 +36,32 @@
   <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/cl_clip_search"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:layout_marginHorizontal="20dp"
-    android:background="@drawable/shape_grey050_fill_12_rect"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/tv_clip_bar_title">
+    android:background="@drawable/shape_neutrals_fill_12_rect"
+    app:layout_constraintTop_toBottomOf="@+id/tv_clip_bar_title"
+    android:layout_height="wrap_content">
 
     <ImageView
       android:id="@+id/iv_clip_search"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="12dp"
-      android:layout_marginTop="11dp"
-      android:layout_marginBottom="11dp"
       android:src="@drawable/ic_search_20"
-      app:layout_constraintStart_toStartOf="@id/cl_clip_search"
-      app:layout_constraintTop_toTopOf="@id/cl_clip_search" />
+      android:paddingVertical="11dp"
+      android:paddingStart="12dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      android:paddingEnd="8dp"/>
 
     <TextView
       android:layout_width="wrap_content"
-      android:layout_height="match_parent"
-      android:layout_marginStart="8dp"
-      android:paddingVertical="11dp"
-      android:text="검색어를 입력하세요"
+      android:layout_height="wrap_content"
+      android:text="검색어를 입력해주세요"
       android:textAppearance="@style/Typography.suit.regular_16"
       android:textColor="@color/neutrals400"
-      app:layout_constraintStart_toEndOf="@id/iv_clip_search" />
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toEndOf="@id/iv_clip_search"
+      app:layout_constraintTop_toTopOf="parent" />
+
   </androidx.constraintlayout.widget.ConstraintLayout>
 
   <TextView

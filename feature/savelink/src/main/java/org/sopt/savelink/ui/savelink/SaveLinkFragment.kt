@@ -146,11 +146,11 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
           showErrorState(binding.tvSaveLinkError)
         }
       }
-//      state = if (state == LinkMIndFullWidthButtonState.DISABLE) {
-//        LinkMIndFullWidthButtonState.DISABLE
-//      } else {
-//        LinkMIndFullWidthButtonState.ENABLE_BLACK
-//      }
+      state = if (state == LinkMIndFullWidthButtonState.DISABLE) {
+        LinkMIndFullWidthButtonState.DISABLE
+      } else {
+        LinkMIndFullWidthButtonState.ENABLE_BLACK
+      }
     }
   }
 

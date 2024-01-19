@@ -20,7 +20,7 @@
     android:maxLines="1"
     android:paddingStart="14dp"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="@id/iv_cancel"
+    app:layout_constraintEnd_toStartOf="@id/iv_cancel"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 

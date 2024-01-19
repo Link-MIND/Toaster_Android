@@ -14,30 +14,31 @@
     android:layout_height="wrap_content"
     android:src="@drawable/ic_clip_24"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"/>
 
   <TextView
     android:id="@+id/tv_clip_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="4dp"
-    android:layout_marginTop="2dp"
     android:text="@string/clip_all"
     android:textAppearance="@style/Typography.suit.semibold_16"
     android:textColor="@color/neutrals850"
     app:layout_constraintStart_toEndOf="@id/iv_clip_icon"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"/>
 
   <TextView
     android:id="@+id/tv_clip_amount"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="2dp"
-    android:layout_marginTop="4dp"
     android:text="n개"
     android:textColor="@color/neutrals850"
     app:layout_constraintEnd_toStartOf="@id/iv_category_clip_arrow"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"/>
 
   <ImageView
     android:id="@+id/iv_category_clip_arrow"

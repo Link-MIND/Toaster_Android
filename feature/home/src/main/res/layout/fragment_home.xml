@@ -28,7 +28,7 @@
       <ImageView
         android:id="@+id/iv_home_setting"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="56dp"
         android:paddingHorizontal="20dp"
         android:paddingVertical="16dp"
         android:src="@drawable/ic_setting_24"
