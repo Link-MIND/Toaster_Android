@@ -137,18 +137,38 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     viewModel.deleteState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          requireContext().linkMindSnackBar(binding.vSnack, "링크 삭제 완료", false)
-          when (binding.mlClipFilter.currentState) {
-            R.id.all -> { viewModel.getCategoryLink("ALL", categoryId) }
-            R.id.read -> { viewModel.getCategoryLink("READ", categoryId) }
-            R.id.unread -> { viewModel.getCategoryLink("UNREAD", categoryId) }
+          if (state.data) {
+            requireContext().linkMindSnackBar(binding.vSnack, "링크 삭제 완료", false)
+            when (binding.mlClipFilter.currentState) {
+              R.id.all -> {
+                viewModel.getCategoryLink("ALL", categoryId)
+              }
+
+              R.id.read -> {
+                viewModel.getCategoryLink("READ", categoryId)
+              }
+
+              R.id.unread -> {
+                viewModel.getCategoryLink("UNREAD", categoryId)
+              }
+            }
           }
+          viewModel.updateDeleteState()
         }
+
         is UiState.Failure -> {
           when (binding.mlClipFilter.currentState) {
-            R.id.all -> { viewModel.getCategoryLink("ALL", categoryId) }
-            R.id.read -> { viewModel.getCategoryLink("READ", categoryId) }
-            R.id.unread -> { viewModel.getCategoryLink("UNREAD", categoryId) }
+            R.id.all -> {
+              viewModel.getCategoryLink("ALL", categoryId)
+            }
+
+            R.id.read -> {
+              viewModel.getCategoryLink("READ", categoryId)
+            }
+
+            R.id.unread -> {
+              viewModel.getCategoryLink("UNREAD", categoryId)
+            }
           }
         }
 

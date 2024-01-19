@@ -42,6 +42,9 @@ class ClipLinkViewModel @Inject constructor(
     }
   }
 
+  fun updateDeleteState() = viewModelScope.launch {
+    _deleteState.emit(UiState.Success(false))
+  }
   fun getCategoryLink(filter: String?, categoryId: Long?) = viewModelScope.launch {
     getCategoryLink(param = GetCategoryLinkUseCase.Param(filter = filter, categoryId = categoryId)).onSuccess {
       val list: MutableList<CategoryLink> = it.toastListDto.toMutableList()
