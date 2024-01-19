@@ -15,6 +15,7 @@ Architecture
 
 ![KakaoTalk_Photo_2024-01-19-22-08-00](https://github.com/Link-MIND/Toaster_Android/assets/93514333/e003aa9e-aa99-4c27-a08c-b78b80f577f5)
 
+by soyoung
 Technology Stacks
 - Dependency injection with Hilt
 - Local Data with DataStore(security)
