@@ -14,7 +14,6 @@ import designsystem.components.button.state.LinkMIndFullWidthButtonState
 import designsystem.components.dialog.LinkMindDialog
 import designsystem.components.edittext.state.LinkMindEditTextState
 import org.orbitmvi.orbit.viewmodel.observe
-import org.sopt.common.util.delSpace
 import org.sopt.savelink.databinding.FragmentSaveLinkBinding
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.context.hideKeyboard

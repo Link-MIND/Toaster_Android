@@ -51,7 +51,7 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
         binding.ivRead.isClickable = false
       }
     }
-    Log.d("test","$arg")
+    Log.d("test", "$arg")
 
     binding.ivRead.onThrottleClick {
       Log.e("읽음", "누름")
