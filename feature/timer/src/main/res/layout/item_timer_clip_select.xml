@@ -20,7 +20,7 @@
     android:id="@+id/tv_item_timer_clip_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="전체 클립"
+    android:text="@string/clip_all"
     android:layout_marginStart="4dp"
     android:textAppearance="@style/Typography.suit.semibold_16"
     android:textColor="@color/neutrals850"

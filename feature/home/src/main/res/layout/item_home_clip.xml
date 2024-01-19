@@ -89,7 +89,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:paddingTop="1dp"
-      android:text="클립추가"
+      android:text="@string/clip_add_clip"
       android:textAppearance="@style/Typography.suit.bold_14"
       android:textColor="@color/neutrals200"
       app:layout_constraintBottom_toBottomOf="parent"

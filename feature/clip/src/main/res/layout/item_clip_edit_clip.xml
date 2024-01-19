@@ -52,7 +52,7 @@
       android:layout_marginStart="14dp"
       android:paddingVertical="15dp"
       android:maxLines="1"
-      android:text="clip"
+      android:text="@string/clip_text_clip"
       android:textAppearance="@style/Typography.suit.semibold_16"
       android:textColor="@color/neutrals850"
       app:layout_constraintStart_toStartOf="@id/cl_clip_edit_clip"

@@ -55,7 +55,7 @@
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="검색어를 입력해주세요"
+      android:text="@string/clip_enter_search_word"
       android:textAppearance="@style/Typography.suit.regular_16"
       android:textColor="@color/neutrals400"
       app:layout_constraintBottom_toBottomOf="parent"
@@ -82,7 +82,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="2dp"
     android:layout_marginTop="19dp"
-    android:text="(n)"
+    android:text="@string/clip_ex_clip_num"
     android:textAppearance="@style/Typography.suit.medium_12"
     android:textColor="@color/neutrals400"
     app:layout_constraintStart_toEndOf="@id/tv_clip_all"

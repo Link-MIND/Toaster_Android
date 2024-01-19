@@ -18,7 +18,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="20dp"
-      android:text="알림받을 클립 선택"
+      android:text="@string/timer_choose_clip"
       android:textAppearance="@style/Typography.suit.bold_18"
       android:textColor="@color/neutrals900"
       android:textStyle="bold"
