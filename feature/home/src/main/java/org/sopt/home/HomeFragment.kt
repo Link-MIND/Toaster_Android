@@ -8,6 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.toast.linkMindSnackBar
 import org.orbitmvi.orbit.viewmodel.observe
+import org.sopt.common.util.delSpace
 import org.sopt.home.adapter.HomeClipAdapter
 import org.sopt.home.adapter.HomeWeekLinkAdapter
 import org.sopt.home.adapter.HomeWeekRecommendLinkAdapter
@@ -124,7 +125,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
 
   private fun navigateToDestination(destination: String) {
     val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
-      destination,
+      destination.delSpace(),
       enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
       exitAnim = android.R.anim.fade_out,
       popEnterAnim = android.R.anim.fade_in,

@@ -18,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.toast.linkMindSnackBar
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import org.sopt.common.util.delSpace
 import org.sopt.mainfeature.R
 import org.sopt.model.timer.Timer
 import org.sopt.timer.databinding.FragmentTimerBinding
@@ -310,7 +311,7 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
 
   private fun navigateToDestination(destination: String) {
     val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
-      destination,
+      destination.delSpace(),
       enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
       exitAnim = android.R.anim.fade_out,
       popEnterAnim = android.R.anim.fade_in,

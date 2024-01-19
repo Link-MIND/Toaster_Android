@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.onEach
 import org.sopt.clip.DeleteLinkBottomSheetFragment
 import org.sopt.clip.R
 import org.sopt.clip.databinding.FragmentClipLinkBinding
+import org.sopt.common.util.delSpace
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.fragment.colorOf
 import org.sopt.ui.fragment.viewLifeCycle
@@ -218,7 +219,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
 
   private fun navigateToDestination(destination: String) {
     val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
-      destination,
+      destination.delSpace(),
       enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
       exitAnim = android.R.anim.fade_out,
       popEnterAnim = android.R.anim.fade_in,

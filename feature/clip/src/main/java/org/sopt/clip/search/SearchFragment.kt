@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.onEach
 import org.sopt.clip.databinding.FragmentSearchBinding
 import org.sopt.clip.search.adapter.ClipResultAdapter
 import org.sopt.clip.search.adapter.LinkResultAdapter
+import org.sopt.common.util.delSpace
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.context.hideKeyboard
 import org.sopt.ui.fragment.viewLifeCycle
@@ -156,7 +157,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBi
 
   private fun navigateToDestination(destination: String) {
     val (request, navOptions) = DeepLinkUtil.getNavRequestNotPopUpAndOption(
-      destination,
+      destination.delSpace(),
       enterAnim = org.sopt.mainfeature.R.anim.from_bottom,
       exitAnim = android.R.anim.fade_out,
       popEnterAnim = android.R.anim.fade_in,
