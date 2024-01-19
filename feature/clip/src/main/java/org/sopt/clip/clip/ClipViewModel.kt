@@ -48,9 +48,12 @@ class ClipViewModel @Inject constructor(
       Log.e("실패", it.message.toString())
     }
   }
-
+  fun updateDuplicateState() = viewModelScope.launch {
+    _duplicateState.emit(UiState.Success(CategoryDuplicate(false)))
+  }
   fun getCategoryDuplicate(title: String) = viewModelScope.launch {
     getCategoryDuplicate.invoke(param = GetCategoryDuplicateUseCase.Param(title)).onSuccess {
+      Log.d("test","$it")
       if (it.isDuplicate) {
         _duplicateState.emit(UiState.Success(it))
         return@launch
