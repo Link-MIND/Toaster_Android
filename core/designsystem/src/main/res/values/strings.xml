@@ -5,8 +5,14 @@
   <string name="text_timer">TIMER</string>
   <string name="text_my">MY</string>
   <string name="text_placeholder">placeholder</string>
+  <string name="menu_edit">편집</string>
 
   <string name="text_all">전체</string>
+
+  <!-- login -->
+  <string name="login_description">더 이상 링크를 태우지 마세요\n토스트 먹듯이 간편하게,</string>
+  <string name="login_with_kakao">카카오 계정으로 시작하기</string>
+
 
   <!-- mypage -->
   <string name="mypage_link_number_now">지금 까지 읽은 링크수</string>
@@ -14,6 +20,9 @@
   <string name="mypage_this_week_read_link">이번주 열람한 링크</string>
   <string name="mypage_this_week_save_link">이번주 저장한 링크</string>
   <string name="mypage_please_wait">아직 마이페이지는 추가 공사 중!\n 업데이트를 기다려주세요 :)</string>
+  <string name="mypage_nn">nn</string>
+  <string name="mypage_nim">님이</string>
+  <string name="mypage_name_ex">홍길동</string>
 
   <!-- timer -->
   <string name="timer_title">TIMER</string>
@@ -23,12 +32,26 @@
   <string name="timer_turn_on_permission">에서 알림을 켜주세요.</string>
   <string name="timer_set_timer">타이머를 설정하고\n원하는 때에 링크를 받아보세요</string>
   <string name="timer_set_btn">타이머 설정하기</string>
+  <string name="timer_set">타이머 설정</string>
   <string name="timer_read">읽으러가기</string>
   <string name="timer_link">링크들을</string>
   <string name="timer_good">읽기 딱 좋은 시간이에요!</string>
   <string name="timer_wait">타이머 대기 중..</string>
   <string name="timer_not_complete">타이머가 완료되면 리마인드 드릴게요</string>
   <string name="timer_complete">완료된 타이머</string>
+  <string name="timer_dialog_noti_permission">알림이 꺼져있어요!</string>
+  <string name="timer_noti_permission_ment">기기 알림이 꺼져있으면\n타이머 기능을 이용할 수 없어요</string>
+  <string name="timer_dialog_permission">기기에서 알림 설정하기</string>
+  <string name="timer_remind_at">에 리마인드 해드릴게요</string>
+  <string name="timer_set_repeat">반복 주기를 정해주세요</string>
+  <string name="timer_repeat">반복</string>
+  <string name="timer_none_noti_ment">* 알림 설정이 꺼져있을 시 타이머 기능이 제한돼요</string>
+  <string name="timer_set_disable_now">지금은 설정할 수 없어요</string>
+  <string name="timer_diable_noti_ment">기기 알림이 꺼져있으면\n토스터의 타이머 기능을 이용할 수 없어요</string>
+  <string name="timer_permission_restore_ment">기존에 설정한 타이머들은 알림을 키면\n다시 복구돼요</string>
+  <string name="timer_ex_complete_count">0</string>
+  <string name="timer_choose_clip">알림 받을 클립 선택</string>
+  <string name="timer_set_repeat_word">반복 설정</string>
 
   <!-- settings -->
   <string name="settings_title">설정</string>
@@ -65,6 +88,18 @@
   <string name="clip_toolbar_edit">편집</string>
   <string name="clip_toolbar_all_clip">전체 클립</string>
   <string name="clip_new_clip_info">클립의 이름을 입력해주세요</string>
+  <string name="clip_enter_search_word">검색어를 입력해주세요</string>
+  <string name="clip_ex_clip_num">(n)</string>
+  <string name="clip_edit_clip">CLIP 편집</string>
+  <string name="clip_all_clip">전체 클립</string>
+  <string name="clip_entire_clip">전체</string>
+  <string name="clip_read_link">열람</string>
+  <string name="clip_unread_link">미열람</string>
+  <string name="clip_ex_num_count">n개</string>
+  <string name="clip_text_clip">clip</string>
+  <string name="clip_already_read">읽음</string>
+  <string name="clip_text_title">Title</string>
+  <string name="clip_ex_url">https://~~</string>
 
   <!-- clip link-->
   <string name="clip_link_read">열람</string>
@@ -82,15 +117,25 @@
   <string name="search_clip_title">클립명</string>
   <string name="search_clip_amount_n">n</string>
   <string name="search_clip_amount_nn">nn</string>
-  <string name="mypage_nn">nn</string>
-  <string name="mypage_nim">님이</string>
-  <string name="mypage_name_ex">홍길동</string>
+
 
   <!-- home -->
   <string name="home_correction_clip">클립수정</string>
   <string name="home_add_clip">클립추가</string>
   <string name="home_new_clip_info">"새로운 클립의 이름을 입력해주세요"</string>
   <string name="home_error_clip_info">공백 또는 15글자 이상은 안됩니다.</string>
+  <string name="home_enter_search_word">검색어를 입력해주세요</string>
+  <string name="home_ex_user_name">홍길동</string>
+  <string name="home_name_nim">님</string>
+  <string name="home_with_toaster">토스터로</string>
+  <string name="home_link_count">0개의 링크</string>
+  <string name="home_collect_stamps">를</string>
+  <string name="home_unforget_read">잊지 않고 읽었어요!</string>
+  <string name="home_toast_progress_link">nn</string>
+  <string name="home_all_toast_ex_num">/nn</string>
+  <string name="home_user_clip">님의 클립</string>
+  <string name="home_this_week_link">이주의 링크</string>
+  <string name="home_this_week_recommend">이주의 추천 사이트</string>
 
   <!-- error -->
   <string name="error_clip_length">클립의 이름은 최대 15자까지 입력 가능해요</string>
@@ -114,4 +159,15 @@
   <string name="positive_delete">삭제할래요</string>
   <string name="negative_withdraw">네, 탈퇴할래요</string>
   <string name="positive_withdraw">더 써볼래요</string>
+
+
+  <!-- save link -->
+  <string name="savelink_save_link">링크 저장</string>
+  <string name="savelink_enter_link">링크를 입력해주세요</string>
+  <string name="savelink_link_error">유효하지 않은 형식의 링크입니다..</string>
+  <string name="savelink_text_savelink_en">save link</string>
+  <string name="savelink_check_clip">클립을 선택해주세요</string>
+  <string name="savelink_choose_clip">알림 받을 클립 선택</string>
+
+
 </resources>
