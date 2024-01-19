@@ -45,11 +45,13 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
           viewModel.patchReadLinkResult.value = false
         }
       }
+      if (arg[1].toInt() == 0) {
+        binding.ivRead.isInvisible = true
+        binding.ivRead.isClickable = false
+      }
     }
-    if (arg[1].toInt() == 0) {
-      binding.ivRead.isInvisible = true
-      binding.ivRead.isClickable = false
-    }
+    Log.d("test","$arg")
+
     binding.ivRead.onThrottleClick {
       Log.e("읽음", "누름")
       viewModel.patchReadLink(arg[1].toLong(), !viewModel.patchReadLinkResult.value)
