@@ -54,7 +54,7 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
 
     binding.ivRead.onThrottleClick {
       Log.e("읽음", "누름")
-      viewModel.patchReadLink(arg[1].toLong(), !viewModel.patchReadLinkResult.value)
+      if (arg.size == 3) viewModel.patchReadLink(arg[1].toLong(), !viewModel.patchReadLinkResult.value)
     }
 
     viewModel.patchReadLinkResult.flowWithLifecycle(viewLifeCycle).onEach {
