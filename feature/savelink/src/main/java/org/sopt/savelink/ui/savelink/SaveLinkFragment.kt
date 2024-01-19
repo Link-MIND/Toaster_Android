@@ -89,7 +89,7 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
           binding.btnSaveLinkNext.setBackGround(org.sopt.mainfeature.R.drawable.shape_neutrals050_fill_12_rect)
         }
         throttleAfterTextChanged {
-          btnSaveLinkNext.state = LinkMIndFullWidthButtonState.DISABLE
+//          btnSaveLinkNext.state = LinkMIndFullWidthButtonState.DISABLE
           if (!editText.text.contains("http")) {
             showErrorState(tvSaveLinkError)
             return@throttleAfterTextChanged
@@ -142,16 +142,11 @@ class SaveLinkFragment : BindingFragment<FragmentSaveLinkBinding>({ FragmentSave
     binding.btnSaveLinkNext.layoutParams = layoutParams
     binding.btnSaveLinkNext.apply {
       state = LinkMIndFullWidthButtonState.ENABLE_BLACK
-      binding.btnSaveLinkNext.btnClick {
-        if (binding.etvSaveCopyLink.editText.text.isEmpty()) {
-          showErrorState(binding.tvSaveLinkError)
-        }
-      }
-      state = if (state == LinkMIndFullWidthButtonState.DISABLE) {
-        LinkMIndFullWidthButtonState.DISABLE
-      } else {
-        LinkMIndFullWidthButtonState.ENABLE_BLACK
-      }
+//      state = if (state == LinkMIndFullWidthButtonState.DISABLE) {
+//        LinkMIndFullWidthButtonState.DISABLE
+//      } else {
+//        LinkMIndFullWidthButtonState.ENABLE_BLACK
+//      }
     }
   }
 

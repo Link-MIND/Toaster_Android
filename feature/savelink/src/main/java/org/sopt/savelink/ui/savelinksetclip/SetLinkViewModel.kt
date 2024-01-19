@@ -79,7 +79,7 @@ class SetLinkViewModel @Inject constructor(
     saveLinkUseCase(
       PostSaveLinkUseCase.Param(
         linkUrl = linkUrl,
-        categoryId = categoryId,
+        categoryId = if (categoryId == 0.toLong()) null else categoryId,
       ),
     ).onSuccess {
       navigateSetLink()

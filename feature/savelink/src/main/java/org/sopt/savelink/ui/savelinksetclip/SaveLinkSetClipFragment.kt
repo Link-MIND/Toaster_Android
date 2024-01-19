@@ -57,8 +57,8 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
   private fun handleSideEffect(sideEffect: SaveLinkSetClipSideEffect) {
     when (sideEffect) {
       is SaveLinkSetClipSideEffect.NavigateSaveLinkSetClip -> {
-        requireContext().linkMindSnackBar(binding.vSnack, "링크 저장 완료", false)
         navigateToHome()
+        requireContext().linkMindSnackBar(binding.vSnack, "링크 저장 완료", false)
       }
 
       is SaveLinkSetClipSideEffect.NavigateUp -> findNavController().navigateUp()

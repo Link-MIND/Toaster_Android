@@ -8,6 +8,7 @@ data class SaveLinkSetClipState(
   val url: String = "",
   val allClipCountNum: Long = 0,
   val duplicate: Boolean = false,
+  val navHome: Boolean = false,
 )
 
 sealed interface SaveLinkSetClipSideEffect {
