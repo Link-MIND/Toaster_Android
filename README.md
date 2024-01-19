@@ -99,6 +99,12 @@ https://github.com/Link-MIND/Toaster_Android/assets/97686638/f772924f-43c0-437c-
 ## 📜 Project Plan
 [Project Plan](https://hill-agenda-2b0.notion.site/7a635a2c014c470899899073be2ff49f?v=4de94ec87af045d8ba9a69afa39511af)
 
+## Team 협업 노션 (회의/회고 등)
+[https://www.notion.so/ANDROID-ad4ad281439f4b8e8ffe57ebe2cbb3ed](https://hill-agenda-2b0.notion.site/ANDROID-ad4ad281439f4b8e8ffe57ebe2cbb3ed?pvs=4)
+
+## Team 기여 노션
+https://hill-agenda-2b0.notion.site/7f607d656bc5462d912477677e0854cc?pvs=4
+
 ### 📂 Module
 ### 모듈은 추가적으로 변화가능
 ```bash
