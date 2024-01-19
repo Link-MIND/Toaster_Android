@@ -4,7 +4,7 @@
 
   <item
     android:id="@+id/action_refactor"
-    android:title="편집"
+    android:title="@string/menu_edit"
     app:showAsAction="always"/>
 
 </menu>
