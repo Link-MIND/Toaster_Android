@@ -34,6 +34,48 @@ Librarys
 
 <br>
 
+## 🎥 Demonstration video
+
+- 링크 저장 플로우 - 링크 1개 저장 과정
+https://github.com/Link-MIND/Toaster_Android/assets/97686638/02e3f491-4f2e-443d-9ea4-499d6e4668bf
+
+- 링크 저장 플로우 - 링크 3개 저장과정 (홈뷰에서 카테고리 내 링크 갯수 변화 확인가능)
+https://github.com/Link-MIND/Toaster_Android/assets/97686638/04bdc80f-75fc-4ff0-8787-450bc515f1eb
+
+
+- 마이페이지뷰 기능(탈퇴제외)
+https://github.com/Link-MIND/Toaster_Android/assets/97686638/0a97f9a6-92e4-4882-8333-1c5e00d05369
+
+
+- 세부카테고리뷰 기능 열람,미열람, 삭제기능
+https://github.com/Link-MIND/Toaster_Android/assets/97686638/4e77dace-947c-47f4-98b1-e68b2cdd9e23
+
+- 클립 편집 - 클립의 수정한 이름이 검색시에도 수정된 이름으로 검색되는 플로우 확인가능
+https://github.com/Link-MIND/Toaster_Android/assets/97686638/d4548492-b3d4-47bf-be76-e83b268df14a
+
+
+
+- 타이머 설정 - 요일 개별 선택해서 생성, 타이머 삭제 플로우
+https://github.com/Link-MIND/Toaster_Android/assets/97686638/e6c2a363-a694-4d5c-b339-6e2c3aceee5e
+
+
+
+- 타이머 추가 플로우 - 알림 권한 설정, 타이머 추가 후 변경한 요일, 시간 적용되는 것까지 확인 가능
+https://github.com/Link-MIND/Toaster_Android/assets/97686638/4dfd0100-63b8-4839-87ef-a8d1457587bc
+
+
+
+- 홈뷰에서 전체 카테고리 진입 플로우 - (열람,미열람 토글 클릭시 필터링 되는 기능 확인 가능)
+https://github.com/Link-MIND/Toaster_Android/assets/97686638/699132ec-86cc-43ad-8b77-714887c74228
+
+
+
+
+- 홈뷰에서 추천링크의 웹뷰 진입, 웹뷰 기능 확인가능
+https://github.com/Link-MIND/Toaster_Android/assets/97686638/f772924f-43c0-437c-a2f0-ad5f318b7ab1
+
+
+
 ## 💻 Code Convention
 [NOTION Code Convetion Link](https://hill-agenda-2b0.notion.site/Code-Convention-f492a5bdf5b444a6aae561e53d9d4e10)
 </br>
