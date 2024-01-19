@@ -144,6 +144,13 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
             R.id.unread -> { viewModel.getCategoryLink("UNREAD", categoryId) }
           }
         }
+        is UiState.Failure -> {
+          when (binding.mlClipFilter.currentState) {
+            R.id.all -> { viewModel.getCategoryLink("ALL", categoryId) }
+            R.id.read -> { viewModel.getCategoryLink("READ", categoryId) }
+            R.id.unread -> { viewModel.getCategoryLink("UNREAD", categoryId) }
+          }
+        }
 
         else -> {
           initViewState(true)
