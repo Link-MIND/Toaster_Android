@@ -26,13 +26,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/cl_clip_detail_text"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="0dp"
       android:layout_marginStart="12dp"
       android:layout_marginBottom="-1dp"
       app:layout_constraintBottom_toBottomOf="@id/cl_link_detail"
       app:layout_constraintStart_toEndOf="@id/iv_link_thumnail"
-      app:layout_constraintTop_toTopOf="parent" >
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintEnd_toEndOf="parent">
 
       <TextView
         android:id="@+id/tv_clip_detail_title"
@@ -49,26 +50,31 @@
 
       <TextView
         android:id="@+id/tv_clip_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:text="@string/settings_title"
         android:maxLines="1"
+        android:ellipsize="end"
         android:textAppearance="@style/Typography.suit.medium_16"
         android:textColor="@color/neutrals850"
         app:layout_constraintStart_toStartOf="@id/cl_clip_detail_text"
-        app:layout_constraintTop_toBottomOf="@id/tv_clip_detail_title" />
+        app:layout_constraintTop_toBottomOf="@id/tv_clip_detail_title"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
       <TextView
         android:id="@+id/tv_clip_url"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="-1dp"
         android:text="@string/search_result_ex_url"
         android:textAppearance="@style/Typography.suit.medium_10"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:textColor="@color/neutrals200"
         app:layout_constraintBottom_toBottomOf="@id/cl_clip_detail_text"
-        app:layout_constraintStart_toStartOf="@id/cl_clip_detail_text" />
+        app:layout_constraintStart_toStartOf="@id/cl_clip_detail_text"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
