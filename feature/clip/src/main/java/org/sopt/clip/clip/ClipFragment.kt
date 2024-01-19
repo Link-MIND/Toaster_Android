@@ -72,11 +72,12 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
     viewModel.duplicateState.flowWithLifecycle(viewLifeCycle).onEach { state ->
       when (state) {
         is UiState.Success -> {
-          Log.d("state","${state.data.isDuplicate}")
+          Log.d("state", "${state.data.isDuplicate}")
           if (!state.data.isDuplicate) {
             requireContext().linkMindSnackBar(binding.vSnack, "클립 생성 완료!", false)
-          }else
+          } else {
             requireContext().linkMindSnackBar(binding.vSnack, "이미 같은 이름의 클립이 있습니다.", false)
+          }
         }
         else -> {}
       }
