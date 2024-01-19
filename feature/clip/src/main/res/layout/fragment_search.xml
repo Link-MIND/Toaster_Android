@@ -36,7 +36,7 @@
       android:imeOptions="actionSearch"
       android:inputType="text"
       android:maxLines="1"
-      android:hint="검색어를 입력해주세요"
+      android:hint="@string/clip_search_hint"
       android:textAppearance="@style/Typography.suit.medium_16"
       android:textColor="@color/neutrals900"
       android:textColorHint="@color/neutrals400"
@@ -121,6 +121,6 @@
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@id/cl_search"
-    tools:listitem="@layout/item_search_result_clip_link"/>
+    tools:listitem="@layout/item_clip_link"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

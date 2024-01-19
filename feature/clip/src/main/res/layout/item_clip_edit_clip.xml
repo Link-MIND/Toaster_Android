@@ -3,6 +3,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_marginBottom="12dp">
   <!--android:background="@color/transparent"-->
 
@@ -52,7 +53,7 @@
       android:layout_marginStart="14dp"
       android:paddingVertical="15dp"
       android:maxLines="1"
-      android:text="clip"
+      tools:text="clip"
       android:textAppearance="@style/Typography.suit.semibold_16"
       android:textColor="@color/neutrals850"
       app:layout_constraintStart_toStartOf="@id/cl_clip_edit_clip"

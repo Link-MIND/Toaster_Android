@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="login_sub_title">더 이상 링크를 태우지 마세요\n토스트 먹듯이 간편하게,</string>
+  <string name="login_start_with_kakao">카카오 계정으로 시작하기</string>
+</resources>

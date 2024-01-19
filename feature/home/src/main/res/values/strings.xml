@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="home_search_hint">검색어를 입력해주세요</string>
+  <string name="home_name_tail">님</string>
+  <string name="home_toaster">토스터로</string>
+  <string name="home_link_tail">를</string>
+  <string name="home_not_forget">잊지 않고 읽었어요!</string>
+  <string name="home_clip_tail">님의 클립</string>
+  <string name="home_week_link">이주의 링크</string>
+  <string name="home_recommend_site">이주의 추천 사이트</string>
+</resources>

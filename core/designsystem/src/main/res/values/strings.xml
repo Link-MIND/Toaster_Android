@@ -65,6 +65,9 @@
   <string name="clip_toolbar_edit">편집</string>
   <string name="clip_toolbar_all_clip">전체 클립</string>
   <string name="clip_new_clip_info">클립의 이름을 입력해주세요</string>
+  <string name="clip_search_hint">검색어를 입력해주세요</string>
+  <string name="clip_edit_title">CLIP 편집</string>
+
 
   <!-- clip link-->
   <string name="clip_link_read">열람</string>
@@ -74,6 +77,8 @@
   <string name="clip_link_back_description">뒤로 가기</string>
   <string name="clip_link_bottom_sheet_title">수정하기</string>
   <string name="clip_link_bottom_sheet_delete">삭제</string>
+  <string name="clip_link_all">전체</string>
+  <string name="clip_link_item_read">읽음</string>
 
   <string name="search_result_ex_url">https://example.com</string>
   <string name="search_result_detail_clip_name">세부 클립명</string>
