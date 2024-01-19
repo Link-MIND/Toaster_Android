@@ -52,6 +52,7 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
     initSetClipAdapter(homeState.categoryList)
     binding.tvSaveLinkClipCount.text = "전체 (${homeState.allClipCountNum})"
     adapter.submitList(homeState.categoryList)
+    if(homeState.duplicate)  requireContext().linkMindSnackBar(binding.vSnack, "이미 존재하는 클립 이름 입니다.", false)
   }
 
   private fun handleSideEffect(sideEffect: SaveLinkSetClipSideEffect) {
