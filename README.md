@@ -8,10 +8,12 @@
 - Development Environment : `Hedgehog | 2023.1.1`
 
 <br>
-## Features
+Features
 Architecture
-- MVVM/I ~
-- 모듈 구조
+
+![KakaoTalk_Photo_2024-01-19-22-08-12](https://github.com/Link-MIND/Toaster_Android/assets/93514333/9b41b62a-60ce-41ed-8a1a-9b3c421d7c0a)
+
+![KakaoTalk_Photo_2024-01-19-22-08-00](https://github.com/Link-MIND/Toaster_Android/assets/93514333/e003aa9e-aa99-4c27-a08c-b78b80f577f5)
 
 Technology Stacks
 - Dependency injection with Hilt
