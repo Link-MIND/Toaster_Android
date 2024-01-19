@@ -4,7 +4,6 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import org.sopt.clip.databinding.ItemClipLinkBinding
 import org.sopt.clip.databinding.ItemSearchLinkBinding
 import org.sopt.clip.search.util.applyBoldStyle
 import org.sopt.model.category.Toast

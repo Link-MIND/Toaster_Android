@@ -24,8 +24,8 @@ class ClipLinkAdapter(
 
   companion object {
     private val DiffUtil = ItemDiffCallback<CategoryLink>(
-      onItemsTheSame = { old, new -> old.linkUrl == new.linkUrl },
-      onContentsTheSame = { old, new -> old == new },
+      onItemsTheSame = { old, new -> old.toastId == new.toastId },
+      onContentsTheSame = { old, new -> old.linkUrl == new.linkUrl },
     )
   }
 }
