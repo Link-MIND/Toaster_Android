@@ -38,19 +38,19 @@ Librarys
 
 ## 🎥 Demonstration video
 
-<img width="300" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/55b687ab-1379-47a1-8d47-26cb57639be1">  <img width="300" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/e487c5af-d426-413d-916d-a369ef461c7f">  <img width="300" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/0c0552dd-a47a-4570-9dbe-6e9cf5a7b3a4"> 
+<img width="200" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/55b687ab-1379-47a1-8d47-26cb57639be1">  <img width="200" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/e487c5af-d426-413d-916d-a369ef461c7f">  <img width="200" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/0c0552dd-a47a-4570-9dbe-6e9cf5a7b3a4"> 
 
 - 링크 저장 플로우 - 링크 1개 저장 과정  링크 저장 플로우 
 - 링크 3개 저장과정 (홈뷰에서 카테고리 내 링크 갯수 변화 확인가능)
 - 마이페이지뷰 기능(탈퇴제외)
 
-<img width="300" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/db7d3fd7-a1da-4d6a-85ca-42f5961f402b"> <img width="300" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/933985a4-eb88-48ad-8520-27272710774c"> <img width="300" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/1a8b9d2b-8409-4e0c-881b-f6bd28cfa2b9">
+<img width="200" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/db7d3fd7-a1da-4d6a-85ca-42f5961f402b"> <img width="200" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/933985a4-eb88-48ad-8520-27272710774c"> <img width="200" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/1a8b9d2b-8409-4e0c-881b-f6bd28cfa2b9">
 
 - 세부카테고리뷰 기능 열람,미열람, 삭제기능
 - 클립 편집 - 클립의 수정한 이름이 검색시에도 수정된 이름으로 검색되는 플로우 확인가능
 - 타이머 설정 - 요일 개별 선택해서 생성, 타이머 삭제 플로우
 
-<img width="300" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/93d3ce84-14d1-4d82-b070-7a83fd525cee"> <img width="300" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/2d90943b-a82e-43ce-ac45-b3e5aeb6b3e1"> <img width="300" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/26b8b794-f4b6-4bae-a42b-f36b2f7cac22">
+<img width="200" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/93d3ce84-14d1-4d82-b070-7a83fd525cee"> <img width="200" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/2d90943b-a82e-43ce-ac45-b3e5aeb6b3e1"> <img width="200" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/26b8b794-f4b6-4bae-a42b-f36b2f7cac22">
 
 - 타이머 추가 플로우 - 알림 권한 설정, 타이머 추가 후 변경한 요일, 시간 적용되는 것까지 확인 가능
 - 홈뷰에서 전체 카테고리 진입 플로우 - (열람,미열람 토글 클릭시 필터링 되는 기능 확인 가능)
