@@ -33,7 +33,7 @@ Librarys
 | [상욱](operawook@catholic.ac.kr) | [이삭](lsls4868@gmail.com) | [채은](parkchangel@naver.com) | [민영](codingmy@naver.com) |
 | :--: | :--: | :--: | :--: |
 | <img width="600" alt="상욱" src="https://avatars.githubusercontent.com/u/113014331?v=4"> | <img width="600" alt="이삭" src="https://avatars.githubusercontent.com/u/93514333?v=4"> | <img width="600" alt="채은" src="https://avatars.githubusercontent.com/u/107169027?v=4"> | <img width="600" alt="민영" src="https://avatars.githubusercontent.com/u/97686638?v=4"> |
-| <p align = "center">`타이머페이지` | <p align = "center">`메인페이지` `링크저장` | <p align = "center">`로그인, 검색` `마이페이지` | <p align = "center"> `카테고리페이지` |
+| <p align = "center">`타이머페이지` `로그인` | <p align = "center">`메인페이지` `링크저장` | <p align = "center">`검색` `마이페이지` | <p align = "center"> `카테고리페이지` |
 
 <br>
 
@@ -46,8 +46,8 @@ Librarys
     <td><img align=top width="200" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/0c0552dd-a47a-4570-9dbe-6e9cf5a7b3a4"></td>
  </tr>
 <tr>
-  <td>링크 1개 저장 과정 (링크 저장 플로우)</td>
-  <td>링크 3개 저장 과정 (카테고리 내 링크 갯수 변화)</td>
+  <td>링크 저장 플로우</td>
+  <td>카테고리 내 링크 갯수 변화</td>
   <td>마이페이지뷰 기능</td>
 </tr>
 
@@ -60,9 +60,9 @@ Librarys
     <td><img align=top width="200" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/1a8b9d2b-8409-4e0c-881b-f6bd28cfa2b9"></td>
  </tr>
 <tr>
-  <td>세부 카테고리뷰 열람, 미열람, 삭제</td>
-  <td>클립 편집 (수정된 이름으로 검색)</td>
-  <td>타이머 설정 (요일 개별 선택, 타이머 삭제)</td>
+  <td>세부 카테고리뷰</td>
+  <td>클립 편집</td>
+  <td>타이머 설정</td>
 </tr>
 
 </table>
@@ -74,8 +74,8 @@ Librarys
     <td><img align=top width="200" src="https://github.com/Link-MIND/Toaster_Android/assets/107169027/26b8b794-f4b6-4bae-a42b-f36b2f7cac22"></td>
  </tr>
 <tr>
-  <td>타이머 추가 플로우 (알림 권한 설정,시간 적용)</td>
-  <td>홈뷰에서 전체 카테고리 진입 플로우 (토글 필터링)</td>
+  <td>알림 권한 설정,시간 적용</td>
+  <td>토글 필터링</td>
   <td>추천 링크 웹뷰</td>
 </tr>
 
