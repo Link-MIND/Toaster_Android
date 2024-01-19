@@ -71,7 +71,6 @@ class SetLinkViewModel @Inject constructor(
         duplicate = false,
       )
     }
-
   }
 
   fun saveCategoryTitle(categoryTitle: String) = viewModelScope.launch {
