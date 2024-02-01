@@ -6,6 +6,9 @@
 
 - 33기 DO SOPT APP-JAM (2023.12.17 ~ )
 - Development Environment : `Hedgehog | 2023.1.1`
+<h2>Download</h2>
+
+<a href='https://play.google.com/store/apps/details?id=org.sopt.official](https://play.google.com/store/apps/details?id=org.sopt.linkmind&hl=ko-KR'><img alt='다운로드하기 Google Play' src='https://play.google.com/intl/ko/badges/static/images/badges/ko_badge_web_generic.png' width='40%'/></a>
 
 <br>
 Features
