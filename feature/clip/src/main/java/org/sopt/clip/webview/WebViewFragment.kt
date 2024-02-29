@@ -17,6 +17,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
+import designsystem.components.toast.linkMindSnackBar
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.sopt.clip.R
@@ -31,7 +32,7 @@ import org.sopt.ui.view.onThrottleClick
 class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebviewBinding.inflate(it) }) {
   private val viewModel: WebViewViewModel by viewModels()
   val args: WebViewFragmentArgs by navArgs()
-  var isRead: Boolean = false
+  var isPatched: Boolean = false
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     binding.wbClip.settings.javaScriptEnabled = true
@@ -55,17 +56,22 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
 
     binding.ivRead.onThrottleClick {
       Log.e("읽음", "누름")
-      if (arg.size == 3) viewModel.patchReadLink(arg[1].toLong(), !viewModel.patchReadLinkResult.value)
+      if (arg.size == 3) {
+        viewModel.patchReadLink(arg[1].toLong(), !viewModel.patchReadLinkResult.value)
+        isPatched = true
+      }
     }
 
     viewModel.patchReadLinkResult.flowWithLifecycle(viewLifeCycle).onEach {
       when (it) {
         true -> {
           binding.ivRead.setImageResource(org.sopt.mainfeature.R.drawable.ic_read_after_24)
+          if(isPatched) requireActivity().linkMindSnackBar(binding.clBottomBar, "열람 완료")
         }
 
         false -> {
           binding.ivRead.setImageResource(R.drawable.ic_read_before_24)
+          if(isPatched) requireActivity().linkMindSnackBar(binding.clBottomBar, "열람 취소")
         }
       }
     }.launchIn(viewLifeCycleScope)
