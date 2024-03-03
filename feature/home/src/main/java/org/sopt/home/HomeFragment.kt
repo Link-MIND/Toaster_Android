@@ -64,6 +64,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       is HomeSideEffect.NavigateWebView -> navigateToDestination(
         "featureSaveLink://webViewFragment?site=${viewModel.container.stateFlow.value.url},,,${0},,,false",
       )
+
+      else -> {}
     }
   }
 

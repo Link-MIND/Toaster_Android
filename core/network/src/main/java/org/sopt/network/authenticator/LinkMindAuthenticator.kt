@@ -22,6 +22,7 @@ class LinkMindAuthenticator @Inject constructor(
   @LOGIN private val intentProvider: IntentProvider,
 ) : Authenticator {
   override fun authenticate(route: Route?, response: Response): Request? {
+
     if (response.code == CODE_TOKEN_EXPIRED) {
       val newTokens = runCatching {
         runBlocking {
