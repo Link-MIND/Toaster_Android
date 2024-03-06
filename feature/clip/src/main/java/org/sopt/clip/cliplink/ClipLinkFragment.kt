@@ -33,10 +33,12 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     super.onViewCreated(view, savedInstanceState)
     val args: ClipLinkFragmentArgs by navArgs()
     val categoryId = args.categoryId
+    val categoryName = args.categoryName
     if (args.categoryId.toInt() == 0) {
       viewModel.getCategoryLink("ALL", 0)
     } else {
       viewModel.getCategoryLink("ALL", categoryId)
+      binding.tvClipLinkTitle.text = categoryName
     }
     binding.tvClipLinkEntire.setOnClickListener {
       updateState(
