@@ -1,7 +1,6 @@
 package org.sopt.savelink.ui.savelinksetclip
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope

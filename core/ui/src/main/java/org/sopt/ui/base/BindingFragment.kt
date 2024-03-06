@@ -14,7 +14,7 @@ abstract class BindingFragment<T : ViewBinding>(
   private var _binding: T? = null
   protected val binding
     get() = requireNotNull(_binding) {
-      Log.d("error","$_binding")
+      Log.d("error", "$_binding")
     }
 
   override fun onCreateView(
