@@ -98,7 +98,7 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
 
   private fun initClipAdapter() {
     clipAdapter = ClipAdapter { category ->
-      val action = ClipFragmentDirections.actionNavigationClipToNavigationClipLink(category.categoryId ?: 0)
+      val action = ClipFragmentDirections.actionNavigationClipToNavigationClipLink(category.categoryId ?: 0, category.categoryTitle ?: "전체 클립")
       findNavController().navigate(action)
     }
     binding.rvClipClip.adapter = clipAdapter

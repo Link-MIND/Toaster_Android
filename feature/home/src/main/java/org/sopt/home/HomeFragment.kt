@@ -58,7 +58,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       is HomeSideEffect.NavigateSearch -> navigateToDestination("featureMyPage://fragmentSearch")
       is HomeSideEffect.NavigateSetting -> navigateToDestination("featureMyPage://fragmentSetting")
       is HomeSideEffect.NavigateClipLink -> navigateToDestination(
-        "featureSaveLink://ClipLinkFragment?categoryId=${viewModel.container.stateFlow.value.categoryId}",
+        "featureSaveLink://ClipLinkFragment/${viewModel.container.stateFlow.value.categoryId}/${viewModel.container.stateFlow.value.categoryName}",
       )
       is HomeSideEffect.ShowBottomSheet -> showHomeBottomSheet()
       is HomeSideEffect.NavigateWebView -> navigateToDestination(
@@ -92,7 +92,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   private fun setClipAdapter() {
     homeClipAdapter = HomeClipAdapter(
       onClickClip = {
-        viewModel.navigateClipLink(it.categoryId)
+        viewModel.navigateClipLink(it.categoryId, it.categoryTitle)
       },
       onClickEmptyClip = {
         viewModel.showBottomSheet()

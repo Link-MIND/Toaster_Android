@@ -25,8 +25,11 @@
     <argument
       android:name="categoryId"
       app:argType="long"/>
+    <argument
+      android:name="categoryName"
+      app:argType="string"/>
     <deepLink
-      app:uri="featureSaveLink://ClipLinkFragment?categoryId={categoryId}" />
+      app:uri="featureSaveLink://ClipLinkFragment/{categoryId}/{categoryName}" />
     <action
       android:id="@+id/action_navigation_clip_link_to_webViewFragment"
       app:destination="@id/webViewFragment" />
