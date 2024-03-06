@@ -23,6 +23,8 @@ import org.sopt.ui.fragment.viewLifeCycleScope
 import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.UiState
 import org.sopt.ui.view.onThrottleClick
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @AndroidEntryPoint
 class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClipLinkBinding.inflate(it) }) {
@@ -31,12 +33,15 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
   var isDataNull: Boolean = true
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    viewModel.initState()
     val args: ClipLinkFragmentArgs by navArgs()
     val categoryId = args.categoryId
+    val categoryName = args.categoryName
     if (args.categoryId.toInt() == 0) {
       viewModel.getCategoryLink("ALL", 0)
     } else {
       viewModel.getCategoryLink("ALL", categoryId)
+      binding.tvClipLinkTitle.text = categoryName
     }
     binding.tvClipLinkEntire.setOnClickListener {
       updateState(
@@ -208,7 +213,8 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
   }
 
   private fun naviagateToWebViewFragment(site: String, toastId: Long, isRead: Boolean) {
-    navigateToDestination("featureSaveLink://webViewFragment?site=$site,,,$toastId,,,$isRead")
+    val encodedURL = URLEncoder.encode(site, StandardCharsets.UTF_8.toString())
+    navigateToDestination("featureSaveLink://webViewFragment/$toastId/$isRead/${true}/$encodedURL")
   }
 
   private fun onClickBackButton() {

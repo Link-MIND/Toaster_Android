@@ -17,6 +17,8 @@ import org.sopt.home.databinding.FragmentHomeBinding
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.onThrottleClick
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @AndroidEntryPoint
 class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.inflate(it) }) {
@@ -58,14 +60,18 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       is HomeSideEffect.NavigateSearch -> navigateToDestination("featureMyPage://fragmentSearch")
       is HomeSideEffect.NavigateSetting -> navigateToDestination("featureMyPage://fragmentSetting")
       is HomeSideEffect.NavigateClipLink -> navigateToDestination(
-        "featureSaveLink://ClipLinkFragment?categoryId=${viewModel.container.stateFlow.value.categoryId}",
+        "featureSaveLink://ClipLinkFragment/${viewModel.container.stateFlow.value.categoryId}/${viewModel.container.stateFlow.value.categoryName}",
       )
       is HomeSideEffect.ShowBottomSheet -> showHomeBottomSheet()
       is HomeSideEffect.NavigateWebView -> navigateToDestination(
         "featureSaveLink://webViewFragment?site=${viewModel.container.stateFlow.value.url},,,${0},,,false",
       )
-
-      else -> {}
+      is HomeSideEffect.NavigateWebView -> {
+        val encodedURL = URLEncoder.encode(viewModel.container.stateFlow.value.url, StandardCharsets.UTF_8.toString())
+        navigateToDestination(
+          "featureSaveLink://webViewFragment/${0}/${false}/${false}/$encodedURL",
+        )
+      }
     }
   }
 
@@ -94,7 +100,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
   private fun setClipAdapter() {
     homeClipAdapter = HomeClipAdapter(
       onClickClip = {
-        viewModel.navigateClipLink(it.categoryId)
+        viewModel.navigateClipLink(it.categoryId, it.categoryTitle)
       },
       onClickEmptyClip = {
         viewModel.showBottomSheet()

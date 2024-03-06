@@ -91,8 +91,13 @@ class HomeViewModel @Inject constructor(
   fun showBottomSheet() = intent { postSideEffect(HomeSideEffect.ShowBottomSheet) }
 
   @OptIn(OrbitExperimental::class)
-  fun navigateClipLink(categoryId: Long?) = blockingIntent {
-    reduce { state.copy(categoryId = categoryId) }
+  fun navigateClipLink(categoryId: Long?, categoryName: String?) = blockingIntent {
+    reduce {
+      state.copy(
+        categoryId = categoryId,
+        categoryName = categoryName,
+      )
+    }
     postSideEffect(HomeSideEffect.NavigateClipLink)
   }
 

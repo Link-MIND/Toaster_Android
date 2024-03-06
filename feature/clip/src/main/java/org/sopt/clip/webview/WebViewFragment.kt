@@ -17,6 +17,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
+import designsystem.components.toast.linkMindSnackBar
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.sopt.clip.R
@@ -26,18 +27,21 @@ import org.sopt.ui.context.hideKeyboard
 import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
 import org.sopt.ui.view.onThrottleClick
+import java.net.URLDecoder
+import java.nio.charset.StandardCharsets
 
 @AndroidEntryPoint
 class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebviewBinding.inflate(it) }) {
   private val viewModel: WebViewViewModel by viewModels()
   val args: WebViewFragmentArgs by navArgs()
-  var isRead: Boolean = false
+  var isPatched: Boolean = false
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    val decodedURL = URLDecoder.decode(args.site, StandardCharsets.UTF_8.toString())
     binding.wbClip.settings.javaScriptEnabled = true
-    val arg = args.site.split(",,,")
-    if (arg.size == 3) {
-      when (arg[2].toBoolean()) {
+    if (args.isMylink) {
+      when (args.isRead) {
         true -> {
           viewModel.patchReadLinkResult.value = true
         }
@@ -46,31 +50,33 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
           viewModel.patchReadLinkResult.value = false
         }
       }
-      if (arg[1].toInt() == 0) {
-        binding.ivRead.isInvisible = true
-        binding.ivRead.isClickable = false
-      }
+    } else {
+      binding.ivRead.isInvisible = true
+      binding.ivRead.isClickable = false
     }
-    Log.d("test", "$arg")
 
     binding.ivRead.onThrottleClick {
       Log.e("읽음", "누름")
-      if (arg.size == 3) viewModel.patchReadLink(arg[1].toLong(), !viewModel.patchReadLinkResult.value)
+      if (args.isMylink) {
+        viewModel.patchReadLink(args.toastId, !viewModel.patchReadLinkResult.value)
+        isPatched = true
+      }
     }
 
     viewModel.patchReadLinkResult.flowWithLifecycle(viewLifeCycle).onEach {
       when (it) {
         true -> {
           binding.ivRead.setImageResource(org.sopt.mainfeature.R.drawable.ic_read_after_24)
+          if (isPatched) requireActivity().linkMindSnackBar(binding.clBottomBar, "열람 완료")
         }
 
         false -> {
           binding.ivRead.setImageResource(R.drawable.ic_read_before_24)
+          if (isPatched) requireActivity().linkMindSnackBar(binding.clBottomBar, "열람 취소")
         }
       }
     }.launchIn(viewLifeCycleScope)
-    Log.e("어케나오노", arg[0])
-    setupWebView(arg[0])
+    setupWebView(decodedURL)
     onClickClipLink()
     onClickWebViewClose()
     onClickWebViewReStart()

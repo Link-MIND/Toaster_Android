@@ -73,9 +73,10 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
         is UiState.Success -> {
           if (!state.data.isDuplicate) {
             requireContext().linkMindSnackBar(binding.vSnack, "클립 생성 완료!", false)
+            viewModel.initializeDuplicateState()
           } else {
             requireContext().linkMindSnackBar(binding.vSnack, "이미 같은 이름의 클립이 있습니다.", false)
-            viewModel.updateDuplicateState()
+            viewModel.initializeDuplicateState()
           }
         }
         else -> {}
@@ -97,7 +98,7 @@ class ClipFragment : BindingFragment<FragmentClipBinding>({ FragmentClipBinding.
 
   private fun initClipAdapter() {
     clipAdapter = ClipAdapter { category ->
-      val action = ClipFragmentDirections.actionNavigationClipToNavigationClipLink(category.categoryId ?: 0)
+      val action = ClipFragmentDirections.actionNavigationClipToNavigationClipLink(category.categoryId ?: 0, category.categoryTitle ?: "전체 클립")
       findNavController().navigate(action)
     }
     binding.rvClipClip.adapter = clipAdapter

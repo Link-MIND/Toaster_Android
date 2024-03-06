@@ -15,7 +15,7 @@
 
 
   <!-- mypage -->
-  <string name="mypage_link_number_now">지금 까지 읽은 링크수</string>
+  <string name="mypage_link_number_now">지금까지 읽은 링크 수</string>
   <string name="mypage_number">개</string>
   <string name="mypage_this_week_read_link">이번주 열람한 링크</string>
   <string name="mypage_this_week_save_link">이번주 저장한 링크</string>
@@ -61,8 +61,8 @@
   <string name="settings_withdraw">탈퇴하기</string>
   <string name="settings_logout">로그아웃</string>
   <string name="settings_term">이용약관</string>
-  <string name="settings_question">1:1문의</string>
-  <string name="settings_alert">알림설정</string>
+  <string name="settings_question">1:1 문의</string>
+  <string name="settings_alert">알림 설정</string>
 
   <!-- edit clip -->
   <string name="edit_clip_guide_msg">클립을 누른 뒤 위아래로 드래그하여 순서를 수정하세요!</string>
@@ -97,7 +97,7 @@
   <string name="clip_unread_link">미열람</string>
   <string name="clip_ex_num_count">n개</string>
   <string name="clip_text_clip">clip</string>
-  <string name="clip_already_read">읽음</string>
+  <string name="clip_already_read">열람</string>
   <string name="clip_text_title">Title</string>
   <string name="clip_ex_url">https://~~</string>
 
@@ -120,15 +120,15 @@
 
 
   <!-- home -->
-  <string name="home_correction_clip">클립수정</string>
-  <string name="home_add_clip">클립추가</string>
+  <string name="home_correction_clip">클립 수정</string>
+  <string name="home_add_clip">클립 추가</string>
   <string name="home_new_clip_info">"새로운 클립의 이름을 입력해주세요"</string>
-  <string name="home_error_clip_info">공백 또는 15글자 이상은 안됩니다.</string>
+  <string name="home_error_clip_info">클립의 이름은 최대 15자까지 입력 가능해요</string>
   <string name="home_enter_search_word">검색어를 입력해주세요</string>
   <string name="home_ex_user_name">홍길동</string>
   <string name="home_name_nim">님</string>
   <string name="home_with_toaster">토스터로</string>
-  <string name="home_link_count">0개의 링크</string>
+  <string name="home_link_count"> 0개의 링크</string>
   <string name="home_collect_stamps">를</string>
   <string name="home_unforget_read">잊지 않고 읽었어요!</string>
   <string name="home_toast_progress_link">nn</string>
