@@ -66,12 +66,12 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
       when (it) {
         true -> {
           binding.ivRead.setImageResource(org.sopt.mainfeature.R.drawable.ic_read_after_24)
-          if(isPatched) requireActivity().linkMindSnackBar(binding.clBottomBar, "열람 완료")
+          if (isPatched) requireActivity().linkMindSnackBar(binding.clBottomBar, "열람 완료")
         }
 
         false -> {
           binding.ivRead.setImageResource(R.drawable.ic_read_before_24)
-          if(isPatched) requireActivity().linkMindSnackBar(binding.clBottomBar, "열람 취소")
+          if (isPatched) requireActivity().linkMindSnackBar(binding.clBottomBar, "열람 취소")
         }
       }
     }.launchIn(viewLifeCycleScope)
