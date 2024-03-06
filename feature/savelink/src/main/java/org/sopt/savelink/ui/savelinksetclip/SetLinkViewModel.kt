@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import org.orbitmvi.orbit.Container
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.intent
@@ -85,17 +87,22 @@ class SetLinkViewModel @Inject constructor(
     }
   }
 
+  private val mutex = Mutex()
   fun saveLink(linkUrl: String, categoryId: Long?) = viewModelScope.launch {
-    saveLinkUseCase(
-      PostSaveLinkUseCase.Param(
-        linkUrl = linkUrl,
-        categoryId = if (categoryId == 0.toLong()) null else categoryId,
-      ),
-    ).onSuccess {
-      navigateSetLink()
-      if (it != 201) showSnackBar()
-    }.onFailure {
-      showSnackBar()
+    if (!mutex.isLocked) {
+      mutex.withLock {
+        saveLinkUseCase(
+          PostSaveLinkUseCase.Param(
+            linkUrl = linkUrl,
+            categoryId = if (categoryId == 0.toLong()) null else categoryId,
+          ),
+        ).onSuccess {
+          navigateSetLink()
+          if (it != 201) showSnackBar()
+        }.onFailure {
+          showSnackBar()
+        }
+      }
     }
   }
 
