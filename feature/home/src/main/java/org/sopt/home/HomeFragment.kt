@@ -17,6 +17,8 @@ import org.sopt.home.databinding.FragmentHomeBinding
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.onThrottleClick
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @AndroidEntryPoint
 class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.inflate(it) }) {
@@ -61,9 +63,12 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
         "featureSaveLink://ClipLinkFragment/${viewModel.container.stateFlow.value.categoryId}/${viewModel.container.stateFlow.value.categoryName}",
       )
       is HomeSideEffect.ShowBottomSheet -> showHomeBottomSheet()
-      is HomeSideEffect.NavigateWebView -> navigateToDestination(
-        "featureSaveLink://webViewFragment?site=${viewModel.container.stateFlow.value.url},,,${0},,,false",
-      )
+      is HomeSideEffect.NavigateWebView -> {
+        val encodedURL = URLEncoder.encode(viewModel.container.stateFlow.value.url, StandardCharsets.UTF_8.toString())
+        navigateToDestination(
+          "featureSaveLink://webViewFragment/${0}/${false}/${false}/$encodedURL",
+        )
+      }
     }
   }
 
