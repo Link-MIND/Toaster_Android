@@ -41,8 +41,17 @@
     <argument
       android:name="site"
       app:argType="string" />
+    <argument
+      android:name="toastId"
+      app:argType="long" />
+    <argument
+      android:name="isRead"
+      app:argType="boolean" />
+    <argument
+      android:name="isMylink"
+      app:argType="boolean" />
     <deepLink
-      app:uri="featureSaveLink://webViewFragment?site={site}" />
+      app:uri="featureSaveLink://webViewFragment/{toastId}/{isRead}/{isMylink}/{site}" />
   </fragment>
   <fragment
     android:id="@+id/navigation_clip_edit"

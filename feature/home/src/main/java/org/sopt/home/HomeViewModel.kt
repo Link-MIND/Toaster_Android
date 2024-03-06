@@ -92,8 +92,12 @@ class HomeViewModel @Inject constructor(
 
   @OptIn(OrbitExperimental::class)
   fun navigateClipLink(categoryId: Long?, categoryName: String?) = blockingIntent {
-    reduce { state.copy(categoryId = categoryId,
-      categoryName = categoryName) }
+    reduce {
+      state.copy(
+        categoryId = categoryId,
+        categoryName = categoryName,
+      )
+    }
     postSideEffect(HomeSideEffect.NavigateClipLink)
   }
 

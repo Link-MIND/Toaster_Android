@@ -54,4 +54,8 @@ class ClipLinkViewModel @Inject constructor(
       Log.d("카테 안의 링크 검색", it.message.toString())
     }
   }
+
+  fun initState() {
+    _linkState.value = UiState.Empty
+  }
 }
