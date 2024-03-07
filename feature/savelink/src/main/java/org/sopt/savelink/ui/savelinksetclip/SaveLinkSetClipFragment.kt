@@ -3,12 +3,14 @@ package org.sopt.savelink.ui.savelinksetclip
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.button.state.LinkMindButtonState
 import designsystem.components.dialog.LinkMindDialog
 import designsystem.components.toast.linkMindSnackBar
+import kotlinx.coroutines.launch
 import org.orbitmvi.orbit.viewmodel.observe
 import org.sopt.mainfeature.R
 import org.sopt.savelink.databinding.FragmentSaveLinkSetClipBinding
@@ -111,7 +113,9 @@ class SaveLinkSetClipFragment : BindingFragment<FragmentSaveLinkSetClipBinding>(
     binding.btnSaveLinkComplete.apply {
       btnClick {
         if (state == LinkMindButtonState.DISABLE) return@btnClick
-        viewModel.saveLink(viewModel.container.stateFlow.value.url, viewModel.container.stateFlow.value.categoryId)
+        viewModel.viewModelScope.launch {
+          viewModel.saveLink(viewModel.container.stateFlow.value.url, viewModel.container.stateFlow.value.categoryId)
+        }
       }
     }
   }

@@ -256,6 +256,7 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
         is UiState.Failure -> {}
         is UiState.Empty -> {}
         is UiState.Loading -> {}
+        else -> {}
       }
     }.launchIn(viewLifeCycleScope)
   }

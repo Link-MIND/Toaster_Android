@@ -172,7 +172,6 @@ class WebViewFragment : BindingFragment<FragmentWebviewBinding>({ FragmentWebvie
       wbClip.webViewClient = object : WebViewClient() {
         override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
           super.onPageStarted(view, url, favicon)
-
           runCatching { updateColors() }
         }
       }

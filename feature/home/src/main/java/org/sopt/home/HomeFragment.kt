@@ -63,6 +63,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
         "featureSaveLink://ClipLinkFragment/${viewModel.container.stateFlow.value.categoryId}/${viewModel.container.stateFlow.value.categoryName}",
       )
       is HomeSideEffect.ShowBottomSheet -> showHomeBottomSheet()
+      is HomeSideEffect.NavigateWebView -> navigateToDestination(
+        "featureSaveLink://webViewFragment?site=${viewModel.container.stateFlow.value.url},,,${0},,,false",
+      )
       is HomeSideEffect.NavigateWebView -> {
         val encodedURL = URLEncoder.encode(viewModel.container.stateFlow.value.url, StandardCharsets.UTF_8.toString())
         navigateToDestination(
