@@ -50,6 +50,8 @@ process-pheonix = "2.1.2"
 preference = "1.2.1"
 core-splashscreen = "1.0.1"
 
+viewpager-indicator = "5.0"
+
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -140,6 +142,8 @@ jsoup = { group = "org.jsoup", name = "jsoup", version.ref = "jsoup" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+
+viewpager-indicator = { group = "com.tbuonomo", name = "dotsindicator", version.ref = "viewpager-indicator" }
 
 # formatting
 detekt-plugin-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
