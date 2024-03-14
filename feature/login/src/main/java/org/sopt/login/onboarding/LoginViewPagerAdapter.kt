@@ -13,7 +13,7 @@ class LoginViewPagerAdapter(private val context: Context) : RecyclerView.Adapter
     R.layout.item_onboarding_first,
     R.layout.item_onboarding_second,
     R.layout.item_onboarding_third,
-    R.layout.item_onboarding_fourth
+    R.layout.item_onboarding_fourth,
   )
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -30,6 +30,5 @@ class LoginViewPagerAdapter(private val context: Context) : RecyclerView.Adapter
     return position
   }
 
-  inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-  }
+  inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }
