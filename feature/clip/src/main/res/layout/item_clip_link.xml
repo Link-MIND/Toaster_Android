@@ -87,7 +87,7 @@
     android:layout_marginStart="6dp"
     android:layout_marginTop="4dp"
     android:text="@string/clip_text_title"
-    android:maxLines="2"
+    android:maxLines="1"
     android:ellipsize="end"
     android:textAppearance="@style/Typography.suit.semibold_16"
     android:textColor="@color/neutrals850"
