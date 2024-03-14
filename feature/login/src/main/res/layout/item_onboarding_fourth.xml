@@ -13,29 +13,29 @@
     android:adjustViewBounds="true"
     android:scaleType="fitXY"
     android:src="@drawable/img_toaster_title"
-    app:layout_constraintEnd_toEndOf="@id/tv_login_description1"
+    app:layout_constraintEnd_toEndOf="@id/tv_onboarding_fourth_1"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
-    android:id="@+id/tv_login_description1"
+    android:id="@+id/tv_onboarding_fourth_1"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="14dp"
-    android:text="더 이상 링크를 태우지 마세요"
+    android:text="@string/onboarding_fourth_1"
     android:textAppearance="@style/Typography.suit.bold_22"
     android:textColor="@color/neutrals900"
     app:layout_constraintTop_toBottomOf="@id/iv_login_title"
     app:layout_constraintStart_toStartOf="@id/iv_login_title"/>
 
   <TextView
-    android:id="@+id/tv_login_description2"
+    android:id="@+id/tv_onboarding_fourth_2"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="토스트 먹듯이 간편하게,"
+    android:text="@string/onboarding_fourth_2"
     android:textAppearance="@style/Typography.suit.extrabold_22"
     android:textColor="@color/neutrals900"
-    app:layout_constraintTop_toBottomOf="@id/tv_login_description1"
+    app:layout_constraintTop_toBottomOf="@id/tv_onboarding_fourth_1"
     app:layout_constraintStart_toStartOf="@id/iv_login_title"/>
 
   <ImageView
@@ -46,6 +46,6 @@
     android:layout_marginTop="6dp"
     android:src="@drawable/img_login"
     android:layout_marginHorizontal="20dp"
-    app:layout_constraintTop_toBottomOf="@id/tv_login_description2"/>
+    app:layout_constraintTop_toBottomOf="@id/tv_onboarding_fourth_2"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

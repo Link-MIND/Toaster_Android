@@ -13,6 +13,21 @@
   <string name="login_description">더 이상 링크를 태우지 마세요\n토스트 먹듯이 간편하게,</string>
   <string name="login_with_kakao">카카오 계정으로 시작하기</string>
 
+  <!-- onboarding -->
+  <string name="onboarding_first_1">복사한 링크</string>
+  <string name="onboarding_first_2">를</string>
+  <string name="onboarding_first_3">손쉽게 저장하고</string>
+  <string name="onboarding_second_1">타이머</string>
+  <string name="onboarding_second_2">를 설정하고</string>
+  <string name="onboarding_second_3">링크를</string>
+  <string name="onboarding_second_4">리마인드</string>
+  <string name="onboarding_second_5">받아요</string>
+  <string name="onboarding_third_1">나의</string>
+  <string name="onboarding_third_2">링크 열람 현황</string>
+  <string name="onboarding_third_3">까지</string>
+  <string name="onboarding_third_4">한 눈에!</string>
+  <string name="onboarding_fourth_1">더 이상 링크를 태우지 마세요</string>
+  <string name="onboarding_fourth_2">토스트 먹듯이 간편하게,</string>
 
   <!-- mypage -->
   <string name="mypage_link_number_now">지금까지 읽은 링크 수</string>
