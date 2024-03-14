@@ -6,40 +6,29 @@
   android:layout_height="match_parent"
   tools:context="org.sopt.login.onboarding.LoginActivity">
 
-  <ImageView
-    android:id="@+id/iv_login_title"
+  <androidx.viewpager2.widget.ViewPager2
+    android:id="@+id/vp_onboarding"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="27dp"
-    android:layout_marginTop="56dp"
-    android:layout_marginEnd="118dp"
-    android:adjustViewBounds="true"
-    android:src="@drawable/img_toaster_title"
-    app:layout_constraintDimensionRatio="2"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    app:layout_constraintBottom_toTopOf="@id/indicator_onboarding"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_marginBottom="24dp" />
 
-  <TextView
-    android:id="@+id/tv_login_description"
+  <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+    android:id="@+id/indicator_onboarding"
+    app:layout_constraintBottom_toTopOf="@id/btn_kakao_login"
+    app:layout_constraintStart_toStartOf="@id/btn_kakao_login"
+    app:layout_constraintEnd_toEndOf="@id/btn_kakao_login"
+    android:layout_marginBottom="80dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
-    android:text="@string/login_description"
-    android:textAppearance="@style/Typography.suit.bold_18"
-    android:textColor="@color/neutrals900"
-    app:layout_constraintTop_toBottomOf="@id/iv_login_title"
-    app:layout_constraintStart_toStartOf="@id/iv_login_title"/>
-
-  <ImageView
-    android:id="@+id/iv_login"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:adjustViewBounds="true"
-    android:src="@drawable/img_login"
-    android:layout_marginHorizontal="33dp"
-    app:layout_constraintTop_toBottomOf="@id/tv_login_description"
-    app:layout_constraintBottom_toTopOf="@id/btn_kakao_login"/>
+    app:dotsColor="@color/neutrals150"
+    app:dotsCornerRadius="20dp"
+    app:dotsSpacing="3dp"
+    app:dotsSize="8dp"
+    app:dotsWidthFactor="2.0"
+    app:selectedDotColor="@color/primary"
+    />
 
   <LinearLayout
     android:id="@+id/btn_kakao_login"
