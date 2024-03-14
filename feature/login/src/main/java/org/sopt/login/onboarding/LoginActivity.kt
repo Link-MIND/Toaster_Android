@@ -43,6 +43,9 @@ class LoginActivity : AppCompatActivity() {
     initCheckAutoLogin()
     initKakaoLoginBtnClickListener()
     initAuthStateObserver()
+
+    binding.vpOnboarding.adapter = LoginViewPagerAdapter(this)
+    binding.indicatorOnboarding.attachTo(binding.vpOnboarding)
   }
 
   private fun initCheckAutoLogin() {
