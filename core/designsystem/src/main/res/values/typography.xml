@@ -18,6 +18,11 @@
     <item name="android:textSize">24sp</item>
   </style>
 
+  <style name="Typography.suit.bold_22">
+    <item name="fontFamily">@font/font_suit_bold</item>
+    <item name="android:textSize">22sp</item>
+  </style>
+
   <style name="Typography.suit.bold_20">
     <item name="fontFamily">@font/font_suit_bold</item>
     <item name="android:textSize">20sp</item>
@@ -43,6 +48,10 @@
     <item name="android:textSize">12sp</item>
   </style>
 
+  <style name="Typography.suit.extrabold_22">
+    <item name="fontFamily">@font/font_suit_extrabold</item>
+    <item name="android:textSize">22sp</item>
+  </style>
 
   <style name="Typography.suit.extrabold_20">
     <item name="fontFamily">@font/font_suit_extrabold</item>
