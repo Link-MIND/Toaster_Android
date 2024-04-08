@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import org.sopt.clip.SelectedToggle
 import org.sopt.domain.category.category.usecase.GetCategoryLinkUseCase
 import org.sopt.domain.link.usecase.DeleteLinkUseCase
+import org.sopt.domain.link.usecase.PatchLinkTitleUseCase
 import org.sopt.model.category.CategoryLink
 import org.sopt.ui.view.UiState
 import javax.inject.Inject
@@ -19,6 +20,7 @@ import javax.inject.Inject
 class ClipLinkViewModel @Inject constructor(
   private val getCategoryLink: GetCategoryLinkUseCase,
   private val deleteLinkUseCase: DeleteLinkUseCase,
+  private val patchLinkTitleUseCase: PatchLinkTitleUseCase,
 ) : ViewModel() {
   private val _linkState = MutableStateFlow<UiState<List<CategoryLink>>>(UiState.Empty)
   val linkState: StateFlow<UiState<List<CategoryLink>>> = _linkState.asStateFlow()
@@ -28,6 +30,9 @@ class ClipLinkViewModel @Inject constructor(
 
   private val _allClipCount = MutableStateFlow<UiState<Long>>(UiState.Empty)
   val allClipCount: StateFlow<UiState<Long>> = _allClipCount.asStateFlow()
+
+  private val _patchLinkTitle = MutableStateFlow<UiState<String>>(UiState.Empty)
+  val patchLinkTitle: StateFlow<UiState<String>> = _patchLinkTitle.asStateFlow()
 
   var toggleSelectedPast: SelectedToggle = SelectedToggle.ALL
   fun deleteLink(toastId: Long) = viewModelScope.launch {
@@ -52,6 +57,14 @@ class ClipLinkViewModel @Inject constructor(
       _linkState.emit(UiState.Success(list))
     }.onFailure {
       Log.d("카테 안의 링크 검색", it.message.toString())
+    }
+  }
+
+  fun patchLinkTitle(toastId: Long, title: String) = viewModelScope.launch {
+    patchLinkTitleUseCase(param = PatchLinkTitleUseCase.Param(toastId = toastId, title = title)).onSuccess {
+      _patchLinkTitle.emit(UiState.Success(it))
+    }.onFailure {
+      _patchLinkTitle.emit(UiState.Failure("fail"))
     }
   }
 
