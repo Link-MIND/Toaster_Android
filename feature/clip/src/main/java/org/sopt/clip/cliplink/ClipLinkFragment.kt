@@ -9,6 +9,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
+import designsystem.components.bottomsheet.LinkMindBottomSheet
 import designsystem.components.toast.linkMindSnackBar
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -84,6 +85,7 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     updateLinkDelete(categoryId)
     updateLinkView()
     updateAllCount()
+    updateLinkTitle(categoryId)
     onClickBackButton()
   }
 
@@ -185,6 +187,49 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     }.launchIn(viewLifeCycleScope)
   }
 
+  private fun updateLinkTitle(categoryId: Long) {
+    viewModel.patchLinkTitle.flowWithLifecycle(viewLifeCycle).onEach { state ->
+      when (state) {
+        is UiState.Success -> {
+          requireContext().linkMindSnackBar(binding.vSnack, "제목 편집 완료", false)
+          when (binding.mlClipFilter.currentState) {
+            R.id.all -> {
+              viewModel.getCategoryLink("ALL", categoryId)
+            }
+
+            R.id.read -> {
+              viewModel.getCategoryLink("READ", categoryId)
+            }
+
+            R.id.unread -> {
+              viewModel.getCategoryLink("UNREAD", categoryId)
+            }
+          }
+        }
+
+        is UiState.Failure -> {
+          when (binding.mlClipFilter.currentState) {
+            R.id.all -> {
+              viewModel.getCategoryLink("ALL", categoryId)
+            }
+
+            R.id.read -> {
+              viewModel.getCategoryLink("READ", categoryId)
+            }
+
+            R.id.unread -> {
+              viewModel.getCategoryLink("UNREAD", categoryId)
+            }
+          }
+        }
+
+        else -> {
+          initViewState(true)
+        }
+      }
+    }.launchIn(viewLifeCycleScope)
+  }
+
   private fun initViewState(isDataNull: Boolean) {
     with(binding) {
       ivClipCategoryEmpty.isVisible = isDataNull
@@ -205,11 +250,29 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
             handleDeleteButton = {
               viewModel.deleteLink(linkDTO.toastId)
             },
+            handleModifyButton = {
+              showClipLinkBottomSheet(linkDTO.toastId,linkDTO.toastTitle)
+            }
           ).show(parentFragmentManager, this.tag)
         }
       }
     }
     binding.rvCategoryLink.adapter = clipLinkAdapter
+  }
+
+  private fun showClipLinkBottomSheet(itemId: Long, itemText: String) {
+    val editTitleBottomSheet = LinkMindBottomSheet(requireContext())
+    editTitleBottomSheet.show()
+    editTitleBottomSheet.apply {
+      setBottomSheetHint(org.sopt.mainfeature.R.string.clip_link_bottom_sheet_modify_body)
+      setTitle(org.sopt.mainfeature.R.string.clip_link_bottom_sheet_modify_title)
+      setBottomSheetText(itemText)
+      bottomSheetConfirmBtnClick { // dto 수정됨
+        val newTitle = getText()
+        viewModel.patchLinkTitle(itemId, newTitle)
+        dismiss()
+      }
+    }
   }
 
   private fun naviagateToWebViewFragment(site: String, toastId: Long, isRead: Boolean) {
