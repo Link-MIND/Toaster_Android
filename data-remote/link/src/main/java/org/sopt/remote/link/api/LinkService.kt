@@ -2,8 +2,10 @@ package org.sopt.remote.link.api
 
 import org.sopt.network.model.response.base.BaseResponse
 import org.sopt.remote.link.request.RequestIsReadDto
+import org.sopt.remote.link.request.RequestPatchTitleDto
 import org.sopt.remote.link.request.RequestWriteDto
 import org.sopt.remote.link.response.ResponseIsReadDto
+import org.sopt.remote.link.response.ResponsePatchTitleDto
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.PATCH
@@ -16,6 +18,7 @@ interface LinkService {
     const val DELETE = "delete"
     const val ISREAD = "is-read"
     const val SAVE = "save"
+    const val TITLE = "title"
   }
 
   @POST("/$TOAST/$SAVE")
@@ -28,4 +31,7 @@ interface LinkService {
 
   @PATCH("/$TOAST/$ISREAD")
   suspend fun patchLink(@Body requestIsReadDto: RequestIsReadDto): BaseResponse<ResponseIsReadDto>
+
+  @PATCH("/$TOAST/$TITLE")
+  suspend fun patchLinkTitle(@Body requestPatchTitleDto: RequestPatchTitleDto): BaseResponse<ResponsePatchTitleDto>
 }
