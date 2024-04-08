@@ -15,4 +15,7 @@ class LinkRepoImpl @Inject constructor(
 
   override suspend fun patchReadLink(toastId: Long, isRead: Boolean): Result<Boolean> =
     runCatching { remoteCategoryDataSource.patchReadLink(toastId, isRead) }
+
+  override suspend fun patchLinkTitle(toastId: Long, title: String): Result<String> =
+    runCatching { remoteCategoryDataSource.patchLinkTitle(toastId, title) }
 }
