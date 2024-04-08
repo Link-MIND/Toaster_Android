@@ -11,15 +11,20 @@ class DeleteLinkBottomSheetFragment() :
   BindingBottomSheetDialogFragment<FragmentDeleteLinkBottomSheetBinding>({ FragmentDeleteLinkBottomSheetBinding.inflate(it) }) {
   var id: Int? = null
   private var handleDelete: () -> Unit = {}
+  private var handleModify: () -> Unit = {}
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
     binding.ivDeleteLinkBottomSheetClose.setOnClickListener {
       dismiss()
     }
-    binding.clDeleteLinkSelect.onThrottleClick {
+    binding.tvDeleteLinkDelete.onThrottleClick {
       Log.d("test", "test")
       handleDelete.invoke()
+      dismiss()
+    }
+    binding.tvDeleteLinkModify.onThrottleClick {
+      handleModify.invoke()
       dismiss()
     }
   }
@@ -30,13 +35,14 @@ class DeleteLinkBottomSheetFragment() :
   }
 
   companion object {
-    fun newInstance(id: Int, handleDeleteButton: () -> Unit): DeleteLinkBottomSheetFragment {
+    fun newInstance(id: Int, handleDeleteButton: () -> Unit, handleModifyButton: () -> Unit): DeleteLinkBottomSheetFragment {
       val args = Bundle().apply {
         putInt("id", id)
       }
       return DeleteLinkBottomSheetFragment().apply {
         arguments = args
         handleDelete = handleDeleteButton
+        handleModify = handleModifyButton
       }
     }
   }

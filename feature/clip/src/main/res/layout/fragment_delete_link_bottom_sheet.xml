@@ -41,18 +41,34 @@
     app:layout_constraintTop_toBottomOf="@id/tv_delete_link_bottom_sheet_title">
 
     <TextView
-      android:id="@+id/tv_delete_link_delete"
-      android:layout_width="wrap_content"
+      android:id="@+id/tv_delete_link_modify"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginStart="20dp"
-      android:layout_marginTop="17dp"
-      android:layout_marginBottom="17dp"
+      android:paddingStart="20dp"
+      android:paddingTop="17dp"
+      android:paddingBottom="17dp"
+      android:text="제목 편집"
+      android:textAppearance="@style/Typography.suit.medium_16"
+      android:textColor="@color/neutrals900"
+      app:layout_constraintBottom_toTopOf="@id/tv_delete_link_delete"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@id/cl_delete_link_select" />
+
+    <TextView
+      android:id="@+id/tv_delete_link_delete"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:paddingStart="20dp"
+      android:paddingTop="17dp"
+      android:paddingBottom="17dp"
       android:text="@string/clip_link_bottom_sheet_delete"
       android:textAppearance="@style/Typography.suit.medium_16"
       android:textColor="@color/error"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@id/cl_delete_link_select" />
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tv_delete_link_modify" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
