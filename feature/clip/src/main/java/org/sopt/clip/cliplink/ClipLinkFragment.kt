@@ -251,8 +251,8 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
               viewModel.deleteLink(linkDTO.toastId)
             },
             handleModifyButton = {
-              showClipLinkBottomSheet(linkDTO.toastId,linkDTO.toastTitle)
-            }
+              showClipLinkBottomSheet(linkDTO.toastId, linkDTO.toastTitle)
+            },
           ).show(parentFragmentManager, this.tag)
         }
       }
