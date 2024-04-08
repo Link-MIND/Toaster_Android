@@ -124,6 +124,10 @@
   <string name="clip_link_back_description">뒤로 가기</string>
   <string name="clip_link_bottom_sheet_title">수정하기</string>
   <string name="clip_link_bottom_sheet_delete">삭제</string>
+  <string name="clip_link_bottom_sheet_modify">제목 편집</string>
+  <string name="clip_link_bottom_sheet_modify_title">링크 제목 편집</string>
+  <string name="clip_link_bottom_sheet_modify_body">링크를 입력해 주세요</string>
+
 
   <string name="search_result_ex_url">https://example.com</string>
   <string name="search_result_detail_clip_name">세부 클립명</string>
