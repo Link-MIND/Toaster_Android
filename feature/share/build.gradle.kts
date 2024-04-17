@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "org.sopt.share"
+  namespace = "org.sopt.share"
 }
 
 dependencies {
@@ -15,4 +15,3 @@ dependencies {
   implementation(libs.androidx.window)
   implementation(libs.process.phoenix)
 }
-

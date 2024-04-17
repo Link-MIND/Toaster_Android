@@ -16,9 +16,6 @@ import org.orbitmvi.orbit.viewmodel.observe
 import org.sopt.common.intentprovider.IntentProvider
 import org.sopt.common.intentprovider.LOGIN
 import org.sopt.datastore.datastore.SecurityDataStore
-import org.sopt.share.databinding.ActivityShareBinding
-import org.sopt.share.databinding.ActivityShareBinding.inflate
-import org.sopt.ui.base.BindingActivity
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -33,7 +30,6 @@ class ShareActivity : AppCompatActivity() {
 
   @Inject
   lateinit var dataStore: SecurityDataStore
-
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
