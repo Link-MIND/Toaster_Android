@@ -92,7 +92,7 @@ class ShareBottomSheetFragment : BindingBottomSheetDialogFragment<FragmentShareB
   }
 
   private fun handleSideEffect(sideEffect: ShareSideEffect) {
-    if(sideEffect !is ShareSideEffect.ShareBottomSheetSideEffect) return
+    if (sideEffect !is ShareSideEffect.ShareBottomSheetSideEffect) return
     when (sideEffect) {
       ShareSideEffect.ShareBottomSheetSideEffect.SaveSuccess -> {
         dismiss()

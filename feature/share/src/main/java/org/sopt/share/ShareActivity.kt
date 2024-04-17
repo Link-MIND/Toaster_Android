@@ -52,7 +52,7 @@ class ShareActivity : AppCompatActivity() {
   }
 
   private fun handleSideEffect(sideEffect: ShareSideEffect) {
-    if(sideEffect !is ShareSideEffect.ShareActivitySideEffect) return
+    if (sideEffect !is ShareSideEffect.ShareActivitySideEffect) return
     when (sideEffect) {
       ShareSideEffect.ShareActivitySideEffect.DefinedUser -> {
         if (!isBottomSheetCreated) {

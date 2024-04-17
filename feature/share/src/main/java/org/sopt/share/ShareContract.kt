@@ -20,5 +20,4 @@ sealed interface ShareSideEffect {
   sealed interface ShareBottomSheetSideEffect : ShareSideEffect {
     data object SaveSuccess : ShareBottomSheetSideEffect
   }
-
 }
