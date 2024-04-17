@@ -48,6 +48,7 @@ dependencies {
 
   implementation(projects.feature.maincontainer)
   implementation(projects.feature.login)
+  implementation(projects.feature.share)
 
   implementation(libs.timber)
   implementation(libs.kakao.login)
