@@ -55,6 +55,8 @@ class SettingsFragment : Fragment() {
       when (state) {
         is UiState.Success -> {
           dataStore.setAutoLogin(false)
+          dataStore.setAccessToken("")
+          dataStore.setRefreshToken("")
           val intent = intentProvider.getIntent()
           startActivity(intent)
           requireActivity().finish()
