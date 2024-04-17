@@ -25,7 +25,7 @@ class ShareViewModel @Inject constructor(
   override val container: Container<ShareState, ShareSideEffect> = container(ShareState())
 
   init {
-      getCategoryAll()
+    getCategoryAll()
   }
   fun getCategoryAll() = intent {
     getCategoryAllUseCase().onSuccess {
@@ -85,4 +85,3 @@ class ShareViewModel @Inject constructor(
     postSideEffect(ShareSideEffect.SaveSuccess)
   }
 }
-
