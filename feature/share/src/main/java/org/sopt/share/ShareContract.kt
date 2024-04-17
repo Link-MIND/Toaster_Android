@@ -10,9 +10,15 @@ data class ShareState(
 )
 
 sealed interface ShareSideEffect {
-  data object SaveSuccess : ShareSideEffect
 
-  data object DefinedUser : ShareSideEffect
+  sealed interface ShareActivitySideEffect : ShareSideEffect {
+    data object DefinedUser : ShareActivitySideEffect
 
-  data object UnDefinedUser : ShareSideEffect
+    data object UnDefinedUser : ShareActivitySideEffect
+  }
+
+  sealed interface ShareBottomSheetSideEffect : ShareSideEffect {
+    data object SaveSuccess : ShareBottomSheetSideEffect
+  }
+
 }

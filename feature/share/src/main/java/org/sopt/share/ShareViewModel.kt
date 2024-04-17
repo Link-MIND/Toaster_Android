@@ -44,9 +44,9 @@ class ShareViewModel @Inject constructor(
             ).distinctBy { it.categoryId },
         )
       }
-      postSideEffect(ShareSideEffect.DefinedUser)
+      postSideEffect(ShareSideEffect.ShareActivitySideEffect.DefinedUser)
     }.onFailure {
-      postSideEffect(ShareSideEffect.UnDefinedUser)
+      postSideEffect(ShareSideEffect.ShareActivitySideEffect.UnDefinedUser)
     }
   }
 
@@ -82,6 +82,6 @@ class ShareViewModel @Inject constructor(
   }
 
   private fun onSaveSuccess() = intent {
-    postSideEffect(ShareSideEffect.SaveSuccess)
+    postSideEffect(ShareSideEffect.ShareBottomSheetSideEffect.SaveSuccess)
   }
 }

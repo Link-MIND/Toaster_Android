@@ -52,8 +52,9 @@ class ShareActivity : AppCompatActivity() {
   }
 
   private fun handleSideEffect(sideEffect: ShareSideEffect) {
+    if(sideEffect !is ShareSideEffect.ShareActivitySideEffect) return
     when (sideEffect) {
-      ShareSideEffect.DefinedUser -> {
+      ShareSideEffect.ShareActivitySideEffect.DefinedUser -> {
         if (!isBottomSheetCreated) {
           isBottomSheetCreated = true
           ShareBottomSheetFragment.newInstance {
@@ -62,7 +63,7 @@ class ShareActivity : AppCompatActivity() {
         }
       }
 
-      ShareSideEffect.UnDefinedUser -> {
+      ShareSideEffect.ShareActivitySideEffect.UnDefinedUser -> {
         val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         clipboardManager.setPrimaryClip(clipData)
         lifecycleScope.launch {
@@ -73,8 +74,6 @@ class ShareActivity : AppCompatActivity() {
           finish()
         }
       }
-
-      else -> {}
     }
   }
 }
