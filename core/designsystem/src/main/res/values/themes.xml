@@ -19,4 +19,10 @@
 
   <style name="Theme.LinkMind" parent="Base.Theme.LinkMind" />
 
+  <style name="Theme.App.Transparent" parent="Theme.LinkMind">
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowContentOverlay">@null</item>
+  </style>
+
 </resources>
