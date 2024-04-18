@@ -7,10 +7,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.getSystemService
 import androidx.lifecycle.lifecycleScope
 import com.jakewharton.processphoenix.ProcessPhoenix
 import dagger.hilt.android.AndroidEntryPoint
+import designsystem.components.dialog.LinkMindDialog
 import kotlinx.coroutines.launch
 import org.orbitmvi.orbit.viewmodel.observe
 import org.sopt.common.intentprovider.IntentProvider
@@ -64,16 +64,34 @@ class ShareActivity : AppCompatActivity() {
       }
 
       ShareSideEffect.ShareActivitySideEffect.UnDefinedUser -> {
-        val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        clipboardManager.setPrimaryClip(clipData)
-        lifecycleScope.launch {
-          runCatching { dataStore.setAutoLogin(false) }
-            .onSuccess {
-              ProcessPhoenix.triggerRebirth(this@ShareActivity, intentProvider.getIntent())
-            }
+        val dialog = LinkMindDialog(this)
+        dialog.setTitle(org.sopt.mainfeature.R.string.share_dialog_title)
+        dialog.setSubtitle(org.sopt.mainfeature.R.string.share_dialog_subtitle)
+        dialog.setNegativeButton(org.sopt.mainfeature.R.string.share_dialog_negative) {
+          finish()
+          dialog.dismiss()
+        }
+        dialog.setPositiveButton(org.sopt.mainfeature.R.string.share_dialog_positive) {
+          val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+          clipboardManager.setPrimaryClip(clipData)
+          rebirthApp()
+          dialog.dismiss()
+        }
+        dialog.setOnCancelListener {
           finish()
         }
+        dialog.show()
       }
+    }
+  }
+
+  private fun rebirthApp() {
+    lifecycleScope.launch {
+      runCatching { dataStore.setAutoLogin(false) }
+        .onSuccess {
+          ProcessPhoenix.triggerRebirth(this@ShareActivity, intentProvider.getIntent())
+        }
+      finish()
     }
   }
 }

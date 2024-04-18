@@ -188,5 +188,10 @@
   <string name="savelink_check_clip">클립을 선택해주세요</string>
   <string name="savelink_choose_clip">알림 받을 클립 선택</string>
 
+  <!-- share -->
+  <string name="share_dialog_title">로그인이 필요한 서비스예요</string>
+  <string name="share_dialog_subtitle">로그인 세션이 만료되었거나 서비스 가입이 필요해요. 앱으로 이동하시겠어요?</string>
+  <string name="share_dialog_positive">확인</string>
+  <string name="share_dialog_negative">취소</string>
 
 </resources>
