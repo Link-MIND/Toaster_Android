@@ -17,8 +17,19 @@ import org.sopt.ui.view.onThrottleClick
 
 class LinkMindDialog constructor(private val context: Context) {
 
+  private var onDismiss: (() -> Unit)? = null
+
+  fun setOnCancelListener(onDismiss: () -> Unit): LinkMindDialog {
+    this.onDismiss = onDismiss
+    return this
+  }
+
   private val builder: AlertDialog.Builder by lazy {
     AlertDialog.Builder(context).setView(binding.root)
+      .setCancelable(true)
+      .setOnCancelListener {
+        onDismiss?.invoke()
+      }
   }
 
   private val binding: DialogLinkmindBinding by lazy {
