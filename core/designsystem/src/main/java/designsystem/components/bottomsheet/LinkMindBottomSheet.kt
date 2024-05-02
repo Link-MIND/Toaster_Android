@@ -47,6 +47,10 @@ class LinkMindBottomSheet(context: Context) {
     binding.etvBottomSheet.editText.setHint(textId)
   }
 
+  fun setBottomSheetHint(text: String) {
+    binding.etvBottomSheet.editText.hint = text
+  }
+
   fun setBottomSheetText(text: String) {
     binding.etvBottomSheet.editText.setText(text)
     binding.etvBottomSheet.setEditTextSelection()

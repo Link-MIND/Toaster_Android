@@ -264,9 +264,10 @@ class ClipLinkFragment : BindingFragment<FragmentClipLinkBinding>({ FragmentClip
     val editTitleBottomSheet = LinkMindBottomSheet(requireContext())
     editTitleBottomSheet.show()
     editTitleBottomSheet.apply {
-      setBottomSheetHint(org.sopt.mainfeature.R.string.clip_link_bottom_sheet_modify_body)
+      setBottomSheetHint(itemText)
       setTitle(org.sopt.mainfeature.R.string.clip_link_bottom_sheet_modify_title)
       setBottomSheetText(itemText)
+      setErroMsg(org.sopt.mainfeature.R.string.error_clip_length)
       bottomSheetConfirmBtnClick { // dto 수정됨
         val newTitle = getText()
         viewModel.patchLinkTitle(itemId, newTitle)
