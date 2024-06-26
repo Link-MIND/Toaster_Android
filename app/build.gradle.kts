@@ -10,8 +10,8 @@ android {
 
   defaultConfig {
     applicationId = "org.sopt.linkmind"
-    versionCode = 9
-    versionName = "1.0.2"
+    versionCode = 10
+    versionName = "1.1.0"
   }
   viewBinding.enable = true
   buildTypes {
