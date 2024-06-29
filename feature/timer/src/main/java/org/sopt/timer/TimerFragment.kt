@@ -79,7 +79,7 @@ class TimerFragment : BindingFragment<FragmentTimerBinding>({ FragmentTimerBindi
         },
         {
           navigateToDestination(
-            "featureSaveLink://ClipLinkFragment?categoryId=${it.categoryId}",
+            "featureSaveLink://ClipLinkFragment/${it.categoryId}/${it.comment}",
           )
         },
       )
