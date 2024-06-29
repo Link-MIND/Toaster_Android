@@ -23,6 +23,8 @@ import org.sopt.ui.fragment.viewLifeCycle
 import org.sopt.ui.fragment.viewLifeCycleScope
 import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.onThrottleClick
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @AndroidEntryPoint
 class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBinding.inflate(it) }) {
@@ -37,7 +39,7 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBi
     linkResultAdapter = LinkResultAdapter { naviagateToWebViewFragment(it.linkUrl!!, it.toastId, it.isRead!!) }
     clipResultAdapter = ClipResultAdapter {
       navigateToDestination(
-        "featureSaveLink://ClipLinkFragment?categoryId=${it.categoryId}",
+        "featureSaveLink://ClipLinkFragment/${it.categoryId}/${it.categoryTitle}",
       )
     }
     mResultAdapter = ConcatAdapter(linkResultAdapter, clipResultAdapter)
@@ -152,7 +154,8 @@ class SearchFragment : BindingFragment<FragmentSearchBinding>({ FragmentSearchBi
   }
 
   private fun naviagateToWebViewFragment(site: String, toastId: Long, isRead: Boolean) {
-    navigateToDestination("featureSaveLink://webViewFragment?site=$site,,,$toastId,,,$isRead")
+    val encodedURL = URLEncoder.encode(site, StandardCharsets.UTF_8.toString())
+    navigateToDestination("featureSaveLink://webViewFragment/$toastId/$isRead/${true}/$encodedURL")
   }
 
   private fun navigateToDestination(destination: String) {
