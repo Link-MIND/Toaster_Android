@@ -37,6 +37,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
 
   private fun initView() {
     initAdapter()
+    viewModel.showPopupInfo()
   }
 
   private fun collectState() {
@@ -62,6 +63,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       is HomeSideEffect.NavigateClipLink -> navigateToDestination(
         "featureSaveLink://ClipLinkFragment/${viewModel.container.stateFlow.value.categoryId}/${viewModel.container.stateFlow.value.categoryName}",
       )
+
       is HomeSideEffect.ShowBottomSheet -> showHomeBottomSheet()
       is HomeSideEffect.NavigateWebView -> {
         val encodedURL = URLEncoder.encode(viewModel.container.stateFlow.value.url, StandardCharsets.UTF_8.toString())
@@ -69,6 +71,8 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
           "featureSaveLink://webViewFragment/${0}/${false}/${false}/$encodedURL",
         )
       }
+
+      is HomeSideEffect.ShowPopupInfo -> showPopupInfo()
     }
   }
 
@@ -82,6 +86,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       getWeekBestLink()
     }
   }
+
   private fun navigateToSetting() {
     binding.ivHomeSetting.onThrottleClick {
       viewModel.navigateSetting()
@@ -153,5 +158,9 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
         requireContext().linkMindSnackBar(binding.vSnack, "클립 생성 완료!", false)
       }
     }
+  }
+
+  private fun showPopupInfo() {
+    SurveyDialogFragment().show(parentFragmentManager, this.tag)
   }
 }

@@ -31,4 +31,5 @@ sealed interface HomeSideEffect {
   data object NavigateClipLink : HomeSideEffect
   data object NavigateWebView : HomeSideEffect
   data object ShowBottomSheet : HomeSideEffect
+  data object ShowPopupInfo : HomeSideEffect
 }
