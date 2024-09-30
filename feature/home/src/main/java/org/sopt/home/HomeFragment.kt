@@ -14,6 +14,7 @@ import org.sopt.home.adapter.HomeWeekLinkAdapter
 import org.sopt.home.adapter.HomeWeekRecommendLinkAdapter
 import org.sopt.home.adapter.ItemDecoration
 import org.sopt.home.databinding.FragmentHomeBinding
+import org.sopt.model.home.PopupInfo
 import org.sopt.ui.base.BindingFragment
 import org.sopt.ui.nav.DeepLinkUtil
 import org.sopt.ui.view.onThrottleClick
@@ -37,7 +38,6 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
 
   private fun initView() {
     initAdapter()
-    viewModel.showPopupInfo()
   }
 
   private fun collectState() {
@@ -72,7 +72,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
         )
       }
 
-      is HomeSideEffect.ShowPopupInfo -> showPopupInfo()
+      is HomeSideEffect.ShowPopupInfo -> showPopupInfo(viewModel.container.stateFlow.value.popupList)
     }
   }
 
@@ -84,6 +84,7 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
       getMainPageUserClip()
       getRecommendSite()
       getWeekBestLink()
+      getPopupListInfo()
     }
   }
 
@@ -160,7 +161,17 @@ class HomeFragment : BindingFragment<FragmentHomeBinding>({ FragmentHomeBinding.
     }
   }
 
-  private fun showPopupInfo() {
-    SurveyDialogFragment().show(parentFragmentManager, this.tag)
+  private fun showPopupInfo(popupList: List<PopupInfo>) {
+    popupList.forEach {
+      if (viewModel.checkPopupDate(it.popupActiveStartDate, it.popupActiveEndDate)
+      ) {
+        val surveyDialog = SurveyDialogFragment.newInstance(
+          it.popupImage,
+          { viewModel.navigateWebview(it.popupLinkUrl) },
+          { viewModel.patchPopupInvisible(it.popupId.toLong(), 7) },
+        )
+        surveyDialog.show(parentFragmentManager, this.tag)
+      }
+    }
   }
 }

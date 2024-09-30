@@ -78,6 +78,8 @@
     android:layout_marginHorizontal="24dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="24dp"
+    android:clickable="true"
+    android:focusable="true"
     android:gravity="center"
     android:text="@string/home_survey_skip"
     android:textAppearance="@style/Typography.suit.regular_14"
