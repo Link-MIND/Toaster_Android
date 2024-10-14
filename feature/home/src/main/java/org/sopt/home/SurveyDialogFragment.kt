@@ -63,7 +63,7 @@ class SurveyDialogFragment : BindingDialogFragment<FragmentSurveyDialogBinding>(
         linkUrl = onNavigateWebView
         handleSkip = onNegativeButtonClick
       }
-      //얘는 bundle 안해도ㅗ되나?
+      // 얘는 bundle 안해도ㅗ되나?
     }
   }
 }
